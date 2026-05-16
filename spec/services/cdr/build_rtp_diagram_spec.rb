@@ -91,6 +91,37 @@ RSpec.describe Cdr::BuildRtpDiagram do
     expect(tx).not_to have_key(:remote_host)
   end
 
+  it 'exposes the receive-side error counters carried on the TX stream' do
+    tx = subject[:tx_streams].find { |s| s[:id] == lega_tx.id }
+    expect(tx).to include(
+      rx_out_of_buffer_errors: 100,
+      rx_rtp_parse_errors: 100,
+      rx_dropped_packets: 100
+    )
+    expect(tx).to have_key(:rx_srtp_decrypt_errors)
+  end
+
+  it 'serializes the full RX column set plus gateway/pop/node names' do
+    rx = subject[:rx_streams].find { |s| s[:id] == lega_rx1.id }
+    Cdr::BuildRtpDiagram::RX_STREAM_FIELDS.each { |f| expect(rx).to have_key(f) }
+    expect(rx).to include(gateway: orig_gw.name)
+    expect(rx).to have_key(:pop)
+    expect(rx).to have_key(:node)
+    expect(rx).to have_key(:tx_stream_id)
+    expect(rx).to have_key(:rx_packet_delta_min)
+    expect(rx).to have_key(:rx_rtcp_jitter_std)
+  end
+
+  it 'serializes the full TX column set plus gateway/pop/node names' do
+    tx = subject[:tx_streams].find { |s| s[:id] == lega_tx.id }
+    Cdr::BuildRtpDiagram::TX_STREAM_FIELDS.each { |f| expect(tx).to have_key(f) }
+    expect(tx).to include(gateway: orig_gw.name)
+    expect(tx).to have_key(:pop)
+    expect(tx).to have_key(:node)
+    expect(tx).to have_key(:rtcp_rtt_std)
+    expect(tx).to have_key(:tx_rtcp_jitter_std)
+  end
+
   it 'stringifies inet host fields so they JSON-encode cleanly' do
     rx = subject[:rx_streams].find { |s| s[:id] == lega_rx1.id }
     expect(rx[:remote_host]).to be_a(String)

@@ -9,7 +9,8 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
 
   acts_as_export :id,
                  :time_start,
-                 :time_end,
+                 :stream_time_start,
+                 :stream_time_end,
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],
                  :gateway_external_id,
                  [:node_name, proc { |row| row.node.try(:name) }],
@@ -52,7 +53,8 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
 
   filter :id
   filter :time_start, as: :date_time_range
-  filter :time_end, as: :date_time_range
+  filter :stream_time_start, as: :date_time_range
+  filter :stream_time_end, as: :date_time_range
   filter :pop
   filter :node
   filter :gateway,
@@ -86,7 +88,8 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
   index do
     id_column
     column :time_start
-    column :time_end
+    column :stream_time_start
+    column :stream_time_end
     column :pop
     column :node
     column :gateway
@@ -120,7 +123,8 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
     attributes_table do
       row :id
       row :time_start
-      row :time_end
+      row :stream_time_start
+      row :stream_time_end
       row :pop
       row :node
       row :gateway

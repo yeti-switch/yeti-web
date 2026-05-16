@@ -16,7 +16,8 @@
 #  rx_out_of_buffer_errors :bigint(8)
 #  rx_rtp_parse_errors     :bigint(8)
 #  rx_srtp_decrypt_errors  :bigint(8)
-#  time_end                :timestamptz
+#  stream_time_end         :timestamptz
+#  stream_time_start       :timestamptz
 #  time_start              :timestamptz      not null
 #  tx_bytes                :bigint(8)
 #  tx_packets              :bigint(8)
@@ -33,10 +34,15 @@
 #  node_id                 :integer(4)
 #  pop_id                  :integer(4)
 #
+# Indexes
+#
+#  tx_streams_local_tag_idx  (local_tag)
+#
 FactoryBot.define do
   factory :tx_stream, class: 'RtpStatistics::TxStream' do
     time_start { 1.minute.ago }
-    time_end { 30.seconds.ago }
+    stream_time_start { 1.minute.ago }
+    stream_time_end { 30.seconds.ago }
     association :pop
     association :node
     association :gateway

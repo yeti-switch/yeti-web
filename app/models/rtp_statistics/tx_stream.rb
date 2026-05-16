@@ -16,7 +16,8 @@
 #  rx_out_of_buffer_errors :bigint(8)
 #  rx_rtp_parse_errors     :bigint(8)
 #  rx_srtp_decrypt_errors  :bigint(8)
-#  time_end                :timestamptz
+#  stream_time_end         :timestamptz
+#  stream_time_start       :timestamptz
 #  time_start              :timestamptz      not null
 #  tx_bytes                :bigint(8)
 #  tx_packets              :bigint(8)
@@ -32,6 +33,10 @@
 #  gateway_id              :bigint(8)
 #  node_id                 :integer(4)
 #  pop_id                  :integer(4)
+#
+# Indexes
+#
+#  tx_streams_local_tag_idx  (local_tag)
 #
 class RtpStatistics::TxStream < Cdr::Base
   self.table_name = 'rtp_statistics.tx_streams'

@@ -29,13 +29,19 @@
 #  rx_rtcp_jitter_std     :float(24)
 #  rx_ssrc                :bigint(8)
 #  rx_total_lost          :bigint(8)
-#  time_end               :timestamptz
+#  stream_time_end        :timestamptz
+#  stream_time_start      :timestamptz
 #  time_start             :timestamptz      not null
 #  gateway_external_id    :bigint(8)
 #  gateway_id             :bigint(8)
 #  node_id                :integer(4)
 #  pop_id                 :integer(4)
 #  tx_stream_id           :bigint(8)
+#
+# Indexes
+#
+#  rx_streams_local_tag_idx     (local_tag)
+#  rx_streams_tx_stream_id_idx  (tx_stream_id)
 #
 class RtpStatistics::RxStream < Cdr::Base
   self.table_name = 'rtp_statistics.rx_streams'

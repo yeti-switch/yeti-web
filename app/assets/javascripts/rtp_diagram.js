@@ -5,7 +5,7 @@
 
     // --- layout constants ---
     var NODE_W = 220;        // single-column node width (orig/term)
-    var SBC_W = 240;         // sbc node width (header + 2 port-column markers)
+    var SBC_W = 360;         // sbc node width (port header + RX-errors / RX-TX-label columns)
     var HEADER_H = 40;       // header area (type label + name label)
     var PORT_H = 38;         // height of one port row — drives vertical spacing between arrows
     var NODE_BOTTOM_PAD = 6; // small clearance under last port row
@@ -48,6 +48,33 @@
         if (ssrc === null || ssrc === undefined) return '?';
         return '0x' + ssrc.toString(16).toUpperCase();
     }
+    // Receive-side error counters are recorded on the TX stream row (one set
+    // per local port). They describe the RX direction, so they are shown next
+    // to the RX label inside the SBC port.
+    function rxErrCount(v) { return (v === null || v === undefined) ? 0 : v; }
+    // One entry per line; `err` flags the counters whose value is non-zero so
+    // only those rows are highlighted (the header is never highlighted).
+    function rxErrRows(s) {
+        var ob = rxErrCount(s.rx_out_of_buffer_errors);
+        var pe = rxErrCount(s.rx_rtp_parse_errors);
+        var dp = rxErrCount(s.rx_dropped_packets);
+        var sd = rxErrCount(s.rx_srtp_decrypt_errors);
+        return [
+            { text: 'RX Errors:', err: false },
+            { text: '  out of buffer: ' + ob, err: ob > 0 },
+            { text: '  parse: ' + pe, err: pe > 0 },
+            { text: '  dropped: ' + dp, err: dp > 0 },
+            { text: '  srtp decrypt: ' + sd, err: sd > 0 }
+        ];
+    }
+    function rxErrTooltip(s) {
+        return 'RX errors (per local port)\n' +
+               'out of buffer: ' + rxErrCount(s.rx_out_of_buffer_errors) + '\n' +
+               'rtp parse: ' + rxErrCount(s.rx_rtp_parse_errors) + '\n' +
+               'dropped packets: ' + rxErrCount(s.rx_dropped_packets) + '\n' +
+               'srtp decrypt: ' + rxErrCount(s.rx_srtp_decrypt_errors);
+    }
+
     function rxTooltip(s, leg, gwName) {
         return 'Leg' + leg + ' RX  Yeti <- ' + gwName + '\n' +
                'stream #' + s.id + '  ssrc=' + ssrcLabel(s.rx_ssrc) + '\n' +
@@ -251,29 +278,100 @@
                                    y1: n.y + HEADER_H, y2: n.y + HEADER_H,
                                    stroke: 'rgba(255,255,255,0.3)', 'stroke-width': 1 }));
 
-        // Each port row: white box w/ colored border + IP:Port text, centered in the row.
-        // No RX/TX tag here — direction is shown only on the SBC side (Yeti's perspective).
+        // The remote gateway is a single "port" object: one box that all of
+        // Yeti's arrows connect to. Labels are from the GATEWAY's perspective,
+        // which is inverted vs Yeti: Yeti RX = gateway TX, Yeti TX = gateway RX.
+        // The remote host:port is only known from Yeti's RX streams (= the
+        // gateway's TX), so it is shown on the gateway-TX rows; gateway-RX rows
+        // show "—". RX/TX labels sit at the arrow-facing edge.
         var side = n.kind === 'orig' ? 'left' : 'right';
+        var rowX = n.x + 6;
+        var rowW = n.w - 12;
+
+        var firstY = n.rows[0].y;
+        var lastY = n.rows[n.rows.length - 1].y;
+        var boxY = firstY + 1;
+        var boxH = (lastY + PORT_H) - firstY - 2;
+
+        children.push(el('rect', {
+            x: rowX, y: boxY, width: rowW, height: boxH,
+            fill: '#fff', stroke: '#666', 'stroke-width': 1, rx: 2, ry: 2
+        }));
+
+        // Arrow-facing edge: orig (left) → right edge; term (right) → left edge.
+        // The ip:port sits right next to the direction label, sharing its
+        // alignment (just inward from the label).
+        var labelX, labelAnchor, ipX;
+        if (side === 'left') {
+            labelX = rowX + rowW - 6;
+            labelAnchor = 'end';
+            ipX = labelX - 26;
+        } else {
+            labelX = rowX + 6;
+            labelAnchor = 'start';
+            ipX = labelX + 26;
+        }
+
+        // Multiple RX streams (= gateway TX) can belong to the same call leg.
+        // Show the remote ip:port once per distinct value: if they all share
+        // the same remote socket, only the first RX row prints it; differing
+        // sockets are each shown next to their own TX label.
+        var seenRemote = {};
+
         n.rows.forEach(function (re) {
             var r = re.row;
             var color = colorFor(r.direction, side);
-            var rowX = n.x + 6;
-            var rowW = n.w - 12;
-            var box = el('rect', {
-                x: rowX, y: re.y + 1, width: rowW, height: PORT_H - 2,
-                fill: '#fff', stroke: color, 'stroke-width': 1, rx: 2, ry: 2
+            var rowMidY = re.y + PORT_H / 2 + 3;
+
+            // Gateway-side direction is the inverse of Yeti's.
+            var gwDir = r.direction === 'rx' ? 'TX' : 'RX';
+            var rowEls = [];
+
+            // Remote ip:port is only known from RX streams (gateway TX),
+            // deduplicated across the leg.
+            if (r.direction === 'rx' && !seenRemote[r.gw_label]) {
+                seenRemote[r.gw_label] = true;
+                var ip = el('text', {
+                    x: ipX, y: rowMidY, 'text-anchor': labelAnchor,
+                    'font-size': 11, fill: '#222'
+                });
+                ip.appendChild(textNode(r.gw_label));
+                rowEls.push(ip);
+            }
+
+            var tag = el('text', {
+                x: labelX, y: rowMidY, 'text-anchor': labelAnchor,
+                'font-size': 11, 'font-weight': 'bold', fill: color
             });
-            var label = el('text', {
-                x: n.x + n.w / 2, y: re.y + PORT_H / 2 + 3, 'text-anchor': 'middle',
-                'font-size': 10, fill: '#222'
-            });
-            label.appendChild(textNode(r.gw_label));
+            tag.appendChild(textNode(gwDir));
+            rowEls.push(tag);
 
             var title = el('title');
             title.appendChild(textNode(r.tooltip));
-            children.push(el('g', null, [title, box, label]));
+            children.push(el('g', null, [title].concat(rowEls)));
         });
         return el('g', null, children);
+    }
+
+    // Group consecutive SBC rows that share the same local socket into one "port"
+    // object. The TX stream and its related RX stream(s) bind the same local
+    // host:port (RX local_host/port is copied from the TX stream), so they belong
+    // to a single Yeti SBC port — one box, with one arrow per stream.
+    function groupSbcPorts(sbcRows) {
+        var groups = [];
+        sbcRows.forEach(function (sbcRow) {
+            var key = sbcRow.side + '|' + sbcRow.gw_node_id + '|' + sbcRow.row.sbc_label;
+            var last = groups[groups.length - 1];
+            if (last && last.key === key) {
+                last.rows.push(sbcRow);
+            } else {
+                groups.push({
+                    key: key, side: sbcRow.side,
+                    label: sbcRow.row.sbc_label, rows: [sbcRow]
+                });
+            }
+        });
+        return groups;
     }
 
     function renderSbcNode(n) {
@@ -281,40 +379,102 @@
                                 fill: NODE_FILL.sbc, stroke: '#222' });
         var children = [rect].concat(renderHeader(n));
 
-        // SBC port rows with RX/TX tag at the arrow-facing edge (Yeti's perspective).
-        n.sbcRows.forEach(function (sbcRow) {
-            var r = sbcRow.row;
-            var color = colorFor(r.direction, sbcRow.side);
+        // One box per local port; the TX stream and its related RX stream(s)
+        // (same local host:port) share it. Per-stream RX/TX tags sit at each
+        // arrow's y so every arrow still reads its own direction.
+        var LABEL_W = 30;     // RX / TX label column width
+
+        groupSbcPorts(n.sbcRows).forEach(function (port) {
             var rowX, rowW;
-            if (sbcRow.side === 'left') {
+            if (port.side === 'left') {
                 rowX = n.x + 4;
                 rowW = n.w / 2 - 8;
             } else {
                 rowX = n.x + n.w / 2 + 4;
                 rowW = n.w / 2 - 8;
             }
-            var box = el('rect', {
-                x: rowX, y: sbcRow.y + 1, width: rowW, height: PORT_H - 2,
-                fill: '#fff', stroke: color, 'stroke-width': 1, rx: 2, ry: 2
-            });
-            var label = el('text', {
-                x: rowX + rowW / 2, y: sbcRow.y + PORT_H / 2 + 3, 'text-anchor': 'middle',
-                'font-size': 10, fill: '#222'
-            });
-            label.appendChild(textNode(r.sbc_label));
+            var firstY = port.rows[0].y;
+            var lastY = port.rows[port.rows.length - 1].y;
+            var boxY = firstY + 1;
+            var boxH = (lastY + PORT_H) - firstY - 2;
 
-            // RX/TX tag at the edge that faces the arrow
-            var tagX = sbcRow.side === 'left' ? rowX + 4 : rowX + rowW - 4;
-            var tagAnchor = sbcRow.side === 'left' ? 'start' : 'end';
-            var tag = el('text', {
-                x: tagX, y: sbcRow.y + PORT_H / 2 + 3, 'text-anchor': tagAnchor,
-                'font-size': 9, 'font-weight': 'bold', fill: color
+            // Neutral border: the port is bidirectional; direction is conveyed
+            // by the per-stream RX/TX labels and the arrow colors.
+            var box = el('rect', {
+                x: rowX, y: boxY, width: rowW, height: boxH,
+                fill: '#fff', stroke: '#666', 'stroke-width': 1, rx: 2, ry: 2
             });
-            tag.appendChild(textNode(r.direction.toUpperCase()));
+            var groupEls = [box];
+
+            // Two body columns. The RX/TX label column sits at the
+            // arrow-facing edge (left side → left edge, right side → right
+            // edge); the RX-errors column takes the remaining inner space.
+            var labelX, labelAnchor, errColX;
+            if (port.side === 'left') {
+                labelX = rowX + 6;
+                labelAnchor = 'start';
+                errColX = rowX + LABEL_W + 6;
+            } else {
+                labelX = rowX + rowW - 6;
+                labelAnchor = 'end';
+                errColX = rowX + 6;
+            }
+
+            // --- port header: host:port (left-aligned with the errors block) ---
+            var hdr = el('text', {
+                x: errColX, y: boxY + 11, 'text-anchor': 'start',
+                'font-size': 12, 'font-weight': 'bold', fill: '#222'
+            });
+            hdr.appendChild(textNode(port.label));
+            groupEls.push(hdr);
+
+            // RX-side error counters are stored on the TX stream row for this
+            // local port; render them once per port in the errors column.
+            var txStream = null;
+            port.rows.forEach(function (sbcRow) {
+                if (!txStream && sbcRow.row.direction === 'tx') txStream = sbcRow.row.stream;
+            });
+            if (txStream) {
+                var rows = rxErrRows(txStream);
+                var lineH = 12;
+                // Start the errors block on the same line as the first RX/TX label.
+                var blockTop = firstY + PORT_H / 2 + 3;
+                var errT = el('text', {
+                    x: errColX, 'text-anchor': 'start', 'font-size': 10
+                });
+                rows.forEach(function (ln, i) {
+                    // Only the counter line with a non-zero value turns red.
+                    var tspan = el('tspan', {
+                        x: errColX, y: blockTop + i * lineH,
+                        fill: ln.err ? '#c33' : '#999'
+                    });
+                    tspan.appendChild(textNode(ln.text));
+                    errT.appendChild(tspan);
+                });
+                var errTitle = el('title');
+                errTitle.appendChild(textNode(rxErrTooltip(txStream)));
+                errT.appendChild(errTitle);
+                groupEls.push(errT);
+            }
+
+            // RX / TX label per member stream, aligned with its arrow.
+            port.rows.forEach(function (sbcRow) {
+                var r = sbcRow.row;
+                var color = colorFor(r.direction, sbcRow.side);
+                var tag = el('text', {
+                    x: labelX, y: sbcRow.y + PORT_H / 2 + 3, 'text-anchor': labelAnchor,
+                    'font-size': 11, 'font-weight': 'bold', fill: color
+                });
+                tag.appendChild(textNode(r.direction.toUpperCase()));
+                groupEls.push(tag);
+            });
 
             var title = el('title');
-            title.appendChild(textNode(r.tooltip));
-            children.push(el('g', null, [title, box, label, tag]));
+            title.appendChild(textNode(
+                'Yeti SBC port ' + port.label + '\n' +
+                port.rows.map(function (sr) { return sr.row.tooltip; }).join('\n\n')
+            ));
+            children.push(el('g', null, [title].concat(groupEls)));
         });
         return el('g', null, children);
     }
@@ -372,39 +532,72 @@
         return arrowEls;
     }
 
+    // Field order and labels mirror the RtpRxStreams admin show page.
     var RX_PANEL_FIELDS = [
-        ['id', 'Stream id'],
+        ['id', 'Id'],
+        ['tx_stream_id', 'Tx stream'],
         ['local_tag', 'Local tag'],
-        ['gateway_id', 'Gateway id'],
         ['time_start', 'Time start'],
-        ['time_end', 'Time end'],
-        ['local_host', 'Local host'],
-        ['local_port', 'Local port'],
+        ['stream_time_start', 'Stream time start'],
+        ['stream_time_end', 'Stream time end'],
+        ['pop', 'Pop'],
+        ['node', 'Node'],
+        ['gateway', 'Gateway'],
+        ['gateway_external_id', 'Gateway external'],
+        ['rx_ssrc', 'Rx ssrc'],
         ['remote_host', 'Remote host'],
         ['remote_port', 'Remote port'],
-        ['rx_ssrc', 'SSRC'],
-        ['rx_packets', 'Packets'],
-        ['rx_bytes', 'Bytes'],
-        ['rx_total_lost', 'Lost'],
-        ['rx_packet_jitter_mean', 'Jitter (mean)'],
-        ['rx_packet_jitter_max', 'Jitter (max)'],
-        ['rx_decode_errors', 'Decode errors']
-    ];
-    var TX_PANEL_FIELDS = [
-        ['id', 'Stream id'],
-        ['local_tag', 'Local tag'],
-        ['gateway_id', 'Gateway id'],
-        ['time_start', 'Time start'],
-        ['time_end', 'Time end'],
         ['local_host', 'Local host'],
         ['local_port', 'Local port'],
-        ['tx_ssrc', 'SSRC'],
-        ['tx_packets', 'Packets'],
-        ['tx_bytes', 'Bytes'],
-        ['tx_total_lost', 'Lost'],
-        ['tx_rtcp_jitter_mean', 'RTCP jitter (mean)'],
-        ['rtcp_rtt_mean', 'RTT (mean)'],
-        ['rtcp_rtt_max', 'RTT (max)']
+        ['rx_packets', 'Rx packets'],
+        ['rx_bytes', 'Rx bytes'],
+        ['rx_total_lost', 'Rx total lost'],
+        ['rx_payloads_transcoded', 'Rx payloads transcoded'],
+        ['rx_payloads_relayed', 'Rx payloads relayed'],
+        ['rx_decode_errors', 'Rx decode errors'],
+        ['rx_packet_delta_min', 'Rx packet delta min'],
+        ['rx_packet_delta_max', 'Rx packet delta max'],
+        ['rx_packet_delta_mean', 'Rx packet delta mean'],
+        ['rx_packet_delta_std', 'Rx packet delta std'],
+        ['rx_packet_jitter_min', 'Rx packet jitter min'],
+        ['rx_packet_jitter_max', 'Rx packet jitter max'],
+        ['rx_packet_jitter_mean', 'Rx packet jitter mean'],
+        ['rx_packet_jitter_std', 'Rx packet jitter std'],
+        ['rx_rtcp_jitter_min', 'Rx rtcp jitter min'],
+        ['rx_rtcp_jitter_max', 'Rx rtcp jitter max'],
+        ['rx_rtcp_jitter_mean', 'Rx rtcp jitter mean'],
+        ['rx_rtcp_jitter_std', 'Rx rtcp jitter std']
+    ];
+    // Field order and labels mirror the RtpTxStreams admin show page.
+    var TX_PANEL_FIELDS = [
+        ['id', 'Id'],
+        ['time_start', 'Time start'],
+        ['stream_time_start', 'Stream time start'],
+        ['stream_time_end', 'Stream time end'],
+        ['pop', 'Pop'],
+        ['node', 'Node'],
+        ['gateway', 'Gateway'],
+        ['local_tag', 'Local tag'],
+        ['rtcp_rtt_min', 'Rtcp rtt min'],
+        ['rtcp_rtt_max', 'Rtcp rtt max'],
+        ['rtcp_rtt_mean', 'Rtcp rtt mean'],
+        ['rtcp_rtt_std', 'Rtcp rtt std'],
+        ['rx_out_of_buffer_errors', 'Rx out of buffer errors'],
+        ['rx_rtp_parse_errors', 'Rx rtp parse errors'],
+        ['rx_dropped_packets', 'Rx dropped packets'],
+        ['rx_srtp_decrypt_errors', 'Rx srtp decrypt errors'],
+        ['tx_packets', 'Tx packets'],
+        ['tx_bytes', 'Tx bytes'],
+        ['tx_ssrc', 'Tx ssrc'],
+        ['local_host', 'Local host'],
+        ['local_port', 'Local port'],
+        ['tx_total_lost', 'Tx total lost'],
+        ['tx_payloads_transcoded', 'Tx payloads transcoded'],
+        ['tx_payloads_relayed', 'Tx payloads relayed'],
+        ['tx_rtcp_jitter_min', 'Tx rtcp jitter min'],
+        ['tx_rtcp_jitter_max', 'Tx rtcp jitter max'],
+        ['tx_rtcp_jitter_mean', 'Tx rtcp jitter mean'],
+        ['tx_rtcp_jitter_std', 'Tx rtcp jitter std']
     ];
 
     function formatValue(field, value) {
