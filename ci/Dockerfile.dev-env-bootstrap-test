@@ -1,0 +1,27 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    sudo \
+    build-essential \
+    git \
+    libpq-dev \
+    ruby-full \
+    ruby-bundler \
+    rbenv \
+    ruby-build \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends bash coreutils grep sed && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+COPY . /work
+
+RUN chmod +x bin/bootstrap-dev-env.sh ci/dev-env-bootstrap-test.sh
+
+CMD ["bash", "ci/dev-env-bootstrap-test.sh"]

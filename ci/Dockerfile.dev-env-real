@@ -1,0 +1,62 @@
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    sudo \
+    bash \
+    coreutils \
+    git \
+    build-essential \
+    libssl-dev \
+    libreadline-dev \
+    zlib1g-dev \
+    libyaml-dev \
+    libffi-dev \
+    libgdbm-dev \
+    libncurses5-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libpq-dev \
+    ruby-full \
+    lua5.4 \
+    lua5.4-dev \
+    make \
+    postgresql-server-dev-16 \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN install -d /usr/share/keyrings \
+  && curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/postgresql.gpg \
+  && echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    postgresql-16 \
+    postgresql-contrib-16 \
+    git \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN git clone --depth 1 https://github.com/yeti-switch/yeti-pg-ext.git /tmp/yeti-pg-ext
+RUN git clone --depth 1 https://github.com/dimitri/prefix.git /tmp/prefix
+RUN git clone --depth 1 https://github.com/pgq/pgq.git /tmp/pgq
+RUN git clone --depth 1 https://github.com/pgq/pgq-ext.git /tmp/pgq-ext
+RUN git clone --depth 1 https://github.com/pllua/pllua.git /tmp/pllua
+
+RUN git clone --depth 1 https://github.com/rbenv/rbenv.git /root/.rbenv \
+  && mkdir -p /root/.rbenv/plugins \
+  && git clone --depth 1 https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build
+
+ENV RBENV_ROOT=/root/.rbenv
+ENV PATH=/root/.rbenv/bin:/root/.rbenv/shims:${PATH}
+
+WORKDIR /work
+COPY . /work
+
+RUN chmod +x bin/bootstrap-dev-env.sh
+
+CMD ["bash", "-lc", "bin/bootstrap-dev-env.sh /work && exec bash"]
