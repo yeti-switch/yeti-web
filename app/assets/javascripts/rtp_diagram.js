@@ -501,21 +501,23 @@
                 stroke: color, 'stroke-width': 2, 'marker-end': 'url(#' + marker + ')',
                 'class': 'rtp-edge'
             });
-            // wide invisible hit area so clicking near the arrow works
+            // wide invisible hit area so clicking near the arrow works.
+            // 32 ≈ row pitch (PORT_H 38) minus a small gap so adjacent
+            // arrows' hit zones don't overlap.
             var hit = el('line', {
                 x1: x1, y1: y, x2: x2, y2: y,
-                stroke: 'transparent', 'stroke-width': 18,
+                stroke: 'transparent', 'stroke-width': 32,
                 'pointer-events': 'all', style: 'cursor:pointer'
             });
             var midX = (x1 + x2) / 2;
             var ssrcLbl = el('text', {
                 x: midX, y: y - 4, 'text-anchor': 'middle',
-                'font-size': 9, fill: color
+                'font-size': 9, fill: color, 'pointer-events': 'none'
             });
             ssrcLbl.appendChild(textNode(r.ssrc));
             var pktLbl = el('text', {
                 x: midX, y: y + 11, 'text-anchor': 'middle',
-                'font-size': 9, fill: '#555'
+                'font-size': 9, fill: '#555', 'pointer-events': 'none'
             });
             var pkts = (r.packets === null || r.packets === undefined) ? '?' : r.packets;
             var verb = r.direction === 'rx' ? 'received' : 'sent';
@@ -690,11 +692,20 @@
         panel.textContent = 'Click an arrow to view full stream details.';
         container.appendChild(panel);
 
-        var currentLine = null;
+        // A single reusable orange "border": a wider line drawn *behind* the
+        // selected arrow, so the arrow keeps its own color and width and just
+        // gains an orange outline. Appended before the arrows so it sits under
+        // them but above the node boxes.
+        var highlight = el('line', {
+            stroke: '#f60', 'stroke-width': 7, 'stroke-linecap': 'round',
+            'pointer-events': 'none', visibility: 'hidden'
+        });
+        svg.appendChild(highlight);
         renderEdges(layout, function (info) {
-            if (currentLine) currentLine.setAttribute('stroke-width', '2');
-            info.line.setAttribute('stroke-width', '4');
-            currentLine = info.line;
+            ['x1', 'y1', 'x2', 'y2'].forEach(function (a) {
+                highlight.setAttribute(a, info.line.getAttribute(a));
+            });
+            highlight.setAttribute('visibility', 'visible');
             renderStreamPanel(panel, info);
         }).forEach(function (e) { svg.appendChild(e); });
     }

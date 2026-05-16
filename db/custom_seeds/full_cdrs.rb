@@ -145,7 +145,7 @@ create_rtp_streams = lambda do |tag, gateway, time_start, time_end, rx_packets: 
   base_remote_port = rand(10_000..30_000)
 
   rx_count.times do |i|
-    remote_port = (i.zero? || rand < 0.5) ? base_remote_port : rand(10_000..30_000)
+    remote_port = i.zero? || rand < 0.5 ? base_remote_port : rand(10_000..30_000)
     RtpStatistics::RxStream.create!(common.merge(
                                       tx_stream_id: tx.id,
                                       remote_host: '10.0.0.2',

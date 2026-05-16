@@ -1120,7 +1120,7 @@ $$;
 -- Name: write_rtp_statistics(json, integer, integer, bigint, bigint, bigint, bigint, character varying, character varying, timestamp with time zone); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.write_rtp_statistics(i_data json, i_pop_id integer, i_node_id integer, i_lega_gateway_id bigint, i_lega_gateway_external_id bigint, i_legb_gateway_id bigint, i_legb_gateway_external_id bigint, i_lega_local_tag character varying, i_legb_local_tag character varying, i_time_start timestamp with time zone) RETURNS void
+CREATE FUNCTION switch.write_rtp_statistics(i_data json, i_pop_id integer, i_node_id integer, i_lega_gateway_id bigint, i_lega_gateway_external_id bigint, i_legb_gateway_id bigint, i_legb_gateway_external_id bigint, i_lega_local_tag character varying, i_legb_local_tag character varying, i_time_start timestamp with time zone DEFAULT NULL::timestamp with time zone) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1435,7 +1435,8 @@ BEGIN
     v_dynamic.term_gw_id,
     v_dynamic.term_gw_external_id,
     i_local_tag,
-    i_legb_local_tag
+    i_legb_local_tag,
+    v_cdr.time_start
   );
 
   v_cdr.global_tag=i_global_tag;
@@ -1697,7 +1698,8 @@ BEGIN
     v_dynamic.term_gw_id,
     v_dynamic.term_gw_external_id,
     i_local_tag,
-    i_legb_local_tag
+    i_legb_local_tag,
+    v_cdr.time_start
   );
 
   v_cdr.global_tag=i_global_tag;
