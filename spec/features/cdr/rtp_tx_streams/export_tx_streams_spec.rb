@@ -18,7 +18,8 @@ RSpec.describe 'Export TX streams', type: :feature do
                          [
                            ['Id', item.id.to_s],
                            ['Time start', item.time_start.to_s],
-                           ['Time end', item.time_end.to_s],
+                           ['Stream time start', item.stream_time_start.to_s],
+                           ['Stream time end', item.stream_time_end.to_s],
                            ['Pop name', item.pop.try(:name)],
                            ['Node name', item.node.try(:name)],
                            ['Gateway name', item.gateway.try(:name)],
