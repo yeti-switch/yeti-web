@@ -240,6 +240,60 @@ form fieldset > ol > li.boolean label {
   width: 100%;
 }
 
-form.filter_form .filter_form_field.filter_date_time_range input[type=text] {
-  width: 110px;
+// The "Set range" preset menu (active_admin_date_range_preset) is appended to
+// <body> as `.block_timerange` with `position:absolute` but no z-index, so it
+// stacks below tom-select dropdowns (`.ts-dropdown` has z-index: 10). Lift it
+// above them.
+.block_timerange {
+  z-index: 1000;
 }
+
+// Date / date-time range filters (e.g. "Time start"): label on its own row,
+// then the two range inputs share one row and together fill the full sidebar
+// content width, so they align with the other filters instead of leaving a
+// gap on the right.
+form.filter_form .filter_form_field.filter_date_time_range,
+form.filter_form .filter_form_field.filter_date_range {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 6px;
+  row-gap: 4px;
+
+  > label {
+    flex: 1 0 100%;
+  }
+
+  input.date-time-picker,
+  input[type=text] {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+}
+
+// Fix asymmetric right gap on sidebar filter inputs.
+// ActiveAdmin's _forms.scss sets the filter text-input width to
+// `$sidebar-inner-content-width - $text-input-horizontal-padding * 2`, which
+// was written for content-box. With the global `box-sizing: border-box`
+// (_base.scss) that subtraction is double-counted, so the input renders ~20px
+// narrower than the <select> / section width; being left-aligned, the whole
+// gap lands on the right and looks like 2x the left padding.
+// Restore full content width (matching <select>) for standalone single-line
+// filters; the side-by-side / range layouts set their own widths and keep them.
+form.filter_form .filter_form_field:not(.select_and_search):not(.filter_date_range):not(.filter_date_time_range):not(.filter_numeric) {
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=tel] {
+    width: 100%;
+  }
+}
+
+// Operator filters (predicate <select> + value input — string-with-predicate
+// and integer/numeric, both carry `.select_and_search`) are laid out in
+// app/assets/stylesheets/yeti/tom-select-customizations.scss, because the
+// predicate <select> is rendered as a tom-select widget that must be sized
+// together with the value input on one full-width row.

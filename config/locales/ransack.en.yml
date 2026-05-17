@@ -2,10 +2,21 @@ en:
   ransack:
     predicates:
       in_string: "In string"
+      # ActiveAdmin's default string filter declares :cont/:eq/:start/:end
+      # predicates; explicitly-declared filters may use the long
+      # contains/equals/starts_with/ends_with forms. Keep both families in sync.
+      cont: "Has"
+      contains: "Has"
+      eq: "Equals"
       equals: "Equals"
-      contains: "Contains"
-      starts_with: "Starts with"
-      ends_with: "Ends with"
-      greater_than: "Greater than"
-      less_than: "Less than"
+      start: "Starts"
+      starts_with: "Starts"
+      end: "Ends"
+      ends_with: "Ends"
+      # Numeric/integer filters declare :eq/:gt/:lt predicates. Short single
+      # words so they fit the compact predicate column.
+      gt: "Greater"
+      lt: "Less"
+      greater_than: "Greater"
+      less_than: "Less"
       hex: "Hex"

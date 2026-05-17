@@ -37,8 +37,15 @@ function initTomSelect(parent, options = {}) {
         var $el = $(el)
         var isMultiple = !!$el.attr('multiple')
         var allowEmptyOption = !!$el.data('allow-empty-option')
-        if (hasBlankOption(el)) plugins.push('clear_button')
-        if (isMultiple) plugins.push('remove_button')
+        // `.tom-select-clear` opts a multi-select into a single clear-all
+        // button instead of the per-chip remove_button plugin. remove_button
+        // injects a .remove anchor into every chip and rebinds control click
+        // handling, which races option clicks on a full-width control (lost
+        // selections in headless). Set this class on the input via the admin
+        // filter config; default multi-selects keep per-chip remove.
+        var clearOnly = $el.hasClass('tom-select-clear')
+        if (hasBlankOption(el) || (isMultiple && clearOnly)) plugins.push('clear_button')
+        if (isMultiple && !clearOnly) plugins.push('remove_button')
         new TomSelect(this, {
             plugins: plugins,
             allowEmptyOption: allowEmptyOption,

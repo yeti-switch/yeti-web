@@ -138,7 +138,19 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_group, collection: proc { Routing::RoutingGroup.select(%i[id name]) }, input_html: { class: 'tom-select' }
   filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, input_html: { class: 'tom-select' }
 
-  filter :internal_disconnect_code
+  filter :internal_disconnect_code, label: 'Internal SIP disconnect code'
+  filter :internal_disconnect_code_id_in,
+         as: :select,
+         label: 'Internal disconnect code',
+         collection: proc {
+           resource_ids = params.fetch(:q, {})[:internal_disconnect_code_id_in]
+           resource_ids.present? ? DisconnectCode.where(id: resource_ids).map { |c| [c.display_name, c.id] } : []
+         },
+         input_html: {
+           class: 'tom-select-ajax',
+           multiple: true,
+           'data-path': '/disconnect_codes/search'
+         }
   filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
   filter :lega_disconnect_code
   filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]

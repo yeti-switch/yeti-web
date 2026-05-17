@@ -32,7 +32,7 @@ class DisconnectCode < ApplicationRecord
   belongs_to :namespace, class_name: 'DisconnectCodeNamespace', foreign_key: 'namespace_id'
 
   def display_name
-    "#{namespace_name}/#{code} - #{reason}"
+    "#{namespace_name}/#{code} - #{reason} | #{id}"
   end
 
   include WithPaperTrail
@@ -62,5 +62,17 @@ class DisconnectCode < ApplicationRecord
 
   def namespace_name
     NSS[namespace_id]
+  end
+
+  scope :search_for, lambda { |term|
+    where(
+      'disconnect_code.id::varchar ILIKE :t OR disconnect_code.code::varchar ILIKE :t ' \
+      'OR disconnect_code.reason ILIKE :t',
+      t: "%#{term}%"
+    )
+  }
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[search_for]
   end
 end

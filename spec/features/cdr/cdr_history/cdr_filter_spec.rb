@@ -107,6 +107,26 @@ RSpec.describe 'Cdrs index page filtering', js: true do
     end
   end
 
+  describe 'filter by internal disconnect code' do
+    let!(:disconnect_codes) { create_list(:disconnect_code, 3, :ts) }
+    let!(:cdrs) { disconnect_codes.map { |dc| create(:cdr, internal_disconnect_code_id: dc.id) } }
+
+    let(:filter_cdr_records) do
+      within_filters do
+        fill_in_tom_select 'INTERNAL DISCONNECT CODE',
+                           with: disconnect_codes[0].display_name,
+                           search: disconnect_codes[0].code.to_s
+      end
+    end
+
+    it 'shows only CDRs matching the selected internal disconnect code' do
+      subject
+      expect(page).to have_table
+      expect(page).to have_table_row(count: 1)
+      expect(page).to have_table_cell(column: 'Id', text: cdrs[0].id.to_s)
+    end
+  end
+
   describe 'filter by term gw' do
     let!(:gateways) { create_list(:gateway, 3) }
     let!(:cdrs) { gateways.map { |gw| create(:cdr, term_gw_id: gw.id) } }
