@@ -604,4 +604,87 @@ RSpec.describe CdrExport do
       include_examples :returns_correct_sql
     end
   end
+
+  describe 'multi-value number list filter parsing' do
+    subject(:filters) { CdrExport::FiltersModel.new(attribute => input) }
+
+    multi_value_attributes = %i[
+      src_prefix_in_in src_prefix_routing_in src_prefix_out_in
+      dst_prefix_in_in dst_prefix_routing_in dst_prefix_out_in
+    ]
+
+    multi_value_attributes.each do |attr|
+      context "for #{attr}" do
+        let(:attribute) { attr }
+
+        context 'with a messy comma-separated string' do
+          let(:input) { ',, ,,11,2' }
+
+          it 'drops empty and whitespace-only values' do
+            expect(filters.public_send(attr)).to eq(%w[11 2])
+            expect(filters.as_json).to eq(attr.to_s => %w[11 2])
+          end
+        end
+
+        context 'with surrounding whitespace around values' do
+          let(:input) { " 11 , 2 ,3\t" }
+
+          it 'strips each value' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3])
+          end
+        end
+
+        context 'with newline-separated values (textarea input)' do
+          let(:input) { "11\n2\n\n 3 \r\n4" }
+
+          it 'splits on new lines as well as commas' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3 4])
+          end
+        end
+
+        context 'with mixed comma and newline separators' do
+          let(:input) { "11,2\n3, ,4" }
+
+          it 'splits on either separator' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3 4])
+          end
+        end
+
+        context 'with only separators and whitespace' do
+          let(:input) { ", , ,,\n  \n" }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+
+        context 'with an empty string' do
+          let(:input) { '' }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+
+        context 'with an array containing blanks (API input)' do
+          let(:input) { ['11', '', ' ', '2'] }
+
+          it 'rejects blank elements' do
+            expect(filters.public_send(attr)).to eq(%w[11 2])
+          end
+        end
+
+        context 'with an empty array' do
+          let(:input) { [] }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+      end
+    end
+  end
 end
