@@ -6,6 +6,8 @@ ActiveAdmin.register DisconnectCode do
   config.batch_actions = false
   actions :index, :show, :edit, :update
 
+  search_support! order_by: :code
+
   controller do
     def scoped_collection
       super.eager_load(:namespace)
