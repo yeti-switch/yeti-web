@@ -119,16 +119,22 @@ RSpec.describe CdrExport do
           failed_resource_type_id_eq: 25,
           src_prefix_in_contains: '1111',
           src_prefix_in_eq: '1111',
+          src_prefix_in_in: %w[1111 1112],
           dst_prefix_in_contains: '2222',
           dst_prefix_in_eq: '2222',
+          dst_prefix_in_in: %w[2222 2223],
           src_prefix_routing_contains: '3333',
           src_prefix_routing_eq: '3333',
+          src_prefix_routing_in: %w[3333 3334],
           dst_prefix_routing_contains: '4444',
           dst_prefix_routing_eq: '4444',
+          dst_prefix_routing_in: %w[4444 4445],
           src_prefix_out_contains: '5555',
           src_prefix_out_eq: '5555',
+          src_prefix_out_in: %w[5555 5556],
           dst_prefix_out_contains: '6666',
           dst_prefix_out_eq: '6666',
+          dst_prefix_out_in: %w[6666 6667],
           src_country_id_eq: 111_222,
           dst_country_id_eq: 111_223,
           routing_tag_ids_include: 2,
@@ -369,6 +375,62 @@ RSpec.describe CdrExport do
       include_examples :returns_correct_sql
     end
 
+    context 'with comma-separated CLI list filters (string input)' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          src_prefix_in_in: '111, 222,333',
+          src_prefix_routing_in: '444',
+          src_prefix_out_in: '555,, 666'
+        }
+      end
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          %{"cdr"."cdr"."src_prefix_in" IN ('111', '222', '333')},
+          'AND',
+          %{"cdr"."cdr"."src_prefix_routing" IN ('444')},
+          'AND',
+          %{"cdr"."cdr"."src_prefix_out" IN ('555', '666'))},
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'with CLI list filters as array (API input)' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          src_prefix_in_in: %w[111 222]
+        }
+      end
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          %{"cdr"."cdr"."src_prefix_in" IN ('111', '222'))},
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
     context 'when filled some filters' do
       let(:filters) do
         {
@@ -540,6 +602,89 @@ RSpec.describe CdrExport do
       end
 
       include_examples :returns_correct_sql
+    end
+  end
+
+  describe 'multi-value number list filter parsing' do
+    subject(:filters) { CdrExport::FiltersModel.new(attribute => input) }
+
+    multi_value_attributes = %i[
+      src_prefix_in_in src_prefix_routing_in src_prefix_out_in
+      dst_prefix_in_in dst_prefix_routing_in dst_prefix_out_in
+    ]
+
+    multi_value_attributes.each do |attr|
+      context "for #{attr}" do
+        let(:attribute) { attr }
+
+        context 'with a messy comma-separated string' do
+          let(:input) { ',, ,,11,2' }
+
+          it 'drops empty and whitespace-only values' do
+            expect(filters.public_send(attr)).to eq(%w[11 2])
+            expect(filters.as_json).to eq(attr.to_s => %w[11 2])
+          end
+        end
+
+        context 'with surrounding whitespace around values' do
+          let(:input) { " 11 , 2 ,3\t" }
+
+          it 'strips each value' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3])
+          end
+        end
+
+        context 'with newline-separated values (textarea input)' do
+          let(:input) { "11\n2\n\n 3 \r\n4" }
+
+          it 'splits on new lines as well as commas' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3 4])
+          end
+        end
+
+        context 'with mixed comma and newline separators' do
+          let(:input) { "11,2\n3, ,4" }
+
+          it 'splits on either separator' do
+            expect(filters.public_send(attr)).to eq(%w[11 2 3 4])
+          end
+        end
+
+        context 'with only separators and whitespace' do
+          let(:input) { ", , ,,\n  \n" }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+
+        context 'with an empty string' do
+          let(:input) { '' }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+
+        context 'with an array containing blanks (API input)' do
+          let(:input) { ['11', '', ' ', '2'] }
+
+          it 'rejects blank elements' do
+            expect(filters.public_send(attr)).to eq(%w[11 2])
+          end
+        end
+
+        context 'with an empty array' do
+          let(:input) { [] }
+
+          it 'becomes nil and is excluded from the serialized filters' do
+            expect(filters.public_send(attr)).to be_nil
+            expect(filters.as_json).not_to have_key(attr.to_s)
+          end
+        end
+      end
     end
   end
 end

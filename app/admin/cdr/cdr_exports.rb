@@ -96,7 +96,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
           end
         end
         panel 'Filters' do
-          attributes_table_for(resource.filters, *CdrExport::FiltersModel.attribute_types.keys)
+          present_filter_keys = resource.filters_json.keys
+          if present_filter_keys.any?
+            attributes_table_for(resource.filters, *present_filter_keys)
+          else
+            para 'No filters'
+          end
         end
       end
     end
@@ -166,6 +171,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                   :duration_lteq,
                   :customer_auth_external_type_eq,
                   :customer_auth_external_type_not_eq,
+                  :src_prefix_in_in,
+                  :src_prefix_routing_in,
+                  :src_prefix_out_in,
+                  :dst_prefix_in_in,
+                  :dst_prefix_routing_in,
+                  :dst_prefix_out_in,
                   customer_auth_external_id_in: [],
                   dst_country_iso_in: [],
                   src_country_iso_in: []
@@ -252,18 +263,24 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                required: false
 
       ff.input :src_prefix_in_contains, required: false
-      ff.input :src_prefix_in_eq, required: false
+      ff.input :src_prefix_in_in, as: :text, required: false, label: 'Src prefix in',
+                                  input_html: { rows: 5, value: ff.object.src_prefix_in_in.presence&.join("\n") }
       ff.input :src_prefix_routing_contains, required: false
-      ff.input :src_prefix_routing_eq, required: false
+      ff.input :src_prefix_routing_in, as: :text, required: false, label: 'Src prefix routing',
+                                       input_html: { rows: 5, value: ff.object.src_prefix_routing_in.presence&.join("\n") }
       ff.input :src_prefix_out_contains, required: false
-      ff.input :src_prefix_out_eq, required: false
+      ff.input :src_prefix_out_in, as: :text, required: false, label: 'Src prefix out',
+                                   input_html: { rows: 5, value: ff.object.src_prefix_out_in.presence&.join("\n") }
 
       ff.input :dst_prefix_in_contains, required: false
-      ff.input :dst_prefix_in_eq, required: false
+      ff.input :dst_prefix_in_in, as: :text, required: false, label: 'Dst prefix in',
+                                  input_html: { rows: 5, value: ff.object.dst_prefix_in_in.presence&.join("\n") }
       ff.input :dst_prefix_routing_contains, required: false
-      ff.input :dst_prefix_routing_eq, required: false
+      ff.input :dst_prefix_routing_in, as: :text, required: false, label: 'Dst prefix routing',
+                                       input_html: { rows: 5, value: ff.object.dst_prefix_routing_in.presence&.join("\n") }
       ff.input :dst_prefix_out_contains, required: false
-      ff.input :dst_prefix_out_eq, required: false
+      ff.input :dst_prefix_out_in, as: :text, required: false, label: 'Dst prefix out',
+                                   input_html: { rows: 5, value: ff.object.dst_prefix_out_in.presence&.join("\n") }
 
       ff.input :src_country_id_eq,
                as: :select,
