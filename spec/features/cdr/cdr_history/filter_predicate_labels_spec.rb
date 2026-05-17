@@ -5,24 +5,20 @@ RSpec.describe 'Cdrs index filter predicate labels' do
 
   before { visit cdrs_path }
 
-  it 'uses short word labels for string-with-predicate filters' do
-    within first('.filter_form_field.filter_string.select_and_search') do
-      %w[Equals Has Starts Ends].each do |label|
-        expect(page).to have_css('option', text: /\A#{label}\z/)
-      end
-      expect(page).to have_no_css('option', text: 'Contains')
-      expect(page).to have_no_css('option', text: 'Starts with')
-      expect(page).to have_no_css('option', text: 'Ends with')
-    end
+  # Asserts the rendered operator options exactly match the labels resolved
+  # from config/locales/ransack.en.yml (via the same path ActiveAdmin uses),
+  # so the test stays in sync with the locale instead of hardcoding strings.
+  def option_texts(scope_css)
+    first(scope_css).all('option', visible: :all).map { |o| o.text.strip }
   end
 
-  it 'uses short single-word labels for numeric/integer filters' do
-    within first('.filter_form_field.filter_numeric') do
-      %w[Equals Greater Less].each do |label|
-        expect(page).to have_css('option', exact_text: label)
-      end
-      expect(page).to have_no_css('option', text: 'Greater than')
-      expect(page).to have_no_css('option', text: 'Less than')
-    end
+  it 'labels string filter predicates from the locale' do
+    expect(option_texts('.filter_form_field.filter_string.select_and_search'))
+      .to match_array(ransack_predicate_labels(:eq, :cont, :start, :end))
+  end
+
+  it 'labels numeric/integer filter predicates from the locale' do
+    expect(option_texts('.filter_form_field.filter_numeric'))
+      .to match_array(ransack_predicate_labels(:eq, :gt, :lt))
   end
 end

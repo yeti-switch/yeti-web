@@ -83,25 +83,18 @@ RSpec.describe 'Filter Customers Auths records', :js do
   # predicates (e.g. the "Name" filter); numeric filters declare :eq/:gt/:lt.
   # Both predicate families are relabelled via config/locales/ransack.en.yml.
   context 'predicate operator labels' do
-    it 'uses short words for the default string filter' do
-      within first('.filter_form_field.filter_string.select_and_search') do
-        %w[Equals Has Starts Ends].each do |label|
-          expect(page).to have_css('option', exact_text: label)
-        end
-        expect(page).to have_no_css('option', text: 'Contains')
-        expect(page).to have_no_css('option', text: 'Starts with')
-        expect(page).to have_no_css('option', text: 'Ends with')
-      end
+    def option_texts(scope_css)
+      first(scope_css).all('option', visible: :all).map { |o| o.text.strip }
     end
 
-    it 'uses short words for numeric filters' do
-      within first('.filter_form_field.filter_numeric') do
-        %w[Equals Greater Less].each do |label|
-          expect(page).to have_css('option', exact_text: label)
-        end
-        expect(page).to have_no_css('option', text: 'Greater than')
-        expect(page).to have_no_css('option', text: 'Less than')
-      end
+    it 'labels the default string filter predicates from the locale' do
+      expect(option_texts('.filter_form_field.filter_string.select_and_search'))
+        .to match_array(ransack_predicate_labels(:eq, :cont, :start, :end))
+    end
+
+    it 'labels numeric filter predicates from the locale' do
+      expect(option_texts('.filter_form_field.filter_numeric'))
+        .to match_array(ransack_predicate_labels(:eq, :gt, :lt))
     end
   end
 end

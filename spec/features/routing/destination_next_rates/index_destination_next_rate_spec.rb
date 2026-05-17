@@ -67,7 +67,7 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
         fill_in 'Destination', with: filter_value
       end
 
-      let(:filter_type) { 'Contains' }
+      let(:filter_type) { ransack_predicate_label(:cont) }
       let!(:destination) { FactoryBot.create(:destination, prefix: '12385643584') }
       let!(:record) { FactoryBot.create(:destination_next_rate, destination:) }
       let(:filter_value) { '85643' }
@@ -86,7 +86,7 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
       end
 
       context 'when filter_type Equals' do
-        let(:filter_type) { 'Equals' }
+        let(:filter_type) { ransack_predicate_label(:eq) }
         let(:filter_value) { '12385643584' }
 
         it 'should render only filtered record' do
@@ -103,8 +103,8 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
         end
       end
 
-      context 'when filter_type Starts with' do
-        let(:filter_type) { 'Starts with' }
+      context 'when filter_type Starts' do
+        let(:filter_type) { ransack_predicate_label(:start) }
         let(:filter_value) { '1238564' }
 
         it 'should render only filtered record' do
@@ -121,8 +121,8 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
         end
       end
 
-      context 'when filter_type Ends with' do
-        let(:filter_type) { 'Ends with' }
+      context 'when filter_type Ends' do
+        let(:filter_type) { ransack_predicate_label(:end) }
         let(:filter_value) { '43584' }
 
         it 'should render only filtered record' do
