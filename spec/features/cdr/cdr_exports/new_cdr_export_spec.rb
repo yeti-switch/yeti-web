@@ -14,6 +14,23 @@ RSpec.describe 'Create new CDR export', js: true do
     create(:account, name: 'rspec', contractor: customer)
   end
 
+  context 'multi-number filter hints' do
+    let(:fill_form!) { nil }
+
+    it 'renders localized formtastic hints for the number list filters' do
+      visit new_cdr_export_path
+
+      expect(page).to have_text(
+        'List of Source Numbers separated by comma or new line. ' \
+        'Matches CDRs whose value equals any of the listed numbers.'
+      )
+      expect(page).to have_text(
+        'List of Destination Numbers separated by comma or new line. ' \
+        'Matches CDRs whose value equals any of the listed numbers.'
+      )
+    end
+  end
+
   context 'with all filled attributes' do
     let(:fill_form!) do
       fill_in_tom_select 'Fields', with: %w[success id], exact: true
@@ -114,17 +131,17 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Customer auth external id eq', with: customer_auth.external_id.to_s
         fill_in_tom_select 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
         fill_in 'Src prefix in contains', with: 'src_prefix_in_test'
-        fill_in 'Src prefix in eq', with: 'src_prefix_in_test'
         fill_in 'Src prefix routing contains', with: 'src_prefix_routing_test'
-        fill_in 'Src prefix routing eq', with: 'src_prefix_routing_test'
         fill_in 'Src prefix out contains', with: 'src_prefix_out_test'
-        fill_in 'Src prefix out eq', with: 'src_prefix_out_test'
+        fill_in 'Src prefix in', with: '111, 222', exact: true
+        fill_in 'Src prefix routing', with: '333', exact: true
+        fill_in 'Src prefix out', with: '444, 555', exact: true
         fill_in 'Dst prefix in contains', with: 'dst_prefix_in_test'
-        fill_in 'Dst prefix in eq', with: 'dst_prefix_in_test'
+        fill_in 'Dst prefix in', with: '666, 777', exact: true
         fill_in 'Dst prefix routing contains', with: 'dst_prefix_routing_test'
-        fill_in 'Dst prefix routing eq', with: 'dst_prefix_routing_test'
+        fill_in 'Dst prefix routing', with: '888', exact: true
         fill_in 'Dst prefix out contains', with: 'dst_prefix_out_test'
-        fill_in 'Dst prefix out eq', with: 'dst_prefix_out_test'
+        fill_in 'Dst prefix out', with: '999, 1010', exact: true
         fill_in_tom_select 'Src country id eq', with: countries.first.name
         fill_in_tom_select 'Dst country id eq', with: countries.last.name
         fill_in 'Routing tag ids include', with: 2
@@ -149,10 +166,15 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in_tom_select 'Src country iso in', with: countries.first.name, multiple: true
         fill_in_tom_select 'Dst country iso in', with: countries.first.name, multiple: true
 
-        # all allowed filters must be filled in this test.
-        CdrExport::FiltersModel.attribute_types.each_key do |filter_key|
+        # all allowed filters must be filled in this test, except the ones
+        # intentionally not exposed in the admin form (still usable via API).
+        filters_without_form_input = %w[
+          src_prefix_in_eq src_prefix_routing_eq src_prefix_out_eq
+          dst_prefix_in_eq dst_prefix_routing_eq dst_prefix_out_eq
+        ]
+        (CdrExport::FiltersModel.attribute_types.keys - filters_without_form_input).each do |filter_key|
           selector = "#cdr_export_filters_#{filter_key}"
-          field_node = page.find("input#{selector}, select#{selector}", visible: :all)
+          field_node = page.find("input#{selector}, select#{selector}, textarea#{selector}", visible: :all)
           expect(field_node.value).to(
             be_present,
             -> { "expect #{field_node.tag_name}#{selector} to be present, but got #{field_node.value.inspect}" }
@@ -189,17 +211,17 @@ RSpec.describe 'Create new CDR export', js: true do
                            customer_auth_external_id_eq: customer_auth.external_id,
                            customer_auth_id_eq: customer_auth.id,
                            src_prefix_in_contains: 'src_prefix_in_test',
-                           src_prefix_in_eq: 'src_prefix_in_test',
                            src_prefix_routing_contains: 'src_prefix_routing_test',
-                           src_prefix_routing_eq: 'src_prefix_routing_test',
                            src_prefix_out_contains: 'src_prefix_out_test',
-                           src_prefix_out_eq: 'src_prefix_out_test',
+                           src_prefix_in_in: %w[111 222],
+                           src_prefix_routing_in: %w[333],
+                           src_prefix_out_in: %w[444 555],
                            dst_prefix_in_contains: 'dst_prefix_in_test',
-                           dst_prefix_in_eq: 'dst_prefix_in_test',
+                           dst_prefix_in_in: %w[666 777],
                            dst_prefix_routing_contains: 'dst_prefix_routing_test',
-                           dst_prefix_routing_eq: 'dst_prefix_routing_test',
+                           dst_prefix_routing_in: %w[888],
                            dst_prefix_out_contains: 'dst_prefix_out_test',
-                           dst_prefix_out_eq: 'dst_prefix_out_test',
+                           dst_prefix_out_in: %w[999 1010],
                            src_country_id_eq: countries.first.id,
                            dst_country_id_eq: countries.last.id,
                            routing_tag_ids_include: 2,

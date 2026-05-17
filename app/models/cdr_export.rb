@@ -56,16 +56,22 @@ class CdrExport < ApplicationRecord
     attribute :failed_resource_type_id_eq, :integer
     attribute :src_prefix_in_contains, :string_presence
     attribute :src_prefix_in_eq, :string_presence
+    attribute :src_prefix_in_in, :string, array: { reject_blank: true }
     attribute :dst_prefix_in_contains, :string_presence
     attribute :dst_prefix_in_eq, :string_presence
+    attribute :dst_prefix_in_in, :string, array: { reject_blank: true }
     attribute :src_prefix_routing_contains, :string_presence
     attribute :src_prefix_routing_eq, :string_presence
+    attribute :src_prefix_routing_in, :string, array: { reject_blank: true }
     attribute :dst_prefix_routing_contains, :string_presence
     attribute :dst_prefix_routing_eq, :string_presence
+    attribute :dst_prefix_routing_in, :string, array: { reject_blank: true }
     attribute :src_prefix_out_contains, :string_presence
     attribute :src_prefix_out_eq, :string_presence
+    attribute :src_prefix_out_in, :string, array: { reject_blank: true }
     attribute :dst_prefix_out_contains, :string_presence
     attribute :dst_prefix_out_eq, :string_presence
+    attribute :dst_prefix_out_in, :string, array: { reject_blank: true }
     attribute :src_country_id_eq, :integer
     attribute :dst_country_id_eq, :integer
     attribute :routing_tag_ids_include, :integer
@@ -94,6 +100,44 @@ class CdrExport < ApplicationRecord
 
     def src_country_iso_in=(v)
       super(v.presence)
+    end
+
+    # CLI list filters. Accept either an Array (API / multi-select) or a plain
+    # String (admin textarea) where values are separated by commas and/or new
+    # lines, so a single export can cover many CLIs at once instead of one
+    # export per CLI.
+    MULTI_VALUE_SEPARATOR = /[,\r\n]+/
+
+    def src_prefix_in_in=(v)
+      super(split_multi_value(v))
+    end
+
+    def src_prefix_routing_in=(v)
+      super(split_multi_value(v))
+    end
+
+    def src_prefix_out_in=(v)
+      super(split_multi_value(v))
+    end
+
+    def dst_prefix_in_in=(v)
+      super(split_multi_value(v))
+    end
+
+    def dst_prefix_routing_in=(v)
+      super(split_multi_value(v))
+    end
+
+    def dst_prefix_out_in=(v)
+      super(split_multi_value(v))
+    end
+
+    private
+
+    def split_multi_value(value)
+      return value.presence unless value.is_a?(String)
+
+      value.split(MULTI_VALUE_SEPARATOR).map(&:strip).reject(&:blank?).presence
     end
   end
 

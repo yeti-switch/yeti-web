@@ -119,16 +119,22 @@ RSpec.describe CdrExport do
           failed_resource_type_id_eq: 25,
           src_prefix_in_contains: '1111',
           src_prefix_in_eq: '1111',
+          src_prefix_in_in: %w[1111 1112],
           dst_prefix_in_contains: '2222',
           dst_prefix_in_eq: '2222',
+          dst_prefix_in_in: %w[2222 2223],
           src_prefix_routing_contains: '3333',
           src_prefix_routing_eq: '3333',
+          src_prefix_routing_in: %w[3333 3334],
           dst_prefix_routing_contains: '4444',
           dst_prefix_routing_eq: '4444',
+          dst_prefix_routing_in: %w[4444 4445],
           src_prefix_out_contains: '5555',
           src_prefix_out_eq: '5555',
+          src_prefix_out_in: %w[5555 5556],
           dst_prefix_out_contains: '6666',
           dst_prefix_out_eq: '6666',
+          dst_prefix_out_in: %w[6666 6667],
           src_country_id_eq: 111_222,
           dst_country_id_eq: 111_223,
           routing_tag_ids_include: 2,
@@ -362,6 +368,62 @@ RSpec.describe CdrExport do
           "\"cdr\".\"cdr\".\"src_prefix_out\" ILIKE '%222222%'",
           'AND',
           "\"cdr\".\"cdr\".\"dst_prefix_out\" ILIKE '%333221%')",
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'with comma-separated CLI list filters (string input)' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          src_prefix_in_in: '111, 222,333',
+          src_prefix_routing_in: '444',
+          src_prefix_out_in: '555,, 666'
+        }
+      end
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          %{"cdr"."cdr"."src_prefix_in" IN ('111', '222', '333')},
+          'AND',
+          %{"cdr"."cdr"."src_prefix_routing" IN ('444')},
+          'AND',
+          %{"cdr"."cdr"."src_prefix_out" IN ('555', '666'))},
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'with CLI list filters as array (API input)' do
+      let(:filters) do
+        {
+          time_start_gteq: '2018-01-01',
+          time_start_lteq: '2018-03-01',
+          src_prefix_in_in: %w[111 222]
+        }
+      end
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success", cdr.cdr.id AS "ID"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00'",
+          'AND',
+          %{"cdr"."cdr"."src_prefix_in" IN ('111', '222'))},
           'ORDER BY cdr.cdr.time_start DESC'
         ].join(' ')
       end
