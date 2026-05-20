@@ -18,7 +18,7 @@ RSpec.describe 'switch.write_rtp_statistics()' do
   let(:pop_id) { 1 }
   let(:node_id) { 2 }
   # Passed by writecdr as the CDR time_start; stream rows store it in time_start.
-  let(:cdr_time_start) { Time.utc(2026, 5, 16, 12, 0, 0) }
+  let(:cdr_time_start) { Time.current.change(hour: 12) }
 
   let(:data) do
     [
