@@ -140,7 +140,6 @@ FactoryBot.define do
 
     association :rateplan
     association :routing_plan
-    association :lua_script
 
     transient do
       gateway_traits { [] }

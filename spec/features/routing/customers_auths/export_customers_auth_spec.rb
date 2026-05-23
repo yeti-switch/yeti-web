@@ -29,6 +29,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_A,
            stir_shaken_crt: create(:stir_shaken_signing_certificate),
            scheduler: create(:scheduler),
+           lua_script: create(:lua_script),
            variables: { 'k' => 'v' })
   end
 
