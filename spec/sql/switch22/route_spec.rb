@@ -5162,6 +5162,75 @@ RSpec.describe '#routing logic' do
           end
         end
       end
+
+      context 'Authorized, Variables in regexp rewrite rules' do
+        let(:customer_auth_variables) { { 'host' => 'example.com', 'tag' => 'XX' } }
+        let(:uri_name) { '12345678' }
+        let(:vendor_gw_host) { '1.1.2.3' }
+
+        context 'vendor_gw.dst_rewrite_result with {{vars.X}}' do
+          let(:vendor_gw_dst_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_dst_rewrite_result) { '{{vars.tag}}#\1' }
+
+          it 'expands placeholders via regexp_replace_rand (3-arg path)' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:dst_prefix_out]).to eq("XX##{uri_name}")
+            expect(subject.first[:ruri]).to eq("sip:XX##{uri_name}@#{vendor_gw_host}")
+          end
+        end
+
+        context 'vendor_gw.to_rewrite_result with {{vars.X}}' do
+          let(:vendor_gw_to_rewrite_rule) { '^(.*)$' }
+          let(:vendor_gw_to_rewrite_result) { '{{vars.tag}}#\1' }
+
+          it 'expands placeholders in TO header' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:to]).to eq("<sip:XX##{uri_name}@#{vendor_gw_host}>")
+          end
+        end
+
+        context 'vendor_gw.src_name_rewrite_result with {{vars.X}} (4-arg keep_empty=true path)' do
+          let(:from_dsp) { 'caller' }
+
+          before do
+            vendor_gateway.update!(
+              src_name_rewrite_rule: '^(.*)$',
+              src_name_rewrite_result: 'name-{{vars.tag}}-\1'
+            )
+          end
+
+          it 'expands placeholders in src_name_out' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:src_name_out]).to eq('name-XX-caller')
+          end
+        end
+
+        context 'numberlist_item.dst_rewrite_result with {{vars.X}}' do
+          let!(:nl) {
+            create(:numberlist,
+                   mode_id: Routing::Numberlist::MODE_STRICT,
+                   default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT)
+          }
+          let!(:nl_item) {
+            create(:numberlist_item,
+                   numberlist_id: nl.id,
+                   key: '12345678',
+                   action_id: Routing::NumberlistItem::ACTION_ACCEPT,
+                   dst_rewrite_rule: '^(.*)$',
+                   dst_rewrite_result: '{{vars.tag}}-\1')
+          }
+          let(:customer_auth_dst_numberlist_id) { nl.id }
+
+          it 'expands placeholders during route SP numberlist rewrite' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:dst_prefix_out]).to eq("XX-#{uri_name}")
+          end
+        end
+      end
     end
   end
 

@@ -41,7 +41,6 @@ FactoryBot.define do
     sequence(:key) { |n| "numberlist_item_#{n}" }
 
     association :numberlist
-    association :lua_script
 
     action_id { Routing::NumberlistItem::ACTION_REJECT }
     variables { { 'numberlist_item_var1' => 'value' } }

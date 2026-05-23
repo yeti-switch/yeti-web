@@ -3653,9 +3653,9 @@ BEGIN
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> DP. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true, i_call_ctx.vars);
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -3700,13 +3700,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -3722,13 +3726,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -3762,13 +3770,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -3785,13 +3797,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -3812,9 +3828,9 @@ BEGIN
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> GW. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true, i_call_ctx.vars);
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -3839,7 +3855,7 @@ BEGIN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'sip';
         v_diversion_header.h = i_vendor_gw.diversion_domain;
         v_bleg_append_headers_req = array_append(
@@ -3850,7 +3866,7 @@ BEGIN
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'tel';
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
@@ -4042,7 +4058,7 @@ BEGIN
     end if;
   end if;
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result, false, i_call_ctx.vars);
 
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
@@ -4458,9 +4474,9 @@ BEGIN
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> DP. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true, i_call_ctx.vars);
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -4505,13 +4521,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -4527,13 +4547,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -4567,13 +4591,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -4590,13 +4618,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -4617,9 +4649,9 @@ BEGIN
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> GW. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true, i_call_ctx.vars);
 
   /*dbg{*/
   v_end:=clock_timestamp();
@@ -4644,7 +4676,7 @@ BEGIN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'sip';
         v_diversion_header.h = i_vendor_gw.diversion_domain;
         v_bleg_append_headers_req = array_append(
@@ -4655,7 +4687,7 @@ BEGIN
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'tel';
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
@@ -4847,7 +4879,7 @@ BEGIN
     end if;
   end if;
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result, false, i_call_ctx.vars);
 
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
@@ -5240,9 +5272,9 @@ BEGIN
 
   /* number rewriting _After_ routing */
   
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_dp.dst_rewrite_rule,i_dp.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_dp.src_rewrite_rule,i_dp.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_dp.src_name_rewrite_rule,i_dp.src_name_rewrite_result, true, i_call_ctx.vars);
 
   
 
@@ -5272,13 +5304,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -5291,13 +5327,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -5322,13 +5362,17 @@ BEGIN
         i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.src_prefix_out,
           v_termination_numberlist_item.src_rewrite_rule,
-          v_termination_numberlist_item.src_rewrite_result
+          v_termination_numberlist_item.src_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
 
         i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
           i_profile.dst_prefix_out,
           v_termination_numberlist_item.dst_rewrite_rule,
-          v_termination_numberlist_item.dst_rewrite_result
+          v_termination_numberlist_item.dst_rewrite_result,
+          false,
+          i_call_ctx.vars
         );
         i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
@@ -5342,13 +5386,17 @@ BEGIN
       i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.src_prefix_out,
         v_termination_numberlist.default_src_rewrite_rule,
-        v_termination_numberlist.default_src_rewrite_result
+        v_termination_numberlist.default_src_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
 
       i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(
         i_profile.dst_prefix_out,
         v_termination_numberlist.default_dst_rewrite_rule,
-        v_termination_numberlist.default_dst_rewrite_result
+        v_termination_numberlist.default_dst_rewrite_result,
+        false,
+        i_call_ctx.vars
       );
       i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
@@ -5366,9 +5414,9 @@ BEGIN
       number rewriting _After_ routing _IN_ termination GW
   */
   
-  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
-  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
-  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true);
+  i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result, false, i_call_ctx.vars);
+  i_profile.src_name_out=yeti_ext.regexp_replace_rand(i_profile.src_name_out,i_vendor_gw.src_name_rewrite_rule,i_vendor_gw.src_name_rewrite_result, true, i_call_ctx.vars);
 
   
 
@@ -5390,7 +5438,7 @@ BEGIN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'sip';
         v_diversion_header.h = i_vendor_gw.diversion_domain;
         v_bleg_append_headers_req = array_append(
@@ -5401,7 +5449,7 @@ BEGIN
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
-        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result, false, i_call_ctx.vars);
         v_diversion_header.s = 'tel';
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
@@ -5575,7 +5623,7 @@ BEGIN
     end if;
   end if;
 
-  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result);
+  v_to_username = yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out, i_vendor_gw.to_rewrite_rule, i_vendor_gw.to_rewrite_result, false, i_call_ctx.vars);
 
   if i_vendor_gw.sip_schema_id = 1 then
     v_schema='sip';
@@ -6040,7 +6088,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_diversion_header.u = yeti_ext.regexp_replace_rand(
               v_diversion_header.u,
               v_customer_auth_normalized.diversion_rewrite_rule,
-              v_customer_auth_normalized.diversion_rewrite_result
+              v_customer_auth_normalized.diversion_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_diversion = array_append(v_diversion, v_diversion_header);
           END LOOP;
@@ -6054,7 +6104,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_pai_header.u = yeti_ext.regexp_replace_rand(
               v_pai_header.u,
               v_customer_auth_normalized.pai_rewrite_rule,
-              v_customer_auth_normalized.pai_rewrite_result
+              v_customer_auth_normalized.pai_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_pai = array_append(v_pai, v_pai_header);
           END LOOP;
@@ -6064,7 +6116,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
           if v_ppi.u is null then
             v_ppi = null;
           else
-            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result, false, v_call_ctx.vars);
           end if;
         END IF;
 
@@ -6106,12 +6158,16 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ss_src = yeti_ext.regexp_replace_rand(
             v_ret.src_prefix_in,
             v_customer_auth_normalized.ss_src_rewrite_rule,
-            v_customer_auth_normalized.ss_src_rewrite_result
+            v_customer_auth_normalized.ss_src_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           v_ss_dst = yeti_ext.regexp_replace_rand(
             v_ret.dst_prefix_in,
             v_customer_auth_normalized.ss_dst_rewrite_rule,
-            v_customer_auth_normalized.ss_dst_rewrite_result
+            v_customer_auth_normalized.ss_dst_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch22.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
@@ -6237,9 +6293,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
-        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
-        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
-        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true, v_call_ctx.vars);
 
         --  if v_ret.radius_auth_profile_id is not null then
         v_ret.src_number_radius:=i_from_name;
@@ -6247,13 +6303,17 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.src_number_radius,
             v_customer_auth_normalized.src_number_radius_rewrite_rule,
-            v_customer_auth_normalized.src_number_radius_rewrite_result
+            v_customer_auth_normalized.src_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
 
         v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.dst_number_radius,
             v_customer_auth_normalized.dst_number_radius_rewrite_rule,
-            v_customer_auth_normalized.dst_number_radius_rewrite_result
+            v_customer_auth_normalized.dst_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
         --  end if;
 /**
@@ -6358,7 +6418,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -6370,7 +6432,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -6398,7 +6462,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -6410,7 +6476,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -6462,7 +6530,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -6474,7 +6544,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -6501,7 +6573,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -6513,7 +6587,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -6581,7 +6657,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -6593,7 +6671,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -6621,7 +6701,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -6633,7 +6715,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -6676,7 +6760,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -6688,7 +6774,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -6715,7 +6803,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -6727,7 +6817,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -6822,7 +6914,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> LNP. Need LNP lookup, LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
             /*}dbg*/
-            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result, false, v_call_ctx.vars);
             /*dbg{*/
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> LNP key translation. LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
@@ -6835,7 +6927,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
               RAISE NOTICE '% ms -> LNP. Data found in cache, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               -- TRANSLATING response from cache
-              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
               /*dbg{*/
               v_end:=clock_timestamp();
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
@@ -6868,7 +6960,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RAISE NOTICE '% ms -> LNP. Success, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 -- TRANSLATING response from LNP DB
-                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
                 /*dbg{*/
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
@@ -7028,7 +7120,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -7036,7 +7130,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.dst_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -7697,7 +7793,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_diversion_header.u = yeti_ext.regexp_replace_rand(
               v_diversion_header.u,
               v_customer_auth_normalized.diversion_rewrite_rule,
-              v_customer_auth_normalized.diversion_rewrite_result
+              v_customer_auth_normalized.diversion_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_diversion = array_append(v_diversion, v_diversion_header);
           END LOOP;
@@ -7711,7 +7809,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_pai_header.u = yeti_ext.regexp_replace_rand(
               v_pai_header.u,
               v_customer_auth_normalized.pai_rewrite_rule,
-              v_customer_auth_normalized.pai_rewrite_result
+              v_customer_auth_normalized.pai_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_pai = array_append(v_pai, v_pai_header);
           END LOOP;
@@ -7721,7 +7821,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           if v_ppi.u is null then
             v_ppi = null;
           else
-            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result, false, v_call_ctx.vars);
           end if;
         END IF;
 
@@ -7763,12 +7863,16 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ss_src = yeti_ext.regexp_replace_rand(
             v_ret.src_prefix_in,
             v_customer_auth_normalized.ss_src_rewrite_rule,
-            v_customer_auth_normalized.ss_src_rewrite_result
+            v_customer_auth_normalized.ss_src_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           v_ss_dst = yeti_ext.regexp_replace_rand(
             v_ret.dst_prefix_in,
             v_customer_auth_normalized.ss_dst_rewrite_rule,
-            v_customer_auth_normalized.ss_dst_rewrite_result
+            v_customer_auth_normalized.ss_dst_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch22.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
@@ -7894,9 +7998,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
-        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
-        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
-        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true, v_call_ctx.vars);
 
         --  if v_ret.radius_auth_profile_id is not null then
         v_ret.src_number_radius:=i_from_name;
@@ -7904,13 +8008,17 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.src_number_radius,
             v_customer_auth_normalized.src_number_radius_rewrite_rule,
-            v_customer_auth_normalized.src_number_radius_rewrite_result
+            v_customer_auth_normalized.src_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
 
         v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.dst_number_radius,
             v_customer_auth_normalized.dst_number_radius_rewrite_rule,
-            v_customer_auth_normalized.dst_number_radius_rewrite_result
+            v_customer_auth_normalized.dst_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
         --  end if;
 /**
@@ -8015,7 +8123,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -8027,7 +8137,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -8055,7 +8167,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -8067,7 +8181,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -8119,7 +8235,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -8131,7 +8249,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -8158,7 +8278,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -8170,7 +8292,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -8238,7 +8362,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -8250,7 +8376,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -8278,7 +8406,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -8290,7 +8420,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -8333,7 +8465,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -8345,7 +8479,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -8372,7 +8508,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -8384,7 +8522,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -8479,7 +8619,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> LNP. Need LNP lookup, LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
             /*}dbg*/
-            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result, false, v_call_ctx.vars);
             /*dbg{*/
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> LNP key translation. LNP key: %',EXTRACT(MILLISECOND from v_end-v_start),v_lnp_key;
@@ -8492,7 +8632,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
               RAISE NOTICE '% ms -> LNP. Data found in cache, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
               /*}dbg*/
               -- TRANSLATING response from cache
-              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
               /*dbg{*/
               v_end:=clock_timestamp();
               RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
@@ -8525,7 +8665,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RAISE NOTICE '% ms -> LNP. Success, lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
                 /*}dbg*/
                 -- TRANSLATING response from LNP DB
-                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
                 /*dbg{*/
                 v_end:=clock_timestamp();
                 RAISE NOTICE '% ms -> LNP. Translation. lrn: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.lrn;
@@ -8685,7 +8825,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -8693,7 +8835,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.dst_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -9332,7 +9476,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_diversion_header.u = yeti_ext.regexp_replace_rand(
               v_diversion_header.u,
               v_customer_auth_normalized.diversion_rewrite_rule,
-              v_customer_auth_normalized.diversion_rewrite_result
+              v_customer_auth_normalized.diversion_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_diversion = array_append(v_diversion, v_diversion_header);
           END LOOP;
@@ -9346,7 +9492,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_pai_header.u = yeti_ext.regexp_replace_rand(
               v_pai_header.u,
               v_customer_auth_normalized.pai_rewrite_rule,
-              v_customer_auth_normalized.pai_rewrite_result
+              v_customer_auth_normalized.pai_rewrite_result,
+              false,
+              v_call_ctx.vars
             );
             v_pai = array_append(v_pai, v_pai_header);
           END LOOP;
@@ -9356,7 +9504,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
           if v_ppi.u is null then
             v_ppi = null;
           else
-            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result, false, v_call_ctx.vars);
           end if;
         END IF;
 
@@ -9398,12 +9546,16 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
           v_ss_src = yeti_ext.regexp_replace_rand(
             v_ret.src_prefix_in,
             v_customer_auth_normalized.ss_src_rewrite_rule,
-            v_customer_auth_normalized.ss_src_rewrite_result
+            v_customer_auth_normalized.ss_src_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           v_ss_dst = yeti_ext.regexp_replace_rand(
             v_ret.dst_prefix_in,
             v_customer_auth_normalized.ss_dst_rewrite_rule,
-            v_customer_auth_normalized.ss_dst_rewrite_result
+            v_customer_auth_normalized.ss_dst_rewrite_result,
+            false,
+            v_call_ctx.vars
           );
           FOREACH v_identity_record IN ARRAY COALESCE(v_identity_data,'{}'::switch22.identity_data_ty[]) LOOP
             IF v_identity_record is null OR v_identity_record.parsed = false THEN
@@ -9520,9 +9672,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             number rewriting _Before_ routing
         */
         
-        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
-        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
-        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true);
+        v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result, false, v_call_ctx.vars);
+        v_ret.src_name_out=yeti_ext.regexp_replace_rand(v_ret.src_name_out,v_customer_auth_normalized.src_name_rewrite_rule,v_customer_auth_normalized.src_name_rewrite_result, true, v_call_ctx.vars);
 
         --  if v_ret.radius_auth_profile_id is not null then
         v_ret.src_number_radius:=i_from_name;
@@ -9530,13 +9682,17 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.src_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.src_number_radius,
             v_customer_auth_normalized.src_number_radius_rewrite_rule,
-            v_customer_auth_normalized.src_number_radius_rewrite_result
+            v_customer_auth_normalized.src_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
 
         v_ret.dst_number_radius=yeti_ext.regexp_replace_rand(
             v_ret.dst_number_radius,
             v_customer_auth_normalized.dst_number_radius_rewrite_rule,
-            v_customer_auth_normalized.dst_number_radius_rewrite_result
+            v_customer_auth_normalized.dst_number_radius_rewrite_result,
+          false,
+          v_call_ctx.vars
         );
         --  end if;
 /**
@@ -9617,7 +9773,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -9629,7 +9787,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -9654,7 +9814,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -9666,7 +9828,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -9706,7 +9870,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -9718,7 +9884,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -9742,7 +9910,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -9754,7 +9924,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -9813,7 +9985,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -9825,7 +9999,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -9850,7 +10026,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_numberlist.default_src_rewrite_rule,
-                v_numberlist.default_src_rewrite_result
+                v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -9862,7 +10040,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -9896,7 +10076,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist_item.src_rewrite_rule,
-                    v_numberlist_item.src_rewrite_result
+                    v_numberlist_item.src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist_item.defer_dst_rewrite THEN
@@ -9908,7 +10090,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist_item.dst_rewrite_rule,
-                    v_numberlist_item.dst_rewrite_result
+                    v_numberlist_item.dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
@@ -9932,7 +10116,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.src_prefix_out,
                     v_numberlist.default_src_rewrite_rule,
-                    v_numberlist.default_src_rewrite_result
+                    v_numberlist.default_src_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             IF v_numberlist.defer_dst_rewrite THEN
@@ -9944,7 +10130,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(
                     v_ret.dst_prefix_out,
                     v_numberlist.default_dst_rewrite_rule,
-                    v_numberlist.default_dst_rewrite_result
+                    v_numberlist.default_dst_rewrite_result,
+                  false,
+                  v_call_ctx.vars
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
@@ -10022,14 +10210,14 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.lnp_database_id=v_lnp_rule.database_id;
             v_lnp_key=v_ret.dst_prefix_routing;
             
-            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result);
+            v_lnp_key=yeti_ext.regexp_replace_rand(v_lnp_key,v_lnp_rule.req_dst_rewrite_rule,v_lnp_rule.req_dst_rewrite_result, false, v_call_ctx.vars);
             
             -- try cache
             select into v_ret.lrn lrn from class4.lnp_cache where dst=v_lnp_key AND database_id=v_lnp_rule.database_id and expires_at>v_now;
             if found then
               
               -- TRANSLATING response from cache
-              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+              v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
               
               v_routing_key=v_ret.lrn;
               if v_lnp_rule.rewrite_call_destination then
@@ -10050,7 +10238,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
               else
                 
                 -- TRANSLATING response from LNP DB
-                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result);
+                v_ret.lrn=yeti_ext.regexp_replace_rand(v_ret.lrn,v_lnp_rule.lrn_rewrite_rule,v_lnp_rule.lrn_rewrite_result, false, v_call_ctx.vars);
                 
                 v_routing_key=v_ret.lrn;
                 if v_lnp_rule.rewrite_call_destination then
@@ -10183,7 +10371,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.src_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.src_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -10191,7 +10381,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.dst_prefix_out = yeti_ext.regexp_replace_rand(
                 v_ret.dst_prefix_out,
                 v_rewrite.rule,
-                v_rewrite.result
+                v_rewrite.result,
+              false,
+              v_call_ctx.vars
             );
         END LOOP;
 
@@ -20416,6 +20608,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260523000000'),
 ('20260417000000'),
 ('20260415000000'),
 ('20260414000000'),
