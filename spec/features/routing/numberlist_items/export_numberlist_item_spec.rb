@@ -11,6 +11,7 @@ RSpec.describe 'Export Numberlist Item', type: :feature do
            action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
            tag_action: Routing::TagAction.take,
            tag_action_value: [tag_ua.id, tag_us.id],
+           lua_script: create(:lua_script),
            variables: { 'k' => 'v' })
   end
 
