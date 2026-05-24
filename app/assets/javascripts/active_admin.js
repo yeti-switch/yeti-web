@@ -12,8 +12,10 @@
 //= require tooltip
 //= require boolean_editable
 //= require dependent_fields
-//= require d3
-//= require nv.d3
+//= require chart.umd
+//= require luxon.min
+//= require chartjs-adapter-luxon.umd
+//= require charts
 //= require sticky_headers
 //= require cdr_stats
 //= require active_calls
@@ -29,7 +31,6 @@
 //= require index_as_table_visible_columns
 //= require sidebar_filter_actions
 //= require modal_confirm_fix
-//= require d3_charts
 //= require password-toggle
 
 //= require vendor/highlightjs/highlight.min

@@ -24,15 +24,15 @@ RSpec.describe RemoteStatsController do
           {
             key: "Node #{nodes[0].id}",
             values: [
-              [active_call_stats[0].created_at.to_datetime.to_fs(:db),
-               active_call_stats[0].count]
+              { x: active_call_stats[0].created_at.to_i * 1000,
+                y: active_call_stats[0].count }
             ]
           },
           {
             key: "Node #{nodes[1].id}",
             values: [
-              [active_call_stats[1].created_at.to_datetime.to_fs(:db),
-               active_call_stats[1].count]
+              { x: active_call_stats[1].created_at.to_i * 1000,
+                y: active_call_stats[1].count }
             ]
           }
         ]

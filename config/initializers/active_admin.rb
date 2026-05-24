@@ -56,6 +56,11 @@ ActiveAdmin.setup do |config|
   #
   config.site_title_image = YetiConfig.site_title_image
 
+  # Expose the Rails Time.zone (IANA name) so JS charts render time labels
+  # in the same timezone as the server-formatted text elsewhere in the UI.
+  # Read in app/assets/javascripts/charts.js via <meta name="yeti-timezone">.
+  config.meta_tags = { 'yeti-timezone' => Time.zone.tzinfo.name }
+
   # == Default Namespace
   #
   # Set the default namespace each administration resource

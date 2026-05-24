@@ -33,11 +33,6 @@ class RemoteStatsController < ApplicationController
     render json: Stats::TrafficCustomerAccount.to_chart(params[:id]).to_json(root: false)
   end
 
-  def hour_nodes
-    # expires_in 1.minutes, public: true
-    render json: Stats::ActiveCall.to_stacked_chart(1).to_json(root: false)
-  end
-
   def node
     expires_in 1.minute, public: true
     render json: Stats::ActiveCall.to_chart(params[:id]).to_json(root: false)

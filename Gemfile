@@ -15,7 +15,6 @@ gem 'responders'
 
 # Authentication
 gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
-gem 'd3-rails', '3.5.2'
 gem 'devise', '>= 4.6.0'
 gem 'ostruct', '~> 0.6.1'
 
@@ -32,7 +31,6 @@ gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions'
 gem 'active_admin_theme'
 gem 'draper'
-gem 'novus-nvd3-rails', github: 'yeti-switch/nvd3-community-rails'
 gem 'ransack'
 
 gem 'jrpc', github: 'didww/jrpc'
