@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   resources :remote_stats do
     collection do
       get :nodes
-      get :hour_nodes
       get :cdrs_summary
       get :profit
       get :duration

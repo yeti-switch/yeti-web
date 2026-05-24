@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Refresh vendored Chart.js + Luxon date adapter. Bump versions below to upgrade.
+# Luxon adapter is used so chart times can render in the server's timezone
+# (see config/initializers/active_admin.rb for the meta tag wiring).
+CHARTJS_VERSION="4.4.7"
+LUXON_VERSION="3.5.0"
+ADAPTER_VERSION="1.3.1"
+
+DEST="$(cd "$(dirname "$0")/.." && pwd)/vendor/assets/javascripts"
+
+curl -fsSL "https://cdn.jsdelivr.net/npm/chart.js@${CHARTJS_VERSION}/dist/chart.umd.js" \
+  -o "${DEST}/chart.umd.js"
+curl -fsSL "https://cdn.jsdelivr.net/npm/luxon@${LUXON_VERSION}/build/global/luxon.min.js" \
+  -o "${DEST}/luxon.min.js"
+curl -fsSL "https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@${ADAPTER_VERSION}/dist/chartjs-adapter-luxon.umd.min.js" \
+  -o "${DEST}/chartjs-adapter-luxon.umd.js"
+
+echo "Chart.js ${CHARTJS_VERSION}, Luxon ${LUXON_VERSION}, adapter ${ADAPTER_VERSION} written to ${DEST}"

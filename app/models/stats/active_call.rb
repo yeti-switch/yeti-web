@@ -28,10 +28,7 @@ class Stats::ActiveCall < Stats::Base
     data.map do |key_value_pair|
       {
         key: key_value_pair[0],
-        # change to x,y
-        values: key_value_pair[1].map do |el|
-                  [el[0].to_datetime.to_fs(:db), el[1]]
-                end
+        values: key_value_pair[1].map { |el| { x: el[0].to_i * 1000, y: el[1] } }
       }
     end
   end

@@ -5,7 +5,7 @@ html {
       height: 400px;
       position: relative;
       width: 100%;
-
+      display: block;
     }
     .chart-placeholder {
       height: 400px;
@@ -15,13 +15,15 @@ html {
       background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
     }
 
+    // AA's .tabs widget has no bottom margin, so anything rendered below
+    // (e.g. the columns row on the dashboard) sits flush against it.
+    .tabs {
+      margin-bottom: 20px;
+    }
+
     .loader {
       background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
       height: 70px;
-    }
-
-    svg {
-      display: block;
     }
 
   }
