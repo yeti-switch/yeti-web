@@ -40,6 +40,12 @@ sentry:
   node_name: "local"
   environment: "prod"
 
+oauth:
+  enabled: false # mount Doorkeeper OAuth provider (/oauth/*, /.well-known/oauth-authorization-server)
+
+mcp:
+  enabled: false # mount /api/mcp; requires oauth.enabled
+
 versioning_disable_for_models:
   - ClassName::ClassName
   - ClassName
