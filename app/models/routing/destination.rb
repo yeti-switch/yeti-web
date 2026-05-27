@@ -105,7 +105,8 @@ class Routing::Destination < ApplicationRecord
   validates :currency, :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
                         :asr_limit, :acd_limit, :short_calls_limit, presence: true
-  validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true
+  validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :initial_interval, :next_interval, numericality: true
   validates :prefix, format: { without: /\s/ }
 
   validates :dst_number_min_length, :dst_number_max_length, presence: true

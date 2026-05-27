@@ -25,13 +25,19 @@ RSpec.describe 'Authorized Applications page', :js do
     )
   end
 
+  # Scope ID assertions to the resource table — raw ID strings collide with
+  # timestamps, version banners ("Routing 20260527160430"), and other digits
+  # on the full page.
+  def table_row_ids
+    page.all('table.index_table tbody tr').map { |row| row['id'].to_s.sub(/^.*_/, '') }
+  end
+
   context 'as a non-root admin' do
     include_context :login_as_admin
 
     it 'lists only the admin’s own active tokens' do
       visit authorized_applications_path
-      expect(page).to have_content(my_token.id.to_s)
-      expect(page).not_to have_content(other_token.id.to_s)
+      expect(table_row_ids).to contain_exactly(my_token.id.to_s)
     end
 
     it 'revokes the token via the Revoke link' do
@@ -39,7 +45,7 @@ RSpec.describe 'Authorized Applications page', :js do
       accept_confirm { click_link 'Revoke' }
       expect(page).to have_content('Access token revoked.')
       expect(my_token.reload.revoked_at).to be_present
-      expect(page).not_to have_content(my_token.id.to_s)
+      expect(table_row_ids).to be_empty
     end
   end
 
@@ -50,8 +56,7 @@ RSpec.describe 'Authorized Applications page', :js do
 
     it 'lists all admins’ tokens' do
       visit authorized_applications_path
-      expect(page).to have_content(my_token.id.to_s)
-      expect(page).to have_content(other_token.id.to_s)
+      expect(table_row_ids).to contain_exactly(my_token.id.to_s, other_token.id.to_s)
     end
   end
 end
