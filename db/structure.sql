@@ -14552,47 +14552,6 @@ ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
 
 
 --
--- Name: dummy_oidc_users; Type: TABLE; Schema: gui; Owner: -
---
-
-CREATE TABLE gui.dummy_oidc_users (
-    id bigint NOT NULL,
-    username character varying,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    provider character varying,
-    uid character varying,
-    oidc_raw_info jsonb,
-    allowed_ips inet[],
-    sign_in_count integer DEFAULT 0,
-    current_sign_in_at timestamp(6) without time zone,
-    last_sign_in_at timestamp(6) without time zone,
-    current_sign_in_ip character varying,
-    last_sign_in_ip character varying,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: dummy_oidc_users_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
---
-
-CREATE SEQUENCE gui.dummy_oidc_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: dummy_oidc_users_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
---
-
-ALTER SEQUENCE gui.dummy_oidc_users_id_seq OWNED BY gui.dummy_oidc_users.id;
-
-
---
 -- Name: oauth_access_grants; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -14605,7 +14564,9 @@ CREATE TABLE gui.oauth_access_grants (
     redirect_uri text NOT NULL,
     scopes character varying DEFAULT ''::character varying NOT NULL,
     created_at timestamp with time zone NOT NULL,
-    revoked_at timestamp with time zone
+    revoked_at timestamp with time zone,
+    code_challenge character varying,
+    code_challenge_method character varying
 );
 
 
@@ -16806,13 +16767,6 @@ ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui
 
 
 --
--- Name: dummy_oidc_users id; Type: DEFAULT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.dummy_oidc_users ALTER COLUMN id SET DEFAULT nextval('gui.dummy_oidc_users_id_seq'::regclass);
-
-
---
 -- Name: oauth_access_grants id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -18289,14 +18243,6 @@ ALTER TABLE ONLY gui.admin_users
 
 ALTER TABLE ONLY gui.background_threads
     ADD CONSTRAINT background_threads_pkey PRIMARY KEY (id);
-
-
---
--- Name: dummy_oidc_users dummy_oidc_users_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.dummy_oidc_users
-    ADD CONSTRAINT dummy_oidc_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -20906,6 +20852,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260527160430'),
 ('20260524202144'),
 ('20260523000000'),
 ('20260417000000'),

@@ -41,10 +41,10 @@ sentry:
   environment: "prod"
 
 oauth:
-  enabled: false # mount Doorkeeper OAuth provider
+  enabled: true # mount Doorkeeper OAuth provider — required for the spec suite
 
 mcp:
-  enabled: false # mount /api/mcp; requires oauth.enabled
+  enabled: true # mount /api/mcp; requires oauth.enabled — required for the spec suite
 
 versioning_disable_for_models:
   - ClassName::ClassName

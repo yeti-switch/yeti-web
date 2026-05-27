@@ -21,26 +21,26 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
 
     it 'rejects a revoked token' do
       token.revoke
-      mcp_call(token: token.token, method: 'tools/list')
+      mcp_call(token: token.plaintext_token, method: 'tools/list')
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'rejects an expired token' do
       tok = issue_access_token(admin: admin, application: application, expires_in: 60)
       travel(2.hours) do
-        mcp_call(token: tok.token, method: 'tools/list')
+        mcp_call(token: tok.plaintext_token, method: 'tools/list')
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     it 'rejects a token for a disabled admin' do
       admin.update!(enabled: false)
-      mcp_call(token: token.token, method: 'tools/list')
+      mcp_call(token: token.plaintext_token, method: 'tools/list')
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'rejects a token for a deleted admin' do
-      raw = token.token
+      raw = token.plaintext_token
       admin.destroy
       mcp_call(token: raw, method: 'tools/list')
       expect(response).to have_http_status(:unauthorized)
@@ -49,7 +49,7 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
 
   describe 'JSON-RPC dispatch' do
     it 'responds to initialize' do
-      mcp_call(token: token.token, method: 'initialize')
+      mcp_call(token: token.plaintext_token, method: 'initialize')
       expect(response).to have_http_status(:success)
       body = JSON.parse(response.body)
       expect(body['jsonrpc']).to eq('2.0')
@@ -58,14 +58,14 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
     end
 
     it 'responds to tools/list with at least routing.simulate' do
-      mcp_call(token: token.token, method: 'tools/list')
+      mcp_call(token: token.plaintext_token, method: 'tools/list')
       expect(response).to have_http_status(:success)
       tools = JSON.parse(response.body).dig('result', 'tools')
       expect(tools.map { |t| t['name'] }).to include('routing.simulate')
     end
 
     it 'accepts notifications/* with a 202 and no body' do
-      mcp_call(token: token.token, method: 'notifications/initialized', id: nil)
+      mcp_call(token: token.plaintext_token, method: 'notifications/initialized', id: nil)
       expect(response).to have_http_status(:accepted)
       expect(response.body).to be_blank
     end
@@ -74,7 +74,7 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
       post '/api/mcp',
            params: 'not json',
            headers: {
-             'Authorization' => "Bearer #{token.token}",
+             'Authorization' => "Bearer #{token.plaintext_token}",
              'Content-Type' => 'application/json'
            }
       expect(response).to have_http_status(:success)
@@ -83,7 +83,7 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
     end
 
     it 'returns JSON-RPC -32601 on unknown method' do
-      mcp_call(token: token.token, method: 'totally/unknown')
+      mcp_call(token: token.plaintext_token, method: 'totally/unknown')
       body = JSON.parse(response.body)
       expect(body.dig('error', 'code')).to eq(-32_601)
     end

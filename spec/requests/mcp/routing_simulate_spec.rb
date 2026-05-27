@@ -8,7 +8,7 @@ RSpec.describe 'MCP routing.simulate tool', type: :request do
 
   def call_tool(arguments)
     mcp_call(
-      token: token.token,
+      token: token.plaintext_token,
       method: 'tools/call',
       params: { name: 'routing.simulate', arguments: arguments }
     )

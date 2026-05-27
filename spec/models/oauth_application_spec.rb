@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: gui.oauth_applications
+#
+#  id           :bigint(8)        not null, primary key
+#  confidential :boolean          default(TRUE), not null
+#  name         :string           not null
+#  redirect_uri :text             not null
+#  scopes       :string           default(""), not null
+#  secret       :string           not null
+#  uid          :string           not null
+#  created_at   :timestamptz      not null
+#  updated_at   :timestamptz      not null
+#
+# Indexes
+#
+#  index_oauth_applications_on_uid  (uid) UNIQUE
+#
 RSpec.describe OauthApplication do
   describe 'persistence in gui schema' do
     it 'uses gui.oauth_applications as the table' do

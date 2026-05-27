@@ -8,7 +8,7 @@ RSpec.describe 'OAuth token revocation', type: :request do
   let(:token) { issue_access_token(admin: admin, application: application) }
 
   it 'revokes the access token and subsequent MCP calls are rejected' do
-    raw_token = token.token
+    raw_token = token.plaintext_token
 
     post '/oauth/revoke', params: {
       token: raw_token,

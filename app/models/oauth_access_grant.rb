@@ -4,15 +4,17 @@
 #
 # Table name: gui.oauth_access_grants
 #
-#  id                :bigint(8)        not null, primary key
-#  expires_in        :integer(4)       not null
-#  redirect_uri      :text             not null
-#  revoked_at        :timestamptz
-#  scopes            :string           default(""), not null
-#  token             :string           not null
-#  created_at        :timestamptz      not null
-#  application_id    :bigint(8)        not null
-#  resource_owner_id :bigint(8)        not null
+#  id                    :bigint(8)        not null, primary key
+#  code_challenge        :string
+#  code_challenge_method :string
+#  expires_in            :integer(4)       not null
+#  redirect_uri          :text             not null
+#  revoked_at            :timestamptz
+#  scopes                :string           default(""), not null
+#  token                 :string           not null
+#  created_at            :timestamptz      not null
+#  application_id        :bigint(8)        not null
+#  resource_owner_id     :bigint(8)        not null
 #
 # Indexes
 #
