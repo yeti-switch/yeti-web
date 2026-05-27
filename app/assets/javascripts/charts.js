@@ -27,10 +27,19 @@
     return PALETTE[index % PALETTE.length];
   }
 
+  // Destroy any chart bound to this canvas — both via our own registry AND
+  // via Chart.js's global canvas tracking. Belt-and-suspenders: if a chart
+  // was created without going through `register` (or another tab activation
+  // raced ahead), Chart.getChart() catches it.
   function destroyExisting(canvasId) {
     if (instances[canvasId]) {
       instances[canvasId].destroy();
       delete instances[canvasId];
+    }
+    var canvas = document.getElementById(canvasId);
+    if (canvas) {
+      var orphan = Chart.getChart(canvas);
+      if (orphan) orphan.destroy();
     }
   }
 
@@ -87,10 +96,14 @@
     }, extra || {});
   }
 
-  // mode:'x' makes the tooltip include every series at the hovered x-position,
-  // even when series have different x-arrays (e.g. node #3 starts later than
-  // node #1). animation:false on the tooltip removes the slide-between-points
-  // delay that makes hovering feel laggy.
+  // mode:'x' shows every series at the hovered x, including those whose
+  // x-arrays don't fully cover the cursor's range (e.g. one node started
+  // later than the others — we want it shown when in-range, omitted when
+  // not). Downside: when point density is high (1-min granularity), Chart.js
+  // returns BOTH the before-cursor and after-cursor neighbors per dataset
+  // (=> each series doubles in the tooltip). The filter below dedupes by
+  // datasetIndex, keeping only the first occurrence per series.
+  // animation:false removes the slide-between-points delay.
   function baseOptions(opts) {
     var mode = opts.interactionMode || 'x';
     return {
@@ -104,7 +117,12 @@
           mode: mode,
           intersect: false,
           animation: false,
-          position: 'nearest'
+          position: 'nearest',
+          filter: function (item, idx, array) {
+            return array.findIndex(function (other) {
+              return other.datasetIndex === item.datasetIndex;
+            }) === idx;
+          }
         }
       }
     };

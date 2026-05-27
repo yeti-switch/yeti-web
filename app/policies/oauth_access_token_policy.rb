@@ -30,6 +30,14 @@ class OauthAccessTokenPolicy < ::RolePolicy
     myself? || user_root?
   end
 
+  # For collection actions (index, batch_*), Pundit passes the model CLASS
+  # rather than an instance, so `myself?` returns false. Always allow — the
+  # Scope#resolve below already filters to the actor's own tokens (root sees
+  # all), so there's no extra exposure.
+  def index?
+    true
+  end
+
   private
 
   def myself?

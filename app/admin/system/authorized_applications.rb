@@ -16,10 +16,11 @@ ActiveAdmin.register OauthAccessToken, as: 'AuthorizedApplication' do
   config.sort_order = 'created_at_desc'
 
   controller do
-    # Per-user scoping is handled by OauthAccessTokenPolicy::Scope.
-    # We only need to exclude already-revoked tokens here.
+    # Per-user scoping is handled by OauthAccessTokenPolicy::Scope. We only
+    # need to filter out revoked tokens and eager-load the application to
+    # avoid an N+1 from the "Application" column.
     def scoped_collection
-      super.where(revoked_at: nil)
+      super.where(revoked_at: nil).includes(:application)
     end
 
     def destroy
