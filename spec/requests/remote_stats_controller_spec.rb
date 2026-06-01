@@ -24,14 +24,14 @@ RSpec.describe RemoteStatsController do
           {
             key: "Node #{nodes[0].id}",
             values: [
-              { x: active_call_stats[0].created_at.to_i * 1000,
+              { x: active_call_stats[0].created_at.then { |t| (t.to_f * 1000).round },
                 y: active_call_stats[0].count }
             ]
           },
           {
             key: "Node #{nodes[1].id}",
             values: [
-              { x: active_call_stats[1].created_at.to_i * 1000,
+              { x: active_call_stats[1].created_at.then { |t| (t.to_f * 1000).round },
                 y: active_call_stats[1].count }
             ]
           }

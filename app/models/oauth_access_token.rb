@@ -30,4 +30,10 @@
 class OauthAccessToken < ApplicationRecord
   include ::Doorkeeper::Orm::ActiveRecord::Mixins::AccessToken
   self.table_name = 'gui.oauth_access_tokens'
+
+  # resource_owner_id is the AdminUser id (single-tenant config — Doorkeeper
+  # supports polymorphic owners but we don't use it). Explicit belongs_to so
+  # the AA index page can eager-load with `.includes(:resource_owner)` and
+  # avoid an N+1 in the Owner column for root admins.
+  belongs_to :resource_owner, class_name: 'AdminUser', foreign_key: :resource_owner_id, optional: true
 end

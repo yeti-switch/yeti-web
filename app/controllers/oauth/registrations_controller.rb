@@ -6,18 +6,30 @@
 # sign in and consent. Add rate limiting at the reverse proxy layer in prod.
 module Oauth
   class RegistrationsController < ActionController::API
+    # Only the two methods we advertise in /.well-known/oauth-authorization-server
+    # are supported. `nil` / missing = public client (treated as 'none').
+    SUPPORTED_AUTH_METHODS = %w[none client_secret_basic].freeze
+
     def create
       params = JSON.parse(request.body.read)
+
+      auth_method = params['token_endpoint_auth_method'].presence || 'none'
+      unless SUPPORTED_AUTH_METHODS.include?(auth_method)
+        return render json: {
+          error: 'invalid_client_metadata',
+          error_description: "Unsupported token_endpoint_auth_method: #{auth_method}. Supported: #{SUPPORTED_AUTH_METHODS.join(', ')}"
+        }, status: 400
+      end
 
       app = OauthApplication.new(
         name: params['client_name'].to_s[0, 100].presence || 'Unnamed MCP client',
         redirect_uri: Array(params['redirect_uris']).join("\n"),
         scopes: params['scope'].presence || Doorkeeper.config.default_scopes.to_s,
-        confidential: confidential_for(params['token_endpoint_auth_method'])
+        confidential: auth_method != 'none'
       )
 
       if app.save
-        render json: registration_response(app, params), status: 201
+        render json: registration_response(app, params, auth_method), status: 201
       else
         render json: { error: 'invalid_client_metadata', error_description: app.errors.full_messages.join('; ') },
                status: 400
@@ -29,14 +41,7 @@ module Oauth
 
     private
 
-    # Public clients (Claude Code et al with PKCE) declare auth_method = 'none'.
-    # Confidential clients have a client_secret. Default to public since that's
-    # what MCP clients are.
-    def confidential_for(auth_method)
-      auth_method.to_s != 'none' && auth_method.present?
-    end
-
-    def registration_response(app, params)
+    def registration_response(app, params, auth_method)
       {
         client_id: app.uid,
         client_secret: app.confidential? ? app.plaintext_secret : nil,
@@ -46,7 +51,7 @@ module Oauth
         redirect_uris: app.redirect_uri.to_s.split("\n"),
         grant_types: Array(params['grant_types']).presence || %w[authorization_code refresh_token],
         response_types: Array(params['response_types']).presence || %w[code],
-        token_endpoint_auth_method: app.confidential? ? 'client_secret_basic' : 'none',
+        token_endpoint_auth_method: auth_method,
         scope: app.scopes.to_s
       }.compact
     end

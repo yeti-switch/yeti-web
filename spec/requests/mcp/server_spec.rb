@@ -54,7 +54,8 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
       body = JSON.parse(response.body)
       expect(body['jsonrpc']).to eq('2.0')
       expect(body['result']['protocolVersion']).to be_present
-      expect(body['result']['serverInfo']['name']).to eq('yeti-mcp')
+      expect(body['result']['serverInfo']['name']).to eq('yeti-switch')
+      expect(body['result']['serverInfo']['version']).to be_present
     end
 
     it 'responds to tools/list with at least routing.simulate' do

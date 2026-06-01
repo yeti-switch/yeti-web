@@ -12,7 +12,13 @@ module Mcp
   # endpoints advertised at /.well-known/oauth-authorization-server.
   class Server
     PROTOCOL_VERSION = '2025-06-18'
-    SERVER_INFO = { name: 'yeti-mcp', version: '0.1.0' }.freeze
+    SERVER_NAME = 'yeti-switch'
+    # Resolved once at class load — app is restarted on every upgrade, so the
+    # version can't drift during a process's lifetime.
+    SERVER_INFO = {
+      name: SERVER_NAME,
+      version: Rails.application.config.app_build_info.fetch('version', 'unknown')
+    }.freeze
 
     def call(env)
       req = Rack::Request.new(env)
@@ -41,7 +47,8 @@ module Mcp
     private
 
     # Returns the AdminUser this token belongs to, or nil if the token is
-    # missing/invalid/expired/revoked, or its admin is disabled.
+    # missing/invalid/expired/revoked, lacks the `mcp` scope, or its admin
+    # is disabled.
     def authenticate!(req)
       header = req.get_header('HTTP_AUTHORIZATION').to_s
       return nil unless header.start_with?('Bearer ')
@@ -49,6 +56,9 @@ module Mcp
       raw_token = header.sub(/\ABearer\s+/, '')
       access_token = OauthAccessToken.by_token(raw_token)
       return nil if access_token.nil? || !access_token.accessible?
+      # Require the `mcp` scope explicitly so future tokens issued for other
+      # scopes (e.g. Grafana SSO via the same OAuth server) can't call MCP.
+      return nil unless access_token.scopes.include?('mcp')
 
       admin_user = AdminUser.find_by(id: access_token.resource_owner_id)
       return nil if admin_user.nil? || !admin_user.enabled?
@@ -60,7 +70,7 @@ module Mcp
       body = { error: 'invalid_token', error_description: 'Missing, invalid, or expired access token' }.to_json
       headers = {
         'Content-Type' => 'application/json',
-        'WWW-Authenticate' => 'Bearer realm="yeti-mcp", error="invalid_token"'
+        'WWW-Authenticate' => %(Bearer realm="#{SERVER_NAME}", error="invalid_token")
       }
       [401, headers, [body]]
     end

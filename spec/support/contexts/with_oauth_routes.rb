@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# OAuth + MCP routes are force-enabled for the whole suite by
-# spec/support/force_oauth_for_tests.rb, so this shared context is now a
-# no-op kept only for clarity / call-site documentation. Specs that need
-# the disabled state should use :with_oauth_routes_disabled instead.
+# OAuth + MCP routes are enabled for the whole suite via yeti_web.yml.ci
+# (which sets oauth.enabled and mcp.enabled to true). This shared context is
+# now a no-op kept only for clarity / call-site documentation. Specs that
+# need the disabled state should use :with_oauth_routes_disabled instead.
 RSpec.shared_context :with_oauth_routes do
 end
 

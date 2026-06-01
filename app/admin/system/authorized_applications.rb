@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 # Lets each admin see and revoke OAuth tokens they've granted to MCP clients
-# (Claude Code, Cursor, ...). Each row is one active access token; revoking
-# kills the access token immediately so the client can no longer call /api/mcp.
-# The refresh token chain still exists separately — revoking access tokens
-# only buys ~1h of immunity until the refresh succeeds; for a permanent kill,
-# revoke once more after refresh, or use the bulk action to revoke all tokens
-# for the application.
+# (Claude Code, Cursor, ...). Each row is one access token; revoking marks
+# the record as revoked, which invalidates the refresh token stored on the
+# same row, so the client loses access permanently (no more refreshes from
+# that authorization).
 ActiveAdmin.register OauthAccessToken, as: 'AuthorizedApplication' do
   menu parent: 'System', label: 'Authorized Applications', priority: 99
 
@@ -16,11 +14,11 @@ ActiveAdmin.register OauthAccessToken, as: 'AuthorizedApplication' do
   config.sort_order = 'created_at_desc'
 
   controller do
-    # Per-user scoping is handled by OauthAccessTokenPolicy::Scope. We only
-    # need to filter out revoked tokens and eager-load the application to
-    # avoid an N+1 from the "Application" column.
+    # Per-user scoping is handled by OauthAccessTokenPolicy::Scope. Eager-load
+    # application (used in every row) and resource_owner (used by root admins
+    # in the Owner column) to avoid N+1s.
     def scoped_collection
-      super.where(revoked_at: nil).includes(:application)
+      super.where(revoked_at: nil).includes(:application, :resource_owner)
     end
 
     def destroy
@@ -37,7 +35,7 @@ ActiveAdmin.register OauthAccessToken, as: 'AuthorizedApplication' do
     end
     if current_admin_user.roles.compact.map(&:to_sym).include?(RolePolicy.root_role)
       column 'Owner' do |t|
-        au = AdminUser.find_by(id: t.resource_owner_id)
+        au = t.resource_owner
         au ? link_to(au.username, admin_user_path(au)) : "id=#{t.resource_owner_id}"
       end
     end

@@ -27,7 +27,10 @@ RSpec.describe 'OAuth refresh token + disabled-admin guard', type: :request do
     expect(response).to have_http_status(:success)
     body = JSON.parse(response.body)
     expect(body['access_token']).to be_present
-    expect(body['access_token']).not_to eq(token.token)
+    # body['access_token'] is plaintext; token.token is the SHA256 stored in
+    # the DB (hash_token_secrets is enabled). Compare against plaintext so
+    # the assertion actually verifies a different access token was issued.
+    expect(body['access_token']).not_to eq(token.plaintext_token)
   end
 
   it 'rejects refresh when the AdminUser is disabled' do
