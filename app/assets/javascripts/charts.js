@@ -96,16 +96,14 @@
     }, extra || {});
   }
 
-  // mode:'x' shows every series at the hovered x, including those whose
-  // x-arrays don't fully cover the cursor's range (e.g. one node started
-  // later than the others — we want it shown when in-range, omitted when
-  // not). Downside: when point density is high (1-min granularity), Chart.js
-  // returns BOTH the before-cursor and after-cursor neighbors per dataset
-  // (=> each series doubles in the tooltip). The filter below dedupes by
-  // datasetIndex, keeping only the first occurrence per series.
+  // mode:'index' picks exactly one point per dataset (the one at the cursor's
+  // x-index), so the tooltip always shows one entry per series without
+  // duplicates from dense-data hitbox overlap. This requires all series to
+  // share the same x-array — see alignToCommonXAxis below, which pads missing
+  // x's with 0 so series that started later (or have gaps) still align.
   // animation:false removes the slide-between-points delay.
   function baseOptions(opts) {
-    var mode = opts.interactionMode || 'x';
+    var mode = opts.interactionMode || 'index';
     return {
       responsive: true,
       maintainAspectRatio: false,
@@ -117,15 +115,33 @@
           mode: mode,
           intersect: false,
           animation: false,
-          position: 'nearest',
-          filter: function (item, idx, array) {
-            return array.findIndex(function (other) {
-              return other.datasetIndex === item.datasetIndex;
-            }) === idx;
-          }
+          position: 'nearest'
         }
       }
     };
+  }
+
+  // Take [{key, values: [{x, y}, ...]}, ...] and return the same shape with
+  // every series covering the union of all x's. Missing points are filled
+  // with 0. Required so mode:'index' aligns datasets correctly even when
+  // some series start later or have gaps in their data.
+  function alignToCommonXAxis(json) {
+    var allXs = new Set();
+    json.forEach(function (series) {
+      (series.values || []).forEach(function (p) { allXs.add(p.x); });
+    });
+    var sortedXs = Array.from(allXs).sort(function (a, b) { return a - b; });
+
+    return json.map(function (series) {
+      var byX = {};
+      (series.values || []).forEach(function (p) { byX[p.x] = p.y; });
+      return {
+        key: series.key,
+        values: sortedXs.map(function (x) {
+          return { x: x, y: x in byX ? byX[x] : 0 };
+        })
+      };
+    });
   }
 
   function renderLine(canvasId, json, opts) {
@@ -134,6 +150,7 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
+    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       return {
         label: series.key,
@@ -167,6 +184,7 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
+    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       var color = colorFor(i);
       return {
@@ -260,6 +278,7 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
+    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       return {
         label: series.key,
