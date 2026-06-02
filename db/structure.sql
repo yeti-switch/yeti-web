@@ -11803,25 +11803,6 @@ CREATE TABLE class4.codecs (
 
 
 --
--- Name: codecs_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
---
-
-CREATE SEQUENCE class4.codecs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: codecs_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
---
-
-ALTER SEQUENCE class4.codecs_id_seq OWNED BY class4.codecs.id;
-
-
---
 -- Name: customers_auth; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -16274,13 +16255,6 @@ ALTER TABLE ONLY class4.codec_group_codecs ALTER COLUMN id SET DEFAULT nextval('
 --
 
 ALTER TABLE ONLY class4.codec_groups ALTER COLUMN id SET DEFAULT nextval('class4.codec_groups_id_seq'::regclass);
-
-
---
--- Name: codecs id; Type: DEFAULT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.codecs ALTER COLUMN id SET DEFAULT nextval('class4.codecs_id_seq'::regclass);
 
 
 --
@@ -20852,6 +20826,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260602000001'),
+('20260602000000'),
 ('20260527160430'),
 ('20260524202144'),
 ('20260523000000'),
