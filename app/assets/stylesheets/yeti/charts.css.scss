@@ -15,6 +15,22 @@ html {
       background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
     }
 
+    // Positioning context for the overlaid range picker. Lives on
+    // .chart-container (not .chart-placeholder) because the latter class is
+    // stripped once the chart loads, which would drop the relative context.
+    .chart-container {
+      position: relative;
+    }
+
+    // Time-range picker overlaid in the chart's top-left corner by
+    // Charts.renderRanged, sharing the row with the right-aligned legend.
+    .chart-range-select {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      z-index: 1;
+    }
+
     // AA's .tabs widget has no bottom margin, so anything rendered below
     // (e.g. the columns row on the dashboard) sits flush against it.
     .tabs {

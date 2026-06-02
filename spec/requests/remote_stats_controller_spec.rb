@@ -49,4 +49,49 @@ RSpec.describe RemoteStatsController do
       )
     end
   end
+
+  describe 'GET /remote_stats/:id/node with hours window' do
+    subject do
+      get "/remote_stats/#{node.id}/node.json", params: params
+    end
+
+    let!(:node) { create(:node) }
+    let!(:recent_stat) { create(:stats_active_call, node: node, created_at: 1.hour.ago) }
+    let!(:old_stat) { create(:stats_active_call, node: node, created_at: 25.hours.ago) }
+
+    def response_xs
+      response_json.first[:values].map { |v| v[:x] }
+    end
+
+    context 'without hours param (default 24h)' do
+      let(:params) { {} }
+
+      it 'returns only points within the last 24 hours' do
+        subject
+        expect(response).to have_http_status(:success)
+        expect(response_xs).to contain_exactly(recent_stat.reload.created_at.to_i * 1000)
+      end
+    end
+
+    context 'with hours=720 (one month)' do
+      let(:params) { { hours: 720 } }
+
+      it 'includes older points within the window' do
+        subject
+        expect(response_xs).to contain_exactly(
+          recent_stat.reload.created_at.to_i * 1000,
+          old_stat.reload.created_at.to_i * 1000
+        )
+      end
+    end
+
+    context 'with a non-positive hours param' do
+      let(:params) { { hours: '0' } }
+
+      it 'falls back to the 24h default' do
+        subject
+        expect(response_xs).to contain_exactly(recent_stat.reload.created_at.to_i * 1000)
+      end
+    end
+  end
 end

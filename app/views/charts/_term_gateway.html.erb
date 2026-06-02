@@ -1,12 +1,12 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#termination-chart']").on("click", function () {
-      $.getJSON("/remote_stats/<%= params[:id] %>/term_gateway.json", function (json) {
-        Charts.renderLine('term-gw-chart', json, {
-          placeholderId: 'chart-placeholder-term-gw',
-          yAxisLabel: 'Active Calls',
-          yTickPrecision: 'integer'
-        });
+    $("div.tabs a[href='#charts']").on("click", function () {
+      Charts.renderRanged({
+        url: "/remote_stats/<%= params[:id] %>/term_gateway.json",
+        canvasId: 'term-gw-chart',
+        placeholderId: 'chart-placeholder-term-gw',
+        type: 'line',
+        chartOpts: { yAxisLabel: 'Active Calls', yTickPrecision: 'integer' }
       });
     });
   });

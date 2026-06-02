@@ -20,18 +20,8 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
     let!(:customer_calls) { {} }
     let!(:vendor_calls) { {} }
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(accounts.size)
-
-      accounts.each do |account|
-        stats = Stats::ActiveCallAccount.where(account_id: account.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 terminated_count: 0,
-                                 originated_count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
-      end
+    it 'does not create stats for accounts without calls' do
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(0)
     end
   end
 
@@ -49,8 +39,8 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
       }
     end
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(accounts.size)
+    it 'creates a row only for accounts with calls' do
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(3)
 
       acc1_stats = Stats::ActiveCallAccount.where(account_id: accounts.first.id).to_a
       expect(acc1_stats.size).to eq(1)
@@ -78,13 +68,7 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
 
       other_accounts = accounts - [accounts.first, accounts.second, accounts.third]
       other_accounts.each do |account|
-        stats = Stats::ActiveCallAccount.where(account_id: account.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 terminated_count: 0,
-                                 originated_count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
+        expect(Stats::ActiveCallAccount.where(account_id: account.id)).to be_empty
       end
     end
   end

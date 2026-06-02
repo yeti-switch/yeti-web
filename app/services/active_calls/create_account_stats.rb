@@ -8,9 +8,6 @@ module ActiveCalls
 
     def call
       attrs_list = build_calls_attrs_list
-      calls_account_ids = (customer_calls.keys + vendor_calls.keys).uniq
-      missing_account_ids = Account.where.not(id: calls_account_ids).pluck(:id)
-      attrs_list.concat build_empty_attrs_list(missing_account_ids)
       return if attrs_list.empty?
 
       Stats::ActiveCallAccount.insert_all!(attrs_list)
@@ -18,6 +15,9 @@ module ActiveCalls
 
     private
 
+    # Only accounts with active calls are stored (each row has originated_count
+    # and/or terminated_count > 0). Absence of a row for a given snapshot means
+    # zero — the chart reconstructs the zero baseline client-side.
     def build_calls_attrs_list
       calls = Hash.new do |list, key|
         list[key] = {
@@ -34,17 +34,6 @@ module ActiveCalls
         calls[account_id.to_i][:terminated_count] = sub_calls.count
       end
       calls.values
-    end
-
-    def build_empty_attrs_list(account_ids)
-      account_ids.map do |account_id|
-        {
-          terminated_count: 0,
-          originated_count: 0,
-          created_at: current_time,
-          account_id: account_id
-        }
-      end
     end
   end
 end

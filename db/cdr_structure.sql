@@ -3308,43 +3308,6 @@ CREATE TABLE stats.active_call_accounts (
 
 
 --
--- Name: active_call_accounts_hourly; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_call_accounts_hourly (
-    id bigint NOT NULL,
-    account_id integer NOT NULL,
-    max_originated_count integer NOT NULL,
-    avg_originated_count integer NOT NULL,
-    min_originated_count integer NOT NULL,
-    max_terminated_count integer NOT NULL,
-    avg_terminated_count integer NOT NULL,
-    min_terminated_count integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    calls_time timestamp with time zone NOT NULL
-);
-
-
---
--- Name: active_call_accounts_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_call_accounts_hourly_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_call_accounts_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_call_accounts_hourly_id_seq OWNED BY stats.active_call_accounts_hourly.id;
-
-
---
 -- Name: active_call_accounts_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
@@ -3373,40 +3336,6 @@ CREATE TABLE stats.active_call_orig_gateways (
     count integer NOT NULL,
     created_at timestamp with time zone
 );
-
-
---
--- Name: active_call_orig_gateways_hourly; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_call_orig_gateways_hourly (
-    id bigint NOT NULL,
-    gateway_id integer NOT NULL,
-    max_count integer NOT NULL,
-    avg_count real NOT NULL,
-    min_count integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    calls_time timestamp with time zone NOT NULL
-);
-
-
---
--- Name: active_call_orig_gateways_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_call_orig_gateways_hourly_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_call_orig_gateways_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_call_orig_gateways_hourly_id_seq OWNED BY stats.active_call_orig_gateways_hourly.id;
 
 
 --
@@ -3441,40 +3370,6 @@ CREATE TABLE stats.active_call_term_gateways (
 
 
 --
--- Name: active_call_term_gateways_hourly; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_call_term_gateways_hourly (
-    id bigint NOT NULL,
-    gateway_id integer NOT NULL,
-    max_count integer NOT NULL,
-    avg_count real NOT NULL,
-    min_count integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    calls_time timestamp with time zone NOT NULL
-);
-
-
---
--- Name: active_call_term_gateways_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_call_term_gateways_hourly_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_call_term_gateways_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_call_term_gateways_hourly_id_seq OWNED BY stats.active_call_term_gateways_hourly.id;
-
-
---
 -- Name: active_call_term_gateways_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
 --
 
@@ -3503,40 +3398,6 @@ CREATE TABLE stats.active_calls (
     count integer NOT NULL,
     created_at timestamp with time zone
 );
-
-
---
--- Name: active_calls_hourly; Type: TABLE; Schema: stats; Owner: -
---
-
-CREATE TABLE stats.active_calls_hourly (
-    id bigint NOT NULL,
-    node_id integer NOT NULL,
-    max_count integer NOT NULL,
-    avg_count real NOT NULL,
-    min_count integer NOT NULL,
-    created_at timestamp with time zone NOT NULL,
-    calls_time timestamp with time zone NOT NULL
-);
-
-
---
--- Name: active_calls_hourly_id_seq; Type: SEQUENCE; Schema: stats; Owner: -
---
-
-CREATE SEQUENCE stats.active_calls_hourly_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_calls_hourly_id_seq; Type: SEQUENCE OWNED BY; Schema: stats; Owner: -
---
-
-ALTER SEQUENCE stats.active_calls_hourly_id_seq OWNED BY stats.active_calls_hourly.id;
 
 
 --
@@ -3932,24 +3793,10 @@ ALTER TABLE ONLY stats.active_call_accounts ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
--- Name: active_call_accounts_hourly id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_accounts_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_accounts_hourly_id_seq'::regclass);
-
-
---
 -- Name: active_call_orig_gateways id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_orig_gateways ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_id_seq'::regclass);
-
-
---
--- Name: active_call_orig_gateways_hourly id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_orig_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_orig_gateways_hourly_id_seq'::regclass);
 
 
 --
@@ -3960,24 +3807,10 @@ ALTER TABLE ONLY stats.active_call_term_gateways ALTER COLUMN id SET DEFAULT nex
 
 
 --
--- Name: active_call_term_gateways_hourly id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_term_gateways_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_call_term_gateways_hourly_id_seq'::regclass);
-
-
---
 -- Name: active_calls id; Type: DEFAULT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_calls ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_id_seq'::regclass);
-
-
---
--- Name: active_calls_hourly id; Type: DEFAULT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_calls_hourly ALTER COLUMN id SET DEFAULT nextval('stats.active_calls_hourly_id_seq'::regclass);
 
 
 --
@@ -4288,27 +4121,11 @@ ALTER TABLE ONLY rtp_statistics.tx_streams
 
 
 --
--- Name: active_call_accounts_hourly active_call_accounts_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_accounts_hourly
-    ADD CONSTRAINT active_call_accounts_hourly_pkey PRIMARY KEY (id);
-
-
---
 -- Name: active_call_accounts active_call_accounts_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_accounts
     ADD CONSTRAINT active_call_accounts_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_call_orig_gateways_hourly active_call_orig_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_orig_gateways_hourly
-    ADD CONSTRAINT active_call_orig_gateways_hourly_pkey PRIMARY KEY (id);
 
 
 --
@@ -4320,27 +4137,11 @@ ALTER TABLE ONLY stats.active_call_orig_gateways
 
 
 --
--- Name: active_call_term_gateways_hourly active_call_term_gateways_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_call_term_gateways_hourly
-    ADD CONSTRAINT active_call_term_gateways_hourly_pkey PRIMARY KEY (id);
-
-
---
 -- Name: active_call_term_gateways active_call_term_gateways_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
 --
 
 ALTER TABLE ONLY stats.active_call_term_gateways
     ADD CONSTRAINT active_call_term_gateways_pkey PRIMARY KEY (id);
-
-
---
--- Name: active_calls_hourly active_calls_hourly_pkey; Type: CONSTRAINT; Schema: stats; Owner: -
---
-
-ALTER TABLE ONLY stats.active_calls_hourly
-    ADD CONSTRAINT active_calls_hourly_pkey PRIMARY KEY (id);
 
 
 --
@@ -4806,6 +4607,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260603000000'),
 ('20260516131500'),
 ('20260516120000'),
 ('20260408000000'),

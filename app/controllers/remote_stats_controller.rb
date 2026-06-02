@@ -20,7 +20,7 @@ class RemoteStatsController < ApplicationController
 
   def nodes
     expires_in 1.minute, public: true
-    render json: Stats::ActiveCall.to_stacked_chart.to_json(root: false)
+    render json: Stats::ActiveCall.to_stacked_chart(chart_hours).to_json(root: false)
   end
 
   def vendors_traffic
@@ -35,12 +35,7 @@ class RemoteStatsController < ApplicationController
 
   def node
     expires_in 1.minute, public: true
-    render json: Stats::ActiveCall.to_chart(params[:id]).to_json(root: false)
-  end
-
-  def aggregated_node
-    expires_in 30.minutes, public: true
-    render json: Stats::AggActiveCall.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCall.to_chart(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   def cdrs_summary
@@ -66,49 +61,29 @@ class RemoteStatsController < ApplicationController
 
   def term_gateway
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallTermGateway.to_chart(params[:id]).to_json(root: false)
-  end
-
-  def aggregated_term_gateway
-    expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallTermGateway.to_chart(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallTermGateway.to_chart(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   def orig_gateway
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallOrigGateway.to_chart(params[:id]).to_json(root: false)
-  end
-
-  def aggregated_orig_gateway
-    expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallOrigGateway.to_chart(params[:id]).to_json(root: false)
-  end
-
-  def aggregated_customer_account
-    expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallAccount.to_chart_customer(params[:id]).to_json(root: false)
-  end
-
-  def aggregated_vendor_account
-    expires_in 10.minutes, public: true
-    render json: Stats::AggActiveCallAccount.to_chart_vendor(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallOrigGateway.to_chart(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   ######
 
   def account_active_calls
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallAccount.to_chart_all(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_all(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   def customer_account
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallAccount.to_chart_customer(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_customer(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   def vendor_account
     expires_in 2.minutes, public: true
-    render json: Stats::ActiveCallAccount.to_chart_vendor(params[:id]).to_json(root: false)
+    render json: Stats::ActiveCallAccount.to_chart_vendor(params[:id], hours: chart_hours).to_json(root: false)
   end
 
   def gateway_pdd_distribution
@@ -122,6 +97,17 @@ class RemoteStatsController < ApplicationController
   end
 
   private
+
+  # Time window for active-call charts, in hours. Defaults to 24h and is capped
+  # at the raw-data retention window (1 month), so a malformed or oversized
+  # `hours` param can't ask for more data than is kept.
+  MAX_CHART_HOURS = 24 * 31
+
+  def chart_hours
+    hours = params[:hours].to_i
+    hours = 24 if hours <= 0
+    [hours, MAX_CHART_HOURS].min
+  end
 
   def clean_search_params(params)
     if params.is_a? Hash

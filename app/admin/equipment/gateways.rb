@@ -760,28 +760,15 @@ ActiveAdmin.register Gateway do
         end
       end
 
-      if s.allow_origination?
-        tab :origination_chart do
-          panel '24h' do
-            render partial: 'charts/orig_gateway'
-          end
-          panel 'History' do
-            render partial: 'charts/orig_gateway_agg'
-          end
+      tab :charts do
+        panel 'Origination Active Calls' do
+          render partial: 'charts/orig_gateway'
         end
-      end
-
-      if s.allow_termination?
-        tab :termination_chart do
-          panel '24h' do
-            render partial: 'charts/term_gateway'
-          end
-          panel 'History' do
-            render partial: 'charts/term_gateway_agg'
-          end
-          panel 'PDD Distribution' do
-            render partial: 'charts/gateway_pdd_distribution'
-          end
+        panel 'Termination Active Calls' do
+          render partial: 'charts/term_gateway'
+        end
+        panel 'PDD Distribution' do
+          render partial: 'charts/gateway_pdd_distribution'
         end
       end
 

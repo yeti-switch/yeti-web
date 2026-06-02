@@ -51,11 +51,8 @@ ActiveAdmin.register Node do
         end
       end
       tab :active_calls_chart do
-        panel '24 hours' do
+        panel 'Active Calls' do
           render partial: 'charts/node'
-        end
-        panel '1 month' do
-          render partial: 'charts/node_agg'
         end
       end
 
