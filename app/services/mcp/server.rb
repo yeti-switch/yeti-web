@@ -37,14 +37,11 @@ module Mcp
         return [202, {}, ['']]
       end
 
-      Current.admin_user = admin_user if defined?(Current) && Current.respond_to?(:admin_user=)
       result = dispatch(message)
       json_response(message['id'], result)
     rescue JSON::ParserError => e
       Rails.logger.warn("[MCP] parse error: #{e.message}")
       json_response(nil, error: { code: -32_700, message: 'Parse error' })
-    ensure
-      Current.admin_user = nil if defined?(Current) && Current.respond_to?(:admin_user=)
     end
 
     private

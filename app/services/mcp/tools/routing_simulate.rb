@@ -89,7 +89,11 @@ module Mcp
           routing_group: ref(r.routing_group, :name),
           dst_network: r.dst_network&.name,
           dst_country: r.dst_country&.name,
-          disconnect_code: ref(r.disconnect_code, :name)
+          disconnect_code: r.disconnect_code && {
+            id: r.disconnect_code.id,
+            code: r.disconnect_code.code,
+            reason: r.disconnect_code.reason
+          }
         }.compact
       end
 

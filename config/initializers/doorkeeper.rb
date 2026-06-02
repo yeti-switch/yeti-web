@@ -438,18 +438,26 @@ if YetiConfig.oauth&.enabled
     # time, but this hook prevents the wasted refresh loop after disable —
     # the client sees an explicit invalid_grant and stops.
     before_successful_strategy_response do |request|
+      # Read the owner id off the request's *public* accessors. For the
+      # auth-code grant it lives on `request.grant` (the AccessGrant);
+      # `request.resource_owner` is private in Doorkeeper, so `respond_to?`
+      # would return false and silently skip the check. For refresh it's on
+      # `request.refresh_token`. Non-polymorphic owner, so resource_owner_id
+      # is the AdminUser id directly.
       resource_owner_id =
         if request.respond_to?(:refresh_token) && request.refresh_token
           request.refresh_token.resource_owner_id
-        elsif request.respond_to?(:resource_owner) && request.resource_owner
-          request.resource_owner.try(:id) || request.resource_owner
+        elsif request.respond_to?(:grant) && request.grant
+          request.grant.resource_owner_id
         end
 
       next unless resource_owner_id
 
       admin = AdminUser.find_by(id: resource_owner_id)
       if admin.nil? || !admin.enabled?
-        raise Doorkeeper::Errors::DoorkeeperError, 'resource_owner_disabled'
+        # `invalid_grant` is the standard OAuth error code (DoorkeeperError#type
+        # == message), so the client gets a spec-compliant response and stops.
+        raise Doorkeeper::Errors::DoorkeeperError, 'invalid_grant'
       end
     end
 

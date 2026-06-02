@@ -42,8 +42,8 @@ RSpec.describe 'OAuth refresh token + disabled-admin guard', type: :request do
     }
     expect(response).to have_http_status(:bad_request)
     # The before_successful_strategy_response hook in doorkeeper.rb raises
-    # with this message; Doorkeeper surfaces it as the OAuth error code.
-    expect(JSON.parse(response.body)['error']).to eq('resource_owner_disabled')
+    # 'invalid_grant'; Doorkeeper surfaces it as the OAuth error code.
+    expect(JSON.parse(response.body)['error']).to eq('invalid_grant')
   end
 
   it 'rejects refresh when the AdminUser has been deleted (cascade)' do

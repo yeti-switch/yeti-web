@@ -62,6 +62,22 @@ RSpec.describe 'OAuth authorization code flow', type: :request do
     expect(body['token_type']).to eq('Bearer')
   end
 
+  it 'rejects the code exchange when the AdminUser is disabled' do
+    code = create_authorization_code
+    admin.update!(enabled: false)
+    post '/oauth/token', params: {
+      grant_type: 'authorization_code',
+      code: code,
+      client_id: application.uid,
+      redirect_uri: application.redirect_uri,
+      code_verifier: code_verifier
+    }
+    expect(response).to have_http_status(:bad_request)
+    # before_successful_strategy_response reads request.grant.resource_owner_id
+    # (request.resource_owner is private) and raises 'invalid_grant'.
+    expect(JSON.parse(response.body)['error']).to eq('invalid_grant')
+  end
+
   it 'rejects a reused authorization code' do
     code = create_authorization_code
     2.times do
