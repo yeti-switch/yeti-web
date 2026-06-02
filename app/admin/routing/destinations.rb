@@ -180,8 +180,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :allow_package_billing
 
     ## fixed price
-    column :rates, &:decorated_rates
-    column :intervals, &:decorated_intervals
+    column :rates, sortable: :next_rate, &:decorated_rates
+    column :intervals, sortable: :initial_interval, &:decorated_intervals
     column :use_dp_intervals
 
     # cost + X ( $ or % )

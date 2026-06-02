@@ -105,8 +105,8 @@ ActiveAdmin.register Dialpeer do
     column :routing_tags
     column :priority, &:decorated_priority
     column :force_hit_rate
-    column :rates, &:decorated_rates
-    column :intervals, &:decorated_intervals
+    column :rates, sortable: :next_rate, &:decorated_rates
+    column :intervals, sortable: :initial_interval, &:decorated_intervals
     column :lcr_rate_multiplier
     column :gateway do |c|
       auto_link(c.gateway, c.gateway.decorated_termination_display_name) unless c.gateway.nil?

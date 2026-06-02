@@ -9,6 +9,10 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   attribute :acd_limit
   attribute :asr_limit
   attribute :short_calls_limit
+  attribute :force_symmetric_rtp, type: :boolean
+  attribute :rtp_ping, type: :boolean
+  attribute :proxy_media, type: :boolean
+  attribute :host
 
   # presence
   validates :priority, presence: true, if: :priority_changed?

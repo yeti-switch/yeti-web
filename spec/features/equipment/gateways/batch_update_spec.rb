@@ -25,7 +25,11 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
       is_shared: false,
       acd_limit: '1',
       asr_limit: '1',
-      short_calls_limit: '1'
+      short_calls_limit: '1',
+      force_symmetric_rtp: false,
+      rtp_ping: true,
+      proxy_media: false,
+      host: 'host.example.com'
     }
   end
 
@@ -63,6 +67,26 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
     if assign_params.key? :short_calls_limit
       check :Short_calls_limit
       fill_in :short_calls_limit, with: assign_params[:short_calls_limit]
+    end
+
+    if assign_params.key? :force_symmetric_rtp
+      check :Force_symmetric_rtp
+      select_by_value assign_params[:force_symmetric_rtp], from: :force_symmetric_rtp
+    end
+
+    if assign_params.key? :rtp_ping
+      check :Rtp_ping
+      select_by_value assign_params[:rtp_ping], from: :rtp_ping
+    end
+
+    if assign_params.key? :proxy_media
+      check :Proxy_media
+      select_by_value assign_params[:proxy_media], from: :proxy_media
+    end
+
+    if assign_params.key? :host
+      check :Host
+      fill_in :host, with: assign_params[:host]
     end
   end
 
