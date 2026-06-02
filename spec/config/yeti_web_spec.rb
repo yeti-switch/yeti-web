@@ -93,7 +93,13 @@ RSpec.describe 'config/yeti_web.yml' do
         }
       },
       tmpdir: a_kind_of(String),
-      admin_ui: be_kind_of(Hash)
+      admin_ui: be_kind_of(Hash),
+      oauth: {
+        enabled: boolean
+      },
+      mcp: {
+        enabled: boolean
+      }
     }
   end
 

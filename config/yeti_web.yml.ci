@@ -40,6 +40,12 @@ sentry:
   node_name: "local"
   environment: "prod"
 
+oauth:
+  enabled: true # mount Doorkeeper OAuth provider — required for the spec suite
+
+mcp:
+  enabled: true # mount /api/mcp; requires oauth.enabled — required for the spec suite
+
 versioning_disable_for_models:
   - ClassName::ClassName
   - ClassName

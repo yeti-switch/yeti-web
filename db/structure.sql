@@ -14552,6 +14552,117 @@ ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
 
 
 --
+-- Name: oauth_access_grants; Type: TABLE; Schema: gui; Owner: -
+--
+
+CREATE TABLE gui.oauth_access_grants (
+    id bigint NOT NULL,
+    resource_owner_id bigint NOT NULL,
+    application_id bigint NOT NULL,
+    token character varying NOT NULL,
+    expires_in integer NOT NULL,
+    redirect_uri text NOT NULL,
+    scopes character varying DEFAULT ''::character varying NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    revoked_at timestamp with time zone,
+    code_challenge character varying,
+    code_challenge_method character varying
+);
+
+
+--
+-- Name: oauth_access_grants_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
+--
+
+CREATE SEQUENCE gui.oauth_access_grants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: oauth_access_grants_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
+--
+
+ALTER SEQUENCE gui.oauth_access_grants_id_seq OWNED BY gui.oauth_access_grants.id;
+
+
+--
+-- Name: oauth_access_tokens; Type: TABLE; Schema: gui; Owner: -
+--
+
+CREATE TABLE gui.oauth_access_tokens (
+    id bigint NOT NULL,
+    resource_owner_id bigint,
+    application_id bigint NOT NULL,
+    token character varying NOT NULL,
+    refresh_token character varying,
+    expires_in integer,
+    scopes character varying,
+    created_at timestamp with time zone NOT NULL,
+    revoked_at timestamp with time zone,
+    previous_refresh_token character varying DEFAULT ''::character varying NOT NULL
+);
+
+
+--
+-- Name: oauth_access_tokens_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
+--
+
+CREATE SEQUENCE gui.oauth_access_tokens_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: oauth_access_tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
+--
+
+ALTER SEQUENCE gui.oauth_access_tokens_id_seq OWNED BY gui.oauth_access_tokens.id;
+
+
+--
+-- Name: oauth_applications; Type: TABLE; Schema: gui; Owner: -
+--
+
+CREATE TABLE gui.oauth_applications (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    uid character varying NOT NULL,
+    secret character varying NOT NULL,
+    redirect_uri text NOT NULL,
+    scopes character varying DEFAULT ''::character varying NOT NULL,
+    confidential boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: oauth_applications_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
+--
+
+CREATE SEQUENCE gui.oauth_applications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: oauth_applications_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
+--
+
+ALTER SEQUENCE gui.oauth_applications_id_seq OWNED BY gui.oauth_applications.id;
+
+
+--
 -- Name: sessions; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -16656,6 +16767,27 @@ ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui
 
 
 --
+-- Name: oauth_access_grants id; Type: DEFAULT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_grants ALTER COLUMN id SET DEFAULT nextval('gui.oauth_access_grants_id_seq'::regclass);
+
+
+--
+-- Name: oauth_access_tokens id; Type: DEFAULT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_tokens ALTER COLUMN id SET DEFAULT nextval('gui.oauth_access_tokens_id_seq'::regclass);
+
+
+--
+-- Name: oauth_applications id; Type: DEFAULT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_applications ALTER COLUMN id SET DEFAULT nextval('gui.oauth_applications_id_seq'::regclass);
+
+
+--
 -- Name: sessions id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -18114,6 +18246,30 @@ ALTER TABLE ONLY gui.background_threads
 
 
 --
+-- Name: oauth_access_grants oauth_access_grants_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_grants
+    ADD CONSTRAINT oauth_access_grants_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_access_tokens oauth_access_tokens_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_tokens
+    ADD CONSTRAINT oauth_access_tokens_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_applications oauth_applications_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_applications
+    ADD CONSTRAINT oauth_applications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
@@ -19239,6 +19395,62 @@ CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON gui.admin_users
 
 
 --
+-- Name: index_oauth_access_grants_on_application_id; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE INDEX index_oauth_access_grants_on_application_id ON gui.oauth_access_grants USING btree (application_id);
+
+
+--
+-- Name: index_oauth_access_grants_on_resource_owner_id; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE INDEX index_oauth_access_grants_on_resource_owner_id ON gui.oauth_access_grants USING btree (resource_owner_id);
+
+
+--
+-- Name: index_oauth_access_grants_on_token; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE UNIQUE INDEX index_oauth_access_grants_on_token ON gui.oauth_access_grants USING btree (token);
+
+
+--
+-- Name: index_oauth_access_tokens_on_application_id; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE INDEX index_oauth_access_tokens_on_application_id ON gui.oauth_access_tokens USING btree (application_id);
+
+
+--
+-- Name: index_oauth_access_tokens_on_refresh_token; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE UNIQUE INDEX index_oauth_access_tokens_on_refresh_token ON gui.oauth_access_tokens USING btree (refresh_token);
+
+
+--
+-- Name: index_oauth_access_tokens_on_resource_owner_id; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE INDEX index_oauth_access_tokens_on_resource_owner_id ON gui.oauth_access_tokens USING btree (resource_owner_id);
+
+
+--
+-- Name: index_oauth_access_tokens_on_token; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE UNIQUE INDEX index_oauth_access_tokens_on_token ON gui.oauth_access_tokens USING btree (token);
+
+
+--
+-- Name: index_oauth_applications_on_uid; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE UNIQUE INDEX index_oauth_applications_on_uid ON gui.oauth_applications USING btree (uid);
+
+
+--
 -- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: gui; Owner: -
 --
 
@@ -20354,6 +20566,38 @@ ALTER TABLE ONLY dns.dns_records
 
 
 --
+-- Name: oauth_access_grants oauth_access_grants_application_id_fkey; Type: FK CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_grants
+    ADD CONSTRAINT oauth_access_grants_application_id_fkey FOREIGN KEY (application_id) REFERENCES gui.oauth_applications(id);
+
+
+--
+-- Name: oauth_access_grants oauth_access_grants_resource_owner_id_fkey; Type: FK CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_grants
+    ADD CONSTRAINT oauth_access_grants_resource_owner_id_fkey FOREIGN KEY (resource_owner_id) REFERENCES gui.admin_users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: oauth_access_tokens oauth_access_tokens_application_id_fkey; Type: FK CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_tokens
+    ADD CONSTRAINT oauth_access_tokens_application_id_fkey FOREIGN KEY (application_id) REFERENCES gui.oauth_applications(id);
+
+
+--
+-- Name: oauth_access_tokens oauth_access_tokens_resource_owner_id_fkey; Type: FK CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_access_tokens
+    ADD CONSTRAINT oauth_access_tokens_resource_owner_id_fkey FOREIGN KEY (resource_owner_id) REFERENCES gui.admin_users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
@@ -20608,6 +20852,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260527160430'),
+('20260524202144'),
 ('20260523000000'),
 ('20260417000000'),
 ('20260415000000'),

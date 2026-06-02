@@ -20,6 +20,21 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  # Doorkeeper OAuth provider + RFC 8414 metadata + RFC 7591 dynamic client
+  # registration. Gated on YetiConfig.oauth.enabled so the surface is opt-in.
+  if YetiConfig.oauth&.enabled
+    use_doorkeeper
+    get '/.well-known/oauth-authorization-server', to: 'well_known/oauth_authorization_server#show'
+    post '/oauth/register', to: 'oauth/registrations#create'
+  end
+
+  # MCP server for LLM tool use. Auth via Doorkeeper OAuth bearer tokens, so
+  # this mount requires both flags. Lambda defers Mcp::Server resolution to
+  # request time so Zeitwerk has loaded app/services/mcp/ by then.
+  if YetiConfig.oauth&.enabled && YetiConfig.mcp&.enabled
+    mount ->(env) { Mcp::Server.new.call(env) }, at: '/api/mcp'
+  end
+
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   authenticate :admin_user do
     ActiveAdmin.routes(self)

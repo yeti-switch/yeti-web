@@ -90,6 +90,21 @@ Config.setup do |setup_config|
       optional(:enabled).filled(:bool)
     end
 
+    # Mounts the Doorkeeper OAuth provider (/oauth/authorize, /oauth/token,
+    # /oauth/register, /.well-known/oauth-authorization-server). Independent
+    # of MCP — can be enabled on its own to power Grafana SSO or other clients.
+    # Block AND `enabled` key are both optional; missing → treated as false.
+    optional(:oauth).schema do
+      optional(:enabled).value(:bool?)
+    end
+
+    # Mounts /api/mcp. Requires oauth.enabled (MCP authenticates via OAuth
+    # bearer tokens); if oauth.enabled is false this flag has no effect.
+    # Block AND `enabled` key are both optional; missing → treated as false.
+    optional(:mcp).schema do
+      optional(:enabled).value(:bool?)
+    end
+
     required(:versioning_disable_for_models).each(:string)
 
     optional(:keep_expired_destinations_days)

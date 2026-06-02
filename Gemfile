@@ -16,6 +16,7 @@ gem 'responders'
 # Authentication
 gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'devise', '>= 4.6.0'
+gem 'doorkeeper', '~> 5.9'
 gem 'ostruct', '~> 0.6.1'
 
 # Seamless JWT authentication for Rails API
