@@ -10,7 +10,11 @@ RSpec.describe BatchUpdateForm::Gateway do
       is_shared: 'false',
       acd_limit: '1',
       asr_limit: '1',
-      short_calls_limit: '1'
+      short_calls_limit: '1',
+      force_symmetric_rtp: 'true',
+      rtp_ping: 'false',
+      proxy_media: 'true',
+      host: 'host.example.com'
     }
   end
 
@@ -45,5 +49,24 @@ RSpec.describe BatchUpdateForm::Gateway do
     # only integer
     it { is_expected.to_not allow_value('0.1').for :priority }
     it { is_expected.to_not allow_value('0.1').for :weight }
+  end
+
+  describe '#attributes' do
+    it 'casts boolean attributes and keeps host as string' do
+      expect(subject.attributes).to include(
+        force_symmetric_rtp: true,
+        rtp_ping: false,
+        proxy_media: true,
+        host: 'host.example.com'
+      )
+    end
+
+    context 'when boolean and host attributes are not passed' do
+      let!(:assign_params) { { priority: '1' } }
+
+      it 'does not include them as changed' do
+        expect(subject.attributes.keys).to_not include(:force_symmetric_rtp, :rtp_ping, :proxy_media, :host)
+      end
+    end
   end
 end
