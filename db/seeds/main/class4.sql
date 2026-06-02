@@ -109,6 +109,11 @@ INSERT INTO codecs (id, name) VALUES (20, 'G722/8000');
 INSERT INTO codecs (id, name) VALUES (21, 'opus/48000/2');
 INSERT INTO codecs (id, name) VALUES (22, 'AMR/8000');
 INSERT INTO codecs (id, name) VALUES (23, 'AMR-WB/16000');
+INSERT INTO codecs (id, name) VALUES (24, 'CN/8000');
+INSERT INTO codecs (id, name) VALUES (25, 'CN/16000');
+INSERT INTO codecs (id, name) VALUES (26, 'CN/24000');
+INSERT INTO codecs (id, name) VALUES (27, 'CN/32000');
+INSERT INTO codecs (id, name) VALUES (28, 'CN/48000');
 
 --
 -- TOC entry 4431 (class 0 OID 0)
@@ -128,15 +133,6 @@ SELECT pg_catalog.setval('blacklists_id_seq', 1, true);
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (19, 1, 6, 64, NULL, NULL);
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (22, 1, 9, 99, NULL, NULL);
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (23, 1, 10, 40, NULL, NULL);
-
-
---
--- TOC entry 4434 (class 0 OID 0)
--- Dependencies: 305
--- Name: codecs_id_seq; Type: SEQUENCE SET; Schema: class4; Owner: yeti
---
-
-SELECT pg_catalog.setval('codecs_id_seq', 20, true);
 
 
 --
