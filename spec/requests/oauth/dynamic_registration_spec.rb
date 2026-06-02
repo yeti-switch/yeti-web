@@ -42,6 +42,17 @@ RSpec.describe 'OAuth Dynamic Client Registration (RFC 7591)', type: :request do
     expect(app.confidential).to be true
   end
 
+  it 'rejects an unsupported token_endpoint_auth_method with 400' do
+    register(
+      client_name: 'Post Client',
+      redirect_uris: ['https://example.test/cb'],
+      token_endpoint_auth_method: 'client_secret_post'
+    )
+    expect(response).to have_http_status(:bad_request)
+    expect(JSON.parse(response.body)['error']).to eq('invalid_client_metadata')
+    expect(OauthApplication.find_by(name: 'Post Client')).to be_nil
+  end
+
   it 'rejects malformed JSON with 400' do
     post '/oauth/register', params: 'not json',
                             headers: { 'Content-Type' => 'application/json' }

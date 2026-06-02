@@ -22,7 +22,7 @@ module Oauth
       end
 
       app = OauthApplication.new(
-        name: params['client_name'].to_s[0, 100].presence || 'Unnamed MCP client',
+        name: params['client_name'].to_s[0, 100].presence || 'Unnamed client',
         redirect_uri: Array(params['redirect_uris']).join("\n"),
         scopes: params['scope'].presence || Doorkeeper.config.default_scopes.to_s,
         confidential: auth_method != 'none'
