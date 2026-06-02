@@ -29,6 +29,9 @@ module Mcp
 
       body = req.body.read
       message = JSON.parse(body)
+      unless message.is_a?(Hash)
+        return json_response(nil, error: { code: -32_600, message: 'Invalid Request' })
+      end
 
       if message['method'].to_s.start_with?('notifications/')
         return [202, {}, ['']]

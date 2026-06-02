@@ -1,62 +1,71 @@
 # frozen_string_literal: true
 
 RSpec.describe OauthAccessTokenPolicy do
-  let(:owner) { create(:admin_user) }
-  let(:other) { create(:admin_user) }
-  let(:root_admin) { create(:admin_user, roles: ['root']) }
-  let(:application) { create_oauth_application }
+  let(:admin_user) { FactoryBot.build(:admin_user, roles: user_roles) }
+  let(:policy) { described_class.new(admin_user, OauthAccessToken.new) }
 
-  let(:owners_token) do
-    OauthAccessToken.create!(
-      resource_owner_id: owner.id,
-      application: application,
-      scopes: 'mcp',
-      expires_in: 3600
-    )
+  before do
+    allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles_config)
   end
 
-  describe '#read? / #destroy?' do
-    context 'when the actor owns the token' do
-      it 'allows read and destroy' do
-        policy = described_class.new(owner, owners_token)
-        expect(policy.read?).to be true
-        expect(policy.destroy?).to be true
-      end
+  # Page-level access is role-based (config/policy_roles.yml, section
+  # "System/OauthAccessToken"): `read` gates seeing the page, `remove`
+  # gates revoking. There is no owner scoping.
+  describe '#read?' do
+    context 'when AdminUser is root' do
+      let(:user_roles) { [:root] }
+      let(:policy_roles_config) { {} }
+
+      it { expect(policy.read?).to be true }
     end
 
-    context 'when the actor is another non-root admin' do
-      it 'denies read and destroy' do
-        policy = described_class.new(other, owners_token)
-        expect(policy.read?).to be false
-        expect(policy.destroy?).to be false
-      end
+    context 'when the role allows read in the section' do
+      let(:user_roles) { [:user] }
+      let(:policy_roles_config) { { user: { :'System/OauthAccessToken' => { read: true } } } }
+
+      it { expect(policy.read?).to be true }
     end
 
-    context 'when the actor has the root role' do
-      it 'allows read and destroy on anyone else’s token' do
-        policy = described_class.new(root_admin, owners_token)
-        expect(policy.read?).to be true
-        expect(policy.destroy?).to be true
-      end
+    context 'when the role disallows read in the section' do
+      let(:user_roles) { [:user] }
+      let(:policy_roles_config) { { user: { :'System/OauthAccessToken' => { read: false } } } }
+
+      it { expect(policy.read?).to be false }
+    end
+
+    context 'when the section is absent (falls back to the Default section)' do
+      let(:user_roles) { [:user] }
+      let(:policy_roles_config) { { user: { Default: { read: true } } } }
+
+      it { expect(policy.read?).to be true }
     end
   end
 
+  describe '#destroy?' do
+    let(:user_roles) { [:user] }
+
+    context 'when the role allows remove in the section' do
+      let(:policy_roles_config) { { user: { :'System/OauthAccessToken' => { remove: true } } } }
+
+      it { expect(policy.destroy?).to be true }
+    end
+
+    context 'when the role disallows remove in the section' do
+      let(:policy_roles_config) { { user: { :'System/OauthAccessToken' => { remove: false } } } }
+
+      it { expect(policy.destroy?).to be false }
+    end
+  end
+
+  # No owner scoping: anyone who can read the page sees every token, so the
+  # scope returns the collection untouched.
   describe described_class::Scope do
-    let!(:token_a) do
-      OauthAccessToken.create!(resource_owner_id: owner.id, application: application, scopes: 'mcp', expires_in: 3600)
-    end
-    let!(:token_b) do
-      OauthAccessToken.create!(resource_owner_id: other.id, application: application, scopes: 'mcp', expires_in: 3600)
-    end
+    let(:user_roles) { [:user] }
+    let(:policy_roles_config) { {} }
+    let(:relation) { instance_double(ActiveRecord::Relation) }
 
-    it 'narrows to the actor’s own tokens for a non-root admin' do
-      resolved = described_class.new(owner, OauthAccessToken).resolve
-      expect(resolved).to contain_exactly(token_a)
-    end
-
-    it 'returns all tokens for a root admin' do
-      resolved = described_class.new(root_admin, OauthAccessToken).resolve
-      expect(resolved).to contain_exactly(token_a, token_b)
+    it 'returns the collection unfiltered' do
+      expect(described_class.new(admin_user, relation).resolve).to be(relation)
     end
   end
 end

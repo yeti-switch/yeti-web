@@ -298,8 +298,8 @@ if YetiConfig.oauth&.enabled
     # flow, so http://localhost:RANDOMPORT/callback (or 127.0.0.1, ::1) must
     # work in every environment. Any non-loopback host (e.g. https://example.com)
     # is still required to be HTTPS.
-    LOOPBACK_REDIRECT_HOSTS = %w[localhost 127.0.0.1 ::1].freeze
-    force_ssl_in_redirect_uri { |uri| LOOPBACK_REDIRECT_HOSTS.exclude?(uri.host) }
+    loopback_redirect_hosts = %w[localhost 127.0.0.1 ::1].freeze
+    force_ssl_in_redirect_uri { |uri| loopback_redirect_hosts.exclude?(uri.host) }
 
     # Specify what redirect URI's you want to block during Application creation.
     # Any redirect URI is allowed by default.

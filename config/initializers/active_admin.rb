@@ -20,6 +20,7 @@ ActiveAdmin.setup do |config|
       menu.add label: 'Logs', priority: 80
       menu.add label: 'System', priority: 90 do |sub_menu|
         sub_menu.add label: 'Components'
+        sub_menu.add label: 'Admin Access'
       end
       menu.add label: 'Rate Management', priority: 100
 

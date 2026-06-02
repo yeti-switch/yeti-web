@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AdminUser do
-  menu parent: 'System', priority: 2
+  menu parent: ['System', 'Admin Access'], priority: 2
   decorate_with AdminUserDecorator
 
   acts_as_status
