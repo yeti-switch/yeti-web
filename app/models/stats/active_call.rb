@@ -21,19 +21,14 @@ class Stats::ActiveCall < Stats::Base
   # Stats::ActiveCall.where('created_at > ?', 1.day.ago).to_chart
   def self.to_stacked_chart(hours_ago = 24)
     nodes = Node.order(:name).pluck(:id, :name).to_h
-    # EXTRACT EPOCH in SQL: avoid building TimeWithZone per row (~5 allocs
-    # each) — saves tens of thousands of allocations for 24h × multi-node.
-    rows = self.hours_ago(hours_ago).where(node_id: nodes.keys)
-               .pluck(
-                 Arel.sql('(EXTRACT(EPOCH FROM created_at) * 1000)::bigint'),
-                 :count,
-                 :node_id
-               )
+    data = self.hours_ago(hours_ago).where(node_id: nodes.keys)
+               .pluck(:created_at, :count, :node_id)
+               .group_by { |n| nodes[n.last] }
 
-    rows.group_by { |r| nodes[r.last] }.map do |name, group|
+    data.map do |key_value_pair|
       {
-        key: name,
-        values: group.map { |el| { x: el[0], y: el[1] } }
+        key: key_value_pair[0],
+        values: key_value_pair[1].map { |el| { x: el[0].to_i * 1000, y: el[1] } }
       }
     end
   end

@@ -27,19 +27,10 @@
     return PALETTE[index % PALETTE.length];
   }
 
-  // Destroy any chart bound to this canvas — both via our own registry AND
-  // via Chart.js's global canvas tracking. Belt-and-suspenders: if a chart
-  // was created without going through `register` (or another tab activation
-  // raced ahead), Chart.getChart() catches it.
   function destroyExisting(canvasId) {
     if (instances[canvasId]) {
       instances[canvasId].destroy();
       delete instances[canvasId];
-    }
-    var canvas = document.getElementById(canvasId);
-    if (canvas) {
-      var orphan = Chart.getChart(canvas);
-      if (orphan) orphan.destroy();
     }
   }
 
@@ -96,14 +87,12 @@
     }, extra || {});
   }
 
-  // mode:'index' picks exactly one point per dataset (the one at the cursor's
-  // x-index), so the tooltip always shows one entry per series without
-  // duplicates from dense-data hitbox overlap. This requires all series to
-  // share the same x-array — see alignToCommonXAxis below, which pads missing
-  // x's with 0 so series that started later (or have gaps) still align.
-  // animation:false removes the slide-between-points delay.
+  // mode:'x' makes the tooltip include every series at the hovered x-position,
+  // even when series have different x-arrays (e.g. node #3 starts later than
+  // node #1). animation:false on the tooltip removes the slide-between-points
+  // delay that makes hovering feel laggy.
   function baseOptions(opts) {
-    var mode = opts.interactionMode || 'index';
+    var mode = opts.interactionMode || 'x';
     return {
       responsive: true,
       maintainAspectRatio: false,
@@ -121,36 +110,12 @@
     };
   }
 
-  // Take [{key, values: [{x, y}, ...]}, ...] and return the same shape with
-  // every series covering the union of all x's. Missing points are filled
-  // with 0. Required so mode:'index' aligns datasets correctly even when
-  // some series start later or have gaps in their data.
-  function alignToCommonXAxis(json) {
-    var allXs = new Set();
-    json.forEach(function (series) {
-      (series.values || []).forEach(function (p) { allXs.add(p.x); });
-    });
-    var sortedXs = Array.from(allXs).sort(function (a, b) { return a - b; });
-
-    return json.map(function (series) {
-      var byX = {};
-      (series.values || []).forEach(function (p) { byX[p.x] = p.y; });
-      return {
-        key: series.key,
-        values: sortedXs.map(function (x) {
-          return { x: x, y: x in byX ? byX[x] : 0 };
-        })
-      };
-    });
-  }
-
   function renderLine(canvasId, json, opts) {
     opts = opts || {};
     var canvas = getCanvas(canvasId, opts.placeholderId);
     if (!canvas) return null;
     destroyExisting(canvasId);
 
-    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       return {
         label: series.key,
@@ -184,7 +149,6 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
-    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       var color = colorFor(i);
       return {
@@ -278,7 +242,6 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
-    json = alignToCommonXAxis(json);
     var datasets = json.map(function (series, i) {
       return {
         label: series.key,

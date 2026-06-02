@@ -1,8 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    // .off before .on so re-running this script (e.g. from a tab re-render)
-    // doesn't stack handlers and trigger the fetch multiple times per click.
-    $("div.tabs a[href='#<%= href %>']").off('click.nodesChart').on('click.nodesChart', function () {
+    $("div.tabs a[href='#<%= href %>']").on("click", function () {
       $.getJSON("/remote_stats/<%= path %>.json", function (json) {
         Charts.renderStackedArea('nodes-chart', json, {
           placeholderId: 'chart-placeholder-nodes',
@@ -10,7 +8,7 @@
         });
       });
     });
-    $("div.tabs a[href='#<%= href %>']").trigger('click.nodesChart');
+    $("div.tabs a[href='#<%= href %>']").trigger('click');
   });
 </script>
 <div id="chart-placeholder-nodes" class="chart-placeholder chart-container">

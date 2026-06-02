@@ -105,8 +105,7 @@ class Dialpeer < ApplicationRecord
             :initial_rate, :next_rate,
             :initial_interval, :next_interval, :connect_fee,
             :routeset_discriminator, :lcr_rate_multiplier, presence: true
-  validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
-  validates :lcr_rate_multiplier, numericality: true
+  validates :initial_rate, :next_rate, :connect_fee, :lcr_rate_multiplier, numericality: true
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
   validates :asr_limit, numericality: { greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00 }

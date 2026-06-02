@@ -41,7 +41,7 @@ class DialpeerNextRate < ApplicationRecord
             presence: true
 
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
-  validates :next_rate, :initial_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :next_rate, :initial_rate, :connect_fee, numericality: true
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
