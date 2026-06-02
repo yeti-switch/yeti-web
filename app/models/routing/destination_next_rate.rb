@@ -45,7 +45,7 @@ class Routing::DestinationNextRate < ApplicationRecord
     greater_than: 0,
     less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT
   }
-  validates :next_rate, :initial_rate, :connect_fee, numericality: true
+  validates :next_rate, :initial_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
