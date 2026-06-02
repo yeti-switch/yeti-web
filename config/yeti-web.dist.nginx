@@ -147,9 +147,12 @@ server {
         root /opt/yeti-web/public;
 	
 	location /api/ {
-		        deny all;
+		deny all;
         }
 
+	location /oauth/ {
+		deny all;
+	}
 
         location / {
                 proxy_pass  http://yeti-unicorn;
