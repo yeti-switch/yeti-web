@@ -21,4 +21,11 @@
 class OauthApplication < ApplicationRecord
   include ::Doorkeeper::Orm::ActiveRecord::Mixins::Application
   self.table_name = 'gui.oauth_applications'
+
+  # Shown wherever ActiveAdmin auto-renders the record (e.g. the OAuth Access
+  # Tokens page's Application column). Includes the client UID so it's
+  # identifiable even when two clients register the same name.
+  def display_name
+    "#{name} (#{uid})"
+  end
 end

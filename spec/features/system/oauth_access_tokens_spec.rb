@@ -34,33 +34,39 @@ RSpec.describe 'OAuth Access Tokens page', :js do
   context 'as an admin whose role allows access' do
     include_context :login_as_admin
 
-    it 'lists every admin’s active tokens (no owner scoping)' do
+    it 'lists every admin’s tokens, including revoked ones (no scoping)' do
+      other_token.revoke
       visit oauth_access_tokens_path
       expect(table_row_ids).to contain_exactly(my_token.id.to_s, other_token.id.to_s)
+      # Application is shown as "name (uid)" via OauthApplication#display_name.
+      expect(page).to have_content("#{application.name} (#{application.uid})")
     end
 
-    it 'exposes the Application, Owner and Scopes filters' do
+    it 'exposes the Application, Resource owner and Scopes filters' do
       visit oauth_access_tokens_path
       within '.filter_form' do
         expect(page).to have_field('Application')
-        expect(page).to have_field('Owner')
+        expect(page).to have_field('Resource owner')
         expect(page).to have_field('Scopes')
       end
     end
 
-    it 'filters the list by Owner' do
+    it 'filters the list by Resource owner' do
       visit oauth_access_tokens_path
-      within('.filter_form') { select other_admin.username, from: 'Owner' }
+      within('.filter_form') { select other_admin.username, from: 'Resource owner' }
       click_button 'Filter'
       expect(table_row_ids).to contain_exactly(other_token.id.to_s)
     end
 
-    it 'revokes a token via the Revoke link' do
+    it 'revokes a token via the Revoke link, leaving the row in place' do
       visit oauth_access_tokens_path
       accept_confirm { find_link('Revoke', href: oauth_access_token_path(my_token)).click }
       expect(page).to have_content('Access token revoked.')
       expect(my_token.reload.revoked_at).to be_present
-      expect(table_row_ids).to contain_exactly(other_token.id.to_s)
+      # The row stays listed, but its Revoke link is gone now that it's revoked.
+      expect(table_row_ids).to contain_exactly(my_token.id.to_s, other_token.id.to_s)
+      expect(page).to have_no_link('Revoke', href: oauth_access_token_path(my_token))
+      expect(page).to have_link('Revoke', href: oauth_access_token_path(other_token))
     end
   end
 

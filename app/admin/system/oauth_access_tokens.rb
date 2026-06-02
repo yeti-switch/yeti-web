@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-# Lists and revokes OAuth tokens granted to MCP clients (Claude Code, Cursor,
-# ...). Each row is one access token; revoking marks the record as revoked,
-# which invalidates the refresh token stored on the same row, so the client
-# loses access permanently (no more refreshes from that authorization).
+# Lists OAuth tokens granted to MCP clients (Claude Code, Cursor, ...), both
+# active and revoked. Each row is one access token; revoking marks the record
+# as revoked, which invalidates the refresh token stored on the same row, so
+# the client loses access permanently (no more refreshes from that
+# authorization) — the row stays, with its Revoked at populated.
 # Access is role-gated by OauthAccessTokenPolicy (no owner scoping): an admin
 # who can see the page sees every token.
 ActiveAdmin.register OauthAccessToken do
@@ -13,14 +14,9 @@ ActiveAdmin.register OauthAccessToken do
   config.batch_actions = false
   config.sort_order = 'created_at_desc'
 
-  controller do
-    # Eager-load application (used in every row) and resource_owner (Owner
-    # column) to avoid N+1s. Page-level access is enforced by
-    # OauthAccessTokenPolicy; the collection is not scoped by owner.
-    def scoped_collection
-      super.where(revoked_at: nil).includes(:application, :resource_owner)
-    end
+  includes :application, :resource_owner
 
+  controller do
     def destroy
       resource.revoke
       flash[:notice] = 'Access token revoked.'
@@ -28,46 +24,35 @@ ActiveAdmin.register OauthAccessToken do
     end
   end
 
-  filter :application,
-         as: :select,
-         collection: -> { OauthApplication.order(:name).pluck(:name, :id) }
-  filter :resource_owner,
-         as: :select,
-         label: 'Owner',
-         collection: -> { AdminUser.order(:username).pluck(:username, :id) }
+  filter :application, as: :select
+  filter :resource_owner, as: :select
   filter :scopes
   filter :created_at
 
   index do
     column :id
-    column 'Application' do |t|
-      t.application&.name || '(deleted)'
-    end
-    column 'Owner' do |t|
-      au = t.resource_owner
-      au ? link_to(au.username, admin_user_path(au)) : "id=#{t.resource_owner_id}"
-    end
+    column :application
+    column :resource_owner
     column :scopes
     column :created_at
     column 'Expires at' do |t|
       t.expires_in ? (t.created_at + t.expires_in.seconds) : 'never'
     end
+    column :revoked_at
     actions defaults: false do |t|
-      link_to 'Revoke', oauth_access_token_path(t),
-              method: :delete,
-              data: { confirm: 'Revoke this token? The client will lose access immediately.' }
+      # Already-revoked tokens have nothing left to revoke.
+      unless t.revoked?
+        link_to 'Revoke', oauth_access_token_path(t),
+                method: :delete,
+                data: { confirm: 'Revoke this token? The client will lose access immediately.' }
+      end
     end
   end
 
   show do
     attributes_table do
       row :id
-      row 'Application' do |t|
-        t.application&.name || '(deleted)'
-      end
-      row 'Client UID' do |t|
-        t.application&.uid
-      end
+      row :application
       row :scopes
       row :created_at
       row 'Expires at' do |t|
