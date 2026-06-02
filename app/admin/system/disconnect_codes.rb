@@ -49,9 +49,14 @@ ActiveAdmin.register DisconnectCode do
 
   filter :id
   filter :code
+  filter :reason
   filter :namespace
+  filter :rewrited_code
+  filter :rewrited_reason
   boolean_filter :success
+  boolean_filter :successnozerolen, label: 'Success when non-zero length'
   boolean_filter :stop_hunting
+  boolean_filter :pass_reason_to_originator
   boolean_filter :store_cdr
   boolean_filter :silently_drop
   show do |_s|

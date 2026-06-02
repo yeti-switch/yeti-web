@@ -161,6 +161,55 @@ RSpec.describe Dialpeer, type: :model do
     end
   end
 
+  describe '.id_in_string' do
+    subject { described_class.id_in_string(value) }
+
+    let!(:dialpeer) { FactoryBot.create(:dialpeer) }
+    let!(:other_dialpeer) { FactoryBot.create(:dialpeer) }
+
+    context 'with a single id' do
+      let(:value) { dialpeer.id.to_s }
+
+      it 'returns the matching dialpeer only' do
+        expect(subject).to contain_exactly(dialpeer)
+      end
+    end
+
+    context 'with a comma-separated list of ids' do
+      let(:value) { "#{dialpeer.id},#{other_dialpeer.id}" }
+
+      it 'returns all matching dialpeers' do
+        expect(subject).to contain_exactly(dialpeer, other_dialpeer)
+      end
+    end
+
+    context 'with surrounding whitespace' do
+      let(:value) { " #{dialpeer.id} , #{other_dialpeer.id} " }
+
+      it 'ignores the whitespace and returns matching dialpeers' do
+        expect(subject).to contain_exactly(dialpeer, other_dialpeer)
+      end
+    end
+
+    context 'when one id is out of bigint range' do
+      let(:value) { "#{dialpeer.id},#{'9' * 40}" }
+
+      it 'does not raise and returns only the in-range matches' do
+        expect { subject.load }.not_to raise_error
+        expect(subject).to contain_exactly(dialpeer)
+      end
+    end
+
+    context 'when all ids are out of bigint range' do
+      let(:value) { '9' * 40 }
+
+      it 'does not raise and returns nothing' do
+        expect { subject.load }.not_to raise_error
+        expect(subject).to be_empty
+      end
+    end
+  end
+
   describe '#destroy' do
     subject { dialpeer.destroy! }
 
