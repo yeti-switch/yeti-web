@@ -149,6 +149,22 @@
     return 'Total: ' + total;
   }
 
+  // Legend click isolates the clicked series: show ONLY it and hide the rest.
+  // Clicking the already-isolated series again restores all series. (Default
+  // Chart.js behaviour just toggles the clicked series off.)
+  function isolateLegendOnClick(_e, legendItem, legend) {
+    var chart = legend.chart;
+    var index = legendItem.datasetIndex;
+    var datasets = chart.data.datasets;
+    var alreadyIsolated = chart.isDatasetVisible(index) && datasets.every(function (_ds, i) {
+      return i === index ? chart.isDatasetVisible(i) : !chart.isDatasetVisible(i);
+    });
+    datasets.forEach(function (_ds, i) {
+      chart.setDatasetVisibility(i, alreadyIsolated ? true : i === index);
+    });
+    chart.update();
+  }
+
   function baseOptions(opts) {
     ensureCursorPositioner();
     var mode = opts.interactionMode || 'index';
@@ -281,6 +297,7 @@
     applyTimeSeriesPerf(options, opts, true);
     if (datasets.length > 1) {
       options.plugins.tooltip.callbacks = { footer: totalFooter };
+      options.plugins.legend.onClick = isolateLegendOnClick;
     }
 
     var config = {
@@ -323,6 +340,7 @@
     applyTimeSeriesPerf(options, opts, false);
     if (datasets.length > 1) {
       options.plugins.tooltip.callbacks = { footer: totalFooter };
+      options.plugins.legend.onClick = isolateLegendOnClick;
     }
 
     var config = {
