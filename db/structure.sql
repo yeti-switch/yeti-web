@@ -14498,41 +14498,6 @@ ALTER SEQUENCE gui.admin_users_id_seq OWNED BY gui.admin_users.id;
 
 
 --
--- Name: background_threads; Type: TABLE; Schema: gui; Owner: -
---
-
-CREATE TABLE gui.background_threads (
-    id integer NOT NULL,
-    name character varying,
-    num integer,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone,
-    data_count bigint,
-    data_processed bigint,
-    exception text
-);
-
-
---
--- Name: background_threads_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
---
-
-CREATE SEQUENCE gui.background_threads_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: background_threads_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
---
-
-ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
-
-
---
 -- Name: oauth_access_grants; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -16667,13 +16632,6 @@ ALTER TABLE ONLY gui.admin_users ALTER COLUMN id SET DEFAULT nextval('gui.admin_
 
 
 --
--- Name: background_threads id; Type: DEFAULT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui.background_threads_id_seq'::regclass);
-
-
---
 -- Name: oauth_access_grants id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -18128,14 +18086,6 @@ ALTER TABLE ONLY gui.admin_users
 
 ALTER TABLE ONLY gui.admin_users
     ADD CONSTRAINT admin_users_username_key UNIQUE (username);
-
-
---
--- Name: background_threads background_threads_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.background_threads
-    ADD CONSTRAINT background_threads_pkey PRIMARY KEY (id);
 
 
 --
@@ -20697,6 +20647,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260604120000'),
 ('20260603120000'),
 ('20260602000002'),
 ('20260602000001'),
