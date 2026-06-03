@@ -18,17 +18,8 @@ RSpec.describe ActiveCalls::CreateOriginationGatewayStats, '.call' do
   context 'without calls' do
     let!(:calls) { {} }
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(gateways.size)
-
-      gateways.each do |gateway|
-        stats = Stats::ActiveCallOrigGateway.where(gateway_id: gateway.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
-      end
+    it 'does not create stats for gateways without calls' do
+      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(0)
     end
   end
 
@@ -41,8 +32,8 @@ RSpec.describe ActiveCalls::CreateOriginationGatewayStats, '.call' do
       }
     end
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(gateways.size)
+    it 'creates a row only for gateways with calls' do
+      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(3)
 
       gateway1_stats = Stats::ActiveCallOrigGateway.where(gateway_id: gateways.first.id).to_a
       expect(gateway1_stats.size).to eq(1)
@@ -67,12 +58,7 @@ RSpec.describe ActiveCalls::CreateOriginationGatewayStats, '.call' do
 
       other_gateways = gateways - [gateways.first, gateways.second, gateways.third]
       other_gateways.each do |gateway|
-        stats = Stats::ActiveCallOrigGateway.where(gateway_id: gateway.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
+        expect(Stats::ActiveCallOrigGateway.where(gateway_id: gateway.id)).to be_empty
       end
     end
   end

@@ -211,8 +211,9 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
         current_time: be_within(2).of(Time.now)
       ).and_call_original
 
-      # account + vendor_acc + another_account
-      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(3)
+      # account (originated) + vendor_acc (terminated). another_account has no
+      # active calls, so no row is written for it.
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(2)
 
       account_stats = Stats::ActiveCallAccount.where(account_id: account.id).to_a
       expect(account_stats.size).to eq 1
@@ -228,12 +229,7 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
                                           originated_count: 0
                                         )
 
-      another_account_stats = Stats::ActiveCallAccount.where(account_id: another_account.id).to_a
-      expect(another_account_stats.size).to eq(1)
-      expect(another_account_stats.first).to have_attributes(
-                                               terminated_count: 0,
-                                               originated_count: 0
-                                             )
+      expect(Stats::ActiveCallAccount.where(account_id: another_account.id)).to be_empty
     end
   end
 
@@ -264,25 +260,22 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
         current_time: be_within(2).of(Time.now)
       ).and_call_original
 
-      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(2).and(
-        change { Stats::ActiveCallTermGateway.count }.by(2)
+      # Only the gateway that actually has calls in each direction gets a row.
+      expect { subject }.to change { Stats::ActiveCallOrigGateway.count }.by(1).and(
+        change { Stats::ActiveCallTermGateway.count }.by(1)
       )
 
       orig_gw1_stats = Stats::ActiveCallOrigGateway.where(gateway_id: origin_gateway.id).to_a
       expect(orig_gw1_stats.size).to eq 1
       expect(orig_gw1_stats.first).to have_attributes(count: 2)
 
-      orig_gw2_stats = Stats::ActiveCallOrigGateway.where(gateway_id: term_gateway.id).to_a
-      expect(orig_gw2_stats.size).to eq 1
-      expect(orig_gw2_stats.first).to have_attributes(count: 0)
+      expect(Stats::ActiveCallOrigGateway.where(gateway_id: term_gateway.id)).to be_empty
 
       term_gw1_stats = Stats::ActiveCallTermGateway.where(gateway_id: term_gateway.id).to_a
       expect(term_gw1_stats.size).to eq 1
       expect(term_gw1_stats.first).to have_attributes(count: 2)
 
-      term_gw2_stats = Stats::ActiveCallTermGateway.where(gateway_id: origin_gateway.id).to_a
-      expect(term_gw2_stats.size).to eq 1
-      expect(term_gw2_stats.first).to have_attributes(count: 0)
+      expect(Stats::ActiveCallTermGateway.where(gateway_id: origin_gateway.id)).to be_empty
     end
   end
 

@@ -1,9 +1,9 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#termination-chart']").on("click", function () {
+    $("div.tabs a[href='#charts']").on("click", function () {
       $.getJSON("/remote_stats/<%= params[:id] %>/gateway_pdd_distribution.json", function (json) {
         Charts.renderBar('gateway-pdd-chart', json, {
-          placeholderId: 'chart-placeholder-account',
+          placeholderId: 'chart-placeholder-gateway-pdd',
           xAxisLabel: 'PDD (seconds)',
           yAxisLabel: 'Count',
           xScale: 'category',
@@ -13,6 +13,6 @@
     });
   });
 </script>
-<div id="chart-placeholder-account" class="chart-placeholder chart-container">
+<div id="chart-placeholder-gateway-pdd" class="chart-placeholder chart-container">
   <canvas id="gateway-pdd-chart" class="stat-chart"></canvas>
 </div>

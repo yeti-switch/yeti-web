@@ -144,13 +144,72 @@
     });
   }
 
+  // Active-call stats are stored only when non-zero (a missing sample means
+  // zero active calls). Detect the sampling cadence as the smallest positive
+  // gap between consecutive points across all series; default to 1 minute.
+  function detectStepMs(json) {
+    var min = Infinity;
+    json.forEach(function (series) {
+      var vs = series.values || [];
+      for (var i = 1; i < vs.length; i++) {
+        var d = vs[i].x - vs[i - 1].x;
+        if (d > 0 && d < min) min = d;
+      }
+    });
+    return isFinite(min) ? min : 60000;
+  }
+
+  // Insert a pair of zero points just inside any gap wider than ~1.5 sampling
+  // intervals, so the line drops to 0 between bursts instead of bridging the
+  // gap with a sloped segment. Input must be sorted ascending by x.
+  function withZeroBaseline(values, stepMs) {
+    if (!values || values.length === 0) return values;
+    var out = [];
+    for (var i = 0; i < values.length; i++) {
+      if (i > 0 && values[i].x - values[i - 1].x > stepMs * 1.5) {
+        out.push({ x: values[i - 1].x + stepMs, y: 0 });
+        out.push({ x: values[i].x - stepMs, y: 0 });
+      }
+      out.push(values[i]);
+    }
+    return out;
+  }
+
+  function reconstructZeros(json) {
+    var stepMs = detectStepMs(json);
+    return json.map(function (series) {
+      return { key: series.key, values: withZeroBaseline(series.values || [], stepMs) };
+    });
+  }
+
+  // Performance + reduction options for the dense time-series line charts:
+  // - parsing:false   data is already in Chart.js-native {x,y} form (also
+  //                   required for the decimation plugin to run).
+  // - normalized:true data is sorted ascending with unique x's per dataset.
+  // - animation:false no slide animation over thousands of points.
+  // Decimation (min-max) keeps both the floor and the spikes per pixel column,
+  // matching what the server min/max rollup used to provide. It is NOT enabled
+  // for stacked/filled charts, where Chart.js decimation is unreliable.
+  function applyTimeSeriesPerf(options, opts, decimate) {
+    options.parsing = false;
+    options.normalized = true;
+    options.animation = false;
+    if (decimate) {
+      options.plugins.decimation = {
+        enabled: true,
+        algorithm: opts.decimationAlgorithm || 'min-max'
+      };
+    }
+    return options;
+  }
+
   function renderLine(canvasId, json, opts) {
     opts = opts || {};
     var canvas = getCanvas(canvasId, opts.placeholderId);
     if (!canvas) return null;
     destroyExisting(canvasId);
 
-    json = alignToCommonXAxis(json);
+    json = alignToCommonXAxis(reconstructZeros(json));
     var datasets = json.map(function (series, i) {
       return {
         label: series.key,
@@ -165,15 +224,18 @@
       };
     });
 
+    var options = Object.assign(baseOptions(opts), {
+      scales: {
+        x: timeXScale(opts),
+        y: linearYScale(opts)
+      }
+    });
+    applyTimeSeriesPerf(options, opts, true);
+
     var config = {
       type: 'line',
       data: { datasets: datasets },
-      options: Object.assign(baseOptions(opts), {
-        scales: {
-          x: timeXScale(opts),
-          y: linearYScale(opts)
-        }
-      })
+      options: options
     };
     return register(canvasId, new Chart(canvas, config));
   }
@@ -184,7 +246,7 @@
     if (!canvas) return null;
     destroyExisting(canvasId);
 
-    json = alignToCommonXAxis(json);
+    json = alignToCommonXAxis(reconstructZeros(json));
     var datasets = json.map(function (series, i) {
       var color = colorFor(i);
       return {
@@ -200,15 +262,18 @@
       };
     });
 
+    var options = Object.assign(baseOptions(opts), {
+      scales: {
+        x: timeXScale(opts),
+        y: linearYScale(opts, { stacked: true })
+      }
+    });
+    applyTimeSeriesPerf(options, opts, false);
+
     var config = {
       type: 'line',
       data: { datasets: datasets },
-      options: Object.assign(baseOptions(opts), {
-        scales: {
-          x: timeXScale(opts),
-          y: linearYScale(opts, { stacked: true })
-        }
-      })
+      options: options
     };
     return register(canvasId, new Chart(canvas, config));
   }
@@ -302,10 +367,65 @@
     return register(canvasId, new Chart(canvas, config));
   }
 
+  // Default time-range choices for the active-call charts. Capped at 30d on the
+  // client; the server caps the `hours` param at the 1-month retention window.
+  var DEFAULT_RANGES = [
+    { label: '24h', hours: 24 },
+    { label: '7d', hours: 168 },
+    { label: '30d', hours: 720 }
+  ];
+
+  // Render a time-series chart with a range picker. Builds a <select> before the
+  // chart placeholder once, then (re)loads `url?hours=N` and renders on the
+  // selected range — and on every call, so re-activating the tab refreshes data.
+  // opts: { url, canvasId, placeholderId, type: 'line'|'stackedArea',
+  //         chartOpts, ranges, defaultHours }
+  function renderRanged(opts) {
+    var placeholder = document.getElementById(opts.placeholderId);
+    if (!placeholder) return;
+
+    var ranges = opts.ranges || DEFAULT_RANGES;
+    var defaultHours = opts.defaultHours || 24;
+    var renderFn = opts.type === 'stackedArea' ? renderStackedArea : renderLine;
+
+    var chartOpts = Object.assign({ placeholderId: opts.placeholderId }, opts.chartOpts || {});
+
+    function load(hours) {
+      var sep = opts.url.indexOf('?') === -1 ? '?' : '&';
+      $.getJSON(opts.url + sep + 'hours=' + hours, function (json) {
+        renderFn(opts.canvasId, json, chartOpts);
+      });
+    }
+
+    var pickerId = opts.canvasId + '-range';
+    var picker = document.getElementById(pickerId);
+    if (!picker) {
+      picker = document.createElement('select');
+      picker.id = pickerId;
+      picker.className = 'chart-range-select';
+      ranges.forEach(function (r) {
+        var option = document.createElement('option');
+        option.value = r.hours;
+        option.text = r.label;
+        if (r.hours === defaultHours) option.selected = true;
+        picker.appendChild(option);
+      });
+      picker.addEventListener('change', function () {
+        load(parseInt(picker.value, 10) || defaultHours);
+      });
+      // Overlay the picker in the chart's top-left corner so it shares the row
+      // with the (right-aligned) legend instead of taking an extra row above.
+      placeholder.insertBefore(picker, placeholder.firstChild);
+    }
+
+    load(parseInt(picker.value, 10) || defaultHours);
+  }
+
   root.Charts = {
     renderLine: renderLine,
     renderStackedArea: renderStackedArea,
     renderBar: renderBar,
-    renderGroupedBar: renderGroupedBar
+    renderGroupedBar: renderGroupedBar,
+    renderRanged: renderRanged
   };
 })(window);

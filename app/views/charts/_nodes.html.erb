@@ -3,11 +3,12 @@
     // .off before .on so re-running this script (e.g. from a tab re-render)
     // doesn't stack handlers and trigger the fetch multiple times per click.
     $("div.tabs a[href='#<%= href %>']").off('click.nodesChart').on('click.nodesChart', function () {
-      $.getJSON("/remote_stats/<%= path %>.json", function (json) {
-        Charts.renderStackedArea('nodes-chart', json, {
-          placeholderId: 'chart-placeholder-nodes',
-          yTickPrecision: 'integer'
-        });
+      Charts.renderRanged({
+        url: "/remote_stats/<%= path %>.json",
+        canvasId: 'nodes-chart',
+        placeholderId: 'chart-placeholder-nodes',
+        type: 'stackedArea',
+        chartOpts: { yTickPrecision: 'integer' }
       });
     });
     $("div.tabs a[href='#<%= href %>']").trigger('click.nodesChart');

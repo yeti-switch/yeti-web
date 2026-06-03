@@ -54,14 +54,9 @@ Rails.application.routes.draw do
       get :customers_traffic
       get :node
       get :account_active_calls
-      get :aggregated_node
-      get :aggregated_orig_gateway
       get :orig_gateway
-      get :aggregated_term_gateway
       get :term_gateway
-      get :aggregated_customer_account
       get :customer_account
-      get :aggregated_vendor_account
       get :vendor_account
       get :gateway_pdd_distribution
       get :dialpeer_pdd_distribution

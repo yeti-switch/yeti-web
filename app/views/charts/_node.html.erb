@@ -1,12 +1,12 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $("div.tabs a[href='#active-calls-chart']").on("click", function () {
-      $.getJSON("/remote_stats/<%= params[:id] %>/node.json", function (json) {
-        Charts.renderLine('node-chart', json, {
-          placeholderId: 'chart-placeholder-node',
-          yAxisLabel: 'Active Calls',
-          yTickPrecision: 'integer'
-        });
+      Charts.renderRanged({
+        url: "/remote_stats/<%= params[:id] %>/node.json",
+        canvasId: 'node-chart',
+        placeholderId: 'chart-placeholder-node',
+        type: 'line',
+        chartOpts: { yAxisLabel: 'Active Calls', yTickPrecision: 'integer' }
       });
     });
   });

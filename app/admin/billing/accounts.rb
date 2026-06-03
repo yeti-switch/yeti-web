@@ -216,14 +216,8 @@ ActiveAdmin.register Account do
       end
 
       tab :active_calls_charts do
-        panel 'Active Calls 24 h' do
+        panel 'Active Calls' do
           render partial: 'charts/account_active_calls'
-        end
-        panel 'Customer Calls 1 month' do
-          render partial: 'charts/customer_account_agg'
-        end
-        panel 'Vendor Calls 1 month' do
-          render partial: 'charts/vendor_account_agg'
         end
       end
 

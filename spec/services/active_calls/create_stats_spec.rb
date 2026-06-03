@@ -18,17 +18,8 @@ RSpec.describe ActiveCalls::CreateStats, '.call' do
   context 'without calls' do
     let!(:calls) { {} }
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCall.count }.by(nodes.size)
-
-      nodes.each do |node|
-        stats = Stats::ActiveCall.where(node_id: node.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
-      end
+    it 'does not create stats for nodes without calls' do
+      expect { subject }.to change { Stats::ActiveCall.count }.by(0)
     end
   end
 
@@ -41,8 +32,8 @@ RSpec.describe ActiveCalls::CreateStats, '.call' do
       }
     end
 
-    it 'creates correct stats' do
-      expect { subject }.to change { Stats::ActiveCall.count }.by(nodes.size)
+    it 'creates a row only for nodes with calls' do
+      expect { subject }.to change { Stats::ActiveCall.count }.by(3)
 
       node1_stats = Stats::ActiveCall.where(node_id: nodes.first.id).to_a
       expect(node1_stats.size).to eq(1)
@@ -67,12 +58,7 @@ RSpec.describe ActiveCalls::CreateStats, '.call' do
 
       other_nodes = nodes - [nodes.first, nodes.second, nodes.third]
       other_nodes.each do |node|
-        stats = Stats::ActiveCall.where(node_id: node.id).to_a
-        expect(stats.size).to eq(1)
-        expect(stats.first).to have_attributes(
-                                 count: 0,
-                                 created_at: be_within(1).of(service_params[:current_time])
-                               )
+        expect(Stats::ActiveCall.where(node_id: node.id)).to be_empty
       end
     end
   end

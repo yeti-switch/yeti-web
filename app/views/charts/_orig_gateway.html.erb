@@ -1,12 +1,12 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#origination-chart']").on("click", function () {
-      $.getJSON("/remote_stats/<%= params[:id] %>/orig_gateway.json", function (json) {
-        Charts.renderLine('orig-gw-chart', json, {
-          placeholderId: 'chart-placeholder-orig-gw',
-          yAxisLabel: 'Active Calls',
-          yTickPrecision: 'integer'
-        });
+    $("div.tabs a[href='#charts']").on("click", function () {
+      Charts.renderRanged({
+        url: "/remote_stats/<%= params[:id] %>/orig_gateway.json",
+        canvasId: 'orig-gw-chart',
+        placeholderId: 'chart-placeholder-orig-gw',
+        type: 'line',
+        chartOpts: { yAxisLabel: 'Active Calls', yTickPrecision: 'integer' }
       });
     });
   });

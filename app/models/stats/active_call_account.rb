@@ -24,19 +24,19 @@ class Stats::ActiveCallAccount < Stats::Base
   self.chart_entity_klass = Account
 
   class << self
-    def to_chart_all(account_id)
-      lines = to_chart_vendor(account_id, area: false, key: 'Vendor')
-      lines.concat to_chart_customer(account_id, area: false, key: 'Account')
+    def to_chart_all(account_id, options = {})
+      lines = to_chart_vendor(account_id, options.merge(area: false))
+      lines.concat to_chart_customer(account_id, options.merge(area: false))
       lines
     end
 
     def to_chart_customer(account_id, options = {})
-      options = options.merge(count_column: :originated_count)
+      options = options.reverse_merge(key: 'Originated').merge(count_column: :originated_count)
       to_chart(account_id, options)
     end
 
     def to_chart_vendor(account_id, options = {})
-      options = options.merge(count_column: :terminated_count)
+      options = options.reverse_merge(key: 'Terminated').merge(count_column: :terminated_count)
       to_chart(account_id, options)
     end
   end

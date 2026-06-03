@@ -96,7 +96,6 @@ class YetiScheduler < Scheduler::Base
   cron Jobs::PartitionRemoving
   cron Jobs::CallsMonitoring
   cron Jobs::StatsClean
-  cron Jobs::StatsAggregation
   cron Jobs::Invoice
   cron Jobs::ReportScheduler
   cron Jobs::TerminationQualityCheck
