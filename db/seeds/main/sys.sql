@@ -171,13 +171,6 @@ insert into sys.states(key,value) values('aleg_gateways_cache', 1);
 insert into sys.states(key,value) values('bleg_gateways_cache', 1);
 
 --
--- Name: active_currencies_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
---
-
-SELECT pg_catalog.setval('sys.active_currencies_id_seq', 1, false);
-
-
---
 -- Name: api_access_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
 --
 
@@ -210,13 +203,6 @@ SELECT pg_catalog.setval('sys.cdrtables_id_seq', 30, true);
 --
 
 SELECT pg_catalog.setval('sys.countries_id_seq', 273, true);
-
-
---
--- Name: currencies_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
---
-
-SELECT pg_catalog.setval('sys.currencies_id_seq', 1, false);
 
 
 --

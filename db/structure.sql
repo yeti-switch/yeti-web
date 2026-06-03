@@ -14498,41 +14498,6 @@ ALTER SEQUENCE gui.admin_users_id_seq OWNED BY gui.admin_users.id;
 
 
 --
--- Name: background_threads; Type: TABLE; Schema: gui; Owner: -
---
-
-CREATE TABLE gui.background_threads (
-    id integer NOT NULL,
-    name character varying,
-    num integer,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone,
-    data_count bigint,
-    data_processed bigint,
-    exception text
-);
-
-
---
--- Name: background_threads_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
---
-
-CREATE SEQUENCE gui.background_threads_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: background_threads_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
---
-
-ALTER SEQUENCE gui.background_threads_id_seq OWNED BY gui.background_threads.id;
-
-
---
 -- Name: oauth_access_grants; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -15340,41 +15305,6 @@ ALTER SEQUENCE switch22.switch_interface_id_seq OWNED BY switch22.switch_interfa
 
 
 --
--- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.active_currencies (
-    id integer NOT NULL,
-    currency_id smallint NOT NULL,
-    is_base boolean DEFAULT false NOT NULL,
-    enable_autoupdate boolean DEFAULT true NOT NULL,
-    description character varying,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone,
-    rate numeric
-);
-
-
---
--- Name: active_currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.active_currencies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.active_currencies_id_seq OWNED BY sys.active_currencies.id;
-
-
---
 -- Name: api_access; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -15542,38 +15472,6 @@ CREATE SEQUENCE sys.countries_id_seq
 --
 
 ALTER SEQUENCE sys.countries_id_seq OWNED BY sys.countries.id;
-
-
---
--- Name: currencies; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.currencies (
-    id smallint NOT NULL,
-    name character varying NOT NULL,
-    country_id integer,
-    code character varying(3) NOT NULL,
-    num_code character varying(3) NOT NULL
-);
-
-
---
--- Name: currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.currencies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.currencies_id_seq OWNED BY sys.currencies.id;
 
 
 --
@@ -16734,13 +16632,6 @@ ALTER TABLE ONLY gui.admin_users ALTER COLUMN id SET DEFAULT nextval('gui.admin_
 
 
 --
--- Name: background_threads id; Type: DEFAULT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.background_threads ALTER COLUMN id SET DEFAULT nextval('gui.background_threads_id_seq'::regclass);
-
-
---
 -- Name: oauth_access_grants id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -16881,13 +16772,6 @@ ALTER TABLE ONLY switch22.switch_interface_out ALTER COLUMN id SET DEFAULT nextv
 
 
 --
--- Name: active_currencies id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies ALTER COLUMN id SET DEFAULT nextval('sys.active_currencies_id_seq'::regclass);
-
-
---
 -- Name: api_access id; Type: DEFAULT; Schema: sys; Owner: -
 --
 
@@ -16920,13 +16804,6 @@ ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdrtabl
 --
 
 ALTER TABLE ONLY sys.countries ALTER COLUMN id SET DEFAULT nextval('sys.countries_id_seq'::regclass);
-
-
---
--- Name: currencies id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies ALTER COLUMN id SET DEFAULT nextval('sys.currencies_id_seq'::regclass);
 
 
 --
@@ -18212,14 +18089,6 @@ ALTER TABLE ONLY gui.admin_users
 
 
 --
--- Name: background_threads background_threads_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
---
-
-ALTER TABLE ONLY gui.background_threads
-    ADD CONSTRAINT background_threads_pkey PRIMARY KEY (id);
-
-
---
 -- Name: oauth_access_grants oauth_access_grants_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
@@ -18468,22 +18337,6 @@ ALTER TABLE ONLY switch22.switch_interface_out
 
 
 --
--- Name: active_currencies active_currencies_currency_id_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_currency_id_key UNIQUE (currency_id);
-
-
---
--- Name: active_currencies active_currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_pkey PRIMARY KEY (id);
-
-
---
 -- Name: api_access api_access_login_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -18545,22 +18398,6 @@ ALTER TABLE ONLY sys.countries
 
 ALTER TABLE ONLY sys.countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
-
-
---
--- Name: currencies currencies_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_name_key UNIQUE (name);
-
-
---
--- Name: currencies currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_pkey PRIMARY KEY (id);
 
 
 --
@@ -20724,14 +20561,6 @@ ALTER TABLE ONLY switch22.resource_type
 
 
 --
--- Name: active_currencies active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES sys.currencies(id);
-
-
---
 -- Name: api_access api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -20745,14 +20574,6 @@ ALTER TABLE ONLY sys.api_access
 
 ALTER TABLE ONLY sys.api_access
     ADD CONSTRAINT api_access_provision_gateway_id_fkey FOREIGN KEY (provision_gateway_id) REFERENCES class4.gateways(id);
-
-
---
--- Name: currencies currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_country_id_fkey FOREIGN KEY (country_id) REFERENCES sys.countries(id);
 
 
 --
@@ -20826,6 +20647,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260604120000'),
+('20260603120000'),
 ('20260602000002'),
 ('20260602000001'),
 ('20260602000000'),
