@@ -102,7 +102,55 @@
   // share the same x-array — see alignToCommonXAxis below, which pads missing
   // x's with 0 so series that started later (or have gaps) still align.
   // animation:false removes the slide-between-points delay.
+  // Register a 'cursor' tooltip positioner once: place the tooltip at the mouse
+  // cursor instead of snapping it to the nearest/average data point. Built-in
+  // positioners ('nearest'/'average') ignore the cursor's exact location.
+  function ensureCursorPositioner() {
+    if (root.Chart && Chart.Tooltip && Chart.Tooltip.positioners &&
+        !Chart.Tooltip.positioners.cursor) {
+      Chart.Tooltip.positioners.cursor = function (_elements, eventPosition) {
+        return { x: eventPosition.x, y: eventPosition.y };
+      };
+    }
+  }
+
+  // Inline plugin: draw a vertical crosshair at the hovered data column. With
+  // interaction mode 'index' all active elements share one x, so the line marks
+  // exactly where the cursor's index crosses every series' point.
+  var crosshairPlugin = {
+    id: 'crosshair',
+    afterDraw: function (chart) {
+      var active = chart.tooltip && chart.tooltip.getActiveElements
+        ? chart.tooltip.getActiveElements()
+        : (chart.tooltip && chart.tooltip._active) || [];
+      if (!active.length) return;
+
+      var x = active[0].element.x;
+      var area = chart.chartArea;
+      var ctx = chart.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, area.top);
+      ctx.lineTo(x, area.bottom);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
+      ctx.stroke();
+      ctx.restore();
+    }
+  };
+
+  // Tooltip footer: sum of all series' values at the hovered index, shown as an
+  // extra "Total:" row (no dedicated dataset). Used only on multi-series charts.
+  function totalFooter(items) {
+    var total = items.reduce(function (sum, item) {
+      var y = item.parsed && typeof item.parsed.y === 'number' ? item.parsed.y : 0;
+      return sum + y;
+    }, 0);
+    return 'Total: ' + total;
+  }
+
   function baseOptions(opts) {
+    ensureCursorPositioner();
     var mode = opts.interactionMode || 'index';
     return {
       responsive: true,
@@ -115,7 +163,7 @@
           mode: mode,
           intersect: false,
           animation: false,
-          position: 'nearest'
+          position: 'cursor'
         }
       }
     };
@@ -231,11 +279,15 @@
       }
     });
     applyTimeSeriesPerf(options, opts, true);
+    if (datasets.length > 1) {
+      options.plugins.tooltip.callbacks = { footer: totalFooter };
+    }
 
     var config = {
       type: 'line',
       data: { datasets: datasets },
-      options: options
+      options: options,
+      plugins: [crosshairPlugin]
     };
     return register(canvasId, new Chart(canvas, config));
   }
@@ -269,11 +321,15 @@
       }
     });
     applyTimeSeriesPerf(options, opts, false);
+    if (datasets.length > 1) {
+      options.plugins.tooltip.callbacks = { footer: totalFooter };
+    }
 
     var config = {
       type: 'line',
       data: { datasets: datasets },
-      options: options
+      options: options,
+      plugins: [crosshairPlugin]
     };
     return register(canvasId, new Chart(canvas, config));
   }
