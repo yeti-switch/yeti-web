@@ -15510,38 +15510,6 @@ ALTER SEQUENCE sys.countries_id_seq OWNED BY sys.countries.id;
 
 
 --
--- Name: currencies; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.currencies (
-    id smallint NOT NULL,
-    name character varying NOT NULL,
-    country_id integer,
-    code character varying(3) NOT NULL,
-    num_code character varying(3) NOT NULL
-);
-
-
---
--- Name: currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.currencies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.currencies_id_seq OWNED BY sys.currencies.id;
-
-
---
 -- Name: customer_portal_access_profiles; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -16878,13 +16846,6 @@ ALTER TABLE ONLY sys.cdr_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdrtabl
 --
 
 ALTER TABLE ONLY sys.countries ALTER COLUMN id SET DEFAULT nextval('sys.countries_id_seq'::regclass);
-
-
---
--- Name: currencies id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies ALTER COLUMN id SET DEFAULT nextval('sys.currencies_id_seq'::regclass);
 
 
 --
@@ -18487,22 +18448,6 @@ ALTER TABLE ONLY sys.countries
 
 ALTER TABLE ONLY sys.countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
-
-
---
--- Name: currencies currencies_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_name_key UNIQUE (name);
-
-
---
--- Name: currencies currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_pkey PRIMARY KEY (id);
 
 
 --
@@ -20679,14 +20624,6 @@ ALTER TABLE ONLY sys.api_access
 
 ALTER TABLE ONLY sys.api_access
     ADD CONSTRAINT api_access_provision_gateway_id_fkey FOREIGN KEY (provision_gateway_id) REFERENCES class4.gateways(id);
-
-
---
--- Name: currencies currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.currencies
-    ADD CONSTRAINT currencies_country_id_fkey FOREIGN KEY (country_id) REFERENCES sys.countries(id);
 
 
 --
