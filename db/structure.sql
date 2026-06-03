@@ -15340,41 +15340,6 @@ ALTER SEQUENCE switch22.switch_interface_id_seq OWNED BY switch22.switch_interfa
 
 
 --
--- Name: active_currencies; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.active_currencies (
-    id integer NOT NULL,
-    currency_id smallint NOT NULL,
-    is_base boolean DEFAULT false NOT NULL,
-    enable_autoupdate boolean DEFAULT true NOT NULL,
-    description character varying,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone,
-    rate numeric
-);
-
-
---
--- Name: active_currencies_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.active_currencies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.active_currencies_id_seq OWNED BY sys.active_currencies.id;
-
-
---
 -- Name: api_access; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -16878,13 +16843,6 @@ ALTER TABLE ONLY switch22.resource_type ALTER COLUMN id SET DEFAULT nextval('swi
 --
 
 ALTER TABLE ONLY switch22.switch_interface_out ALTER COLUMN id SET DEFAULT nextval('switch22.switch_interface_id_seq'::regclass);
-
-
---
--- Name: active_currencies id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies ALTER COLUMN id SET DEFAULT nextval('sys.active_currencies_id_seq'::regclass);
 
 
 --
@@ -18465,22 +18423,6 @@ ALTER TABLE ONLY switch22.switch_interface_out
 
 ALTER TABLE ONLY switch22.switch_interface_out
     ADD CONSTRAINT switch_interface_rank_key UNIQUE (rank);
-
-
---
--- Name: active_currencies active_currencies_currency_id_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_currency_id_key UNIQUE (currency_id);
-
-
---
--- Name: active_currencies active_currencies_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_pkey PRIMARY KEY (id);
 
 
 --
@@ -20724,14 +20666,6 @@ ALTER TABLE ONLY switch22.resource_type
 
 
 --
--- Name: active_currencies active_currencies_currency_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.active_currencies
-    ADD CONSTRAINT active_currencies_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES sys.currencies(id);
-
-
---
 -- Name: api_access api_access_customer_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -20826,6 +20760,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260603120000'),
 ('20260602000002'),
 ('20260602000001'),
 ('20260602000000'),
