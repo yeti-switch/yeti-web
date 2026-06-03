@@ -206,13 +206,6 @@ SELECT pg_catalog.setval('sys.countries_id_seq', 273, true);
 
 
 --
--- Name: currencies_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
---
-
-SELECT pg_catalog.setval('sys.currencies_id_seq', 1, false);
-
-
---
 -- Name: delayed_jobs_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
 --
 
