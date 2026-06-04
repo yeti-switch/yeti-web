@@ -173,7 +173,7 @@
       maintainAspectRatio: false,
       interaction: { mode: mode, intersect: false, axis: 'x' },
       plugins: {
-        legend: { position: 'top', align: 'end' },
+        legend: { position: 'top', align: 'end', labels: { boxWidth: 12, boxHeight: 12 } },
         tooltip: {
           enabled: true,
           mode: mode,
