@@ -7,6 +7,7 @@ class Importing::Model < ActiveAdminImport::Model
   attr_reader :script_std_err
 
   validate :std_err_empty
+  validate :quote_char_single_character
 
   def assign_attributes(args = {}, new_record = false)
     super
@@ -37,6 +38,18 @@ class Importing::Model < ActiveAdminImport::Model
 
   def std_err_empty
     errors.add(:base, script_std_err) if script_std_err.present?
+  end
+
+  # CSV requires quote_char to be nil or a single character. The import gem only
+  # strips nil/empty values from csv_options, so a multi-character value (e.g. an
+  # accidental "") would otherwise reach CSV.parse and raise an unhandled
+  # ArgumentError (HTTP 500). Surface it as a form error instead.
+  def quote_char_single_character
+    csv_options = attributes[:csv_options]
+    quote_char = csv_options.is_a?(Hash) ? (csv_options[:quote_char] || csv_options['quote_char']) : nil
+    return if quote_char.blank? || quote_char.to_s.length == 1
+
+    errors.add(:base, 'CSV quote char must be nil or a single character')
   end
 
   def script_path

@@ -1,6 +1,46 @@
 # frozen_string_literal: true
 
 RSpec.describe Importing::Model do
+  describe '#quote_char_single_character' do
+    subject do
+      model = described_class.new(csv_options: { col_sep: ',', row_sep: nil, quote_char: quote_char })
+      model.valid?
+      model
+    end
+
+    context 'when quote_char is nil' do
+      let(:quote_char) { nil }
+
+      it 'is valid' do
+        expect(subject.errors[:base]).to be_empty
+      end
+    end
+
+    context 'when quote_char is an empty string' do
+      let(:quote_char) { '' }
+
+      it 'is valid' do
+        expect(subject.errors[:base]).to be_empty
+      end
+    end
+
+    context 'when quote_char is a single character' do
+      let(:quote_char) { '"' }
+
+      it 'is valid' do
+        expect(subject.errors[:base]).to be_empty
+      end
+    end
+
+    context 'when quote_char has more than one character' do
+      let(:quote_char) { '""' }
+
+      it 'adds a validation error' do
+        expect(subject.errors[:base]).to include('CSV quote char must be nil or a single character')
+      end
+    end
+  end
+
   describe '#run_script' do
     let(:script_name) { 'test_script.sh' }
     let(:import_dir) { '/fake/import/dir' }
