@@ -1,0 +1,29 @@
+// Active Admin theme variable overrides. Imported (via `@import "themes/*"`)
+// before the wigu theme, so these win over the theme's `!default` values.
+
+// Anthracite header menu (instead of the theme's blue). Handled by the forked
+// active_admin_theme via dedicated menu variables.
+$skinMenuPillColor:      #2e3236; // top-level current/hover pill
+$skinMenuPanelColor:     #2e3236; // dropdown panel bg + hover bridge border
+$skinMenuItemHoverColor: #3f454c; // dropdown item hover/current bg
+$skinMenuTextColor:      #dfe2e6; // dropdown item text
+
+// Header / menu sizing
+$skinMenuFontSize:       13px;
+$skinMenuItemLineHeight: 1.35;
+$skinMenuItemPaddingY:   5px;
+$skinHeaderPaddingY:     4.5px;
+$skinHeaderLogoMaxHeight: 27px;
+
+// Title bar: dark bg, no bottom accent border, smaller action buttons
+$skinTitleBarColor:       #343c46;
+$skinTitleBarBorderWidth: 0;
+$skinTitleBarButtonPaddingY: 6px;
+$skinTitleBarButtonPaddingX: 10px;
+
+// The has_nested arrow on a HIGHLIGHTED (current/hover) item uses ActiveAdmin's
+// "dark" arrow image — meant for a light highlight, so it's low-contrast on the
+// dark menu. Point the dark arrow vars at the light arrow images (these AA vars
+// are `!default`, defined in active_admin/mixins which is imported after this).
+$menu-arrow-dark-icon-url: 'data:image/png;base64,R0lGODlhBwAEAKIAAL6+vry8vIiIiJWVlf///3t7ewAAAAAAACH5BAEAAAUALAAAAAAHAAQAAAMLWLol80MoF5mQKgEAOw==';
+$menu-arrow-right-dark-icon-url: 'data:image/gif;base64,R0lGODlhBAAHAKECAKqqqszMzPkVFfkVFSH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAIALAAAAAAEAAcAAAIJlA0XKbH9nmAFADs=';

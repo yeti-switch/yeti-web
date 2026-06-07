@@ -54,13 +54,12 @@ body.active_admin #title_bar {
     transform: none;
   }
 
-  // Shorter, symmetric action buttons with tighter horizontal padding between
-  // the label and the button border (base is 12px 17px 10px). margin-left adds
-  // a small gap between adjacent buttons.
+  // Small gap between adjacent action buttons. (Button padding is the theme's
+  // $skinTitleBarButtonPaddingY/X — the theme's own rule out-specificities this
+  // selector, so setting padding here had no effect.)
   .action_items span.action_item > a,
   .action_items span.action_item > .dropdown_menu > a {
-    padding: 6px 10px;
-    margin: 0 0 0 4px;
+    margin: 0 0 0 2px;
   }
 
  .action_items {
@@ -82,14 +81,9 @@ body.active_admin #title_bar {
 }
 
 
-#wrapper #title_bar {
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  background-color: #343c46;
-  border: none;
-  border-bottom: 0px solid #5ea3d3;
-}
+// Title bar background (#343c46) and the removed bottom accent border are now
+// theme variables — $skinTitleBarColor / $skinTitleBarBorderWidth in
+// themes/variables.scss.
 
 // The wigu theme gives the breadcrumb `margin-bottom: 8px` (intended for the old
 // stacked breadcrumb-above-title layout). In our flex row with align-items:

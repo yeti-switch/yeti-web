@@ -30,7 +30,7 @@ gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_
 gem 'active_admin_datetimepicker'
 gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions'
-gem 'active_admin_theme'
+gem 'active_admin_theme', github: 'yeti-switch/active_admin_theme', branch: 'header_menu_colors'
 gem 'draper'
 gem 'ransack'
 

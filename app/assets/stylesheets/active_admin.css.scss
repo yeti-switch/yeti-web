@@ -210,16 +210,10 @@ body.active_admin.index #active_admin_content {
   border-right: 1px solid #d7dce4;
 }
 
-// Keep the header compact (~35px) while fitting a larger logo: the header
-// height is logo height + vertical padding, so we trim the padding to ~1px and
-// let a 33px logo fill the band. The theme's default padding (5px top / 9px
-// bottom from wigu) and the img top:-2px nudge are overridden below.
-// Scoped under #wrapper to match (and override) the wigu theme's
-// `#wrapper #header { padding-bottom: 9px }`, which otherwise wins on
-// specificity and leaves a 9px gap below the centered header content.
+// Header pinning + logo centering. (Header padding and the logo max-height are
+// now theme variables — $skinHeaderPaddingY / $skinHeaderLogoMaxHeight, set in
+// themes/variables.scss.)
 #wrapper #header {
-  padding-top: 4.5px;
-  padding-bottom: 4.5px;
   // Pin the header to the viewport's left edge and cap it to the viewport width
   // so it does NOT scroll sideways with wide tables — keeping the logo and nav
   // menu always visible. Same technique as #title_bar; unquote so Sass emits the
@@ -243,11 +237,9 @@ body.active_admin.index #active_admin_content {
 }
 
 #header h1 img{
-  // Cap the logo height so a larger/custom site_title_image can't grow the
-  // header. Keep it inline + vertical-align: middle so it stays centered in the
-  // table-cell row (which is shared with, and may be taller than, ul.tabs).
-  // top:0 resets the theme's -2px nudge.
-  max-height: 27px;
+  // Keep the logo inline + vertical-align: middle so it stays centered in the
+  // table-cell row. top:0 resets the theme's -2px nudge. (max-height is the
+  // theme's $skinHeaderLogoMaxHeight var.)
   vertical-align: middle;
   top: 0;
 }
@@ -266,31 +258,13 @@ body.active_admin.index #active_admin_content {
   margin-bottom: 2px;
 }
 
-// Larger header menu text (both the global nav and the utility nav username).
-// The logout icon (font-size:0 on its <a>) and the clock (own font-size on
-// .clock-time/.clock-date) have more specific rules, so they're unaffected.
-// Kept small enough that the pills stay within the logo height (header
-// height unchanged).
-#header ul.tabs > li {
-  font-size: 13px;
-}
+// Menu font size, dropdown sizing (no-wrap/size-to-content), and dropdown row
+// density are now theme variables/fixes — $skinMenuFontSize, $skinMenuItemPaddingY,
+// $skinMenuItemLineHeight (see themes/variables.scss).
 
-// Dropdown submenu panels: the base caps them at max-width: calc(100% + 20px)
-// (≈ the narrow parent item width), so longer labels wrap. Let them size to
-// their content and keep each label on one line.
-#header ul.tabs > li ul {
-  width: auto;
-  max-width: none;
-  white-space: nowrap;
-}
-#header ul.tabs > li ul li > a {
-  white-space: nowrap;
-  // Slightly tighter rows than the base (line-height 1.5, padding 6px/4px),
-  // but a touch more relaxed than fully compact.
-  line-height: 1.35;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+// Menu colors (panel, pills, dropdown item text/hover, the bridge border) are
+// now themed via the active_admin_theme menu variables — see
+// app/assets/stylesheets/themes/variables.scss.
 
 // Show the Logout menu item as an icon instead of the "Logout" text. The text
 // is kept in the DOM (just sized to 0) so screen readers still announce it, and
