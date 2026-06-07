@@ -266,6 +266,84 @@ body.active_admin.index #active_admin_content {
   margin-bottom: 2px;
 }
 
+// Larger header menu text (both the global nav and the utility nav username).
+// The logout icon (font-size:0 on its <a>) and the clock (own font-size on
+// .clock-time/.clock-date) have more specific rules, so they're unaffected.
+// Kept small enough that the pills stay within the logo height (header
+// height unchanged).
+#header ul.tabs > li {
+  font-size: 13px;
+}
+
+// Dropdown submenu panels: the base caps them at max-width: calc(100% + 20px)
+// (≈ the narrow parent item width), so longer labels wrap. Let them size to
+// their content and keep each label on one line.
+#header ul.tabs > li ul {
+  width: auto;
+  max-width: none;
+  white-space: nowrap;
+}
+#header ul.tabs > li ul li > a {
+  white-space: nowrap;
+}
+
+// Show the Logout menu item as an icon instead of the "Logout" text. The text
+// is kept in the DOM (just sized to 0) so screen readers still announce it, and
+// the working logout link/method (built by add_logout_button_to_menu) is left
+// intact. FontAwesome 4: fa-sign-out = \f08b.
+// inline-flex + align-items: center keeps the icon vertically centered with the
+// adjacent text items (admin name, clock); font-size:0 alone collapses the line
+// box so the glyph would otherwise sit a few px low.
+#header #logout > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 12px; // match the text items' content height
+}
+#header #logout > a::before {
+  font-family: 'FontAwesome';
+  content: '\f08b';
+  font-size: 13px;
+  line-height: 1;
+}
+
+// Server clock (server_clock.js) shown as two compact lines: time + timezone,
+// then year/month/day. Kept small (10px/12px) so both lines fit within the logo
+// height and the header height is unchanged. vertical-align: middle centers the
+// two-line block with the adjacent admin name / logout icon.
+// Clock: a centered flex column (time line larger, date line smaller). Sized to
+// the nav pills' band (~24px, same as the menu items and admin/logout) rather
+// than the taller logo, so its top/bottom line up with the rest of the header
+// instead of hanging lower. Header height is unchanged.
+#header #servertime > span {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end; // right-align both lines
+  vertical-align: middle;
+  height: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
+  // Monospace so every glyph (digits included) is fixed-width — the ticking
+  // time keeps a constant width, so the right-anchored admin/logout don't jitter
+  // every second. (font-variant-numeric: tabular-nums is unreliable here because
+  // the header font has no tabular figures.)
+  font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+#header #servertime .clock-time {
+  font-size: 12px;
+  line-height: 1.1;
+}
+#header #servertime .clock-date {
+  font-size: 9px;
+  line-height: 1.1;
+}
+#header #servertime {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 
 .ul-list-comma-separated {
   display: inline;

@@ -23,7 +23,10 @@ ActiveAdmin.setup do |config|
         sub_menu.add label: 'Admin Access'
       end
       menu.add label: 'Rate Management', priority: 100
-
+    end
+    # Current user, logout (and the server clock, appended via server_clock.js)
+    # live in the right-aligned utility navigation instead of the main menu.
+    admin.build_menu :utility_navigation do |menu|
       # http://127.0.0.1:3000/admin/admin_users/1
       menu.add label: proc { display_name current_active_admin_user },
                url: proc { admin_user_path(current_active_admin_user) },
@@ -33,8 +36,6 @@ ActiveAdmin.setup do |config|
 
       admin.add_logout_button_to_menu menu, 9_999_999
       # can also pass priority & html_options for link_to to use
-    end
-    admin.build_menu :utility_navigation do
     end
   end
   config.load_paths = [Rails.root.join('app/admin').to_s] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
