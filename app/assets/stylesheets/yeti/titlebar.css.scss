@@ -1,11 +1,38 @@
 //titlebar
 body.active_admin #title_bar {
-  position: relative;
+  // On wide pages the content (and this bar) is far wider than the viewport and
+  // the whole page scrolls horizontally. Pin the bar to the viewport's left
+  // edge and cap it to the viewport width so it does NOT scroll sideways with
+  // the table — keeping the title and action buttons always visible.
+  // width:100vw is the viewport width; max-width:100% caps it to the content
+  // area on normal pages so 100vw's scrollbar allowance can't add a stray
+  // horizontal scrollbar. (No `top` set, so it still scrolls vertically.)
+  position: sticky;
+  left: 0;
+  // unquote so Sass emits the CSS min() literally instead of trying to evaluate
+  // it at compile time (it can't mix % and vw units).
+  width: unquote("min(100vw, 100%)");
+  // Fixed-height flex bar so every page — with or without a breadcrumb — gets
+  // the SAME height, with the title block and the action buttons both
+  // vertically centered. (A fixed height is what keeps detail pages, which add
+  // a breadcrumb, from growing taller than index pages.)
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 37px; // match the header height
+  box-sizing: border-box;
+  padding-top: 0;
+  padding-bottom: 0;
+  // The base ActiveAdmin clearfix adds a #title_bar::after block which, in a
+  // flex container, becomes a stray third flex item that space-between pushes
+  // to the far right — stranding the buttons in the middle. Flexbox needs no
+  // clearfix, so drop it.
+  &::after { display: none; }
   .action_items a.delete-link {
     color: #990033;
   }
   #titlebar_left,  #titlebar_right {
-    height: 29px;
+    height: auto;
     vertical-align: baseline;
     display: block;
   }
@@ -15,13 +42,25 @@ body.active_admin #title_bar {
     padding: 0;
     font-size: 1em;
     font-weight: bold;
-    padding-top: 10px;
   }
 
   #titlebar_right {
-    position: absolute;
-    right: 0px;
-    top: 7px;
+    // Flex item, vertically centered by the parent's align-items: center.
+    // Horizontal pinning is handled by #title_bar (sticky + viewport width);
+    // this just sits at the right end of the bar via justify-content.
+    position: static;
+    right: auto;
+    top: auto;
+    transform: none;
+  }
+
+  // Shorter, symmetric action buttons with tighter horizontal padding between
+  // the label and the button border (base is 12px 17px 10px). margin-left adds
+  // a small gap between adjacent buttons.
+  .action_items span.action_item > a,
+  .action_items span.action_item > .dropdown_menu > a {
+    padding: 6px 10px;
+    margin: 0 0 0 4px;
   }
 
  .action_items {
@@ -29,11 +68,16 @@ body.active_admin #title_bar {
     text-align: left;
   }
 
+  // Lay the breadcrumb and title out on one line so detail pages (which add a
+  // breadcrumb) stay the same single-line height as index pages.
+  #titlebar_left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
   #titlebar_left .breadcrumb {
-    float: left;
-    margin-bottom: 5px;
-    margin-top: 10px;
-
+    float: none;
+    margin: 0;
   }
 }
 
@@ -45,4 +89,13 @@ body.active_admin #title_bar {
   background-color: #343c46;
   border: none;
   border-bottom: 0px solid #5ea3d3;
+}
+
+// The wigu theme gives the breadcrumb `margin-bottom: 8px` (intended for the old
+// stacked breadcrumb-above-title layout). In our flex row with align-items:
+// center that bottom margin makes the breadcrumb ride ~4px above the title.
+// Scoped to match the theme's specificity (#wrapper ... span.breadcrumb) so it
+// wins, and loaded after wigu.
+#wrapper #title_bar #titlebar_left span.breadcrumb {
+  margin-bottom: 0;
 }
