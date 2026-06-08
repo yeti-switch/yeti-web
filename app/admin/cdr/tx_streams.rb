@@ -39,7 +39,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
 
   with_default_params do
     params[:q] = { time_start_gteq_datetime_picker: 0.days.ago.beginning_of_day }
-    'Only RTP streams started from beginning of the day showed by default'
+    nil # suppress the "only today's RTP streams" flash notice (default filter still applies)
   end
 
   controller do

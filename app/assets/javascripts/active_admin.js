@@ -9,6 +9,7 @@
 //= require panel_toggle
 //= require action_buttons
 //= require server_clock
+//= require theme_toggle
 //= require tooltip
 //= require boolean_editable
 //= require dependent_fields

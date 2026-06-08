@@ -54,3 +54,18 @@ html {
   }
 
 }
+
+// Dark mode: the chart loading states use a solid white box behind the spinner
+// gif. This file compiles as a separate asset (require_tree in yeti.css), so the
+// theme's `aa-dark` mixin isn't visible — re-declare the triggers locally. Only
+// override background-color so the spinner background-image is preserved.
+@mixin charts-dark {
+  @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) { @content; } }
+  html[data-theme="dark"] { @content; }
+}
+@include charts-dark {
+  #wrapper .chart-placeholder,
+  #wrapper .loader {
+    background-color: var(--aa-surface);
+  }
+}

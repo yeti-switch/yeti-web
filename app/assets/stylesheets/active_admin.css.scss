@@ -22,6 +22,18 @@
 @import "active_admin/components/status_tags";
 @import "vendor/highlightjs/default";
 
+// Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
+// SHAKEN passport). The vendor highlight theme imported above is light; scope a
+// dark palette to dark mode via the theme's aa-dark helper + --aa-* vars.
+@include aa-dark {
+  .hljs { background: var(--aa-surface-2); color: var(--aa-text); }
+  .hljs-attr, .hljs-attribute, .hljs-name      { color: #9cdcfe; } // keys
+  .hljs-string, .hljs-symbol                   { color: #ce9178; } // strings
+  .hljs-number                                 { color: #b5cea8; } // numbers
+  .hljs-literal, .hljs-keyword, .hljs-built_in { color: #569cd6; } // true/false/null
+  .hljs-punctuation, .hljs-comment             { color: var(--aa-text-muted); }
+}
+
 fieldset.inputs {
   input.date-time-picker {
     width: 286px;
@@ -210,24 +222,137 @@ body.active_admin.index #active_admin_content {
   border-right: 1px solid #d7dce4;
 }
 
-#header {
-  // The wigu theme adds padding-bottom: 9px on top of the base padding: 5px 0,
-  // giving asymmetric vertical padding that shifts the logo up. Balance it.
-  padding-top: 9px;
+// Header pinning + logo centering. (Header padding and the logo max-height are
+// now theme variables — $skinHeaderPaddingY / $skinHeaderLogoMaxHeight, set in
+// themes/variables.scss.)
+#wrapper #header {
+  // Pin the header to the viewport's left edge and cap it to the viewport width
+  // so it does NOT scroll sideways with wide tables — keeping the logo and nav
+  // menu always visible. Same technique as #title_bar; unquote so Sass emits the
+  // CSS min() literally (it can't mix % and vw). No `top` set, so it still
+  // scrolls vertically like normal.
+  position: sticky;
+  left: 0;
+  width: unquote("min(100vw, 100%)");
+  // Pinning activates the header's z-index:900, so its drop shadow would now
+  // paint a dark line over the title bar below (previously the title bar, painted
+  // later, covered it). Drop the shadow — the two dark bars sit flush.
+  box-shadow: none;
 }
 
 #header h1 {
-  // Neutralize the inherited top padding tuned for a ~21px logo so the
-  // taller image stays vertically centered in the table-cell.
   padding-top: 0;
   padding-bottom: 0;
+  // Collapse the text baseline strut (theme sets line-height: 1.2) so the
+  // inline logo centers cleanly via the table-cell's vertical-align: middle.
+  line-height: 0;
 }
 
 #header h1 img{
-  max-height: 60px;
-  // Reset the hardcoded -2px nudge; vertical-align: middle handles centering.
-  top: 0;
+  // Keep the logo inline + vertical-align: middle so it stays centered in the
+  // table-cell row. top:0 resets the theme's -2px nudge. (max-height is the
+  // theme's $skinHeaderLogoMaxHeight var.)
   vertical-align: middle;
+  top: 0;
+}
+
+// The nav menus (global + utility) are `ul.header-item.tabs` table-cells. The
+// theme nudges every .header-item down 2px (tuned for the old taller header),
+// which knocks them off-center. Reset it so vertical-align: middle centers them.
+#header .header-item {
+  top: 0;
+}
+
+// Trim the tab pills' vertical margins (theme default 5px) so the nav cell does
+// not grow the header past the logo; they stay centered via vertical-align.
+#header ul.tabs > li {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+// Menu font size, dropdown sizing (no-wrap/size-to-content), and dropdown row
+// density are now theme variables/fixes — $skinMenuFontSize, $skinMenuItemPaddingY,
+// $skinMenuItemLineHeight (see themes/variables.scss).
+
+// Menu colors (panel, pills, dropdown item text/hover, the bridge border) are
+// now themed via the active_admin_theme menu variables — see
+// app/assets/stylesheets/themes/variables.scss.
+
+// Show the Logout menu item as an icon instead of the "Logout" text. The text
+// is kept in the DOM (just sized to 0) so screen readers still announce it, and
+// the working logout link/method (built by add_logout_button_to_menu) is left
+// intact. FontAwesome 4: fa-sign-out = \f08b.
+// inline-flex + align-items: center keeps the icon vertically centered with the
+// adjacent text items (admin name, clock); font-size:0 alone collapses the line
+// box so the glyph would otherwise sit a few px low.
+#header #logout > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 12px; // match the text items' content height
+}
+#header #logout > a::before {
+  font-family: 'FontAwesome';
+  content: '\f08b';
+  font-size: 13px;
+  line-height: 1;
+}
+
+// Dark-mode toggle button (theme_toggle.js injects #theme_toggle into the
+// utility nav). Same icon treatment as the logout icon. The glyph reflects the
+// current mode: moon in light mode (click → dark), sun in dark mode.
+#header #theme_toggle > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 12px;
+  cursor: pointer;
+}
+#header #theme_toggle > a::before {
+  font-family: 'FontAwesome';
+  font-size: 13px;
+  line-height: 1;
+  content: '\f186'; // fa-moon-o (default / light mode → switch to dark)
+}
+#header #theme_toggle[data-mode="dark"] > a::before {
+  content: '\f185'; // fa-sun-o (dark mode → switch to light)
+}
+
+// Server clock (server_clock.js) shown as two compact lines: time + timezone,
+// then year/month/day. Kept small (10px/12px) so both lines fit within the logo
+// height and the header height is unchanged. vertical-align: middle centers the
+// two-line block with the adjacent admin name / logout icon.
+// Clock: a centered flex column (time line larger, date line smaller). Sized to
+// the nav pills' band (~24px, same as the menu items and admin/logout) rather
+// than the taller logo, so its top/bottom line up with the rest of the header
+// instead of hanging lower. Header height is unchanged.
+#header #servertime > span {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end; // right-align both lines
+  vertical-align: middle;
+  height: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
+  // Monospace so every glyph (digits included) is fixed-width — the ticking
+  // time keeps a constant width, so the right-anchored admin/logout don't jitter
+  // every second. (font-variant-numeric: tabular-nums is unreliable here because
+  // the header font has no tabular figures.)
+  font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+#header #servertime .clock-time {
+  font-size: 12px;
+  line-height: 1.1;
+}
+#header #servertime .clock-date {
+  font-size: 9px;
+  line-height: 1.1;
+}
+#header #servertime {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 
