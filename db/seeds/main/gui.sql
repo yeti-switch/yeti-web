@@ -29,7 +29,6 @@ INSERT INTO admin_users (
     sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip,
     created_at, updated_at, enabled, username,
                          stateful_filters, visible_columns,
-                         per_page,
                          saved_filters,
                          roles
 ) VALUES (
@@ -37,7 +36,6 @@ INSERT INTO admin_users (
     '2017-08-16 12:10:32.83527+03', '2014-10-13 11:34:08.58971+03', '127.0.0.1', '127.0.0.1',
     '2012-09-07 15:20:21.93699+03', '2017-08-16 12:10:32.836658+03', true, 'admin',
     false, '{}',
-    '{"contractors":30,"accounts":30,"system_countries":30,"routing_groups":30,"importing_routing_groups":30,"jobs":30,"background_tasks":30,"cdrs":30}',
     '{}',
     '{root}'
 );

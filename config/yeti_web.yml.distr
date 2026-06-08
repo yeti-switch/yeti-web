@@ -87,8 +87,10 @@ tmpdir: 'tmp'
 # HTTP webhooks and emails to System::EventSubscription contacts are unaffected.
 #disable_balance_notification_emails: false
 
-# Admin UI session expiration configuration (optional)
-# If not set, sessions will not expire (current behavior)
-# If set, sessions will expire after the specified number of seconds of inactivity
+# Admin UI options (optional)
 # admin_ui:
-#   session_lifetime: 60  # Session expires after 60 seconds of inactivity
+#   # Session expires after N seconds of inactivity. If unset, sessions do not expire.
+#   session_lifetime: 60
+#   # Per-page options for index tables (the pagination dropdown; first value is the
+#   # default). If unset, falls back to [30, 50, 100].
+#   per_page: [30, 50, 100]

@@ -165,9 +165,9 @@ ActiveAdmin.setup do |config|
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
-  # You can control the default per page count for all resources here.
-  #
-  # config.default_per_page = [50, 100, 200, 500]
+  # Per-page options come from yeti_web.yml (admin_ui.per_page); when unset, fall
+  # back to the previous defaults. An array enables AA's native per-page dropdown.
+  config.default_per_page = YetiConfig.admin_ui&.per_page.presence || [30, 50, 100]
 
   # == Register Stylesheets & Javascripts
   #
@@ -220,7 +220,6 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsImportPreview
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBatchChangeable
   ActiveAdmin::ResourceDSL.include ResourceDSL::ReportScheduler
-  ActiveAdmin::ResourceController.include ActiveAdmin::PerPageExtension
   ActiveAdmin::BaseController.include ActiveAdmin::WithPayloads
   ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy

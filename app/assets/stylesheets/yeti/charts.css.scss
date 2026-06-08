@@ -12,7 +12,8 @@ html {
       margin: 1px auto;
       width: 100%;
       text-align: center;
-      background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
+      background-color: var(--aa-surface);
+      position: relative;
     }
 
     // Positioning context for the overlaid range picker. Lives on
@@ -38,8 +39,27 @@ html {
     }
 
     .loader {
-      background: #FFFFFF asset-url('ajax-loader.gif') 50% 50% no-repeat scroll;
+      background-color: var(--aa-surface);
       height: 70px;
+      position: relative;
+    }
+
+    // Theme-aware CSS spinner (replaces ajax-loader.gif): a ring with one accent
+    // segment, centered in the loading box. Colors come from the --aa-* vars, so
+    // it adapts to light/dark automatically.
+    .chart-placeholder::after,
+    .loader::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 32px;
+      height: 32px;
+      margin: -16px 0 0 -16px;
+      border: 3px solid var(--aa-border);
+      border-top-color: var(--aa-accent);
+      border-radius: 50%;
+      animation: aa-spin 0.8s linear infinite;
     }
 
   }
@@ -55,17 +75,4 @@ html {
 
 }
 
-// Dark mode: the chart loading states use a solid white box behind the spinner
-// gif. This file compiles as a separate asset (require_tree in yeti.css), so the
-// theme's `aa-dark` mixin isn't visible — re-declare the triggers locally. Only
-// override background-color so the spinner background-image is preserved.
-@mixin charts-dark {
-  @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) { @content; } }
-  html[data-theme="dark"] { @content; }
-}
-@include charts-dark {
-  #wrapper .chart-placeholder,
-  #wrapper .loader {
-    background-color: var(--aa-surface);
-  }
-}
+@keyframes aa-spin { to { transform: rotate(360deg); } }

@@ -14468,7 +14468,6 @@ CREATE TABLE gui.admin_users (
     username character varying NOT NULL,
     stateful_filters boolean DEFAULT false NOT NULL,
     visible_columns json DEFAULT '{}'::json NOT NULL,
-    per_page json DEFAULT '{}'::json NOT NULL,
     saved_filters json DEFAULT '{}'::json NOT NULL,
     roles character varying[] NOT NULL,
     allowed_ips inet[],
@@ -15597,7 +15596,6 @@ ALTER SEQUENCE sys.delayed_jobs_id_seq OWNED BY sys.delayed_jobs.id;
 --
 
 CREATE TABLE sys.guiconfig (
-    rows_per_page character varying DEFAULT '50,100'::character varying NOT NULL,
     id integer NOT NULL,
     cdr_unload_dir character varying,
     cdr_unload_uri character varying,
@@ -20647,6 +20645,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260608120000'),
 ('20260604120000'),
 ('20260603120000'),
 ('20260602000002'),

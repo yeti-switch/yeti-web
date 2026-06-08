@@ -2,6 +2,7 @@
 
 ActiveAdmin.register PartitionModel::Log, as: 'Log Partition' do
   menu parent: 'Logs', label: 'Log Partitions'
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
 
   actions :index
 
@@ -23,7 +24,6 @@ ActiveAdmin.register PartitionModel::Log, as: 'Log Partition' do
     end
 
     def apply_pagination(chain)
-      @skip_drop_down_pagination = true
       records = chain.to_a
       Kaminari.paginate_array(records).page(1).per(records.size)
     end

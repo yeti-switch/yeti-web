@@ -68,7 +68,7 @@ INSERT INTO sys.cdr_tables (id, name, readable, writable, date_start, date_stop)
 -- Data for Name: guiconfig; Type: TABLE DATA; Schema: sys; Owner: senid
 --
 
-INSERT INTO sys.guiconfig (rows_per_page, id, cdr_unload_dir, cdr_unload_uri, max_records, import_max_threads, import_helpers_dir, active_calls_require_filter, registrations_require_filter, active_calls_show_chart, active_calls_autorefresh_enable, max_call_duration, random_disconnect_enable, random_disconnect_length, drop_call_if_lnp_fail, short_call_length, termination_stats_window, lnp_cache_ttl, quality_control_min_calls, quality_control_min_duration, lnp_e2e_timeout, web_url) VALUES ('30,50,100', 1, '/tmp', 'https://127.0.0.1/tmexport', 100500, 4, '/tmp/yeti-xml2rates', true, true, false, false, 7200, false, 7000, false, 15, 24, 10800, 100, 3600, 1000, 'http://127.0.0.1');
+INSERT INTO sys.guiconfig (id, cdr_unload_dir, cdr_unload_uri, max_records, import_max_threads, import_helpers_dir, active_calls_require_filter, registrations_require_filter, active_calls_show_chart, active_calls_autorefresh_enable, max_call_duration, random_disconnect_enable, random_disconnect_length, drop_call_if_lnp_fail, short_call_length, termination_stats_window, lnp_cache_ttl, quality_control_min_calls, quality_control_min_duration, lnp_e2e_timeout, web_url) VALUES (1, '/tmp', 'https://127.0.0.1/tmexport', 100500, 4, '/tmp/yeti-xml2rates', true, true, false, false, 7200, false, 7000, false, 15, 24, 10800, 100, 3600, 1000, 'http://127.0.0.1');
 
 
 --
