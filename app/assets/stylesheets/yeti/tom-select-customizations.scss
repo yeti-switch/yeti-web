@@ -1,6 +1,16 @@
 // Wrap customizations in #active_admin_content to increase styles priority,
 // because due to bugs in sass compiling tom-select own css loaded after active admin styles,
 // see config/initializers/active_admin.rb
+
+// Dark-mode scope helper. This file compiles as a separate asset (require_tree
+// in yeti.css), so the theme's `aa-dark` mixin isn't visible here — re-declare
+// the same two triggers. The --aa-* custom properties ARE global at runtime, so
+// the theme's dark palette is available. Use at the top level (see end of file).
+@mixin ts-dark {
+  @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) { @content; } }
+  html[data-theme="dark"] { @content; }
+}
+
 #active_admin_content {
 
   // Width variants for Tom Select
@@ -288,6 +298,48 @@
       input {
         font-size: 0.95em;
       }
+    }
+  }
+}
+
+// ---- Dark mode -------------------------------------------------------------
+// tom-select isn't an ActiveAdmin component, so its dark-mode recolor lives here
+// with the rest of the tom-select styling, using the theme's --aa-* custom
+// properties. Selectors mirror (and slightly out-specify) the light rules above.
+@include ts-dark {
+  #active_admin_content {
+    .ts-wrapper .ts-control {
+      background-color: var(--aa-input-bg);
+      border-color: var(--aa-input-border);
+      color: var(--aa-text);
+    }
+    // The .tom-select* variants above set a lighter border at higher specificity;
+    // match it here so the dark border wins for those widgets too.
+    form.formtastic .ts-wrapper.tom-select .ts-control,
+    form.formtastic .ts-wrapper.tom-select-ajax .ts-control,
+    form.formtastic .ts-wrapper.tom-select-ajax-fillable .ts-control,
+    form.formtastic .ts-wrapper.tom-select-sortable .ts-control {
+      border-color: var(--aa-input-border);
+    }
+    .ts-control input { color: var(--aa-text); }
+    .ts-control input::placeholder { color: var(--aa-text-muted); }
+    // Selected chips: the standard .item and the sortable variant's > div chips.
+    .ts-control .item,
+    form.formtastic .ts-wrapper.tom-select-sortable .ts-control > div {
+      background: var(--aa-surface-2);
+      color: var(--aa-text);
+    }
+    .ts-dropdown {
+      background: var(--aa-surface);
+      border-color: var(--aa-input-border);
+      color: var(--aa-text);
+    }
+    .ts-dropdown .option, .ts-dropdown .optgroup-header { color: var(--aa-text); }
+    .ts-dropdown .create:hover { background: var(--aa-surface-hover); }
+    // Single-select chevron: light stroke for the dark control.
+    .ts-wrapper.single .ts-control,
+    .ts-wrapper.single.input-active .ts-control {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23aab1bb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
     }
   }
 }

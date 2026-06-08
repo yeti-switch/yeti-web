@@ -21,6 +21,56 @@ $skinTitleBarBorderWidth: 0;
 $skinTitleBarButtonPaddingY: 6px;
 $skinTitleBarButtonPaddingX: 10px;
 
+// Panel/section headers recede to the page background (like the inactive tabs),
+// so the header reads as a slightly recessed bar above the content surface.
+// var(--aa-page-bg)/var(--aa-text) follow the mode automatically (light + dark).
+$skinPanelHeaderColor:         var(--aa-page-bg);
+$skinPanelHeaderColorDark:     var(--aa-page-bg);
+// Header label uses the same color as the inactive tab labels.
+$skinPanelHeaderTextColor:     var(--aa-inactive-tab-text);
+$skinPanelHeaderTextColorDark: var(--aa-inactive-tab-text);
+
+// Scope tabs keep their own accent — they default from the panel-header color,
+// which is now the surface, so pin them explicitly (also needed because
+// --aa-scope-selected runs lighten() on these).
+$skinScopeColor:     #5ea3d3; // light (theme blue)
+$skinScopeColorDark: #3a4d63; // dark slate
+// Scope tab text — white in light mode (on the blue scope bar), as before.
+$skinScopeTextColor: #ffffff; // light
+
+// Buttons in dark mode (form submit, action buttons, batch actions). A muted
+// teal instead of blue. Change to any color you like.
+$skinButtonColorDark: #3c6e62;
+
+// Shorter panel/section headers and tabs (vertical padding; default 8px / 10px).
+$skinPanelHeaderPaddingY: 5px;
+$skinTabPaddingY: 6px;
+
+// Index-table column header text — one color for sortable + plain headers.
+$skinTableHeaderTextColor:     #5e6469; // light
+$skinTableHeaderTextColorDark: #d7dbe0; // dark (was a mix of blue links + grey)
+
+// Inactive tabs recede to the page background, so the active tab (which matches
+// the content surface) reads as raised/selected. Same idea in both modes — only
+// the color differs: light page bg vs dark page bg.
+$skinTabInactiveColor:     #f7f9fb; // light page bg
+$skinTabInactiveColorDark: #1a1d21; // dark page bg
+
+// Tab label colors: active (selected) tab stands out in the accent; inactive
+// tabs are subdued. Set per mode.
+$skinActiveTabTextColor:       #5ea3d3; // light
+$skinActiveTabTextColorDark:   #6cb0de; // dark
+$skinInactiveTabTextColor:     #5e6469; // light
+$skinInactiveTabTextColorDark: #9aa0a6; // dark
+
+// Content link color. Darker blue in light mode.
+$skinLinkColor:     #38678b; // light
+$skinLinkColorDark: #6cb0de; // dark
+// Delete links share the regular link color in both modes (no dedicated delete
+// color). Light already follows $skinLinkColor via the theme default; pin dark
+// to match too (the theme default would otherwise be red).
+$skinDeleteLinkColorDark: $skinLinkColorDark;
+
 // The has_nested arrow on a HIGHLIGHTED (current/hover) item uses ActiveAdmin's
 // "dark" arrow image — meant for a light highlight, so it's low-contrast on the
 // dark menu. Point the dark arrow vars at the light arrow images (these AA vars

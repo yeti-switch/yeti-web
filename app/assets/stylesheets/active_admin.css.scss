@@ -22,6 +22,18 @@
 @import "active_admin/components/status_tags";
 @import "vendor/highlightjs/default";
 
+// Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
+// SHAKEN passport). The vendor highlight theme imported above is light; scope a
+// dark palette to dark mode via the theme's aa-dark helper + --aa-* vars.
+@include aa-dark {
+  .hljs { background: var(--aa-surface-2); color: var(--aa-text); }
+  .hljs-attr, .hljs-attribute, .hljs-name      { color: #9cdcfe; } // keys
+  .hljs-string, .hljs-symbol                   { color: #ce9178; } // strings
+  .hljs-number                                 { color: #b5cea8; } // numbers
+  .hljs-literal, .hljs-keyword, .hljs-built_in { color: #569cd6; } // true/false/null
+  .hljs-punctuation, .hljs-comment             { color: var(--aa-text-muted); }
+}
+
 fieldset.inputs {
   input.date-time-picker {
     width: 286px;
@@ -284,6 +296,26 @@ body.active_admin.index #active_admin_content {
   content: '\f08b';
   font-size: 13px;
   line-height: 1;
+}
+
+// Dark-mode toggle button (theme_toggle.js injects #theme_toggle into the
+// utility nav). Same icon treatment as the logout icon. The glyph reflects the
+// current mode: moon in light mode (click → dark), sun in dark mode.
+#header #theme_toggle > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 12px;
+  cursor: pointer;
+}
+#header #theme_toggle > a::before {
+  font-family: 'FontAwesome';
+  font-size: 13px;
+  line-height: 1;
+  content: '\f186'; // fa-moon-o (default / light mode → switch to dark)
+}
+#header #theme_toggle[data-mode="dark"] > a::before {
+  content: '\f185'; // fa-sun-o (dark mode → switch to light)
 }
 
 // Server clock (server_clock.js) shown as two compact lines: time + timezone,

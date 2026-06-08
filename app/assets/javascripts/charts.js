@@ -82,7 +82,9 @@
       },
       adapters: { date: { zone: serverTimezone() } },
       title: opts.xAxisLabel ? { display: true, text: opts.xAxisLabel } : { display: false },
-      ticks: { maxRotation: 45, autoSkip: true }
+      ticks: { maxRotation: 45, autoSkip: true, color: tickColor },
+      grid: { color: gridColor },
+      border: { color: gridColor }
     };
   }
 
@@ -91,8 +93,10 @@
       type: 'linear',
       title: opts.yAxisLabel ? { display: true, text: opts.yAxisLabel } : { display: false },
       ticks: opts.yTickPrecision === 'integer'
-        ? { precision: 0 }
-        : {}
+        ? { precision: 0, color: tickColor }
+        : { color: tickColor },
+      grid: { color: gridColor },
+      border: { color: gridColor }
     }, extra || {});
   }
 
@@ -114,6 +118,59 @@
     }
   }
 
+  // Read a value from the active theme palette (the --aa-* CSS custom properties
+  // defined by active_admin_theme), with a fallback. Used so chart text/grid/
+  // crosshair colors follow light/dark mode.
+  function cssVar(name, fallback) {
+    try {
+      var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return v || fallback;
+    } catch (e) { return fallback; }
+  }
+
+  // Scriptable colors for axis grid / ticks / legend. Chart.js calls these at
+  // draw time, so they return the LIVE theme value — charts follow a runtime
+  // light/dark switch (a plain color is captured at creation and would freeze).
+  function gridColor() { return cssVar('--aa-border', 'rgba(0, 0, 0, 0.1)'); }
+  function tickColor() { return cssVar('--aa-text-muted', '#666'); }
+
+  // Point Chart.js's global font (ticks, legend) and grid/border colors at the
+  // theme palette. Read at build time; charts already drawn keep their colors
+  // until the next render (e.g. page reload or zoom change).
+  function applyChartTheme() {
+    if (!root.Chart) return;
+    Chart.defaults.color = cssVar('--aa-text-muted', '#666');
+    Chart.defaults.borderColor = cssVar('--aa-border', 'rgba(0, 0, 0, 0.1)');
+  }
+
+  // Re-theme already-drawn charts when the color mode changes at runtime. Grid /
+  // tick colors are read from the theme palette at draw time, so without this a
+  // toggle (or OS change) leaves charts showing the previous mode's grid (a light
+  // grid on a now-dark page reads as white; a dark grid on light as black) until
+  // the page is reloaded. update() re-resolves options from the new defaults.
+  function refreshChartsTheme() {
+    applyChartTheme();
+    // Grid/tick/legend colors are scriptable (read the live theme at draw time),
+    // so a redraw is all that's needed to pick up the new mode.
+    Object.keys(instances).forEach(function (id) {
+      var c = instances[id];
+      if (c) { try { c.update('none'); } catch (e) {} }
+    });
+  }
+
+  // The toggle sets/removes html[data-theme]; an OS change (when the user hasn't
+  // chosen) flips prefers-color-scheme. Re-theme charts on either.
+  if (root.MutationObserver) {
+    new MutationObserver(refreshChartsTheme).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['data-theme']
+    });
+  }
+  if (root.matchMedia) {
+    var prefersDark = root.matchMedia('(prefers-color-scheme: dark)');
+    if (prefersDark.addEventListener) prefersDark.addEventListener('change', refreshChartsTheme);
+    else if (prefersDark.addListener) prefersDark.addListener(refreshChartsTheme);
+  }
+
   // Inline plugin: draw a vertical crosshair at the hovered data column. With
   // interaction mode 'index' all active elements share one x, so the line marks
   // exactly where the cursor's index crosses every series' point.
@@ -133,7 +190,7 @@
       ctx.moveTo(x, area.top);
       ctx.lineTo(x, area.bottom);
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
+      ctx.strokeStyle = cssVar('--aa-text-muted', 'rgba(0, 0, 0, 0.35)');
       ctx.stroke();
       ctx.restore();
     }
@@ -167,13 +224,14 @@
 
   function baseOptions(opts) {
     ensureCursorPositioner();
+    applyChartTheme();
     var mode = opts.interactionMode || 'index';
     return {
       responsive: true,
       maintainAspectRatio: false,
       interaction: { mode: mode, intersect: false, axis: 'x' },
       plugins: {
-        legend: { position: 'top', align: 'end', labels: { boxWidth: 12, boxHeight: 12 } },
+        legend: { position: 'top', align: 'end', labels: { boxWidth: 12, boxHeight: 12, color: tickColor } },
         tooltip: {
           enabled: true,
           mode: mode,
