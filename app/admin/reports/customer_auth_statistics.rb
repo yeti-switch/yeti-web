@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Stats::CustomerAuthStats, as: 'Customer Auth Statistic' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   actions :index
   menu parent: 'Reports', label: 'Customer Auth Statistic', priority: 105
 

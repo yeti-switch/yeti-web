@@ -48,7 +48,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
     end
   end
 
-  scope :all, show_count: false
+  scope :all, show_count: false, default: true
   scope :no_tx, show_count: false
 
   filter :id

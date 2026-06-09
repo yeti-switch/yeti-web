@@ -22,12 +22,6 @@
 @import "active_admin/components/status_tags";
 @import "vendor/highlightjs/default";
 
-// Selected scope (light mode): the theme derives --aa-scope-selected as
-// lighten($skinScopeColor, 15%), but lightening the near-white #f7f9fb scope bar
-// gives ~white — no visible selection. Pin a distinct shade for light here.
-// (Dark mode keeps the theme's lightened slate via html[data-theme="dark"].)
-:root { --aa-scope-selected: #dfe5ec; }
-
 // Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
 // SHAKEN passport). The vendor highlight theme imported above is light; scope a
 // dark palette to dark mode via the theme's aa-dark helper + --aa-* vars.
@@ -127,9 +121,23 @@ form.filter_form .filter_form_field.select_and_search input[type=text].search_fi
   white-space: pre-wrap;
 }
 
-#toggle_block_available_columns {
-  display: inline-block;
-  margin: 0 0 10px 0;
+// "Visible columns" / "Reset" tools — rendered as buttons in the table_tools row
+// (ActiveAdmin::Views::Pages::Index#build_additional_tools). Positioning only; the
+// button look comes from the theme's generic a.table_tools_button rule.
+#wrapper #active_admin_content .table_tools #additional_table_tools {
+  float: left; // sits inline after the scopes
+  margin-left: 10px; // gap from the scopes
+  a.table_tools_button + a.table_tools_button { margin-left: 6px; } // gap between Visible columns & Reset
+  // Center the icon-only glyph in the 30px button; line-height centering leaves the
+  // baseline-aligned icon a few px high.
+  a.table_tools_button { display: inline-flex; align-items: center; justify-content: center; }
+  a.table_tools_button .fa { font-size: 16px; } // larger glyph than the inherited button text size
+}
+
+// jQuery UI tooltip (with_tooltip helper) ships a light grey glow (ui-widget-shadow:
+// 0 0 5px #aaa) that reads as a white outline on the dark page. Use a dark drop shadow.
+.ui-tooltip.ui-widget-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 #block_available_columns {
@@ -295,12 +303,13 @@ body.active_admin.index #active_admin_content {
   font-size: 0;
   display: inline-flex;
   align-items: center;
+  vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
   height: 12px; // match the text items' content height
 }
 #header #logout > a::before {
   font-family: 'FontAwesome';
   content: '\f08b';
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1;
 }
 
@@ -312,12 +321,13 @@ body.active_admin.index #active_admin_content {
   font-size: 0;
   display: inline-flex;
   align-items: center;
+  vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
   height: 12px;
   cursor: pointer;
 }
 #header #theme_toggle > a::before {
   font-family: 'FontAwesome';
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1;
   content: '\f042'; // fa-adjust — auto (default before JS sets data-mode)
 }
@@ -336,15 +346,18 @@ body.active_admin.index #active_admin_content {
 // the nav pills' band (~24px, same as the menu items and admin/logout) rather
 // than the taller logo, so its top/bottom line up with the rest of the header
 // instead of hanging lower. Header height is unchanged.
-#header #servertime > span {
+#header #servertime > a {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end; // right-align both lines
   vertical-align: middle;
   height: 24px;
-  padding-top: 0;
-  padding-bottom: 0;
+  color: #ffffff;
+  text-decoration: none;
+  pointer-events: none; // it's a clock, not a link
+  font-size: 0;         // hide the raw server-time label until JS formats it (the
+                        // .clock-time/.clock-date spans set their own size)
   // Monospace so every glyph (digits included) is fixed-width — the ticking
   // time keeps a constant width, so the right-anchored admin/logout don't jitter
   // every second. (font-variant-numeric: tabular-nums is unreliable here because
@@ -360,11 +373,6 @@ body.active_admin.index #active_admin_content {
   font-size: 9px;
   line-height: 1.1;
 }
-#header #servertime {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 
 .ul-list-comma-separated {
   display: inline;
@@ -396,6 +404,39 @@ form fieldset > ol > li.boolean label {
 // above them.
 .block_timerange {
   z-index: 1000;
+  // Follow dark mode — the plugin hardcodes a light #f4f4f4 bg, black border and
+  // blue links; re-point to the palette so it themes in both modes.
+  background-color: var(--aa-surface);
+  border-color: var(--aa-border);
+  color: var(--aa-text);
+  > div span { color: var(--aa-link); }
+}
+
+// RTP diagram (rtp_diagram.js) renders an SVG with hardcoded light fills/strokes.
+// In dark mode, re-point the light-only ones (port boxes, labels, borders) to the
+// palette via attribute selectors — CSS overrides SVG presentation attributes.
+// Colored nodes (#369/#693/#444), white header text, arrows (#2a7/#27a) and the
+// orange highlight (#f60) are left as-is; they read fine on the dark page.
+@mixin rtp-diagram-dark {
+  .rtp-diagram {
+    background: var(--aa-surface) !important;         // inline style background:#fafafa
+    border-color: var(--aa-border) !important;        // inline style border #ddd
+    [fill="#fff"]   { fill: var(--aa-surface); }     // port box background
+    [fill="#222"]   { fill: var(--aa-text); }         // port labels
+    [fill="#555"]   { fill: var(--aa-text-muted); }   // packet-count labels
+    [stroke="#666"] { stroke: var(--aa-border); }     // port box border
+    [stroke="#222"] { stroke: var(--aa-border); }     // node border
+  }
+  // The "click an arrow" stream-details panel (inline-styled light card).
+  .rtp-stream-panel {
+    background: var(--aa-surface) !important;
+    border-color: var(--aa-border) !important;
+    color: var(--aa-text) !important;
+  }
+}
+html[data-theme="dark"] { @include rtp-diagram-dark; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { @include rtp-diagram-dark; }
 }
 
 // Date / date-time range filters (e.g. "Time start"): label on its own row,

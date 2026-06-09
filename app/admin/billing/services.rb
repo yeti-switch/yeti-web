@@ -65,7 +65,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   filter :renew_at, as: :date_time_range
   filter :uuid_equals, label: 'UUID'
 
-  scope :all
+  scope :all, default: true
   scope :ready_for_renew
   scope :one_time_services
 

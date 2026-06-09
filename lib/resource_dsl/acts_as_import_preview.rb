@@ -20,7 +20,7 @@ module ResourceDSL
         end
       end
 
-      scope :all
+      scope :all, default: true
       scope :success
       scope :with_errors
       scope :for_create

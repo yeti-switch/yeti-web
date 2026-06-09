@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::PackageCounter, as: 'Package Counters' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'Billing', label: 'Package Counters', priority: 11
 
   actions :index, :show

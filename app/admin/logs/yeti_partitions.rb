@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register PartitionModel::Log, as: 'Log Partition' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'Logs', label: 'Log Partitions'
   config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
 

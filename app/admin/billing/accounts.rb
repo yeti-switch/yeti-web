@@ -55,7 +55,7 @@ ActiveAdmin.register Account do
     end
   end
 
-  scope :all
+  scope :all, default: true
   scope :vendors_accounts
   scope :customers_accounts
   scope :insufficient_balance

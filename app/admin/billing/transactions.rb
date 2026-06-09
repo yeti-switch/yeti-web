@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'Billing', label: 'Transactions', priority: 21
 
   actions :index, :show
@@ -30,6 +31,7 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
   filter :description
   filter :uuid_equals, label: 'UUID'
 
+  scope :all, default: true
   scope :today
   scope :yesterday
 

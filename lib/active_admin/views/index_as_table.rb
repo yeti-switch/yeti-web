@@ -4,20 +4,9 @@ module ActiveAdmin
   module Views
     class IndexAsTable < ActiveAdmin::Component
       def table_for(*args, &block)
-        if assigns[:visible_columns].is_a?(Array)
-          span do
-            link_to 'Visible columns', '#', id: 'toggle_block_available_columns', class: 'active'
-          end
-          if assigns[:visible_columns].any?
-            span do
-              ' | '
-            end
-            span do
-              link_to 'Reset', '#', id: 'reset_visible_columns'
-            end
-          end
-        end
-
+        # The "Visible columns" / "Reset" controls now render in the table_tools
+        # row (ActiveAdmin::Views::Pages::Index#build_additional_tools); only the
+        # hidden dialog block stays here.
         insert_tag IndexTableFor, *args, &block
 
         if assigns[:visible_columns].is_a?(Array)

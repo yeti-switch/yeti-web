@@ -30,7 +30,8 @@ class CodecGroup < ApplicationRecord
   validate :check_uniqueness_of_codecs
 
   def codec_names
-    codec_group_codecs.sort_by(&:priority).map { |c| c.codec.name }
+    # highest priority first (descending)
+    codec_group_codecs.sort_by(&:priority).reverse.map { |c| c.codec.name }
   end
   # define_attribute_methods :codec_names
   # def codec_group_codecs_attributes=(attributes)

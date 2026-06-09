@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register CdrExport, as: 'CDR Export' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
   decorate_with CdrExportDecorator
