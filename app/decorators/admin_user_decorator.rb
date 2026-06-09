@@ -9,10 +9,6 @@ class AdminUserDecorator < ApplicationDecorator
     h.pre_wrap_json(model.visible_columns)
   end
 
-  def pretty_per_page
-    h.pre_wrap_json(model.per_page)
-  end
-
   def pretty_saved_filters
     h.pre_wrap_json(model.saved_filters)
   end

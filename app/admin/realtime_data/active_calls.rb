@@ -5,6 +5,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     authorized?(:index, RealtimeData::ActiveCall) && Node.any?
   }
   config.batch_actions = true
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
   batch_action :destroy, false
   decorate_with ActiveCallDecorator
 
@@ -155,7 +156,6 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     end
 
     def apply_pagination(chain)
-      @skip_drop_down_pagination = true
       records = chain.to_a
       Kaminari.paginate_array(records).page(1).per(records.size)
     end

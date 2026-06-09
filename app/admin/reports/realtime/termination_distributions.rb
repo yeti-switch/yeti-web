@@ -4,6 +4,7 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
   menu parent: 'Reports', label: 'Termination distribution', priority: 100
   config.batch_actions = false
   config.paginate = false
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
   config.sort_order = 'vendor_id_desc'
   actions :index
 
@@ -21,11 +22,6 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
   controller do
     def scoped_collection
       super.detailed_scope
-    end
-
-    def find_collection
-      @skip_drop_down_pagination = true
-      super
     end
   end
 
@@ -46,7 +42,7 @@ ActiveAdmin.register Report::Realtime::TerminationDistribution do
     column :vendor_price, sortable: :vendor_price, &:decorated_vendor_price
   end
 
-  index as: :data, skip_drop_down_pagination: true do
+  index as: :data do
     data = collection.map do |x|
       {
         label: x.vendor&.display_name || "Vendor | #{x.vendor_id}",

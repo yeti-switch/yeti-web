@@ -4,9 +4,11 @@
 // Anthracite header menu (instead of the theme's blue). Handled by the forked
 // active_admin_theme via dedicated menu variables.
 $skinMenuPillColor:      #2e3236; // top-level current/hover pill
+$skinMenuPillTextColor:  #6cb0de; // top-level current/hover (selected) pill text — accent highlight
 $skinMenuPanelColor:     #2e3236; // dropdown panel bg + hover bridge border
 $skinMenuItemHoverColor: #3f454c; // dropdown item hover/current bg
 $skinMenuTextColor:      #dfe2e6; // dropdown item text
+$skinMenuItemHoverTextColor: #6cb0de; // hover/current (selected) item text — accent highlight
 
 // Header / menu sizing
 $skinMenuFontSize:       13px;
@@ -30,13 +32,13 @@ $skinPanelHeaderColorDark:     var(--aa-page-bg);
 $skinPanelHeaderTextColor:     var(--aa-inactive-tab-text);
 $skinPanelHeaderTextColorDark: var(--aa-inactive-tab-text);
 
-// Scope tabs keep their own accent — they default from the panel-header color,
-// which is now the surface, so pin them explicitly (also needed because
-// --aa-scope-selected runs lighten() on these).
-$skinScopeColor:     #5ea3d3; // light (theme blue)
+// Scope tabs. Light: a recessed page-bg bar with dark text. Dark: slate bar with
+// white text. (Pinned explicitly because --aa-scope-selected runs lighten() on
+// these, and they'd otherwise default from the panel-header color.)
+$skinScopeColor:     #f7f9fb; // light (recessed, = page bg)
 $skinScopeColorDark: #3a4d63; // dark slate
-// Scope tab text — white in light mode (on the blue scope bar), as before.
-$skinScopeTextColor: #ffffff; // light
+$skinScopeTextColor:     #323537; // light (dark text on the light bar)
+$skinScopeTextColorDark: #ffffff; // dark (white text on the slate bar)
 
 // Buttons in dark mode (form submit, action buttons, batch actions). A muted
 // teal instead of blue. Change to any color you like.

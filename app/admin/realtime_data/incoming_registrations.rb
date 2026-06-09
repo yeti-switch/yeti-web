@@ -3,6 +3,7 @@
 ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrations' do
   actions :index, :show
   config.batch_actions = false
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
   menu parent: 'Realtime Data', priority: 30, if: proc { authorized?(:index, RealtimeData::IncomingRegistration) && Node.any? }
 
   member_action :registrations_data, method: :get do
@@ -33,7 +34,6 @@ ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrat
         flash.now[:error] = e.message
       end
 
-      @skip_drop_down_pagination = true
       registrations
     end
   end

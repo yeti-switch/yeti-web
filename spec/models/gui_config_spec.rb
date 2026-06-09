@@ -22,7 +22,6 @@
 #  random_disconnect_enable        :boolean          default(FALSE), not null
 #  random_disconnect_length        :integer(4)       default(7000), not null
 #  registrations_require_filter    :boolean          default(TRUE), not null
-#  rows_per_page                   :string           default("50,100"), not null
 #  short_call_length               :integer(4)       default(15), not null
 #  termination_stats_window        :integer(4)       default(24), not null
 #  web_url                         :string           default("http://127.0.0.1"), not null

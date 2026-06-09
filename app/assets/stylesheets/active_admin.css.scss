@@ -22,6 +22,12 @@
 @import "active_admin/components/status_tags";
 @import "vendor/highlightjs/default";
 
+// Selected scope (light mode): the theme derives --aa-scope-selected as
+// lighten($skinScopeColor, 15%), but lightening the near-white #f7f9fb scope bar
+// gives ~white — no visible selection. Pin a distinct shade for light here.
+// (Dark mode keeps the theme's lightened slate via html[data-theme="dark"].)
+:root { --aa-scope-selected: #dfe5ec; }
+
 // Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
 // SHAKEN passport). The vendor highlight theme imported above is light; scope a
 // dark palette to dark mode via the theme's aa-dark helper + --aa-* vars.
@@ -300,7 +306,8 @@ body.active_admin.index #active_admin_content {
 
 // Dark-mode toggle button (theme_toggle.js injects #theme_toggle into the
 // utility nav). Same icon treatment as the logout icon. The glyph reflects the
-// current mode: moon in light mode (click → dark), sun in dark mode.
+// current mode (cycles auto → light → dark): adjust = auto (follows OS),
+// sun = forced light, moon = forced dark.
 #header #theme_toggle > a {
   font-size: 0;
   display: inline-flex;
@@ -312,10 +319,13 @@ body.active_admin.index #active_admin_content {
   font-family: 'FontAwesome';
   font-size: 13px;
   line-height: 1;
-  content: '\f186'; // fa-moon-o (default / light mode → switch to dark)
+  content: '\f042'; // fa-adjust — auto (default before JS sets data-mode)
+}
+#header #theme_toggle[data-mode="light"] > a::before {
+  content: '\f185'; // fa-sun-o — forced light
 }
 #header #theme_toggle[data-mode="dark"] > a::before {
-  content: '\f185'; // fa-sun-o (dark mode → switch to light)
+  content: '\f186'; // fa-moon-o — forced dark
 }
 
 // Server clock (server_clock.js) shown as two compact lines: time + timezone,

@@ -20,7 +20,6 @@
 #  random_disconnect_enable        :boolean          default(FALSE), not null
 #  random_disconnect_length        :integer(4)       default(7000), not null
 #  registrations_require_filter    :boolean          default(TRUE), not null
-#  rows_per_page                   :string           default("50,100"), not null
 #  short_call_length               :integer(4)       default(15), not null
 #  termination_stats_window        :integer(4)       default(24), not null
 #  web_url                         :string           default("http://127.0.0.1"), not null
@@ -31,6 +30,5 @@ gui_conf_1:
   cdr_unload_dir: /tmp
   cdr_unload_uri: https://127.0.0.1/tmexport
   max_records: 100500
-  rows_per_page: "50,100"
   import_max_threads: 4
   import_helpers_dir: /opt/yeti-web/yeti-xml2rates

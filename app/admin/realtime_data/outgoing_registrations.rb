@@ -7,6 +7,7 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
   actions :index
 
   config.batch_actions = false
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
 
   filter :node_id_eq,
          as: :select,
@@ -38,7 +39,6 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
         CaptureError.capture(e, tags: { component: 'AdminUI' })
         flash.now[:warning] = e.message
       end
-      @skip_drop_down_pagination = true
       registrations
     end
   end

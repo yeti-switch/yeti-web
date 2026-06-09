@@ -125,6 +125,7 @@ Config.setup do |setup_config|
     end
     optional(:admin_ui).schema do
       optional(:session_lifetime).maybe(:int?)
+      optional(:per_page).array(:integer)
     end
 
     optional(:ip_access).schema do

@@ -22,7 +22,6 @@
 #  random_disconnect_enable        :boolean          default(FALSE), not null
 #  random_disconnect_length        :integer(4)       default(7000), not null
 #  registrations_require_filter    :boolean          default(TRUE), not null
-#  rows_per_page                   :string           default("50,100"), not null
 #  short_call_length               :integer(4)       default(15), not null
 #  termination_stats_window        :integer(4)       default(24), not null
 #  web_url                         :string           default("http://127.0.0.1"), not null
@@ -33,8 +32,7 @@ class GuiConfig < ApplicationRecord
 
   include WithPaperTrail
 
-  SETTINGS_NAMES = %i[rows_per_page
-                      cdr_unload_dir
+  SETTINGS_NAMES = %i[cdr_unload_dir
                       cdr_unload_uri
                       max_records
                       import_max_threads
@@ -64,10 +62,6 @@ class GuiConfig < ApplicationRecord
 
   def self.instance
     first || new
-  end
-
-  def self.per_page
-    rows_per_page.split(',').map(&:to_i).uniq
   end
 
   def self.import_scripts(allowed_file_prefix = '')

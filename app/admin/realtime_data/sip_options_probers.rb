@@ -4,6 +4,7 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
   menu parent: 'Realtime Data', label: 'Sip Options Probers', priority: 10
   config.batch_actions = false
   config.filters = false
+  config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)
 
   actions :index
 
@@ -25,7 +26,6 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
     end
 
     def apply_pagination(chain)
-      @skip_drop_down_pagination = true
       records = chain.to_a
       Kaminari.paginate_array(records).page(1).per(records.size)
     end
