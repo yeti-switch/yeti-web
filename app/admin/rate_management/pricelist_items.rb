@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu false
   actions :index
   decorate_with RateManagementPricelistItemDecorator

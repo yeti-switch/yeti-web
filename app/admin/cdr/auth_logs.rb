@@ -48,7 +48,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
                  :rpid,
                  :rpid_privacy
 
-  scope :all, show_count: false
+  scope :all, show_count: false, default: true
   scope :successful, show_count: false
   scope :failed, show_count: false
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register BackgroundTask do
+  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'System', priority: 20
   actions :index, :show
   decorate_with BackgroundTaskDecorator

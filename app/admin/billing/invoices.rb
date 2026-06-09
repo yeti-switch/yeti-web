@@ -13,7 +13,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   decorate_with InvoiceDecorator
 
-  scope :all
+  scope :all, default: true
   scope :approved
   scope :pending
 

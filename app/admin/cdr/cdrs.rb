@@ -54,7 +54,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
   end
 
-  scope :all, show_count: false
+  scope :all, show_count: false, default: true
   scope :successful_calls, show_count: false
   scope :short_calls, show_count: false
   scope :rerouted_calls, show_count: false

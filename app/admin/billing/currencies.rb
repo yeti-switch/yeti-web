@@ -6,6 +6,7 @@ ActiveAdmin.register Billing::Currency, as: 'Currency' do
   decorate_with Billing::CurrencyDecorator
 
   actions :index, :show, :new, :create, :edit, :update
+  config.batch_actions = false # no destroy action → the default batch Delete is hidden anyway
 
   acts_as_audit
   acts_as_safe_destroy

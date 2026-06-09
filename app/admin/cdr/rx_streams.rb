@@ -52,7 +52,7 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
     end
   end
 
-  scope :all, show_count: false
+  scope :all, show_count: false, default: true
   scope :no_rx, show_count: false
 
   filter :id
