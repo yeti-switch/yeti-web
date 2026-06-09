@@ -19,9 +19,15 @@
   }
 
   .filter_indicator_persist {
-    background-color: #fff;
+    // No pill — just the "Persist" text + checkbox, vertically centered in the header.
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px; // space between the "Persist" text and the checkbox
+    margin-top: 2px; // center the 16px control in the ~19px header content box
     color: #8a949e;
-    vertical-align: top;
     input[type=checkbox] {
       margin-right: 0px;
     }
@@ -30,17 +36,4 @@
     color: #4092d4;
   }
 
-}
-
-// Dark mode: the persist-filter indicator has a hardcoded white background.
-// Separate asset bundle (require_tree), so re-declare the dark triggers locally;
-// --aa-* vars are global at runtime. The grey/blue text colors stay readable.
-@mixin sfa-dark {
-  @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) { @content; } }
-  html[data-theme="dark"] { @content; }
-}
-@include sfa-dark {
-  #sidebar #filters_sidebar_section .filter_indicator_persist {
-    background-color: var(--aa-surface-2);
-  }
 }

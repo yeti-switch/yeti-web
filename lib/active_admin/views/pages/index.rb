@@ -44,8 +44,14 @@ class ActiveAdmin::Views::Pages::Index
 
   # Reopening the class replaces the gem's method (no `super`), so the original
   # conditions are inlined plus our extra-tools check.
+  #
+  # The batch-actions check mirrors what the selector actually renders: it filters
+  # by each action's display_if (batch_actions_to_display). Using the raw
+  # batch_actions.any? would render an empty table_tools div on resources whose
+  # actions are all display-hidden (e.g. routing plans), and its margin offsets
+  # the table down from the sidebar top.
   def any_table_tools?
-    active_admin_config.batch_actions.any? ||
+    active_admin_config.batch_actions.any? { |ba| call_method_or_proc_on(self, ba.display_if_block) } ||
       active_admin_config.scopes.any? ||
       active_admin_config.page_presenters[:index].try(:size).try(:>, 1) ||
       assigns[:visible_columns].is_a?(Array)

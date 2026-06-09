@@ -18,14 +18,9 @@
   apply(); // run as early as possible to minimize flash
 
   $(document).ready(function () {
-    if (!$('#utility_nav').length || $('#theme_toggle').length) return;
-
-    var $li = $(
-      '<li id="theme_toggle" class="header-item">' +
-        '<a href="#" role="button"></a>' +
-      '</li>'
-    );
-    $('#utility_nav').prepend($li);
+    // The toggle is a server-rendered utility-nav menu item; just find + wire it.
+    var $li = $('#theme_toggle');
+    if (!$li.length) return;
 
     var LABEL = {
       auto:  'Theme: auto (follows OS) — click for light',
