@@ -11,7 +11,6 @@
 //= require server_clock
 //= require theme_toggle
 //= require tooltip
-//= require boolean_editable
 //= require dependent_fields
 //= require chart.umd
 //= require luxon.min

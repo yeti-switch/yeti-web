@@ -1,6 +1,14 @@
-body.active_admin table.index_table tr.selected td {
-  background: #CBE2F7;
-}
-body.active_admin table.index_table tr td.selected {
-  background: #CBE2F7;
+/* Selected / clicked row (and cell) highlight. !important so the selection wins
+   over the theme's striping/hover row backgrounds. The accent tint sits over the
+   row surface, so it reads in both light and dark.
+
+   - tr.selected: row-click (table_highlights.js) on checkbox-less tables, and AA's
+     regular batch-action selection (which adds `selected` to the row on check).
+   - tr:has(... input:checked): scoped-collection-action tables (acts_as_async_*,
+     e.g. /accounts) do NOT add `selected` on check, so follow the checkbox state
+     directly. */
+body.active_admin table.index_table tr.selected td,
+body.active_admin table.index_table tr td.selected,
+body.active_admin table.index_table tbody tr:has(td.col-selectable input[type="checkbox"]:checked) > td {
+  background: rgba(108, 176, 222, 0.3) !important;
 }
