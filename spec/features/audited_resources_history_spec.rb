@@ -14,13 +14,21 @@ RSpec.describe 'Audited resources: history page' do
   include_context :login_as_admin
 
   # The history view loads each version's polymorphic item individually, which is
-  # an inherent N+1 unrelated to what this spec guards (decoration). Disable Bullet
-  # here so that pre-existing N+1 doesn't mask the decorator regression we care about.
+  # an inherent N+1 unrelated to what this spec guards (decoration). Disable N+1
+  # detection here so that pre-existing N+1 doesn't mask the decorator regression
+  # we care about.
+  #
+  # NOTE: toggle only the n_plus_one_query flag, never `Bullet.enable=`. The latter's
+  # setter resets *every* sub-detector flag (unused_eager_loading, counter_cache) to
+  # the given value, so `Bullet.enable = true` would clobber the disables set in
+  # config/environments/test.rb and leak re-enabled detectors into later specs sharing
+  # the process.
   around do |example|
-    Bullet.enable = false
+    was_enabled = Bullet.n_plus_one_query_enable?
+    Bullet.n_plus_one_query_enable = false
     example.run
   ensure
-    Bullet.enable = true
+    Bullet.n_plus_one_query_enable = was_enabled
   end
 
   # Builders for models whose factory needs traits/args, or whose factory name
