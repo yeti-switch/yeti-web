@@ -74,6 +74,32 @@
     }
   }
 
+  // Multi-select chips need a fill distinct from the input background, otherwise
+  // the selected values are almost the same color as the control and become hard
+  // to read. The blue chip matches the sortable multiselect styling used in forms.
+  // inline-flex + align-items: center vertically centers the label text inside
+  // the chip (a plain block left it top-aligned).
+  .ts-wrapper.multi .ts-control > .item {
+    background: #d6e4f7;
+    color: #1a3a5c;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 6px;
+    line-height: 1.4;
+
+    // Per-chip remove (×) glyph — bump it up from the small chip-text size.
+    // line-height: 1 keeps its line box from growing the chip height; the chip
+    // height stays driven by the label text. border-left: 0 drops the vertical
+    // separator the remove_button plugin draws between the label and the ×.
+    .remove {
+      font-size: 1.7em;
+      line-height: 0; // glyph no longer contributes height, so the chip height
+      border-left: 0;  // stays driven by the label regardless of icon size
+      margin-left: 0;  // drop the plugin's separator spacing (keep its padding)
+    }
+  }
+
   // caret icon
   .ts-wrapper.single .ts-control, .ts-wrapper.single.input-active .ts-control {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
@@ -95,7 +121,7 @@
   // Always show clear button when a value is selected
   .ts-wrapper.plugin-clear_button.has-items .clear-button {
     opacity: 1;
-    font-size: 1.2em;
+    font-size: 1.6em;
   }
 
   // When dropdown opens on an empty select, tom-select hides .items-placeholder
@@ -107,9 +133,10 @@
   }
 
   form.formtastic {
-    // Sortable multiselect: apply same font/height fixes as single-select variants.
-    // tom-select adjusts control padding for multi has-items so the math works out
-    // to the same 1.15em + 18px overhead as single-select.
+    // Sortable multiselect: size it like the other form selects (single-row
+    // height == a normal input) instead of the taller 10px-padded box it used to
+    // be. Chips are centered; multi-row spacing comes from row-gap rather than a
+    // per-chip bottom margin, so one chip row stays the same height as empty.
     .ts-wrapper.tom-select-sortable {
       // flow-root creates a BFC so the wrapper avoids the floated label,
       // making the dropdown's left:0 align with the control's left edge.
@@ -120,9 +147,11 @@
         width: 100%;
         font-size: 0.95em;
         line-height: 1.15;
-        padding: 10px 8px;
-        // 10px top + 10px bottom + 1px border × 2 = 22px overhead
-        min-height: calc(1.15em + 22px);
+        align-items: center;
+        padding: 2px 8px;
+        row-gap: 3px; // spacing between wrapped chip rows (not the first row)
+        // match the other form selects: 1.15em content + 18px overhead
+        min-height: calc(1.15em + 18px);
 
         input {
           font-size: 0.95em;
@@ -136,17 +165,29 @@
 
         > div {
           padding: 3px 8px;
-          margin: 0 4px 3px 0;
+          margin: 0 4px 0 0;
           background: #d6e4f7;
           color: #1a3a5c;
         }
       }
+    }
 
-      // Override tom-select's has-items padding compensation to match our
-      // control padding (10px) and item padding (3px) / margin-bottom (3px).
-      &.has-items .ts-control {
-        padding-top: 7px;   // 10px - 3px item-pad-top
-        padding-bottom: 4px; // 10px - 3px item-pad-bottom - 3px item-margin-bottom
+    // Non-sortable multi-select variants: a chip (~21px) is taller than the
+    // single-line value the min-height was sized for, so the first chip used to
+    // grow the control (empty 31px → filled 42px). Center the chips and use
+    // small symmetric vertical padding (overriding tom-select's has-items
+    // compensation) so one chip row fits inside the empty min-height — empty and
+    // one-row-filled render at the same height.
+    .ts-wrapper.tom-select.multi .ts-control,
+    .ts-wrapper.tom-select-ajax.multi .ts-control,
+    .ts-wrapper.tom-select-ajax-fillable.multi .ts-control {
+      align-items: center;
+      padding-top: 3px;
+      padding-bottom: 3px;
+
+      > .item {
+        margin-top: 0;
+        margin-bottom: 0;
       }
     }
 
@@ -226,6 +267,19 @@
         .items-placeholder {
           font-size: inherit;
           height: 1.15em;
+        }
+      }
+
+      // Multi-select: small, symmetric padding and align-items:center so the
+      // chips sit tight and vertically centered in the control. Keep the base
+      // min-height (1.15em + 17px) so an empty multiselect is the same height as
+      // the single-select inputs; the chip just centers within that height.
+      &.multi .ts-control {
+        align-items: center;
+        padding: 2px 8px 2px 4px;
+
+        > .item {
+          margin: 1px 4px 1px 0;
         }
       }
     }
@@ -323,11 +377,17 @@
     }
     .ts-control input { color: var(--aa-text); }
     .ts-control input::placeholder { color: var(--aa-text-muted); }
-    // Selected chips: the standard .item and the sortable variant's > div chips.
-    .ts-control .item,
-    form.formtastic .ts-wrapper.tom-select-sortable .ts-control > div {
-      background: var(--aa-surface-2);
-      color: var(--aa-text);
+    // Clear-all (✗) button carries a fixed dark glyph color that is invisible
+    // against the dark input; recolor it for the dark palette.
+    .ts-control .clear-button { color: var(--aa-text-muted); }
+    .ts-control .clear-button:hover { color: var(--aa-text); }
+    // Selected chips (multi-select). --aa-surface-2 equals --aa-input-bg in the
+    // dark palette, so it can't be used as a chip color — the chips would vanish
+    // into the control. Use a tinted blue fill (the dark analog of the light
+    // #d6e4f7 chip) so selected values stay legible against the input.
+    .ts-wrapper.multi .ts-control > .item {
+      background: #33506b;
+      color: #e4eef8;
     }
     .ts-dropdown {
       background: var(--aa-surface);

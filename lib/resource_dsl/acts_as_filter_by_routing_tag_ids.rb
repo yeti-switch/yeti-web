@@ -3,8 +3,8 @@
 module ResourceDSL
   module ActsAsFilterByRoutingTagIds
     def acts_as_filter_by_routing_tag_ids(routing_tag_ids_covers: true, routing_tag_ids_count: false)
-      # tom-select-clear: single clear-all button, no per-chip remove_button
-      # (the latter races option clicks on the full-width filter control).
+      # tom-select-clear: adds a single clear-all button (per-chip remove icons
+      # are present on all multi-selects regardless; see tom-select.js).
       if routing_tag_ids_covers
         filter :routing_tag_ids_covers, as: :select,
                                         collection: -> { Routing::RoutingTag.pluck(:name, :id) },
