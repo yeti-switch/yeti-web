@@ -38,9 +38,13 @@ $skinButtonColorDark: #3c6e62;
 
 // Shorter panel/section headers and tabs (vertical padding; default 8px / 10px).
 $skinPanelHeaderPaddingY: 5px;
-$skinTabPaddingY: 6px;
-// Tighter tab labels: text closer to the tab border (theme default 20px).
-$skinTabPaddingX: 10px;
+// 8px makes the inactive tab (12px line-height + 1px top border) 29px tall, to
+// match the panel-header height — the tab's line-height is smaller than the
+// header's, so it needs more padding to render at the same height.
+$skinTabPaddingY: 8px;
+// Match the panel-header horizontal text padding (15px) so tabs and headers
+// have the same text-to-border gap (theme default is 20px).
+$skinTabPaddingX: 15px;
 
 // Index-table column header text — one color for sortable + plain headers.
 $skinTableHeaderTextColor:     #5e6469; // light
