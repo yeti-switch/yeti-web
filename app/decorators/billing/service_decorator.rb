@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ServiceDecorator < BillingDecorator
+class Billing::ServiceDecorator < BillingDecorator
   decorates Billing::Service
 
   def state_badge

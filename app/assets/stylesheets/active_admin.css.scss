@@ -329,6 +329,9 @@ body.active_admin.index #active_admin_content {
   font-family: 'FontAwesome';
   font-size: 18px;
   line-height: 1;
+  display: inline-block;
+  width: 1.28571em; // fixed-width (fa-fw) so the differently-sized glyphs below
+  text-align: center; // don't change the toggle's width and shift the clock
   content: '\f042'; // fa-adjust — auto (default before JS sets data-mode)
 }
 #header #theme_toggle[data-mode="light"] > a::before {

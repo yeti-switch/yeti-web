@@ -19,8 +19,12 @@
             }
         })
 
+        // Per-chip remove icons for multi-selects (match the non-ajax widgets).
+        var plugins = ['dropdown_input', 'clear_button']
+        if ($el.attr('multiple')) plugins.push('remove_button')
+
         var ts = new TomSelect(el, {
-            plugins: ['dropdown_input', 'clear_button'],
+            plugins: plugins,
             valueField: 'value',
             labelField: 'text',
             searchField: 'text',

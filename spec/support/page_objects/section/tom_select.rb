@@ -55,6 +55,12 @@ module Section
         option.click
       end
 
+      # Wait until an option with the given text is rendered (e.g. after an ajax
+      # search has loaded results), without selecting it.
+      def wait_for_option(text, exact: true)
+        options(text:, exact_text: exact, minimum: 1)
+      end
+
       def search(text)
         input.native.send_keys(text.to_s)
       end
@@ -111,18 +117,17 @@ module Section
     end
 
     def select(texts, exact: true)
-      with_opened_dropdown do
-        Array.wrap(texts).each do |text|
-          dropdown.select_option(text, exact:)
-        end
-      end
+      # Options are already loaded from the <select>, so select straight through
+      # the API — no need to open the dropdown.
+      Array.wrap(texts).each { |text| add_item_by_text(text, exact:) }
     end
 
     def search_and_select(search, select: nil, exact: true)
       with_opened_dropdown do
         dropdown.search(search)
         Array.wrap(select || search).each do |text|
-          dropdown.select_option(text, exact:)
+          dropdown.wait_for_option(text, exact:) # wait for the ajax-loaded option
+          add_item_by_text(text, exact:)
         end
       end
     end
@@ -141,12 +146,69 @@ module Section
 
     def with_opened_dropdown
       was_open = dropdown_open?
-      control.click unless was_open
+      open_dropdown unless was_open
       dropdown # waits until dropdown is visible
       result = yield
       control.native.send_keys(:escape) if !was_open && dropdown_open?
       dropdown(visible: false) # waits until dropdown is hidden
       result
+    end
+
+    # JS prologue that resolves this widget's tom-select instance into `ts`.
+    # tom-select keeps the original <select> as the wrapper's previous sibling;
+    # fall back to matching by instance.wrapper. arguments[0] is the wrapper.
+    INSTANCE_JS = <<~JS
+      var wrapper = arguments[0];
+      var el = wrapper.previousElementSibling;
+      if (!el || !el.tomselect) {
+        var nodes = document.querySelectorAll('.tomselected');
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].tomselect && nodes[i].tomselect.wrapper === wrapper) { el = nodes[i]; break; }
+        }
+      }
+      var ts = el && el.tomselect;
+    JS
+
+    # Open the dropdown via tom-select's own API rather than clicking the
+    # control. Clicking the control is unsafe now that the per-chip remove plugin
+    # is enabled: there is no empty element to target (the control holds only
+    # chips, a 0x0 input and the clear button), a centre click can land on a
+    # chip's remove icon and silently delete an item, and cuprite coordinate
+    # clicks don't auto-scroll so targeting empty space by x/y is unreliable.
+    # `open()` is deterministic and never touches the chips.
+    def open_dropdown
+      root_element.session.execute_script("#{INSTANCE_JS}\nif (ts) { ts.open(); }", root_element)
+    end
+
+    # Select an option through tom-select's API (addItem with its value) instead
+    # of clicking the rendered .option. A 20x page-CPU throttle does not
+    # reproduce the CI "lost selection" flake, which rules out a page-side render
+    # race and points at the driver/CDP coordinate-click pipeline under host load
+    # (the same reason the dropdown is opened via the API). addItem needs no
+    # coordinates and no dropdown positioning, so the selection is deterministic.
+    # Raises if the option isn't found, so genuine problems still surface.
+    def add_item_by_text(text, exact:)
+      # evaluate_script wraps the script as `function () { return <expr> }`, so it
+      # must be a single expression — hence the IIFE. arguments[0..2] are wrapper,
+      # text, exact.
+      result = root_element.session.evaluate_script(<<~JS, root_element, text.to_s, exact)
+        (function () {
+          #{INSTANCE_JS}
+          if (!ts) { return 'no-instance'; }
+          var text = String(arguments[1]).trim(), exact = arguments[2];
+          var labelField = ts.settings.labelField, valueField = ts.settings.valueField;
+          var match = null;
+          Object.keys(ts.options).some(function (key) {
+            var label = String(ts.options[key][labelField]).trim();
+            if (exact ? label === text : label.indexOf(text) !== -1) { match = ts.options[key]; return true; }
+            return false;
+          });
+          if (!match) { return 'not-found'; }
+          ts.addItem(String(match[valueField]), false);
+          return 'ok';
+        })(arguments[0], arguments[1], arguments[2])
+      JS
+      raise "tom-select: could not select #{text.inspect} (#{result})" unless result == 'ok'
     end
   end
 end

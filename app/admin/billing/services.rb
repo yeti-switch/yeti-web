@@ -40,7 +40,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
                  :type_id,
                  :variables
 
-  decorate_with ServiceDecorator
+  decorate_with Billing::ServiceDecorator
 
   includes :type, :account
 

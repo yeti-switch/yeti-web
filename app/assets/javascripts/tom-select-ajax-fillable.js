@@ -12,6 +12,8 @@
         var key = 'k-' + Math.random().toString(36).substr(2, 9)
         var plugins = ['clear_button']
         if (!skipDropdownInput) plugins.push('dropdown_input')
+        // Per-chip remove icons for multi-selects (match the non-ajax widgets).
+        if ($el.attr('multiple')) plugins.push('remove_button')
 
         var ts = new TomSelect(el, {
             plugins: plugins,
