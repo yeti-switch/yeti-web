@@ -141,12 +141,36 @@ module Section
 
     def with_opened_dropdown
       was_open = dropdown_open?
-      control.click unless was_open
+      open_dropdown unless was_open
       dropdown # waits until dropdown is visible
       result = yield
       control.native.send_keys(:escape) if !was_open && dropdown_open?
       dropdown(visible: false) # waits until dropdown is hidden
       result
+    end
+
+    # Open the dropdown via tom-select's own API rather than clicking the
+    # control. Clicking the control is unsafe now that the per-chip remove plugin
+    # is enabled: there is no empty element to target (the control holds only
+    # chips, a 0x0 input and the clear button), a centre click can land on a
+    # chip's remove icon and silently delete an item, and cuprite coordinate
+    # clicks don't auto-scroll so targeting empty space by x/y is unreliable.
+    # `open()` is deterministic and never touches the chips; selecting and
+    # removing items below still use real clicks.
+    def open_dropdown
+      root_element.session.execute_script(<<~JS, root_element)
+        var wrapper = arguments[0];
+        // tom-select keeps the original <select> as the wrapper's previous
+        // sibling; fall back to matching by instance.wrapper just in case.
+        var el = wrapper.previousElementSibling;
+        if (!el || !el.tomselect) {
+          var nodes = document.querySelectorAll('.tomselected');
+          for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].tomselect && nodes[i].tomselect.wrapper === wrapper) { el = nodes[i]; break; }
+          }
+        }
+        if (el && el.tomselect) { el.tomselect.open(); }
+      JS
     end
   end
 end
