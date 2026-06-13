@@ -10,13 +10,13 @@
 //= require action_buttons
 //= require server_clock
 //= require theme_toggle
+//= require scrollbar_width
 //= require tooltip
 //= require dependent_fields
 //= require chart.umd
 //= require luxon.min
 //= require chartjs-adapter-luxon.umd
 //= require charts
-//= require sticky_headers
 //= require cdr_stats
 //= require active_calls
 //= require active_admin_sidebar
@@ -49,8 +49,6 @@
 
 
 $(document).ready(function () {
-
-    $('.index_as_table .index_table').stickyTableHeaders();
 
     $('#active_admin_content .tabs').on("tabsactivate", function (event, ui) {
 
