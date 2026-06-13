@@ -19,7 +19,6 @@
 @import "active_admin_date_range_preset";
 @import "font-awesome";
 @import "active_admin/components/active_admin_scoped_collection_actions";
-@import "active_admin/components/status_tags";
 @import "vendor/highlightjs/default";
 
 // Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
@@ -216,24 +215,20 @@ body.active_admin.index #active_admin_content {
   width: auto;
 }
 
-#wrapper table.index_table {
-  background-color: #ffffff;
-  border: 1px solid #e6e9ee;
-  border-bottom: 1px solid #e6e9ee;
-  border-radius: 4px;
-}
-
-#wrapper table.index_table th {
-  background-image: none;
-  border: none;
-  box-shadow: none;
-  text-shadow: none;
-  font-size: 1.0em;
-  font-weight: bold;
-  background-color: #e6e9ee;
-  padding: 10px 12px 10px 12px;
-  border-bottom: 1px solid #d7dce4;
-  border-right: 1px solid #d7dce4;
+// Floating column headers, native CSS — replaces the jquery.stickytableheaders
+// plugin (was app/assets/javascripts/sticky_headers.js). Scoped to index tables
+// only. The admin #header and #title_bar are sticky on `left` only (no `top`),
+// so they scroll off vertically — the header sticks flush at the viewport top
+// with no offset needed. border-collapse is `separate` (border-spacing: 0), so
+// each th paints its own borders and the bottom/right lines travel with the
+// sticky cell. The th already has an opaque background (theme); z-index keeps it
+// above the body rows that scroll under it. (The index-table borders, corner
+// rounding and bottom-edge de-doubling now live in the theme's
+// table.index_table block.)
+#wrapper table.index_table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 // Header pinning + logo centering. (Header padding and the logo max-height are
@@ -247,7 +242,11 @@ body.active_admin.index #active_admin_content {
   // scrolls vertically like normal.
   position: sticky;
   left: 0;
-  width: unquote("min(100vw, 100%)");
+  // 100vw includes the vertical scrollbar, which makes this left-pinned bar
+  // overshoot the visible viewport and get clamped (shifting left) at far-right
+  // scroll when a vertical scrollbar is present. Subtract the scrollbar width
+  // (a JS-set CSS var, 0 when there's no scrollbar — see scrollbar_width.js).
+  width: unquote("min(calc(100vw - var(--scrollbar-width, 0px)), 100%)");
   // Pinning activates the header's z-index:900, so its drop shadow would now
   // paint a dark line over the title bar below (previously the title bar, painted
   // later, covered it). Drop the shadow — the two dark bars sit flush.

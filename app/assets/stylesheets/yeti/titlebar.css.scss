@@ -10,8 +10,11 @@ body.active_admin #title_bar {
   position: sticky;
   left: 0;
   // unquote so Sass emits the CSS min() literally instead of trying to evaluate
-  // it at compile time (it can't mix % and vw units).
-  width: unquote("min(100vw, 100%)");
+  // it at compile time (it can't mix % and vw units). Subtract the vertical
+  // scrollbar width (JS-set CSS var, 0 when absent — see scrollbar_width.js) so
+  // 100vw doesn't overshoot the visible viewport and shift the bar left at the
+  // far-right scroll position when a vertical scrollbar is present.
+  width: unquote("min(calc(100vw - var(--scrollbar-width, 0px)), 100%)");
   // Fixed-height flex bar so every page — with or without a breadcrumb — gets
   // the SAME height, with the title block and the action buttons both
   // vertically centered. (A fixed height is what keeps detail pages, which add
