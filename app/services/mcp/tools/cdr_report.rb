@@ -86,7 +86,7 @@ module Mcp
         'calls' => 'count()',
         'answered' => 'countIf(success = 1)',
         'failed' => 'countIf(success = 0)',
-        'asr' => 'round(countIf(success = 1) / count(), 4)',
+        'asr' => 'round(countIf(success = 1) / nullIf(count(), 0), 4)',
         'acd' => 'round(sumIf(duration, success = 1) / nullIf(countIf(success = 1), 0), 1)',
         'total_duration' => 'sum(duration)',
         'avg_duration' => 'round(avg(duration), 1)',
@@ -243,7 +243,11 @@ module Mcp
           group_by_clause,
           "ORDER BY #{order_clause}",
           "LIMIT #{limit}",
-          settings_clause
+          settings_clause,
+          # JSON output so the gem parses the body to a Hash (rows/data); without
+          # it ClickHouse defaults to TabSeparated and run would break. FORMAT must
+          # be the final clause (after SETTINGS).
+          'FORMAT JSON'
         ].reject(&:empty?).join(' ')
       end
 
@@ -335,8 +339,10 @@ module Mcp
         return "#{measures.first} DESC" unless ob.is_a?(Hash) && ob['field']
 
         field = ob['field']
-        unless DIMENSIONS.key?(field) || MEASURES.key?(field)
-          raise ArgumentError, "unknown order_by field #{field.inspect}"
+        # Must be a key actually in SELECT (a measure or dimension of THIS query),
+        # otherwise ClickHouse raises "Unknown identifier" on the alias.
+        unless (measures + dimensions).include?(field)
+          raise ArgumentError, "order_by field #{field.inspect} must be one of the selected measures or dimensions"
         end
 
         dir = ob['dir'].to_s.casecmp('asc').zero? ? 'ASC' : 'DESC'

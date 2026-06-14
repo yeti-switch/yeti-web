@@ -122,9 +122,14 @@ RSpec.describe Mcp::Tools::CdrReport do
         .to eq('calls DESC')
     end
 
-    it 'rejects an unknown order_by field' do
+    it 'rejects an unknown / injected order_by field' do
       expect { tool('measures' => ['calls'], 'order_by' => { 'field' => 'calls; DROP' }).send(:order_clause) }
-        .to raise_error(ArgumentError, /unknown order_by/)
+        .to raise_error(ArgumentError, /must be one of the selected/)
+    end
+
+    it 'rejects an allowlisted field that is not in this query\'s SELECT' do
+      expect { tool('measures' => ['calls'], 'order_by' => { 'field' => 'asr' }).send(:order_clause) }
+        .to raise_error(ArgumentError, /must be one of the selected/)
     end
   end
 
@@ -184,6 +189,7 @@ RSpec.describe Mcp::Tools::CdrReport do
       expect(sql).to include('FROM cdrs')
       expect(sql).to include('GROUP BY customer_acc_id')
       expect(sql).to include('SETTINGS max_execution_time')
+      expect(sql).to end_with('FORMAT JSON') # so the gem parses the body to a Hash
       # every {...} in the final SQL is one of our generated typed params
       placeholders = sql.scan(/\{[^}]*\}/)
       expect(placeholders).not_to be_empty
