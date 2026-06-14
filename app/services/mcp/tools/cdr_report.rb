@@ -2,7 +2,7 @@
 
 module Mcp
   module Tools
-    # Aggregated, read-only reporting over the ClickHouse `yeti.cdrs` table, for
+    # Aggregated, read-only reporting over the ClickHouse `cdrs` table, for
     # traffic analysis and anomaly detection.
     #
     # SQL-injection safe by construction: the LLM never supplies SQL text. It
@@ -22,10 +22,12 @@ module Mcp
     #                their values, and they are absent from DIMENSIONS/FILTERS so
     #                there's no value-probing WHERE oracle either.
     #
-    # Run this tool's ClickHouse user as read-only, scoped to yeti.cdrs; per-query
-    # caps are also added in a SETTINGS clause as defense in depth.
+    # Run this tool's ClickHouse user as read-only, scoped to the cdrs table;
+    # per-query caps are also added in a SETTINGS clause as defense in depth.
     class CdrReport
-      TABLE = 'yeti.cdrs'
+      # Unqualified: the database is supplied by the connection (config.database
+      # from click_house.yml), same as the other ClickhouseReport queries.
+      TABLE = 'cdrs'
 
       DEFAULT_LIMIT = 200
       MAX_LIMIT = 2000
@@ -148,7 +150,7 @@ module Mcp
         {
           name: 'cdr.report',
           description: <<~DESC.strip,
-            Aggregated, read-only report over CDRs (ClickHouse yeti.cdrs) for
+            Aggregated, read-only report over CDRs (ClickHouse cdrs table) for
             traffic analysis and anomaly detection. Choose `measures` (aggregates)
             and optional `dimensions` (group-by axes) by name, optional `filters`,
             and a mandatory time window (`from`/`to`, max #{MAX_WINDOW_DAYS} days).
@@ -229,23 +231,55 @@ module Mcp
 
       private
 
+      # Assembles the statement from individually-validated clause builders. Every
+      # clause emits ONLY allowlist-mapped constants and {param:Type} placeholders;
+      # caller-supplied values live in @params, never in the SQL text. Each builder
+      # is a small, independently unit-testable method (see the unit spec).
       def build_sql
-        measures = fetch_keys(@args['measures'], MEASURES, 'measure')
-        raise ArgumentError, 'at least one measure is required' if measures.empty?
+        [
+          "SELECT #{select_clause}",
+          "FROM #{TABLE}",
+          "WHERE #{where_clause}",
+          group_by_clause,
+          "ORDER BY #{order_clause}",
+          "LIMIT #{limit}",
+          settings_clause
+        ].reject(&:empty?).join(' ')
+      end
 
-        dimensions = fetch_keys(@args['dimensions'], DIMENSIONS, 'dimension')
+      # Validated, memoized key lists. Raise on any key not in the allowlists, so
+      # an unknown/injected name can never reach the SQL.
+      def measures
+        @measures ||= begin
+          keys = fetch_keys(@args['measures'], MEASURES, 'measure')
+          raise ArgumentError, 'at least one measure is required' if keys.empty?
 
-        select = (dimensions.map { |k| "#{DIMENSIONS[k]} AS #{k}" } +
-                  measures.map { |k| "#{MEASURES[k]} AS #{k}" }).join(', ')
+          keys
+        end
+      end
 
-        sql = +"SELECT #{select} FROM #{TABLE} WHERE #{where_clause}"
-        sql << " GROUP BY #{dimensions.map { |k| DIMENSIONS[k] }.join(', ')}" if dimensions.any?
-        sql << " ORDER BY #{order_clause(measures)}"
-        sql << " LIMIT #{limit}"
-        # Per-query guardrails, independent of the CH user's own limits.
-        sql << " SETTINGS max_execution_time = #{MAX_EXECUTION_TIME}, " \
-                "max_result_rows = #{limit}, result_overflow_mode = 'throw'"
-        sql
+      def dimensions
+        @dimensions ||= fetch_keys(@args['dimensions'], DIMENSIONS, 'dimension')
+      end
+
+      # SELECT: dimension + measure fragments (constants), each aliased to its key.
+      def select_clause
+        (dimensions.map { |k| "#{DIMENSIONS[k]} AS #{k}" } +
+         measures.map { |k| "#{MEASURES[k]} AS #{k}" }).join(', ')
+      end
+
+      # GROUP BY the dimension fragments (constants); empty string when no
+      # dimensions (single grand-total row) so build_sql drops the clause.
+      def group_by_clause
+        return '' if dimensions.empty?
+
+        "GROUP BY #{dimensions.map { |k| DIMENSIONS[k] }.join(', ')}"
+      end
+
+      # Per-query guardrails, independent of the CH user's own limits.
+      def settings_clause
+        "SETTINGS max_execution_time = #{MAX_EXECUTION_TIME}, " \
+          "max_result_rows = #{limit}, result_overflow_mode = 'throw'"
       end
 
       def where_clause
@@ -295,8 +329,8 @@ module Mcp
       end
 
       # ORDER BY references a SELECT alias (a constant from our maps), never input
-      # text. Defaults to the first measure descending.
-      def order_clause(measures)
+      # text; direction is forced to ASC/DESC. Defaults to first measure desc.
+      def order_clause
         ob = @args['order_by']
         return "#{measures.first} DESC" unless ob.is_a?(Hash) && ob['field']
 
