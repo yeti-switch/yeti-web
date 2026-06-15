@@ -82,6 +82,16 @@ RSpec.describe Mcp::Tools::CdrReport do
       expect(params_of(t)).to include('param_f1' => [1, 7])
     end
 
+    it 'rejects a scalar value for an array operator (no silent coercion)' do
+      expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => 1 }]).send(:where_clause) }
+        .to raise_error(ArgumentError, /non-empty array/)
+    end
+
+    it 'rejects an empty array for an array operator' do
+      expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [] }]).send(:where_clause) }
+        .to raise_error(ArgumentError, /non-empty array/)
+    end
+
     it 'rejects a raw PII column as a filter field' do
       expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'sign_orig_ip', 'op' => 'eq', 'value' => 'x' }]).send(:where_clause) }
         .to raise_error(ArgumentError, /unknown filter field/)

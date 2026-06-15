@@ -317,8 +317,12 @@ module Mcp
 
         name = next_param
         if op[:array]
-          values = Array(f['value'])
-          raise ArgumentError, "operator #{f['op']} needs a non-empty array value" if values.empty?
+          values = f['value']
+          # Require an actual non-empty array; don't silently wrap a scalar (the
+          # descriptor says in/not_in take an array, and coercing masks mistakes).
+          unless values.is_a?(Array) && values.any?
+            raise ArgumentError, "operator #{f['op']} needs a non-empty array value"
+          end
 
           @params["param_#{name}"] = values
           placeholder = "{#{name}: Array(#{spec[:type]})}"
