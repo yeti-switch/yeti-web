@@ -2,7 +2,7 @@
 
 ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   menu parent: 'Realtime Data', priority: 10, if: proc {
-    authorized?(:index, RealtimeData::ActiveCall) && Node.any?
+    authorized?(:index, RealtimeData::ActiveCall)
   }
   config.batch_actions = true
   config.per_page = 10_000 # scalar: no per-page dropdown (these pages load every row at once)

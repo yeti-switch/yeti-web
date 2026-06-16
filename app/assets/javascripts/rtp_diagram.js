@@ -7,6 +7,7 @@
     var NODE_W = 220;        // single-column node width (orig/term)
     var SBC_W = 360;         // sbc node width (port header + RX-errors / RX-TX-label columns)
     var HEADER_H = 40;       // header area (type label + name label)
+    var HEADER_GAP = 8;      // padding between the header divider and the body (port box)
     var PORT_H = 38;         // height of one port row — drives vertical spacing between arrows
     var NODE_BOTTOM_PAD = 6; // small clearance under last port row
     var COL_GAP = 160;       // horizontal arrow length between node outer edges
@@ -18,7 +19,13 @@
     //   backward (yeti→orig, term→yeti) = blue
     var COLOR_FWD = '#2a7';
     var COLOR_BWD = '#27a';
-    var NODE_FILL = { orig: '#369', term: '#693', sbc: '#444' };
+    // Node "panel" chrome — matches the ActiveAdmin panel look (surface body,
+    // recessed header bar, muted header text, 1px border). Dark mode re-points
+    // these via attribute selectors in active_admin.css.scss (rtp-diagram-dark).
+    var NODE_BG = '#fff';
+    var NODE_BORDER = '#d7dce4';
+    var NODE_HEADER_BG = '#eef1f5';
+    var NODE_HEADER_TEXT = '#5e6469';
 
     function colorFor(direction, side) {
         var fwd = (direction === 'rx' && side === 'left') ||
@@ -184,7 +191,7 @@
             var cursorY = PAD;
             ids.forEach(function (id) {
                 var rows = buildPortRows(pairs[id]);
-                var h = HEADER_H + rows.length * PORT_H + NODE_BOTTOM_PAD;
+                var h = HEADER_H + HEADER_GAP + rows.length * PORT_H + NODE_BOTTOM_PAD;
                 var typeLabel = baseTypeLabel;
                 if (kind === 'term') {
                     typeLabel += ' #' + pairs[id].routing_attempt;
@@ -195,7 +202,7 @@
                     name_label: pairs[id].gw.name,
                     rows: rows.map(function (r, i) {
                         return {
-                            y: cursorY + HEADER_H + i * PORT_H,
+                            y: cursorY + HEADER_H + HEADER_GAP + i * PORT_H,
                             row: r
                         };
                     })
@@ -224,7 +231,7 @@
         // SBC dimensions: cover header + all port row positions.
         var topPortY = Math.min.apply(null, sbcRows.map(function (r) { return r.y; }));
         var bottomPortY = Math.max.apply(null, sbcRows.map(function (r) { return r.y; }));
-        var sbcTop = Math.min(PAD, topPortY - HEADER_H);
+        var sbcTop = Math.min(PAD, topPortY - HEADER_H - HEADER_GAP);
         var sbcBottom = bottomPortY + PORT_H + NODE_BOTTOM_PAD;
 
         nodes.sbc = {
@@ -242,25 +249,53 @@
         return { nodes: nodes, pairs: pairs, width: canvasWidth, height: canvasHeight };
     }
 
+    // Rect with only the top two corners rounded (radius r); square bottom — for
+    // the panel header bar that sits flush against the body below the divider.
+    function topRoundedRect(x, y, w, h, r, fill) {
+        var d = 'M' + x + ',' + (y + h) +
+                'V' + (y + r) +
+                'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + (-r) +
+                'H' + (x + w - r) +
+                'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r +
+                'V' + (y + h) + 'Z';
+        return el('path', { d: d, fill: fill });
+    }
+
+    // ActiveAdmin-panel-style chrome for a node: surface body, a recessed
+    // top-rounded header bar, a header/body divider, and a 1px border drawn last
+    // so it outlines both. Returns the elements in back-to-front order.
+    function renderNodePanel(n) {
+        return [
+            el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 6, ry: 6, fill: NODE_BG }),
+            topRoundedRect(n.x, n.y, n.w, HEADER_H, 6, NODE_HEADER_BG),
+            el('line', { x1: n.x, x2: n.x + n.w, y1: n.y + HEADER_H, y2: n.y + HEADER_H,
+                         stroke: NODE_BORDER, 'stroke-width': 1 }),
+            el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 6, ry: 6,
+                         fill: 'none', stroke: NODE_BORDER, 'stroke-width': 1 })
+        ];
+    }
+
     function renderHeader(n) {
-        var centerX = n.x + n.w / 2;
+        // Left-aligned, like ActiveAdmin panel headers (text at a fixed left pad).
+        var textX = n.x + 12;
         var els = [];
         if (n.type_label) {
-            var typeT = el('text', {
-                x: centerX, y: n.y + 16, 'text-anchor': 'middle',
-                fill: 'white', 'font-size': 11, 'font-style': 'italic', opacity: 0.85
-            });
-            typeT.appendChild(textNode(n.type_label));
+            // Gateway name on top (bold, prominent); type below (italic, secondary).
             var nameT = el('text', {
-                x: centerX, y: n.y + 32, 'text-anchor': 'middle',
-                fill: 'white', 'font-size': 13, 'font-weight': 'bold'
+                x: textX, y: n.y + 16, 'text-anchor': 'start',
+                fill: NODE_HEADER_TEXT, 'font-size': 13, 'font-weight': 'bold'
             });
             nameT.appendChild(textNode(n.name_label));
-            els.push(typeT, nameT);
+            var typeT = el('text', {
+                x: textX, y: n.y + 32, 'text-anchor': 'start',
+                fill: NODE_HEADER_TEXT, 'font-size': 11, 'font-style': 'italic', opacity: 0.85
+            });
+            typeT.appendChild(textNode(n.type_label));
+            els.push(nameT, typeT);
         } else {
             var lbl = el('text', {
-                x: centerX, y: n.y + 24, 'text-anchor': 'middle',
-                fill: 'white', 'font-size': 14, 'font-weight': 'bold'
+                x: textX, y: n.y + 24, 'text-anchor': 'start',
+                fill: NODE_HEADER_TEXT, 'font-size': 14, 'font-weight': 'bold'
             });
             lbl.appendChild(textNode(n.name_label));
             els.push(lbl);
@@ -269,14 +304,7 @@
     }
 
     function renderGatewayNode(n) {
-        var rect = el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 6, ry: 6,
-                                fill: NODE_FILL[n.kind], stroke: '#222' });
-        var children = [rect].concat(renderHeader(n));
-
-        // Header/port separator line
-        children.push(el('line', { x1: n.x + 4, x2: n.x + n.w - 4,
-                                   y1: n.y + HEADER_H, y2: n.y + HEADER_H,
-                                   stroke: 'rgba(255,255,255,0.3)', 'stroke-width': 1 }));
+        var children = renderNodePanel(n).concat(renderHeader(n));
 
         // The remote gateway is a single "port" object: one box that all of
         // Yeti's arrows connect to. Labels are from the GATEWAY's perspective,
@@ -375,9 +403,7 @@
     }
 
     function renderSbcNode(n) {
-        var rect = el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 6, ry: 6,
-                                fill: NODE_FILL.sbc, stroke: '#222' });
-        var children = [rect].concat(renderHeader(n));
+        var children = renderNodePanel(n).concat(renderHeader(n));
 
         // One box per local port; the TX stream and its related RX stream(s)
         // (same local host:port) share it. Per-stream RX/TX tags sit at each
@@ -652,8 +678,7 @@
 
         var svg = el('svg', {
             xmlns: SVG_NS, width: layout.width, height: layout.height, 'class': 'rtp-diagram',
-            style: 'display:block;width:' + layout.width + 'px;height:' + layout.height +
-                   'px;border:1px solid #ddd;background:#fafafa'
+            style: 'display:block;width:' + layout.width + 'px;height:' + layout.height + 'px'
         });
 
         svg.appendChild(el('defs', null, [
