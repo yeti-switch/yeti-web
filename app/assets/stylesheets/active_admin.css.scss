@@ -415,25 +415,33 @@ form fieldset > ol > li.boolean label {
 }
 
 // RTP diagram (rtp_diagram.js) renders an SVG with hardcoded light fills/strokes.
-// In dark mode, re-point the light-only ones (port boxes, labels, borders) to the
-// palette via attribute selectors — CSS overrides SVG presentation attributes.
-// Colored nodes (#369/#693/#444), white header text, arrows (#2a7/#27a) and the
-// orange highlight (#f60) are left as-is; they read fine on the dark page.
+// In dark mode, re-point the light-only ones (node panels, port boxes, labels,
+// borders) to the palette via attribute selectors — CSS overrides SVG
+// presentation attributes. Arrows (#2a7/#27a) and the orange highlight (#f60)
+// are left as-is; they read fine on the dark page.
 @mixin rtp-diagram-dark {
   .rtp-diagram {
-    background: var(--aa-surface) !important;         // inline style background:#fafafa
-    border-color: var(--aa-border) !important;        // inline style border #ddd
-    [fill="#fff"]   { fill: var(--aa-surface); }     // port box background
-    [fill="#222"]   { fill: var(--aa-text); }         // port labels
-    [fill="#555"]   { fill: var(--aa-text-muted); }   // packet-count labels
-    [stroke="#666"] { stroke: var(--aa-border); }     // port box border
-    [stroke="#222"] { stroke: var(--aa-border); }     // node border
+    // The container is transparent + borderless in both modes (no inline
+    // bg/border from rtp_diagram.js), so only the SVG content needs re-pointing.
+    [fill="#fff"]     { fill: var(--aa-surface); }            // node body + port box bg
+    [fill="#eef1f5"]  { fill: var(--aa-panel-header); }       // node header bar
+    [fill="#5e6469"]  { fill: var(--aa-panel-header-text); }  // node header text
+    [fill="#222"]     { fill: var(--aa-text); }               // port labels
+    [fill="#555"]     { fill: var(--aa-text-muted); }         // packet-count labels
+    [stroke="#d7dce4"] { stroke: var(--aa-border); }          // node border + divider
+    [stroke="#666"]   { stroke: var(--aa-border); }           // port box border
   }
   // The "click an arrow" stream-details panel (inline-styled light card).
   .rtp-stream-panel {
     background: var(--aa-surface) !important;
     border-color: var(--aa-border) !important;
     color: var(--aa-text) !important;
+    // The title (h4) and the details grid carry hardcoded light inline colors
+    // (#222) that don't inherit the panel color, and the grid's key labels are
+    // #666 — all dark-on-dark here. Override them. The grid is rendered as
+    // key/val/key/val, so its odd children are the (muted) key labels.
+    h4, > div { color: var(--aa-text) !important; }
+    > div > :nth-child(odd) { color: var(--aa-text-muted) !important; }
   }
 }
 html[data-theme="dark"] { @include rtp-diagram-dark; }

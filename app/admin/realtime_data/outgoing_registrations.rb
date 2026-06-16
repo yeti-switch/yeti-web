@@ -2,7 +2,7 @@
 
 ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrations' do
   menu parent: 'Realtime Data', priority: 30,
-       if: proc { authorized?(:index, RealtimeData::OutgoingRegistration) && Node.any? }
+       if: proc { authorized?(:index, RealtimeData::OutgoingRegistration) }
 
   actions :index
 
