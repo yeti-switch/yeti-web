@@ -226,9 +226,15 @@ module ClickhouseReport
       Rails.logger.debug { "ClickhouseReport request params: #{all_query_params}" }
       response = ClickHouse.connection.execute(sql, nil, params: all_query_params)
       Rails.logger.debug { "ClickhouseReport response (status: #{response.status})\n#{response.body}" }
-      raise InvalidResponseError, "clickhouse responds with #{response.status}" if response.status != 200
+      # ClickHouse reports query errors as a non-200 and/or an "exception" field
+      # in the (JSON) body (http_write_exception_in_output_format=1).
+      body = response.body
+      exception = body['exception'] if body.is_a?(Hash)
+      if response.status != 200 || exception
+        raise InvalidResponseError, "clickhouse responds with #{response.status}#{": #{exception}" if exception}"
+      end
 
-      format_result(response.body)
+      format_result(body)
     end
 
     private

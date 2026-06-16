@@ -76,6 +76,31 @@ RSpec.describe Mcp::Tools::CdrReport do
       expect(params_of(t)).to include('param_f1' => 42)
     end
 
+    it 'coerces a boolean filter value to 0/1 for an integer column (success = true → 1)' do
+      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'success', 'op' => 'eq', 'value' => true }])
+      t.send(:where_clause)
+      expect(params_of(t)).to include('param_f1' => 1)
+    end
+
+    it 'coerces false to 0' do
+      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'success', 'op' => 'eq', 'value' => false }])
+      t.send(:where_clause)
+      expect(params_of(t)).to include('param_f1' => 0)
+    end
+
+    it 'coerces array filter values too' do
+      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'success', 'op' => 'in', 'value' => [true, false] }])
+      t.send(:where_clause)
+      expect(params_of(t)).to include('param_f1' => [1, 0])
+    end
+
+    it 'rejects a non-integer filter value as invalid input' do
+      expect do
+        windowed('measures' => ['calls'],
+                 'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => 'abc' }]).send(:where_clause)
+      end.to raise_error(ArgumentError, /not a valid Int32/)
+    end
+
     it 'binds an array filter value as Array(Type)' do
       t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [1, 7] }])
       expect(t.send(:where_clause)).to include('dst_country_id IN {f1: Array(Int32)}')
@@ -163,17 +188,17 @@ RSpec.describe Mcp::Tools::CdrReport do
   end
 
   describe '#build_sql injection properties' do
-    it 'binds a malicious filter value as a param instead of inlining it' do
-      malicious = '1); DROP TABLE cdrs;--'
-      t = windowed(
-        'measures' => ['calls'],
-        'dimensions' => ['customer_acc_id'],
-        'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => malicious }]
-      )
-      sql = t.send(:build_sql)
-      expect(sql).not_to include('DROP')
-      expect(sql).to include('customer_acc_id = {f1: Int32}')
-      expect(params_of(t).values).to include(malicious)
+    it 'rejects a malicious (non-integer) filter value rather than binding or inlining it' do
+      # For an integer column the value is coerced/validated, so an injection-shaped
+      # string is rejected outright — it never reaches the SQL or the params.
+      # (Binding-of-valid-values safety is covered by the #where_clause specs.)
+      expect do
+        windowed(
+          'measures' => ['calls'],
+          'dimensions' => ['customer_acc_id'],
+          'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => '1); DROP TABLE cdrs;--' }]
+        ).send(:build_sql)
+      end.to raise_error(ArgumentError, /not a valid Int32/)
     end
 
     it 'rejects injection routed through any key (measure/dimension/filter field/op/order)' do

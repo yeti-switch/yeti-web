@@ -7,6 +7,7 @@ RSpec.shared_context :clickhouse_helpers do
         basic_auth: [ClickHouse.config.username, ClickHouse.config.password],
         query: {
           database: ClickHouse.config.database,
+          **ClickHouse.config.global_params, # e.g. http_write_exception_in_output_format
           **clickhouse_query_params,
           query: clickhouse_query_sql,
           send_progress_in_http_headers: 1

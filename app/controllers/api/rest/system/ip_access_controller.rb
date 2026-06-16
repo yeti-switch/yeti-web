@@ -123,7 +123,16 @@ class Api::Rest::System::IpAccessController < Api::RestController
 
     response = ClickHouse.connection.execute(recent_cdr_sql)
     body = response.body
-    row = body.is_a?(Hash) ? Array(body['data']).first : nil
+    # ClickHouse reports query errors as a non-200 and/or an "exception" field in
+    # the (JSON) body (http_write_exception_in_output_format=1).
+    if response.status != 200 || (body.is_a?(Hash) && body['exception'])
+      detail = body.is_a?(Hash) && body['exception'] ? body['exception'] : body
+      Rails.logger.error("Api::Rest::System::IpAccessController: ClickHouse error: HTTP #{response.status}: #{detail}")
+      IpAccessProcessor.collect_clickhouse_error_metric if PrometheusConfig.enabled?
+      return { lega: [], legb: [] }
+    end
+
+    row = Array(body['data']).first
     {
       lega: normalize_cdr_ips(row && row['lega_ips']),
       legb: normalize_cdr_ips(row && row['legb_ips'])
