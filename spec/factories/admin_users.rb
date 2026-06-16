@@ -13,6 +13,7 @@
 #  last_sign_in_at        :timestamptz
 #  last_sign_in_ip        :string(255)
 #  oidc_raw_info          :jsonb
+#  per_page               :jsonb            not null
 #  provider               :string
 #  remember_created_at    :timestamptz
 #  reset_password_sent_at :timestamptz
