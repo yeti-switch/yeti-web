@@ -14473,7 +14473,8 @@ CREATE TABLE gui.admin_users (
     allowed_ips inet[],
     provider character varying,
     uid character varying,
-    oidc_raw_info jsonb
+    oidc_raw_info jsonb,
+    per_page jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -20645,6 +20646,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260616120000'),
 ('20260608120000'),
 ('20260604120000'),
 ('20260603120000'),

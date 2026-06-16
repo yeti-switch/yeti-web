@@ -13,6 +13,10 @@ class AdminUserDecorator < ApplicationDecorator
     h.pre_wrap_json(model.saved_filters)
   end
 
+  def pretty_per_page
+    h.pre_wrap_json(model.per_page)
+  end
+
   def has_allowed_ips
     if model.allowed_ips.nil?
       status_tag(:no)
