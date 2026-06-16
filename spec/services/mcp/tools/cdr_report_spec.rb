@@ -101,6 +101,13 @@ RSpec.describe Mcp::Tools::CdrReport do
       end.to raise_error(ArgumentError, /not a valid Int32/)
     end
 
+    it 'binds a String filter value as-is (no integer coercion)' do
+      t = windowed('measures' => ['calls'],
+                   'filters' => [{ 'field' => 'internal_disconnect_reason', 'op' => 'eq', 'value' => 'Media stream exception' }])
+      expect(t.send(:where_clause)).to include('internal_disconnect_reason = {f1: String}')
+      expect(params_of(t)).to include('param_f1' => 'Media stream exception')
+    end
+
     it 'binds an array filter value as Array(Type)' do
       t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [1, 7] }])
       expect(t.send(:where_clause)).to include('dst_country_id IN {f1: Array(Int32)}')

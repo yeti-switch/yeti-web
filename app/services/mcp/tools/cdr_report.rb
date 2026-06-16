@@ -54,8 +54,12 @@ module Mcp
         'src_network_id' => 'src_network_id',
         'disconnect_initiator_id' => 'disconnect_initiator_id',
         'internal_disconnect_code_id' => 'internal_disconnect_code_id',
+        'internal_disconnect_code' => 'internal_disconnect_code',
+        'internal_disconnect_reason' => 'internal_disconnect_reason',
         'lega_disconnect_code' => 'lega_disconnect_code',
+        'lega_disconnect_reason' => 'lega_disconnect_reason',
         'legb_disconnect_code' => 'legb_disconnect_code',
+        'legb_disconnect_reason' => 'legb_disconnect_reason',
         'lega_q850_cause' => 'lega_q850_cause',
         'legb_q850_cause' => 'legb_q850_cause',
         'lega_q850_text' => 'lega_q850_text',
@@ -125,8 +129,12 @@ module Mcp
         'src_network_id' => { col: 'src_network_id', type: 'Int32' },
         'disconnect_initiator_id' => { col: 'disconnect_initiator_id', type: 'Int32' },
         'internal_disconnect_code_id' => { col: 'internal_disconnect_code_id', type: 'Int16' },
+        'internal_disconnect_code' => { col: 'internal_disconnect_code', type: 'Int32' },
+        'internal_disconnect_reason' => { col: 'internal_disconnect_reason', type: 'String' },
         'lega_disconnect_code' => { col: 'lega_disconnect_code', type: 'Int32' },
+        'lega_disconnect_reason' => { col: 'lega_disconnect_reason', type: 'String' },
         'legb_disconnect_code' => { col: 'legb_disconnect_code', type: 'Int32' },
+        'legb_disconnect_reason' => { col: 'legb_disconnect_reason', type: 'String' },
         'pop_id' => { col: 'pop_id', type: 'Int32' },
         'node_id' => { col: 'node_id', type: 'Int32' },
         'failed_resource_type_id' => { col: 'failed_resource_type_id', type: 'Int8' },
@@ -355,12 +363,12 @@ module Mcp
         op[:sql].call(spec[:col], placeholder)
       end
 
-      # Coerce a filter value to its column type before binding. All allowlisted
-      # filter columns are integers, and ClickHouse's parameter binder rejects
-      # anything that isn't a bare integer (e.g. `success = true` → "Value true
-      # cannot be parsed as Int8"). Map booleans to 0/1 and accept integer-ish
-      # values; reject the rest as invalid input so the client gets a clear error
-      # instead of a server-side ClickHouse failure.
+      # Coerce a filter value to its column type before binding. For integer
+      # columns ClickHouse's parameter binder rejects anything that isn't a bare
+      # integer (e.g. `success = true` → "Value true cannot be parsed as Int8"),
+      # so map booleans to 0/1 and accept integer-ish values, rejecting the rest as
+      # invalid input (clear client error rather than a server-side CH failure).
+      # Non-integer columns (e.g. String reason filters) bind their value as-is.
       def coerce_filter_value(value, type, field)
         return value unless type.start_with?('Int', 'UInt')
 
