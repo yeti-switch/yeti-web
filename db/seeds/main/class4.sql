@@ -309,6 +309,8 @@ insert into class4.disconnect_code
 values
     (133, 1, true, false, 480, 'Term. gw throttled', 480, 'Temporarily Unavailable', false, true,  true, false);
 
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (134, 1, true, false, 500, 'No Free RTP ports', NULL, NULL, false, false, true, false);
+
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1500, 1, true, false, 500, 'SDP processing exception', NULL, NULL, false, true, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1501, 1, true, false, 500, 'SDP parsing failed', NULL, NULL, false, true, true, false);
