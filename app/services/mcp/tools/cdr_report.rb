@@ -75,6 +75,8 @@ module Mcp
         'sign_term_transport_protocol_id' => 'sign_term_transport_protocol_id',
         'auth_orig_transport_protocol_id' => 'auth_orig_transport_protocol_id',
         'success' => 'success',
+        'is_last_cdr' => 'is_last_cdr',
+        'routing_attempt' => 'routing_attempt',
         # GeoIP origin (IP-derived city/ISP centroid — discrete, low-cardinality).
         'origin_lat' => 'auth_orig_lat',
         'origin_lon' => 'auth_orig_lon',
@@ -138,7 +140,9 @@ module Mcp
         'pop_id' => { col: 'pop_id', type: 'Int32' },
         'node_id' => { col: 'node_id', type: 'Int32' },
         'failed_resource_type_id' => { col: 'failed_resource_type_id', type: 'Int8' },
-        'success' => { col: 'success', type: 'Int8' }
+        'success' => { col: 'success', type: 'Int8' },
+        'is_last_cdr' => { col: 'is_last_cdr', type: 'Int8' },
+        'routing_attempt' => { col: 'routing_attempt', type: 'Int32' }
       }.freeze
 
       # op => { array:, sql: builder(column, placeholder) }. `array` ops bind an
@@ -168,6 +172,15 @@ module Mcp
             any actual numbers/IPs/names: e.g. high `calls` with
             `distinct_src_numbers` = 1 means every call shares a single CLI;
             `distinct_orig_ips` spiking on an account suggests credential sharing.
+
+            Coded value semantics:
+            - `success`: 0 = failed/unanswered, 1 = answered.
+            - `is_last_cdr`: 1 = final CDR of a call leg, 0 = an intermediate
+              rerouting attempt. Filter `is_last_cdr = 1` to count real calls
+              (otherwise reroute attempts inflate the counts).
+            - `disconnect_initiator_id`: #{Cdr::Cdr::DISCONNECT_INITIATORS.map { |id, name| "#{id} = #{name}" }.join(', ')}.
+            For disconnect detail prefer the human-readable `*_disconnect_reason`
+            dimensions over the numeric `*_disconnect_code` fields.
           DESC
           inputSchema: {
             type: 'object',
