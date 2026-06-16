@@ -38,6 +38,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_export :id, :enabled,
                  [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  :prefix, :dst_number_min_length, :dst_number_max_length,
+                 [:country_name, proc { |row| row.network_prefix.try(:country).try(:name) }],
+                 [:network_name, proc { |row| row.network_prefix.try(:network).try(:name) }],
                  [:rate_group_name, proc { |row| row.rate_group.try(:name) }],
                  :reject_calls,
                  :rate_policy_name,

@@ -26,6 +26,8 @@ ActiveAdmin.register Dialpeer do
   acts_as_export :id, :enabled, :locked,
                  [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  :prefix, :priority, :force_hit_rate, :exclusive_route,
+                 [:country_name, proc { |row| row.network_prefix.try(:country).try(:name) }],
+                 [:network_name, proc { |row| row.network_prefix.try(:network).try(:name) }],
                  :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee,
                  [:currency_name, proc { |row| row.currency.name }],
                  :lcr_rate_multiplier,
