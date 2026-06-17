@@ -111,6 +111,10 @@ ActiveAdmin.register Payment do
         pre { JSON.pretty_generate(payment.metadata || {}) }
       end
 
+      tab 'Comments' do
+        active_admin_comments
+      end
+
       if payment.type_cryptomus?
         tab :cryptomus_info do
           pre do
@@ -134,9 +138,12 @@ ActiveAdmin.register Payment do
   end
 
   action_item :rollback, only: :show do
-    if authorized?(:rollback, resource)
-      hint = "Balance will be restored, status changed, rolledback_at recorded. This action can't be reverted."
-      link_to('Rollback', rollback_payment_path(resource.id), method: :post, title: hint)
+    # Only completed payments can be rolled back (see Payment::Rollback) — hide the
+    # button otherwise, including once a payment has already been rolled back.
+    if authorized?(:rollback, resource) && resource.completed?
+      hint = I18n.t('payment.rollback.hint')
+      link_to('Rollback', rollback_payment_path(resource.id), method: :post, title: hint,
+                                                              data: { confirm: I18n.t('payment.rollback.confirm', hint: hint) })
     end
   end
 end
