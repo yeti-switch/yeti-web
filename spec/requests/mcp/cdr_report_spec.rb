@@ -153,11 +153,38 @@ RSpec.describe 'MCP cdr.report tool', type: :request do
       end
     end
 
-    it 'surfaces a non-200 ClickHouse response as an error' do
-      allow(ch_connection).to receive(:execute).and_return(double(status: 500, body: 'boom'))
+    it 'on a non-200 ClickHouse response returns a generic error and logs the real cause' do
+      allow(ch_connection).to receive(:execute)
+        .and_return(double(status: 404, body: { 'exception' => 'Code: 60. DB::Exception: Unknown table' }))
+      expect(Rails.logger).to receive(:error).with(/HTTP 404.*Code: 60.*Unknown table/m)
+
       call_tool('measures' => ['calls'], 'from' => from, 'to' => to)
+
       expect(result['isError']).to be true
-      expect(error_text).to match(/clickhouse error 500/i)
+      expect(error_text).to eq('Internal server error')
+      # nothing internal leaks to the client
+      expect(error_text).not_to match(/404|DB::Exception|Code:/)
+    end
+
+    it 'treats a 200 response carrying an "exception" attribute as a failure' do
+      allow(ch_connection).to receive(:execute)
+        .and_return(double(status: 200, body: { 'exception' => 'Code: 159. DB::Exception: Timeout exceeded' }))
+      expect(Rails.logger).to receive(:error).with(/Timeout exceeded/)
+
+      call_tool('measures' => ['calls'], 'from' => from, 'to' => to)
+
+      expect(result['isError']).to be true
+      expect(error_text).to eq('Internal server error')
+    end
+
+    it 'on a ClickHouse/transport exception returns a generic error and logs it' do
+      allow(ch_connection).to receive(:execute).and_raise(StandardError.new('connection refused'))
+      expect(Rails.logger).to receive(:error).with(/StandardError.*connection refused/m)
+
+      call_tool('measures' => ['calls'], 'from' => from, 'to' => to)
+
+      expect(result['isError']).to be true
+      expect(error_text).to eq('Internal server error')
     end
   end
 end

@@ -32,7 +32,7 @@ module Mcp
       DEFAULT_LIMIT = 200
       MAX_LIMIT = 2000
       MAX_WINDOW_DAYS = 31
-      MAX_EXECUTION_TIME = 30 # seconds
+      MAX_EXECUTION_TIME = 120 # seconds
 
       # name => SQL fragment (constant; the LLM only sends the name)
       DIMENSIONS = {
@@ -54,8 +54,12 @@ module Mcp
         'src_network_id' => 'src_network_id',
         'disconnect_initiator_id' => 'disconnect_initiator_id',
         'internal_disconnect_code_id' => 'internal_disconnect_code_id',
+        'internal_disconnect_code' => 'internal_disconnect_code',
+        'internal_disconnect_reason' => 'internal_disconnect_reason',
         'lega_disconnect_code' => 'lega_disconnect_code',
+        'lega_disconnect_reason' => 'lega_disconnect_reason',
         'legb_disconnect_code' => 'legb_disconnect_code',
+        'legb_disconnect_reason' => 'legb_disconnect_reason',
         'lega_q850_cause' => 'lega_q850_cause',
         'legb_q850_cause' => 'legb_q850_cause',
         'lega_q850_text' => 'lega_q850_text',
@@ -71,6 +75,8 @@ module Mcp
         'sign_term_transport_protocol_id' => 'sign_term_transport_protocol_id',
         'auth_orig_transport_protocol_id' => 'auth_orig_transport_protocol_id',
         'success' => 'success',
+        'is_last_cdr' => 'is_last_cdr',
+        'routing_attempt' => 'routing_attempt',
         # GeoIP origin (IP-derived city/ISP centroid — discrete, low-cardinality).
         'origin_lat' => 'auth_orig_lat',
         'origin_lon' => 'auth_orig_lon',
@@ -125,12 +131,18 @@ module Mcp
         'src_network_id' => { col: 'src_network_id', type: 'Int32' },
         'disconnect_initiator_id' => { col: 'disconnect_initiator_id', type: 'Int32' },
         'internal_disconnect_code_id' => { col: 'internal_disconnect_code_id', type: 'Int16' },
+        'internal_disconnect_code' => { col: 'internal_disconnect_code', type: 'Int32' },
+        'internal_disconnect_reason' => { col: 'internal_disconnect_reason', type: 'String' },
         'lega_disconnect_code' => { col: 'lega_disconnect_code', type: 'Int32' },
+        'lega_disconnect_reason' => { col: 'lega_disconnect_reason', type: 'String' },
         'legb_disconnect_code' => { col: 'legb_disconnect_code', type: 'Int32' },
+        'legb_disconnect_reason' => { col: 'legb_disconnect_reason', type: 'String' },
         'pop_id' => { col: 'pop_id', type: 'Int32' },
         'node_id' => { col: 'node_id', type: 'Int32' },
         'failed_resource_type_id' => { col: 'failed_resource_type_id', type: 'Int8' },
-        'success' => { col: 'success', type: 'Int8' }
+        'success' => { col: 'success', type: 'Int8' },
+        'is_last_cdr' => { col: 'is_last_cdr', type: 'Int8' },
+        'routing_attempt' => { col: 'routing_attempt', type: 'Int32' }
       }.freeze
 
       # op => { array:, sql: builder(column, placeholder) }. `array` ops bind an
@@ -160,6 +172,15 @@ module Mcp
             any actual numbers/IPs/names: e.g. high `calls` with
             `distinct_src_numbers` = 1 means every call shares a single CLI;
             `distinct_orig_ips` spiking on an account suggests credential sharing.
+
+            Coded value semantics:
+            - `success`: 0 = failed/unanswered, 1 = answered.
+            - `is_last_cdr`: 1 = final CDR of a call leg, 0 = an intermediate
+              rerouting attempt. Filter `is_last_cdr = 1` to count real calls
+              (otherwise reroute attempts inflate the counts).
+            - `disconnect_initiator_id`: #{Cdr::Cdr::DISCONNECT_INITIATORS.map { |id, name| "#{id} = #{name}" }.join(', ')}.
+            For disconnect detail prefer the human-readable `*_disconnect_reason`
+            dimensions over the numeric `*_disconnect_code` fields.
           DESC
           inputSchema: {
             type: 'object',
@@ -217,19 +238,39 @@ module Mcp
       end
 
       def run
+        # build_sql raises ArgumentError for bad input — that surfaces as a
+        # helpful "Invalid input" via .call (it's about the request, not server
+        # internals), so keep it OUTSIDE the rescue below.
         sql = build_sql
         Rails.logger.debug { "[MCP] cdr.report sql=#{sql} params=#{@params}" }
-        response = ClickHouse.connection.execute(sql, nil, params: @params)
-        unless response.status == 200
-          return Mcp::Tools.tool_error("ClickHouse error #{response.status}: #{response.body}")
-        end
 
-        body = response.body
-        out = { rows: body['rows'], data: body['data'] }
-        { content: [{ type: 'text', text: JSON.pretty_generate(out) }] }
+        begin
+          response = ClickHouse.connection.execute(sql, nil, params: @params)
+          body = response.body
+          # ClickHouse renders query errors as a non-200 and/or an "exception"
+          # field in the (JSON) body (http_write_exception_in_output_format=1).
+          if response.status != 200 || (body.is_a?(Hash) && body['exception'])
+            detail = body.is_a?(Hash) && body['exception'] ? body['exception'] : body
+            return log_and_fail(sql, "ClickHouse responded HTTP #{response.status}: #{detail}")
+          end
+
+          { content: [{ type: 'text', text: JSON.pretty_generate(rows: body['rows'], data: body['data']) }] }
+        rescue StandardError => e
+          log_and_fail(sql, "#{e.class}: #{e.message}", e)
+        end
       end
 
       private
+
+      # Log the real cause (HTTP status/body or exception) to the yeti-web log,
+      # and return a generic error to the client — never expose the SQL or any
+      # ClickHouse internals.
+      def log_and_fail(sql, detail, exception = nil)
+        lines = ["[MCP] cdr.report failed: #{detail}", "  sql: #{sql}", "  params: #{@params}"]
+        lines.concat(exception.backtrace.first(10)) if exception&.backtrace
+        Rails.logger.error(lines.join("\n"))
+        Mcp::Tools.tool_error('Internal server error')
+      end
 
       # Assembles the statement from individually-validated clause builders. Every
       # clause emits ONLY allowlist-mapped constants and {param:Type} placeholders;
@@ -280,10 +321,9 @@ module Mcp
         "GROUP BY #{dimensions.map { |k| DIMENSIONS[k] }.join(', ')}"
       end
 
-      # Per-query guardrails, independent of the CH user's own limits.
+      # Per-query wall-clock cap (the row count is already bounded by LIMIT).
       def settings_clause
-        "SETTINGS max_execution_time = #{MAX_EXECUTION_TIME}, " \
-          "max_result_rows = #{limit}, result_overflow_mode = 'throw'"
+        "SETTINGS max_execution_time = #{MAX_EXECUTION_TIME}"
       end
 
       def where_clause
@@ -324,16 +364,37 @@ module Mcp
             raise ArgumentError, "operator #{f['op']} needs a non-empty array value"
           end
 
-          @params["param_#{name}"] = values
+          @params["param_#{name}"] = values.map { |v| coerce_filter_value(v, spec[:type], f['field']) }
           placeholder = "{#{name}: Array(#{spec[:type]})}"
         else
           value = f['value']
           raise ArgumentError, "operator #{f['op']} needs a scalar value" if value.nil? || value.is_a?(Array)
 
-          @params["param_#{name}"] = value
+          @params["param_#{name}"] = coerce_filter_value(value, spec[:type], f['field'])
           placeholder = "{#{name}: #{spec[:type]}}"
         end
         op[:sql].call(spec[:col], placeholder)
+      end
+
+      # Coerce a filter value to its column type before binding. For integer
+      # columns ClickHouse's parameter binder rejects anything that isn't a bare
+      # integer (e.g. `success = true` → "Value true cannot be parsed as Int8"),
+      # so map booleans to 0/1 and accept integer-ish values, rejecting the rest as
+      # invalid input (clear client error rather than a server-side CH failure).
+      # Non-integer columns (e.g. String reason filters) bind their value as-is.
+      def coerce_filter_value(value, type, field)
+        return value unless type.start_with?('Int', 'UInt')
+
+        case value
+        when true then 1
+        when false then 0
+        when Integer then value
+        when String
+          Integer(value, exception: false) ||
+            (raise ArgumentError, "filter #{field}: #{value.inspect} is not a valid #{type}")
+        else
+          raise ArgumentError, "filter #{field}: #{value.inspect} is not a valid #{type}"
+        end
       end
 
       # ORDER BY references a SELECT alias (a constant from our maps), never input
