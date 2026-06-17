@@ -136,8 +136,8 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.21.2', require: false
   gem 'simplecov-cobertura', '~> 3.1', require: false
-  gem 'site_prism', '~> 5.1'
-  gem 'webdrivers', '~> 4.0'
+  gem 'site_prism', '~> 6.0'
+  gem 'webdrivers', '~> 5.3'
   gem 'webmock'
 end
 gem 'bootsnap', require: false
