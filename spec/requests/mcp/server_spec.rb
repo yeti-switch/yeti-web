@@ -58,11 +58,11 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
       expect(body['result']['serverInfo']['version']).to be_present
     end
 
-    it 'responds to tools/list with at least routing.simulate' do
+    it 'responds to tools/list with at least routing_simulate' do
       mcp_call(token: token.plaintext_token, method: 'tools/list')
       expect(response).to have_http_status(:success)
       tools = JSON.parse(response.body).dig('result', 'tools')
-      expect(tools.map { |t| t['name'] }).to include('routing.simulate')
+      expect(tools.map { |t| t['name'] }).to include('routing_simulate')
     end
 
     it 'accepts notifications/* with a 202 and no body' do

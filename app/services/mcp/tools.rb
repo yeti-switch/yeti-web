@@ -3,8 +3,8 @@
 module Mcp
   module Tools
     REGISTRY = {
-      'routing.simulate' => RoutingSimulate,
-      'cdr.report' => CdrReport
+      'routing_simulate' => RoutingSimulate,
+      'cdr_report' => CdrReport
     }.freeze
 
     def self.list
