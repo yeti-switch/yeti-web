@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'MCP routing.simulate tool', type: :request do
+RSpec.describe 'MCP routing_simulate tool', type: :request do
   include_context :with_oauth_routes
 
   let(:admin) { create(:admin_user) }
@@ -10,7 +10,7 @@ RSpec.describe 'MCP routing.simulate tool', type: :request do
     mcp_call(
       token: token.plaintext_token,
       method: 'tools/call',
-      params: { name: 'routing.simulate', arguments: arguments }
+      params: { name: 'routing_simulate', arguments: arguments }
     )
   end
 

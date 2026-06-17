@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'MCP cdr.report tool', type: :request do
+RSpec.describe 'MCP cdr_report tool', type: :request do
   include_context :with_oauth_routes
 
   let(:admin) { create(:admin_user) }
@@ -13,7 +13,7 @@ RSpec.describe 'MCP cdr.report tool', type: :request do
     mcp_call(
       token: token.plaintext_token,
       method: 'tools/call',
-      params: { name: 'cdr.report', arguments: arguments }
+      params: { name: 'cdr_report', arguments: arguments }
     )
   end
 

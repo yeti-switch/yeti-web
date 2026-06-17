@@ -16,7 +16,7 @@ module Mcp
 
       def self.descriptor
         {
-          name: 'routing.simulate',
+          name: 'routing_simulate',
           description: <<~DESC.strip,
             Simulate how a call would be routed without actually placing it.
             Returns the ordered list of route candidates with the dialpeer,

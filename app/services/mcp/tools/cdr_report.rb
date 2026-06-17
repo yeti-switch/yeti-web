@@ -160,7 +160,7 @@ module Mcp
 
       def self.descriptor
         {
-          name: 'cdr.report',
+          name: 'cdr_report',
           description: <<~DESC.strip,
             Aggregated, read-only report over CDRs (ClickHouse cdrs table) for
             traffic analysis and anomaly detection. Choose `measures` (aggregates)
