@@ -17,7 +17,7 @@ gem 'responders'
 gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'devise', '>= 4.6.0'
 gem 'doorkeeper', '~> 5.9'
-gem 'ostruct', '~> 0.6.1'
+gem 'ostruct', '~> 0.6.3'
 
 # Seamless JWT authentication for Rails API
 gem 'jwt'
@@ -52,6 +52,8 @@ gem 'jsonapi-resources', github: 'JSONAPI-Resources/jsonapi-resources', branch: 
 # gem 'activeadmin_async_export'
 
 # Ext
+# Held at 7.x: validates_timeliness 8.0 requires activemodel >= 8 (Rails 8).
+# Move to '~> 8.0' as part of the Rails 8 upgrade.
 gem 'validates_timeliness', '~> 7.0.0.beta1'
 
 # Object-oriented authorization for Rails applications
@@ -69,7 +71,7 @@ gem 'coffee-rails'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
-gem 'tom-select-rails', '~> 2.4'
+gem 'tom-select-rails', '~> 2.5'
 
 gem 'mini_racer'
 gem 'rails-html-sanitizer', '>= 1.6.1'
@@ -81,8 +83,6 @@ gem 'delayed_job_active_record'
 gem 'odf-report', github: 'yeti-switch/odf-report', branch: 'master-2018'
 gem 'puma', '~> 8.0'
 gem 'puma_worker_killer'
-gem 'syslog', '~> 0.2.0' # need for syslog-logger
-gem 'syslog-logger'
 gem 'zip-zip'
 
 gem 'pgq_prometheus', require: false
@@ -133,7 +133,7 @@ group :test do
   gem 'database_consistency', require: false
   gem 'ferrum'
   gem 'shoulda-matchers'
-  gem 'simplecov', '~> 0.21.2', require: false
+  gem 'simplecov', require: false
   gem 'simplecov-cobertura', '~> 3.1', require: false
   gem 'site_prism', '~> 6.0'
   gem 'webmock'
@@ -144,11 +144,11 @@ gem 'httparty', '>= 0.24.0'
 
 gem 'matrix', '~> 0.4.2'
 
-gem 'net-smtp', '~> 0.3.3'
+gem 'net-smtp'
 
-gem 'webrick', '~> 1.8', require: false
+gem 'webrick', require: false
 
-gem 'cronex', '~> 0.12.0'
+gem 'cronex'
 
 gem 'click_house'
 

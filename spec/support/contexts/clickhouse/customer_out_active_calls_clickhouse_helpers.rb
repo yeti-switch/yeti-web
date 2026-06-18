@@ -4,13 +4,13 @@ RSpec.shared_context :customer_out_active_calls_clickhouse_helpers do
   include_context :clickhouse_helpers
 
   let(:clickhouse_query_sql) do
-    <<-SQL.squish
-        SELECT
-          #{ClickhouseReport::CustomerOutgoingActiveCalls::COLUMNS.map(&:to_s).join(', ')}
-        FROM active_calls
-        WHERE #{clickhouse_query_sql_where_conditions.join(' AND ')}
-        ORDER BY start_time DESC
-        FORMAT JSON
+    <<~SQL.squish
+      SELECT
+        #{ClickhouseReport::CustomerOutgoingActiveCalls::COLUMNS.map(&:to_s).join(', ')}
+      FROM active_calls
+      WHERE #{clickhouse_query_sql_where_conditions.join(' AND ')}
+      ORDER BY start_time DESC
+      FORMAT JSON
     SQL
   end
   let(:clickhouse_query_sql_where_conditions) do

@@ -402,6 +402,9 @@ Naming/ClassAndModuleCamelCase:
   Enabled: true
 Naming/FileName:
   Enabled: true
+  Exclude:
+    # Itsi web server config file — must be CamelCase, like Gemfile/Rakefile.
+    - 'Itsi.rb'
 Naming/HeredocDelimiterCase:
   Enabled: true
 Naming/HeredocDelimiterNaming:
@@ -482,6 +485,11 @@ Rails/Date:
   Enabled: false
 Rails/Delegate:
   Enabled: true
+  Exclude:
+    # Standalone daemon (bin/cdr_processor) that does NOT boot Rails; `delegate`
+    # is only available transitively via active_record, so keep these forwarders
+    # explicit rather than rely on that. See bin/cdr_processor.
+    - 'lib/cdr_processor/**/*'
 Rails/DelegateAllowBlank:
   Enabled: true
 Rails/DynamicFindBy:
@@ -517,6 +525,9 @@ Rails/NotNullColumn:
   Enabled: true
 Rails/Output:
   Enabled: true
+  Exclude:
+    # Seed scripts intentionally print progress to stdout when run from the CLI.
+    - 'db/custom_seeds/**/*'
 Rails/OutputSafety:
   Enabled: false
 Rails/PluralizationGrammar:

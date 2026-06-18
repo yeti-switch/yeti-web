@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Rails/Output
 puts 'loading global data'
 network_types = YAML.load_file('db/network_types.yml')
 networks = YAML.load_file('db/networks.yml')
@@ -49,4 +48,3 @@ System::NetworkPrefix.transaction do
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.countries_id_seq', MAX(id), true) FROM sys.countries"
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.network_prefixes_id_seq', MAX(id), true) FROM sys.network_prefixes"
 end
-# rubocop:enable Rails/Output

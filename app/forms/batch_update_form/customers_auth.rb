@@ -35,7 +35,7 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
     less_than_or_equal_to: 100,
     allow_blank: true,
     only_integer: true
-  }, if: -> { :src_number_max_length_changed? && src_number_min_length =~ /^[0-9]+$/ }
+  }, if: -> { src_number_max_length_changed? && src_number_min_length =~ /^[0-9]+$/ }
 
   validates :src_number_min_length, numericality: {
     greater_than_or_equal_to: 0,
@@ -49,7 +49,7 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
     less_than_or_equal_to: 100,
     allow_blank: true,
     only_integer: true
-  }, if: -> { :dst_number_max_length_changed? && dst_number_min_length =~ /^[0-9]+$/ }
+  }, if: -> { dst_number_max_length_changed? && dst_number_min_length =~ /^[0-9]+$/ }
 
   validates :dst_number_min_length, numericality: {
     greater_than_or_equal_to: 0,

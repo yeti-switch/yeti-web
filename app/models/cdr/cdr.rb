@@ -454,7 +454,7 @@ class Cdr::Cdr < Cdr::Base
                                       .transform_values { |rs| rs.sum { |r| r.customer_price.to_f } },
       vendor_price: rows.sum { |r| r.vendor_price_system.to_f },
       vendor_price_by_currency: rows.group_by(&:vendor_currency_id)
-                                      .transform_values { |rs| rs.sum { |r| r.vendor_price.to_f } }
+                                    .transform_values { |rs| rs.sum { |r| r.vendor_price.to_f } }
     )
   end
 

@@ -3,12 +3,7 @@
 module OauthTestHelpers
   # Creates an OauthApplication. Defaults match a public MCP client
   # (PKCE-capable, no client secret needed).
-  def create_oauth_application(
-    name: 'Test Client',
-    confidential: false,
-    scopes: 'mcp',
-    redirect_uri: 'http://localhost:8080/callback'
-  )
+  def create_oauth_application(name: 'Test Client', confidential: false, scopes: 'mcp', redirect_uri: 'http://localhost:8080/callback')
     OauthApplication.create!(
       name: name,
       redirect_uri: redirect_uri,

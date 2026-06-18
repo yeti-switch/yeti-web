@@ -61,7 +61,7 @@ ActiveAdmin.before_load do
     private
 
     def normalize_authorized_params(action, subject)
-      if subject.nil? && (!action.is_a?(Symbol) && !action.is_a?(String) && !action.is_a?(NilClass))
+      if subject.nil? && !action.is_a?(Symbol) && !action.is_a?(String) && !action.is_a?(NilClass)
         subject = action
         action = nil
       end

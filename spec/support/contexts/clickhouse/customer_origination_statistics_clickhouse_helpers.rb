@@ -4,7 +4,7 @@ RSpec.shared_context :customer_origination_statistics_clickhouse_helpers do
   include_context :clickhouse_helpers
 
   let(:clickhouse_query_sql) do
-    <<-SQL.squish
+    <<~SQL.squish
       SELECT
         toUnixTimestamp(toStartOfMinute(time_start)) as t,
         toUInt32(count(*)) AS total_calls,

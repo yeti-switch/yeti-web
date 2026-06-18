@@ -6,8 +6,8 @@ RSpec.describe Worker::ScheduleRateChanges, type: :job do
   let!(:destinations) { FactoryBot.create_list(:destination, 2) }
 
   let(:ids_sql) do
-    <<-SQL.squish
-        SELECT "class4"."destinations"."id" FROM "class4"."destinations" WHERE "class4"."destinations"."id" IN (#{destinations.pluck(:id).join(', ')})
+    <<~SQL.squish
+      SELECT "class4"."destinations"."id" FROM "class4"."destinations" WHERE "class4"."destinations"."id" IN (#{destinations.pluck(:id).join(', ')})
     SQL
   end
   let(:rate_attrs) do

@@ -25,7 +25,7 @@ class BatchUpdateForm::Contractor < BatchUpdateForm::Base
   validate :without_customers_auths
 
   def without_customers_auths
-    if errors.messages.blank? && (!customer && vendor)
+    if errors.messages.blank? && !customer && vendor
       errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer')) if customers_auth_any?
     end
   end

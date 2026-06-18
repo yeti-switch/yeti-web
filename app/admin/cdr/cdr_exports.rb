@@ -329,9 +329,9 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                },
                collection: if ff.object.customer_auth_external_id_in.present?
                              CustomersAuth
-                               .where(external_id: ff.object.customer_auth_external_id_in)
-                               .order(:name)
-                               .map { |r| [r.display_name, r.external_id] }
+                             .where(external_id: ff.object.customer_auth_external_id_in)
+                             .order(:name)
+                             .map { |r| [r.display_name, r.external_id] }
                            else
                              CustomersAuth.none
                            end
