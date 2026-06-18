@@ -62,7 +62,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
     allow_nil: false,
     only_integer: true,
     allow_blank: true
-  }, if: -> { :dst_number_max_length_changed? && dst_number_min_length =~ /^[0-9]+$/ }
+  }, if: -> { dst_number_max_length_changed? && dst_number_min_length =~ /^[0-9]+$/ }
   validates :dp_margin_percent, numericality: {
     greater_than: 0,
     allow_blank: true

@@ -32,9 +32,7 @@ class CustomStruct
     @attributes.dup
   end
 
-  def values
-    @attributes.values
-  end
+  delegate :values, to: :@attributes
 
   def to_s
     attrs = @attributes.map { |name, val| "#{name}=#{val}" }.join(' ')

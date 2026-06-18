@@ -16,8 +16,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
   let(:affected_destinations) { destinations }
 
   let(:ids_sql) do
-    <<-SQL.squish
-        SELECT "class4"."destinations"."id" FROM "class4"."destinations"
+    <<~SQL.squish
+      SELECT "class4"."destinations"."id" FROM "class4"."destinations"
     SQL
   end
   let(:apply_time) { 1.month.from_now.to_date }
@@ -263,7 +263,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
 
     let(:affected_destinations) { [destinations[1], destinations[0]] }
     let(:ids_sql) do
-      <<-SQL.squish
+      <<~SQL.squish
         SELECT "class4"."destinations"."id" FROM "class4"."destinations" WHERE "class4"."destinations"."id" IN (#{affected_destinations.pluck(:id).join(', ')})
       SQL
     end
@@ -297,7 +297,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
 
     let(:affected_destinations) { [destinations[0], destinations[1], destinations[2]] }
     let(:ids_sql) do
-      <<-SQL.squish
+      <<~SQL.squish
         SELECT "class4"."destinations"."id" FROM "class4"."destinations" WHERE "class4"."destinations"."rate_group_id" = #{rate_group.id}
       SQL
     end

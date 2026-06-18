@@ -13,9 +13,7 @@ module Scheduler
       end
 
       # @param options [Scheduler::Base::RunOptions]
-      def call(options)
-        @app.call(options)
-      end
+      delegate :call, to: :@app
     end
   end
 end

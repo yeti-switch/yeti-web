@@ -2,7 +2,7 @@
 
 ApiLogThread = Class.new(Thread)
 ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_name, start, finish, _id, payload|
-  api_log_enabled = YetiConfig.api_log_enabled.nil? ? true : YetiConfig.api_log_enabled
+  api_log_enabled = YetiConfig.api_log_enabled.nil? || YetiConfig.api_log_enabled
   next unless api_log_enabled
   next unless payload[:path].start_with?('/api/')
 

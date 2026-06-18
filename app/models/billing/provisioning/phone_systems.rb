@@ -5,7 +5,7 @@ module Billing
     class PhoneSystems < Base
       def verify_service_variables!
         contract = ServiceVariablesContract.new
-        result = contract.call(service.variables)
+        result = contract.call(service.variables || {})
         raise Billing::Provisioning::Errors::InvalidVariablesError, result.errors.to_h unless result.success?
 
         service.variables
@@ -21,7 +21,7 @@ module Billing
 
       def self.verify_service_type_variables!(service_type)
         contract = ServiceTypeVariablesContract.new
-        result = contract.call(service_type.variables)
+        result = contract.call(service_type.variables || {})
         raise Billing::Provisioning::Errors::InvalidVariablesError, result.errors.to_h unless result.success?
 
         service_type.variables

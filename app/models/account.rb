@@ -195,7 +195,7 @@ class Account < ApplicationRecord
   end
 
   def max_balance_reached?
-    self.balance >= self.max_balance
+    balance >= max_balance
   end
 
   def min_balance_close?

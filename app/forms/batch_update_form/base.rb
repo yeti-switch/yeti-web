@@ -138,7 +138,7 @@ class BatchUpdateForm::Base
 
     def extract_foreign_key_options(options)
       options.assert_valid_keys(:class_name, :display_name, :primary_key, :scope, :input_html, :type)
-      options[:input_html].assert_valid_keys(:additional_options) if options[:input_html].present?
+      options[:input_html].presence&.assert_valid_keys(:additional_options)
 
       {
         class_name: options.fetch(:class_name),

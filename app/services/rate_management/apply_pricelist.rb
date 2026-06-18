@@ -84,7 +84,7 @@ module RateManagement
     end
 
     def create_new_dialpeers!
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         INSERT INTO class4.dialpeers
           (#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id, currency_id, currency_rate, next_rate_system_currency)
         SELECT
@@ -117,7 +117,7 @@ module RateManagement
       dialpeer_ids = pricelist.items.to_delete.pluck(:dialpeer_id)
       return if dialpeer_ids.empty?
 
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         UPDATE class4.dialpeers
           SET valid_till = pricelist_items.valid_from
           FROM ratemanagement.pricelist_items
@@ -136,7 +136,7 @@ module RateManagement
     end
 
     def update_dialpeers!
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         UPDATE class4.dialpeers
         SET valid_till = pricelist_items.valid_from
           FROM ratemanagement.pricelist_items
@@ -149,7 +149,7 @@ module RateManagement
                 (#{NON_NEXT_RATE_FIELDS.map { |field| "dialpeers.#{field}" }.join(', ')})
       SQL
 
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         INSERT INTO class4.dialpeers(#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id, currency_id, currency_rate, next_rate_system_currency)
         SELECT
           #{(DATA_FIELDS + SCOPE_FIELDS).map { |field| "pricelist_items.#{field}" }.join(', ')},
@@ -171,7 +171,7 @@ module RateManagement
     end
 
     def create_next_rates!
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         UPDATE dialpeers
         SET valid_till = pricelist_items.valid_till
         FROM ratemanagement.pricelist_items
@@ -184,7 +184,7 @@ module RateManagement
           (#{NON_NEXT_RATE_FIELDS.map { |field| "dialpeers.#{field}" }.join(', ')})
       SQL
 
-      SqlCaller::Yeti.execute <<-SQL.squish
+      SqlCaller::Yeti.execute <<~SQL.squish
         INSERT INTO class4.dialpeer_next_rates(
                               dialpeer_id,
                               apply_time,

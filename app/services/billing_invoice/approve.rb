@@ -24,9 +24,7 @@ module BillingInvoice
     end
 
     def send_email
-      if invoice.invoice_document.present?
-        invoice.invoice_document.send_invoice
-      end
+      invoice.invoice_document.presence&.send_invoice
     end
 
     def raise_if_invalid!

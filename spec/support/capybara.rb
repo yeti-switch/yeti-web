@@ -18,7 +18,7 @@ build_cuprite_driver = lambda do |app, headless:|
     window_size: [1920, 1200],
     process_timeout: 10, # fix for macOS chrome
     timeout: 20, # to fix some rare cases on local machine and CI when browser hangs
-    url_whitelist: %w[http://127.0.0.1:* http://localhost:* http://lvh.me:*],
+    url_allowlist: %w[http://127.0.0.1:* http://localhost:* http://lvh.me:*],
     # https://peter.sh/experiments/chromium-command-line-switches/
     browser_options: {
       'disable-gpu' => nil,

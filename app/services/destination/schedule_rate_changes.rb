@@ -20,7 +20,7 @@ module Destination
         Routing::Destination.where('id IN (?) AND valid_till <= ?', ids, apply_time).update_all(valid_till: apply_time + VALID_TILL)
         Routing::DestinationNextRate.where(destination_id: ids).delete_all
 
-        sql = <<-SQL.squish
+        sql = <<~SQL.squish
           INSERT INTO class4.destination_next_rates (destination_id, initial_interval, initial_rate, next_interval, next_rate, connect_fee, apply_time, created_at, updated_at)
           SELECT id,
                  #{initial_interval.nil? ? 'initial_interval' : ':initial_interval'},

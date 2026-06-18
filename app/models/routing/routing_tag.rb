@@ -54,7 +54,7 @@ class Routing::RoutingTag < ApplicationRecord
   private
 
   def name_to_lowercase
-    name.downcase! if name.present?
+    name.presence&.downcase!
   end
 
   def prevent_destroy_if_have_assosiations
