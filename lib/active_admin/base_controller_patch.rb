@@ -2,7 +2,7 @@
 
 ActiveAdmin.before_load do
   ActiveAdmin::BaseController.class_eval do
-    include Pundit
+    include Pundit::Authorization
     include CaptureError::ControllerMethods
 
     before_action only: [:index] do
@@ -11,7 +11,8 @@ ActiveAdmin.before_load do
     end
 
     before_action do
-      left_sidebar!(collapsed: true) if respond_to?(:left_sidebar!)
+      # Left-positioned sidebar, always visible (collapse feature disabled).
+      left_sidebar! if respond_to?(:left_sidebar!)
     end
 
     after_action do

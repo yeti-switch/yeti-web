@@ -9,6 +9,12 @@ GIT
       railties (>= 4.1)
 
 GIT
+  remote: https://github.com/activeadmin-plugins/active_admin_date_range_preset.git
+  revision: dfcf8f65c2173b631169f371cc436c58a0c29287
+  specs:
+    active_admin_date_range_preset (0.3.1)
+
+GIT
   remote: https://github.com/activeadmin-plugins/activeadmin-oidc.git
   revision: d6dbc83cf1641151d9c48a32196bbec132a5b92f
   specs:
@@ -78,12 +84,6 @@ GIT
       rspec (~> 3.0)
 
 GIT
-  remote: https://github.com/workgena/active_admin_date_range_preset.git
-  revision: 1bfb64ceb9639bb76dcad2c8e2df4c5199b138f3
-  specs:
-    active_admin_date_range_preset (0.3.1)
-
-GIT
   remote: https://github.com/yeti-switch/active_admin_theme.git
   revision: 2043bf60325b3cbcd45cf0285f377ad576af0b98
   branch: dark_mode
@@ -149,17 +149,17 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_admin_datetimepicker (1.1.0)
-      activeadmin (>= 2.14.0, < 4.0)
-    active_admin_import (5.0.0)
-      activeadmin (>= 1.0.0)
-      activerecord-import (>= 0.27)
+    active_admin_datetimepicker (2.0.0)
+      activeadmin (>= 3.0, < 4.0)
+    active_admin_import (8.0.0)
+      activeadmin (>= 3.0, < 4.1)
+      activerecord-import (>= 2.0)
       rchardet (>= 1.6)
       rubyzip (>= 1.2)
     active_admin_scoped_collection_actions (2.0.0)
       activeadmin (>= 3.0, < 4.0)
-    active_admin_sidebar (1.1.0)
-      activeadmin
+    active_admin_sidebar (3.0.0)
+      activeadmin (>= 3.0, < 4.0)
     active_record_extended (3.5.0)
       activerecord (>= 5.2)
       pg (< 3.0)
@@ -218,7 +218,7 @@ GEM
       ruby2_keywords (>= 0.0.2)
     ast (2.4.3)
     attr_required (1.0.2)
-    awesome_print (1.8.0)
+    awesome_print (1.9.2)
     aws-eventstream (1.4.0)
     aws-partitions (1.1261.0)
     aws-sdk-core (3.252.0)
@@ -248,18 +248,20 @@ GEM
     brakeman (8.0.5)
       racc
     builder (3.3.0)
-    bullet (7.2.0)
+    bullet (8.1.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     bundler-audit (0.9.3)
       bundler (>= 1.2.0)
       thor (~> 1.0)
-    bunny (2.24.0)
-      amq-protocol (~> 2.3)
+    bunny (3.1.0)
+      amq-protocol (~> 2.7)
+      logger (~> 1, >= 1.7)
       sorted_set (~> 1, >= 1.0.2)
     bunny-mock (1.7.0)
       bunny (>= 1.7)
-    byebug (11.1.3)
+    byebug (13.0.0)
+      reline (>= 0.6.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -276,13 +278,6 @@ GEM
     click_house (2.1.2)
       activesupport
       faraday (>= 1.7, < 3)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.3.7)
     config (5.6.1)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -321,7 +316,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.6.2)
     docile (1.4.1)
-    doorkeeper (5.9.1)
+    doorkeeper (5.9.3)
       railties (>= 5)
     draper (4.0.6)
       actionpack (>= 5.0)
@@ -408,7 +403,8 @@ GEM
     fugit (1.12.2)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
-    get_process_mem (0.2.7)
+    get_process_mem (1.0.0)
+      bigdecimal (>= 2.0)
       ffi (~> 1.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
@@ -497,12 +493,13 @@ GEM
     matrix (0.4.3)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    mini_racer (0.20.0)
+    mini_racer (0.21.2)
       libv8-node (~> 24.12.0.1)
     minitest (5.27.0)
     msgpack (1.8.3)
     multi_json (1.21.1)
-    multi_xml (0.6.0)
+    multi_xml (0.9.1)
+      bigdecimal (>= 3.1, < 5)
     mustache (1.1.2)
     net-http (0.9.1)
       uri (>= 0.11.1)
@@ -723,8 +720,8 @@ GEM
       opentelemetry-api (~> 1.0)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    paper_trail (16.0.0)
-      activerecord (>= 6.1)
+    paper_trail (17.0.0)
+      activerecord (>= 7.1)
       request_store (~> 1.4)
     parallel (2.1.0)
     parallel_tests (5.7.0)
@@ -745,10 +742,11 @@ GEM
     public_suffix (7.0.5)
     puma (8.0.2)
       nio4r (~> 2.0)
-    puma_worker_killer (0.3.1)
-      get_process_mem (~> 0.2)
+    puma_worker_killer (1.0.0)
+      bigdecimal (>= 2.0)
+      get_process_mem (>= 0.2)
       puma (>= 2.7)
-    pundit (1.1.0)
+    pundit (2.5.2)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
@@ -998,7 +996,7 @@ DEPENDENCIES
   active_admin_datetimepicker
   active_admin_import
   active_admin_scoped_collection_actions
-  active_admin_sidebar (= 1.1.0)
+  active_admin_sidebar (~> 3.0)
   active_admin_theme!
   active_record_extended
   activeadmin
@@ -1019,7 +1017,6 @@ DEPENDENCIES
   capybara-screenshot
   capybara_active_admin!
   click_house
-  coffee-rails
   config
   cronex
   cryptomus (~> 0.2.2)

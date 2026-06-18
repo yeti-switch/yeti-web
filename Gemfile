@@ -26,7 +26,7 @@ gem 'jquery-ui-rails'
 
 # ActiveAdmin
 gem 'activeadmin'
-gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
+gem 'active_admin_date_range_preset', github: 'activeadmin-plugins/active_admin_date_range_preset'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions'
@@ -36,7 +36,7 @@ gem 'ransack'
 
 gem 'jrpc', github: 'didww/jrpc'
 
-gem 'active_admin_sidebar', '1.1.0'
+gem 'active_admin_sidebar', '~> 3.0'
 
 # XLS generation
 # can be switched back to the original repo after ruby 3 fix PR merged
@@ -67,7 +67,6 @@ gem 'sass-rails'
 gem 'sprockets'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
-gem 'coffee-rails'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
