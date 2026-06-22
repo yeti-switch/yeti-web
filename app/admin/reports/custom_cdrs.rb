@@ -72,7 +72,9 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
                          label: 'Customer',
                          path_params: { q: { customer_eq: true } }
 
-      f.input :filter
+      f.input :filter,
+              as: :cdr_filter,
+              columns: Report::CustomCdr::CDR_COLUMNS
 
       f.input :group_by,
               as: :select,
