@@ -1,39 +1,44 @@
-#sidebar #filters_sidebar_section  {
+// The icon is an <a>, so the theme's high-specificity link-colour rule
+// (#wrapper #active_admin_content a:not(...) { color: var(--aa-link) }) would
+// override our colours. The leading #active_admin_content gives these rules a
+// 3rd id selector, which wins on specificity.
+#active_admin_content #sidebar #filters_sidebar_section  {
 
-  .filter_indicator_btn_reset,
+  // Icon-only filter-saving toggle in the section header.
   .filter_indicator_persist {
-    font-weight: normal;
-    display: block;
-    padding: 0px 10px 2px 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-    height: 16px;
     float: right;
-    overflow: hidden;
-    color: #ffffff;
-  }
-
-  .filter_indicator_btn_reset {
+    // No margin-right: the h3's 15px padding already lines the icon's right
+    // edge up with the filter inputs below it. float:right keeps that right
+    // edge fixed as the glyph swaps.
+    margin-top: 2px; // center the 16px icon in the ~19px header content box
+    font-size: 14px;
+    line-height: 16px;
     cursor: pointer;
-    background-color: #3B76A4;
-  }
-
-  .filter_indicator_persist {
-    // No pill — just the "Persist" text + checkbox, vertically centered in the header.
-    background-color: transparent;
-    border-radius: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 5px; // space between the "Persist" text and the checkbox
-    margin-top: 2px; // center the 16px control in the ~19px header content box
-    color: #8a949e;
-    input[type=checkbox] {
-      margin-right: 0px;
+    color: #8a949e; // off (saving disabled)
+    text-decoration: none;
+    &:hover {
+      color: #6b7680;
+      text-decoration: none;
+    }
+    .fa {
+      display: block;
     }
   }
+
   .filter_indicator_persist.persist {
-    color: #4092d4;
+    color: #e29b20; // on (saving enabled) — amber to stand out as the active state
+    &:hover {
+      color: #c8861a;
+    }
+  }
+
+  // While the request is in flight: neutral colour, no extra hover affordance.
+  .filter_indicator_persist.busy {
+    color: #8a949e;
+    cursor: default;
+    &:hover {
+      color: #8a949e;
+    }
   }
 
 }

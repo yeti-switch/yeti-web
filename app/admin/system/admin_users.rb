@@ -55,7 +55,7 @@ ActiveAdmin.register AdminUser do
   end
 
   permit_params do
-    attrs = %i[stateful_filters allowed_ips]
+    attrs = %i[allowed_ips]
     attrs_last = { allowed_ips: [] }
     unless AdminUser.external_auth?
       attrs.concat %i[username email password password_confirmation]
@@ -78,7 +78,6 @@ ActiveAdmin.register AdminUser do
                 collection: AdminUser.available_roles,
                 input_html: { class: 'tom-select', multiple: true }
       end
-      f.input :stateful_filters
       f.input :allowed_ips, as: :array_of_strings
     end
     f.actions
