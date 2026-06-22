@@ -14466,7 +14466,6 @@ CREATE TABLE gui.admin_users (
     updated_at timestamp with time zone NOT NULL,
     enabled boolean DEFAULT true,
     username character varying NOT NULL,
-    stateful_filters boolean DEFAULT false NOT NULL,
     visible_columns json DEFAULT '{}'::json NOT NULL,
     saved_filters json DEFAULT '{}'::json NOT NULL,
     roles character varying[] NOT NULL,
@@ -20646,6 +20645,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260618120000'),
 ('20260616130000'),
 ('20260616120000'),
 ('20260608120000'),

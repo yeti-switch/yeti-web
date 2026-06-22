@@ -53,7 +53,6 @@ module ActiveAdmin
         elsif filter_storage.present? && params[:action].to_sym == :index && params[:q].blank? && params[:commit].blank?
           saved_filters = filter_storage[filter_saver_key]['search']
           if saved_filters.present?
-            flash.now[:notice_message] = 'Filters were restored to previous values' if params[:commit].blank?
             @default_filters_present = true
             params[:q] = saved_filters
           end
@@ -84,16 +83,20 @@ module ActiveAdmin
       def set_persistent_filters
         return false unless params.key?(:search_filter_switch)
 
+        enabled = params[:search_filter_switch].to_s == 'true'
         filter_storage = current_admin_user.saved_filters
-        if filter_storage[filter_saver_key].is_a?(Hash)
-          filter_storage[filter_saver_key]['enabled'] = (params[:search_filter_switch].to_s == 'true')
+        if enabled
+          # Enabling: remember the current filters. Rendering here halts the
+          # after_action that would normally persist them, so capture params[:q]
+          # now — otherwise we'd store the on/off flag but never the filter.
+          filter_storage[filter_saver_key] = { enabled: true, search: params[:q].presence }
         else
-          filter_storage[filter_saver_key] = {
-            enabled: (params[:search_filter_switch].to_s == 'true')
-          }
+          # Disabling: drop the whole entry so the saved search is cleared and
+          # filters are no longer restored.
+          filter_storage.delete(filter_saver_key)
         end
         current_admin_user.update_column(:saved_filters, filter_storage)
-        render(json: { search_filter_switch: save_filters? }) && return
+        render(json: { search_filter_switch: enabled }) && return
       end
     end
   end
