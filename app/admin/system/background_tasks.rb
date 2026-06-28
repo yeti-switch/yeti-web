@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register BackgroundTask do
-  config.batch_actions = false # no destroy action, so the default batch Delete is hidden
   menu parent: 'System', priority: 20
-  actions :index, :show
+  actions :index, :show, :destroy
   decorate_with BackgroundTaskDecorator
+
+  batch_action :destroy, confirm: 'Are you sure?', if: proc { authorized?(:destroy) } do |ids|
+    BackgroundTask.where(id: ids).destroy_all
+    flash[:notice] = 'Selected Background Tasks deleted'
+    redirect_to_back
+  end
 
   scope(:active, default: true)
   scope(:running)
@@ -14,7 +19,9 @@ ActiveAdmin.register BackgroundTask do
   scope(:all)
 
   index do
+    selectable_column
     id_column
+    actions
     column :queue
     column :name
     column :args, :args_short
@@ -26,8 +33,6 @@ ActiveAdmin.register BackgroundTask do
     column :created_at
     column :locked_by
     column :locked_at
-
-    actions
   end
 
   show do
