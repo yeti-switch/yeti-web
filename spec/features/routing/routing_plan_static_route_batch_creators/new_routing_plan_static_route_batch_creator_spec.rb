@@ -20,6 +20,10 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
     fill_in_tom_select 'Routing plan', with: routing_plan.display_name, search: true
     fill_in 'Prefixes', with: '26327,34205'
     fill_in_tom_select 'Vendors', with: [vendor_2.display_name, vendor_1.display_name], search: 'Vendor'
+    # Wait for both vendor chips to be committed before submitting, otherwise a
+    # slow second selection races with the submit and only one vendor is sent.
+    expect(page).to have_field_tom_select('Vendors', with: vendor_2.display_name, exact: false)
+    expect(page).to have_field_tom_select('Vendors', with: vendor_1.display_name, exact: false)
   end
 
   it 'creates record' do
