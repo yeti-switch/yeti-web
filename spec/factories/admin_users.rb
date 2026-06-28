@@ -20,6 +20,7 @@
 #  reset_password_token   :string(255)
 #  roles                  :string           not null, is an Array
 #  saved_filters          :json             not null
+#  saved_sortings         :jsonb            not null
 #  sign_in_count          :integer(4)       default(0)
 #  uid                    :string
 #  username               :string           not null

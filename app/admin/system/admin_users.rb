@@ -50,6 +50,7 @@ ActiveAdmin.register AdminUser do
       row :created_at
       row :visible_columns, &:pretty_visible_columns
       row :saved_filters, &:pretty_saved_filters
+      row :saved_sortings, &:pretty_saved_sortings
       row :per_page, &:pretty_per_page
     end
   end
