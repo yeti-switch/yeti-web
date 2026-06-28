@@ -17,7 +17,7 @@ RSpec.describe 'Destroy System Background Task', type: :feature, js: true do
     expect do
       subject
 
-      expect(page).to have_flash_message('Background Task was successfully destroyed.', type: :notice)
+      expect(page).to have_flash_message('Background task was successfully destroyed.', type: :notice)
     end.to change { BackgroundTask.count }.by(-1)
   end
 end
