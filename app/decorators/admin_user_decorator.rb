@@ -13,6 +13,10 @@ class AdminUserDecorator < ApplicationDecorator
     h.pre_wrap_json(model.saved_filters)
   end
 
+  def pretty_saved_sortings
+    h.pre_wrap_json(model.saved_sortings)
+  end
+
   def pretty_per_page
     h.pre_wrap_json(model.per_page)
   end

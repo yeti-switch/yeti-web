@@ -8,6 +8,7 @@ module ActiveAdmin
           classes = super
           classes << 'with_default_filters' if assigns.fetch(:default_filters_present, false)
           classes << 'with_persistent_filters' if assigns.fetch(:persistent_filter, false)
+          classes << 'with_persistent_sorting' if assigns.fetch(:persistent_sorting, false)
           classes
         end
       end

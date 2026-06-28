@@ -1,0 +1,69 @@
+// Icon-only sort-persistence toggle, sitting at the right edge of the index
+// table's id column header (th.col-id).
+//
+// The icon is an <a>; both the theme's link-colour rule and its th-padding rule
+// carry ~2 id selectors (#wrapper #active_admin_content …). Match that with a
+// leading #wrapper so our padding/positioning actually wins — otherwise the
+// reserved right padding is dropped and the icon lands on top of the "Id" label.
+#wrapper #active_admin_content table.index_table thead th.col-id {
+
+  // Anchor the absolutely-positioned icon to this cell, and reserve room on the
+  // right so it never overlaps the "Id" sort link or the sorted-arrow.
+  position: relative;
+  white-space: nowrap;
+  padding-right: 42px;
+
+  .sorting_indicator_persist {
+    // Out of flow so the icons can't add a second header row regardless of the
+    // column width. Stretch to the full cell height and flex-center the glyphs:
+    // more reliable than translateY(-50%), which mis-centers because a glyph's
+    // visual centre isn't its line-box centre.
+    position: absolute;
+    right: 6px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    // This anchor lives inside th.sortable, so AA's `th.sortable a` rule paints
+    // its orderable sprite (a chevron) to our left and adds padding-left for it.
+    // Null both so the toggle shows only the padlock glyph.
+    background: none;
+    padding-left: 0;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    // !important: the theme forces `th a { color: var(--aa-table-header-text)
+    // !important }` on every header link, which would otherwise swallow these.
+    color: #8a949e !important; // off (saving disabled)
+    text-decoration: none;
+    &:hover {
+      color: #6b7680 !important;
+      text-decoration: none;
+    }
+    // padlock + up/down arrows laid out side by side, vertically centered.
+    .fa {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .sort_arrows {
+      margin-left: 4px;
+    }
+  }
+
+  .sorting_indicator_persist.persist {
+    color: #e29b20 !important; // on (saving enabled) — amber to stand out as the active state
+    &:hover {
+      color: #c8861a !important;
+    }
+  }
+
+  // While the request is in flight: neutral colour, no extra hover affordance.
+  .sorting_indicator_persist.busy {
+    color: #8a949e !important;
+    cursor: default;
+    &:hover {
+      color: #8a949e !important;
+    }
+  }
+
+}

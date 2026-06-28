@@ -1,0 +1,35 @@
+// Replace ActiveAdmin's low-res sprite sort indicator on index-table column
+// headers with crisp Font Awesome chevrons. The gem draws the sprite via
+//   th.sortable a { background: url($orderable-icon-url) no-repeat 0 4px; padding-left: 13px }
+// with background-position shifts for the sorted-asc / sorted-desc states
+// (active_admin/components/_tables.scss).
+//
+// Scoped with `:not(.sorting_indicator_persist)` so the persistent-sort padlock
+// toggle — also an <a> inside th.sortable — keeps its own glyphs untouched.
+// The chevron is a ::after pseudo-element, so it inherits the header link colour
+// (the theme pins `th a { color: var(--aa-table-header-text) !important }`).
+#wrapper #active_admin_content table.index_table thead th.sortable {
+  > a:not(.sorting_indicator_persist) {
+    background-image: none;   // drop the sprite
+    padding-left: 0;          // reclaim the gutter the sprite used
+
+    &::after {
+      content: '\f0dc';       // fa-sort — faint up/down for sortable-but-unsorted
+      font-family: 'FontAwesome';
+      font-weight: normal;
+      margin-left: 6px;
+      font-size: 1.1em;
+      opacity: 0.4;
+    }
+  }
+
+  // Currently-sorted column: a solid directional fa-sort glyph.
+  &.sorted-asc  > a:not(.sorting_indicator_persist)::after {
+    content: '\f0de';         // fa-sort-asc
+    opacity: 1;
+  }
+  &.sorted-desc > a:not(.sorting_indicator_persist)::after {
+    content: '\f0dd';         // fa-sort-desc
+    opacity: 1;
+  }
+}

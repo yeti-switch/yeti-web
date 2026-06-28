@@ -31,6 +31,7 @@
 //= require delay
 //= require index_as_table_visible_columns
 //= require sidebar_filter_actions
+//= require sorting_persist
 //= require modal_confirm_fix
 //= require password-toggle
 
