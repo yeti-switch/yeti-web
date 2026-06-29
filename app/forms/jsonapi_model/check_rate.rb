@@ -45,6 +45,7 @@ module JsonapiModel
                   'next_rate',
                   'next_interval',
                   'connect_fee',
+                  'attempt_fee',
                   'reject_calls',
                   'valid_from',
                   'valid_till',

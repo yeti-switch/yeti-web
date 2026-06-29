@@ -89,6 +89,19 @@ module RateManagement
       connect_fee
     }
 
+    verify_attribute :attempt_fee, apply: lambda { |attempt_fee, row_number|
+      # attempt_fee is an optional CSV header; default to 0 when omitted
+      return BigDecimal(0) if attempt_fee.nil?
+
+      attempt_fee = convert_to_decimal(attempt_fee)
+      if attempt_fee.nil?
+        add_error('Attempt fee is not a number', row_number)
+        return
+      end
+
+      attempt_fee
+    }
+
     verify_attribute :dst_number_min_length, apply: lambda { |dst_number_min_length, row_number|
       return project.dst_number_min_length if dst_number_min_length.nil?
 
@@ -200,6 +213,7 @@ module RateManagement
         initial_rate: verify_attribute(:initial_rate, attributes, row_number: row_number),
         next_rate: verify_attribute(:next_rate, attributes, row_number: row_number),
         connect_fee: verify_attribute(:connect_fee, attributes, row_number: row_number),
+        attempt_fee: verify_attribute(:attempt_fee, attributes, row_number: row_number),
         routing_tag_ids: verify_attribute(:routing_tag_names, attributes, row_number: row_number),
         routing_tag_mode_id: verify_attribute(:routing_tag_mode, attributes, row_number: row_number),
         dst_number_min_length: verify_attribute(:dst_number_min_length, attributes, row_number: row_number),

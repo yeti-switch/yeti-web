@@ -14,6 +14,7 @@ class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResou
              :next_rate,
              :next_interval,
              :connect_fee,
+             :attempt_fee,
              :valid_from,
              :valid_till,
              :network_prefix_id
@@ -34,6 +35,7 @@ class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResou
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
   ransack_filter :connect_fee, type: :number
+  ransack_filter :attempt_fee, type: :number
 
   ransack_filter :valid_from, type: :datetime
   ransack_filter :valid_till, type: :datetime

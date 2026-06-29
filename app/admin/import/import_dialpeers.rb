@@ -46,6 +46,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
     column :next_interval
     column :next_rate
     column :connect_fee
+    column :attempt_fee
     column :reverse_billing
     column :lcr_rate_multiplier
     column :gateway, sortable: :gateway_name

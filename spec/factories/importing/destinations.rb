@@ -7,6 +7,7 @@
 #  id                       :bigint(8)        not null, primary key
 #  acd_limit                :float(24)
 #  asr_limit                :float(24)
+#  attempt_fee              :decimal(, )
 #  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
 #  currency_name            :string
@@ -57,6 +58,7 @@ FactoryBot.define do
     rate_group_name { nil }
     rate_group_id { nil }
     connect_fee { 0 }
+    attempt_fee { 0 }
     enabled { true }
     reject_calls { false }
     initial_interval { 60 }

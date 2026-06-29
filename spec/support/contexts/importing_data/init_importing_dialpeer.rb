@@ -20,6 +20,7 @@ shared_context :init_importing_dialpeer do |args|
       routing_group_name: @routing_group.name,
       next_rate: 0.0092,
       connect_fee: 0.0,
+      attempt_fee: 0.0,
       vendor_id: @contractor.id,
       vendor_name: @contractor.name,
       account_id: @account.id,

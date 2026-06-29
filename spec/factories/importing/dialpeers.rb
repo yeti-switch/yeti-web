@@ -8,6 +8,7 @@
 #  account_name                :string
 #  acd_limit                   :float(24)
 #  asr_limit                   :float(24)
+#  attempt_fee                 :decimal(, )
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
 #  currency_name               :string
@@ -75,6 +76,7 @@ FactoryBot.define do
     gateway_id { nil }
     next_rate { nil }
     connect_fee { nil }
+    attempt_fee { nil }
     vendor_name { nil }
     vendor_id { nil }
     account_name { nil }

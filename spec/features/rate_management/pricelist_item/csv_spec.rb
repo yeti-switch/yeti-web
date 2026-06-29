@@ -95,6 +95,7 @@ RSpec.describe 'Rate Management Pricelist Items CSV', type: :feature do
         initial_rate: item.initial_rate.to_s,
         next_rate: item.next_rate.to_s,
         connect_fee: item.connect_fee.to_s,
+        attempt_fee: item.attempt_fee.to_s,
         initial_interval: item.initial_interval.to_s,
         next_interval: item.next_interval.to_s,
         dst_number_min_length: item.dst_number_min_length.to_s,

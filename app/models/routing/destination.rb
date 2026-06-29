@@ -8,6 +8,7 @@
 #  acd_limit              :float(24)        default(0.0), not null
 #  allow_package_billing  :boolean          default(FALSE), not null
 #  asr_limit              :float(24)        default(0.0), not null
+#  attempt_fee            :decimal(, )      default(0.0), not null
 #  cdo                    :integer(2)
 #  connect_fee            :decimal(, )      default(0.0)
 #  dp_margin_fixed        :decimal(, )      default(0.0), not null
@@ -102,10 +103,10 @@ class Routing::Destination < ApplicationRecord
     where_account(account_ids)
   }
 
-  validates :currency, :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
+  validates :currency, :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, :attempt_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
                         :asr_limit, :acd_limit, :short_calls_limit, presence: true
-  validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :initial_rate, :next_rate, :connect_fee, :attempt_fee, numericality: { greater_than_or_equal_to: 0 }
   validates :initial_interval, :next_interval, numericality: true
   validates :prefix, format: { without: /\s/ }
 
@@ -125,6 +126,7 @@ class Routing::Destination < ApplicationRecord
   after_initialize do
     if new_record?
       self.connect_fee ||= 0
+      self.attempt_fee ||= 0
       self.initial_interval ||= 1
       self.next_interval ||= 1
       self.dp_margin_fixed ||= 0

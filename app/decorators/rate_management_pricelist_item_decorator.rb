@@ -59,6 +59,10 @@ class RateManagementPricelistItemDecorator < ApplicationDecorator
     changes_for_column(:connect_fee)
   end
 
+  def attempt_fee
+    changes_for_column(:attempt_fee)
+  end
+
   def initial_interval
     changes_for_column(:initial_interval)
   end
