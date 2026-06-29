@@ -7,6 +7,7 @@
 #  id                       :bigint(8)        not null, primary key
 #  acd_limit                :float(24)
 #  asr_limit                :float(24)
+#  attempt_fee              :decimal(, )
 #  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
 #  currency_name            :string
@@ -54,7 +55,7 @@ class Importing::Destination < Importing::Base
 
   self.import_attributes = %w[enabled prefix reject_calls rate_group_id currency_id
                               initial_interval next_interval initial_rate next_rate
-                              connect_fee rate_policy_id reverse_billing dp_margin_fixed dp_margin_percent use_dp_intervals
+                              connect_fee attempt_fee rate_policy_id reverse_billing dp_margin_fixed dp_margin_percent use_dp_intervals
                               valid_from valid_till profit_control_mode_id
                               asr_limit acd_limit short_calls_limit
                               dst_number_min_length dst_number_max_length

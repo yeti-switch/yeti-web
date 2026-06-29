@@ -403,6 +403,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :routing_tags
           column :dialpeer
           column :dialpeer_fee
+          column :dialpeer_attempt_fee
 
           column('Dialpeer rates', sortable: 'dialpeer_next_rate') do |cdr|
             "#{cdr.dialpeer_initial_rate}/#{cdr.dialpeer_next_rate}".chomp('/')
@@ -608,6 +609,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :destination
           row :destination_rate_policy, &:destination_rate_policy_name
           row :destination_fee
+          row :destination_attempt_fee
           row :destination_initial_interval
           row :destination_initial_rate
           row :destination_next_interval
@@ -620,6 +622,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :dialpeer
 
           row :dialpeer_fee
+          row :dialpeer_attempt_fee
           row :dialpeer_initial_interval
           row :dialpeer_initial_rate
           row :dialpeer_next_interval
@@ -955,6 +958,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :destination
     column :destination_rate_policy, &:destination_rate_policy_name
     column :destination_fee
+    column :destination_attempt_fee
     column :destination_initial_interval
     column :destination_initial_rate
     column :destination_next_interval
@@ -966,6 +970,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       "Dialpeer ##{row.dialpeer.id}" if row.dialpeer.present?
     end
     column :dialpeer_fee
+    column :dialpeer_attempt_fee
     column :dialpeer_initial_interval
     column :dialpeer_initial_rate
     column :dialpeer_next_interval

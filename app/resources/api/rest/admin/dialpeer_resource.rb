@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::DialpeerResource < BaseResource
-  attributes :enabled, :next_rate, :connect_fee, :initial_rate,
+  attributes :enabled, :next_rate, :connect_fee, :attempt_fee, :initial_rate,
              :initial_interval, :next_interval, :valid_from, :valid_till,
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
@@ -25,6 +25,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :enabled, type: :boolean
   ransack_filter :next_rate, type: :number
   ransack_filter :connect_fee, type: :number
+  ransack_filter :attempt_fee, type: :number
   ransack_filter :initial_rate, type: :number
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
@@ -73,6 +74,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
       routeset_discriminator
       next_rate
       connect_fee
+      attempt_fee
       vendor
       account
       routing_tag_mode_id

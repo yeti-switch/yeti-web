@@ -11,6 +11,7 @@ module RateManagement
       initial_rate
       next_rate
       connect_fee
+      attempt_fee
       dst_number_min_length
       dst_number_max_length
       initial_interval

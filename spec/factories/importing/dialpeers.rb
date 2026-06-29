@@ -8,6 +8,7 @@
 #  account_name                :string
 #  acd_limit                   :float(24)
 #  asr_limit                   :float(24)
+#  attempt_fee                 :decimal(, )
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
 #  currency_name               :string

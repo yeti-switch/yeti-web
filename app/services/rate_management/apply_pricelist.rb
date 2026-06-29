@@ -17,6 +17,7 @@ module RateManagement
       gateway_id
       next_rate
       connect_fee
+      attempt_fee
       src_rewrite_result
       dst_rewrite_result
       priority
@@ -37,7 +38,7 @@ module RateManagement
       routing_tag_ids
       routing_tag_mode_id
     ].freeze
-    NEXT_RATE_FIELDS = %w[connect_fee initial_interval next_interval initial_rate next_rate].freeze
+    NEXT_RATE_FIELDS = %w[connect_fee attempt_fee initial_interval next_interval initial_rate next_rate].freeze
     NON_NEXT_RATE_FIELDS = DATA_FIELDS - NEXT_RATE_FIELDS
 
     def call

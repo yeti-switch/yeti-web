@@ -8,9 +8,10 @@ module Destination
     attribute :next_interval
     attribute :next_rate
     attribute :connect_fee
+    attribute :attempt_fee
     attribute :ids_sql, :string
 
-    validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+    validates :initial_rate, :next_rate, :connect_fee, :attempt_fee, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :initial_interval, :next_interval, numericality: {
       greater_than: 0,
       less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
@@ -28,7 +29,8 @@ module Destination
         initial_rate: 'text',
         next_interval: 'text',
         next_rate: 'text',
-        connect_fee: 'text'
+        connect_fee: 'text',
+        attempt_fee: 'text'
       }
     end
 
@@ -42,7 +44,8 @@ module Destination
         initial_rate:,
         next_interval:,
         next_rate:,
-        connect_fee:
+        connect_fee:,
+        attempt_fee:
       )
     end
 
@@ -53,8 +56,8 @@ module Destination
     end
 
     def validate_rate_fields
-      if initial_interval.nil? && initial_rate.nil? && next_interval.nil? && next_rate.nil? && connect_fee.nil?
-        errors.add(:base, 'At least one of the following fields must be filled: initial_interval, initial_rate, next_interval, next_rate, connect_fee')
+      if initial_interval.nil? && initial_rate.nil? && next_interval.nil? && next_rate.nil? && connect_fee.nil? && attempt_fee.nil?
+        errors.add(:base, 'At least one of the following fields must be filled: initial_interval, initial_rate, next_interval, next_rate, connect_fee, attempt_fee')
       end
     end
   end

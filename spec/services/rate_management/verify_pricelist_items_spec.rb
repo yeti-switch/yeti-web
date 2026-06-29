@@ -39,6 +39,8 @@ RSpec.describe RateManagement::VerifyPricelistItems do
   let!(:routing_tags) { FactoryBot.create_list(:routing_tag, 3) }
   let(:default_item_attrs) do
     {
+      # attempt_fee is an optional CSV column; omitted in these fixtures so it defaults to 0
+      attempt_fee: 0,
       pricelist_id: pricelist.id,
       valid_till: pricelist.valid_till,
       src_rewrite_rule: project.src_rewrite_rule,

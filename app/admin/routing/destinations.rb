@@ -17,7 +17,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                            class: 'scoped_collection_action_button ui',
                            form: -> { Destination::ScheduleRateChangesForm.form_inputs },
                            if: -> { authorized?(:batch_update, resource_class) } do
-    attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee)
+    attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee, :attempt_fee)
 
     form = Destination::ScheduleRateChangesForm.new(attrs)
     form.ids_sql = scoped_collection_records.select(:id).to_sql
@@ -45,7 +45,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                  :rate_policy_name,
                  :initial_interval, :next_interval,
                  :use_dp_intervals,
-                 :initial_rate, :next_rate, :connect_fee,
+                 :initial_rate, :next_rate, :connect_fee, :attempt_fee,
                  [:currency_name, proc { |row| row.currency.name }],
                  :dp_margin_fixed, :dp_margin_percent,
                  :profit_control_mode_name,
@@ -72,6 +72,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
+  filter :attempt_fee
   filter :allow_package_billing
 
   filter :network_prefix_country_id_eq,
@@ -106,7 +107,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
-  permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rate_group_id, :next_rate, :connect_fee,
+  permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rate_group_id, :next_rate, :connect_fee, :attempt_fee,
                 :initial_interval, :next_interval, :dp_margin_fixed, :cdo,
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
@@ -244,6 +245,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
+      f.input :attempt_fee
       f.input :profit_control_mode_id,
               as: :select,
               include_blank: true,
@@ -307,6 +309,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
             row :initial_rate
             row :next_rate
             row :connect_fee
+            row :attempt_fee
             row :profit_control_mode, &:profit_control_mode_name
           end
         end
@@ -333,6 +336,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           column :initial_interval
           column :next_interval
           column :connect_fee
+          column :attempt_fee
           column :external_id
           column :actions do |r|
             link_to('Edit', edit_destination_destination_next_rate_path(s.id, r.id))

@@ -7,6 +7,7 @@
 #  id                        :bigint(8)        not null, primary key
 #  acd_limit                 :float(24)        default(0.0), not null
 #  asr_limit                 :float(24)        default(0.0), not null
+#  attempt_fee               :decimal(, )      default(0.0), not null
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      default(0.0), not null
 #  currency_rate             :float            default(1.0), not null

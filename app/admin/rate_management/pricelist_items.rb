@@ -38,6 +38,7 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
+  filter :attempt_fee
   filter :initial_interval
   filter :next_interval
   filter :dst_number_min_length
@@ -131,6 +132,7 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
     column :initial_rate
     column :next_rate
     column :connect_fee
+    column :attempt_fee
     column :initial_interval
     column :next_interval
     column :dst_number_min_length
@@ -170,6 +172,7 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
     column(:initial_rate) { |r| r.model.initial_rate }
     column(:next_rate) { |r| r.model.next_rate }
     column(:connect_fee) { |r| r.model.connect_fee }
+    column(:attempt_fee) { |r| r.model.attempt_fee }
     column(:initial_interval) { |r| r.model.initial_interval }
     column(:next_interval) { |r| r.model.next_interval }
     column(:dst_number_min_length) { |r| r.model.dst_number_min_length }

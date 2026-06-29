@@ -131,6 +131,7 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
             'initial-interval': rate.initial_interval,
             'next-rate': rate.next_rate.to_s,
             'next-interval': rate.next_interval,
+            'attempt-fee': rate.attempt_fee.to_s,
             'connect-fee': rate.connect_fee.to_s,
             'valid-from': rate.valid_from.iso8601(3),
             'valid-till': rate.valid_till.iso8601(3),
