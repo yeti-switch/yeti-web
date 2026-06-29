@@ -82,7 +82,7 @@ module RateManagement
 
     include RoutingTagIdsScopeable
 
-    validates :valid_till, :initial_rate, :initial_interval, :next_interval, presence: true
+    validates :valid_till, :initial_rate, :next_rate, :connect_fee, :initial_interval, :next_interval, presence: true
 
     belongs_to :gateway, optional: true
     belongs_to :gateway_group, optional: true
@@ -95,7 +95,7 @@ module RateManagement
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
     validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
-    validates :initial_rate, :next_rate, numericality: true
+    validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
     validates :initial_interval, :next_interval, numericality: { greater_than: 0 }
 
     scope :to_create, -> { where("detected_dialpeer_ids = '{}'") }
