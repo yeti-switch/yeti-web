@@ -386,6 +386,24 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
     end
   end
 
+  context 'with negative rates & fee values' do
+    let(:initial_rate) { '-0.1' }
+    let(:next_rate) { '-0.2' }
+    let(:connect_fee) { '-0.03' }
+
+    it 'should show error message' do
+      expect do
+        subject
+        expect(page).to have_flash_message(
+          'Validation Error: Initial rate must be greater than or equal to 0, '\
+          'Next rate must be greater than or equal to 0, and '\
+          'Connect fee must be greater than or equal to 0',
+           type: :error
+        )
+      end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+    end
+  end
+
   context 'when apply_time is in the past' do
     let(:apply_time) { 1.second.ago.to_date }
 

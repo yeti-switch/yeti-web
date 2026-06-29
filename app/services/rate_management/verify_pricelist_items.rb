@@ -56,6 +56,7 @@ module RateManagement
         return
       end
 
+      add_error('Initial rate must be greater or equal to 0', row_number) if initial_rate.negative?
       initial_rate
     }
 
@@ -71,6 +72,7 @@ module RateManagement
         return
       end
 
+      add_error('Next rate must be greater or equal to 0', row_number) if next_rate.negative?
       next_rate
     }
 
@@ -86,6 +88,7 @@ module RateManagement
         return
       end
 
+      add_error('Connect fee must be greater or equal to 0', row_number) if connect_fee.negative?
       connect_fee
     }
 

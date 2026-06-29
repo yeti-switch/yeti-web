@@ -10,7 +10,7 @@ module Destination
     attribute :connect_fee
     attribute :ids_sql, :string
 
-    validates :initial_rate, :next_rate, :connect_fee, numericality: true, allow_nil: true
+    validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :initial_interval, :next_interval, numericality: {
       greater_than: 0,
       less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
