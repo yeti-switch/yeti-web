@@ -396,7 +396,7 @@ RSpec.describe Destination::ScheduleRateChanges do
     end
 
     it 'should raise an error' do
-      expect { subject }.to raise_error(described_class::Error, 'At least one of the following parameters must be present: initial_interval, initial_rate, next_interval, next_rate, connect_fee')
+      expect { subject }.to raise_error(described_class::Error, 'At least one of the following parameters must be present: initial_interval, initial_rate, next_interval, next_rate, connect_fee, attempt_fee')
     end
   end
 
