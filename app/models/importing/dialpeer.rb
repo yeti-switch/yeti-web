@@ -8,6 +8,7 @@
 #  account_name                :string
 #  acd_limit                   :float(24)
 #  asr_limit                   :float(24)
+#  attempt_fee                 :decimal(, )
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
 #  currency_name               :string
@@ -71,7 +72,7 @@ class Importing::Dialpeer < Importing::Base
   has_many :dialpeer_next_rates, dependent: :destroy
 
   self.import_attributes = %w[prefix enabled lcr_rate_multiplier
-                              initial_interval next_interval initial_rate next_rate connect_fee reverse_billing
+                              initial_interval next_interval initial_rate next_rate connect_fee attempt_fee reverse_billing
                               gateway_id gateway_group_id routing_group_id
                               vendor_id account_id currency_id
                               src_name_rewrite_rule src_name_rewrite_result

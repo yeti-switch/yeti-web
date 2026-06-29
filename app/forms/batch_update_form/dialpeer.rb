@@ -18,6 +18,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :next_interval
   attribute :next_rate
   attribute :connect_fee
+  attribute :attempt_fee
   attribute :lcr_rate_multiplier
   attribute :gateway_id, type: :foreign_key, class_name: 'Gateway'
   attribute :gateway_group_id, type: :foreign_key, class_name: 'GatewayGroup'
@@ -49,6 +50,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   validates :next_interval, presence: true, if: :next_interval_changed?
   validates :next_rate, presence: true, if: :next_rate_changed?
   validates :connect_fee, presence: true, if: :connect_fee_changed?
+  validates :attempt_fee, presence: true, if: :attempt_fee_changed?
   validates :acd_limit, presence: true, if: :acd_limit_changed?
   validates :asr_limit, presence: true, if: :asr_limit_changed?
   validates :prefix, presence: true, if: :prefix_changed?
@@ -70,6 +72,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   validates :initial_rate, numericality: { allow_blank: true }, if: :initial_rate_changed?
   validates :next_rate, numericality: { allow_blank: true }, if: :next_rate_changed?
   validates :connect_fee, numericality: { allow_blank: true }, if: :connect_fee_changed?
+  validates :attempt_fee, numericality: { allow_blank: true }, if: :attempt_fee_changed?
   validates :initial_interval, numericality: { greater_than: 0, only_integer: true, allow_blank: true }, if: :initial_interval_changed?
   validates :next_interval, numericality: { greater_than: 0, only_integer: true, allow_blank: true }, if: :next_interval_changed?
   validates :priority, numericality: {

@@ -7,6 +7,7 @@
 #  id                        :bigint(8)        not null, primary key
 #  acd_limit                 :float(24)        default(0.0), not null
 #  asr_limit                 :float(24)        default(0.0), not null
+#  attempt_fee               :decimal(, )      default(0.0), not null
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      default(0.0), not null
 #  currency_rate             :float            default(1.0), not null
@@ -103,9 +104,9 @@ class Dialpeer < ApplicationRecord
   validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
   validates :currency, :account, :routing_group, :vendor, :valid_from, :valid_till,
             :initial_rate, :next_rate,
-            :initial_interval, :next_interval, :connect_fee,
+            :initial_interval, :next_interval, :connect_fee, :attempt_fee,
             :routeset_discriminator, :lcr_rate_multiplier, presence: true
-  validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :initial_rate, :next_rate, :connect_fee, :attempt_fee, numericality: { greater_than_or_equal_to: 0 }
   validates :lcr_rate_multiplier, numericality: true
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
@@ -150,6 +151,7 @@ class Dialpeer < ApplicationRecord
   after_initialize do
     if new_record?
       self.connect_fee ||= 0
+      self.attempt_fee ||= 0
       self.initial_interval ||= 1
       self.next_interval ||= 1
       self.valid_from ||= DateTime.now

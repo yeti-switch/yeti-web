@@ -9,6 +9,7 @@ module Destination
     parameter :next_interval
     parameter :next_rate
     parameter :connect_fee
+    parameter :attempt_fee
 
     VALID_TILL = 40.years.freeze
     Error = Class.new(StandardError)
@@ -21,13 +22,14 @@ module Destination
         Routing::DestinationNextRate.where(destination_id: ids).delete_all
 
         sql = <<~SQL.squish
-          INSERT INTO class4.destination_next_rates (destination_id, initial_interval, initial_rate, next_interval, next_rate, connect_fee, apply_time, created_at, updated_at)
+          INSERT INTO class4.destination_next_rates (destination_id, initial_interval, initial_rate, next_interval, next_rate, connect_fee, attempt_fee, apply_time, created_at, updated_at)
           SELECT id,
                  #{initial_interval.nil? ? 'initial_interval' : ':initial_interval'},
                  #{initial_rate.nil? ? 'initial_rate' : ':initial_rate'},
                  #{next_interval.nil? ? 'next_interval' : ':next_interval'},
                  #{next_rate.nil? ? 'next_rate' : ':next_rate'},
                  #{connect_fee.nil? ? 'connect_fee' : ':connect_fee'},
+                 #{attempt_fee.nil? ? 'attempt_fee' : ':attempt_fee'},
                  :apply_time,
                  NOW(),
                  NOW()
@@ -40,6 +42,7 @@ module Destination
                                                            next_interval:,
                                                            next_rate:,
                                                            connect_fee:,
+                                                           attempt_fee:,
                                                            apply_time:)
         SqlCaller::Yeti.execute(sanitized_sql)
       end
@@ -51,8 +54,8 @@ module Destination
       raise Error, "Ids can't be blank" if ids.blank?
       raise Error, "Apply time can't be blank" if apply_time.blank?
       raise Error, 'Apply time must be in the future' unless apply_time.future?
-      if initial_interval.nil? && initial_rate.nil? && next_interval.nil? && next_rate.nil? && connect_fee.nil?
-        raise Error, 'At least one of the following parameters must be present: initial_interval, initial_rate, next_interval, next_rate, connect_fee'
+      if initial_interval.nil? && initial_rate.nil? && next_interval.nil? && next_rate.nil? && connect_fee.nil? && attempt_fee.nil?
+        raise Error, 'At least one of the following parameters must be present: initial_interval, initial_rate, next_interval, next_rate, connect_fee, attempt_fee'
       end
     end
   end

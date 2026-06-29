@@ -41,6 +41,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
         'initial-rate': next_rate.initial_rate.to_s,
         'initial-interval': next_rate.initial_interval,
         'next-interval': next_rate.next_interval,
+        'attempt-fee': next_rate.attempt_fee.to_s,
         'connect-fee': next_rate.connect_fee.to_s,
         'apply-time': eq_time_string(next_rate.apply_time),
         'applied': next_rate.applied,
@@ -94,6 +95,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
         'initial-rate': '0.01',
         'initial-interval': 60,
         'next-interval': 60,
+        'attempt-fee': '0.02',
         'connect-fee': '0.01',
         'apply-time': 1.month.from_now.to_s
       }
@@ -113,6 +115,7 @@ RSpec.describe Api::Rest::Admin::DestinationNextRatesController, type: :request 
           'initial-rate': json_api_request_attributes[:'initial-rate'],
           'initial-interval': json_api_request_attributes[:'initial-interval'],
           'next-interval': json_api_request_attributes[:'next-interval'],
+          'attempt-fee': json_api_request_attributes[:'attempt-fee'],
           'connect-fee': json_api_request_attributes[:'connect-fee'],
           'apply-time': eq_time_string(json_api_request_attributes[:'apply-time']),
           'applied': false,

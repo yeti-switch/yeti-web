@@ -21,6 +21,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :next_rate
   attribute :use_dp_intervals, type: :boolean
   attribute :connect_fee
+  attribute :attempt_fee
   attribute :profit_control_mode_id, type: :integer_collection, collection: Routing::RateProfitControlMode::MODES.invert.to_a
   attribute :dp_margin_fixed
   attribute :dp_margin_percent
@@ -40,6 +41,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   validates :initial_interval, presence: true, if: :initial_interval_changed?
   validates :next_interval, presence: true, if: :next_interval_changed?
   validates :connect_fee, presence: true, if: :connect_fee_changed?
+  validates :attempt_fee, presence: true, if: :attempt_fee_changed?
   validates :dp_margin_fixed, presence: true, if: :dp_margin_fixed_changed?
   validates :dp_margin_percent, presence: true, if: :dp_margin_percent_changed?
   validates :asr_limit, presence: true, if: :asr_limit_changed?
@@ -71,6 +73,10 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
     greater_than_or_equal_to: 0,
     allow_blank: true
   }, if: :connect_fee_changed?
+  validates :attempt_fee, numericality: {
+    greater_than_or_equal_to: 0,
+    allow_blank: true
+  }, if: :attempt_fee_changed?
   validates :dp_margin_fixed, numericality: {
     greater_than_or_equal_to: 0,
     allow_blank: true

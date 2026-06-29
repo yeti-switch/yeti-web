@@ -7,6 +7,7 @@
 #  id                        :bigint(8)        not null, primary key
 #  acd_limit                 :float(24)
 #  asr_limit                 :float(24)
+#  attempt_fee               :decimal(, )      default(0.0), not null
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      not null
 #  detected_dialpeer_ids     :bigint(8)        default([]), is an Array
@@ -112,7 +113,8 @@ module RateManagement
       OR pricelist_items.initial_rate != dialpeers.initial_rate
       OR pricelist_items.next_interval != dialpeers.next_interval
       OR pricelist_items.next_rate != dialpeers.next_rate
-      OR pricelist_items.connect_fee != dialpeers.connect_fee')
+      OR pricelist_items.connect_fee != dialpeers.connect_fee
+      OR pricelist_items.attempt_fee != dialpeers.attempt_fee')
     }
 
     def type

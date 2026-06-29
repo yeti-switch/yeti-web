@@ -7,6 +7,7 @@
 #  id               :bigint(8)        not null, primary key
 #  applied          :boolean          default(FALSE), not null
 #  apply_time       :timestamptz      not null
+#  attempt_fee      :decimal(, )      default(0.0), not null
 #  connect_fee      :decimal(, )      not null
 #  initial_interval :integer(2)       not null
 #  initial_rate     :decimal(, )      not null

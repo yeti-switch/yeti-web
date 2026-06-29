@@ -5,6 +5,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
   filter :prefix
   filter :rate
   filter :connect_fee
+  filter :attempt_fee
   filter :cdo, if: proc { authorized?(:allow_cdo) }
   boolean_filter :is_changed
 
@@ -40,6 +41,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     column :next_interval
     column :next_rate
     column :connect_fee
+    column :attempt_fee
     column :use_dp_intervals
     column :dp_margin_fixed
     column :dp_margin_percent

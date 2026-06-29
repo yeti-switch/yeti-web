@@ -3,7 +3,7 @@
 class Api::Rest::Admin::DestinationResource < ::BaseResource
   model_name 'Routing::Destination'
 
-  attributes :enabled, :next_rate, :connect_fee, :initial_interval, :next_interval, :dp_margin_fixed,
+  attributes :enabled, :next_rate, :connect_fee, :attempt_fee, :initial_interval, :next_interval, :dp_margin_fixed,
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
@@ -22,6 +22,7 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
   ransack_filter :prefix, type: :string
   ransack_filter :next_rate, type: :number
   ransack_filter :connect_fee, type: :number
+  ransack_filter :attempt_fee, type: :number
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
   ransack_filter :dp_margin_fixed, type: :number
@@ -71,6 +72,7 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
       currency
       next_rate
       connect_fee
+      attempt_fee
       initial_interval
       next_interval
       dp_margin_fixed

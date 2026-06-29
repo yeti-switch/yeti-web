@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::DialpeerNextRateResource < BaseResource
-  attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :apply_time, :applied,
+  attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :attempt_fee, :apply_time, :applied,
              :external_id
 
   paginator :paged
@@ -15,6 +15,7 @@ class Api::Rest::Admin::DialpeerNextRateResource < BaseResource
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
   ransack_filter :connect_fee, type: :number
+  ransack_filter :attempt_fee, type: :number
   ransack_filter :applied, type: :boolean
   ransack_filter :external_id, type: :number
 

@@ -2,7 +2,7 @@
 
 class Api::Rest::Admin::DestinationNextRateResource < ::BaseResource
   model_name 'Routing::DestinationNextRate'
-  attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :apply_time, :applied,
+  attributes :next_rate, :initial_rate, :initial_interval, :next_interval, :connect_fee, :attempt_fee, :apply_time, :applied,
              :external_id
 
   paginator :paged
@@ -16,6 +16,7 @@ class Api::Rest::Admin::DestinationNextRateResource < ::BaseResource
   ransack_filter :initial_interval, type: :number
   ransack_filter :next_interval, type: :number
   ransack_filter :connect_fee, type: :number
+  ransack_filter :attempt_fee, type: :number
   ransack_filter :apply_time, type: :datetime
   ransack_filter :created_at, type: :datetime
   ransack_filter :updated_at, type: :datetime
