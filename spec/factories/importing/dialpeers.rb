@@ -76,6 +76,7 @@ FactoryBot.define do
     gateway_id { nil }
     next_rate { nil }
     connect_fee { nil }
+    attempt_fee { nil }
     vendor_name { nil }
     vendor_id { nil }
     account_name { nil }

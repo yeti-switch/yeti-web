@@ -58,6 +58,7 @@ FactoryBot.define do
     rate_group_name { nil }
     rate_group_id { nil }
     connect_fee { 0 }
+    attempt_fee { 0 }
     enabled { true }
     reject_calls { false }
     initial_interval { 60 }

@@ -132,6 +132,12 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (719, 'rateplan_id', 'integer', true, 1760, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (721, 'destination_fee', 'numeric', true, 1780, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (723, 'dialpeer_fee', 'numeric', true, 1800, true);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1055, 'customer_currency_id', 'smallint', true, 1992, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1056, 'vendor_currency_id', 'smallint', true, 1993, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1057, 'customer_currency_rate', 'double precision', true, 1994, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1058, 'vendor_currency_rate', 'double precision', true, 1995, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1059, 'destination_attempt_fee', 'numeric', true, 1996, true);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1060, 'dialpeer_attempt_fee', 'numeric', true, 1997, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (726, 'dst_prefix_in', 'varchar', true, 1840, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (727, 'dst_prefix_out', 'varchar', true, 1850, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (728, 'src_prefix_in', 'varchar', true, 1860, true);
