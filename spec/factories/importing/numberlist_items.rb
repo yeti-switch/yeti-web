@@ -24,7 +24,7 @@
 #  action_id              :integer(4)
 #  lua_script_id          :integer(2)
 #  numberlist_id          :integer(4)
-#  o_id                   :integer(4)
+#  o_id                   :bigint(8)
 #  rewrite_ss_status_id   :integer(2)
 #  tag_action_id          :integer(4)
 #

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 # attempt_fee is charged for the act of attempting to send a call to a vendor,
-# regardless of whether the call connected:
+# regardless of whether the call connected, but only when the call was actually
+# sent to a vendor. A set internal_disconnect_code_id means the call was rejected
+# by routing (never sent), so the fee is charged only when it is null:
 #   * vendor side (dialpeer_attempt_fee): once per CDR (every attempt is a CDR)
 #   * customer side (destination_attempt_fee): once per call, on the is_last_cdr row
 # These specs exercise the billing.bill_cdr logic via switch.writecdr, focusing on
@@ -25,6 +27,8 @@ RSpec.describe 'switch.writecdr() attempt_fee billing' do
   let(:dialpeer_attempt_fee) { '3.0' }
   let(:customer_acc_vat) { '23.0' }
   let(:package_counter_id) { nil }
+  # nil => not rejected by routing, i.e. the call was sent to a vendor
+  let(:internal_disconnect_code_id) { nil }
 
   let(:time_start) { 10.minutes.ago }
   let(:leg_b_time) { time_start + 10.seconds }
@@ -82,6 +86,7 @@ RSpec.describe 'switch.writecdr() attempt_fee billing' do
         'sip:ruri@example.com', 'sip:proxy@example.com',
         '#{i_time_data}',
         'f', '486', 'Busy', '3', '486', 'Busy', '486', 'Busy',
+        #{internal_disconnect_code_id ? "'#{internal_disconnect_code_id}'" : 'NULL'},
         'orig-call-id@rspec', 'term-call-id@rspec',
         'local-tag-#{routing_attempt}', 'legb-local-tag-#{routing_attempt}',
         '', '0', 'f', '{}', '[]', '', '', '[]',
@@ -141,6 +146,21 @@ RSpec.describe 'switch.writecdr() attempt_fee billing' do
         customer_price: 0,
         customer_price_no_vat: 0,
         vendor_price: BigDecimal(dialpeer_attempt_fee)
+      )
+    end
+  end
+
+  context 'call was rejected by routing / not sent to a vendor (internal_disconnect_code_id present)' do
+    let(:internal_disconnect_code_id) { 8034 }
+
+    it 'charges neither the customer nor the vendor an attempt fee' do
+      subject
+      expect(cdr).to have_attributes(
+        internal_disconnect_code_id: 8034,
+        customer_price: 0,
+        customer_price_no_vat: 0,
+        vendor_price: 0,
+        profit: 0
       )
     end
   end

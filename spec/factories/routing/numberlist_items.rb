@@ -4,7 +4,7 @@
 #
 # Table name: class4.numberlist_items
 #
-#  id                   :integer(4)       not null, primary key
+#  id                   :bigint(8)        not null, primary key
 #  defer_dst_rewrite    :boolean          default(FALSE), not null
 #  defer_src_rewrite    :boolean          default(FALSE), not null
 #  dst_rewrite_result   :string

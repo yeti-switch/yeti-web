@@ -2525,7 +2525,7 @@ $$;
 --
 
 CREATE TABLE class4.numberlist_items (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     numberlist_id integer NOT NULL,
     key character varying NOT NULL,
     created_at timestamp with time zone,
@@ -14080,7 +14080,7 @@ ALTER SEQUENCE data_import.import_gateways_id_seq1 OWNED BY data_import.import_g
 
 CREATE TABLE data_import.import_numberlist_items (
     id integer NOT NULL,
-    o_id integer,
+    o_id bigint,
     error_string character varying,
     numberlist_id integer,
     numberlist_name character varying,
@@ -20672,6 +20672,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260702120000'),
 ('20260629122000'),
 ('20260629120500'),
 ('20260629120000'),
