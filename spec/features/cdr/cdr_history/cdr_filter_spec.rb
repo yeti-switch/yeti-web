@@ -93,8 +93,9 @@ RSpec.describe 'Cdrs index page filtering', js: true do
 
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_tom_select 'ORIGINATION GATEWAY', with: gateways[0].name, search: true
-        fill_in_tom_select 'ORIGINATION GATEWAY', with: gateways[1].name, search: true
+        select_tom_select_by_value 'ORIGINATION GATEWAY',
+                                   gateways[0].id => gateways[0].name,
+                                   gateways[1].id => gateways[1].name
       end
     end
 
@@ -133,8 +134,9 @@ RSpec.describe 'Cdrs index page filtering', js: true do
 
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_tom_select 'TERMINATION GATEWAY', with: gateways[0].name, search: true
-        fill_in_tom_select 'TERMINATION GATEWAY', with: gateways[1].name, search: true
+        select_tom_select_by_value 'TERMINATION GATEWAY',
+                                   gateways[0].id => gateways[0].name,
+                                   gateways[1].id => gateways[1].name
       end
     end
 

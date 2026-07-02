@@ -132,6 +132,18 @@ module Section
       end
     end
 
+    # Select known options in an ajax tom-select purely through the API: inject
+    # the option (so no server round-trip is needed) and add it. This avoids the
+    # type -> throttled-fetch -> render -> addItem chain of #search_and_select,
+    # which can race under CI load and drop the selection. Use it when the test
+    # already knows the value+text and only cares that the filter/form submits
+    # the right value, not that the ajax search UI works.
+    def select_by_value(pairs)
+      pairs.each do |value, text|
+        add_option_and_select(value, text)
+      end
+    end
+
     def clear
       control.root_element.hover
       control.clear_btn.click
@@ -209,6 +221,23 @@ module Section
         })(arguments[0], arguments[1], arguments[2])
       JS
       raise "tom-select: could not select #{text.inspect} (#{result})" unless result == 'ok'
+    end
+
+    # Inject an option (value + label) and select it, entirely through the
+    # tom-select API — no dropdown, no typing, no ajax. Mirrors what the ajax
+    # loader would have produced for a matching search, so the underlying
+    # <select> submits the value. arguments[0..2] are wrapper, value, text.
+    def add_option_and_select(value, text)
+      root_element.session.execute_script(<<~JS, root_element, value.to_s, text.to_s)
+        #{INSTANCE_JS}
+        if (ts) {
+          var opt = {};
+          opt[ts.settings.valueField] = arguments[1];
+          opt[ts.settings.labelField] = arguments[2];
+          ts.addOption(opt);
+          ts.addItem(String(arguments[1]), false);
+        }
+      JS
     end
   end
 end
