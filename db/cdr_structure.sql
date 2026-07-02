@@ -294,7 +294,9 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	customer_currency_id smallint,
 	vendor_currency_id smallint,
 	customer_currency_rate double precision,
-	vendor_currency_rate double precision
+	vendor_currency_rate double precision,
+	destination_attempt_fee numeric,
+	dialpeer_attempt_fee numeric
 );
 
 
@@ -579,7 +581,9 @@ CREATE TABLE cdr.cdr (
     customer_currency_id smallint,
     vendor_currency_id smallint,
     customer_currency_rate double precision,
-    vendor_currency_rate double precision
+    vendor_currency_rate double precision,
+    destination_attempt_fee numeric,
+    dialpeer_attempt_fee numeric
 )
 PARTITION BY RANGE (time_start);
 
@@ -641,6 +645,14 @@ BEGIN
         i_cdr.customer_price_no_vat=0;
         i_cdr.vendor_price=0;
         i_cdr.profit=0;
+    end if;
+    if i_cdr.internal_disconnect_code_id is null then
+        i_cdr.vendor_price = COALESCE(i_cdr.vendor_price, 0) + COALESCE(i_cdr.dialpeer_attempt_fee, 0);
+        if i_cdr.is_last_cdr and i_cdr.package_counter_id is null then
+            i_cdr.customer_price_no_vat = COALESCE(i_cdr.customer_price_no_vat, 0) + COALESCE(i_cdr.destination_attempt_fee, 0);
+            i_cdr.customer_price = i_cdr.customer_price_no_vat * (1 + COALESCE(i_cdr.customer_acc_vat, 0) / 100);
+        end if;
+        i_cdr.profit = COALESCE(i_cdr.customer_price, 0) - COALESCE(i_cdr.vendor_price, 0);
     end if;
     RETURN i_cdr;
 END;
@@ -1345,6 +1357,7 @@ BEGIN
   v_cdr.destination_initial_interval:=v_dynamic.destination_initial_interval;
   v_cdr.destination_next_interval:=v_dynamic.destination_next_interval;
   v_cdr.destination_fee:=v_dynamic.destination_fee;
+  v_cdr.destination_attempt_fee:=v_dynamic.destination_attempt_fee;
   v_cdr.destination_rate_policy_id:=v_dynamic.destination_rate_policy_id;
   v_cdr.destination_reverse_billing=v_dynamic.destination_reverse_billing;
 
@@ -1353,6 +1366,7 @@ BEGIN
   v_cdr.dialpeer_initial_interval:=v_dynamic.dialpeer_initial_interval;
   v_cdr.dialpeer_next_interval:=v_dynamic.dialpeer_next_interval;
   v_cdr.dialpeer_fee:=v_dynamic.dialpeer_fee;
+  v_cdr.dialpeer_attempt_fee:=v_dynamic.dialpeer_attempt_fee;
   v_cdr.dialpeer_reverse_billing=v_dynamic.dialpeer_reverse_billing;
 
   /* sockets addresses */
@@ -1607,6 +1621,7 @@ BEGIN
   v_cdr.destination_initial_interval:=v_dynamic.destination_initial_interval;
   v_cdr.destination_next_interval:=v_dynamic.destination_next_interval;
   v_cdr.destination_fee:=v_dynamic.destination_fee;
+  v_cdr.destination_attempt_fee:=v_dynamic.destination_attempt_fee;
   v_cdr.destination_rate_policy_id:=v_dynamic.destination_rate_policy_id;
   v_cdr.destination_reverse_billing=v_dynamic.destination_reverse_billing;
 
@@ -1615,6 +1630,7 @@ BEGIN
   v_cdr.dialpeer_initial_interval:=v_dynamic.dialpeer_initial_interval;
   v_cdr.dialpeer_next_interval:=v_dynamic.dialpeer_next_interval;
   v_cdr.dialpeer_fee:=v_dynamic.dialpeer_fee;
+  v_cdr.dialpeer_attempt_fee:=v_dynamic.dialpeer_attempt_fee;
   v_cdr.dialpeer_reverse_billing=v_dynamic.dialpeer_reverse_billing;
 
   /* sockets addresses */
@@ -1884,6 +1900,7 @@ BEGIN
   v_cdr.destination_initial_interval:=v_dynamic.destination_initial_interval;
   v_cdr.destination_next_interval:=v_dynamic.destination_next_interval;
   v_cdr.destination_fee:=v_dynamic.destination_fee;
+  v_cdr.destination_attempt_fee:=v_dynamic.destination_attempt_fee;
   v_cdr.destination_rate_policy_id:=v_dynamic.destination_rate_policy_id;
   v_cdr.destination_reverse_billing=COALESCE(v_dynamic.destination_reverse_billing, false);
 
@@ -1892,6 +1909,7 @@ BEGIN
   v_cdr.dialpeer_initial_interval:=v_dynamic.dialpeer_initial_interval;
   v_cdr.dialpeer_next_interval:=v_dynamic.dialpeer_next_interval;
   v_cdr.dialpeer_fee:=v_dynamic.dialpeer_fee;
+  v_cdr.dialpeer_attempt_fee:=v_dynamic.dialpeer_attempt_fee;
   v_cdr.dialpeer_reverse_billing=COALESCE(v_dynamic.dialpeer_reverse_billing, false);
 
   /* sockets addresses */
@@ -4607,6 +4625,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260629121000'),
 ('20260603000000'),
 ('20260516131500'),
 ('20260516120000'),

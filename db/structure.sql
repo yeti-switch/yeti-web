@@ -249,7 +249,9 @@ CREATE TYPE billing.cdr_v2 AS (
 	destination_reverse_billing boolean,
 	dialpeer_reverse_billing boolean,
 	package_counter_id bigint,
-	customer_duration integer
+	customer_duration integer,
+	destination_attempt_fee numeric,
+	dialpeer_attempt_fee numeric
 );
 
 
@@ -478,7 +480,9 @@ CREATE TYPE switch22.callprofile_ty AS (
 	customer_currency_id smallint,
 	vendor_currency_id smallint,
 	customer_currency_rate double precision,
-	vendor_currency_rate double precision
+	vendor_currency_rate double precision,
+	destination_attempt_fee numeric,
+	dialpeer_attempt_fee numeric
 );
 
 
@@ -2521,7 +2525,7 @@ $$;
 --
 
 CREATE TABLE class4.numberlist_items (
-    id integer NOT NULL,
+    id bigint NOT NULL,
     numberlist_id integer NOT NULL,
     key character varying NOT NULL,
     created_at timestamp with time zone,
@@ -2848,6 +2852,7 @@ CREATE TABLE class4.destinations (
     cdo smallint,
     scheduler_id smallint,
     currency_id smallint NOT NULL,
+    attempt_fee numeric DEFAULT 0.0 NOT NULL,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -2904,6 +2909,7 @@ CREATE TABLE class4.dialpeers (
     currency_id smallint NOT NULL,
     currency_rate double precision DEFAULT 1 NOT NULL,
     next_rate_system_currency numeric NOT NULL,
+    attempt_fee numeric DEFAULT 0.0 NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -3486,6 +3492,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -3511,6 +3518,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -3529,6 +3537,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -3594,6 +3603,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -4307,6 +4317,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -4332,6 +4343,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -4350,6 +4362,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -4415,6 +4428,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -5120,6 +5134,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -5145,6 +5160,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -5163,6 +5179,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -5228,6 +5245,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -7084,6 +7102,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
@@ -8789,6 +8808,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
@@ -10338,6 +10358,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
@@ -11938,7 +11959,8 @@ CREATE TABLE class4.destination_next_rates (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     applied boolean DEFAULT false NOT NULL,
-    external_id bigint
+    external_id bigint,
+    attempt_fee numeric DEFAULT 0.0 NOT NULL
 );
 
 
@@ -11997,6 +12019,7 @@ CREATE TABLE class4.dialpeer_next_rates (
     applied boolean DEFAULT false NOT NULL,
     external_id bigint,
     initial_rate numeric NOT NULL,
+    attempt_fee numeric DEFAULT 0.0 NOT NULL,
     CONSTRAINT dialpeer_next_rate_positive_initial_interval CHECK ((next_interval > 0)),
     CONSTRAINT dialpeer_next_rate_positive_next_interval CHECK ((next_interval > 0))
 );
@@ -13705,7 +13728,8 @@ CREATE TABLE data_import.import_destinations (
     scheduler_id smallint,
     scheduler_name character varying,
     currency_id smallint,
-    currency_name character varying
+    currency_name character varying,
+    attempt_fee numeric
 );
 
 
@@ -13783,7 +13807,8 @@ CREATE TABLE data_import.import_dialpeers (
     scheduler_id smallint,
     scheduler_name character varying,
     currency_id smallint,
-    currency_name character varying
+    currency_name character varying,
+    attempt_fee numeric
 );
 
 
@@ -14055,7 +14080,7 @@ ALTER SEQUENCE data_import.import_gateways_id_seq1 OWNED BY data_import.import_g
 
 CREATE TABLE data_import.import_numberlist_items (
     id integer NOT NULL,
-    o_id integer,
+    o_id bigint,
     error_string character varying,
     numberlist_id integer,
     numberlist_name character varying,
@@ -15025,7 +15050,8 @@ CREATE TABLE ratemanagement.pricelist_items (
     routeset_discriminator_id smallint,
     dialpeer_id bigint,
     detected_dialpeer_ids bigint[] DEFAULT '{}'::bigint[],
-    to_delete boolean DEFAULT false NOT NULL
+    to_delete boolean DEFAULT false NOT NULL,
+    attempt_fee numeric DEFAULT 0.0 NOT NULL
 );
 
 
@@ -20646,6 +20672,10 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260702120000'),
+('20260629122000'),
+('20260629120500'),
+('20260629120000'),
 ('20260628120000'),
 ('20260618120000'),
 ('20260616130000'),

@@ -59,7 +59,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
         initial_rate:,
         next_interval:,
         next_rate:,
-        connect_fee:
+        connect_fee:,
+        attempt_fee: nil
       }
     )
   end
@@ -117,7 +118,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           initial_rate: nil,
           next_interval: nil,
           next_rate: nil,
-          connect_fee: nil
+          connect_fee: nil,
+          attempt_fee: nil
         }
       )
     end
@@ -156,7 +158,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           initial_rate:,
           next_interval: nil,
           next_rate: nil,
-          connect_fee: nil
+          connect_fee: nil,
+          attempt_fee: nil
         }
       )
     end
@@ -183,7 +186,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           initial_rate: nil,
           next_interval:,
           next_rate: nil,
-          connect_fee: nil
+          connect_fee: nil,
+          attempt_fee: nil
         }
       )
     end
@@ -222,7 +226,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           initial_rate: nil,
           next_interval: nil,
           next_rate:,
-          connect_fee: nil
+          connect_fee: nil,
+          attempt_fee: nil
         }
       )
     end
@@ -249,7 +254,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           initial_rate: nil,
           next_interval: nil,
           next_rate: nil,
-          connect_fee:
+          connect_fee:,
+          attempt_fee: nil
         }
       )
     end
@@ -281,7 +287,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
                   initial_rate:,
                   next_interval:,
                   next_rate:,
-                  connect_fee:
+                  connect_fee:,
+                  attempt_fee: nil
                 }
               )
     end
@@ -323,7 +330,8 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
                   initial_rate:,
                   next_interval:,
                   next_rate:,
-                  connect_fee:
+                  connect_fee:,
+                  attempt_fee: nil
                 }
               )
     end

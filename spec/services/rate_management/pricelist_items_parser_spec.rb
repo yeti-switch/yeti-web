@@ -118,9 +118,9 @@ RSpec.describe RateManagement::PricelistItemsParser do
 
     it 'should be raise validation error' do
       expect { subject }.to raise_error RateManagement::PricelistItemsParser::Error, 'Unknown headers: Invalid header.' \
-                            ' Valid headers are: Prefix, Initial rate, Next rate, Connect fee, Dst number min length,' \
-                            ' Dst number max length, Initial interval, Next interval, Routing tag names,' \
-                            ' Routing tag mode, Enabled, Priority, Valid from'
+                            ' Valid headers are: Prefix, Initial rate, Next rate, Connect fee, Attempt fee,' \
+                            ' Dst number min length, Dst number max length, Initial interval, Next interval,' \
+                            ' Routing tag names, Routing tag mode, Enabled, Priority, Valid from'
     end
   end
 
@@ -134,9 +134,9 @@ RSpec.describe RateManagement::PricelistItemsParser do
 
     it 'should be raise validation error' do
       expect { subject }.to raise_error RateManagement::PricelistItemsParser::Error, 'Unknown headers: Invalid header, Test.' \
-                            ' Valid headers are: Prefix, Initial rate, Next rate, Connect fee, Dst number min length,' \
-                            ' Dst number max length, Initial interval, Next interval, Routing tag names,' \
-                            ' Routing tag mode, Enabled, Priority, Valid from'
+                            ' Valid headers are: Prefix, Initial rate, Next rate, Connect fee, Attempt fee,' \
+                            ' Dst number min length, Dst number max length, Initial interval, Next interval,' \
+                            ' Routing tag names, Routing tag mode, Enabled, Priority, Valid from'
     end
   end
 

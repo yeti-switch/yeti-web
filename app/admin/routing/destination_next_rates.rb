@@ -23,6 +23,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
                 :initial_rate,
                 :next_rate,
                 :connect_fee,
+                :attempt_fee,
                 :apply_time
 
   controller do
@@ -55,6 +56,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
       row :initial_rate
       row :next_rate
       row :connect_fee
+      row :attempt_fee
       row :current_rate_id
     end
   end
@@ -67,6 +69,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
+      f.input :attempt_fee
       f.input :apply_time, as: :date_time_picker, datepicker_options: { defaultTime: '00:00' }
     end
     f.actions
@@ -88,6 +91,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   filter :initial_interval
   filter :next_interval
   filter :connect_fee
+  filter :attempt_fee
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range
   filter :external_id
@@ -105,6 +109,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
     column :initial_interval
     column :next_interval
     column :connect_fee
+    column :attempt_fee
     column :created_at
     column :updated_at
     column :external_id

@@ -20,6 +20,7 @@
 #  customer_duration               :integer(4)
 #  customer_price                  :decimal(, )
 #  customer_price_no_vat           :decimal(, )
+#  destination_attempt_fee         :decimal(, )
 #  destination_fee                 :decimal(, )
 #  destination_initial_interval    :integer(4)
 #  destination_initial_rate        :decimal(, )
@@ -27,6 +28,7 @@
 #  destination_next_rate           :decimal(, )
 #  destination_prefix              :string
 #  destination_reverse_billing     :boolean
+#  dialpeer_attempt_fee            :decimal(, )
 #  dialpeer_fee                    :decimal(, )
 #  dialpeer_initial_interval       :integer(4)
 #  dialpeer_initial_rate           :decimal(, )

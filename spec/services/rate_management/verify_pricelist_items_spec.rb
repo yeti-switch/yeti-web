@@ -39,6 +39,8 @@ RSpec.describe RateManagement::VerifyPricelistItems do
   let!(:routing_tags) { FactoryBot.create_list(:routing_tag, 3) }
   let(:default_item_attrs) do
     {
+      # attempt_fee is an optional CSV column; omitted in these fixtures so it defaults to 0
+      attempt_fee: 0,
       pricelist_id: pricelist.id,
       valid_till: pricelist.valid_till,
       src_rewrite_rule: project.src_rewrite_rule,
@@ -316,6 +318,12 @@ RSpec.describe RateManagement::VerifyPricelistItems do
       let(:item_attrs) { super().merge(connect_fee: '-0.1') }
 
       include_examples :raises_service_error, 'Connect fee must be greater or equal to 0 for row 2'
+    end
+
+    context 'when CSV has row with negative attempt_fee' do
+      let(:item_attrs) { super().merge(attempt_fee: '-0.1') }
+
+      include_examples :raises_service_error, 'Attempt fee must be greater or equal to 0 for row 2'
     end
 
     context 'when CSV has row with dst_number_min_length="-1"' do

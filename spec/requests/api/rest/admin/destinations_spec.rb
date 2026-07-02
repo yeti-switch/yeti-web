@@ -64,6 +64,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
             {
               'acd-limit': destinations[0].acd_limit,
               'asr-limit': destinations[0].asr_limit,
+              'attempt-fee': destinations[0].attempt_fee.to_s,
               'connect-fee': destinations[0].connect_fee.to_s,
               'dp-margin-fixed': destinations[0].dp_margin_fixed.to_s,
               'dp-margin-percent': destinations[0].dp_margin_percent.to_s,
@@ -112,6 +113,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
             {
               'acd-limit': destinations[1].acd_limit,
               'asr-limit': destinations[1].asr_limit,
+              'attempt-fee': destinations[1].attempt_fee.to_s,
               'connect-fee': destinations[1].connect_fee.to_s,
               'dp-margin-fixed': destinations[1].dp_margin_fixed.to_s,
               'dp-margin-percent': destinations[1].dp_margin_percent.to_s,
@@ -158,6 +160,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
           {
             applied: next_rate.applied,
             'apply-time': next_rate.apply_time.iso8601(3),
+            'attempt-fee': next_rate.attempt_fee.to_s,
             'connect-fee': next_rate.connect_fee.to_s,
             'external-id': next_rate.external_id,
             'initial-interval': next_rate.initial_interval,

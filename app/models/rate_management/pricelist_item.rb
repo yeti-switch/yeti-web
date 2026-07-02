@@ -7,6 +7,7 @@
 #  id                        :bigint(8)        not null, primary key
 #  acd_limit                 :float(24)
 #  asr_limit                 :float(24)
+#  attempt_fee               :decimal(, )      default(0.0), not null
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      not null
 #  detected_dialpeer_ids     :bigint(8)        default([]), is an Array
@@ -82,7 +83,7 @@ module RateManagement
 
     include RoutingTagIdsScopeable
 
-    validates :valid_till, :initial_rate, :next_rate, :connect_fee, :initial_interval, :next_interval, presence: true
+    validates :valid_till, :initial_rate, :next_rate, :connect_fee, :attempt_fee, :initial_interval, :next_interval, presence: true
 
     belongs_to :gateway, optional: true
     belongs_to :gateway_group, optional: true
@@ -95,7 +96,7 @@ module RateManagement
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
     validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
-    validates :initial_rate, :next_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+    validates :initial_rate, :next_rate, :connect_fee, :attempt_fee, numericality: { greater_than_or_equal_to: 0 }
     validates :initial_interval, :next_interval, numericality: { greater_than: 0 }
 
     scope :to_create, -> { where("detected_dialpeer_ids = '{}'") }
@@ -112,7 +113,8 @@ module RateManagement
       OR pricelist_items.initial_rate != dialpeers.initial_rate
       OR pricelist_items.next_interval != dialpeers.next_interval
       OR pricelist_items.next_rate != dialpeers.next_rate
-      OR pricelist_items.connect_fee != dialpeers.connect_fee')
+      OR pricelist_items.connect_fee != dialpeers.connect_fee
+      OR pricelist_items.attempt_fee != dialpeers.attempt_fee')
     }
 
     def type

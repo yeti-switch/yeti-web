@@ -28,7 +28,7 @@ ActiveAdmin.register Dialpeer do
                  :prefix, :priority, :force_hit_rate, :exclusive_route,
                  [:country_name, proc { |row| row.network_prefix.try(:country).try(:name) }],
                  [:network_name, proc { |row| row.network_prefix.try(:network).try(:name) }],
-                 :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee,
+                 :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee, :attempt_fee,
                  [:currency_name, proc { |row| row.currency.name }],
                  :lcr_rate_multiplier,
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],
@@ -204,6 +204,7 @@ ActiveAdmin.register Dialpeer do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
+  filter :attempt_fee
   boolean_filter :reverse_billing
   filter :scheduler, as: :select, input_html: { class: 'tom-select' }
 
@@ -255,6 +256,7 @@ ActiveAdmin.register Dialpeer do
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
+      f.input :attempt_fee
       f.input :currency, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :reverse_billing
       f.input :lcr_rate_multiplier
@@ -333,6 +335,7 @@ ActiveAdmin.register Dialpeer do
           end
           row :lcr_rate_multiplier
           row :connect_fee
+          row :attempt_fee
           row :reverse_billing
 
           row :gateway do
@@ -377,6 +380,7 @@ ActiveAdmin.register Dialpeer do
           column :initial_interval
           column :next_interval
           column :connect_fee
+          column :attempt_fee
           column :external_id
           column :actions do |r|
             link_to('Edit', edit_dialpeer_dialpeer_next_rate_path(s.id, r.id))

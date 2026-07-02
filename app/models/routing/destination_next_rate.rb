@@ -7,6 +7,7 @@
 #  id               :bigint(8)        not null, primary key
 #  applied          :boolean          default(FALSE), not null
 #  apply_time       :timestamptz
+#  attempt_fee      :decimal(, )      default(0.0), not null
 #  connect_fee      :decimal(, )      not null
 #  initial_interval :integer(2)       not null
 #  initial_rate     :decimal(, )      not null
@@ -37,6 +38,7 @@ class Routing::DestinationNextRate < ApplicationRecord
             :initial_interval,
             :next_interval,
             :connect_fee,
+            :attempt_fee,
             :apply_time,
             presence: true
 
@@ -45,7 +47,7 @@ class Routing::DestinationNextRate < ApplicationRecord
     greater_than: 0,
     less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT
   }
-  validates :next_rate, :initial_rate, :connect_fee, numericality: { greater_than_or_equal_to: 0 }
+  validates :next_rate, :initial_rate, :connect_fee, :attempt_fee, numericality: { greater_than_or_equal_to: 0 }
 
   scope :not_applied, -> { where(applied: false) }
   scope :applied, -> { where(applied: true) }
@@ -68,7 +70,8 @@ class Routing::DestinationNextRate < ApplicationRecord
         next_interval: next_interval,
         initial_rate: initial_rate,
         next_rate: next_rate,
-        connect_fee: connect_fee
+        connect_fee: connect_fee,
+        attempt_fee: attempt_fee
       )
       update!(applied: true)
     end
