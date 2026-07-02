@@ -11334,10 +11334,11 @@ ALTER SEQUENCE billing.currencies_id_seq OWNED BY billing.currencies.id;
 CREATE TABLE billing.invoice_templates (
     id integer NOT NULL,
     name character varying NOT NULL,
-    filename character varying NOT NULL,
+    filename character varying,
     data bytea,
     sha1 character varying,
-    created_at timestamp with time zone
+    created_at timestamp with time zone,
+    html_template text
 );
 
 
@@ -20672,6 +20673,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260703120000'),
 ('20260702120000'),
 ('20260629122000'),
 ('20260629120500'),
