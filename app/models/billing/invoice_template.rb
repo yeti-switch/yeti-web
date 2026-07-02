@@ -18,7 +18,7 @@
 #
 
 class Billing::InvoiceTemplate < ApplicationRecord
-  self.table_name = 'invoice_templates'
+  self.table_name = 'billing.invoice_templates'
   # attr_accessible :template_file,:data,:name
   validates :name, presence: true
   validates :name, uniqueness: true

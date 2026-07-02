@@ -949,10 +949,12 @@ RSpec.describe '#routing logic' do
                  next_interval: destination_next_interval,
                  initial_rate: destination_rate,
                  next_rate: destination_rate,
+                 attempt_fee: destination_attempt_fee,
                  rate_group_id: rate_group.id,
                  allow_package_billing: destination_allow_package_billing,
                  currency: destination_currency)
         }
+        let!(:destination_attempt_fee) { 0.5 }
         let!(:dialpeer) {
           create(:dialpeer,
                  prefix: '',
@@ -962,10 +964,12 @@ RSpec.describe '#routing logic' do
                  account: vendor_account,
                  initial_rate: 1.0,
                  next_rate: 1.0,
+                 attempt_fee: dialpeer_attempt_fee,
                  gateway_id: dialpeer_gateway_id,
                  gateway_group_id: dialpeer_gateway_group_id,
                  currency: dialpeer_currency)
         }
+        let!(:dialpeer_attempt_fee) { 0.25 }
 
         it 'applies currency conversion to destination and dialpeer rates' do
           # dst multiplier = destination_currency.rate / customer_currency.rate = 6.0 / 2.0 = 3.0
@@ -986,6 +990,10 @@ RSpec.describe '#routing logic' do
           # dialpeer rate converted: 1.0 * 6.0 = 6.0
           expect(subject.first[:dialpeer_initial_rate]).to eq(1.0 * 6.0)
           expect(subject.first[:dialpeer_next_rate]).to eq(1.0 * 6.0)
+
+          # attempt fees converted the same way as fees/rates
+          expect(subject.first[:destination_attempt_fee]).to eq(0.5 * 3.0)
+          expect(subject.first[:dialpeer_attempt_fee]).to eq(0.25 * 6.0)
 
           expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
         end
