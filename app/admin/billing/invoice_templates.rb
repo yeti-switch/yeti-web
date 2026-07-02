@@ -23,7 +23,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
 
   controller do
     def scoped_collection
-      super.select('created_at, sha1, id, name, filename')
+      super.select('created_at, sha1, id, name, filename, html_template')
     end
 
     def find_resource
@@ -41,7 +41,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     column :name
 
     column 'Type' do |row|
-      row.filename.present? ? status_tag('ODT') : status_tag('HTML', class: 'ok')
+      row.html_template.present? ? status_tag('HTML', class: 'ok') : status_tag('ODT')
     end
     column 'File' do |row|
       label = row.filename.presence || "#{row.name}.html"
@@ -97,9 +97,22 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     attributes_table do
       row :id
       row :name
-      row('Type') { t.filename.present? ? 'ODT' : 'HTML' }
+      row('Type') { t.html_template.present? ? 'HTML' : 'ODT' }
       row :sha1
       row :created_at
+    end
+
+    if t.html_template.present?
+      panel 'HTML template' do
+        # Rendered as <pre><code class="language-django">; highlight.js (loaded
+        # in active_admin.js) highlights it on load and adds `.hljs`, themed for
+        # dark mode by the app CSS. The django/jinja grammar sub-highlights the
+        # HTML (via xml) AND the pongo2 {{ }} / {% %} / {# #} tags. Arbre
+        # HTML-escapes the String, so it's shown as source, not rendered.
+        pre(style: 'white-space: pre-wrap; word-break: break-word;') do
+          code(class: 'language-django') { t.html_template }
+        end
+      end
     end
 
     active_admin_comments

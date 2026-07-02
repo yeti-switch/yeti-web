@@ -38,6 +38,8 @@
 //= require vendor/highlightjs/highlight.min
 //= require vendor/highlightjs/languages/lua.min
 //= require vendor/highlightjs/languages/json.min
+//= require vendor/highlightjs/languages/xml.min
+//= require vendor/highlightjs/languages/django.min
 //= require highlightjs
 //= require modal_link
 //= require import_apply_unique_fields
