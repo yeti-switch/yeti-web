@@ -300,6 +300,24 @@ RSpec.describe RateManagement::VerifyPricelistItems do
       include_examples :raises_service_error, "Next rate can't be blank for row 2"
     end
 
+    context 'when CSV has row with negative initial_rate' do
+      let(:item_attrs) { super().merge(initial_rate: '-0.1') }
+
+      include_examples :raises_service_error, 'Initial rate must be greater or equal to 0 for row 2'
+    end
+
+    context 'when CSV has row with negative next_rate' do
+      let(:item_attrs) { super().merge(next_rate: '-0.1') }
+
+      include_examples :raises_service_error, 'Next rate must be greater or equal to 0 for row 2'
+    end
+
+    context 'when CSV has row with negative connect_fee' do
+      let(:item_attrs) { super().merge(connect_fee: '-0.1') }
+
+      include_examples :raises_service_error, 'Connect fee must be greater or equal to 0 for row 2'
+    end
+
     context 'when CSV has row with dst_number_min_length="-1"' do
       let(:item_attrs) { super().merge(dst_number_min_length: -1) }
 
