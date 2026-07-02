@@ -60,6 +60,9 @@ class Billing::InvoiceTemplate < ApplicationRecord
   end
 
   def refresh_html_sha1
-    self.sha1 = html_template.present? ? Digest::SHA1.hexdigest(html_template) : nil
+    # A blank textarea submits "" alongside an ODT upload; normalize it away and
+    # leave sha1 alone so the ODT path's sha1 (set in template_file=) survives.
+    self.html_template = nil if html_template.blank?
+    self.sha1 = Digest::SHA1.hexdigest(html_template) if html_template.present?
   end
 end

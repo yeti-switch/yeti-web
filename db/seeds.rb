@@ -23,13 +23,6 @@ end
   execute_sql_file("db/seeds/main/#{filename}.sql")
 end
 
-# Example HTML invoice template, so new installs have a ready-to-copy example
-# (rendered to PDF by the yeti-pdf service). Created once; existing rows/edits
-# are left untouched.
-Billing::InvoiceTemplate.find_or_create_by!(name: 'Example (HTML)') do |template|
-  template.html_template = File.read(Rails.root.join('db/seeds/main/invoice_template.html'))
-end
-
 # "Cdr" database
 %w[
   pgq
