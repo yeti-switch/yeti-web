@@ -3492,7 +3492,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  i_profile.destination_attempt_fee:=i_destination.attempt_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -3518,7 +3518,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
-  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -3537,7 +3537,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
-    i_profile.dialpeer_attempt_fee := (i_dp.attempt_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -3603,7 +3603,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
-      i_profile.destination_attempt_fee := (i_profile.destination_attempt_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -4317,7 +4317,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  i_profile.destination_attempt_fee:=i_destination.attempt_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -4343,7 +4343,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
-  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -4362,7 +4362,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
-    i_profile.dialpeer_attempt_fee := (i_dp.attempt_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -4428,7 +4428,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
-      i_profile.destination_attempt_fee := (i_profile.destination_attempt_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -5134,7 +5134,7 @@ BEGIN
 
   i_profile.destination_id:=i_destination.id;
   i_profile.destination_fee:=i_destination.connect_fee::varchar;
-  i_profile.destination_attempt_fee:=i_destination.attempt_fee::varchar;
+  i_profile.destination_attempt_fee:=i_destination.attempt_fee;
   i_profile.destination_rate_policy_id:=i_destination.rate_policy_id;
 
   --vendor account capacity limit;
@@ -5160,7 +5160,7 @@ BEGIN
   i_profile.dialpeer_initial_interval=i_dp.initial_interval;
   i_profile.dialpeer_next_interval=i_dp.next_interval;
   i_profile.dialpeer_fee=i_dp.connect_fee::varchar;
-  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee::varchar;
+  i_profile.dialpeer_attempt_fee=i_dp.attempt_fee;
   i_profile.dialpeer_reverse_billing=i_dp.reverse_billing;
 
   select into strict v_vendor * from public.contractors where id = i_dp.vendor_id;
@@ -5179,7 +5179,7 @@ BEGIN
     i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
     i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
-    i_profile.dialpeer_attempt_fee := (i_dp.attempt_fee * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_attempt_fee := i_dp.attempt_fee * v_dp_currency_multiplier;
   END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
@@ -5245,7 +5245,7 @@ BEGIN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
-      i_profile.destination_attempt_fee := (i_profile.destination_attempt_fee::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_attempt_fee := i_profile.destination_attempt_fee * v_dst_currency_multiplier;
     END IF;
   END IF;
 
@@ -7102,7 +7102,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
-          v_ret.destination_attempt_fee = v_destination.attempt_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
@@ -8808,7 +8808,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
-          v_ret.destination_attempt_fee = v_destination.attempt_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
@@ -10358,7 +10358,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.time_limit = v_package.duration;
         ELSE
           v_ret.destination_fee = v_destination.connect_fee::varchar;
-          v_ret.destination_attempt_fee = v_destination.attempt_fee::varchar;
+          v_ret.destination_attempt_fee = v_destination.attempt_fee;
           v_ret.destination_rate_policy_id = v_destination.rate_policy_id;
           v_ret.destination_reverse_billing = v_destination.reverse_billing;
           if v_destination.next_rate::float > v_destination_rate_limit then
