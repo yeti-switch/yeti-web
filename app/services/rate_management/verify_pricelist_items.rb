@@ -102,6 +102,7 @@ module RateManagement
         return
       end
 
+      add_error('Attempt fee must be greater or equal to 0', row_number) if attempt_fee.negative?
       attempt_fee
     }
 

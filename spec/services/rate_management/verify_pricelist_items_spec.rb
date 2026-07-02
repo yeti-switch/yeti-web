@@ -320,6 +320,12 @@ RSpec.describe RateManagement::VerifyPricelistItems do
       include_examples :raises_service_error, 'Connect fee must be greater or equal to 0 for row 2'
     end
 
+    context 'when CSV has row with negative attempt_fee' do
+      let(:item_attrs) { super().merge(attempt_fee: '-0.1') }
+
+      include_examples :raises_service_error, 'Attempt fee must be greater or equal to 0 for row 2'
+    end
+
     context 'when CSV has row with dst_number_min_length="-1"' do
       let(:item_attrs) { super().merge(dst_number_min_length: -1) }
 
