@@ -122,6 +122,14 @@ Config.setup do |setup_config|
     optional(:invoice).schema do
       optional(:auto_approve).value(:bool)
       optional(:pdf_converter).maybe(:string)
+      # External yeti-pdf render service. When configured (and a template has
+      # html_template) invoice PDFs are produced via yeti-pdf instead of the
+      # legacy ODT + pdf_converter path.
+      optional(:pdf_api).schema do
+        required(:base_url).filled(:string)
+        optional(:auth_token).maybe(:string)
+        optional(:timeout).maybe(:integer)
+      end
     end
     optional(:admin_ui).schema do
       optional(:session_lifetime).maybe(:int?)

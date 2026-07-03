@@ -4,12 +4,13 @@
 #
 # Table name: invoice_templates
 #
-#  id         :integer(4)       not null, primary key
-#  data       :binary
-#  filename   :string           not null
-#  name       :string           not null
-#  sha1       :string
-#  created_at :timestamptz
+#  id            :integer(4)       not null, primary key
+#  data          :binary
+#  filename      :string
+#  html_template :text
+#  name          :string           not null
+#  sha1          :string
+#  created_at    :timestamptz
 #
 # Indexes
 #

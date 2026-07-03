@@ -30,7 +30,12 @@
   .hljs-string, .hljs-symbol                   { color: #ce9178; } // strings
   .hljs-number                                 { color: #b5cea8; } // numbers
   .hljs-literal, .hljs-keyword, .hljs-built_in { color: #569cd6; } // true/false/null
-  .hljs-punctuation, .hljs-comment             { color: var(--aa-text-muted); }
+  // .hljs-tag = the angle-bracket punctuation (< </ >); the light theme leaves
+  // it dark (#444a), which is invisible on a dark background.
+  .hljs-tag, .hljs-punctuation, .hljs-comment  { color: var(--aa-text-muted); }
+  // pongo2 / Jinja template tags — the light theme colors these dark red.
+  .hljs-template-tag                           { color: #c586c0; } // {% ... %}
+  .hljs-template-variable                      { color: #dcdcaa; } // {{ ... }}
 }
 
 fieldset.inputs {

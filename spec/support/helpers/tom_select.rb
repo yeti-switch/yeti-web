@@ -32,6 +32,15 @@ module Helpers
       end
     end
 
+    # Select known options in an ajax tom-select through its API (inject +
+    # addItem), skipping the flaky type -> ajax-fetch -> render -> click chain.
+    # Pass value => text pairs, e.g.
+    #   select_tom_select_by_value 'ORIGINATION GATEWAY', gw1.id => gw1.name, gw2.id => gw2.name
+    def select_tom_select_by_value(label, pairs, exact_label: false, selector: nil)
+      tom_select = find_tom_select(label, exact: exact_label, selector:)
+      tom_select.select_by_value(pairs)
+    end
+
     def fill_in_filter_type_tom_select(label, with:, exact_label: false, parent: nil)
       parent ||= Capybara.current_session
       label = parent.find(:label, label, exact: exact_label)

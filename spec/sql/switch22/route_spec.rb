@@ -612,12 +612,14 @@ RSpec.describe '#routing logic' do
                                   next_interval: destination_next_interval,
                                   initial_rate: destination_rate,
                                   next_rate: destination_rate,
+                                  attempt_fee: destination_attempt_fee,
                                   rate_group_id: rate_group.id,
                                   allow_package_billing: destination_allow_package_billing,
                                   currency: customer_account.currency)
       }
       let!(:destination_allow_package_billing) { false }
       let!(:destination_rate) { 0.11 }
+      let!(:destination_attempt_fee) { 0 }
       let!(:destination_initial_interval) { 1 }
       let!(:destination_next_interval) { 1 }
 
@@ -649,10 +651,12 @@ RSpec.describe '#routing logic' do
                routing_group_id: routing_group.id,
                vendor_id: vendor.id,
                account: vendor_account,
+               attempt_fee: dialpeer_attempt_fee,
                gateway_id: dialpeer_gateway_id,
                gateway_group_id: dialpeer_gateway_group_id,
                currency: vendor_account.currency)
       }
+      let!(:dialpeer_attempt_fee) { 0 }
 
       let(:dialpeer_gateway_id) { vendor_gateway.id }
       let(:dialpeer_gateway_group_id) { nil }
@@ -945,10 +949,12 @@ RSpec.describe '#routing logic' do
                  next_interval: destination_next_interval,
                  initial_rate: destination_rate,
                  next_rate: destination_rate,
+                 attempt_fee: destination_attempt_fee,
                  rate_group_id: rate_group.id,
                  allow_package_billing: destination_allow_package_billing,
                  currency: destination_currency)
         }
+        let!(:destination_attempt_fee) { 0.5 }
         let!(:dialpeer) {
           create(:dialpeer,
                  prefix: '',
@@ -958,10 +964,12 @@ RSpec.describe '#routing logic' do
                  account: vendor_account,
                  initial_rate: 1.0,
                  next_rate: 1.0,
+                 attempt_fee: dialpeer_attempt_fee,
                  gateway_id: dialpeer_gateway_id,
                  gateway_group_id: dialpeer_gateway_group_id,
                  currency: dialpeer_currency)
         }
+        let!(:dialpeer_attempt_fee) { 0.25 }
 
         it 'applies currency conversion to destination and dialpeer rates' do
           # dst multiplier = destination_currency.rate / customer_currency.rate = 6.0 / 2.0 = 3.0
@@ -982,6 +990,10 @@ RSpec.describe '#routing logic' do
           # dialpeer rate converted: 1.0 * 6.0 = 6.0
           expect(subject.first[:dialpeer_initial_rate]).to eq(1.0 * 6.0)
           expect(subject.first[:dialpeer_next_rate]).to eq(1.0 * 6.0)
+
+          # attempt fees converted the same way as fees/rates
+          expect(subject.first[:destination_attempt_fee]).to eq(0.5 * 3.0)
+          expect(subject.first[:dialpeer_attempt_fee]).to eq(0.25 * 6.0)
 
           expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
         end
@@ -2165,6 +2177,18 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:aleg_append_headers_reply]).to eq(expected_headers.join('\r\n'))
 
           expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+        end
+      end
+
+      context 'Authorized, attempt fees are snapshotted onto the routed profile' do
+        # same currency everywhere => no conversion, snapshot equals the raw values
+        let!(:destination_attempt_fee) { 0.5 }
+        let!(:dialpeer_attempt_fee) { 0.25 }
+
+        it 'snapshots destination_attempt_fee and dialpeer_attempt_fee onto the profile' do
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+          expect(subject.first[:destination_attempt_fee]).to eq(0.5)
+          expect(subject.first[:dialpeer_attempt_fee]).to eq(0.25)
         end
       end
 

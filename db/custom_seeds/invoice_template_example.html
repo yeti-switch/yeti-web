@@ -1,0 +1,197 @@
+{# Example invoice template (yeti-pdf / pongo2). #}
+{# Demonstrates every value the invoice payload provides and every filter. #}
+{# Copy it, delete the sections you don't need, and restyle. #}
+{# Values are raw — format with filters: #}
+{#   {{ amount|money:"€" }}  ->  1 234.50 €   (2dp, space thousands) #}
+{#   {{ n|number:4 }}  ->  0.0125 #}
+{#   {{ seconds|duration:"colon" }}  ->  12:30   (M:SS) #}
+{#   {{ seconds|duration:"min" }}  ->  12.50   (decimal minutes) #}
+{#   {{ seconds|duration:"human" }}  ->  12 m. 30 s. #}
+{#   {{ ts|strfdate:"%d.%m.%Y %H:%M" }}  ->  30.06.2026 23:59 #}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 16mm 14mm; }
+  body { font-family: sans-serif; font-size: 9pt; color: #222; }
+  h1 { font-size: 17pt; margin: 0 0 2pt; }
+  h2 { font-size: 12pt; margin: 16pt 0 4pt; border-bottom: 2px solid #333; padding-bottom: 2pt; }
+  h3 { font-size: 10pt; margin: 12pt 0 3pt; color: #444; }
+  .muted { color: #777; }
+  .header { display: flex; justify-content: space-between; margin-bottom: 10pt; }
+  .box { margin-bottom: 4pt; }
+  dl { margin: 0; }
+  dl.kv { display: grid; grid-template-columns: max-content 1fr; column-gap: 10pt; row-gap: 2pt; }
+  dl.kv dt { color: #666; }
+  dl.kv dd { margin: 0; }
+  table { width: 100%; border-collapse: collapse; margin-top: 4pt; }
+  th, td { border: 1px solid #bbb; padding: 3pt 5pt; }
+  th { background: #eee; text-align: left; }
+  td.num, th.num { text-align: right; }
+  tfoot td { font-weight: bold; background: #f5f5f5; }
+  .empty { color: #999; font-style: italic; padding: 4pt 0; }
+</style>
+</head>
+<body>
+
+  {# ---- Header: issuer (contractor) + customer (account) + invoice meta ---- #}
+  <div class="header">
+    <div>
+      <h1>Invoice {{ invoice.reference }}</h1>
+      <div class="muted">No. {{ invoice.id }} · issued {{ invoice.created_at|strfdate:"%d.%m.%Y %H:%M" }}</div>
+      <div class="muted">Period {{ invoice.start_date|strfdate:"%d.%m.%Y" }} – {{ invoice.end_date|strfdate:"%d.%m.%Y" }}
+        {% if account.invoice_period %}({{ account.invoice_period }}){% endif %}</div>
+    </div>
+    <div>
+      <div class="box"><strong>{{ contractor.name }}</strong></div>
+      <div class="box muted">{{ contractor.address }}</div>
+      <div class="box muted">{{ contractor.phones }}</div>
+    </div>
+  </div>
+
+  <h2>Account</h2>
+  <dl class="kv">
+    <dt>Name</dt><dd>{{ account.name }} (#{{ account.id }})</dd>
+    <dt>Balance</dt><dd>{{ account.balance|money:"€" }}</dd>
+    <dt>Min / Max balance</dt><dd>{{ account.min_balance|money:"€" }} / {{ account.max_balance|money:"€" }}</dd>
+  </dl>
+
+  {# ---- Totals ---- #}
+  <h2>Summary</h2>
+  <dl class="kv">
+    <dt>Amount total</dt><dd><strong>{{ invoice.amount_total|money:"€" }}</strong></dd>
+    <dt>Spent</dt><dd>{{ invoice.amount_spent|money:"€" }}</dd>
+    <dt>Earned</dt><dd>{{ invoice.amount_earned|money:"€" }}</dd>
+  </dl>
+
+  {# Macro: render the originated/terminated summary block. #}
+  {% macro leg_summary(title, leg) %}
+    <h3>{{ title }}</h3>
+    <dl class="kv">
+      <dt>Spent / Earned</dt><dd>{{ leg.amount_spent|money:"€" }} / {{ leg.amount_earned|money:"€" }}</dd>
+      <dt>Calls (successful / total)</dt><dd>{{ leg.successful_calls_count|number }} / {{ leg.calls_count|number }}</dd>
+      <dt>Duration</dt><dd>{{ leg.calls_duration|duration:"colon" }}
+        ({{ leg.calls_duration|duration:"min" }} min, {{ leg.calls_duration|duration:"human" }})</dd>
+      <dt>First / Last call</dt><dd>{{ leg.first_call_at|strfdate:"%d.%m.%Y %H:%M" }} / {{ leg.last_call_at|strfdate:"%d.%m.%Y %H:%M" }}</dd>
+    </dl>
+  {% endmacro %}
+
+  {{ leg_summary("Originated", invoice.originated) }}
+  {{ leg_summary("Terminated", invoice.terminated) }}
+
+  <h3>Services</h3>
+  <dl class="kv">
+    <dt>Spent / Earned</dt><dd>{{ invoice.services.amount_spent|money:"€" }} / {{ invoice.services.amount_earned|money:"€" }}</dd>
+    <dt>Transactions</dt><dd>{{ invoice.services.transactions_count|number }}</dd>
+  </dl>
+
+  {# Macro: a destinations table (has a prefix column). #}
+  {% macro destinations_table(rows) %}
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Prefix</th><th>Country</th><th>Network</th>
+          <th class="num">Rate</th><th class="num">Calls</th><th class="num">Success</th>
+          <th class="num">Duration</th><th class="num">Amount</th>
+          <th>First call</th><th>Last call</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# skip rows with a zero (or missing) amount; keep sequential numbering #}
+        {% set i = 0 %}
+        {% for d in rows %}{% if d.amount %}{% set i = i + 1 %}
+        <tr>
+          <td class="num">{{ i }}</td>
+          <td>{{ d.prefix }}</td>
+          <td>{{ d.country }}</td>
+          <td>{{ d.network }}</td>
+          <td class="num">{{ d.rate|number:4 }}</td>
+          <td class="num">{{ d.calls_count|number }}</td>
+          <td class="num">{{ d.successful_calls_count|number }}</td>
+          <td class="num">{{ d.calls_duration|duration:"colon" }}</td>
+          <td class="num">{{ d.amount|money }}</td>
+          <td>{{ d.first_call_at|strfdate:"%d.%m %H:%M" }}</td>
+          <td>{{ d.last_call_at|strfdate:"%d.%m %H:%M" }}</td>
+        </tr>
+        {% endif %}{% endfor %}
+      </tbody>
+    </table>
+    {% if not rows %}<div class="empty">No data.</div>{% endif %}
+  {% endmacro %}
+
+  {# Macro: a networks table (aggregated by country/network — no prefix). #}
+  {% macro networks_table(rows) %}
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Country</th><th>Network</th>
+          <th class="num">Rate</th><th class="num">Calls</th><th class="num">Success</th>
+          <th class="num">Duration</th><th class="num">Amount</th>
+          <th>First call</th><th>Last call</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# skip rows with a zero (or missing) amount; keep sequential numbering #}
+        {% set i = 0 %}
+        {% for n in rows %}{% if n.amount %}{% set i = i + 1 %}
+        <tr>
+          <td class="num">{{ i }}</td>
+          <td>{{ n.country }}</td>
+          <td>{{ n.network }}</td>
+          <td class="num">{{ n.rate|number:4 }}</td>
+          <td class="num">{{ n.calls_count|number }}</td>
+          <td class="num">{{ n.successful_calls_count|number }}</td>
+          <td class="num">{{ n.calls_duration|duration:"colon" }}</td>
+          <td class="num">{{ n.amount|money }}</td>
+          <td>{{ n.first_call_at|strfdate:"%d.%m %H:%M" }}</td>
+          <td>{{ n.last_call_at|strfdate:"%d.%m %H:%M" }}</td>
+        </tr>
+        {% endif %}{% endfor %}
+      </tbody>
+    </table>
+    {% if not rows %}<div class="empty">No data.</div>{% endif %}
+  {% endmacro %}
+
+  <h2>Originated destinations</h2>
+  {{ destinations_table(originated_destinations) }}
+  <h3>Originated destinations — successful only</h3>
+  {{ destinations_table(originated_destinations_succ) }}
+
+  <h2>Terminated destinations</h2>
+  {{ destinations_table(terminated_destinations) }}
+  <h3>Terminated destinations — successful only</h3>
+  {{ destinations_table(terminated_destinations_succ) }}
+
+  <h2>Originated networks</h2>
+  {{ networks_table(originated_networks) }}
+  <h3>Originated networks — successful only</h3>
+  {{ networks_table(originated_networks_succ) }}
+
+  <h2>Terminated networks</h2>
+  {{ networks_table(terminated_networks) }}
+  <h3>Terminated networks — successful only</h3>
+  {{ networks_table(terminated_networks_succ) }}
+
+  <h2>Service data</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Service</th><th class="num">Transactions</th><th class="num">Amount</th></tr>
+    </thead>
+    <tbody>
+      {# skip rows with a zero (or missing) amount; keep sequential numbering #}
+      {% set i = 0 %}
+      {% for s in service_data %}{% if s.amount %}{% set i = i + 1 %}
+      <tr>
+        <td class="num">{{ i }}</td>
+        <td>{{ s.service }}</td>
+        <td class="num">{{ s.transactions_count|number }}</td>
+        <td class="num">{{ s.amount|money }}</td>
+      </tr>
+      {% endif %}{% endfor %}
+    </tbody>
+  </table>
+  {% if not service_data %}<div class="empty">No data.</div>{% endif %}
+
+</body>
+</html>
