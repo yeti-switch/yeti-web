@@ -47,9 +47,15 @@ class Importing::Account < Importing::Base
     total_capacity
     destination_rate_limit
     max_call_duration
+    invoice_period_id
   ]
 
   self.strict_unique_attributes = %w[name]
 
   import_for ::Account
+
+  def self.after_import_hook
+    resolve_integer_constant('invoice_period_id', 'invoice_period_name', Billing::InvoicePeriod.pluck(:id, :name))
+    super
+  end
 end

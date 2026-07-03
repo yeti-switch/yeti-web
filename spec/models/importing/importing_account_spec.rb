@@ -22,4 +22,12 @@ RSpec.describe Importing::Account do
 
     let(:real_item) { described_class.import_class.last }
   end
+
+  context 'with invoice_period_name' do
+    include_context :init_importing_account, name: 'ACC-PERIOD', invoice_period_name: 'Weekly', invoice_period_id: nil
+
+    it 'resolves invoice_period_id' do
+      expect { subject }.to change { preview_item.reload.invoice_period_id }.to(Billing::InvoicePeriod::WEEKLY)
+    end
+  end
 end

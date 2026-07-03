@@ -146,6 +146,24 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
       include_examples :creates_account
     end
 
+    context 'with invoice-period-id attribute' do
+      let(:attributes) do
+        super().merge 'invoice-period-id': Billing::InvoicePeriod::WEEKLY
+      end
+
+      include_examples :responds_with_status, 201
+      include_examples :creates_account
+
+      it 'fills next_invoice_at' do
+        subject
+        expect(Account.last!).to have_attributes(
+          invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+          next_invoice_at: be_present,
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+    end
+
     context 'when attributes and relationships are invalid' do
       let(:attributes) { { name: 'name', 'max-balance': -1 } }
       let(:relationships) { {} }
