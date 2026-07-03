@@ -74,8 +74,8 @@ ActiveAdmin.register Account do
 
   index footer_data: ->(collection) { collection.totals_per_currency } do
     selectable_column
-    actions
     id_column
+    actions
     column :contractor do |c|
       auto_link(c.contractor, c.contractor.decorated_display_name)
     end
