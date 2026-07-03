@@ -133,6 +133,126 @@ RSpec.describe Account, type: :model do
         include_examples :creates_account
       end
     end
+
+    context 'with invoice_period_id' do
+      let(:current_time) { Time.utc(2020, 1, 1, 12) } # Wednesday
+      let(:create_params) { super().merge invoice_period_id: Billing::InvoicePeriod::WEEKLY }
+      let(:expected_account_attrs) do
+        super().merge next_invoice_at: ActiveSupport::TimeZone.new(utc_timezone).parse('2020-01-06 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+
+      include_examples :creates_account
+    end
+
+    context 'with invoice_period_id and explicit next_invoice_at' do
+      let(:current_time) { Time.utc(2020, 1, 1, 12) }
+      let(:explicit_next_invoice_at) { ActiveSupport::TimeZone.new(utc_timezone).parse('2020-02-01 00:00:00') }
+      let(:create_params) do
+        super().merge invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+                      next_invoice_at: explicit_next_invoice_at,
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+
+      include_examples :creates_account
+    end
+  end
+
+  describe '#update' do
+    subject do
+      travel_to(current_time) do
+        account.update(update_params)
+      end
+    end
+
+    let(:current_time) { Time.utc(2020, 1, 1, 12) } # Wednesday
+    let(:utc_time_zone) { ActiveSupport::TimeZone.new(utc_timezone) }
+    let!(:contractor) { FactoryBot.create(:vendor) }
+    let!(:account) { FactoryBot.create(:account, account_attrs) }
+    let(:account_attrs) { { contractor: contractor } }
+
+    context 'when invoice_period_id is set' do
+      let(:update_params) { { invoice_period_id: Billing::InvoicePeriod::WEEKLY } }
+      let(:expected_account_attrs) do
+        update_params.merge(
+          next_invoice_at: utc_time_zone.parse('2020-01-06 00:00:00'),
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when invoice_period_id is set along with explicit next_invoice_at' do
+      let(:update_params) do
+        {
+          invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+          next_invoice_at: utc_time_zone.parse('2020-02-01 00:00:00'),
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        }
+      end
+      let(:expected_account_attrs) { update_params }
+
+      include_examples :updates_account
+    end
+
+    context 'when invoice_period_id is cleared' do
+      let(:account_attrs) do
+        super().merge invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+                      next_invoice_at: utc_time_zone.parse('2020-01-06 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+      let(:update_params) { { invoice_period_id: nil } }
+      let(:expected_account_attrs) do
+        update_params.merge(next_invoice_at: nil, next_invoice_type_id: nil)
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when timezone is changed and invoice_period_id present' do
+      let(:account_attrs) do
+        super().merge invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+                      next_invoice_at: utc_time_zone.parse('2020-01-06 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+      let(:update_params) { { timezone: kyiv_timezone } }
+      let(:expected_account_attrs) do
+        update_params.merge(
+          invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+          next_invoice_at: ActiveSupport::TimeZone.new(kyiv_timezone).parse('2020-01-06 00:00:00'),
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when timezone is changed without invoice_period_id' do
+      let(:update_params) { { timezone: kyiv_timezone } }
+      let(:expected_account_attrs) do
+        update_params.merge(invoice_period_id: nil, next_invoice_at: nil, next_invoice_type_id: nil)
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when only next_invoice_at is changed' do
+      let(:account_attrs) do
+        super().merge invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+                      next_invoice_at: utc_time_zone.parse('2020-01-06 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+      let(:update_params) { { next_invoice_at: utc_time_zone.parse('2020-01-13 00:00:00') } }
+      let(:expected_account_attrs) do
+        update_params.merge(
+          invoice_period_id: Billing::InvoicePeriod::WEEKLY,
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+
+      include_examples :updates_account
+    end
   end
 
   describe '#valid?' do

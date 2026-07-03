@@ -35,5 +35,6 @@ ActiveAdmin.register Importing::Account do
     column :origination_capacity
     column :termination_capacity
     column :total_capacity
+    column :invoice_period_name
   end
 end

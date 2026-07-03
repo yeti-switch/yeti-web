@@ -122,6 +122,7 @@ class Account < ApplicationRecord
   validates :next_invoice_type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
 
   before_validation :set_currency_name, on: :create
+  before_save :apply_invoice_period
 
   after_initialize do
     if new_record?
@@ -207,6 +208,29 @@ class Account < ApplicationRecord
   end
 
   private
+
+  # invoice_period_id is written not only via AccountForm, but also directly on the model
+  # (admin API, batch update, CSV import), so next_invoice_at must be maintained here.
+  # Timezone change realigns next_invoice_at to a period boundary in the new timezone,
+  # otherwise the next generated invoice would cover an odd transitional period.
+  def apply_invoice_period
+    # When next_invoice_at is assigned in the same save (data migration/restore, console fixes,
+    # specs preparing invoicing state), the explicit value expresses caller's intent - keep it
+    # instead of recomputing. It does not affect BillingInvoice::Generate advancing
+    # next_invoice_at after each invoice: invoice_period_id and timezone are unchanged there,
+    # so the callback exits on the guard below.
+    return if next_invoice_at_changed?
+    return unless invoice_period_id_changed? || (timezone_changed? && invoice_period_id.present?)
+
+    if invoice_period_id
+      invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: self)
+      self.next_invoice_at = invoice_params[:end_time]
+      self.next_invoice_type_id = invoice_params[:type_id]
+    else
+      self.next_invoice_at = nil
+      self.next_invoice_type_id = nil
+    end
+  end
 
   def set_currency_name
     self.currency_name = currency&.name if currency_id.present?

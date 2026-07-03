@@ -175,8 +175,11 @@ ActiveAdmin.register Account do
           row :invoice_period do
             if s.invoice_period
               text_node s.invoice_period.name
-              text_node ' - '
-              text_node s.next_invoice_at.to_date if s.next_invoice_at.present?
+              if s.next_invoice_at.present?
+                text_node ' - next billing period starts '
+                text_node s.next_invoice_at
+              end
+              text_node " (#{s.next_invoice_type.name})" if s.next_invoice_type_id.present?
             end
           end
           row :timezone
