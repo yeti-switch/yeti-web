@@ -9,10 +9,24 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   attribute :acd_limit
   attribute :asr_limit
   attribute :short_calls_limit
-  attribute :force_symmetric_rtp, type: :boolean
-  attribute :rtp_ping, type: :boolean
-  attribute :proxy_media, type: :boolean
   attribute :host
+
+  # media
+  attribute :filter_noaudio_streams, type: :boolean
+  attribute :try_avoid_transcoding, type: :boolean
+  attribute :proxy_media, type: :boolean
+  attribute :single_codec_in_200ok, type: :boolean
+  attribute :force_symmetric_rtp, type: :boolean
+  attribute :symmetric_rtp_nonstop, type: :boolean
+  attribute :rtp_ping, type: :boolean
+  attribute :force_one_way_early_media, type: :boolean
+  attribute :rtp_force_relay_cn, type: :boolean
+  attribute :rtp_interface_name
+  attribute :media_encryption_mode_id, type: :foreign_key, class_name: 'Equipment::GatewayMediaEncryptionMode'
+  attribute :ice_mode_id, type: :integer_collection, collection: Gateway::ICE_MODES.invert.to_a
+  attribute :rtcp_mux_mode_id, type: :integer_collection, collection: Gateway::RTCP_MUX_MODES.invert.to_a
+  attribute :rtcp_feedback_mode_id, type: :integer_collection, collection: Gateway::RTCP_FEEDBACK_MODES.invert.to_a
+  attribute :rtp_acl
 
   # presence
   validates :priority, presence: true, if: :priority_changed?
@@ -42,4 +56,15 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
     greater_than_or_equal_to: 0.00,
     less_than_or_equal_to: 1.00
   }, if: :short_calls_limit_changed?
+
+  # media
+  validates :rtp_interface_name, format: { without: /\s/, message: 'must contain no spaces' }, if: :rtp_interface_name_changed?
+
+  validate if: :rtp_acl_changed? do
+    rtp_acl.to_s.split(',').map(&:strip).reject(&:blank?).each do |raw_ip|
+      IPAddr.new(raw_ip)
+    rescue IPAddr::Error
+      errors.add(:rtp_acl, "contains invalid ip or network: #{raw_ip}")
+    end
+  end
 end

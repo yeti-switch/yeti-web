@@ -14,7 +14,19 @@ RSpec.describe BatchUpdateForm::Gateway do
       force_symmetric_rtp: 'true',
       rtp_ping: 'false',
       proxy_media: 'true',
-      host: 'host.example.com'
+      host: 'host.example.com',
+      filter_noaudio_streams: 'true',
+      try_avoid_transcoding: 'false',
+      single_codec_in_200ok: 'true',
+      symmetric_rtp_nonstop: 'false',
+      force_one_way_early_media: 'true',
+      rtp_force_relay_cn: 'false',
+      rtp_interface_name: 'rtp0',
+      media_encryption_mode_id: '1',
+      ice_mode_id: Gateway::ICE_MODE_ACCEPT.to_s,
+      rtcp_mux_mode_id: Gateway::RTCP_MUX_MODE_DISABLED.to_s,
+      rtcp_feedback_mode_id: Gateway::RTCP_FEEDBACK_MODE_INITIATE.to_s,
+      rtp_acl: '192.168.0.0/24, 10.0.0.1'
     }
   end
 
@@ -49,6 +61,13 @@ RSpec.describe BatchUpdateForm::Gateway do
     # only integer
     it { is_expected.to_not allow_value('0.1').for :priority }
     it { is_expected.to_not allow_value('0.1').for :weight }
+
+    # media
+    it { is_expected.to allow_value('rtp0').for :rtp_interface_name }
+    it { is_expected.to_not allow_value('rtp 0').for :rtp_interface_name }
+    it { is_expected.to allow_value('192.168.0.0/24, 10.0.0.1').for :rtp_acl }
+    it { is_expected.to_not allow_value('999.999.1.1').for :rtp_acl }
+    it { is_expected.to_not allow_value('192.168.0.0/24, invalid').for :rtp_acl }
   end
 
   describe '#attributes' do

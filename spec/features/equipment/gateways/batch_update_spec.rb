@@ -29,7 +29,19 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
       force_symmetric_rtp: false,
       rtp_ping: true,
       proxy_media: false,
-      host: 'host.example.com'
+      host: 'host.example.com',
+      filter_noaudio_streams: true,
+      try_avoid_transcoding: false,
+      single_codec_in_200ok: true,
+      symmetric_rtp_nonstop: false,
+      force_one_way_early_media: true,
+      rtp_force_relay_cn: false,
+      rtp_interface_name: 'rtp0',
+      media_encryption_mode_id: '1',
+      ice_mode_id: Gateway::ICE_MODE_ACCEPT.to_s,
+      rtcp_mux_mode_id: Gateway::RTCP_MUX_MODE_DISABLED.to_s,
+      rtcp_feedback_mode_id: Gateway::RTCP_FEEDBACK_MODE_INITIATE.to_s,
+      rtp_acl: '192.168.0.0/24,10.0.0.1'
     }
   end
 
@@ -87,6 +99,66 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
     if assign_params.key? :host
       check :Host
       fill_in :host, with: assign_params[:host]
+    end
+
+    if assign_params.key? :filter_noaudio_streams
+      check :Filter_noaudio_streams
+      select_by_value assign_params[:filter_noaudio_streams], from: :filter_noaudio_streams
+    end
+
+    if assign_params.key? :try_avoid_transcoding
+      check :Try_avoid_transcoding
+      select_by_value assign_params[:try_avoid_transcoding], from: :try_avoid_transcoding
+    end
+
+    if assign_params.key? :single_codec_in_200ok
+      check :Single_codec_in_200ok
+      select_by_value assign_params[:single_codec_in_200ok], from: :single_codec_in_200ok
+    end
+
+    if assign_params.key? :symmetric_rtp_nonstop
+      check :Symmetric_rtp_nonstop
+      select_by_value assign_params[:symmetric_rtp_nonstop], from: :symmetric_rtp_nonstop
+    end
+
+    if assign_params.key? :force_one_way_early_media
+      check :Force_one_way_early_media
+      select_by_value assign_params[:force_one_way_early_media], from: :force_one_way_early_media
+    end
+
+    if assign_params.key? :rtp_force_relay_cn
+      check :Rtp_force_relay_cn
+      select_by_value assign_params[:rtp_force_relay_cn], from: :rtp_force_relay_cn
+    end
+
+    if assign_params.key? :rtp_interface_name
+      check :Rtp_interface_name
+      fill_in :rtp_interface_name, with: assign_params[:rtp_interface_name]
+    end
+
+    if assign_params.key? :media_encryption_mode_id
+      check :Media_encryption_mode_id
+      select_by_value assign_params[:media_encryption_mode_id], from: :media_encryption_mode_id
+    end
+
+    if assign_params.key? :ice_mode_id
+      check :Ice_mode_id
+      select_by_value assign_params[:ice_mode_id], from: :ice_mode_id
+    end
+
+    if assign_params.key? :rtcp_mux_mode_id
+      check :Rtcp_mux_mode_id
+      select_by_value assign_params[:rtcp_mux_mode_id], from: :rtcp_mux_mode_id
+    end
+
+    if assign_params.key? :rtcp_feedback_mode_id
+      check :Rtcp_feedback_mode_id
+      select_by_value assign_params[:rtcp_feedback_mode_id], from: :rtcp_feedback_mode_id
+    end
+
+    if assign_params.key? :rtp_acl
+      check :Rtp_acl
+      fill_in :rtp_acl, with: assign_params[:rtp_acl]
     end
   end
 
