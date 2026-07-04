@@ -36,7 +36,8 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
       let(:json_api_record_attributes) do
         {
           name: currency.name,
-          rate: currency.rate
+          rate: currency.rate,
+          'rate-provider-id': currency.rate_provider_id
         }
       end
     end
@@ -66,7 +67,8 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
       let(:json_api_record_attributes) do
         {
           name: 'EUR',
-          rate: 1.2
+          rate: 1.2,
+          'rate-provider-id': nil
         }
       end
     end
