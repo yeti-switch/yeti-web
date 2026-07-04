@@ -62,4 +62,46 @@ RSpec.describe CurrencyRates::Update, '.call' do
       expect(request_stub).to_not have_been_requested
     end
   end
+
+  context 'with prometheus enabled' do
+    before { allow(PrometheusConfig).to receive(:enabled?).and_return(true) }
+
+    it 'emits updates and duration metrics on success' do
+      expect(CurrencyRateProcessor).to receive(:collect_updates_metric).with(2, 'Frankfurter')
+      expect(CurrencyRateProcessor).to receive(:collect_duration_metric).with(kind_of(Numeric), 'Frankfurter')
+      expect(CurrencyRateProcessor).to_not receive(:collect_error_metric)
+      subject
+    end
+
+    context 'when provider request fails' do
+      let(:request_stub) do
+        stub_request(:get, 'https://api.frankfurter.dev/v1/latest?base=USD').to_return(status: 500)
+      end
+
+      it 'emits error and duration metrics and no updates' do
+        expect(CurrencyRateProcessor).to receive(:collect_error_metric).with('Frankfurter')
+        expect(CurrencyRateProcessor).to receive(:collect_duration_metric).with(kind_of(Numeric), 'Frankfurter')
+        expect(CurrencyRateProcessor).to_not receive(:collect_updates_metric)
+        subject
+      end
+    end
+
+    context 'when a currency is missing in the provider response' do
+      let(:request_stub) do
+        stub_request(:get, 'https://api.frankfurter.dev/v1/latest?base=USD')
+          .to_return(
+            status: 200,
+            headers: { 'Content-Type' => 'application/json' },
+            body: { base: 'USD', date: '2026-07-03', rates: { EUR: 0.8 } }.to_json
+          )
+      end
+
+      it 'emits an error metric for the missing currency and still records updates and duration' do
+        expect(CurrencyRateProcessor).to receive(:collect_error_metric).with('Frankfurter').once
+        expect(CurrencyRateProcessor).to receive(:collect_updates_metric).with(1, 'Frankfurter')
+        expect(CurrencyRateProcessor).to receive(:collect_duration_metric).with(kind_of(Numeric), 'Frankfurter')
+        subject
+      end
+    end
+  end
 end

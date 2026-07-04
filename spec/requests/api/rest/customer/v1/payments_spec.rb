@@ -295,6 +295,7 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
                                           links: anything,
                                           attributes: {
                                             amount: payment.amount.to_s,
+                                            currency: payment.currency.name,
                                             notes: payment.notes,
                                             'created-at': payment.created_at.iso8601(3),
                                             status: payment.status,
