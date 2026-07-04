@@ -4,6 +4,7 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
   model_name 'Payment'
 
   attributes :amount,
+             :currency,
              :notes,
              :status,
              :type_name,
@@ -12,6 +13,14 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
              :rolledback_at
 
   has_one :account, foreign_key_on: :related
+
+  def currency
+    _model.currency&.name
+  end
+
+  def self.required_model_includes(_context)
+    [:currency]
+  end
 
   def self.default_sort
     [{ field: 'created_at', direction: :desc }]

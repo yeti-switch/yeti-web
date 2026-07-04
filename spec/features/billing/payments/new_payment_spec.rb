@@ -34,6 +34,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
       type_id: Payment::CONST::TYPE_ID_MANUAL,
       status_id: Payment::CONST::STATUS_ID_COMPLETED,
       account: account,
+      currency_id: account.currency_id,
       amount: 100_500,
       notes: 'Some notes',
       private_notes: 'Some private notes'

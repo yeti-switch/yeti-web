@@ -24,6 +24,14 @@ RSpec.describe Api::Rest::Admin::PaymentsController, type: :request do
       end
     end
 
+    it 'returns currency as ISO code' do
+      subject
+      currency_by_id = response_json[:data].to_h { |d| [d[:id], d[:attributes][:currency]] }
+      payments.each do |payment|
+        expect(currency_by_id[payment.id.to_s]).to eq(payment.currency.name)
+      end
+    end
+
     it_behaves_like :json_api_admin_check_authorization
   end
 end
