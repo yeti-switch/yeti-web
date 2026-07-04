@@ -47,6 +47,11 @@ export RBENV_ROOT := $(app_dir)/vendor/rbenv
 export PATH := $(RBENV_ROOT)/shims:$(PATH)
 rbenv_version = $(file < .ruby-version)
 
+# Build Ruby with YJIT (Rust-based, needs the rustc build-dep). Explicit so the
+# build fails loudly if the toolchain is missing rather than silently shipping
+# a Ruby without YJIT. Rails enables YJIT at boot (config.yjit) once it is compiled in.
+export RUBY_CONFIGURE_OPTS := --enable-yjit
+
 export no_proxy ?= 127.0.0.1,localhost
 
 pgq_drop_roles :=	DROP ROLE IF EXISTS pgq_reader; \
