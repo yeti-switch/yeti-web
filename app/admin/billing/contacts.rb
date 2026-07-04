@@ -24,8 +24,8 @@ ActiveAdmin.register Billing::Contact do
 
   index do
     selectable_column
-    actions
     id_column
+    actions
     column :contractor
     column :admin_user
     column :email

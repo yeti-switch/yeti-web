@@ -68,6 +68,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
   filter :rate_group, input_html: { class: 'tom-select' }
   filter :rateplan_id_filter, as: :select, input_html: { class: 'tom-select' }, label: 'Rateplan', collection: -> { Routing::Rateplan.all }
+  filter :currency, input_html: { class: 'tom-select' }
   boolean_filter :reject_calls
   filter :initial_rate
   filter :next_rate
