@@ -27,7 +27,7 @@ RSpec.resource 'Currencies' do
   post '/api/rest/admin/currencies' do
     parameter :type, 'Resource type (currencies)', scope: :data, required: true
 
-    jsonapi_attributes(%i[name rate], [])
+    jsonapi_attributes(%i[name rate rate_provider_id], [])
 
     let(:name) { 'EUR' }
     let(:rate) { 1.2 }
@@ -41,7 +41,7 @@ RSpec.resource 'Currencies' do
     parameter :type, 'Resource type (currencies)', scope: :data, required: true
     parameter :id, 'Currency ID', scope: :data, required: true
 
-    jsonapi_attributes(%i[name rate], [])
+    jsonapi_attributes(%i[name rate rate_provider_id], [])
 
     let(:id) { create(:currency).id }
     let(:name) { 'GBP' }
