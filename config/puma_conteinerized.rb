@@ -72,7 +72,7 @@ before_fork do
   end
 end
 
-on_worker_boot do
+before_worker_boot do
   SemanticLogger.reopen
 
   if PrometheusConfig.enabled?
