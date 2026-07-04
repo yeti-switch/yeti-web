@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: gui.oauth_access_grants
+# Database name: primary
 #
 #  id                    :bigint(8)        not null, primary key
 #  code_challenge        :string

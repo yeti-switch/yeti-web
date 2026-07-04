@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: logs.api_requests
+# Database name: primary
 #
 #  id               :bigint(8)        not null, primary key
 #  action           :string

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.call_duration_round_modes
+# Database name: cdr
 #
 #  id   :integer(2)       not null, primary key
 #  name :string           not null

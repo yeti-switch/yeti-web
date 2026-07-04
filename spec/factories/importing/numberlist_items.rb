@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: data_import.import_numberlist_items
+# Database name: primary
 #
 #  id                     :integer(4)       not null, primary key
 #  action_name            :string

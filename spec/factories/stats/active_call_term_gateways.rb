@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stats.active_call_term_gateways
+# Database name: cdr
 #
 #  id         :bigint(8)        not null, primary key
 #  count      :integer(4)       not null

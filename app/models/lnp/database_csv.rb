@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.lnp_databases_csv
+# Database name: primary
 #
 #  id            :integer(2)       not null, primary key
 #  csv_file_path :string

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.routing_plans
+# Database name: primary
 #
 #  id                          :integer(4)       not null, primary key
 #  max_rerouting_attempts      :integer(2)       default(10), not null

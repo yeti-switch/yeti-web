@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.network_prefixes
+# Database name: primary
 #
 #  id                :integer(4)       not null, primary key
 #  number_max_length :integer(2)       default(100), not null

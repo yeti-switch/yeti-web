@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: cdr.cdr
+# Database name: cdr
 #
 #  id                              :bigint(8)        not null, primary key
 #  audio_recorded                  :boolean

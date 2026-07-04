@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: dns.dns_records
+# Database name: primary
 #
 #  id            :integer(4)       not null, primary key
 #  content       :string           not null

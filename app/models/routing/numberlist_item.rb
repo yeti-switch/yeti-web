@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.numberlist_items
+# Database name: primary
 #
 #  id                   :bigint(8)        not null, primary key
 #  defer_dst_rewrite    :boolean          default(FALSE), not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.gateway_rel100_modes
+# Database name: primary
 #
 #  id   :integer(2)       not null, primary key
 #  name :string           not null

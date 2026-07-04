@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.account_balance_notification_settings
+# Database name: primary
 #
 #  id             :bigint(8)        not null, primary key
 #  high_threshold :decimal(, )

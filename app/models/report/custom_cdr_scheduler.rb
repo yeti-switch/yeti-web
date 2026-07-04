@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report_schedulers
+# Database name: cdr
 #
 #  id          :integer(4)       not null, primary key
 #  filter      :string

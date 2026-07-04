@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: dialpeer_next_rates
+# Database name: primary
 #
 #  id               :bigint(8)        not null, primary key
 #  applied          :boolean          default(FALSE), not null

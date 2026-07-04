@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.gateways
+# Database name: primary
 #
 #  id                               :integer(4)       not null, primary key
 #  acd_limit                        :float(24)        default(0.0), not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.lnp_databases_coure_anq
+# Database name: primary
 #
 #  id            :integer(2)       not null, primary key
 #  base_url      :string           not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: external_data.countries
+# Database name: cdr
 #
 #  id   :integer(4)       not null, primary key
 #  iso2 :string

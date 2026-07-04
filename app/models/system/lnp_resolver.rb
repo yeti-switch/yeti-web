@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.lnp_resolvers
+# Database name: primary
 #
 #  id      :integer(4)       not null, primary key
 #  address :string           not null

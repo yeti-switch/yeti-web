@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.customer_traffic_report
+# Database name: cdr
 #
 #  id          :bigint(8)        not null, primary key
 #  completed   :boolean          default(FALSE), not null

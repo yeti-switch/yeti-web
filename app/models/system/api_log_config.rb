@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.api_log_config
+# Database name: primary
 #
 #  id         :integer(4)       not null, primary key
 #  controller :string           not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: logic_log
+# Database name: primary
 #
 #  id        :bigint(8)        not null, primary key
 #  level     :integer(4)       not null

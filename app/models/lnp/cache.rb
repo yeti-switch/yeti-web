@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.lnp_cache
+# Database name: primary
 #
 #  id          :integer(4)       not null, primary key
 #  data        :string

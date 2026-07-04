@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stats.customer_auth_stats
+# Database name: cdr
 #
 #  id                    :bigint(8)        not null, primary key
 #  calls_count           :integer(4)       default(0), not null

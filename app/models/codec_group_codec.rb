@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: codec_group_codecs
+# Database name: primary
 #
 #  id                   :integer(4)       not null, primary key
 #  dynamic_payload_type :integer(4)

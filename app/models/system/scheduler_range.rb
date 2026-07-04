@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.scheduler_ranges
+# Database name: primary
 #
 #  id           :integer(2)       not null, primary key
 #  days         :integer(2)       default([]), not null, is an Array

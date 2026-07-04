@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.lnp_databases_30x_redirect_formats
+# Database name: primary
 #
 #  id   :integer(2)       not null, primary key
 #  name :string           not null

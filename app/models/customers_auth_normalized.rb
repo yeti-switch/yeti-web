@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.customers_auth_normalized
+# Database name: primary
 #
 #  id                               :integer(4)       not null, primary key
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null

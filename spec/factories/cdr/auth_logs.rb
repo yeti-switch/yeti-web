@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: auth_log.auth_log
+# Database name: cdr
 #
 #  id                    :bigint(8)        not null, primary key
 #  code                  :integer(2)

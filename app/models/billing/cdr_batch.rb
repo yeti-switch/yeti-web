@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.cdr_batches
+# Database name: primary
 #
 #  id         :bigint(8)        not null, primary key
 #  created_at :timestamptz      not null

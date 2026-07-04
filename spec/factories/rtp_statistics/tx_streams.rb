@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: rtp_statistics.tx_streams
+# Database name: cdr
 #
 #  id                      :bigint(8)        not null, primary key
 #  local_host              :inet

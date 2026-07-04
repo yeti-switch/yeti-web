@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.routing_plan_lnp_rules
+# Database name: primary
 #
 #  id                       :integer(4)       not null, primary key
 #  drop_call_on_error       :boolean          default(FALSE), not null

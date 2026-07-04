@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.area_prefixes
+# Database name: primary
 #
 #  id      :bigint(8)        not null, primary key
 #  prefix  :string           not null

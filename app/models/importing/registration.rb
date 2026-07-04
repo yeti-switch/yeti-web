@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: data_import.import_registrations
+# Database name: primary
 #
 #  id                      :bigint(8)        not null, primary key
 #  auth_password           :string

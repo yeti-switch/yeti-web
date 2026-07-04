@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: gui.oauth_access_tokens
+# Database name: primary
 #
 #  id                     :bigint(8)        not null, primary key
 #  expires_in             :integer(4)

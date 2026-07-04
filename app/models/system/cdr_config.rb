@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.config
+# Database name: cdr
 #
 #  id                              :integer(2)       not null, primary key
 #  cdo                             :boolean          default(FALSE), not null

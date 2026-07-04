@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: dns.dns_zones
+# Database name: primary
 #
 #  id        :integer(2)       not null, primary key
 #  expire    :integer(2)       default(1800), not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.smtp_connections
+# Database name: primary
 #
 #  id            :integer(4)       not null, primary key
 #  auth_password :string

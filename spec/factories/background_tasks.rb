@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: delayed_jobs
+# Database name: primary
 #
 #  id          :integer(4)       not null, primary key
 #  attempts    :integer(4)       default(0), not null

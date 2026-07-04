@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.routing_plan_static_routes
+# Database name: primary
 #
 #  id                :integer(4)       not null, primary key
 #  prefix            :string           default(""), not null

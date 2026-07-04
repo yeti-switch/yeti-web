@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.currencies
+# Database name: primary
 #
 #  id               :integer(2)       not null, primary key
 #  name             :string           not null

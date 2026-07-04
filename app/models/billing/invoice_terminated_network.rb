@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.invoice_terminated_networks
+# Database name: cdr
 #
 #  id                     :bigint(8)        not null, primary key
 #  amount                 :decimal(, )

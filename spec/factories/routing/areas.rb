@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.areas
+# Database name: primary
 #
 #  id   :integer(4)       not null, primary key
 #  name :string           not null

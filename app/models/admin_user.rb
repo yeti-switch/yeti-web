@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: admin_users
+# Database name: primary
 #
 #  id                     :integer(4)       not null, primary key
 #  allowed_ips            :inet             is an Array

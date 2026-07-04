@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: import_rate_groups
+# Database name: primary
 #
 #  id           :bigint(8)        not null, primary key
 #  error_string :string

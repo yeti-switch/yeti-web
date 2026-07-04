@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: notifications.event_subscriptions
+# Database name: primary
 #
 #  id      :integer(4)       not null, primary key
 #  event   :string           not null

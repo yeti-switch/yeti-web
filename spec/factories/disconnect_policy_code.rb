@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: disconnect_policy_code
+# Database name: primary
 #
 #  id                        :integer(4)       not null, primary key
 #  pass_reason_to_originator :boolean          default(FALSE), not null

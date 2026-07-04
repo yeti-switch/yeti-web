@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: cdr_exports
+# Database name: primary
 #
 #  id                  :integer(4)       not null, primary key
 #  callback_url        :string

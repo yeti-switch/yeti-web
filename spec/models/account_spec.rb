@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.accounts
+# Database name: primary
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.invoices
+# Database name: cdr
 #
 #  id                                :integer(4)       not null, primary key
 #  amount_earned                     :decimal(, )      default(0.0), not null
