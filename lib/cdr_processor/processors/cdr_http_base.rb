@@ -6,6 +6,12 @@ module CdrProcessor
   module Processors
     class CdrHttpBase < CdrProcessor::ConsumerGroup
       AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
+      HTTP_TIMEOUTS = {
+        connect_timeout: 20,
+        write_timeout: 30,
+        read_timeout: 30,
+        request_timeout: 60
+      }.freeze
 
       def initialize(...)
         super(...)
@@ -71,7 +77,7 @@ module CdrProcessor
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
-        client = HTTPX
+        client = HTTPX.with(timeout: HTTP_TIMEOUTS)
         if logger.debug?
           client = client.with(debug: logger, debug_level: 1)
         end
