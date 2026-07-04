@@ -3,6 +3,7 @@
 class Api::Rest::Admin::PaymentResource < BaseResource
   attributes :created_at,
              :amount,
+             :currency,
              :notes,
              :private_notes,
              :status,
@@ -13,6 +14,14 @@ class Api::Rest::Admin::PaymentResource < BaseResource
   paginator :paged
 
   has_one :account, always_include_linkage_data: true
+
+  def currency
+    _model.currency&.name
+  end
+
+  def self.required_model_includes(_context)
+    [:currency]
+  end
 
   relationship_filter :account
 

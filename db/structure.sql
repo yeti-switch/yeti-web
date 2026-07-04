@@ -11411,7 +11411,8 @@ CREATE TABLE billing.payments (
     type_id smallint DEFAULT 20 NOT NULL,
     balance_before_payment numeric,
     rolledback_at timestamp with time zone,
-    metadata jsonb
+    metadata jsonb,
+    currency_id smallint NOT NULL
 );
 
 
@@ -19588,6 +19589,14 @@ ALTER TABLE ONLY billing.payments
 
 
 --
+-- Name: payments payments_currency_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.payments
+    ADD CONSTRAINT payments_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES billing.currencies(id);
+
+
+--
 -- Name: services services_account_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -20674,6 +20683,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260704115624'),
 ('20260703164410'),
 ('20260703164409'),
 ('20260703120000'),

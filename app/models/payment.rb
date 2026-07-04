@@ -14,6 +14,7 @@
 #  uuid                   :uuid             not null
 #  created_at             :timestamptz      not null
 #  account_id             :integer(4)       not null
+#  currency_id            :integer(2)       not null
 #  status_id              :integer(2)       default(20), not null
 #  type_id                :integer(2)       default(20), not null
 #
@@ -24,7 +25,8 @@
 #
 # Foreign Keys
 #
-#  payments_account_id_fkey  (account_id => accounts.id)
+#  payments_account_id_fkey   (account_id => accounts.id)
+#  payments_currency_id_fkey  (currency_id => currencies.id)
 #
 
 class Payment < ApplicationRecord
@@ -53,15 +55,30 @@ class Payment < ApplicationRecord
   include WithPaperTrail
 
   belongs_to :account, class_name: 'Account'
+  belongs_to :currency, class_name: 'Billing::Currency'
 
   validates :amount, presence: true
   validates :amount, numericality: { other_than: 0 }, allow_nil: true
 
   validate :validate_status_id
 
+  before_validation :set_currency_from_account, on: :create
+
+  # @return [Array<Array(String, BigDecimal)>] [currency_name, total_amount] sorted by currency name.
+  def self.totals_per_currency
+    except(:preload, :includes, :eager_load, :limit, :offset, :select, :order)
+      .joins(:currency)
+      .group('currencies.name')
+      .pluck(Arel.sql('currencies.name, sum(amount)'))
+      .sort_by(&:first)
+  end
+
   validates :type_id, presence: true, on: :create
   validates :type_id, inclusion: { in: CONST::TYPE_IDS.keys }, allow_nil: true, on: :create
   validates :type_id, readonly: true, on: :update
+
+  validates :currency_id, presence: true
+  validates :currency_id, readonly: true, on: :update
 
   before_save :top_up_balance
 
@@ -122,6 +139,10 @@ class Payment < ApplicationRecord
   end
 
   private
+
+  def set_currency_from_account
+    self.currency_id ||= account&.currency_id
+  end
 
   def top_up_balance
     if (new_record? || status_id_changed?) && completed?

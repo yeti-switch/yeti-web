@@ -21,6 +21,7 @@ RSpec.describe 'Export Payments', type: :feature do
         ['Id', item.id.to_s],
         ['Uuid', item.uuid.to_s],
         ['Account name', item.account.name],
+        ['Currency name', item.currency.name],
         ['Amount', item.amount.to_s],
         ['Notes', item.notes.to_s],
         ['Private notes', item.private_notes.to_s],

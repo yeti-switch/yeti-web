@@ -16,6 +16,7 @@ ActiveAdmin.register Payment do
                  :uuid,
                  :created_at,
                  [:account_name, proc { |row| row.account.try(:name) }],
+                 [:currency_name, proc { |row| row.currency.try(:name) }],
                  :amount,
                  :notes,
                  :private_notes,
@@ -31,7 +32,7 @@ ActiveAdmin.register Payment do
 
   controller do
     def scoped_collection
-      Payment.includes(:account)
+      Payment.includes(:account, :currency)
     end
   end
 
@@ -47,7 +48,7 @@ ActiveAdmin.register Payment do
     f.actions
   end
 
-  index footer_data: ->(collection) { collection.select('round(sum(amount),4) as total_amount').take } do
+  index footer_data: ->(collection) { collection.totals_per_currency } do
     id_column
     column :created_at
     column :account, footer: lambda {
@@ -58,10 +59,22 @@ ActiveAdmin.register Payment do
     column :type, :type_formatted, sortable: :type_id
     column :status, :status_formatted, sortable: :status_id
     column :amount, footer: lambda {
-      strong do
-        @footer_data[:total_amount]
+      @footer_data.each do |currency_name, total|
+        div do
+          status_tag(currency_name)
+          text_node ' '
+          strong do
+            number_to_currency(total, delimiter: ' ', separator: '.', precision: 2, unit: '')
+          end
+        end
       end
-    }
+    } do |payment|
+      status_tag(payment.currency&.name)
+      text_node ' '
+      strong do
+        payment.amount
+      end
+    end
     column :private_notes
     column :notes
     column :balance_before_payment
@@ -74,6 +87,7 @@ ActiveAdmin.register Payment do
   filter :created_at, as: :date_time_range
   filter :rolledback_at, as: :date_time_range, label: 'RolledBack at'
   account_filter :account_id_eq
+  filter :currency, input_html: { class: 'tom-select' }
   filter :type_id,
          label: 'Type',
          as: :select,

@@ -14,6 +14,7 @@
 #  uuid                   :uuid             not null
 #  created_at             :timestamptz      not null
 #  account_id             :integer(4)       not null
+#  currency_id            :integer(2)       not null
 #  status_id              :integer(2)       default(20), not null
 #  type_id                :integer(2)       default(20), not null
 #
@@ -24,7 +25,8 @@
 #
 # Foreign Keys
 #
-#  payments_account_id_fkey  (account_id => accounts.id)
+#  payments_account_id_fkey   (account_id => accounts.id)
+#  payments_currency_id_fkey  (currency_id => currencies.id)
 #
 FactoryBot.define do
   factory :payment, class: 'Payment' do
