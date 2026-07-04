@@ -94,6 +94,7 @@ INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALU
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (19, 'ServiceRenew', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (20, 'CdrCompaction', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (21, 'Scheduler', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (22, 'CurrencyRatesUpdate', NULL, NULL, NULL);
 
 
 --

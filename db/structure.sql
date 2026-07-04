@@ -11303,7 +11303,8 @@ CREATE TABLE billing.cdr_batches (
 CREATE TABLE billing.currencies (
     id smallint NOT NULL,
     name character varying NOT NULL,
-    rate double precision NOT NULL
+    rate double precision NOT NULL,
+    rate_provider_id smallint
 );
 
 
@@ -20673,6 +20674,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260703164410'),
+('20260703164409'),
 ('20260703120000'),
 ('20260702120000'),
 ('20260629122000'),

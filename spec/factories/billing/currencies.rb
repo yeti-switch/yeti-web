@@ -4,9 +4,10 @@
 #
 # Table name: billing.currencies
 #
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#  rate :float            not null
+#  id               :integer(2)       not null, primary key
+#  name             :string           not null
+#  rate             :float            not null
+#  rate_provider_id :integer(2)
 #
 # Indexes
 #
