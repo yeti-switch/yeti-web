@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: invoice_templates
+# Table name: billing.invoice_templates
 #
 #  id            :integer(4)       not null, primary key
 #  data          :binary

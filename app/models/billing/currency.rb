@@ -4,9 +4,10 @@
 #
 # Table name: billing.currencies
 #
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#  rate :float            not null
+#  id               :integer(2)       not null, primary key
+#  name             :string           not null
+#  rate             :float            not null
+#  rate_provider_id :integer(2)
 #
 # Indexes
 #
@@ -176,9 +177,18 @@ class Billing::Currency < ApplicationRecord
     'USDT' => 'Tether USD'
   }.freeze
 
+  composed_of :rate_provider,
+              class_name: 'Billing::CurrencyRateProvider',
+              mapping: { rate_provider_id: :id },
+              constructor: ->(rate_provider_id) { Billing::CurrencyRateProvider.find(rate_provider_id) }
+
   validates :name, presence: true, uniqueness: true, inclusion: { in: NAMES.keys }
   validates :rate, presence: true, numericality: { greater_than: 0 }
+  validates :rate_provider_id, inclusion: { in: Billing::CurrencyRateProvider.ids }, allow_nil: true
   validate :rate_must_be_one_for_default
+  validate :rate_provider_must_be_empty_for_default
+  validate :rate_provider_must_support_currency
+  validate :used_rate_providers_must_support_system_currency, if: -> { default? && name_changed? }
 
   has_many :accounts, class_name: 'Account', foreign_key: :currency_id, dependent: :restrict_with_error
 
@@ -198,6 +208,38 @@ class Billing::Currency < ApplicationRecord
 
   def rate_must_be_one_for_default
     errors.add(:rate, 'must be 1 for default currency') if default? && rate != 1
+  end
+
+  def rate_provider_must_be_empty_for_default
+    errors.add(:rate_provider_id, 'must be empty for default currency') if default? && rate_provider_id.present?
+  end
+
+  # Provider must publish both the currency itself and the system currency -
+  # the latter is the base all rates are expressed in (see CurrencyRates::Update).
+  def rate_provider_must_support_currency
+    return if default? || name.blank? || rate_provider.nil?
+
+    provider_class = rate_provider.service_class.constantize
+    errors.add(:rate_provider_id, "#{rate_provider.name} does not support #{name}") unless provider_class.supports?(name)
+
+    if system_currency_name.present? && !provider_class.supports?(system_currency_name)
+      errors.add(:rate_provider_id, "#{rate_provider.name} does not support system currency #{system_currency_name} required for cross rates")
+    end
+  end
+
+  def system_currency_name
+    return @system_currency_name if defined?(@system_currency_name)
+
+    @system_currency_name = self.class.find_by(id: 0)&.name
+  end
+
+  def used_rate_providers_must_support_system_currency
+    provider_ids = self.class.where.not(rate_provider_id: nil).distinct.pluck(:rate_provider_id)
+    unsupported = provider_ids.filter_map { |id| Billing::CurrencyRateProvider.find(id) }
+                              .reject { |provider| provider.service_class.constantize.supports?(name) }
+    return if unsupported.none?
+
+    errors.add(:name, "is not supported as system currency by used rate provider(s): #{unsupported.map(&:name).join(', ')}")
   end
 
   def update_accounts_currency_name

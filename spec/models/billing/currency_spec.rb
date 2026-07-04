@@ -4,9 +4,10 @@
 #
 # Table name: billing.currencies
 #
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#  rate :float            not null
+#  id               :integer(2)       not null, primary key
+#  name             :string           not null
+#  rate             :float            not null
+#  rate_provider_id :integer(2)
 #
 # Indexes
 #
@@ -23,6 +24,88 @@ RSpec.describe Billing::Currency do
     it { is_expected.not_to allow_value('INVALID').for(:name) }
     it { is_expected.not_to allow_value('RUB').for(:name) }
     it { is_expected.not_to allow_value('').for(:name) }
+
+    it { is_expected.to allow_value(nil).for(:rate_provider_id) }
+    it { is_expected.to allow_value(Billing::CurrencyRateProvider::FRANKFURTER).for(:rate_provider_id) }
+    it { is_expected.to allow_value(Billing::CurrencyRateProvider::BANK_OF_ISRAEL).for(:rate_provider_id) }
+    it { is_expected.to allow_value(Billing::CurrencyRateProvider::NBU).for(:rate_provider_id) }
+    it { is_expected.not_to allow_value(999).for(:rate_provider_id) }
+  end
+
+  describe 'rate_provider_must_be_empty_for_default' do
+    context 'when default currency' do
+      let(:default_currency) { described_class.find(0) }
+
+      it 'is not valid with rate provider' do
+        default_currency.rate_provider_id = Billing::CurrencyRateProvider::FRANKFURTER
+        expect(default_currency).not_to be_valid
+        expect(default_currency.errors[:rate_provider_id]).to include('must be empty for default currency')
+      end
+    end
+
+    context 'when non-default currency' do
+      subject { described_class.new(id: 1, name: 'EUR', rate: 1.2, rate_provider_id: Billing::CurrencyRateProvider::FRANKFURTER) }
+
+      it 'is valid' do
+        expect(subject).to be_valid
+      end
+    end
+  end
+
+  describe 'rate_provider_must_support_currency' do
+    subject { described_class.new(id: 1, name: name, rate: 1.2, rate_provider_id: Billing::CurrencyRateProvider::FRANKFURTER) }
+
+    context 'when currency is supported by provider' do
+      let(:name) { 'EUR' }
+
+      it 'is valid' do
+        expect(subject).to be_valid
+      end
+    end
+
+    context 'when currency is not supported by provider' do
+      let(:name) { 'UAH' }
+
+      it 'is not valid' do
+        expect(subject).not_to be_valid
+        expect(subject.errors[:rate_provider_id]).to include('Frankfurter does not support UAH')
+      end
+    end
+
+    context 'when provider does not support system currency' do
+      let(:name) { 'EUR' }
+
+      before do
+        allow(CurrencyRates::Providers::Frankfurter).to receive(:supports?).and_call_original
+        allow(CurrencyRates::Providers::Frankfurter).to receive(:supports?).with('USD').and_return(false)
+      end
+
+      it 'is not valid' do
+        expect(subject).not_to be_valid
+        expect(subject.errors[:rate_provider_id]).to include('Frankfurter does not support system currency USD required for cross rates')
+      end
+    end
+  end
+
+  describe 'used_rate_providers_must_support_system_currency' do
+    let(:default_currency) { described_class.find(0) }
+    let!(:ils) { FactoryBot.create(:currency, name: 'ILS', rate: 0.3, rate_provider_id: Billing::CurrencyRateProvider::BANK_OF_ISRAEL) }
+
+    context 'when renaming to a name unsupported by used providers' do
+      it 'is not valid' do
+        default_currency.name = 'UAH'
+        expect(default_currency).not_to be_valid
+        expect(default_currency.errors[:name])
+          .to include('is not supported as system currency by used rate provider(s): Bank of Israel')
+      end
+    end
+
+    context 'when renaming to a name supported by used providers' do
+      it 'is valid' do
+        default_currency.name = 'GBP'
+        expect(default_currency).to be_valid
+      end
+    end
   end
 
   describe '#default?' do
