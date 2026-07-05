@@ -2132,7 +2132,6 @@ ALTER SEQUENCE auth_log.auth_log_id_seq OWNED BY auth_log.auth_log.id;
 CREATE TABLE billing.invoice_documents (
     id integer NOT NULL,
     invoice_id integer NOT NULL,
-    data bytea,
     filename character varying NOT NULL,
     pdf_data bytea
 );
@@ -2388,7 +2387,8 @@ CREATE TABLE billing.invoices (
     amount_total numeric DEFAULT 0 NOT NULL,
     services_amount_spent numeric DEFAULT 0.0 NOT NULL,
     services_amount_earned numeric DEFAULT 0.0 NOT NULL,
-    service_transactions_count integer DEFAULT 0 NOT NULL
+    service_transactions_count integer DEFAULT 0 NOT NULL,
+    pdf_error text
 );
 
 
@@ -4625,6 +4625,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260705140100'),
 ('20260629121000'),
 ('20260603000000'),
 ('20260516131500'),

@@ -22,7 +22,8 @@ RSpec.describe BillingInvoice::InvoiceData do
   # value types, and that the collections are always present as arrays.
 
   it 'returns nested account/contractor/invoice sections' do
-    expect(payload[:account]).to include(id: account.id, name: account.name)
+    expect(payload[:account]).to include(id: account.id, name: account.name,
+                                         currency_id: account.currency_id, currency: account.currency_name)
     expect(payload[:contractor]).to include(name: contractor.name)
     expect(payload[:invoice]).to include(:id, :reference, :amount_total, :originated, :terminated, :services)
   end
@@ -36,9 +37,15 @@ RSpec.describe BillingInvoice::InvoiceData do
     end
   end
 
-  it 'sends raw numeric types, not pre-formatted strings' do
-    expect(payload[:invoice][:amount_total]).to be_a(Numeric).or be_nil
+  it 'sends numeric/decimal columns as exact decimal strings, integers as numbers' do
+    amount_total = payload[:invoice][:amount_total]
+    # PG numeric -> exact decimal string (full precision, not a pre-formatted
+    # money string: no currency symbol, no thousands grouping).
+    expect(amount_total).to be_a(String).or be_nil
+    expect(amount_total).to match(/\A-?\d+(\.\d+)?\z/) if amount_total
+    # integer/bigint columns (counts, durations) stay JSON numbers
     expect(payload[:invoice][:originated][:calls_count]).to be_a(Integer).or be_nil
+    expect(payload[:invoice][:originated][:calls_duration]).to be_a(Integer).or be_nil
   end
 
   it 'formats timestamps as ISO-8601 strings' do

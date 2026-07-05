@@ -13,6 +13,9 @@ Rails.application.config.assets.version = '1.0'
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile += %w[yeti/*]
+# Page-scoped bundle for the invoice template playground (CodeMirror), included
+# only on that page so it is not part of the global active_admin bundle.
+Rails.application.config.assets.precompile += %w[playground.js playground.css]
 Rails.application.config.assets.precompile += %w[.svg .eot .woff .ttf]
 
 # Fixes bug when precompile tom-select-rails/css/tom-select.css:

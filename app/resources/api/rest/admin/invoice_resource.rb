@@ -11,7 +11,6 @@ class Api::Rest::Admin::InvoiceResource < ::BaseResource
   attribute :start_date
   attribute :end_date
   attribute :pdf_path
-  attribute :odt_path
   attribute :amount_spent
   attribute :amount_earned
 
@@ -98,14 +97,8 @@ class Api::Rest::Admin::InvoiceResource < ::BaseResource
     "/api/rest/admin/files/invoice-#{_model.id}.pdf"
   end
 
-  def odt_path
-    return nil if _model.invoice_document&.data.blank?
-
-    "/api/rest/admin/files/invoice-#{_model.id}.odt"
-  end
-
   def self.sortable_fields(_ctx = nil)
-    super - %i[state invoice_type pdf_path odt_path]
+    super - %i[state invoice_type pdf_path]
   end
 
   def self.creatable_fields(_ctx = nil)

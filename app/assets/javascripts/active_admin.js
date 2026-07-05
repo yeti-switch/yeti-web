@@ -34,6 +34,7 @@
 //= require sorting_persist
 //= require modal_confirm_fix
 //= require password-toggle
+//= require template_playground
 
 //= require vendor/highlightjs/highlight.min
 //= require vendor/highlightjs/languages/lua.min

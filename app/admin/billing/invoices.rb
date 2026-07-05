@@ -26,7 +26,9 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
 
     def scoped_collection
-      super.preload(:contractor, :account)
+      # preload invoice_document WITHOUT its (large) pdf_data blob — a boolean is
+      # enough to decide whether to show the index download icon
+      super.preload(:contractor, :account, :invoice_document_summary)
     end
   end
 
@@ -62,16 +64,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
   end
 
-  member_action :export_file_odt, method: :get do
-    doc = resource.invoice_document
-    if doc.present? && doc.data.present?
-      send_data doc.data, type: 'application/vnd.oasis.opendocument.text', filename: "#{doc.filename}.odt"
-    else
-      flash[:notice] = 'File not found'
-      redirect_back fallback_location: root_path
-    end
-  end
-
   member_action :export_file_pdf, method: :get do
     doc = resource.invoice_document
     if doc.present? && doc.pdf_data.present?
@@ -82,16 +74,25 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
   end
 
+  # Serves the PDF inline (disposition: inline) so it renders in the browser
+  # rather than downloading. Used by the lazy-loaded "PDF" tab iframe on the
+  # show page, which requests this only when the tab is opened.
+  member_action :pdf, method: :get do
+    doc = resource.invoice_document
+    if doc.present? && doc.pdf_data.present?
+      send_data doc.pdf_data, type: 'application/pdf', disposition: 'inline', filename: "#{doc.filename}.pdf"
+    else
+      head 404
+    end
+  end
+
   action_item :regenerate_documents, only: :show do
     link_to('Regenerate documents', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
   end
 
   action_item :documents, only: :show do
     if resource.invoice_document.present?
-      dropdown_menu 'Files' do
-        item('Document (ODT format)', export_file_odt_invoice_path(resource.id), method: :get)
-        item('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get)
-      end
+      link_to('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get)
     end
   end
 
@@ -101,7 +102,18 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
-    id_column
+    column(:id, sortable: :id) do |inv|
+      parts = [link_to(inv.id, resource_path(inv), class: 'resource_id_link')]
+      doc = inv.invoice_document_summary
+      if doc && ActiveModel::Type::Boolean.new.cast(doc.pdf_present)
+        parts << link_to(fa_icon('file-pdf-o'), export_file_pdf_invoice_path(inv), title: 'Download PDF')
+      end
+      if inv.pdf_error.present?
+        parts << content_tag(:span, fa_icon('exclamation-triangle'),
+                             title: 'PDF generation failure', style: 'color:#c00; cursor:help;')
+      end
+      safe_join(parts, ' ')
+    end
     actions
     column :reference
     column :contractor, footer: lambda {
@@ -270,6 +282,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :services_transactions_count
 
   show do |s|
+    pdf_tab_title = if s.pdf_error.present?
+                      safe_join(['PDF ', content_tag(:span, fa_icon('exclamation-triangle'),
+                                                     style: 'color:#c00;', title: 'PDF generation failure')])
+                    else
+                      'PDF'
+                    end
     tabs do
       tab 'Invoice' do
         panel 'Details' do
@@ -503,6 +521,26 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
             end
             column :transactions_count
           end
+        end
+      end
+
+      tab pdf_tab_title, id: 'pdf' do
+        if s.pdf_error.present?
+          panel 'PDF generation error' do
+            pre(style: 'white-space: pre-wrap; word-break: break-word; color: #c00;') { s.pdf_error }
+          end
+        end
+        if s.invoice_document&.pdf_data.present?
+          # The iframe carries the PDF url in data-src, not src: ajax_tab.js sets
+          # src only when this tab is activated, so the document is fetched on
+          # demand instead of on every show-page load.
+          iframe '',
+                 class: 'invoice-pdf-frame',
+                 'data-src': pdf_invoice_path(s),
+                 style: 'width: 100%; height: 80vh; border: 0;',
+                 title: "Invoice #{s.reference} PDF"
+        elsif s.pdf_error.blank?
+          para 'PDF document has not been generated yet.'
         end
       end
     end

@@ -5,7 +5,6 @@
 # Table name: billing.invoice_documents
 #
 #  id         :integer(4)       not null, primary key
-#  data       :binary
 #  filename   :string           not null
 #  pdf_data   :binary
 #  invoice_id :integer(4)       not null
@@ -25,7 +24,6 @@ FactoryBot.define do
     filename { 'fine.example' }
 
     trait :filled do
-      data { 'data' }
       pdf_data { 'pdf_data' }
     end
   end

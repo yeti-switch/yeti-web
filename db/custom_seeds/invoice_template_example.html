@@ -100,7 +100,7 @@
       <tbody>
         {# skip rows with a zero (or missing) amount; keep sequential numbering #}
         {% set i = 0 %}
-        {% for d in rows %}{% if d.amount %}{% set i = i + 1 %}
+        {% for d in rows %}{% if d.amount > 0 %}{% set i = i + 1 %}
         <tr>
           <td class="num">{{ i }}</td>
           <td>{{ d.prefix }}</td>
@@ -134,7 +134,7 @@
       <tbody>
         {# skip rows with a zero (or missing) amount; keep sequential numbering #}
         {% set i = 0 %}
-        {% for n in rows %}{% if n.amount %}{% set i = i + 1 %}
+        {% for n in rows %}{% if n.amount > 0 %}{% set i = i + 1 %}
         <tr>
           <td class="num">{{ i }}</td>
           <td>{{ n.country }}</td>
@@ -181,7 +181,7 @@
     <tbody>
       {# skip rows with a zero (or missing) amount; keep sequential numbering #}
       {% set i = 0 %}
-      {% for s in service_data %}{% if s.amount %}{% set i = i + 1 %}
+      {% for s in service_data %}{% if s.amount > 0 %}{% set i = i + 1 %}
       <tr>
         <td class="num">{{ i }}</td>
         <td>{{ s.service }}</td>

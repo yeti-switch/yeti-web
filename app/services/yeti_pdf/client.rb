@@ -22,8 +22,8 @@ module YetiPdf
         new.render_html(...)
       end
 
-      # Whether the render service is configured (used by the dispatcher to
-      # decide between the HTML and legacy ODT paths).
+      # Whether the render service is configured (base_url present). When it is
+      # not, invoice generation records a PdfApiNotConfigured error.
       def configured?
         YetiConfig.invoice&.pdf_api&.base_url.present?
       end

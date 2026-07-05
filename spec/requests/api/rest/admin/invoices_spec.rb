@@ -136,7 +136,6 @@ RSpec.describe Api::Rest::Admin::InvoicesController, type: :request, bullet: [:n
     let(:expected_attributes) do
       {
         'pdf-path': nil,
-        'odt-path': nil,
         reference: invoice.reference,
         'start-date': invoice.start_date.iso8601(3),
         'end-date': invoice.end_date.iso8601(3),
@@ -194,18 +193,6 @@ RSpec.describe Api::Rest::Admin::InvoicesController, type: :request, bullet: [:n
       let!(:invoice_document) { create(:invoice_document, invoice: invoice, pdf_data: 'foobar') }
       let(:expected_attributes) do
         super().merge 'pdf-path': "/api/rest/admin/files/invoice-#{invoice.id}.pdf"
-      end
-
-      include_examples :returns_json_api_record, relationships: do
-        let(:json_api_record_id) { record_id }
-        let(:json_api_record_attributes) { expected_attributes }
-      end
-    end
-
-    context 'when invoice has document with odt file' do
-      let!(:invoice_document) { create(:invoice_document, invoice: invoice, data: 'foobar') }
-      let(:expected_attributes) do
-        super().merge 'odt-path': "/api/rest/admin/files/invoice-#{invoice.id}.odt"
       end
 
       include_examples :returns_json_api_record, relationships: do
@@ -914,50 +901,6 @@ RSpec.describe Api::Rest::Admin::InvoicesController, type: :request, bullet: [:n
 
     context 'when invoice_document does not have pdf_data' do
       let(:invoice_document) { create(:invoice_document, :filled, invoice:, pdf_data: nil) }
-
-      include_examples :responds_with_status, 404
-    end
-
-    context 'when invoice does not have invoice_document' do
-      let(:invoice_document) { nil }
-
-      include_examples :responds_with_status, 404
-    end
-
-    context 'with non-existed id' do
-      let(:record_id) { (invoice.id + 1_000).to_s }
-
-      include_examples :responds_with_status, 404
-    end
-  end
-
-  describe 'GET /api/rest/admin/invoices/{id}/odt' do
-    subject do
-      get json_api_request_path, params: nil, headers: json_api_request_headers
-    end
-
-    let(:json_api_request_headers) { super().except('Content-Type', 'Accept') }
-    let(:json_api_request_path) { "#{super()}/#{record_id}/odt" }
-    let(:record_id) { invoice.id.to_s }
-
-    let!(:contractor) { create(:customer) }
-    let!(:account) { create(:account, contractor:) }
-    let!(:invoice) { create(:invoice, account:) }
-    let!(:invoice_document) { create(:invoice_document, :filled, invoice:) }
-
-    it 'responds with pdf file' do
-      subject
-      expect(response.status).to eq(200)
-      expect(response.headers['Content-Transfer-Encoding']).to eq('binary')
-      expect(response.headers['Content-Type']).to eq('application/octet-stream')
-      expect(response.headers['Content-Disposition']).to include("attachment; filename=\"invoice-#{invoice.id}.odt\"")
-      expect(response.body).to match(invoice_document.data)
-    end
-
-    it_behaves_like :json_api_admin_check_authorization
-
-    context 'when invoice_document does not have pdf_data' do
-      let(:invoice_document) { create(:invoice_document, :filled, invoice:, data: nil) }
 
       include_examples :responds_with_status, 404
     end

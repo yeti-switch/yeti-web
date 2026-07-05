@@ -27,8 +27,4 @@ class Api::Rest::Admin::InvoiceServiceDatumResource < ::BaseResource
   def pdf_url
     nil
   end
-
-  def odt_url
-    nil
-  end
 end

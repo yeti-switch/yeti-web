@@ -44,8 +44,4 @@ class Api::Rest::Admin::InvoiceTerminatedDestinationResource < ::BaseResource
   def pdf_url
     nil
   end
-
-  def odt_url
-    nil
-  end
 end
