@@ -10,10 +10,6 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
 
   acts_as_export :id, :name, :created_at
 
-  member_action :download, method: :get do
-    send_data resource.html_template, type: 'text/html', filename: "#{resource.name}.html"
-  end
-
   controller do
     def scoped_collection
       # keep the (potentially large) html_template out of the index listing
@@ -25,13 +21,14 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     end
   end
 
+  action_item :playground, only: :show do
+    link_to 'Template Playground', template_playground_path(template_id: resource.id)
+  end
+
   index do
     id_column
     actions
     column :name
-    column 'File' do |row|
-      link_to "#{row.name}.html", download_invoice_template_path(row), method: :get
-    end
     column :created_at
   end
 
@@ -42,24 +39,9 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :html_template, as: :text, input_html: { rows: 24 },
-                              hint: 'HTML/pongo2 template rendered to PDF by the yeti-pdf service (invoice.pdf_api must be configured).'
+      f.input :html_template, as: :text, input_html: { rows: 24 }
     end
     f.actions
-    panel 'HTML template variables (yeti-pdf)' do
-      text_node <<~HTML.html_safe
-        Reference values with nested names, e.g. <code>{{ account.name }}</code>,
-        <code>{{ invoice.reference }}</code>, <code>{{ invoice.amount_total|money }}</code>.
-        Top-level: <code>account</code>, <code>contractor</code>, <code>invoice</code>
-        (with <code>invoice.originated</code> / <code>invoice.terminated</code> / <code>invoice.services</code>),
-        and the row collections
-        <code>originated_destinations</code>, <code>originated_destinations_succ</code>,
-        <code>terminated_destinations(_succ)</code>, <code>originated_networks(_succ)</code>,
-        <code>terminated_networks(_succ)</code>, <code>service_data</code>.
-        Filters: <code>money</code>, <code>number:N</code>,
-        <code>duration:"colon"|"min"|"human"</code>, <code>strfdate:"%d.%m.%Y"</code>.
-      HTML
-    end
   end
 
   show do |t|

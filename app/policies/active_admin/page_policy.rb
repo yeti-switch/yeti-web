@@ -8,8 +8,15 @@ module ActiveAdmin
     SECTION_NAMES = {
       'Info' => 'System/Info',
       'Dashboard' => 'Dashboard',
-      'Routing simulation' => 'Routing/RoutingSimulation'
+      'Routing simulation' => 'Routing/RoutingSimulation',
+      'Template Playground' => 'Billing/InvoiceTemplate'
     }.freeze
+
+    # Playground actions that only read data (render preview, reload template)
+    # follow the section's read permission; saving the edited template follows
+    # update (change).
+    alias_rule :preview?, :template?, to: :read?
+    alias_rule :save?, to: :update?
 
     # def read?
     #   if Rails.env.development? && SECTION_NAMES.key?(record.name)

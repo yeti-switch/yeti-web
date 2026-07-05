@@ -27,7 +27,12 @@ RSpec.resource 'Invoice template' do
   post '/api/rest/admin/invoice-template' do
     parameter :type, 'Resource type (invoice-templates)', scope: :data, required: true
 
-    jsonapi_attributes(%i[name html_template], [])
+    jsonapi_attributes(%i[name], [])
+    # html_template dasherizes to the "html-template" param, whose value
+    # rspec_api_documentation looks up by that (dashed) name; point it back at
+    # the underscored let so the value is actually sent (otherwise it arrives
+    # blank and the required validation returns 422).
+    jsonapi_attribute(:html_template, required: true, method: :html_template)
 
     let(:name) { 'Daily' }
     let(:html_template) { '<p>{{ invoice.reference }}</p>' }

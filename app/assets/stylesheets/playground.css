@@ -1,0 +1,127 @@
+/*
+ * Page-scoped styles for the invoice template playground (CodeMirror + layout).
+ * Included only on the playground page. Vendor codemirror.css at the path below.
+ *
+ *= require vendor/codemirror/lib/codemirror
+ */
+
+/* height is set by JS (fitHeight) to fill the space below the panes */
+.template-playground .tp-body {
+  display: flex;
+  gap: 8px;
+}
+
+/* Two equal 50% panes. flex-grow expands each to 50%, while width:0 + min-width:0
+   keep the pane's *intrinsic* width from growing the AA layout (its #wrapper is
+   display:table, which otherwise sizes to CodeMirror's longest line and pushes
+   the whole page wide). overflow:hidden on the editor pane keeps a long line
+   scrolling INSIDE the editor. */
+.template-playground .tp-editor-pane,
+.template-playground .tp-preview {
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+}
+
+.template-playground .tp-editor-pane {
+  overflow: hidden;
+}
+
+.template-playground .tp-preview {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* positioning context for the loading spinner overlay */
+}
+
+/* Spinner shown over the (previous) PDF while a render is in flight. */
+.template-playground .tp-spinner {
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(128, 128, 128, 0.3);
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: tp-spin 0.8s linear infinite;
+  display: none;
+}
+.template-playground .tp-spinner.active {
+  display: block;
+}
+@keyframes tp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* The editor (textarea fallback or CodeMirror) fills its pane. */
+.template-playground .tp-editor,
+.template-playground .CodeMirror {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+
+.template-playground .tp-editor {
+  font-family: monospace;
+  white-space: pre;
+  overflow: auto;
+  padding: 6px;
+}
+
+/* Dark mode: .cm-dark is toggled on .template-playground by the JS to follow the
+   admin's html[data-theme="dark"] (or OS dark when not forced light). */
+
+/* Render native scrollbars (editor's and the PDF viewer's in the iframe) dark;
+   the admin's dark mode is CSS-only, so the UA doesn't do this on its own. */
+.template-playground.cm-dark {
+  color-scheme: dark;
+}
+
+.template-playground.cm-dark .CodeMirror,
+.template-playground.cm-dark .tp-editor {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-color: #3c3c3c;
+}
+.template-playground.cm-dark .CodeMirror-gutters {
+  background: #252526;
+  border-right-color: #3c3c3c;
+}
+.template-playground.cm-dark .CodeMirror-linenumber { color: #858585; }
+.template-playground.cm-dark .CodeMirror-cursor { border-left-color: #d4d4d4; }
+.template-playground.cm-dark .CodeMirror-selected,
+.template-playground.cm-dark .CodeMirror-focused .CodeMirror-selected { background: #264f78; }
+.template-playground.cm-dark .cm-comment { color: #6a9955; }
+.template-playground.cm-dark .cm-string { color: #ce9178; }
+.template-playground.cm-dark .cm-tag { color: #569cd6; }
+.template-playground.cm-dark .cm-attribute { color: #9cdcfe; }
+.template-playground.cm-dark .cm-keyword { color: #c586c0; }
+.template-playground.cm-dark .cm-variable,
+.template-playground.cm-dark .cm-variable-2 { color: #9cdcfe; }
+.template-playground.cm-dark .cm-number { color: #b5cea8; }
+.template-playground.cm-dark .cm-atom { color: #ce9178; }
+.template-playground.cm-dark .cm-def { color: #dcdcaa; }
+.template-playground.cm-dark .cm-property { color: #9cdcfe; }
+.template-playground.cm-dark .cm-qualifier { color: #d7ba7d; }
+.template-playground.cm-dark .cm-builtin,
+.template-playground.cm-dark .cm-type,
+.template-playground.cm-dark .cm-variable-3 { color: #4ec9b0; }
+.template-playground.cm-dark .cm-bracket,
+.template-playground.cm-dark .cm-meta { color: #d4d4d4; }
+
+.template-playground .tp-error {
+  display: none;
+  color: #c00;
+  white-space: pre-wrap;
+  padding: 6px;
+  border: 1px solid #c00;
+  margin-bottom: 6px;
+}
+
+.template-playground .tp-frame {
+  flex: 1;
+  width: 100%;
+  border: 1px solid #ccc;
+}
