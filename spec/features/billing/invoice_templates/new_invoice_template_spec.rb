@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-file_path = Rails.root.join 'spec/features/billing/invoice_templates/template.odt'
-
 RSpec.describe 'Create new Invoice Template', type: :feature do
   include_context :login_as_admin
 
@@ -10,10 +8,11 @@ RSpec.describe 'Create new Invoice Template', type: :feature do
   end
 
   include_context :fill_form, 'new_billing_invoice_template' do
+    let(:html_template) { '<html><body>{{ invoice.reference }}</body></html>' }
     let(:attributes) do
       {
         name: 'new template',
-        template_file: file_path
+        html_template: html_template
       }
     end
 
@@ -23,9 +22,7 @@ RSpec.describe 'Create new Invoice Template', type: :feature do
 
       expect(Billing::InvoiceTemplate.last).to have_attributes(
         name: attributes[:name],
-        filename: File.basename(file_path),
-        data: File.read(file_path).b,
-        sha1: Digest::SHA1.file(file_path).to_s
+        html_template: html_template
       )
     end
   end

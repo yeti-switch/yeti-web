@@ -19,6 +19,7 @@
 #  originated_calls_count            :bigint(8)        default(0), not null
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
+#  pdf_error                         :text
 #  reference                         :string
 #  service_transactions_count        :integer(4)       default(0), not null
 #  services_amount_earned            :decimal(, )      default(0.0), not null
@@ -112,6 +113,12 @@ class Billing::Invoice < Cdr::Base
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id, optional: true # , :conditions => {:customer => true}act
 
   has_one :invoice_document, dependent: :destroy
+  # Projection of invoice_document for listings: excludes the (large) pdf_data
+  # blob and exposes a `pdf_present` boolean instead, so index pages can show a
+  # download icon without loading PDF bytes for every row.
+  has_one :invoice_document_summary,
+          -> { select(:id, :invoice_id, Arel.sql('(pdf_data IS NOT NULL) AS pdf_present')) },
+          class_name: 'Billing::InvoiceDocument', foreign_key: :invoice_id
   has_many :originated_destinations, class_name: 'Billing::InvoiceOriginatedDestination', foreign_key: :invoice_id, dependent: :delete_all
   has_many :terminated_destinations, class_name: 'Billing::InvoiceTerminatedDestination', foreign_key: :invoice_id, dependent: :delete_all
   has_many :originated_networks, class_name: 'Billing::InvoiceOriginatedNetwork', foreign_key: :invoice_id, dependent: :delete_all
@@ -170,11 +177,7 @@ class Billing::Invoice < Cdr::Base
   def regenerate_document
     transaction do
       invoice_document&.delete
-      begin
-        BillingInvoice::GenerateDocument.call(invoice: self)
-      rescue BillingInvoice::GenerateDocument::TemplateUndefined => e
-        Rails.logger.info { "#{e.class}: #{e.message}" }
-      end
+      BillingInvoice::GenerateDocument.call(invoice: self)
     end
   end
 

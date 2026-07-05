@@ -79,7 +79,6 @@ gem 'uglifier', '>= 1.3'
 # Server Tools
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'odf-report', github: 'yeti-switch/odf-report', branch: 'master-2018'
 gem 'puma', '~> 8.0'
 gem 'puma_worker_killer'
 gem 'zip-zip'

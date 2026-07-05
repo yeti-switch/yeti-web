@@ -27,10 +27,10 @@ RSpec.resource 'Invoice template' do
   post '/api/rest/admin/invoice-template' do
     parameter :type, 'Resource type (invoice-templates)', scope: :data, required: true
 
-    jsonapi_attributes(%i[name filename], [])
+    jsonapi_attributes(%i[name html_template], [])
 
     let(:name) { 'Daily' }
-    let(:filename) { 'filename.odt' }
+    let(:html_template) { '<p>{{ invoice.reference }}</p>' }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

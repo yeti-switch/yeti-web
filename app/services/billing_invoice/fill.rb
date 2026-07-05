@@ -220,9 +220,9 @@ module BillingInvoice
     end
 
     def create_invoice_docs
+      # GenerateDocument records any failure on invoice.pdf_error and never
+      # raises, so a rendering problem does not abort invoice fill.
       BillingInvoice::GenerateDocument.call(invoice: invoice)
-    rescue BillingInvoice::GenerateDocument::TemplateUndefined => e
-      Rails.logger.info { "#{e.class}: #{e.message}" }
     end
   end
 end

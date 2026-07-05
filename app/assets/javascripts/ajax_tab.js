@@ -27,4 +27,14 @@ $(document).ready(function () {
         if (container.data('loaded')) return;
         loadAjaxContent(container, container.data('ajax-tab-url'));
     });
+
+    // Lazily load an embedded iframe (e.g. the invoice PDF) when its tab is
+    // opened, so the resource is fetched on demand rather than on page load.
+    $('#active_admin_content .tabs').on('tabsactivate', function (event, ui) {
+        ui.newPanel.find('iframe[data-src]').each(function () {
+            if (!this.getAttribute('src')) {
+                this.setAttribute('src', this.getAttribute('data-src'));
+            }
+        });
+    });
 });

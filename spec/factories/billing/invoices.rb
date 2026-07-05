@@ -19,6 +19,7 @@
 #  originated_calls_count            :bigint(8)        default(0), not null
 #  originated_calls_duration         :bigint(8)        default(0), not null
 #  originated_successful_calls_count :bigint(8)        default(0), not null
+#  pdf_error                         :text
 #  reference                         :string
 #  service_transactions_count        :integer(4)       default(0), not null
 #  services_amount_earned            :decimal(, )      default(0.0), not null

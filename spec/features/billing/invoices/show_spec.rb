@@ -21,13 +21,9 @@ RSpec.describe 'Invoices show page', js: true, bullet: [:n] do
       FactoryBot.create(:invoice_document, invoice:)
     end
 
-    it 'displays download links' do
+    it 'displays the pdf download link' do
       subject
       expect(page).to have_attribute_row('ID', exact_text: invoice.id.to_s)
-
-      expect(page).to have_action_item('Files')
-      click_action_item('Files') # opens dropdown
-      expect(page).to have_action_item('Document (ODT format)')
       expect(page).to have_action_item('Document (PDF format)')
     end
   end

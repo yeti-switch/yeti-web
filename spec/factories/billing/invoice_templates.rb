@@ -5,11 +5,8 @@
 # Table name: billing.invoice_templates
 #
 #  id            :integer(4)       not null, primary key
-#  data          :binary
-#  filename      :string
 #  html_template :text
 #  name          :string           not null
-#  sha1          :string
 #  created_at    :timestamptz
 #
 # Indexes
@@ -19,6 +16,6 @@
 FactoryBot.define do
   factory :invoice_template, class: 'Billing::InvoiceTemplate' do
     sequence(:name) { |n| "invoice_template#{n}" }
-    filename { 'filename.odt' }
+    html_template { '<html><body>{{ invoice.reference }}</body></html>' }
   end
 end

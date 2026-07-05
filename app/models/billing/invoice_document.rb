@@ -5,7 +5,6 @@
 # Table name: billing.invoice_documents
 #
 #  id         :integer(4)       not null, primary key
-#  data       :binary
 #  filename   :string           not null
 #  pdf_data   :binary
 #  invoice_id :integer(4)       not null
@@ -23,17 +22,11 @@ class Billing::InvoiceDocument < Cdr::Base
   self.table_name = 'billing.invoice_documents'
   belongs_to :invoice
 
-  # TODO: remove
-  def self.get_file(invoice_id)
-    Billing::InvoiceDocument.find(invoice_id).data
-  end
-
   delegate :contacts_for_invoices, to: :account
 
   def attachments
     [
-      Notification::Attachment.new(filename: "#{filename}.pdf", data: pdf_data) # ,
-      # Notification::Attachment.new(filename: "#{filename}.odt", data: self.data)
+      Notification::Attachment.new(filename: "#{filename}.pdf", data: pdf_data)
     ].reject { |a| a.data.blank? }
   end
 

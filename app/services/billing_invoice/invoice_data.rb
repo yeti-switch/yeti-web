@@ -3,11 +3,16 @@
 module BillingInvoice
   # Builds the JSON-serialisable payload sent to the yeti-pdf render service.
   #
-  # Values are RAW (numbers, integer seconds, ISO-8601 timestamps): all
-  # formatting (money, durations, dates) is done template-side by yeti-pdf's
-  # pongo2 filters, mirroring what the ODT decorators used to do. The shape is
-  # nested so templates read naturally, e.g. {{ account.name }},
-  # {{ invoice.amount_total|money }}, {{ d.calls_duration|duration:"colon" }}.
+  # PG numeric/decimal columns are serialised as exact decimal strings (dec) so
+  # no precision is lost: yeti-pdf parses JSON numbers as float64, which cannot
+  # hold an arbitrary-precision decimal exactly. Integer/bigint columns (ids,
+  # counts, durations) are exact in float64, so they stay JSON numbers (int).
+  # Timestamps are ISO-8601 strings. Formatting (money, durations, dates) is done
+  # template-side by pongo2 filters, which parse the decimal strings as needed;
+  # a raw {{ v }} renders the exact value.
+  #
+  # Because the decimal fields are strings, templates must use `{% if v > 0 %}`
+  # (pongo2 coerces) rather than bare `{% if v %}` on them — "0" is truthy.
   class InvoiceData < ApplicationService
     parameter :invoice, required: true
 
@@ -35,9 +40,11 @@ module BillingInvoice
       {
         id: account.id,
         name: account.name,
-        balance: num(account.balance),
-        min_balance: num(account.min_balance),
-        max_balance: num(account.max_balance),
+        currency_id: account.currency_id,
+        currency: account.currency_name,
+        balance: dec(account.balance),
+        min_balance: dec(account.min_balance),
+        max_balance: dec(account.max_balance),
         invoice_period: invoice.invoice_period&.name
       }
     end
@@ -58,30 +65,30 @@ module BillingInvoice
         created_at: time(invoice.created_at),
         start_date: time(invoice.start_date),
         end_date: time(invoice.end_date),
-        amount_total: num(invoice.amount_total),
-        amount_spent: num(invoice.amount_spent),
-        amount_earned: num(invoice.amount_earned),
+        amount_total: dec(invoice.amount_total),
+        amount_spent: dec(invoice.amount_spent),
+        amount_earned: dec(invoice.amount_earned),
         originated: {
-          amount_spent: num(invoice.originated_amount_spent),
-          amount_earned: num(invoice.originated_amount_earned),
+          amount_spent: dec(invoice.originated_amount_spent),
+          amount_earned: dec(invoice.originated_amount_earned),
           calls_count: int(invoice.originated_calls_count),
           successful_calls_count: int(invoice.originated_successful_calls_count),
-          calls_duration: num(invoice.originated_calls_duration),
+          calls_duration: int(invoice.originated_calls_duration),
           first_call_at: time(invoice.first_originated_call_at),
           last_call_at: time(invoice.last_originated_call_at)
         },
         terminated: {
-          amount_spent: num(invoice.terminated_amount_spent),
-          amount_earned: num(invoice.terminated_amount_earned),
+          amount_spent: dec(invoice.terminated_amount_spent),
+          amount_earned: dec(invoice.terminated_amount_earned),
           calls_count: int(invoice.terminated_calls_count),
           successful_calls_count: int(invoice.terminated_successful_calls_count),
-          calls_duration: num(invoice.terminated_calls_duration),
+          calls_duration: int(invoice.terminated_calls_duration),
           first_call_at: time(invoice.first_terminated_call_at),
           last_call_at: time(invoice.last_terminated_call_at)
         },
         services: {
-          amount_spent: num(invoice.services_amount_spent),
-          amount_earned: num(invoice.services_amount_earned),
+          amount_spent: dec(invoice.services_amount_spent),
+          amount_earned: dec(invoice.services_amount_earned),
           transactions_count: int(invoice.service_transactions_count)
         }
       }
@@ -93,11 +100,11 @@ module BillingInvoice
           prefix: row.dst_prefix,
           country: row.country&.name,
           network: row.network&.name,
-          rate: num(row.rate),
+          rate: dec(row.rate),
           calls_count: int(row.calls_count),
           successful_calls_count: int(row.successful_calls_count),
-          calls_duration: num(row.calls_duration),
-          amount: num(row.amount),
+          calls_duration: int(row.calls_duration),
+          amount: dec(row.amount),
           first_call_at: time(row.first_call_at),
           last_call_at: time(row.last_call_at)
         }
@@ -109,11 +116,11 @@ module BillingInvoice
         {
           country: row.country&.name,
           network: row.network&.name,
-          rate: num(row.rate),
+          rate: dec(row.rate),
           calls_count: int(row.calls_count),
           successful_calls_count: int(row.successful_calls_count),
-          calls_duration: num(row.calls_duration),
-          amount: num(row.amount),
+          calls_duration: int(row.calls_duration),
+          amount: dec(row.amount),
           first_call_at: time(row.first_call_at),
           last_call_at: time(row.last_call_at)
         }
@@ -125,17 +132,21 @@ module BillingInvoice
         {
           service: row.service&.name,
           transactions_count: int(row.transactions_count),
-          amount: num(row.amount)
+          amount: dec(row.amount)
         }
       end
     end
 
-    # Numeric (money/rate/duration) -> Float so it serialises as a JSON number
-    # (BigDecimal would serialise as a string and break the template filters).
-    def num(value)
-      value&.to_f
+    # Exact decimal string for every PG numeric/decimal value, so no precision
+    # is lost converting to float. Formatting filters still work (they parse the
+    # string); a raw {{ v }} renders the exact value. Avoid bare `{% if v %}` on
+    # these ("0" is a truthy string) — use `{% if v > 0 %}`, which pongo2 coerces.
+    def dec(value)
+      value&.to_s('F')
     end
 
+    # Integer/bigint columns (counts, durations) as an Integer JSON number —
+    # exact in float64, so no need to stringify.
     def int(value)
       value&.to_i
     end

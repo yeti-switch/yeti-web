@@ -128,7 +128,6 @@ Rails.application.routes.draw do
             jsonapi_relationships
             member do
               get :pdf
-              get :odt
             end
           end
           jsonapi_resources :invoice_originated_destinations, only: %i[index show]
