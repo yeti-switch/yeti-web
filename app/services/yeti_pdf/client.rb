@@ -55,8 +55,17 @@ module YetiPdf
     end
 
     def client(cfg)
+      t = (cfg.timeout || DEFAULT_TIMEOUT).to_i
+      # Rendering a large invoice can take yeti-pdf minutes, so the client must
+      # wait for the response. HTTPX's read/write timeouts default to 60s and
+      # fire independently of request_timeout, so raise all of them to the
+      # configured value — otherwise "Timed out after 60 seconds" hits first.
       HTTPX.with(
-        timeout: { request_timeout: cfg.timeout || DEFAULT_TIMEOUT },
+        timeout: {
+          read_timeout: t,
+          write_timeout: t,
+          request_timeout: t
+        },
         headers: headers(cfg)
       )
     end
