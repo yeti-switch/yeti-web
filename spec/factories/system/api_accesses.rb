@@ -3,11 +3,12 @@
 # == Schema Information
 #
 # Table name: sys.api_access
+# Database name: primary
 #
 #  id                                :integer(4)       not null, primary key
 #  account_ids                       :integer(4)       default([]), not null, is an Array
 #  allow_outgoing_numberlists_ids    :integer(4)       default([]), not null, is an Array
-#  allowed_ips                       :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
+#  allowed_ips                       :inet             default(["0.0.0.0/0", "::/0"]), not null, is an Array
 #  login                             :string           not null
 #  password_digest                   :string           not null
 #  created_at                        :timestamptz

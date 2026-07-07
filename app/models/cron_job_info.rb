@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.jobs
+# Database name: primary
 #
 #  id             :bigint(8)        not null, primary key
 #  last_duration  :decimal(, )

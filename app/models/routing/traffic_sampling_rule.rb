@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.traffic_sampling_rules
+# Database name: primary
 #
 #  id                :integer(2)       not null, primary key
 #  dst_prefix        :string           default(""), not null

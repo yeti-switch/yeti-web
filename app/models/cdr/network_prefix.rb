@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: external_data.network_prefixes
+# Database name: cdr
 #
 #  id                :integer(4)       not null, primary key
 #  number_max_length :integer(4)

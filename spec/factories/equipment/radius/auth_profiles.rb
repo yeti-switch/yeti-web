@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.radius_auth_profiles
+# Database name: primary
 #
 #  id              :integer(2)       not null, primary key
 #  attempts        :integer(2)       default(2), not null

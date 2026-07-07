@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.stir_shaken_rcd_profiles
+# Database name: primary
 #
 #  id          :integer(4)       not null, primary key
 #  apn         :string

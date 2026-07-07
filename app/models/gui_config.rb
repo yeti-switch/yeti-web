@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: guiconfig
+# Database name: primary
 #
 #  id                              :integer(4)       not null, primary key
 #  active_calls_autorefresh_enable :boolean          default(FALSE), not null

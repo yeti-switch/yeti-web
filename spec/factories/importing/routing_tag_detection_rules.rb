@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: data_import.import_routing_tag_detection_rules
+# Database name: primary
 #
 #  id                     :bigint(8)        not null, primary key
 #  dst_area_name          :string

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: versions
+# Database name: primary
 #
 #  id             :integer(4)       not null, primary key
 #  event          :string(255)      not null

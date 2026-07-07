@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.countries
+# Database name: primary
 #
 #  id   :integer(4)       not null, primary key
 #  iso2 :string(2)        not null

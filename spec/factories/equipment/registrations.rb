@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.registrations
+# Database name: primary
 #
 #  id                    :integer(4)       not null, primary key
 #  auth_password         :string

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.services
+# Database name: primary
 #
 #  id              :bigint(8)        not null, primary key
 #  initial_price   :decimal(, )      not null

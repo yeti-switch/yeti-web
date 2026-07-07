@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.cdr_compacted_tables
+# Database name: cdr
 #
 #  id         :bigint(8)        not null, primary key
 #  table_name :string           not null

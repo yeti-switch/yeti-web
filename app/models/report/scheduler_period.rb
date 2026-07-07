@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.scheduler_periods
+# Database name: cdr
 #
 #  id   :integer(2)       not null, primary key
 #  name :string           not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report
+# Database name: cdr
 #
 #  id          :integer(4)       not null, primary key
 #  completed   :boolean          default(FALSE), not null

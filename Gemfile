@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack'
-gem 'rails', '7.2.3.1'
+gem 'rails', '~> 8.0.0'
 gem 'responders'
 
 # Authentication
@@ -52,9 +52,7 @@ gem 'jsonapi-resources', github: 'JSONAPI-Resources/jsonapi-resources', branch: 
 # gem 'activeadmin_async_export'
 
 # Ext
-# Held at 7.x: validates_timeliness 8.0 requires activemodel >= 8 (Rails 8).
-# Move to '~> 8.0' as part of the Rails 8 upgrade.
-gem 'validates_timeliness', '~> 7.0.0.beta1'
+gem 'validates_timeliness', '~> 8.0.0'
 
 # Object-oriented authorization for Rails applications
 gem 'pundit'
@@ -101,7 +99,7 @@ gem 'config', require: false
 gem 'dry-validation', '~> 1.0', require: false
 
 group :development do
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'listen', require: false
 end
 

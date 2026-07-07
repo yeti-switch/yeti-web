@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: gateways_stats
+# Database name: primary
 #
 #  id             :integer(4)       not null, primary key
 #  acd            :float(24)

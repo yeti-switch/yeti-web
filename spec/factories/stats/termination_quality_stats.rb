@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stats.termination_quality_stats
+# Database name: cdr
 #
 #  id                  :bigint(8)        not null, primary key
 #  duration            :bigint(8)        not null

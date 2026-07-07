@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: disconnect_code_namespace
+# Database name: primary
 #
 #  id   :integer(4)       not null, primary key
 #  name :string           not null

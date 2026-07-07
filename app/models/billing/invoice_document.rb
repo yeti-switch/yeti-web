@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.invoice_documents
+# Database name: cdr
 #
 #  id         :integer(4)       not null, primary key
 #  filename   :string           not null

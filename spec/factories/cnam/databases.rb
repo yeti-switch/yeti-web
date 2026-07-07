@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.cnam_databases
+# Database name: primary
 #
 #  id                 :integer(2)       not null, primary key
 #  database_type      :string           not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stats.active_call_accounts
+# Database name: cdr
 #
 #  id               :bigint(8)        not null, primary key
 #  originated_count :integer(4)       not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: ratemanagement.pricelists
+# Database name: primary
 #
 #  id                           :integer(4)       not null, primary key
 #  applied_at                   :datetime

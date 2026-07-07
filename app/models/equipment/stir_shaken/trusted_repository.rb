@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stir_shaken_trusted_repositories
+# Database name: primary
 #
 #  id                         :integer(2)       not null, primary key
 #  url_pattern                :string           not null

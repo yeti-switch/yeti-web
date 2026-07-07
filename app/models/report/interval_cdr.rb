@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.cdr_interval_report
+# Database name: cdr
 #
 #  id              :integer(4)       not null, primary key
 #  aggregate_by    :string           not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.networks
+# Database name: primary
 #
 #  id      :integer(4)       not null, primary key
 #  name    :string           not null

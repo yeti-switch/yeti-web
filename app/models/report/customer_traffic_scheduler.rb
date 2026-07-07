@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.customer_traffic_report_schedulers
+# Database name: cdr
 #
 #  id          :integer(4)       not null, primary key
 #  last_run_at :timestamptz

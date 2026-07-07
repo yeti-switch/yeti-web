@@ -88,6 +88,32 @@ jobs:
             log/
 
 
+  annotations:
+    name: Model annotations
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v6
+      - name: use cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            vendor
+            .bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+      - name: run make annotations
+        run: make annotations
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+
 
   brakeman:
     name: Brakeman

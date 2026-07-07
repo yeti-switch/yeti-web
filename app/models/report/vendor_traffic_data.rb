@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.vendor_traffic_report_data
+# Database name: cdr
 #
 #  id                      :bigint(8)        not null, primary key
 #  acd                     :float(24)

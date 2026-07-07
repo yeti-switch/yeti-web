@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.service_types
+# Database name: primary
 #
 #  id                 :integer(2)       not null, primary key
 #  force_renew        :boolean          default(FALSE), not null

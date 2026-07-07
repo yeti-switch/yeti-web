@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.customers_auth
+# Database name: primary
 #
 #  id                               :integer(4)       not null, primary key
 #  allow_receive_rate_limit         :boolean          default(FALSE), not null
@@ -15,7 +16,7 @@
 #  dst_number_min_length            :integer(2)       default(0), not null
 #  dst_number_radius_rewrite_result :string
 #  dst_number_radius_rewrite_rule   :string
-#  dst_prefix                       :string           default(["\"\""]), is an Array
+#  dst_prefix                       :string           default([""]), is an Array
 #  dst_rewrite_result               :string
 #  dst_rewrite_rule                 :string
 #  enable_audio_recording           :boolean          default(FALSE), not null
@@ -23,7 +24,7 @@
 #  external_type                    :string
 #  from_domain                      :string           default([]), is an Array
 #  interface                        :string           default([]), not null, is an Array
-#  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
+#  ip                               :inet             default(["127.0.0.0/8"]), is an Array
 #  name                             :string           not null
 #  pai_rewrite_result               :string
 #  pai_rewrite_rule                 :string
@@ -37,7 +38,7 @@
 #  src_number_radius_rewrite_result :string
 #  src_number_radius_rewrite_rule   :string
 #  src_numberlist_use_diversion     :boolean          default(FALSE), not null
-#  src_prefix                       :string           default(["\"\""]), is an Array
+#  src_prefix                       :string           default([""]), is an Array
 #  src_rewrite_result               :string
 #  src_rewrite_rule                 :string
 #  ss_dst_rewrite_result            :string

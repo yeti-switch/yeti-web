@@ -29,11 +29,15 @@ RSpec.resource 'Origination Statistics', document: :customer_v1 do
     let(:'account-id') { account.uuid }
     let(:'from-time') { 1.day.ago.iso8601 }
     let(:sampling) { 'minute' }
+    # Mirror the request's parameter lets (not fresh evaluations) so the
+    # ClickHouse stub's from_time matches what the request actually sends;
+    # otherwise the two 1.day.ago calls can straddle a second boundary and the
+    # stubbed request no longer matches (flaky).
     let(:query) do
       {
-        'account-id': account.uuid,
-        'from-time': 1.day.ago.iso8601,
-        sampling: 'minute'
+        'account-id': send(:'account-id'),
+        'from-time': send(:'from-time'),
+        sampling: sampling
       }
     end
 

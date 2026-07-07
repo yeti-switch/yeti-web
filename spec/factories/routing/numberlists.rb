@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.numberlists
+# Database name: primary
 #
 #  id                         :integer(4)       not null, primary key
 #  default_dst_rewrite_result :string

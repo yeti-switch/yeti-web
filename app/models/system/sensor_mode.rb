@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.sensor_modes
+# Database name: primary
 #
 #  id   :integer(4)       not null, primary key
 #  name :string           not null

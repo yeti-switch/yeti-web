@@ -224,6 +224,11 @@ database_consistency: gems-test config/database.yml config/yeti_web.yml config/p
 	$(info:msg=Check the consistency of the database constraints with the application validations)
 	RAILS_ENV=test $(bundle_bin) exec database_consistency
 
+.PHONY: annotations
+annotations: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml prepare-test-db
+	$(info:msg=Check that model annotations are up to date)
+	RAILS_ENV=test $(bundle_bin) exec annotaterb models --frozen
+
 .PHONY: lint
 lint: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
 	$(info:msg=Running rubocop and bundle audit)

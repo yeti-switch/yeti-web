@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: reports.cdr_custom_report_data
+# Database name: cdr
 #
 #  id                           :bigint(8)        not null, primary key
 #  agg_asr_origination          :decimal(, )

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: stats.traffic_customer_accounts
+# Database name: cdr
 #
 #  id         :bigint(8)        not null, primary key
 #  amount     :decimal(, )

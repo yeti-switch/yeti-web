@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.schedulers
+# Database name: primary
 #
 #  id               :integer(2)       not null, primary key
 #  current_state    :boolean

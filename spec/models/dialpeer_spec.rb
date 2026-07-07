@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.dialpeers
+# Database name: primary
 #
 #  id                        :bigint(8)        not null, primary key
 #  acd_limit                 :float(24)        default(0.0), not null

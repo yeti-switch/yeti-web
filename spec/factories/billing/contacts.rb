@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: notifications.contacts
+# Database name: primary
 #
 #  id            :integer(4)       not null, primary key
 #  email         :string           not null

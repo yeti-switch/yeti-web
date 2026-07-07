@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.rate_plan_groups
+# Database name: primary
 #
 #  id            :integer(4)       not null, primary key
 #  rate_group_id :integer(4)       not null

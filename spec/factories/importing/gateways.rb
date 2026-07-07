@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: data_import.import_gateways
+# Database name: primary
 #
 #  id                                 :integer(4)       not null, primary key
 #  acd_limit                          :float(24)

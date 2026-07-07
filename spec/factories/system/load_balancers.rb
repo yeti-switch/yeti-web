@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.load_balancers
+# Database name: primary
 #
 #  id            :integer(2)       not null, primary key
 #  name          :string           not null

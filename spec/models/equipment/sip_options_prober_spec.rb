@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.sip_options_probers
+# Database name: primary
 #
 #  id                    :integer(4)       not null, primary key
 #  append_headers        :string

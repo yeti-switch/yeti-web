@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.radius_auth_profile_attributes
+# Database name: primary
 #
 #  id              :integer(2)       not null, primary key
 #  format          :string           not null

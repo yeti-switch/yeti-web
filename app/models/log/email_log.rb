@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: notifications.email_logs
+# Database name: primary
 #
 #  id                 :bigint(8)        not null, primary key
 #  error              :string

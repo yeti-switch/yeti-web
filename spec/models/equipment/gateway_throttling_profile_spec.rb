@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.gateway_throttling_profiles
+# Database name: primary
 #
 #  id              :integer(2)       not null, primary key
 #  codes           :string           not null, is an Array

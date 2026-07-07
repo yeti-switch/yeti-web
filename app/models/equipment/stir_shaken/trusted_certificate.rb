@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.stir_shaken_trusted_certificates
+# Database name: primary
 #
 #  id          :integer(2)       not null, primary key
 #  certificate :string           not null

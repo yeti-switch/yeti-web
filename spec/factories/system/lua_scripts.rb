@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.lua_scripts
+# Database name: primary
 #
 #  id         :integer(2)       not null, primary key
 #  name       :string           not null

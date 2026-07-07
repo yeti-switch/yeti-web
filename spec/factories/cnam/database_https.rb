@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.cnam_databases_http
+# Database name: primary
 #
 #  id      :integer(2)       not null, primary key
 #  timeout :integer(2)       default(5), not null

@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: billing.transactions
+# Database name: primary
 #
 #  id          :bigint(8)        not null, primary key
 #  amount      :decimal(, )      not null

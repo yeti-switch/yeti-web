@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: gui.oauth_applications
+# Database name: primary
 #
 #  id           :bigint(8)        not null, primary key
 #  confidential :boolean          default(TRUE), not null

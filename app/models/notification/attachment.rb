@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: notifications.attachments
+# Database name: primary
 #
 #  id       :integer(4)       not null, primary key
 #  data     :binary

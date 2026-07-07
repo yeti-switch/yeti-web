@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: class4.lnp_databases_thinq
+# Database name: primary
 #
 #  id         :integer(2)       not null, primary key
 #  host       :string           not null

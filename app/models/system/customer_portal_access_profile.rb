@@ -3,6 +3,7 @@
 # == Schema Information
 #
 # Table name: sys.customer_portal_access_profiles
+# Database name: primary
 #
 #  id                                         :integer(2)       not null, primary key
 #  account                                    :boolean          default(TRUE), not null
