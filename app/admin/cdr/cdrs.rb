@@ -200,27 +200,31 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
   member_action :dump, method: :get do
-    self.response_body = Enumerator.new do |yielder|
-      Cdr::DownloadPcap.call(cdr: resource, response_object: response, stream_writer: yielder)
-    end
+    # Stream synchronously to response.stream (buffered): this keeps the header
+    # setup and error handling inside the request. Rails 8 / Rack 3 runs an
+    # Enumerator response body in Puma *after* the request finishes, which would
+    # drop headers set during streaming and let exceptions escape this rescue.
+    Cdr::DownloadPcap.call(cdr: resource, response_object: response, stream_writer: response.stream)
   rescue Cdr::DownloadPcap::NotFoundError => e
     flash[:error] = e.message
     redirect_back(fallback_location: root_path)
   rescue StandardError => e
     flash[:error] = "An unexpected error occurred: #{e.message}"
     redirect_back(fallback_location: root_path)
+  ensure
+    response.stream.close
   end
 
   member_action :download_call_record, method: :get do
-    self.response_body = Enumerator.new do |yielder|
-      Cdr::DownloadCallRecord.call(cdr: resource, response_object: response, stream_writer: yielder)
-    end
+    Cdr::DownloadCallRecord.call(cdr: resource, response_object: response, stream_writer: response.stream)
   rescue Cdr::DownloadCallRecord::NotFoundError => e
     flash[:error] = e.message
     redirect_back(fallback_location: root_path)
   rescue StandardError => e
     flash[:error] = "An unexpected error occurred: #{e.message}"
     redirect_back(fallback_location: root_path)
+  ensure
+    response.stream.close
   end
 
   member_action :rtp_diagram, method: :get do
