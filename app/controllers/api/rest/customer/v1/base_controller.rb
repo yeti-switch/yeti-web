@@ -38,6 +38,13 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
 
   def handle_exceptions(e)
     capture_error(e) unless e.is_a?(JSONAPI::Exceptions::Error)
+    # rescue_from handlers (e.g. auth failures in before_action) call this before
+    # the JSONAPI flow has set up and rendered the response document; in 0.9
+    # handle_exceptions rendered directly, but 26.x only appends to the document
+    # and renders separately. Do that here when invoked outside the flow.
+    render_standalone = @response_document.nil?
+    setup_response_document if render_standalone
     super
+    render_response_document if render_standalone
   end
 end

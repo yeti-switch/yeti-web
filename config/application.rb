@@ -35,10 +35,8 @@ module Yeti
     # changing defaults
     config.action_view.default_enforce_utf8 = true
 
-    # Rails 8.0 deprecates the :offset behavior of to_time; opt into the :zone behavior
-    # (the Rails 8.1 default). Our timezone logic uses TimeWithZone, not to_time offset
-    # semantics, so this is safe (verified by the invoice period specs).
-    config.active_support.to_time_preserves_timezone = :zone
+    # Rails 8.1 always preserves the timezone in Time#to_time (the former :zone
+    # behavior); the setting is deprecated and removed in 8.2, so no opt-in needed.
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

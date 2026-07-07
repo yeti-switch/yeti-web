@@ -2,9 +2,10 @@
 
 require 'jsonapi/exceptions/authorization_failed'
 require 'jsonapi/exceptions/authentication_failed'
-require 'jsonapi/operation_dispatcher_patch'
+require 'jsonapi/processor_patch'
 require 'jsonapi/relationship_patch'
-require 'jsonapi/request_parser_patch'
+require 'jsonapi/request_patch'
+require 'jsonapi/active_relation_resource_patch'
 
 # Fix Rack deprecation: :unprocessable_entity -> :unprocessable_content (HTTP 422)
 # https://github.com/cerebris/jsonapi-resources/issues/1456
