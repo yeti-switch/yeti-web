@@ -36,6 +36,7 @@
 #  created_at                        :timestamptz      not null
 #  account_id                        :integer(4)       not null
 #  contractor_id                     :integer(4)
+#  currency_id                       :integer(2)       not null
 #  state_id                          :integer(2)       default(3), not null
 #  type_id                           :integer(2)       not null
 #

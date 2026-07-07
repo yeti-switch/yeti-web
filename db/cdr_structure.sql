@@ -2388,7 +2388,8 @@ CREATE TABLE billing.invoices (
     services_amount_spent numeric DEFAULT 0.0 NOT NULL,
     services_amount_earned numeric DEFAULT 0.0 NOT NULL,
     service_transactions_count integer DEFAULT 0 NOT NULL,
-    pdf_error text
+    pdf_error text,
+    currency_id smallint NOT NULL
 );
 
 
@@ -4625,6 +4626,8 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260706120100'),
+('20260706120000'),
 ('20260705140100'),
 ('20260629121000'),
 ('20260603000000'),
