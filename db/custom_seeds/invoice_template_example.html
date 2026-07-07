@@ -153,25 +153,26 @@
     {% if not rows %}<div class="empty">No data.</div>{% endif %}
   {% endmacro %}
 
+  {# Every list holds all rows; |where keeps only connected destinations. #}
   <h2>Originated destinations</h2>
   {{ destinations_table(originated_destinations) }}
   <h3>Originated destinations — successful only</h3>
-  {{ destinations_table(originated_destinations_succ) }}
+  {{ destinations_table(originated_destinations|where:"successful_calls_count > 0") }}
 
   <h2>Terminated destinations</h2>
   {{ destinations_table(terminated_destinations) }}
   <h3>Terminated destinations — successful only</h3>
-  {{ destinations_table(terminated_destinations_succ) }}
+  {{ destinations_table(terminated_destinations|where:"successful_calls_count > 0") }}
 
   <h2>Originated networks</h2>
   {{ networks_table(originated_networks) }}
   <h3>Originated networks — successful only</h3>
-  {{ networks_table(originated_networks_succ) }}
+  {{ networks_table(originated_networks|where:"successful_calls_count > 0") }}
 
   <h2>Terminated networks</h2>
   {{ networks_table(terminated_networks) }}
   <h3>Terminated networks — successful only</h3>
-  {{ networks_table(terminated_networks_succ) }}
+  {{ networks_table(terminated_networks|where:"successful_calls_count > 0") }}
 
   <h2>Service data</h2>
   <table>

@@ -16,11 +16,26 @@ ActiveAdmin.register_page 'Info' do
         end
 
         panel 'Build info' do
+          # Live YJIT status. Rails enables YJIT after boot via a finisher, so
+          # this can be 'enabled' even when the boot banner didn't show +YJIT.
+          yjit_status =
+            if !defined?(RubyVM::YJIT)
+              'unavailable'
+            elsif RubyVM::YJIT.enabled?
+              'enabled'
+            else
+              'disabled'
+            end
           data = {
             ui_version: Rails.application.config.app_build_info.fetch('version', 'unknown'),
             routing_version: ApplicationRecord::DB_VER,
             cdr_version: Cdr::Base::DB_VER,
-            ruby: "#{RUBY_VERSION}/#{RUBY_PLATFORM}/#{RUBY_RELEASE_DATE}",
+            # Full interpreter description (version, revision, platform) incl.
+            # active VM feature flags (YJIT, PRISM, …). RubyVM::YJIT.enable
+            # updates RUBY_DESCRIPTION, so this reflects YJIT even when Rails
+            # turns it on after boot.
+            ruby: RUBY_DESCRIPTION,
+            yjit: yjit_status,
             switch_interface: ApplicationRecord::ROUTING_SCHEMA
           }
           attributes_table_for data do

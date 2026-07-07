@@ -22,13 +22,9 @@ module BillingInvoice
         contractor: contractor_data,
         invoice: invoice_data,
         originated_destinations: destinations(invoice.originated_destinations.for_invoice.order('dst_prefix')),
-        originated_destinations_succ: destinations(invoice.originated_destinations.for_invoice_succ.order('dst_prefix')),
         terminated_destinations: destinations(invoice.terminated_destinations.for_invoice.order('dst_prefix')),
-        terminated_destinations_succ: destinations(invoice.terminated_destinations.for_invoice_succ.order('dst_prefix')),
         originated_networks: networks(invoice.originated_networks.for_invoice.order('country_id, network_id')),
-        originated_networks_succ: networks(invoice.originated_networks.for_invoice_succ.order('country_id, network_id')),
         terminated_networks: networks(invoice.terminated_networks.for_invoice.order('country_id, network_id')),
-        terminated_networks_succ: networks(invoice.terminated_networks.for_invoice_succ.order('country_id, network_id')),
         service_data: services(invoice.service_data.for_invoice)
       }
     end

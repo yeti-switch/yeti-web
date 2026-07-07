@@ -29,10 +29,8 @@ RSpec.describe BillingInvoice::InvoiceData do
   end
 
   it 'exposes every collection as an array' do
-    %i[originated_destinations originated_destinations_succ
-       terminated_destinations terminated_destinations_succ
-       originated_networks originated_networks_succ
-       terminated_networks terminated_networks_succ service_data].each do |key|
+    %i[originated_destinations terminated_destinations
+       originated_networks terminated_networks service_data].each do |key|
       expect(payload[key]).to be_an(Array), "expected #{key} to be an Array"
     end
   end
