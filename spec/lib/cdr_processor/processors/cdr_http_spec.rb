@@ -115,4 +115,28 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 2 })
     end
   end
+
+  # Proxy behaviour is covered in spec/lib/httpx_proxy_spec.rb; here we only
+  # verify the processor wires its config into HttpxProxy.
+  describe 'http proxy config' do
+    it 'defaults to no proxy and does not inherit the env proxy' do
+      expect(consumer.send(:proxy).inherit_env_proxy?).to be false
+    end
+
+    context 'with use_env_proxy enabled' do
+      let(:config) { super().merge('use_env_proxy' => true) }
+
+      it 'inherits the env proxy' do
+        expect(consumer.send(:proxy).inherit_env_proxy?).to be true
+      end
+    end
+
+    context 'with an explicit http_proxy' do
+      let(:config) { super().merge('http_proxy' => 'http://proxy.local:3128', 'use_env_proxy' => true) }
+
+      it 'uses the configured proxy over the env proxy' do
+        expect(consumer.send(:proxy).inherit_env_proxy?).to be false
+      end
+    end
+  end
 end

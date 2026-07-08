@@ -45,7 +45,9 @@ module YetiPdf
       cfg = YetiConfig.invoice&.pdf_api
       raise Error, 'invoice.pdf_api.base_url is not configured' if cfg&.base_url.blank?
 
-      response = client(cfg).post(url(cfg, path), json: { template: template, data: data, options: options })
+      proxy = proxy_for(cfg)
+      http = proxy.apply(client(cfg))
+      response = proxy.run { http.post(url(cfg, path), json: { template: template, data: data, options: options }) }
       response.raise_for_status
       response.body.to_s
     rescue HTTPX::HTTPError => e
@@ -68,6 +70,12 @@ module YetiPdf
         },
         headers: headers(cfg)
       )
+    end
+
+    # Outbound HTTP proxy for yeti-pdf calls (usually an internal service, so it
+    # defaults to direct); see HttpxProxy and invoice.pdf_api.* in yeti_web.yml.
+    def proxy_for(cfg)
+      HttpxProxy.new(http_proxy: cfg.http_proxy, use_env_proxy: cfg.use_env_proxy)
     end
 
     def url(cfg, path)

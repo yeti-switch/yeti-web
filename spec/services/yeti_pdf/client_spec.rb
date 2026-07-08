@@ -59,4 +59,36 @@ RSpec.describe YetiPdf::Client do
         .to raise_error(YetiPdf::Client::Error, /not configured/)
     end
   end
+
+  # Proxy behaviour is covered in spec/lib/httpx_proxy_spec.rb; here we only
+  # verify the client wires invoice.pdf_api config into HttpxProxy.
+  describe '#proxy_for' do
+    let(:cfg) { OpenStruct.new(pdf_api_config) }
+
+    subject(:proxy) { described_class.new.send(:proxy_for, cfg) }
+
+    context 'with defaults' do
+      let(:pdf_api_config) { { base_url: base_url } }
+
+      it 'does not inherit the env proxy' do
+        expect(proxy.inherit_env_proxy?).to be false
+      end
+    end
+
+    context 'with use_env_proxy enabled' do
+      let(:pdf_api_config) { { base_url: base_url, use_env_proxy: true } }
+
+      it 'inherits the env proxy' do
+        expect(proxy.inherit_env_proxy?).to be true
+      end
+    end
+
+    context 'with an explicit http_proxy' do
+      let(:pdf_api_config) { { base_url: base_url, http_proxy: 'http://proxy.local:3128', use_env_proxy: true } }
+
+      it 'uses the configured proxy over the env proxy' do
+        expect(proxy.inherit_env_proxy?).to be false
+      end
+    end
+  end
 end

@@ -24,26 +24,37 @@ RSpec.describe CurrencyRates::Providers::Frankfurter, '#rates' do
     expect(request_stub).to have_been_requested
   end
 
+  # Proxy behaviour itself is covered in spec/lib/httpx_proxy_spec.rb; here we
+  # only verify the provider wires its config into HttpxProxy.
   describe 'http proxy' do
-    let(:http_client_options) { described_class.new.send(:client).instance_variable_get(:@options) }
+    let(:provider) { described_class.new }
+
+    before do
+      allow(YetiConfig).to receive(:currency_rates).and_return(OpenStruct.new(currency_rates_config))
+    end
 
     context 'when http proxy is configured' do
-      before do
-        allow(YetiConfig).to receive(:currency_rates).and_return(OpenStruct.new(http_proxy: 'http://proxy.local:3128'))
-      end
+      let(:currency_rates_config) { { http_proxy: 'http://proxy.local:3128' } }
 
-      it 'builds the http client with the proxy' do
-        expect(http_client_options.proxy.uri.to_s).to eq 'http://proxy.local:3128'
+      it 'builds the http client with the configured proxy' do
+        options = provider.send(:client).instance_variable_get(:@options)
+        expect(options.proxy.uri.to_s).to eq 'http://proxy.local:3128'
       end
     end
 
-    context 'when http proxy is not configured' do
-      before do
-        allow(YetiConfig).to receive(:currency_rates).and_return(OpenStruct.new(http_proxy: nil))
-      end
+    context 'when http proxy is not configured and use_env_proxy is disabled' do
+      let(:currency_rates_config) { { http_proxy: nil, use_env_proxy: false } }
 
-      it 'builds the http client without a proxy' do
-        expect(http_client_options).to_not respond_to(:proxy)
+      it 'does not inherit the env proxy' do
+        expect(provider.send(:proxy).inherit_env_proxy?).to be false
+      end
+    end
+
+    context 'when http proxy is not configured and use_env_proxy is enabled' do
+      let(:currency_rates_config) { { http_proxy: nil, use_env_proxy: true } }
+
+      it 'inherits the env proxy' do
+        expect(provider.send(:proxy).inherit_env_proxy?).to be true
       end
     end
   end
