@@ -138,7 +138,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
     let!(:account) { FactoryBot.create(:account, contractor: vendor) }
     let(:fill_form!) do
       fill_in_tom_select 'Vendor', with: vendor.name, search: true
-      fill_in_tom_select 'Account', with: account.name
+      fill_in_tom_select 'Account', with: account.name, search: true
     end
 
     it 'does not update dialpeer' do
