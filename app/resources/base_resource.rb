@@ -123,6 +123,56 @@ class BaseResource < JSONAPI::Resource
     end
   end
 
+  # jsonapi-resources 26.x drives index/show through find_fragments, which assumes
+  # an ActiveRecord model (it plucks columns via raw SQL). Our query-builder POROs
+  # (WithQueryBuilder) alias :all to their query_builder, so the gem's PORO check
+  # (`respond_to?(:all)`) misfires and they hit the SQL path -> 500. Route them
+  # through their records collection instead, reusing the resource's own
+  # filter/sort/pagination methods (the 0.9-era overrides), and build fragments
+  # by wrapping each model in a resource.
+  def self.find_fragments(filters, options = {})
+    return super unless _model_class.respond_to?(:query_builder)
+
+    context = options[:context]
+    records = records(options)
+    records = filter_records(records, filters, options) if filters.present?
+
+    order_options = construct_order_options(options[:sort_criteria])
+    records = sort_records(records, order_options, options)
+
+    paginator = options[:paginator]
+    records = apply_pagination(records, paginator, order_options) if paginator
+
+    records.to_a.each_with_object({}) do |model, fragments|
+      identity = JSONAPI::ResourceIdentity.new(self, model.public_send(_primary_key))
+      fragments[identity] = JSONAPI::ResourceFragment.new(identity, resource: new(model, context))
+    end
+  end
+
+  # Record count for the top-level meta; the gem's count_records calls
+  # records.count (AR), which the query-builder proxy doesn't implement.
+  def self.count(filters, options = {})
+    return super unless _model_class.respond_to?(:query_builder)
+
+    records = records(options)
+    records = filter_records(records, filters, options) if filters.present?
+    records.to_a.size
+  end
+
+  # For query-builder POROs, filters without a custom :apply must be passed to
+  # the proxy as a plain `where(name => value)` (the query builder interprets the
+  # name); the gem's default wraps the field in Arel.sql, which breaks the proxy.
+  def self.apply_filter(records, filter, value, options = {})
+    return super unless _model_class.respond_to?(:query_builder)
+
+    strategy = _allowed_filters.fetch(filter.to_sym, {})[:apply]
+    if strategy
+      call_method_or_proc(strategy, records, value, options)
+    else
+      records.where(filter => value)
+    end
+  end
+
   def self.records(context)
     scope = super
     apply_required_model_includes(scope, context)
