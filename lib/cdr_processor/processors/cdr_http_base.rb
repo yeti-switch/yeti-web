@@ -84,9 +84,16 @@ module CdrProcessor
         if @params['auth_user'].present?
           client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
         end
-        response = client.public_send(http_method, http_url, **kwargs)
+        client = proxy.apply(client)
+        response = proxy.run { client.public_send(http_method, http_url, **kwargs) }
         response.raise_for_status
         response
+      end
+
+      # Outbound HTTP proxy for CDR export requests, controlled per processor via
+      # http_proxy / use_env_proxy in config/cdr_processors.yml; see HttpxProxy.
+      def proxy
+        @proxy ||= HttpxProxy.new(http_proxy: @params['http_proxy'], use_env_proxy: @params['use_env_proxy'])
       end
 
       def log_prefix

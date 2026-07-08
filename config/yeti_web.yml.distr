@@ -66,6 +66,11 @@ invoice:
     base_url: "http://127.0.0.1:9080"
     auth_token: ""
     timeout: 30
+    # Outbound proxy for yeti-pdf calls. Defaults to direct (ignores any
+    # HTTP(S)_PROXY env vars). Set http_proxy to force a proxy, or
+    # use_env_proxy: true to honour the env vars when http_proxy is unset.
+    #http_proxy: http://proxy.example.com:3128
+    #use_env_proxy: false
 
 s3_storage:
   endpoint: ''
@@ -100,6 +105,10 @@ tmpdir: 'tmp'
 #   per_page: [30, 50, 100]
 
 # Currency rate autoupdate (Billing -> Currencies, "Rate provider" attribute).
-# Optional outbound HTTP proxy used for all provider API calls.
+# Outbound HTTP proxy for all provider API calls. By default calls go direct,
+# ignoring any HTTP(S)_PROXY env vars present on the host.
 #currency_rates:
+#  # Explicit proxy URI; always takes precedence when set.
 #  http_proxy: http://proxy.example.com:3128
+#  # Honour the standard HTTP(S)_PROXY env vars when http_proxy is not set.
+#  use_env_proxy: false

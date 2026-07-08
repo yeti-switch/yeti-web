@@ -129,6 +129,8 @@ Config.setup do |setup_config|
         required(:base_url).filled(:string)
         optional(:auth_token).maybe(:string)
         optional(:timeout).maybe(:integer)
+        optional(:http_proxy).maybe(:string)
+        optional(:use_env_proxy).maybe(:bool?)
       end
     end
     optional(:admin_ui).schema do

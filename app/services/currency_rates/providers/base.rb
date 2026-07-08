@@ -11,8 +11,8 @@ module CurrencyRates
     #   SUPPORTED_CURRENCIES - optional allowlist (omit to support any)
     # and implement #build_rates (and optionally #request_options).
     #
-    # An optional outbound HTTP proxy for all providers is read from
-    # currency_rates.http_proxy in yeti_web.yml.
+    # Outbound HTTP proxy for all providers is controlled via yeti_web.yml
+    # (currency_rates.http_proxy / currency_rates.use_env_proxy); see HttpxProxy.
     class Base
       class Error < StandardError; end
 
@@ -30,7 +30,7 @@ module CurrencyRates
       # @return [Hash{String => Float}] price of 1 unit of each returned currency in base currency.
       # @raise [Error]
       def rates(base:)
-        response = client.get(rates_url, **request_options(base))
+        response = proxy.run { client.get(rates_url, **request_options(base)) }
         response.raise_for_status
         build_rates(JSON.parse(response.body.to_s), base)
       rescue HTTPX::HTTPError => e
@@ -64,15 +64,18 @@ module CurrencyRates
       end
 
       def client
-        http = HTTPX.with(timeout: { request_timeout: REQUEST_TIMEOUT })
-        proxy = http_proxy
-        return http if proxy.blank?
-
-        http.plugin(:proxy).with_proxy(uri: proxy)
+        proxy.apply(HTTPX.with(timeout: { request_timeout: REQUEST_TIMEOUT }))
       end
 
-      def http_proxy
-        YetiConfig.currency_rates&.http_proxy.presence
+      def proxy
+        @proxy ||= HttpxProxy.new(
+          http_proxy: config&.http_proxy,
+          use_env_proxy: config&.use_env_proxy
+        )
+      end
+
+      def config
+        YetiConfig.currency_rates
       end
     end
   end

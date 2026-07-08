@@ -30,6 +30,11 @@ http:
   method: POST
   # auth_user: user
   # auth_password: password
+  # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
+  # Set http_proxy to force a proxy, or use_env_proxy: true to honour the env
+  # vars when http_proxy is unset.
+  # http_proxy: http://proxy.example.com:3128
+  # use_env_proxy: false
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -77,6 +82,11 @@ http_batch:
   method: POST
   # auth_user: user
   # auth_password: password
+  # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
+  # Set http_proxy to force a proxy, or use_env_proxy: true to honour the env
+  # vars when http_proxy is unset.
+  # http_proxy: http://proxy.example.com:3128
+  # use_env_proxy: false
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
