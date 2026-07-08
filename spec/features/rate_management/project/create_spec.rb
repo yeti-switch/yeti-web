@@ -21,7 +21,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
     let(:fill_form!) do
       fill_in 'Name', with: new_attrs[:name]
       fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
-      fill_in_tom_select 'Account', with: new_attrs[:account].name
+      fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
       fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
       fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
       fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
@@ -63,7 +63,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
       let(:fill_form!) do
         fill_in 'Name', with: new_attrs[:name]
         fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
-        fill_in_tom_select 'Account', with: new_attrs[:account].name
+        fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
         fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
         fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
         fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
@@ -179,7 +179,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
       let(:fill_form!) do
         fill_in 'Name', with: new_attrs[:name]
         fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
-        fill_in_tom_select 'Account', with: new_attrs[:account].name
+        fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
         fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
         fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
         fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name

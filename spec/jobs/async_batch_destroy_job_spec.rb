@@ -78,7 +78,7 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
         let!(:item) do
           FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, :filed_from_project, dialpeer: dialpeers.last)
         end
-        let(:sql_query) { Dialpeer.all.to_sql }
+        let(:sql_query) { Dialpeer.order(:id).to_sql }
 
         it 'should raise validation error' do
           error_message = "Dialpeer ##{dialpeers.last.id} can't be deleted: Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{item.pricelist_id}"
