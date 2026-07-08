@@ -209,12 +209,19 @@ module Section
           if (!ts) { return 'no-instance'; }
           var text = String(arguments[1]).trim(), exact = arguments[2];
           var labelField = ts.settings.labelField, valueField = ts.settings.valueField;
-          var match = null;
+          // Always prefer an exact label match; only when exact is false and no
+          // exact match exists do we fall back to the first substring match.
+          // Without this preference a search for "Discriminator 1" could pick
+          // "Discriminator 10" (whichever option key is enumerated first),
+          // selecting the wrong record and flaking the spec.
+          var match = null, substringMatch = null;
           Object.keys(ts.options).some(function (key) {
             var label = String(ts.options[key][labelField]).trim();
-            if (exact ? label === text : label.indexOf(text) !== -1) { match = ts.options[key]; return true; }
+            if (label === text) { match = ts.options[key]; return true; }
+            if (!exact && substringMatch === null && label.indexOf(text) !== -1) { substringMatch = ts.options[key]; }
             return false;
           });
+          if (!match && !exact) { match = substringMatch; }
           if (!match) { return 'not-found'; }
           ts.addItem(String(match[valueField]), false);
           return 'ok';
