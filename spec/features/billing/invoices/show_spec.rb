@@ -24,7 +24,7 @@ RSpec.describe 'Invoices show page', js: true, bullet: [:n] do
     it 'displays the pdf download link' do
       subject
       expect(page).to have_attribute_row('ID', exact_text: invoice.id.to_s)
-      expect(page).to have_action_item('Document (PDF format)')
+      expect(page).to have_action_item('Download PDF')
     end
   end
 

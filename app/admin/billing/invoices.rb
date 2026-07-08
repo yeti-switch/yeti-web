@@ -3,7 +3,7 @@
 ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   menu parent: 'Billing', label: 'Invoices', priority: 30
 
-  actions :index, :show, :destroy, :create, :new, :edit, :update
+  actions :index, :show, :destroy, :create, :new
 
   acts_as_audit
   acts_as_safe_destroy
@@ -53,6 +53,24 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     redirect_back fallback_location: root_path
   end
 
+  # Changing the reference is a dedicated action rather than a generic resource
+  # update: it is the only mutable field on a (pending) invoice. Authorization
+  # goes through InvoicePolicy#change_reference? (aliased to #update?, pending-only).
+  member_action :change_reference, method: :post do
+    resource.update!(reference: params[:reference])
+    # The reference is printed on the PDF, so regenerate it by default; the modal
+    # checkbox lets the admin opt out. Guarded by regenerate_document_allowed?
+    # (pending-only) for parity with the standalone regenerate action.
+    if ActiveModel::Type::Boolean.new.cast(params[:regenerate_pdf]) && resource.regenerate_document_allowed?
+      resource.regenerate_document
+    end
+    flash[:notice] = 'Invoice reference was updated'
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+  ensure
+    redirect_to action: :show
+  end
+
   member_action :regenerate_document, method: :post do
     if resource.regenerate_document_allowed?
       resource.regenerate_document
@@ -87,17 +105,35 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   action_item :regenerate_documents, only: :show do
-    link_to('Regenerate documents', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
+    link_to('Rebuild PDF', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
   end
 
   action_item :documents, only: :show do
     if resource.invoice_document.present?
-      link_to('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get)
+      link_to('Download PDF', export_file_pdf_invoice_path(resource.id), method: :get)
     end
   end
 
   action_item :approve, only: :show do
     link_to('Approve', approve_invoice_path(resource.id), method: :post) if resource.approvable?
+  end
+
+  # Reference is edited via a modal dialog (modal_link.js) instead of a separate
+  # edit form. Only offered for pending invoices the current admin may change.
+  # data-values prefills the current reference so clicking OK can't blank it.
+  action_item :change_reference, only: :show do
+    if authorized?(:change_reference, resource)
+      link_to 'Change Reference',
+              change_reference_invoice_path(resource),
+              class: 'modal-link',
+              data: {
+                method: :post,
+                confirm: 'Change Reference',
+                inputs: { reference: :text, regenerate_pdf: :checkbox }.to_json,
+                values: { reference: resource.reference, regenerate_pdf: true }.to_json,
+                labels: { regenerate_pdf: 'Rebuild PDF' }.to_json
+              }
+    end
   end
 
   # Footer helpers: render one line per currency (amounts in different currencies
@@ -490,44 +526,34 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
   end
 
-  # Create takes the manual-invoice params; editing an existing (pending) invoice
-  # only allows its reference to change.
-  permit_params do
-    params[:action] == 'update' ? %i[reference] : %i[contractor_id account_id start_date end_date]
-  end
+  # Only manual-invoice creation goes through the resource form; the reference is
+  # changed via the dedicated change_reference member action.
+  permit_params :contractor_id, :account_id, :start_date, :end_date
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
 
-    if f.object.persisted?
-      # Edit: only the reference is editable (see InvoicePolicy#update? — pending only).
-      f.inputs 'Edit Invoice' do
-        f.input :reference
-      end
-      f.actions
-    else
-      f.inputs form_title do
-        f.contractor_input :contractor_id
-        f.account_input :account_id,
-                        fill_params: { contractor_id_eq: f.object.contractor_id },
-                        fill_required: :contractor_id_eq,
-                        input_html: {
-                          'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
-                          'data-required-param': 'q[contractor_id_eq]'
-                        }
+    f.inputs form_title do
+      f.contractor_input :contractor_id
+      f.account_input :account_id,
+                      fill_params: { contractor_id_eq: f.object.contractor_id },
+                      fill_required: :contractor_id_eq,
+                      input_html: {
+                        'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
+                        'data-required-param': 'q[contractor_id_eq]'
+                      }
 
-        f.input :start_date,
-                as: :date_time_picker,
-                datepicker_options: { defaultTime: '00:00' },
-                hint: 'Account timezone will be used',
-                wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
+      f.input :start_date,
+              as: :date_time_picker,
+              datepicker_options: { defaultTime: '00:00' },
+              hint: 'Account timezone will be used',
+              wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
 
-        f.input :end_date,
-                as: :date_time_picker,
-                datepicker_options: { defaultTime: '00:00' },
-                hint: 'Account timezone will be used'
-      end
-      f.actions { f.submit('Create Invoice') }
+      f.input :end_date,
+              as: :date_time_picker,
+              datepicker_options: { defaultTime: '00:00' },
+              hint: 'Account timezone will be used'
     end
+    f.actions { f.submit('Create Invoice') }
   end
 end

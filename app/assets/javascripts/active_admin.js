@@ -43,6 +43,7 @@
 //= require vendor/highlightjs/languages/django.min
 //= require highlightjs
 //= require modal_link
+//= require modal_link_customize
 //= require import_apply_unique_fields
 //= require tom-select
 //= require credential_generator
