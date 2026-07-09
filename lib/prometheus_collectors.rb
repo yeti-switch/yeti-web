@@ -8,6 +8,11 @@ $stdout.sync = true
 
 require 'active_support/all'
 
+# This process does not boot Rails, so YetiConfig has to be loaded explicitly.
+# Collectors that seed their counters with zero values read prometheus.default_labels from it.
+require_relative 'yeti_config_loader'
+YetiConfigLoader.call
+
 Dir[File.join(__dir__, 'prometheus/*_collector.rb')].each do |filename|
   require_relative filename
 end

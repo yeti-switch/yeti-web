@@ -167,6 +167,49 @@ RSpec.describe Jobs::PartitionRemoving, '#call' do
           it 'should collect Prometheus metrics' do
             expect(PartitionRemoveHookProcessor).to receive(:collect).with(executions: 1)
             expect(PartitionRemoveHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(success: 1)
+            expect(PartitionRemoveHookProcessor).not_to receive(:collect).with(errors: anything)
+            subject
+          end
+        end
+
+        context 'when hook binary is missing' do
+          let(:hook_value) { '/nonexistent/partition_remove_hook' }
+
+          it 'should NOT drop partition' do
+            expect { subject }.not_to change { PartitionModel::Cdr.all.size }
+          end
+
+          it 'should collect Prometheus metrics, counting the crash as an error' do
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(executions: 1)
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(errors: 1)
+            expect(PartitionRemoveHookProcessor).not_to receive(:collect).with(success: anything)
+            subject
+          end
+        end
+
+        context 'when hook is not executable' do
+          let(:non_executable_hook) do
+            file = Tempfile.new('partition_remove_hook')
+            file.write("#!/bin/sh\nexit 0\n")
+            file.close
+            File.chmod(0o644, file.path)
+            file
+          end
+          let(:hook_value) { non_executable_hook.path }
+
+          after { non_executable_hook.unlink }
+
+          it 'should NOT drop partition' do
+            expect { subject }.not_to change { PartitionModel::Cdr.all.size }
+          end
+
+          it 'should collect Prometheus metrics, counting the failure to start as an error' do
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(executions: 1)
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(PartitionRemoveHookProcessor).to receive(:collect).with(errors: 1)
+            expect(PartitionRemoveHookProcessor).not_to receive(:collect).with(success: anything)
             subject
           end
         end
@@ -182,6 +225,7 @@ RSpec.describe Jobs::PartitionRemoving, '#call' do
             expect(PartitionRemoveHookProcessor).to receive(:collect).with(executions: 1)
             expect(PartitionRemoveHookProcessor).to receive(:collect).with(duration: be_present)
             expect(PartitionRemoveHookProcessor).to receive(:collect).with(errors: 1)
+            expect(PartitionRemoveHookProcessor).not_to receive(:collect).with(success: anything)
             subject
           end
         end

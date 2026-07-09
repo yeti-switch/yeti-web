@@ -37,7 +37,7 @@ module Jobs
 
       handle_compaction_candidate!(cdr_compaction_candidate)
     rescue Errno::ENOENT => e
-      # usually raised on hook execution
+      # safety net: hook start-up failures are handled at the Open3.capture3 call site below
       logger.error { "Partition removing hook failed #{self.class}: #{cdr_compaction_candidate&.name} - #{e.message}" }
       capture_error(e, extra: { partition_class: partition_class, model_class: model_class })
     rescue ActiveRecord::RecordNotDestroyed => e
@@ -70,13 +70,26 @@ module Jobs
       collect_prometheus_executions_metric!
       start_time = get_time
 
-      stdout, stderr, status = Open3.capture3(cmd)
+      begin
+        stdout, stderr, status = Open3.capture3(cmd)
+      rescue SystemCallError => e
+        # Open3 raises when the hook cannot be started at all: missing (ENOENT), not executable
+        # or a directory (EACCES). The run failed just as it does on a non-zero exit status, so it
+        # is counted the same way, and compaction of this table is skipped.
+        logger.error { "Cdr compaction hook failed to start: <#{e.class}> #{e.message}" }
+        collect_prometheus_errors_metric!
+        capture_error(e, extra: { table_name: candidate_table_name })
+        return false
+      ensure
+        collect_prometheus_duration_metric!(start_time)
+      end
+
       logger.info { "Partition remove hook stdout:\n#{stdout}" }
       logger.info { "Partition remove hook stderr:\n#{stderr}" }
-      collect_prometheus_duration_metric!(start_time)
 
       if status.success?
         logger.info { "Partition remove hook succeed, exit code: #{status.exitstatus}" }
+        collect_prometheus_success_metric!
         return true
       else
         logger.error { "Partition remove hook failed: #{status.exitstatus}. Stopping removing procedure" }
@@ -99,6 +112,10 @@ module Jobs
 
     def collect_prometheus_executions_metric!
       CdrCompactionHookProcessor.collect_executions_metric if PrometheusConfig.enabled?
+    end
+
+    def collect_prometheus_success_metric!
+      CdrCompactionHookProcessor.collect_success_metric if PrometheusConfig.enabled?
     end
 
     def collect_prometheus_errors_metric!

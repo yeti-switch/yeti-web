@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'prometheus_exporter/server'
-require_relative Rails.root.join('lib/prometheus/partition_remove_hook_collector')
+require_relative Rails.root.join('lib/prometheus/cdr_compaction_hook_collector')
 
-RSpec.describe PartitionRemoveHookCollector, '#metrics' do
+RSpec.describe CdrCompactionHookCollector, '#metrics' do
   subject { described_instance.metrics.map(&:metric_text).compact_blank.map { |metrics| metrics.split("\n") }.flatten }
 
   let(:described_instance) { described_class.new(labels) }
@@ -13,36 +13,36 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
   let(:metric_success) { { success: 1 } }
   let(:metric_errors) { { errors: 1 } }
   let(:metric_duration) { { duration: 13 } }
-  let(:expected_metric_executions_lines) { ['yeti_partition_removing_hook_executions{host="yeti-1"} 1'] }
-  let(:expected_metric_success_lines) { ['yeti_partition_removing_hook_success{host="yeti-1"} 1'] }
-  let(:expected_metric_errors_lines) { ['yeti_partition_removing_hook_errors{host="yeti-1"} 1'] }
-  let(:expected_metric_duarion_lines) { ['yeti_partition_removing_hook_duration{host="yeti-1"} 13'] }
-  let(:zero_metric_executions_lines) { ['yeti_partition_removing_hook_executions{host="yeti-1"} 0'] }
-  let(:zero_metric_success_lines) { ['yeti_partition_removing_hook_success{host="yeti-1"} 0'] }
-  let(:zero_metric_errors_lines) { ['yeti_partition_removing_hook_errors{host="yeti-1"} 0'] }
-  let(:zero_metric_duration_lines) { ['yeti_partition_removing_hook_duration{host="yeti-1"} 0'] }
+  let(:expected_metric_executions_lines) { ['yeti_cdr_compaction_hook_executions{host="yeti-1"} 1'] }
+  let(:expected_metric_success_lines) { ['yeti_cdr_compaction_hook_success{host="yeti-1"} 1'] }
+  let(:expected_metric_errors_lines) { ['yeti_cdr_compaction_hook_errors{host="yeti-1"} 1'] }
+  let(:expected_metric_duration_lines) { ['yeti_cdr_compaction_hook_duration{host="yeti-1"} 13'] }
+  let(:zero_metric_executions_lines) { ['yeti_cdr_compaction_hook_executions{host="yeti-1"} 0'] }
+  let(:zero_metric_success_lines) { ['yeti_cdr_compaction_hook_success{host="yeti-1"} 0'] }
+  let(:zero_metric_errors_lines) { ['yeti_cdr_compaction_hook_errors{host="yeti-1"} 0'] }
+  let(:zero_metric_duration_lines) { ['yeti_cdr_compaction_hook_duration{host="yeti-1"} 0'] }
 
   before { data.map { |obj| described_instance.collect(obj.deep_stringify_keys) } }
 
   context 'when metric_executions, metric_errors and metric_duration collected' do
     it 'responds with filled metric_executions, metric_errors and metric_duration' do
-      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duarion_lines)
+      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duration_lines)
     end
   end
 
   context 'with 2 metric_executions, 1 metric_errors and 1 metric_duration collected' do
     let(:data) { [metric_executions, metric_executions, metric_success, metric_errors, metric_duration] }
-    let(:expected_metric_executions_lines) { ['yeti_partition_removing_hook_executions{host="yeti-1"} 2'] }
+    let(:expected_metric_executions_lines) { ['yeti_cdr_compaction_hook_executions{host="yeti-1"} 2'] }
 
     it 'responds with filled metric_executions, metric_errors and metric_duration' do
-      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duarion_lines)
+      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duration_lines)
     end
   end
 
   context 'when metrics are fetched multiple times in a row' do
     it 'should NOT change counter for second call as there no new data collected' do
-      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duarion_lines)
-      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duarion_lines)
+      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duration_lines)
+      expect(subject).to match_array(expected_metric_executions_lines + expected_metric_success_lines + expected_metric_errors_lines + expected_metric_duration_lines)
     end
   end
 
@@ -76,10 +76,10 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
 
     it 'responds with unlabelled metrics' do
       expect(subject).to contain_exactly(
-        'yeti_partition_removing_hook_executions 1',
-        'yeti_partition_removing_hook_success 0',
-        'yeti_partition_removing_hook_errors 0',
-        'yeti_partition_removing_hook_duration 0'
+        'yeti_cdr_compaction_hook_executions 1',
+        'yeti_cdr_compaction_hook_success 0',
+        'yeti_cdr_compaction_hook_errors 0',
+        'yeti_cdr_compaction_hook_duration 0'
       )
     end
   end
@@ -89,7 +89,7 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
 
     it 'resolves them from PrometheusConfig, matching the client custom_labels' do
       allow(PrometheusConfig).to receive(:default_labels).and_return({ host: :'yeti-2' })
-      expect(subject.metrics.map(&:metric_text)).to include('yeti_partition_removing_hook_executions{host="yeti-2"} 0')
+      expect(subject.metrics.map(&:metric_text)).to include('yeti_cdr_compaction_hook_executions{host="yeti-2"} 0')
     end
   end
 end
