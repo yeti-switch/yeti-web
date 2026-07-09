@@ -70,7 +70,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
     fill_in_tom_select 'Account', with: account.display_name, search: true
     fill_in_tom_select 'Routing group', with: routing_group.display_name
     fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
-    fill_in_tom_select 'Gateway', with: gateway.display_name
+    fill_in_tom_select 'Gateway', with: gateway.display_name, search: true
     fill_in_tom_select 'Currency', with: currency.name
   end
 
@@ -164,7 +164,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
       fill_in_tom_select 'Account', with: account.display_name, search: true
       fill_in_tom_select 'Routing group', with: routing_group.display_name
       fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
-      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name, search: true
       fill_in_tom_select 'Currency', with: currency.name
     end
 
@@ -196,8 +196,8 @@ RSpec.describe 'Create new Dialpeer', js: true do
       fill_in_tom_select 'Account', with: account.display_name, search: true
       fill_in_tom_select 'Routing group', with: routing_group.display_name
       fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
-      fill_in_tom_select 'Gateway', with: gateway.display_name
-      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Gateway', with: gateway.display_name, search: true
+      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name, search: true
       fill_in_tom_select 'Currency', with: currency.name
     end
 

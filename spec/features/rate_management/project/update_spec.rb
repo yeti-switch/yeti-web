@@ -14,7 +14,7 @@ RSpec.describe 'Rate Management Project Update', js: true, bullet: [:n] do
   let(:fill_form!) do
     fill_in 'Name', with: new_name
     clear_tom_select 'Gateway'
-    fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
+    fill_in_tom_select 'Gateway Group', with: gateway_group.display_name, search: true
     tom_select_deselect_values 'Routing Tags', values: record.routing_tags.map(&:name)
   end
 
@@ -40,7 +40,7 @@ RSpec.describe 'Rate Management Project Update', js: true, bullet: [:n] do
       fill_in_tom_select 'Account', with: another_project.account.name, search: true
       fill_in_tom_select 'Routing group', with: another_project.routing_group.name
       fill_in_tom_select 'Routeset discriminator', with: another_project.routeset_discriminator.name
-      fill_in_tom_select 'Gateway', with: another_gateway.name
+      fill_in_tom_select 'Gateway', with: another_gateway.name, search: true
     end
     let!(:another_project) do
       FactoryBot.create(:rate_management_project, :filled)

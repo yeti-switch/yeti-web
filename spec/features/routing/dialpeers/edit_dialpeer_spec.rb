@@ -183,7 +183,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway' do
         let(:fill_form!) do
           super()
-          fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true
+          fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true, search: true
         end
 
         it 'updates correctly' do
@@ -213,7 +213,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway_group' do
         let(:fill_form!) do
           super()
-          fill_in_tom_select 'Gateway Group', with: gateway_group.name
+          fill_in_tom_select 'Gateway Group', with: gateway_group.name, search: true
         end
 
         it 'updates correctly' do

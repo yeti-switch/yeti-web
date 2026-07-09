@@ -24,7 +24,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
       fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
       fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
       fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
-      fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
+      fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name, search: true
     end
 
     let(:new_attrs) do
@@ -65,7 +65,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
         fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
         fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
         fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
-        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
+        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name, search: true
         fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
         fill_in_tom_select 'Routing Tags', with: new_attrs[:routing_tags].first.name, multiple: true
         fill_in_tom_select 'Routing Tags', with: new_attrs[:routing_tags].second.name, multiple: true
@@ -182,7 +182,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
         fill_in_tom_select 'Account', with: new_attrs[:account].name, search: true
         fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
         fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
-        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
+        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name, search: true
         fill_in_tom_select 'Routing Tags', with: routing_tags.third.name, multiple: true
         fill_in_tom_select 'Routing Tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
         fill_in_tom_select 'Routing Tags', with: routing_tags.first.name, multiple: true
