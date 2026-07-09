@@ -138,7 +138,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
     let!(:account) { FactoryBot.create(:account, contractor: vendor) }
     let(:fill_form!) do
       fill_in_tom_select 'Vendor', with: vendor.name, search: true
-      fill_in_tom_select 'Account', with: account.name, search: true
+      select_tom_select_by_value 'Account', { account.id => account.name }
     end
 
     it 'does not update dialpeer' do
@@ -183,7 +183,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway' do
         let(:fill_form!) do
           super()
-          fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true
+          select_tom_select_by_value 'Gateway', { gateway.id => gateway.name }, exact_label: true
         end
 
         it 'updates correctly' do
@@ -213,7 +213,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway_group' do
         let(:fill_form!) do
           super()
-          fill_in_tom_select 'Gateway Group', with: gateway_group.name
+          select_tom_select_by_value 'Gateway Group', { gateway_group.id => gateway_group.name }
         end
 
         it 'updates correctly' do
