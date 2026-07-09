@@ -124,7 +124,49 @@ RSpec.describe Jobs::CdrCompaction, '#call' do
           it 'should collect Prometheus metrics' do
             expect(CdrCompactionHookProcessor).to receive(:collect).with(executions: 1)
             expect(CdrCompactionHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(success: 1)
             expect(CdrCompactionHookProcessor).not_to receive(:collect).with(errors: anything)
+            subject
+          end
+        end
+
+        context 'when hook binary is missing' do
+          let(:cdr_compaction_hook) { '/nonexistent/cdr_compaction_hook' }
+
+          it 'should not manage old cdrs' do
+            expect { subject }.not_to change { Cdr::Cdr.count }
+          end
+
+          it 'should collect Prometheus metrics, counting the crash as an error' do
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(executions: 1)
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(errors: 1)
+            expect(CdrCompactionHookProcessor).not_to receive(:collect).with(success: anything)
+            subject
+          end
+        end
+
+        context 'when hook is not executable' do
+          let(:non_executable_hook) do
+            file = Tempfile.new('cdr_compaction_hook')
+            file.write("#!/bin/sh\nexit 0\n")
+            file.close
+            File.chmod(0o644, file.path)
+            file
+          end
+          let(:cdr_compaction_hook) { non_executable_hook.path }
+
+          after { non_executable_hook.unlink }
+
+          it 'should not manage old cdrs' do
+            expect { subject }.not_to change { Cdr::Cdr.count }
+          end
+
+          it 'should collect Prometheus metrics, counting the failure to start as an error' do
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(executions: 1)
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(duration: be_present)
+            expect(CdrCompactionHookProcessor).to receive(:collect).with(errors: 1)
+            expect(CdrCompactionHookProcessor).not_to receive(:collect).with(success: anything)
             subject
           end
         end
@@ -155,6 +197,7 @@ RSpec.describe Jobs::CdrCompaction, '#call' do
             expect(CdrCompactionHookProcessor).to receive(:collect).with(executions: 1)
             expect(CdrCompactionHookProcessor).to receive(:collect).with(duration: be_present)
             expect(CdrCompactionHookProcessor).to receive(:collect).with(errors: 1)
+            expect(CdrCompactionHookProcessor).not_to receive(:collect).with(success: anything)
 
             subject
           end

@@ -23,8 +23,8 @@ class YetiScheduler < Scheduler::Base
   end
   ConnectionsMiddleware = Class.new(Scheduler::Middleware::Base) do
     def call(options)
-      ApplicationRecord.connection_pool.connection
-      Cdr::Base.connection_pool.connection
+      ApplicationRecord.connection_pool.lease_connection
+      Cdr::Base.connection_pool.lease_connection
       app.call(options)
       ApplicationRecord.connection_pool.release_connection
       Cdr::Base.connection_pool.release_connection

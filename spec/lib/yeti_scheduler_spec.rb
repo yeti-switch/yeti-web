@@ -116,8 +116,8 @@ RSpec.describe YetiScheduler do
     let!(:time_double) { instance_double(EtOrbi::EoTime) }
 
     before do
-      expect(ApplicationRecord.connection_pool).to receive(:connection).once.ordered
-      expect(Cdr::Base.connection_pool).to receive(:connection).once.ordered
+      expect(ApplicationRecord.connection_pool).to receive(:lease_connection).once.ordered
+      expect(Cdr::Base.connection_pool).to receive(:lease_connection).once.ordered
 
       # We stubbing active record model because we required to stub connection_pool connect/release.
       # Without such stubs tests wil break.

@@ -56,14 +56,26 @@ module Jobs
         logger.info { "Running partition removing hook: #{cmd}" }
         collect_prometheus_executions_metric!
 
-        return_value, sout, serr = execute_cmd(cmd)
+        begin
+          return_value, sout, serr = execute_cmd(cmd)
+        rescue SystemCallError => e
+          # Open3 raises when the hook cannot be started at all: missing (ENOENT), not executable
+          # or a directory (EACCES). The run failed just as it does on a non-zero exit status, so it
+          # is counted the same way, and the remaining tables are still processed.
+          logger.error { "Partition remove hook failed to start: <#{e.class}> #{e.message}" }
+          collect_prometheus_errors_metric!
+          capture_error(e, extra: { partition_class: partition_class.name, model_class: model_class.name })
+          return
+        ensure
+          collect_prometheus_duration_metric!(start_time)
+        end
 
         logger.info { "Partition remove hook stdout:\n#{sout}" }
         logger.info { "Partition remove hook stderr:\n#{serr}" }
-        collect_prometheus_duration_metric!(start_time)
 
         if return_value.success?
           logger.info { "Partition remove hook succeed, exit code: #{return_value.exitstatus}" }
+          collect_prometheus_success_metric!
         else
           logger.error { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
           collect_prometheus_errors_metric!
@@ -73,7 +85,7 @@ module Jobs
 
       cdr_remove_candidate.destroy!
     rescue Errno::ENOENT => e
-      # usually raised on hook execution
+      # safety net: hook start-up failures are handled at the execute_cmd call site above
       logger.error { "Partition removing hook failed #{self.class}: {#{table_name}} #{cdr_remove_candidate&.name} - #{e.message}" }
       capture_error(e, extra: { partition_class: partition_class, model_class: model_class })
     rescue ActiveRecord::RecordNotDestroyed => e
@@ -87,6 +99,10 @@ module Jobs
 
     def collect_prometheus_executions_metric!
       PartitionRemoveHookProcessor.collect_executions_metric if PrometheusConfig.enabled?
+    end
+
+    def collect_prometheus_success_metric!
+      PartitionRemoveHookProcessor.collect_success_metric if PrometheusConfig.enabled?
     end
 
     def collect_prometheus_errors_metric!
