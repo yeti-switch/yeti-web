@@ -28,7 +28,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     def scoped_collection
       # preload invoice_document WITHOUT its (large) pdf_data blob — a boolean is
       # enough to decide whether to show the index download icon
-      super.preload(:contractor, :account, :invoice_document_summary)
+      super.preload(:contractor, :account, :currency, :invoice_document_summary)
     end
   end
 
@@ -51,6 +51,24 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     flash[:error] = e.message
   ensure
     redirect_back fallback_location: root_path
+  end
+
+  # Changing the reference is a dedicated action rather than a generic resource
+  # update: it is the only mutable field on a (pending) invoice. Authorization
+  # goes through InvoicePolicy#change_reference? (aliased to #update?, pending-only).
+  member_action :change_reference, method: :post do
+    resource.update!(reference: params[:reference])
+    # The reference is printed on the PDF, so regenerate it by default; the modal
+    # checkbox lets the admin opt out. Guarded by regenerate_document_allowed?
+    # (pending-only) for parity with the standalone regenerate action.
+    if ActiveModel::Type::Boolean.new.cast(params[:regenerate_pdf]) && resource.regenerate_document_allowed?
+      resource.regenerate_document
+    end
+    flash[:notice] = 'Invoice reference was updated'
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+  ensure
+    redirect_to action: :show
   end
 
   member_action :regenerate_document, method: :post do
@@ -87,12 +105,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   action_item :regenerate_documents, only: :show do
-    link_to('Regenerate documents', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
+    link_to('Rebuild PDF', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
   end
 
   action_item :documents, only: :show do
     if resource.invoice_document.present?
-      link_to('Document (PDF format)', export_file_pdf_invoice_path(resource.id), method: :get)
+      link_to('Download PDF', export_file_pdf_invoice_path(resource.id), method: :get)
     end
   end
 
@@ -100,7 +118,31 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     link_to('Approve', approve_invoice_path(resource.id), method: :post) if resource.approvable?
   end
 
-  index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
+  # Reference is edited via a modal dialog (modal_link.js) instead of a separate
+  # edit form. Only offered for pending invoices the current admin may change.
+  # data-values prefills the current reference so clicking OK can't blank it.
+  action_item :change_reference, only: :show do
+    if authorized?(:change_reference, resource)
+      link_to 'Change Reference',
+              change_reference_invoice_path(resource),
+              class: 'modal-link',
+              data: {
+                method: :post,
+                confirm: 'Change Reference',
+                inputs: { reference: :text, regenerate_pdf: :checkbox }.to_json,
+                values: { reference: resource.reference, regenerate_pdf: true }.to_json,
+                labels: { regenerate_pdf: 'Rebuild PDF' }.to_json
+              }
+    end
+  end
+
+  # Footer helpers: render one line per currency (amounts in different currencies
+  # can't be summed, so every money/count/duration total is grouped by currency).
+  money_footer = ->(attr) { -> { @footer_data.each { |d| div { strong { d.money_format(attr) } } } } }
+  int_footer = ->(attr) { -> { @footer_data.each { |d| div { strong { d.public_send(attr).to_i } } } } }
+  dur_footer = ->(attr) { -> { @footer_data.each { |d| div { strong { d.time_format_min(attr) } } } } }
+
+  index footer_data: ->(collection) { collection.totals_per_currency.map { |t| BillingDecorator.new(t) } } do
     selectable_column
     column(:id, sortable: :id) do |inv|
       parts = [link_to(inv.id, resource_path(inv), class: 'resource_id_link')]
@@ -127,126 +169,58 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     column :start_date
     column :end_date
     column :amount_total, footer: lambda {
-      strong do
-        @footer_data.money_format :total_amount_total
+      @footer_data.each do |d|
+        div do
+          status_tag(d.currency_name)
+          text_node ' '
+          strong { d.money_format(:total_amount_total) }
+        end
       end
     } do |c|
-      strong do
-        c.decorated_amount_total
-      end
+      status_tag(c.currency&.name)
+      text_node ' '
+      strong { c.decorated_amount_total }
     end
-    column :amount_spent, footer: lambda {
-      strong do
-        @footer_data.money_format :total_amount_spent
-      end
-    } do |c|
-      strong do
-        c.decorated_amount_spent
-      end
+    column :amount_spent, footer: money_footer.call(:total_amount_spent) do |c|
+      strong { c.decorated_amount_spent }
     end
-    column :amount_earned, footer: lambda {
-      strong do
-        @footer_data.money_format :total_amount_earned
-      end
-    } do |c|
-      strong do
-        c.decorated_amount_earned
-      end
+    column :amount_earned, footer: money_footer.call(:total_amount_earned) do |c|
+      strong { c.decorated_amount_earned }
     end
 
-    column :originated_amount_spent, footer: lambda {
-      strong do
-        @footer_data.money_format :total_originated_amount_spent
-      end
-    } do |c|
-      strong do
-        c.decorated_originated_amount_spent
-      end
+    column :originated_amount_spent, footer: money_footer.call(:total_originated_amount_spent) do |c|
+      strong { c.decorated_originated_amount_spent }
     end
-    column :originated_amount_earned, footer: lambda {
-      strong do
-        @footer_data.money_format :total_originated_amount_earned
-      end
-    } do |c|
-      strong do
-        c.decorated_originated_amount_earned
-      end
+    column :originated_amount_earned, footer: money_footer.call(:total_originated_amount_earned) do |c|
+      strong { c.decorated_originated_amount_earned }
     end
 
-    column :terminated_amount_spent, footer: lambda {
-      strong do
-        @footer_data.money_format :total_terminated_amount_spent
-      end
-    } do |c|
-      strong do
-        c.decorated_terminated_amount_spent
-      end
+    column :terminated_amount_spent, footer: money_footer.call(:total_terminated_amount_spent) do |c|
+      strong { c.decorated_terminated_amount_spent }
     end
-    column :terminated_amount_earned, footer: lambda {
-      strong do
-        @footer_data.money_format :total_terminated_amount_earned
-      end
-    } do |c|
-      strong do
-        c.decorated_terminated_amount_earned
-      end
+    column :terminated_amount_earned, footer: money_footer.call(:total_terminated_amount_earned) do |c|
+      strong { c.decorated_terminated_amount_earned }
     end
 
-    column :originated_calls_count, footer: lambda {
-      strong do
-        @footer_data.total_originated_calls_count.to_i
-      end
-    }
-    column :terminated_calls_count, footer: lambda {
-      strong do
-        @footer_data.total_terminated_calls_count.to_i
-      end
-    }
-    column :originated_calls_duration, footer: lambda {
-      strong do
-        @footer_data.time_format_min :total_originated_calls_duration
-      end
-    }, &:decorated_originated_calls_duration
-    column :terminated_calls_duration, footer: lambda {
-      strong do
-        @footer_data.time_format_min :total_terminated_calls_duration
-      end
-    }, &:decorated_terminated_calls_duration
+    column :originated_calls_count, footer: int_footer.call(:total_originated_calls_count)
+    column :terminated_calls_count, footer: int_footer.call(:total_terminated_calls_count)
+    column :originated_calls_duration, footer: dur_footer.call(:total_originated_calls_duration),
+                                       &:decorated_originated_calls_duration
+    column :terminated_calls_duration, footer: dur_footer.call(:total_terminated_calls_duration),
+                                       &:decorated_terminated_calls_duration
 
-    column :originated_billing_duration, footer: lambda {
-      strong do
-        @footer_data.time_format_min :total_originated_billing_duration
-      end
-    }, &:decorated_originated_billing_duration
-    column :originated_terminated_duration, footer: lambda {
-      strong do
-        @footer_data.time_format_min :total_terminated_billing_duration
-      end
-    }, &:decorated_terminated_billing_duration
+    column :originated_billing_duration, footer: dur_footer.call(:total_originated_billing_duration),
+                                         &:decorated_originated_billing_duration
+    column :originated_terminated_duration, footer: dur_footer.call(:total_terminated_billing_duration),
+                                            &:decorated_terminated_billing_duration
 
-    column :services_amount_spent, footer: lambda {
-      strong do
-        @footer_data.money_format :total_services_amount_spent
-      end
-    } do |c|
-      strong do
-        c.decorated_services_amount_spent
-      end
+    column :services_amount_spent, footer: money_footer.call(:total_services_amount_spent) do |c|
+      strong { c.decorated_services_amount_spent }
     end
-    column :terminated_amount_earned, footer: lambda {
-      strong do
-        @footer_data.money_format :total_services_amount_earned
-      end
-    } do |c|
-      strong do
-        c.decorated_services_amount_earned
-      end
+    column :services_amount_earned, footer: money_footer.call(:total_services_amount_earned) do |c|
+      strong { c.decorated_services_amount_earned }
     end
-    column :services_transactions_count, footer: lambda {
-      strong do
-        @footer_data.total_service_transactions_count.to_i
-      end
-    }
+    column :services_transactions_count, footer: int_footer.call(:total_service_transactions_count)
 
     column :created_at
     column 'UUID', :uuid
@@ -257,6 +231,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   filter :reference
   contractor_filter :contractor_id_eq
   account_filter :account_id_eq
+  # currencies live in the primary DB, so filter on the scalar currency_id column
+  # (no cross-DB join like a `filter :currency` association would need).
+  filter :currency_id,
+         as: :select,
+         collection: -> { Billing::Currency.order(:name).pluck(:name, :id) },
+         input_html: { class: 'tom-select' }
   filter :state
   filter :type
   filter :start_date, as: :date_time_range
@@ -546,13 +526,13 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     end
   end
 
-  permit_params :contractor_id,
-                :account_id,
-                :start_date,
-                :end_date
+  # Only manual-invoice creation goes through the resource form; the reference is
+  # changed via the dedicated change_reference member action.
+  permit_params :contractor_id, :account_id, :start_date, :end_date
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
+
     f.inputs form_title do
       f.contractor_input :contractor_id
       f.account_input :account_id,

@@ -36,6 +36,7 @@
 #  created_at                        :timestamptz      not null
 #  account_id                        :integer(4)       not null
 #  contractor_id                     :integer(4)
+#  currency_id                       :integer(2)       not null
 #  state_id                          :integer(2)       default(3), not null
 #  type_id                           :integer(2)       not null
 #
@@ -69,6 +70,10 @@ class Billing::Invoice < Cdr::Base
     :total_service_transactions_count
   )
 
+  # Same totals, tagged with a currency name — one row per currency, since money
+  # amounts in different currencies cannot be summed together.
+  CurrencyTotals = Struct.new(:currency_name, *Totals.members)
+
   class << self
     def totals
       row = extending(ActsAsTotalsRelation).totals_row_by(
@@ -92,6 +97,19 @@ class Billing::Invoice < Cdr::Base
       Totals.new(*row)
     end
 
+    # Per-currency totals: same aggregates as #totals but grouped by currency_id,
+    # one CurrencyTotals per currency. Currencies live in the primary DB, so we
+    # group by currency_id in the CDR DB and resolve names in Ruby (no SQL join).
+    def totals_per_currency
+      sums = Totals.members.map { |m| "sum(#{m.to_s.delete_prefix('total_')})" }
+      rows = except(:preload, :includes, :eager_load, :limit, :offset, :select, :order)
+             .group(:currency_id)
+             .pluck(Arel.sql((['currency_id'] + sums).join(', ')))
+      names = Billing::Currency.where(id: rows.filter_map(&:first)).pluck(:id, :name).to_h
+      rows.map { |row| CurrencyTotals.new(names[row.first] || row.first&.to_s, *row.drop(1)) }
+          .sort_by { |t| t.currency_name.to_s }
+    end
+
     def last_end_date(account_id:)
       Billing::Invoice.where(account_id: account_id).order('end_date desc').limit(1).pick(:end_date)
     end
@@ -112,6 +130,11 @@ class Billing::Invoice < Cdr::Base
 
   belongs_to :account, class_name: 'Account', foreign_key: 'account_id'
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id, optional: true # , :conditions => {:customer => true}act
+  # Currencies live in the primary DB while invoices live in the CDR DB, so this
+  # is a cross-DB association (read-only join is not possible; presence is
+  # enforced in the model + a NOT NULL column, not a cross-DB FK). optional:true
+  # skips the association-presence load; currency_id presence is validated below.
+  belongs_to :currency, class_name: 'Billing::Currency', optional: true
 
   has_one :invoice_document, dependent: :destroy
   # Projection of invoice_document for listings: excludes the (large) pdf_data
@@ -149,6 +172,11 @@ class Billing::Invoice < Cdr::Base
             :terminated_calls_count,
             :terminated_calls_duration,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  # Copy the currency from the account on creation; it is fixed thereafter.
+  before_validation :set_currency_from_account, on: :create
+  validates :currency_id, presence: true
+  validates :currency_id, readonly: true, on: :update
 
   scope :approved, -> { where state_id: Billing::InvoiceState::APPROVED }
   scope :pending, -> { where state_id: Billing::InvoiceState::PENDING }
@@ -193,6 +221,10 @@ class Billing::Invoice < Cdr::Base
   end
 
   private
+
+  def set_currency_from_account
+    self.currency_id ||= account&.currency_id
+  end
 
   def validate_dates
     errors.add(:start_date, :blank) if start_date.blank?
