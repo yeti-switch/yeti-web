@@ -5,11 +5,17 @@
 # This significantly reduces memory usage compared to `rake cdr_processor`.
 #
 # Usage:
-#   bin/cdr_processor <processor_name> [config_file]
+#   bin/cdr_processor <processor_name> [config_file] [--check]
 #
 # Examples:
 #   bin/cdr_processor cdr_billing
 #   bin/cdr_processor cdr_billing config/cdr_processors.yml
+#
+# With --check the worker boots the full require chain, instantiates the
+# configured processor and forces resolution of its lazily-referenced
+# dependencies (e.g. HttpxProxy, which lives in app/lib and is NOT autoloaded
+# here), then exits 0 without connecting to AMQP or entering the processing
+# loop. Used as a boot smoke test / deploy healthcheck.
 
 require 'bundler/setup'
 require 'active_record'
@@ -22,6 +28,9 @@ require 'yaml'
 require 'erb'
 require 'logger'
 require 'json'
+
+# --check may appear in any position; strip it before reading positional args.
+check_only = !ARGV.delete('--check').nil? || ENV['CDR_PROCESSOR_CHECK'] == '1'
 
 processor_name = ARGV[0] || ENV.fetch('processor', nil)
 config_file = ARGV[1] || ENV.fetch('config_file', nil)
@@ -76,7 +85,11 @@ CdrProcessor::PrimaryDb.establish_connection(primary_db_config)
 # Extend CdrDb with PGQ API
 CdrProcessor::CdrDb.extend(CdrProcessor::Api)
 
-# Load processor implementations
+# Load processor implementations. HttpxProxy lives in app/lib and is normally
+# resolved by Rails autoloading, which this standalone worker does not set up,
+# so require it explicitly by full path before the HTTP processors that use it.
+require File.join(ROOT_PATH, 'app/lib/httpx_proxy')
+
 require 'cdr_processor/processors/cdr_billing'
 require 'cdr_processor/processors/cdr_stat'
 require 'cdr_processor/processors/cdr_http_base'
@@ -112,6 +125,15 @@ raise "Missing 'class' in config section '#{processor_name}'" if class_name.blan
 
 processor_class = "CdrProcessor::Processors::#{class_name.camelize}".constantize
 processor = processor_class.new(logger, processor_config['queue'], processor_config['consumer'], processor_config)
+
+# Boot check: force resolution of dependencies referenced lazily inside the
+# processor (e.g. the HTTP processors' #proxy -> HttpxProxy), which a plain
+# require chain would not surface, then exit without running the loop.
+if check_only
+  processor.send(:proxy) if processor.respond_to?(:proxy, true)
+  logger.info "check passed for #{prog_name}"
+  exit 0
+end
 
 # Prometheus metrics (optional)
 prometheus = nil

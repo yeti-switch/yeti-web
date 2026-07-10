@@ -1,0 +1,21 @@
+# Minimal config used only by spec/bin/cdr_processor_spec.rb to smoke-test that
+# the standalone worker boots each HTTP processor with every constant resolved.
+# mode: test binds to the test DB config; the connection is lazy, so --check
+# never issues a query.
+cdr_http:
+  mode: test
+  class: cdr_http
+  queue: cdr_billing
+  consumer: cdr_billing
+  url: "http://example.com/api/cdrs"
+  method: POST
+  cdr_fields: all
+
+cdr_http_batch:
+  mode: test
+  class: cdr_http_batch
+  queue: cdr_billing
+  consumer: cdr_billing
+  url: "http://example.com/api/cdrs"
+  method: POST
+  cdr_fields: all
