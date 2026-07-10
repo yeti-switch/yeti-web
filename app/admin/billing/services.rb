@@ -45,7 +45,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   includes :type, :account
 
   filter :id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   filter :name
   account_filter :account_id_eq
   filter :type_id,
@@ -62,7 +62,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
          collection: Billing::Service::STATES.invert
   filter :initial_price
   filter :renew_price
-  filter :renew_at, as: :date_time_range
+  filter :renew_at, as: :date_range
   filter :uuid_equals, label: 'UUID'
 
   scope :all, default: true
@@ -139,7 +139,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
       f.input :renew_price
 
       if f.object.new_record?
-        f.input :renew_at, as: :date_time_picker
+        f.input :renew_at, as: :datetime_picker
         f.input :renew_period_id,
                 as: :select,
                 input_html: { class: 'tom-select' },

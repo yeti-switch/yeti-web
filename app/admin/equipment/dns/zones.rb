@@ -53,6 +53,6 @@ ActiveAdmin.register Equipment::Dns::Zone do
       row :retry
       row :serial
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

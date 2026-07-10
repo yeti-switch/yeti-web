@@ -1,0 +1,133 @@
+// Design tokens: the ActiveAdmin 3 palette, formerly supplied by the
+// `active_admin_theme` gem (removed during the ActiveAdmin 4 upgrade).
+//
+// This is the single source of truth for yeti's admin colours. ActiveAdmin 4
+// hard-codes Tailwind utilities for its chrome (in the gem's plugin.js and in
+// our view overrides); `yeti_admin.css.scss` re-points that chrome at these
+// variables. Change a colour here, not in the markup.
+//
+// Values are lifted verbatim from the theme's resolved palette:
+//   - defaults from wigu/active_admin_theme.scss ($skin* !default)
+//   - yeti's overrides from the old app/assets/stylesheets/themes/variables.scss
+
+// Dark-mode scope helper.
+//
+// ActiveAdmin 4 decides dark mode itself: the inline script in
+// active_admin/_html_head adds `.dark` to <html> when localStorage.theme is
+// 'dark', or when nothing is stored and the OS prefers dark. So `html.dark` is
+// authoritative, and keying off [data-theme] / prefers-color-scheme (as this
+// file did while it was AA3-shaped) meant the dark palette never applied.
+//
+// `yeti/tom-select-customizations.scss` declares its own copy (`ts-dark`)
+// because it compiles as a separate asset and cannot see this one.
+// Root-form on purpose: callers use it at the top level (`@include aa-dark { .hljs {} }`),
+// where `html.dark &` would be an illegal parent-selector reference.
+@mixin aa-dark {
+  html.dark {
+    @content;
+  }
+}
+
+:root {
+  // Render native controls (checkboxes, radios, selects, scrollbars) light.
+  color-scheme: light;
+
+  // --- content surfaces (mode-dependent) ---
+  --aa-page-bg:           #f7f9fb;
+  --aa-surface:           #ffffff;   // panels / cards / table body
+  --aa-surface-2:         #f0f2f5;   // table headers / zebra striping / subtle fills
+  --aa-surface-hover:     #f5f7fa;   // row / item hover
+  --aa-text:              #323537;
+  --aa-text-muted:        #6b7177;
+  --aa-border:            #e0e4e9;
+  --aa-input-bg:          #ffffff;
+  --aa-input-border:      #c9ced4;
+  --aa-link:              #38678b;
+  // The theme's default was a red #e06c6c in dark mode; yeti pinned delete links
+  // to the ordinary link colour in both modes ($skinDeleteLinkColorDark: $skinLinkColorDark).
+  --aa-delete-link:       var(--aa-link);
+  --aa-accent:            #5ea3d3;   // $skinMainSecondColor
+  --aa-inactive-tab-text: #5e6469;
+  --aa-active-tab-text:   #5ea3d3;   // $skinActiveTabTextColor
+  --aa-tab-inactive:      var(--aa-page-bg); // $skinTabInactiveColor
+  --aa-table-header-text: #5e6469;
+
+  --aa-panel-header:      var(--aa-page-bg);
+  --aa-panel-header-text: var(--aa-inactive-tab-text);
+  --aa-label-text:        #8494a8;   // $skinLabelColor (form + filter labels)
+
+  // Index toolbar. AA3 kept these separate from --aa-surface so each control
+  // could be retinted on its own; they all default to the surface colour.
+  --aa-table-tool-button:        var(--aa-surface);
+  --aa-table-tool-scope:         var(--aa-surface);
+  --aa-table-tool-batch-actions: var(--aa-surface);
+  --aa-table-tool-selected:      var(--aa-surface-2); // current scope
+
+  // --- type scale -------------------------------------------------------------
+  // ActiveAdmin 3 had a single knob: `body.active_admin { font-size: 72% }` = an
+  // 11.52px base that every component sized itself against in `em`.
+  //
+  // ActiveAdmin 4 has none. Each component's size comes from a Tailwind utility
+  // baked into the gem's plugin.js, which compiles to a variable reference —
+  // `.formtastic { font-size: var(--text-sm) }`, `.data-table th { var(--text-xs) }`.
+  // Overriding the variables here re-points every one of them at once (13 uses of
+  // --text-sm in the built CSS, 5 of --text-xs, 4 of --text-lg), without patching
+  // the gem or rebuilding Tailwind.
+  //
+  // This is the DEFAULT, not the whole scale: AA4 uses `text-sm` for the index
+  // table, status tags and filter labels alike, which yeti renders at 12/11/10px,
+  // so those keep explicit overrides in yeti_admin.css.scss. What the tokens buy
+  // is that anything nobody has styled yet — show-page attributes tables, dropdown
+  // menus, scope counts, and whatever the next AA4 beta adds — lands on yeti's
+  // scale instead of the gem's 14px.
+  //
+  // Do NOT reach for `html { font-size: … }` instead: Tailwind v4's spacing scale
+  // is rem-based too (`--spacing: .25rem`, 204 uses), so it would shrink every
+  // padding and gap while the chrome's px heights stayed put.
+  --text-sm: 13px;
+  --text-xs: 10px;
+  --text-lg: 15px;
+
+  // Corner rounding. AA3's $skinBorderRadius; ActiveAdmin 4 uses 6px
+  // (Tailwind's `rounded-md`) throughout. Status tags keep their own 2px.
+  --aa-radius: 4px;
+
+  // Form control height. ActiveAdmin 3 rendered 29px: core's `padding: 8px 10px 7px`
+  // + 1px borders + a 0.95em line box, where the em resolves against
+  // `body.active_admin { font-size: 72% }` = 11.52px, i.e. a 10.94px font.
+  // (Measuring that rule against a 14px base wrongly gives 32px.)
+  // ActiveAdmin 4 renders 38px (py-2, 14px type).
+  --aa-input-height: 29px;
+
+  // --- header chrome (mode-INDEPENDENT: AA3's header was dark in both modes) ---
+  --aa-header-bg:              #23282f; // $skinMainFirstColor
+  --aa-menu-text:              #dfe2e6;
+  --aa-menu-pill:              #2e3236; // current/hover top-level pill
+  --aa-menu-pill-text:         #6cb0de;
+  --aa-menu-panel:             #2e3236; // dropdown panel background
+  --aa-menu-item-hover:        #3f454c;
+  --aa-menu-item-hover-text:   #6cb0de;
+  --aa-titlebar:               #343c46; // page header bar
+  --aa-titlebar-text:          #ffffff;
+}
+
+@include aa-dark {
+  color-scheme: dark;
+
+  --aa-page-bg:           #1a1d21;
+  --aa-surface:           #24272c;
+  --aa-surface-2:         #2c3036;
+  --aa-surface-hover:     #30353b;
+  --aa-text:              #d7dbe0;
+  --aa-text-muted:        #9aa0a6;
+  --aa-border:            #3a3f45;
+  --aa-input-bg:          #2c3036;
+  --aa-input-border:      #454b52;
+  --aa-link:              #6cb0de;
+  --aa-accent:            #5ea3d3;
+  --aa-inactive-tab-text: #9aa0a6;
+  --aa-active-tab-text:   #6cb0de;
+  --aa-tab-inactive:      var(--aa-page-bg);
+  --aa-table-header-text: #d7dbe0;
+  --aa-label-text:        var(--aa-text); // $skinLabelColorDark: $skinTextColorDark
+}

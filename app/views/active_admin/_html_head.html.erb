@@ -1,0 +1,29 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+    Carries what `config.meta_tags` / `config.register_stylesheet` used to do in
+    the initializer before ActiveAdmin 4 removed them. %>
+<%= stylesheet_link_tag "active_admin" %>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%# Rails Time.zone (IANA name), read by app/assets/javascripts/charts.js so JS
+    charts label times in the same zone as the server-rendered text. %>
+<meta name="yeti-timezone" content="<%= Time.zone.tzinfo.name %>">
+
+<% # On page load or when changing themes, best to add inline in `head` to avoid FOUC %>
+<%= javascript_tag nonce: true do %>
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+<% end %>
+<%= javascript_importmap_tags "active_admin", importmap: ActiveAdmin.importmap %>
+
+<%# Yeti's own sprockets bundles. yeti_admin.* were named active_admin.* under
+    ActiveAdmin 3; they are renamed so they cannot shadow the gem's own
+    `active_admin` asset (the importmap pins `active_admin` -> active_admin.js). %>
+<%= stylesheet_link_tag "yeti_admin" %>
+<%= stylesheet_link_tag "yeti/yeti" %>
+<%= stylesheet_link_tag "tom-select-rails/css/tom-select" %>
+<%= javascript_include_tag "yeti_admin" %>

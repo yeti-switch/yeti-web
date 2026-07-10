@@ -40,7 +40,7 @@ ActiveAdmin.register Report::VendorTrafficScheduler, as: 'VendorTrafficScheduler
   end
 
   filter :id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   show do |_s|

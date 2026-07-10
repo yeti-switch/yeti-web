@@ -34,32 +34,32 @@ module ResourceDSL
 
       action_item :create_new_once, only: [:index] do
         if authorized?(:batch_insert)
-          link_to 'Create new ones', action: :batch_insert unless Importing::ImportingDelayedJob.jobs?
+          action_item_link 'Create new ones', action: :batch_insert unless Importing::ImportingDelayedJob.jobs?
         end
       end
 
       action_item :create_and_update, only: [:index] do
         if authorized?(:batch_replace)
-          link_to 'Create and update ', action: :batch_replace unless Importing::ImportingDelayedJob.jobs?
+          action_item_link 'Create and update ', action: :batch_replace unless Importing::ImportingDelayedJob.jobs?
         end
       end
 
       action_item :only_update, only: [:index] do
         if authorized?(:batch_update)
-          link_to 'Only update', action: :batch_update unless Importing::ImportingDelayedJob.jobs?
+          action_item_link 'Only update', action: :batch_update unless Importing::ImportingDelayedJob.jobs?
         end
       end
 
       action_item :cancel_import_session, only: [:index] do
         if authorized?(:destroy_all)
-          link_to 'Cancel import session', action: :delete_all unless Importing::ImportingDelayedJob.jobs?
+          action_item_link 'Cancel import session', action: :delete_all unless Importing::ImportingDelayedJob.jobs?
         end
       end
 
       action_item :apply_unique_columns, only: [:index] do
         if authorized?(:batch_update)
           if acts_as_import_resource_class.strict_unique_attributes.present?
-            link_to 'Apply unique columns',
+            action_item_link 'Apply unique columns',
                     url_for(action: :apply_unique_columns),
                     class: 'modal-link',
                     data: {
@@ -70,7 +70,7 @@ module ResourceDSL
                       }.to_json
                     }
           else
-            link_to 'Apply unique columns',
+            action_item_link 'Apply unique columns',
                     url_for(action: :apply_unique_columns),
                     class: 'modal-link',
                     data: {

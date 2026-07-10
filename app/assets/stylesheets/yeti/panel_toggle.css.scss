@@ -1,6 +1,7 @@
 // Collapsible sidebar panels (sections rendered with `class: 'toggle'`, e.g. the
 // CDR "Statistic" sidebar). The header (h3) toggles the body; panel_toggle.js
-// slides .panel_contents and toggles `.on` on the panel for styling state.
+// slides .panel-body and toggles `.on` on the panel for styling state.
+// (ActiveAdmin 3's `.panel_contents` wrapper no longer exists — see that file.)
 div.toggle.panel {
   > h3 {
     cursor: pointer;
@@ -19,17 +20,19 @@ div.toggle.panel {
     }
   }
   // Collapsed by default; slideToggle reveals it via inline styles.
-  .panel_contents { display: none; }
+  > .panel-body { display: none; }
   // Expanded: chevron flips up.
   &.on > h3::after { content: '\f077'; } // fa-chevron-up
 }
 
 // Collapsed (no `.on`): the header is a self-contained rounded bar — no empty
-// panel body below it, bottom corners rounded, no separator border. Scoped to
-// out-specify the theme's 2-id panel-header rule.
-#wrapper #active_admin_content div.toggle.panel:not(.on) > h3 {
+// panel body below it, bottom corners rounded, no separator border.
+// (Was scoped `#wrapper #active_admin_content` — neither id exists in AA4, and
+// the sidebar is no longer inside the content div. `html body` out-specifies the
+// shared `.panel > .panel-title` rule in yeti_admin.css.scss.)
+html body div.toggle.panel:not(.on) > h3 {
   margin-bottom: 0; // drop the header's bottom gap (kept when expanded) so only the header shows
   border-bottom: none;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: var(--aa-radius);
+  border-bottom-right-radius: var(--aa-radius);
 }

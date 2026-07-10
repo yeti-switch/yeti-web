@@ -32,7 +32,7 @@ module ResourceDSL
 
       action_item :copy, only: %i[show edit] do
         if authorized?(:create, resource) && (!resource.respond_to?(:live?) || resource.live?)
-          link_to 'Copy', action: :new, from: resource.id
+          action_item_link 'Copy', action: :new, from: resource.id
         end
       end
     end
@@ -42,7 +42,7 @@ module ResourceDSL
 
       action_item :copy_with_relations, only: %i[show edit] do
         if authorized?(:create, resource) && (!resource.respond_to?(:live?) || resource.live?)
-          link_to(opts[:name],  url_for(controller: active_admin_resource_for(opts[:helper]).route_collection_path, action: 'new', from: resource.id))
+          action_item_link(opts[:name], url_for(controller: active_admin_resource_for(opts[:helper]).route_collection_path, action: 'new', from: resource.id))
         end
       end
     end

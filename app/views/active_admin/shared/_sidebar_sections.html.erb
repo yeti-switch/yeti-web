@@ -1,0 +1,28 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+    The gem renders each sidebar section as a bare <div> with no chrome and no
+    heading at all — so `sidebar 'Long time stats'` lost its title in AA4. This
+    restores the ActiveAdmin 3 look: every section is a panel with a header bar.
+
+    The `filters` and `active_search` sections emit their own <h3> inside the body
+    (h3.filters-form-title / h3.active-filters-title). Those are hidden in
+    app/assets/stylesheets/yeti_admin.css.scss so the panel header is the only
+    title; `active_search` keeps its scope-aware wording here. %>
+<% sidebar_sections_for_action.each do |section| %>
+  <% title =
+       if section.name == "active_search" && respond_to?(:current_scope) && current_scope
+         t("active_admin.search_status.title_with_scope", name: scope_name(current_scope))
+       elsif section.name == "active_search"
+         t("active_admin.search_status.title")
+       else
+         section.options[:title] || section.name.titleize
+       end %>
+  <%# Same markup as ActiveAdmin 4's own `panel` component (.panel > h3.panel-title
+      + .panel-body) so one set of rules in yeti_admin.css.scss styles the sidebar
+      sections and the dashboard/show-page panels identically. %>
+  <div id="<%= section.id %>" class="<%= section.custom_class %> panel">
+    <h3 class="panel-title"><%= title %></h3>
+    <div class="panel-body">
+      <%= render "active_admin/shared/sidebar_section", section: section %>
+    </div>
+  </div>
+<% end %>

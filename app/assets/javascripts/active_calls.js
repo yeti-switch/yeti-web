@@ -7,10 +7,11 @@ $(document).ready(function () {
             widgets: ['zebra', 'columns'],
             sortList: sort
         });
-        // The tablesorter lib breaks activeadmin toggle_all logic,
-        // because it changes table thead DOM after actvieadmin checkboxToggler() initialized.
-        // In order to fix it we need to reinitialize checkboxToggler again.
-        $table.checkboxToggler();
+        // ActiveAdmin 3's jQuery `checkboxToggler()` used to be re-run here,
+        // because tablesorter rebuilds the thead and the toggle-all checkbox
+        // lost its handler. ActiveAdmin 4 delegates that handler off `document`
+        // (`.batch-actions-toggle-all`, features/batch_actions.js), so a rebuilt
+        // thead keeps working and there is nothing to reinitialise.
     };
     $active_calls_sorter([]);
 

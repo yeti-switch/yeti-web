@@ -36,7 +36,7 @@ ActiveAdmin.register DialpeerNextRate do
   includes :dialpeer
 
   action_item :dialpeers, only: [:index] do
-    link_to 'Dialpeers', dialpeers_path
+    action_item_link 'Dialpeers', dialpeers_path
   end
 
   sidebar :dialpeer, priority: 1, only: %i[new update], if: proc { assigns[:dialpeer].present? } do
@@ -63,7 +63,7 @@ ActiveAdmin.register DialpeerNextRate do
       f.input :next_rate
       f.input :connect_fee
       f.input :attempt_fee
-      f.input :apply_time, as: :date_time_picker, datepicker_options: { defaultTime: '00:00' }
+      f.input :apply_time, as: :datetime_picker
     end
     f.actions
   end
@@ -79,8 +79,8 @@ ActiveAdmin.register DialpeerNextRate do
   filter :next_interval
   filter :connect_fee
   filter :attempt_fee
-  filter :created_at, as: :date_time_range
-  filter :updated_at, as: :date_time_range
+  filter :created_at, as: :date_range
+  filter :updated_at, as: :date_range
   filter :external_id
 
   index do

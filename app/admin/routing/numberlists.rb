@@ -9,8 +9,6 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_async_destroy('Routing::Numberlist')
-  acts_as_async_update BatchUpdateForm::NumberList
 
   acts_as_delayed_job_lock
 

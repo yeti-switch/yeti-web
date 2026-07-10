@@ -1,16 +1,28 @@
-<div id="login">
-  <h2><%= title "#{render_or_call_method_or_proc_on(self, active_admin_application.site_title)} #{t('active_admin.devise.login.title')}" %></h2>
+<%# Overrides ActiveAdmin 4's template. Keep in sync with the gem on upgrade.
+
+    Deltas:
+      - the password form is hidden when OIDC is enabled, and an OIDC login button
+        is rendered instead. Note the `main_app` proxy on the session path —
+        ActiveAdmin 4 requires it from Devise templates.
+      - `id="login"` (ActiveAdmin 3's) carries the card chrome, from
+        yeti_admin.css.scss: the 500px box and the full-bleed panel header. The
+        gem's Tailwind card classes are gone; keeping them here would fight it.
+      - the submit button loses `w-full`/`grow`: AA3 aligned it under the inputs
+        rather than stretching it across the card. %>
+<div id="login" class="w-full max-w-[500px]">
+  <h2><%= site_title %> <%= set_page_title t('active_admin.devise.login.title') %></h2>
 
   <% unless AdminUser.oidc? %>
     <% scope = Devise::Mapping.find_scope!(resource_name) %>
-    <%= active_admin_form_for(resource, :as => resource_name, :url => send(:"#{scope}_session_path"), :html => { :id => "session_new" }) do |f|
+    <%= active_admin_form_for(resource, as: resource_name, url: main_app.send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
       f.inputs do
-        resource.class.authentication_keys.each { |key| f.input key, :input_html => {:autofocus => true}}
+        resource.class.authentication_keys.each_with_index { |key, index|
+          f.input key, input_html: { autofocus: index.zero? }
+        }
         f.input :password
-       # f.input :remember_me, :label => t('active_admin.devise.login.remember_me'), :as => :boolean, :if =>    devise_mapping.rememberable?
       end
       f.actions do
-        f.action :submit, :label => t('active_admin.devise.login.submit'), :button_html => { :value => t('active_admin.devise.login.submit') }
+        f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.login.submit') }
       end
     end
     %>

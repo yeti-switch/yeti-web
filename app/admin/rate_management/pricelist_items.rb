@@ -66,21 +66,21 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
 
   action_item :detect_dialpeers do
     if authorized?(:detect_dialpeers) && helpers.parent.new? && !helpers.parent.has_background_job?
-      link_to 'Detect Dialpeers',
+      action_item_link 'Detect Dialpeers',
               detect_dialpeers_rate_management_pricelist_path(helpers.parent)
     end
   end
 
   action_item :redetect_dialpeers do
     if authorized?(:redetect_dialpeers) && helpers.parent.dialpeers_detected? && !helpers.parent.has_background_job?
-      link_to 'Redetect Dialpeers',
+      action_item_link 'Redetect Dialpeers',
               redetect_dialpeers_rate_management_pricelist_path(helpers.parent)
     end
   end
 
   action_item :apply_changes do
     if authorized?(:apply_changes) && helpers.parent.dialpeers_detected? && !helpers.parent.has_background_job? && !helpers.parent.items.with_error.exists?
-      link_to 'Apply Changes',
+      action_item_link 'Apply Changes',
               apply_changes_rate_management_pricelist_path(helpers.parent),
               data: { confirm: 'Are you sure you want to start Apply Changes?' }
     end
@@ -88,14 +88,14 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
 
   action_item :edit do
     if authorized?(:update)
-      link_to 'Edit Pricelist',
+      action_item_link 'Edit Pricelist',
               edit_rate_management_pricelist_path(helpers.parent)
     end
   end
 
   action_item :destroy do
     if authorized?(:remove)
-      link_to 'Delete Pricelist',
+      action_item_link 'Delete Pricelist',
               rate_management_pricelist_path(helpers.parent),
               method: :delete,
               data: { confirm: I18n.t('active_admin.delete_confirmation') }

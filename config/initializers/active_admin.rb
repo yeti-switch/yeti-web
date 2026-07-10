@@ -3,6 +3,9 @@
 ActiveAdmin.setup do |config|
   config.namespace :root do |admin|
     #        admin.build_menu :utility_navigation do |menu|
+    # Two-level nesting (Billing > Settings > Currencies) is not supported by
+    # ActiveAdmin 4 out of the box; lib/active_admin/menu_deep_nesting.rb
+    # restores it.
     admin.build_menu do |menu|
       menu.add label: 'Billing', priority: 20 do |sub_menu|
         sub_menu.add label: 'Settings', priority: 1000
@@ -24,39 +27,12 @@ ActiveAdmin.setup do |config|
       end
       menu.add label: 'Rate Management', priority: 100
     end
-    # Right-aligned utility navigation, ordered by priority:
-    #   username, server clock, theme switcher, logout.
-    # The clock + switcher render server-side here (then populated/wired by
-    # server_clock.js / theme_toggle.js) so there is no client-side reordering.
-    admin.build_menu :utility_navigation do |menu|
-      # http://127.0.0.1:3000/admin/admin_users/1
-      menu.add label: proc { display_name current_active_admin_user },
-               url: proc { admin_user_path(current_active_admin_user) },
-               id: 'current_user',
-               if: proc { current_active_admin_user? },
-               priority: 9_999_996
-
-      # Server clock. The label is the per-request server time as plain text;
-      # server_clock.js reads it off the link, syncs to the client, and ticks
-      # every second. A real (non-"#") anchor is needed because AA drops blank /
-      # url-less utility items; CSS hides the raw text and makes it non-interactive.
-      menu.add id: 'servertime',
-               url: '#clock',
-               priority: 9_999_997,
-               label: proc { Time.current.strftime('%Y %m %d %H %M %S %Z') }
-
-      # Dark-mode switcher (icon via CSS, wired by theme_toggle.js). A non-"#"
-      # anchor so AA does not treat it as a blank/hidden menu item.
-      menu.add id: 'theme_toggle',
-               label: '',
-               url: '#theme',
-               priority: 9_999_998,
-               html_options: { role: 'button' }
-
-      # title gives the icon-only logout link a hover tooltip.
-      admin.add_logout_button_to_menu menu, 9_999_999, title: 'Log out'
-      # can also pass priority & html_options for link_to to use
-    end
+    # ActiveAdmin 4 removed the :utility_navigation menu (and
+    # Namespace#add_logout_button_to_menu). Its contents now live in the site
+    # header, which app/views/active_admin/_site_header.html.erb overrides:
+    #   - current user link and logout: rendered by AA4's user menu
+    #   - dark-mode switcher: AA4 ships its own
+    #   - server clock: kept in the header override, still wired by server_clock.js
   end
   config.load_paths = [Rails.root.join('app/admin').to_s] #+ Dir.glob(File.join(Rails.root, "app", "admin", "/**/*/"))).uniq
 
@@ -71,17 +47,13 @@ ActiveAdmin.setup do |config|
   #
   # config.site_title_link = "/"
 
-  # Set an optional image to be displayed for the header
-  # instead of a string (overrides :site_title)
-  #
-  # Note: Recommended image height is 21px to properly fit in the header
-  #
-  config.site_title_image = YetiConfig.site_title_image
-
-  # Expose the Rails Time.zone (IANA name) so JS charts render time labels
-  # in the same timezone as the server-formatted text elsewhere in the UI.
-  # Read in app/assets/javascripts/charts.js via <meta name="yeti-timezone">.
-  config.meta_tags = { 'yeti-timezone' => Time.zone.tzinfo.name }
+  # ActiveAdmin 4 removed `site_title_image`, `meta_tags`, `register_stylesheet`
+  # and `footer`. Their behaviour now lives in the generated view overrides under
+  # app/views/active_admin/ (see _site_title, _meta_tags, _head, _footer):
+  #   - site_title_image  -> YetiConfig.site_title_image, in _site_title
+  #   - meta_tags         -> the <meta name="yeti-timezone"> that charts.js reads
+  #   - register_stylesheet -> yeti/yeti.css + tom-select css, in _head
+  #   - footer            -> renders active_admin/_footer
 
   # == Default Namespace
   #
@@ -195,10 +167,7 @@ ActiveAdmin.setup do |config|
   # up your own stylesheets / javascripts to customize the look
   # and feel.
   #
-  # To load a stylesheet:
-  config.register_stylesheet 'yeti/yeti.css'
-  config.register_stylesheet 'tom-select-rails/css/tom-select.css'
-  config.footer = proc { render partial: 'active_admin/footer' }
+  # (register_stylesheet / footer removed in ActiveAdmin 4 — see the note above.)
 
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
@@ -243,8 +212,6 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceController.include ActiveAdmin::PerPageExtension
   ActiveAdmin::BaseController.include ActiveAdmin::WithPayloads
   ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
-  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy
-  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncUpdate
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsDelayedJobLock
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsFilterByRoutingTagIds
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBelongsTo

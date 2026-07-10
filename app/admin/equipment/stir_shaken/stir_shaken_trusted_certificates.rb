@@ -45,6 +45,6 @@ ActiveAdmin.register Equipment::StirShaken::TrustedCertificate do
       end
       row :updated_at
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

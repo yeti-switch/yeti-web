@@ -41,10 +41,6 @@ module ActiveAdmin
   end
 end
 
-ActiveAdminDatetimepicker::Base.default_datetime_picker_options = {
-  defaultDate: proc { Time.current.strftime('%Y-%m-%d 00:00') }
-}
-
 # fix filtering by array contains
 module Arel
   module Visitors

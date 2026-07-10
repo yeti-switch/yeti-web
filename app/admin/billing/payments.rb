@@ -84,8 +84,8 @@ ActiveAdmin.register Payment do
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :created_at, as: :date_time_range
-  filter :rolledback_at, as: :date_time_range, label: 'RolledBack at'
+  filter :created_at, as: :date_range
+  filter :rolledback_at, as: :date_range, label: 'RolledBack at'
   account_filter :account_id_eq
   filter :currency, input_html: { class: 'tom-select' }
   filter :type_id,
@@ -126,7 +126,7 @@ ActiveAdmin.register Payment do
       end
 
       tab 'Comments' do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
 
       if payment.type_cryptomus?
@@ -156,8 +156,8 @@ ActiveAdmin.register Payment do
     # button otherwise, including once a payment has already been rolled back.
     if authorized?(:rollback, resource) && resource.completed?
       hint = I18n.t('payment.rollback.hint')
-      link_to('Rollback', rollback_payment_path(resource.id), method: :post, title: hint,
-                                                              data: { confirm: I18n.t('payment.rollback.confirm', hint: hint) })
+      action_item_link('Rollback', rollback_payment_path(resource.id), method: :post, title: hint,
+                                                                       data: { confirm: I18n.t('payment.rollback.confirm', hint: hint) })
     end
   end
 end

@@ -6,8 +6,6 @@ ActiveAdmin.register Account do
   acts_as_safe_destroy
   acts_as_audit
   acts_as_clone wrap_resource: proc { |model| AccountForm.new(model) }, except: [:uuid]
-  acts_as_async_destroy('Account')
-  acts_as_async_update BatchUpdateForm::Account
 
   acts_as_delayed_job_lock
 
@@ -135,7 +133,7 @@ ActiveAdmin.register Account do
   end
 
   action_item :balance_notifications, only: [:show] do
-    link_to 'Balance Notifications', log_balance_notifications_path(q: { account_id_eq: resource.id })
+    action_item_link 'Balance Notifications', log_balance_notifications_path(q: { account_id_eq: resource.id })
   end
 
   show do |s|
@@ -215,7 +213,7 @@ ActiveAdmin.register Account do
       end
 
       tab 'Comments' do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
 
       tab :active_calls_charts do

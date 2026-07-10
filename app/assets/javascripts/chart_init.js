@@ -68,7 +68,7 @@
 
       // Charts render lazily when their tab is opened, matching the old inline
       // behaviour. Handlers stack per chart, so several charts can share a tab.
-      $("div.tabs a[href='" + el.data('chartTab') + "']").on('click.chart', function () {
+      $(".tabs [data-tab-target='" + el.data('chartTab') + "']").on('click.chart', function () {
         render(el);
       });
 

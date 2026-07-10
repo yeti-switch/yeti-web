@@ -18,7 +18,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   end
 
   action_item :reports, only: :index do
-    link_to 'Delete report',
+    action_item_link 'Delete report',
             custom_cdr_path(assigns[:custom_cdr].id),
             method: :delete,
             data: { confirm: I18n.t('active_admin.delete_confirmation') },

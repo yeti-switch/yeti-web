@@ -1,75 +1,63 @@
 # frozen_string_literal: true
 
+# Adds a totals footer (<tfoot>) to ActiveAdmin's TableFor.
 #
-# @see https://github.com/activeadmin/activeadmin/issues/3797 for details
+# Usage, from an `index` block:
 #
+#   index footer_data: ->(collection) { collection.totals_per_currency } do
+#     column :amount, footer: -> { @footer_data.each { |d| div { d.total } } }
+#   end
+#
+# `footer_data:` is a proc evaluated once against the *unpaginated* collection;
+# its result is exposed to each column's `footer:` proc as @footer_data.
+#
+# @see https://github.com/activeadmin/activeadmin/issues/3797
+#
+# Through ActiveAdmin 3 this file carried a full copy of TableFor, because the
+# footer hooks did not exist. It is now a patch: ActiveAdmin 4's own
+# `build_table_cell` -> `helpers.format_attribute` already renders booleans as
+# status tags, which is all the old `render_data` override did.
+
+require 'active_admin/views/components/table_for'
+
 module ActiveAdmin
   module Views
-    class TableFor < Arbre::HTML::Table
-      builder_method :table_for
-
-      def tag_name
-        'table'
+    class TableFor
+      # AA4 keeps Column#@options private, but the `footer:` procs live there.
+      class Column
+        attr_reader :options
       end
+    end
 
+    module TableForFooter
       def build(obj, *attrs)
         options = attrs.extract_options!
-        @sortable = options.delete(:sortable)
-
-        @resource_class = options.delete(:i18n)
-        @collection = obj.respond_to?(:each) && !obj.is_a?(Hash) ? obj : [obj]
-
-        footer_data_proc = options.delete(:footer_data)
-        if footer_data_proc.is_a?(Proc)
-          @footer_data = instance_exec @collection.except(:limit, :offset, :includes).reorder(''), &footer_data_proc
-        end
-
-        @columns = []
-        @row_class = options.delete(:row_class)
-        build_table
-        super(options)
-        columns(*attrs)
-      end
-
-      def columns(*attrs)
-        attrs.each { |attr| column(attr) }
+        @footer_data_proc = options.delete(:footer_data)
+        super(obj, *attrs, options)
       end
 
       def column(*args, &block)
-        options = default_options.merge(args.extract_options!)
-        title = args[0]
-        data = args[1] || args[0]
-        col = Column.new(title, data, @resource_class, options, &block)
-        @columns << col
+        super
 
-        # Build our header item
-        within @header_row do
-          build_table_header(col)
-        end
-        # Build our footer item
-        if @footer_data
-          within @footer_row do
-            build_table_footer(col)
-          end
-        end
+        return unless @footer_data
 
-        # Add a table cell for each item
-        @collection.each_with_index do |item, i|
-          within @tbody.children[i] do
-            build_table_cell col, item
-          end
+        within @footer_row do
+          build_table_footer(@columns.last)
         end
-      end
-
-      def sortable?
-        !!@sortable
       end
 
       protected
 
+      # `super`'s build sets @collection before calling this, so the
+      # footer_data proc can see the collection.
       def build_table
         build_table_head
-        build_table_foot if @footer_data
+
+        if @footer_data_proc.is_a?(Proc)
+          @footer_data = instance_exec(footer_collection, &@footer_data_proc)
+          build_table_foot
+        end
+
         build_table_body
       end
 
@@ -79,187 +67,23 @@ module ActiveAdmin
         end
       end
 
-      def build_table_head
-        @thead = thead do
-          @header_row = tr
-        end
-      end
-      # def footer_proc(collection)
-      #          if  @options[:footer_proc].is_a?(Proc)
-      #            instance_exec(collection, &@options[:footer_proc])
-      #          end
-      #        end
-
       def build_table_footer(col)
         td class: col.html_class do
-          if col.options[:footer].is_a?(Proc)
-            instance_exec &col.options[:footer]
-          end
+          instance_exec(&col.options[:footer]) if col.options[:footer].is_a?(Proc)
         end
       end
 
-      def build_table_header(col)
-        classes = Arbre::HTML::ClassList.new
-        sort_key = sortable? && col.sortable? && col.sort_key
-        params = request.query_parameters.except :page, :order, :commit, :format
+      private
 
-        classes << 'sortable' if sort_key
-        classes << "sorted-#{current_sort[1]}" if sort_key && current_sort[0] == sort_key
-        classes << col.html_class
+      # Totals span the whole collection, not the current page; ordering and
+      # eager-loading only slow the aggregate down.
+      def footer_collection
+        return @collection unless @collection.respond_to?(:except)
 
-        if sort_key
-          th class: classes do
-            link_to col.pretty_title, params: params, order: "#{sort_key}_#{order_for_sort_key(sort_key)}"
-          end
-        else
-          th col.pretty_title, class: classes
-        end
-      end
-
-      def build_table_body
-        @tbody = tbody do
-          # Build enough rows for our collection
-          @collection.each do |elem|
-            classes = [cycle('odd', 'even')]
-
-            classes << @row_class.call(elem) if @row_class
-
-            tr(class: classes.flatten.join(' '), id: dom_id_for(elem))
-          end
-        end
-      end
-
-      def build_table_cell(col, item)
-        td class: col.html_class do
-          render_data col.data, item
-        end
-      end
-
-      def render_data(data, item)
-        value = if data.is_a? Proc
-                  data.call item
-                elsif item.respond_to? data
-                  item.public_send data
-                elsif item.respond_to? :[]
-                  item[data]
-                end
-        if helpers.is_boolean_val?(value)
-          value = helpers.boolean_status_tag(value)
-        elsif data.is_a?(Symbol)
-          value = helpers.pretty_format(value)
-        end
-
-        value
-      end
-
-      # Returns an array for the current sort order
-      #   current_sort[0] #=> sort_key
-      #   current_sort[1] #=> asc | desc
-      def current_sort
-        @current_sort ||= begin
-                            order_clause = active_admin_config.order_clause.new(active_admin_config, params[:order])
-                            if order_clause.valid?
-                              [order_clause.field, order_clause.order]
-                            else
-                              []
-                            end
-                          end
-      end
-
-      # Returns the order to use for a given sort key
-      #
-      # Default is to use 'desc'. If the current sort key is
-      # 'desc' it will return 'asc'
-      def order_for_sort_key(sort_key)
-        current_key, current_order = current_sort
-        return 'desc' unless current_key == sort_key
-
-        current_order == 'desc' ? 'asc' : 'desc'
-      end
-
-      def default_options
-        {
-          i18n: @resource_class
-        }
-      end
-
-      class Column
-        attr_accessor :title, :data, :html_class, :options
-
-        def initialize(*args, &block)
-          @options = args.extract_options!
-
-          @title = args[0]
-          html_classes = [:col]
-          if @options.key?(:class)
-            html_classes << @options.delete(:class)
-          elsif @title.present?
-            html_classes << "col-#{@title.to_s.parameterize(separator: '_')}"
-          end
-          @html_class = html_classes.join(' ')
-          @data = args[1] || args[0]
-          @data = block if block
-          @resource_class = args[2]
-        end
-
-        def sortable?
-          if @options.key?(:sortable)
-            !!@options[:sortable]
-          elsif @resource_class
-            @resource_class.column_names.include?(sort_column_name)
-          else
-            @title.present?
-          end
-        end
-
-        #
-        # Returns the key to be used for sorting this column
-        #
-        # Defaults to the column's method if its a symbol
-        #   column :username
-        #   # => Sort key will be set to 'username'
-        #
-        # You can set the sort key by passing a string or symbol
-        # to the sortable option:
-        #   column :username, sortable: 'other_column_to_sort_on'
-        #
-        # If you pass a block to be rendered for this column, the column
-        # will not be sortable unless you pass a string to sortable to
-        # sort the column on:
-        #
-        #   column('Username', sortable: 'login'){ @user.pretty_name }
-        #   # => Sort key will be 'login'
-        #
-        def sort_key
-          # If boolean or nil, use the default sort key.
-          if [true, false].include?(@options[:sortable])
-            @data.to_s
-          elsif @options[:sortable].nil?
-            sort_column_name
-          else
-            @options[:sortable].to_s
-          end
-        end
-
-        def pretty_title
-          if @title.is_a? Symbol
-            default = @title.to_s.titleize
-            if @options[:i18n].respond_to? :human_attribute_name
-              @title = @options[:i18n].human_attribute_name @title, default: default
-            else
-              default
-            end
-          else
-            @title
-          end
-        end
-
-        private
-
-        def sort_column_name
-          @data.is_a?(Symbol) ? @data.to_s : @title.to_s
-        end
+        @collection.except(:limit, :offset, :includes).reorder('')
       end
     end
+
+    TableFor.prepend TableForFooter
   end
 end

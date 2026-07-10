@@ -37,7 +37,7 @@ module ResourceDSL
 
       action_item :history, only: %i[show edit], if: proc { versioning_enabled_for_model?(resource_class) } do
         if authorized?(:history)
-          link_to 'History', action: :history, id: resource.id
+          action_item_link 'History', action: :history, id: resource.id
         end
       end
 

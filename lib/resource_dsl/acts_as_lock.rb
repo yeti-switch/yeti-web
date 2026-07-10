@@ -12,7 +12,7 @@ module ResourceDSL
 
       action_item :unlock, only: %i[show edit] do
         if resource.locked && authorized?(:unlock)
-          link_to 'Unlock', action: :unlock, id: resource.id
+          action_item_link 'Unlock', action: :unlock, id: resource.id
         end
       end
     end

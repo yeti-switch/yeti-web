@@ -7,8 +7,6 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_async_destroy('Routing::RoutingPlanStaticRoute')
-  acts_as_async_update BatchUpdateForm::RoutingPlanStaticRoute
 
   acts_as_delayed_job_lock
 
@@ -41,7 +39,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   # end
 
   action_item :batch_create do
-    link_to('Batch create', new_routing_plan_static_route_batch_creator_path)
+    action_item_link('Batch create', new_routing_plan_static_route_batch_creator_path)
   end
 
   index do
@@ -72,7 +70,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
       row :weight
       row :vendor
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   form do |f|

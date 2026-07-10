@@ -9,18 +9,26 @@ module ResourceDSL
     def acts_as_stats_actions
       # must be used as last DSL for resource
 
+      # ActiveAdmin 4 renders action_item blocks from an ERB partial
+      # (active_admin/shared/_action_items) rather than inside an Arbre context,
+      # so Arbre builder methods such as `dropdown_menu` are not in scope. Build
+      # an explicit context; it delegates unknown methods (resource, authorized?)
+      # back to the view.
       action_item :truncate_stats, only: %i[show edit] do
-        dropdown_menu 'Statistics' do
-          has_member_action = lambda do |name|
-            active_admin_config.member_actions.detect { |element| element.name == name.to_sym }.present?
-          end
+        view = self
+        Arbre::Context.new({}, view) do
+          dropdown_menu 'Statistics' do
+            has_member_action = lambda do |name|
+              view.active_admin_config.member_actions.detect { |element| element.name == name.to_sym }.present?
+            end
 
-          if authorized?(:truncate_long_time_stats) && has_member_action.call(:truncate_long_time_stats)
-            item 'Truncate long time stats', action: :truncate_long_time_stats, id: resource.id
-          end
+            if view.authorized?(:truncate_long_time_stats) && has_member_action.call(:truncate_long_time_stats)
+              item 'Truncate long time stats', action: :truncate_long_time_stats, id: view.resource.id
+            end
 
-          if authorized?(:truncate_short_window_stats) && has_member_action.call(:truncate_short_window_stats)
-            item 'Truncate short window stats', action: :truncate_short_window_stats, id: resource.id
+            if view.authorized?(:truncate_short_window_stats) && has_member_action.call(:truncate_short_window_stats)
+              item 'Truncate short window stats', action: :truncate_short_window_stats, id: view.resource.id
+            end
           end
         end
       end

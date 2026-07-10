@@ -7,7 +7,6 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
 
   acts_as_audit
   acts_as_safe_destroy
-  acts_as_async_destroy('Billing::Invoice')
 
   acts_as_delayed_job_lock
 
@@ -105,17 +104,17 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   action_item :regenerate_documents, only: :show do
-    link_to('Rebuild PDF', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
+    action_item_link('Rebuild PDF', regenerate_document_invoice_path(resource.id), method: :post) if resource.regenerate_document_allowed?
   end
 
   action_item :documents, only: :show do
     if resource.invoice_document.present?
-      link_to('Download PDF', export_file_pdf_invoice_path(resource.id), method: :get)
+      action_item_link('Download PDF', export_file_pdf_invoice_path(resource.id), method: :get)
     end
   end
 
   action_item :approve, only: :show do
-    link_to('Approve', approve_invoice_path(resource.id), method: :post) if resource.approvable?
+    action_item_link('Approve', approve_invoice_path(resource.id), method: :post) if resource.approvable?
   end
 
   # Reference is edited via a modal dialog (modal_link.js) instead of a separate
@@ -123,7 +122,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   # data-values prefills the current reference so clicking OK can't blank it.
   action_item :change_reference, only: :show do
     if authorized?(:change_reference, resource)
-      link_to 'Change Reference',
+      action_item_link 'Change Reference',
               change_reference_invoice_path(resource),
               class: 'modal-link',
               data: {
@@ -239,8 +238,8 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
          input_html: { class: 'tom-select' }
   filter :state
   filter :type
-  filter :start_date, as: :date_time_range
-  filter :end_date, as: :date_time_range
+  filter :start_date, as: :date_range
+  filter :end_date, as: :date_range
 
   filter :amount_total
   filter :amount_spent
@@ -544,14 +543,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
                       }
 
       f.input :start_date,
-              as: :date_time_picker,
-              datepicker_options: { defaultTime: '00:00' },
+              as: :datetime_picker,
               hint: 'Account timezone will be used',
               wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
 
       f.input :end_date,
-              as: :date_time_picker,
-              datepicker_options: { defaultTime: '00:00' },
+              as: :datetime_picker,
               hint: 'Account timezone will be used'
     end
     f.actions { f.submit('Create Invoice') }
