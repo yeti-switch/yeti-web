@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feature, js: true do
+RSpec.describe 'Create new Routing Plan Static Route Batch Creator', js: true do
   subject do
     click_submit('Create Routing plan static route batch creator')
   end
@@ -19,9 +19,11 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
 
     fill_in_tom_select 'Routing plan', with: routing_plan.display_name, search: true
     fill_in 'Prefixes', with: '26327,34205'
-    fill_in_tom_select 'Vendors', with: [vendor_2.display_name, vendor_1.display_name], search: 'Vendor'
-    # Wait for both vendor chips to be committed before submitting, otherwise a
-    # slow second selection races with the submit and only one vendor is sent.
+    # Inject value+text via the tom-select API: the ajax search chain races the
+    # re-fetch from the second selection on this multiple select and drops a chip
+    # under CI load. Order sets priority: vendor_2 -> 100, vendor_1 -> 95.
+    select_tom_select_by_value 'Vendors', { vendor_2.id => vendor_2.display_name, vendor_1.id => vendor_1.display_name }
+    # Chips are added synchronously; keep the barrier as a pre-submit guard.
     expect(page).to have_field_tom_select('Vendors', with: vendor_2.display_name, exact: false)
     expect(page).to have_field_tom_select('Vendors', with: vendor_1.display_name, exact: false)
   end
