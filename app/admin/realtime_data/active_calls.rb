@@ -90,7 +90,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
   end
 
   action_item :drop, only: :show do
-    link_to('Terminate', drop_active_call_path(id: resource.id), method: :post, data: { confirm: I18n.t('active_admin.delete_confirmation') })
+    action_item_link('Terminate', drop_active_call_path(id: resource.id), method: :post, data: { confirm: I18n.t('active_admin.delete_confirmation') })
   end
 
   before_action only: [:index] do

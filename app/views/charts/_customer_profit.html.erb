@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#profitability']").on("click", function () {
+    $(".tabs [data-tab-target='#profitability']").on("click", function () {
       $.getJSON("/remote_stats/<%= params[:id] %>/customers_traffic.json", function (json) {
         Charts.renderGroupedBar('customer-profit-chart', json, {
           placeholderId: 'chart-placeholder-customer-profit',

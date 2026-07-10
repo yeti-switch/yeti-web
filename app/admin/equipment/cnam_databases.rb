@@ -10,11 +10,15 @@ ActiveAdmin.register Cnam::Database do
 
   acts_as_export :id, :name
 
+  # ActiveAdmin 4 renders action_item blocks in an ERB context, so Arbre builder
+  # methods need an explicit Arbre::Context. See ResourceDSL::ActsAsStat.
   action_item :new_databases, only: [:index] do
-    dropdown_menu 'New CNAM Database' do
-      item Cnam::Database::CONST::TYPE_NAME_HTTP,
-           action: :new,
-           cnam_database: { database_type: Cnam::Database::CONST::TYPE_HTTP }
+    Arbre::Context.new({}, self) do
+      dropdown_menu 'New CNAM Database' do
+        item Cnam::Database::CONST::TYPE_NAME_HTTP,
+             action: :new,
+             cnam_database: { database_type: Cnam::Database::CONST::TYPE_HTTP }
+      end
     end
   end
 

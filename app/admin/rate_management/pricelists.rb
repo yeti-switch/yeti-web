@@ -38,10 +38,10 @@ ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' 
   filter :filename
   boolean_filter :retain_enabled
   boolean_filter :retain_priority
-  filter :valid_from, as: :date_time_range
-  filter :valid_till, as: :date_time_range
-  filter :created_at, as: :date_time_range
-  filter :updated_at, as: :date_time_range
+  filter :valid_from, as: :date_range
+  filter :valid_till, as: :date_range
+  filter :created_at, as: :date_range
+  filter :updated_at, as: :date_range
 
   includes :project
 
@@ -116,8 +116,8 @@ ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' 
         f.input :project_id, as: :select,
                              collection: RateManagement::Project.ordered,
                              input_html: { class: 'tom-select' }
-        f.input :valid_from, as: :date_time_picker
-        f.input :valid_till, as: :date_time_picker
+        f.input :valid_from, as: :datetime_picker
+        f.input :valid_till, as: :datetime_picker
         f.input :file,
                 as: :file,
                 hint: "Allowed headers: #{RateManagement::PricelistItemsParser.humanized_headers.join(', ')}"

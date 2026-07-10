@@ -1,0 +1,42 @@
+<%# Renders one dropdown panel's worth of menu items, recursing for sub-groups.
+    Used by active_admin/_top_navigation. Follows Flowbite's "Multi-level dropdown"
+    pattern: a nested dropdown is just another [data-dropdown-toggle] inside the
+    parent panel; initDropdowns() picks up every one of them.
+
+    Locals: items (Array<ActiveAdmin::MenuItem>)
+
+    ActiveAdmin 4 only nests one level; lib/active_admin/menu_deep_nesting.rb
+    restores the deeper tree this renders. %>
+<ul class="py-1">
+  <%# 13px matches the bar (ActiveAdmin 3's $skinMenuFontSize) so the type does
+      not jump between the top-level items and the dropdown. %>
+  <% item_classes = "flex items-center justify-between gap-x-3 w-full px-3 py-1.5 text-[13px]/[1.35] no-underline text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-white" %>
+  <% items.each do |item| %>
+    <% children = item.items(self).presence %>
+    <% url = item.url(self) %>
+    <% selected = current_menu_item?(item, children: false) ? "bg-gray-100 dark:bg-white/5 text-gray-900 dark:text-white selected" : "" %>
+    <li data-item-id="<%= item.id %>">
+      <% if children %>
+        <% panel_id = "topnav-panel-#{item.id}" %>
+        <%# A sub-group ("Settings", "RADIUS", ...) has no url of its own. %>
+        <button type="button"
+                data-dropdown-toggle="<%= panel_id %>"
+                data-dropdown-trigger="hover"
+                data-dropdown-placement="right-start"
+                data-dropdown-offset-distance="0"
+                data-dropdown-delay="0"
+                class="<%= item_classes %> <%= current_menu_item?(item) ? 'text-gray-900 dark:text-white' : '' %>">
+          <%= item.label(self) %>
+          <svg class="w-2.5 h-2.5 shrink-0 rtl:-scale-x-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        </button>
+        <div id="<%= panel_id %>" class="z-50 hidden min-w-max rounded shadow-lg outline outline-black/5 dark:-outline-offset-1 dark:outline-white/10 bg-white dark:bg-gray-800">
+          <%= render "active_admin/top_menu_items", items: children %>
+        </div>
+      <% else %>
+        <%= link_to item.label(self), url, item.html_options.merge(class: "#{item_classes} #{selected}") %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

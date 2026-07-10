@@ -32,6 +32,6 @@ ActiveAdmin.register Pop do
       row :id
       row :name
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

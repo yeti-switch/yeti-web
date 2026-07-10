@@ -89,7 +89,7 @@ ActiveAdmin.register AdminUser do
     # link to change own password
     action_item :change_password, only: :show do
       if authorized?(:change_password, resource.model)
-        link_to 'Change Password', url_for(action: :change_password)
+        action_item_link 'Change Password', url_for(action: :change_password)
       end
     end
 

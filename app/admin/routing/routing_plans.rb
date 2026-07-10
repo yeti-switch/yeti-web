@@ -7,8 +7,6 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_audit
   acts_as_clone links: [:routing_groups]
   acts_as_safe_destroy
-  acts_as_async_destroy('Routing::RoutingPlan')
-  acts_as_async_update BatchUpdateForm::RoutingPlan
 
   acts_as_delayed_job_lock
   acts_as_export :id,
@@ -79,7 +77,7 @@ ActiveAdmin.register Routing::RoutingPlan do
       row :src_numberlist
       row :dst_numberlist
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   form do |f|

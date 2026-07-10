@@ -30,7 +30,7 @@ ActiveAdmin.register System::LuaScript do
       row :created_at
       row :updated_at
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   form do |f|

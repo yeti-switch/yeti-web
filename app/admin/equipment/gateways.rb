@@ -11,8 +11,6 @@ ActiveAdmin.register Gateway do
   acts_as_quality_stat
   acts_as_lock GatewayQualityCheck
   acts_as_stats_actions
-  acts_as_async_destroy('Gateway')
-  acts_as_async_update BatchUpdateForm::Gateway
 
   acts_as_delayed_job_lock
 
@@ -718,7 +716,7 @@ ActiveAdmin.register Gateway do
       tab :media do
         attributes_table_for s do
           row :sdp_c_location
-          row :codec_group, input_html: { class: 'tom-select' }
+          row :codec_group
           row :try_avoid_transcoding
           row :proxy_media
           row :single_codec_in_200ok
@@ -780,7 +778,7 @@ ActiveAdmin.register Gateway do
       end
 
       tab :comments do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
     end
   end

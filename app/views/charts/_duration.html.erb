@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#calls-duration']").on("click", function () {
+    $(".tabs [data-tab-target='#calls-duration']").on("click", function () {
       $.getJSON("/remote_stats/duration.json", function (json) {
         json[0].values = json[0].values.map(function (p) {
           return { x: p.x, y: parseFloat(p.y) / 60.0 };

@@ -15,18 +15,6 @@ GIT
     active_admin_date_range_preset (0.3.1)
 
 GIT
-  remote: https://github.com/activeadmin-plugins/activeadmin-oidc.git
-  revision: d6dbc83cf1641151d9c48a32196bbec132a5b92f
-  specs:
-    activeadmin-oidc (0.1.0)
-      activeadmin (>= 3.5, < 4)
-      devise (>= 4.9)
-      omniauth (>= 2.1)
-      omniauth-rails_csrf_protection (>= 1.0)
-      omniauth_openid_connect (>= 0.7)
-      rails (>= 7.2)
-
-GIT
   remote: https://github.com/activeadmin-plugins/capybara_active_admin.git
   revision: d2cdc2c0a5478d4ee1afb30f3465c7be3b760a86
   specs:
@@ -83,14 +71,6 @@ GIT
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0)
 
-GIT
-  remote: https://github.com/yeti-switch/active_admin_theme.git
-  revision: 2043bf60325b3cbcd45cf0285f377ad576af0b98
-  branch: dark_mode
-  specs:
-    active_admin_theme (2.0.0)
-      activeadmin (>= 3.0, < 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -137,30 +117,30 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_admin_datetimepicker (2.0.0)
-      activeadmin (>= 3.0, < 4.0)
     active_admin_import (8.0.0)
       activeadmin (>= 3.0, < 4.1)
       activerecord-import (>= 2.0)
       rchardet (>= 1.6)
       rubyzip (>= 1.2)
-    active_admin_scoped_collection_actions (2.0.0)
-      activeadmin (>= 3.0, < 4.0)
-    active_admin_sidebar (3.0.0)
-      activeadmin (>= 3.0, < 4.0)
     active_record_extended (3.5.0)
       activerecord (>= 5.2)
       pg (< 3.0)
-    activeadmin (3.5.1)
-      arbre (~> 1.2, >= 1.2.1)
+    activeadmin (4.0.0.beta22)
+      arbre (~> 2.0)
       csv
-      formtastic (>= 3.1)
-      formtastic_i18n (>= 0.4)
-      inherited_resources (~> 1.7)
-      jquery-rails (>= 4.2)
+      formtastic (>= 6.0)
+      formtastic_i18n (>= 0.7)
+      inherited_resources (~> 2.0)
       kaminari (>= 1.2.1)
-      railties (>= 6.1)
+      railties (>= 7.2)
       ransack (>= 4.0)
+    activeadmin-oidc (2.1.2)
+      activeadmin (>= 3.5, < 5)
+      devise (~> 5.0)
+      omniauth (~> 2.1)
+      omniauth-rails_csrf_protection (>= 1.0, < 3)
+      omniauth_openid_connect (>= 0.6, < 1)
+      rails (>= 7.2, < 9)
     activejob (8.0.5)
       activesupport (= 8.0.5)
       globalid (>= 0.3.6)
@@ -202,9 +182,8 @@ GEM
     annotaterb (4.23.0)
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
-    arbre (1.7.0)
-      activesupport (>= 3.0.0)
-      ruby2_keywords (>= 0.0.2)
+    arbre (2.2.1)
+      activesupport (>= 7.0)
     ast (2.4.3)
     attr_required (1.0.2)
     awesome_print (1.9.2)
@@ -280,6 +259,8 @@ GEM
       unicode (>= 0.4.4.5)
     cryptomus (0.2.2)
       faraday (~> 2.7)
+    cssbundling-rails (1.4.3)
+      railties (>= 6.0.0)
     csv (3.3.5)
     cuprite (0.17)
       capybara (~> 3.0)
@@ -450,10 +431,14 @@ GEM
       http-2 (>= 1.2.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    inherited_resources (1.14.0)
-      actionpack (>= 6.0)
+    importmap-rails (2.2.3)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
+    inherited_resources (2.1.0)
+      actionpack (>= 7.0)
       has_scope (>= 0.6)
-      railties (>= 6.0)
+      railties (>= 7.0)
       responders (>= 2)
     io-console (0.8.2)
     irb (1.18.0)
@@ -1057,14 +1042,10 @@ PLATFORMS
 
 DEPENDENCIES
   active_admin_date_range_preset!
-  active_admin_datetimepicker
   active_admin_import
-  active_admin_scoped_collection_actions
-  active_admin_sidebar (~> 3.0)
-  active_admin_theme!
   active_record_extended
-  activeadmin
-  activeadmin-oidc!
+  activeadmin (= 4.0.0.beta22)
+  activeadmin-oidc (~> 2.1)
   activemodel-serializers-xml
   activerecord-import
   annotaterb
@@ -1084,6 +1065,7 @@ DEPENDENCIES
   config
   cronex
   cryptomus (~> 0.2.2)
+  cssbundling-rails
   cuprite
   daemons
   database_consistency
@@ -1099,6 +1081,7 @@ DEPENDENCIES
   font-awesome-rails
   httparty (>= 0.24.0)
   httpx
+  importmap-rails
   jquery-rails
   jquery-tablesorter
   jquery-ui-rails

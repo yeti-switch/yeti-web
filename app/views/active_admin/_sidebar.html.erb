@@ -1,0 +1,10 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+    Deltas: the column now carries its own width (the layout is a flex row with
+    the sidebar first, so this sits on the left), and `id="sidebar"` is restored
+    for CSS/JS that targets it. Sections are panels — see
+    active_admin/shared/_sidebar_sections. %>
+<% unless skip_sidebar? || sidebar_sections_for_action.blank? %>
+  <div id="sidebar" class="w-full lg:w-[250px] lg:shrink-0 space-y-4">
+    <%= render "active_admin/shared/sidebar_sections" %>
+  </div>
+<% end %>

@@ -9,27 +9,11 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_status(show_count: false)
   acts_as_quality_stat
   acts_as_stats_actions
-  acts_as_async_destroy('Routing::Destination')
-  acts_as_async_update BatchUpdateForm::Destination
 
-  scoped_collection_action :async_schedule_rate_changes,
-                           title: 'Schedule rate changes',
-                           class: 'scoped_collection_action_button ui',
-                           form: -> { Destination::ScheduleRateChangesForm.form_inputs },
-                           if: -> { authorized?(:batch_update, resource_class) } do
-    attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee, :attempt_fee)
-
-    form = Destination::ScheduleRateChangesForm.new(attrs)
-    form.ids_sql = scoped_collection_records.select(:id).to_sql
-
-    if form.save
-      flash[:notice] = 'Rate changes are scheduled'
-    else
-      flash[:error] = "Validation Error: #{form.errors.full_messages.to_sentence}"
-    end
-
-    head 200
-  end
+  # The "Schedule rate changes" bulk action was built on
+  # active_admin_scoped_collection_actions, removed for the ActiveAdmin 4
+  # upgrade. Destination::ScheduleRateChangesForm is left in place for the
+  # reimplementation on top of AA4 batch actions.
 
   acts_as_delayed_job_lock
 
@@ -94,8 +78,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
          collection: -> { System::NetworkType.collection }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
-  filter :valid_from, as: :date_time_range
-  filter :valid_till, as: :date_time_range
+  filter :valid_from, as: :date_range
+  filter :valid_till, as: :date_range
   filter :rate_policy_id_eq, input_html: { class: 'tom-select' }, collection: Routing::DestinationRatePolicy::POLICIES.invert
   boolean_filter :reverse_billing
   filter :initial_interval
@@ -116,15 +100,15 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :reverse_billing, :routing_tag_mode_id, :allow_package_billing, :scheduler_id, :currency_id, routing_tag_ids: []
 
   action_item :show_rates, only: [:show] do
-    link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
+    action_item_link 'Show Rates', destination_destination_next_rates_path(resource.id)
   end
 
   action_item :new_rate, only: [:show] do
-    link_to 'New Rate', new_destination_destination_next_rate_path(resource.id)
+    action_item_link 'New Rate', new_destination_destination_next_rate_path(resource.id)
   end
 
   action_item :next_rates, only: [:index] do
-    link_to 'Next rates', destination_next_rates_path
+    action_item_link 'Next rates', destination_next_rates_path
   end
 
   controller do
@@ -153,7 +137,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   action_item :clear_quality_alarm, only: %i[show edit] do
     if resource.quality_alarm? && authorized?(:clear_quality_alarm)
-      link_to 'Clear quality alarm', action: :clear_quality_alarm, id: resource.id
+      action_item_link 'Clear quality alarm', action: :clear_quality_alarm, id: resource.id
     end
   end
 
@@ -229,8 +213,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
               }
       f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }
 
-      f.input :valid_from, as: :date_time_picker
-      f.input :valid_till, as: :date_time_picker
+      f.input :valid_from, as: :datetime_picker
+      f.input :valid_till, as: :datetime_picker
       f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::DestinationRatePolicy::POLICIES.invert, input_html: { class: 'tom-select' }
       f.input :reverse_billing
       f.input :allow_package_billing
@@ -346,6 +330,6 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       end
     end
 
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

@@ -1,0 +1,62 @@
+<%# Horizontal main menu in the site header, the way ActiveAdmin 3 had it.
+    Built on Flowbite's Navbar pattern (markup + [data-dropdown-toggle]); Flowbite
+    ships no Navbar JS component, only Dropdown/Collapse/Drawer.
+
+    Shown from 2xl up. Below that the header's hamburger opens the vertical
+    drawer (active_admin/_main_navigation), which is a better fit for ten
+    top-level items nested two deep.
+
+    Sub-groups recurse through active_admin/_top_menu_items. %>
+<nav class="hidden 2xl:flex min-w-0 ms-6" aria-label="<%= t('active_admin.toggle_main_navigation_menu') %>">
+  <ul role="list" class="flex flex-row items-center gap-x-0.5">
+    <%# 13px / 1.35 line-height / 5px vertical padding are the ActiveAdmin 3 menu
+        metrics ($skinMenuFontSize, $skinMenuItemLineHeight, $skinMenuItemPaddingY).
+        That makes each pill ~28px tall, leaving ~4px above and below inside the
+        header's 36px content box (h-[37px] minus the 1px bottom border). %>
+    <% top_classes = "flex items-center gap-x-1 rounded-md px-3 py-[5px] text-[13px]/[1.35] no-underline text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-white/5" %>
+    <% current_menu.items(self).each do |item| %>
+      <% children = item.items(self).presence %>
+      <% url = item.url(self) %>
+      <%# current_menu_item? is recursive, so a top-level item highlights when any
+          descendant is the current page (e.g. /currencies highlights Billing). %>
+      <% selected = current_menu_item?(item) ? "bg-gray-100 dark:bg-white/5 text-gray-900 dark:text-white selected" : "" %>
+      <li class="shrink-0" data-item-id="<%= item.id %>">
+        <% if children %>
+          <% panel_id = "topnav-panel-#{item.id}" %>
+          <%# Toggle is an <a> when the item has a real url (so it stays clickable)
+              and a <button> otherwise. Either works as a Flowbite dropdown trigger. %>
+          <% toggle_attrs = {
+               "data-dropdown-toggle" => panel_id,
+               "data-dropdown-trigger" => "hover",
+               "data-dropdown-placement" => "bottom-start",
+               # Flowbite applies one `delay` to BOTH opening and closing on hover
+               # (its default is 300ms). 0 opens instantly; closing stays safe
+               # because offset-distance 0 leaves no gap to cross into the panel.
+               "data-dropdown-offset-distance" => "0",
+               "data-dropdown-delay" => "0",
+               class: "#{top_classes} #{selected}"
+             } %>
+          <% chevron = capture do %>
+            <svg class="w-2.5 h-2.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          <% end %>
+          <% if url.present? && url != "#" %>
+            <%= link_to url, item.html_options.merge(toggle_attrs) do %><%= item.label(self) %><%= chevron %><% end %>
+          <% else %>
+            <button type="button" <%= tag.attributes(toggle_attrs) %> aria-label="<%= t('active_admin.toggle_section') %>">
+              <%= item.label(self) %><%= chevron %>
+            </button>
+          <% end %>
+          <div id="<%= panel_id %>" class="z-50 hidden min-w-max rounded shadow-lg outline outline-black/5 dark:-outline-offset-1 dark:outline-white/10 bg-white dark:bg-gray-800">
+            <%= render "active_admin/top_menu_items", items: children %>
+          </div>
+        <% elsif url.present? %>
+          <%= link_to item.label(self), url, item.html_options.merge(class: "#{top_classes} #{selected}") %>
+        <% else %>
+          <span class="<%= top_classes %>"><%= item.label(self) %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

@@ -74,7 +74,7 @@ ActiveAdmin.register BackgroundTask do
       end
 
       tab :comments do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
     end
   end

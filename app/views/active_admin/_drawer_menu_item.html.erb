@@ -1,0 +1,46 @@
+<%# Recursive drawer menu items. Caller supplies the wrapping <ul>.
+    Locals: items (Array<ActiveAdmin::MenuItem>)
+
+    Mirrors ActiveAdmin 4's _main_navigation markup, but recurses instead of
+    stopping at one level of children, so `Billing > Settings > Currencies`
+    renders as nested accordions.
+
+    ActiveAdmin's main_menu.js toggles `data-open` on the <li class="group">
+    nearest the clicked [data-menu-button], so this works at any depth without
+    extra JS. %>
+<% link_classes = "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white flex items-center w-full rounded-md p-2 gap-x-2 text-sm no-underline" %>
+<% items.each do |item| %>
+  <% children = item.items(self).presence %>
+  <% url = item.url(self) %>
+  <% selected = current_menu_item?(item, children: false) ? "bg-gray-100 dark:bg-white/5 text-gray-900 dark:text-white selected" : "" %>
+  <li <%= "data-open" if current_menu_item?(item) %> class="group" data-item-id="<%= item.id %>">
+    <% if children %>
+      <% chevron = capture do %>
+        <svg class="group-data-open:rotate-90 group-data-open:rtl:-rotate-90 ms-auto h-5 w-5 shrink-0 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+        </svg>
+      <% end %>
+      <% if url.present? && url != "#" %>
+        <%# Item is both a link and a section: link on the left, caret toggles. %>
+        <div data-parent-id="<%= item.id %>" data-menu-button class="flex">
+          <%= link_to item.label(self), url, item.html_options.merge(class: "#{link_classes} #{selected}") %>
+          <button class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white flex items-center p-2 text-sm" aria-label="<%= t('active_admin.toggle_section') %>">
+            <%= chevron %>
+          </button>
+        </div>
+      <% else %>
+        <button data-menu-button class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white flex items-center w-full rounded-md p-2 gap-x-2 text-sm" aria-label="<%= t('active_admin.toggle_section') %>">
+          <%= item.label(self) %>
+          <%= chevron %>
+        </button>
+      <% end %>
+      <ul role="list" class="mt-1 space-y-1 hidden group-data-open:block ms-1 ps-2 border-s-2 border-gray-100 dark:border-white/5">
+        <%= render "active_admin/drawer_menu_item", items: children %>
+      </ul>
+    <% elsif url.present? %>
+      <%= link_to item.label(self), url, item.html_options.merge(class: "#{link_classes} #{selected}") %>
+    <% else %>
+      <span class="<%= link_classes %>"><%= item.label(self) %></span>
+    <% end %>
+  </li>
+<% end %>

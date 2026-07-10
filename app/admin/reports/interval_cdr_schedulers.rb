@@ -62,5 +62,5 @@ ActiveAdmin.register Report::IntervalCdrScheduler, as: 'IntervalCdrScheduler' do
   end
 
   filter :id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
 end

@@ -1,0 +1,19 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+    Two deltas:
+      1. This is now the MOBILE DRAWER only. The desktop menu lives horizontally
+         in the site header (active_admin/_top_navigation), so the `xl:` classes
+         that pinned this as a permanent left rail are gone and it is 2xl:hidden.
+      2. Items recurse through active_admin/_drawer_menu_item so the two-level
+         nesting restored by lib/active_admin/menu_deep_nesting.rb renders at any
+         depth. The gem's version hardcodes a single level of children.
+
+    `id="main-menu"` must stay: the header's hamburger targets it via Flowbite's
+    data-drawer-target, and ActiveAdmin's main_menu.js delegates the accordion
+    toggle from "#main-menu [data-menu-button]". %>
+<div id="main-menu"
+     class="2xl:hidden fixed top-0 bottom-0 inset-s-0 z-40 w-72 p-4 overflow-y-auto transition-transform duration-200 -translate-x-full bg-white dark:bg-gray-950"
+     tabindex="-1">
+  <ul role="list" class="flex flex-1 flex-col space-y-1.5">
+    <%= render "active_admin/drawer_menu_item", items: current_menu.items(self) %>
+  </ul>
+</div>

@@ -1,0 +1,142 @@
+# frozen_string_literal: true
+
+# Overrides ActiveAdmin 4's app/views/active_admin/resource/index.html.arb.
+# Keep in sync with the gem on upgrade; the deltas are marked YETI below.
+#
+# Replaces what ActiveAdmin::Views::Pages::Index used to do before AA4 deleted
+# the Arbre page classes:
+#   - an extra "Visible columns" control in the table-tools row
+#   - any_table_tools? also true when the visible-columns tool is available
+#   - filter/sorting state classes on the content container, which
+#     sidebar_filter_actions.js and sorting_persist.js key off
+
+def wrap_with_batch_action_form(&block)
+  if active_admin_config.batch_actions.any?
+    insert_tag(ActiveAdmin::BatchActions::BatchActionForm, &block)
+    batch_actions_to_display.each do |batch_action|
+      if batch_action.partial.present?
+        render(batch_action.partial)
+      end
+    end
+  else
+    yield
+  end
+end
+
+def build_collection
+  if collection_empty?(collection)
+    if params[:q] || params[:scope]
+      render('active_admin/resource/index_empty_results')
+    else
+      render('active_admin/resource/index_blank_slate')
+    end
+  else
+    render_index
+  end
+end
+
+def build_table_tools
+  if any_table_tools?
+    div class: 'index-data-table-toolbar' do
+      render 'batch_actions_dropdown'
+      build_scopes
+      build_index_list
+      build_additional_tools # YETI
+    end
+  end
+end
+
+# YETI: `batch_actions_to_display` (not the raw batch_actions) mirrors what the
+# dropdown actually renders — it applies each action's display_if. The raw list
+# would render an empty toolbar on resources whose actions are all hidden.
+# The visible-columns tool also warrants a toolbar on its own.
+def any_table_tools?
+  batch_actions_to_display.any? ||
+    active_admin_config.scopes.any? ||
+    active_admin_config.page_presenters[:index].try(:size).try(:>, 1) ||
+    assigns[:visible_columns].is_a?(Array)
+end
+
+# YETI: extra toolbar controls. Currently the visible-columns toggle (+ reset);
+# the hidden dialog itself is rendered by ActiveAdmin::Views::IndexAsTable.
+# Icon-only, with the label in `title` as a tooltip, to keep the toolbar compact.
+def build_additional_tools
+  return unless assigns[:visible_columns].is_a?(Array)
+
+  span id: 'additional_table_tools' do
+    a href: '#', id: 'toggle_block_available_columns', class: 'table_tools_button', title: 'Visible columns' do
+      span class: 'fa fa-columns'
+    end
+    if assigns[:visible_columns].any?
+      a href: '#', id: 'reset_visible_columns', class: 'table_tools_button', title: 'Reset visible columns' do
+        span class: 'fa fa-undo'
+      end
+    end
+  end
+end
+
+def build_scopes
+  if active_admin_config.scopes.any?
+    scope_options = { scope_count: page_presenter.fetch(:scope_count, true) }
+    insert_tag(ActiveAdmin::Views::Scopes, active_admin_config.scopes, scope_options)
+  end
+end
+
+def build_index_list
+  indexes = active_admin_config.page_presenters[:index]
+
+  if indexes.is_a?(Hash) && indexes.length > 1
+    index_classes = []
+    active_admin_config.page_presenters[:index].each_value do |page_presenter|
+      index_classes << find_index_renderer_class(page_presenter[:as])
+    end
+
+    insert_tag(ActiveAdmin::Views::IndexList, index_classes)
+  end
+end
+
+# Returns the actual class for rendering the main content on the index
+# page. To set this, use the :as option in the page_presenter block.
+def find_index_renderer_class(klass)
+  if klass.is_a?(Class)
+    klass
+  else
+    ::ActiveAdmin::Views.const_get('IndexAs' + klass.to_s.camelcase)
+  end
+end
+
+def render_index
+  renderer_class = find_index_renderer_class(page_presenter[:as])
+
+  paginator = page_presenter.fetch(:paginator, true)
+  download_links = page_presenter.fetch(:download_links, active_admin_config.namespace.download_links)
+  pagination_total = page_presenter.fetch(:pagination_total, true)
+  per_page = page_presenter.fetch(:per_page, active_admin_config.per_page)
+
+  paginated_collection(
+    collection, entry_name: active_admin_config.resource_label,
+                entries_name: active_admin_config.plural_resource_label(count: collection_size),
+                download_links: download_links,
+                paginator: paginator,
+                per_page: per_page,
+                pagination_total: pagination_total
+  ) do
+    insert_tag(renderer_class, page_presenter, collection)
+  end
+end
+
+# YETI: state classes consumed by sidebar_filter_actions.js / sorting_persist.js.
+def main_content_classes
+  classes = ['main-content-container']
+  classes << 'with_default_filters' if assigns.fetch(:default_filters_present, false)
+  classes << 'with_persistent_filters' if assigns.fetch(:persistent_filter, false)
+  classes << 'with_persistent_sorting' if assigns.fetch(:persistent_sorting, false)
+  classes.join(' ')
+end
+
+div id: 'active_admin_content', class: main_content_classes do # YETI: id + classes
+  wrap_with_batch_action_form do
+    build_table_tools
+    build_collection
+  end
+end

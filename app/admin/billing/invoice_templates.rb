@@ -4,7 +4,8 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
   menu parent: %w[Billing Settings], label: 'Invoice templates', priority: 90
   config.batch_actions = false
   actions :all # :index,:create, :new, :destroy, :delete, :edit, :update
-  before_action :left_sidebar!
+  # `before_action :left_sidebar!` removed with the active_admin_sidebar gem;
+  # ActiveAdmin 4 has no sidebar-position option.
 
   permit_params :name, :html_template
 
@@ -22,7 +23,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
   end
 
   action_item :playground, only: :show do
-    link_to 'Template Playground', template_playground_path(template_id: resource.id)
+    action_item_link 'Template Playground', template_playground_path(template_id: resource.id)
   end
 
   index do
@@ -62,6 +63,6 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
       end
     end
 
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

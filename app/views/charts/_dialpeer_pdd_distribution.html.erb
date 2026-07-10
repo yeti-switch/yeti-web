@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#termination-chart']").on("click", function () {
+    $(".tabs [data-tab-target='#termination-chart']").on("click", function () {
       $.getJSON("/remote_stats/<%= params[:id] %>/dialpeer_pdd_distribution.json", function (json) {
         Charts.renderBar('dialpeer-pdd-chart', json, {
           placeholderId: 'chart-placeholder-account',

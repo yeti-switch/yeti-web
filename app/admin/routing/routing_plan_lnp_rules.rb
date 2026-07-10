@@ -6,8 +6,6 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   # acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_async_destroy('Lnp::RoutingPlanLnpRule')
-  acts_as_async_update BatchUpdateForm::RoutingPlanLnpRule
 
   acts_as_delayed_job_lock
 
@@ -40,7 +38,7 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   filter :dst_prefix
   filter :routing_plan, input_html: { class: 'tom-select' }, collection: proc { Routing::RoutingPlan.pluck(:name, :id) }
   filter :database, input_html: { class: 'tom-select' }, collection: proc { Lnp::Database.pluck(:name, :id) }
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
 
   show do |_s|
     attributes_table do

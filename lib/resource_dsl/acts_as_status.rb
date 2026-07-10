@@ -31,13 +31,13 @@ module ResourceDSL
 
       action_item :enable, only: %i[show edit] do
         if resource.disabled? && authorized?(:enable) && (!resource.respond_to?(:live?) || resource.live?)
-          link_to 'Enable', action: :enable, id: resource.id
+          action_item_link 'Enable', action: :enable, id: resource.id
         end
       end
 
       action_item :disable, only: %i[show edit] do
         if resource.enabled? && authorized?(:disable) && (!resource.respond_to?(:live?) || resource.live?)
-          link_to 'Disable ', action: :disable, id: resource.id
+          action_item_link 'Disable ', action: :disable, id: resource.id
         end
       end
     end

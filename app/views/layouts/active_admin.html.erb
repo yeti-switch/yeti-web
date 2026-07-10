@@ -1,0 +1,35 @@
+<%# Overrides ActiveAdmin 4's layout. Keep in sync with the gem on upgrade. %>
+<!doctype html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <title><%= html_head_site_title %></title>
+  <%= render "active_admin/html_head" %>
+</head>
+<body class="bg-white dark:bg-gray-950/95 text-gray-950 dark:text-gray-100 antialiased">
+  <%= render "active_admin/site_header", title: site_title %>
+  <%# `xl:ms-60` (the left gutter reserving space for the sidebar rail) removed:
+      the main menu now lives horizontally in the site header. The top padding
+      clears the fixed header and must match its height (h-[37px]). %>
+  <%# id="page_wrapper": on index pages this grows to the width of the (unwrapped,
+      possibly very wide) table, so the page header can stick to the left of the
+      scrollport. See yeti_admin.css.scss. %>
+  <div id="page_wrapper" class="pt-[37px]">
+    <%= render "active_admin/main_navigation" %>
+    <%= render "active_admin/page_header", title: @page_title || page_title %>
+    <%= render "active_admin/flash_messages" %>
+    <%# Sidebar on the LEFT, ActiveAdmin 3 style. The gem uses a grid whose first
+        child lands in the single explicit `1fr` column and the second in an
+        implicit 250px one — so simply reordering would give the sidebar the wide
+        column. Flex instead: the sidebar sets its own width and the content grows.
+        `_sidebar` renders nothing when skipped, so the content still fills the row. %>
+    <%# px-4 (not the gem's px-2.5 lg:px-5) so the content gutter matches the page
+        header's px-4 at every breakpoint — the sidebar and the page title line up.
+        gap-4 (not gap-4 lg:gap-6) so the sidebar-to-content gap is that same 16px. %>
+    <div data-test-page-content class="px-4 flex flex-col lg:flex-row gap-4">
+      <%= render "active_admin/sidebar" %>
+      <div class="min-w-0 grow"><%= yield %></div>
+    </div>
+    <%= render "active_admin/site_footer" %>
+  </div>
+</body>
+</html>
