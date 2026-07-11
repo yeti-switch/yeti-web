@@ -15,6 +15,7 @@ RSpec.describe BatchUpdateForm::Gateway do
       rtp_ping: 'false',
       proxy_media: 'true',
       host: 'host.example.com',
+      codec_group_id: '1',
       filter_noaudio_streams: 'true',
       try_avoid_transcoding: 'false',
       single_codec_in_200ok: 'true',
@@ -63,6 +64,7 @@ RSpec.describe BatchUpdateForm::Gateway do
     it { is_expected.to_not allow_value('0.1').for :weight }
 
     # media
+    it { is_expected.to_not allow_value('', ' ').for :codec_group_id }
     it { is_expected.to allow_value('rtp0').for :rtp_interface_name }
     it { is_expected.to_not allow_value('rtp 0').for :rtp_interface_name }
     it { is_expected.to allow_value('192.168.0.0/24, 10.0.0.1').for :rtp_acl }

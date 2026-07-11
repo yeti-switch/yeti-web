@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# ActiveAdmin's default string predicates, with "equals" first instead of "contains".
+STRING_FILTERS = %i[eq cont start end].freeze
+
 ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   menu parent: 'CDR', priority: 95, label: 'CDR history'
 
@@ -82,9 +85,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
                           label: 'Customer Auth',
                           scope: -> { CustomersAuth.order(:name) },
                           path: '/customers_auths/search'
-  filter :src_prefix_routing, filters: %i[equals contains starts_with ends_with]
+  filter :src_prefix_routing, filters: STRING_FILTERS
   filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'tom-select' }
-  filter :dst_prefix_routing, filters: %i[equals contains starts_with ends_with]
+  filter :dst_prefix_routing, filters: STRING_FILTERS
   filter :dst_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'tom-select' }
 
   country_filter :src_country_id_eq, label: 'SRC Country'
@@ -151,30 +154,30 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
            multiple: true,
            'data-path': '/disconnect_codes/search'
          }
-  filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :internal_disconnect_reason, filters: STRING_FILTERS
   filter :lega_disconnect_code
-  filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :lega_disconnect_reason, filters: STRING_FILTERS
   filter :lega_q850_cause_eq, label: 'LegA Q.850 cause', as: :select, collection: System::Q850::CAUSES.invert, input_html: { class: 'tom-select' }
 
   filter :legb_disconnect_code
-  filter :legb_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+  filter :legb_disconnect_reason, filters: STRING_FILTERS
   filter :legb_q850_cause_eq, label: 'LegB Q.850 cause', as: :select, collection: System::Q850::CAUSES.invert, input_html: { class: 'tom-select' }
 
-  filter :src_prefix_in, as: :string_eq
-  filter :dst_prefix_in, as: :string_eq
-  filter :src_prefix_out, filters: %i[equals contains starts_with ends_with]
-  filter :dst_prefix_out, filters: %i[equals contains starts_with ends_with]
-  filter :lrn, filters: %i[equals contains starts_with ends_with]
-  filter :diversion_in, as: :string_eq
-  filter :diversion_out, as: :string_eq
-  filter :src_name_in, as: :string_eq
-  filter :src_name_out, as: :string_eq
+  filter :src_prefix_in, filters: STRING_FILTERS
+  filter :dst_prefix_in, filters: STRING_FILTERS
+  filter :src_prefix_out, filters: STRING_FILTERS
+  filter :dst_prefix_out, filters: STRING_FILTERS
+  filter :lrn, filters: STRING_FILTERS
+  filter :diversion_in, filters: STRING_FILTERS
+  filter :diversion_out, filters: STRING_FILTERS
+  filter :src_name_in, filters: STRING_FILTERS
+  filter :src_name_out, filters: STRING_FILTERS
   filter :node, input_html: { class: 'tom-select' }
   filter :pop, input_html: { class: 'tom-select' }
-  filter :local_tag, filters: %i[equals contains starts_with ends_with]
-  filter :legb_local_tag, filters: %i[equals contains starts_with ends_with]
-  filter :orig_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
-  filter :term_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
+  filter :local_tag, filters: STRING_FILTERS
+  filter :legb_local_tag, filters: STRING_FILTERS
+  filter :orig_call_id, as: :string, filters: STRING_FILTERS
+  filter :term_call_id, as: :string, filters: STRING_FILTERS
   filter :routing_attempt
   filter :customer_price
   filter :vendor_price
@@ -182,16 +185,16 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_delay
   filter :pdd
   filter :rtt
-  filter :p_charge_info_in, as: :string_eq
+  filter :p_charge_info_in, filters: STRING_FILTERS
   filter :uuid_equals, label: 'UUID'
   filter :auth_orig_ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
          label: I18n.t('activerecord.attributes.cdr.auth_orig_ip')
-  filter :sign_orig_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_orig_local_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
+  filter :sign_orig_ip, filters: STRING_FILTERS
+  filter :sign_orig_local_ip, filters: STRING_FILTERS
+  filter :sign_term_local_ip, filters: STRING_FILTERS
+  filter :sign_term_ip, filters: STRING_FILTERS
   filter :customer_auth_external_type_eq, as: :string, label: 'CUSTOMER AUTH EXTERNAL TYPE'
   filter :lega_ss_status_id_eq, label: 'LegA SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'tom-select' }
   filter :legb_ss_status_id_eq, label: 'LegB SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'tom-select' }
