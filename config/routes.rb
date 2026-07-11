@@ -3,19 +3,19 @@
 Rails.application.routes.draw do
   def dasherized_namespace(name, options = {}, &block)
     options[:path] = name.to_s.dasherize
-    namespace(name.to_s.underscore.to_sym, options, &block)
+    namespace(name.to_s.underscore.to_sym, **options, &block)
   end
 
   def dasherized_resources(name, options = {}, &block)
     options[:controller] ||= name.to_s.underscore.to_sym
     options[:as] ||= name.to_s.underscore.to_sym
-    resources(name.to_s.dasherize.to_sym, options, &block)
+    resources(name.to_s.dasherize.to_sym, **options, &block)
   end
 
   def dasherized_resource(name, options = {}, &block)
     options[:controller] ||= name.to_s.underscore.to_sym
     options[:as] ||= name.to_s.underscore.to_sym
-    resource(name.to_s.dasherize.to_sym, options, &block)
+    resource(name.to_s.dasherize.to_sym, **options, &block)
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
