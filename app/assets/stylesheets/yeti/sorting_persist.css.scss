@@ -1,11 +1,11 @@
 // Icon-only sort-persistence toggle, sitting at the right edge of the index
-// table's id column header (th.col-id).
+// table's id column header.
 //
-// The icon is an <a>; both the theme's link-colour rule and its th-padding rule
-// carry ~2 id selectors (#wrapper #active_admin_content …). Match that with a
-// leading #wrapper so our padding/positioning actually wins — otherwise the
-// reserved right padding is dropped and the icon lands on top of the "Id" label.
-#wrapper #active_admin_content table.index_table thead th.col-id {
+// Rescoped for ActiveAdmin 4: the table is `table.data-table` (was
+// `table.index_table`), header cells carry `data-column` instead of `col-*`
+// classes, and there is no `#wrapper`. The old selector matched nothing, so the
+// toggle rendered unpositioned. sorting_persist.js anchors on the same cell.
+#active_admin_content table.data-table thead th[data-column="id"] {
 
   // Anchor the absolutely-positioned icon to this cell, and reserve room on the
   // right so it never overlaps the "Id" sort link or the sorted-arrow.
@@ -24,6 +24,11 @@
     bottom: 0;
     display: flex;
     align-items: center;
+    // ActiveAdmin 4's plugin styles every header link as `flex gap-2`
+    // (`.data-table :where(thead > tr > th > a)`), and this toggle is a th > a.
+    // That 8px gap, plus the 4px on .sort_arrows, pushed the padlock and the
+    // arrows 12px apart. Zero it and let .sort_arrows own the spacing.
+    column-gap: 0;
     // This anchor lives inside th.sortable, so AA's `th.sortable a` rule paints
     // its orderable sprite (a chevron) to our left and adds padding-left for it.
     // Null both so the toggle shows only the padlock glyph.
@@ -46,7 +51,7 @@
       vertical-align: middle;
     }
     .sort_arrows {
-      margin-left: 4px;
+      margin-left: 2px;
     }
   }
 

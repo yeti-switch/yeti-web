@@ -10,23 +10,27 @@ ActiveAdmin.register Lnp::Database do
 
   acts_as_export :id, :name
 
+  # ActiveAdmin 4 renders action_item blocks in an ERB context, so Arbre builder
+  # methods need an explicit Arbre::Context. See ResourceDSL::ActsAsStat.
   action_item :new_databases, only: [:index] do
-    dropdown_menu 'New Lnp Database' do
-      item Lnp::Database::CONST::TYPE_NAME_THINQ,
-           action: :new,
-           lnp_database: { database_type: Lnp::Database::CONST::TYPE_THINQ }
-      item Lnp::Database::CONST::TYPE_NAME_SIP_REDIRECT,
-           action: :new,
-           lnp_database: { database_type: Lnp::Database::CONST::TYPE_SIP_REDIRECT }
-      item Lnp::Database::CONST::TYPE_NAME_CSV,
-           action: :new,
-           lnp_database: { database_type: Lnp::Database::CONST::TYPE_CSV }
-      item Lnp::Database::CONST::TYPE_NAME_ALCAZAR,
-           action: :new,
-           lnp_database: { database_type: Lnp::Database::CONST::TYPE_ALCAZAR }
-      item Lnp::Database::CONST::TYPE_NAME_COURE_ANQ,
-           action: :new,
-           lnp_database: { database_type: Lnp::Database::CONST::TYPE_COURE_ANQ }
+    Arbre::Context.new({}, self) do
+      dropdown_menu 'New Lnp Database' do
+        item Lnp::Database::CONST::TYPE_NAME_THINQ,
+             action: :new,
+             lnp_database: { database_type: Lnp::Database::CONST::TYPE_THINQ }
+        item Lnp::Database::CONST::TYPE_NAME_SIP_REDIRECT,
+             action: :new,
+             lnp_database: { database_type: Lnp::Database::CONST::TYPE_SIP_REDIRECT }
+        item Lnp::Database::CONST::TYPE_NAME_CSV,
+             action: :new,
+             lnp_database: { database_type: Lnp::Database::CONST::TYPE_CSV }
+        item Lnp::Database::CONST::TYPE_NAME_ALCAZAR,
+             action: :new,
+             lnp_database: { database_type: Lnp::Database::CONST::TYPE_ALCAZAR }
+        item Lnp::Database::CONST::TYPE_NAME_COURE_ANQ,
+             action: :new,
+             lnp_database: { database_type: Lnp::Database::CONST::TYPE_COURE_ANQ }
+      end
     end
   end
 

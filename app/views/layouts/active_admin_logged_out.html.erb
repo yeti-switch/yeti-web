@@ -1,0 +1,29 @@
+<%# Overrides ActiveAdmin 4's layout. Keep in sync with the gem on upgrade.
+
+    Deltas:
+      - `pt-[70px]` instead of `justify-center`: ActiveAdmin 3 sat the card near
+        the top of the page (`#content_wrapper { margin: 70px auto }`), not in the
+        middle of the viewport.
+      - the flash messages are taken out of the flow. The gem renders them as the
+        first child of this column, so "Invalid username or password." pushes the
+        card down by its height — the card jumps between the first and the second
+        attempt, right as the user is aiming at the field. Absolutely positioned,
+        they hang above it and the card stays put. %>
+<!doctype html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <title><%= html_head_site_title %></title>
+  <%= render "active_admin/html_head" %>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-950 dark:text-gray-100 antialiased">
+  <div class="relative flex flex-col items-center min-h-screen pt-[70px] px-4 mx-auto">
+    <%# Width-matched to the card so their edges line up. `-mb-8` cancels the
+        partial's own bottom margin, and the 70px of padding above the card is
+        exactly the room a one-line message needs. %>
+    <div class="absolute top-2 w-full max-w-[500px] -mb-8">
+      <%= render "active_admin/flash_messages" %>
+    </div>
+    <%= yield %>
+  </div>
+</body>
+</html>

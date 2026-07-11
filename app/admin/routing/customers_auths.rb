@@ -7,8 +7,6 @@ ActiveAdmin.register CustomersAuth do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
-  acts_as_async_destroy('CustomersAuth')
-  acts_as_async_update BatchUpdateForm::CustomersAuth
 
   acts_as_delayed_job_lock
 

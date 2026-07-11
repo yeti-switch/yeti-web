@@ -1,0 +1,31 @@
+{
+  "name": "yeti-web",
+  "version": "1.0.0",
+  "description": "![Tests](https://github.com/yeti-switch/yeti-web/workflows/Tests/badge.svg?branch=master) ![Coverage Status](https://img.shields.io/badge/Code%20Coverage-87%25-success?style=flat) [![Made in Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/active_admin.tailwind.css -o ./app/assets/builds/active_admin.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitry-sinina/yeti-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmitry-sinina/yeti-web/issues"
+  },
+  "homepage": "https://github.com/dmitry-sinina/yeti-web#readme",
+  "type": "module",
+  "dependencies": {
+    "@activeadmin/activeadmin": "^4.0.0-beta22",
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}

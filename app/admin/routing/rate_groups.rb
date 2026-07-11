@@ -32,7 +32,7 @@ ActiveAdmin.register Routing::RateGroup do
       row :rateplans
       row :external_id
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   form do |f|

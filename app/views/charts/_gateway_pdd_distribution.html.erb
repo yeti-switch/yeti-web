@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#charts']").on("click", function () {
+    $(".tabs [data-tab-target='#charts']").on("click", function () {
       $.getJSON("/remote_stats/<%= params[:id] %>/gateway_pdd_distribution.json", function (json) {
         Charts.renderBar('gateway-pdd-chart', json, {
           placeholderId: 'chart-placeholder-gateway-pdd',

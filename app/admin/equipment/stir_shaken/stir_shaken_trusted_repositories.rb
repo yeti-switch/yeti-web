@@ -35,6 +35,6 @@ ActiveAdmin.register Equipment::StirShaken::TrustedRepository do
       row :validate_https_certificate
       row :updated_at
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

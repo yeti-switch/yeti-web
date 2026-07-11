@@ -1,15 +1,22 @@
+// Yeti's own admin JS bundle (was active_admin.js under ActiveAdmin 3; renamed
+// so it cannot shadow the gem's `active_admin` asset, which the importmap pins).
+// ActiveAdmin 4's own JS ships as an ES module via importmap and no longer
+// bundles jQuery, so `active_admin/base` is gone. jQuery stays because the
+// scripts below still depend on it.
 //= require jquery3
 //= require jquery-ui/widgets/tooltip
+// index_as_table_visible_columns.js opens the "Visible columns" chooser with
+// jQuery UI's dialog. ActiveAdmin 3 loaded the whole of jQuery UI; AA4 loads no
+// jQuery at all, so the widget has to be required explicitly.
+//= require jquery-ui/widgets/dialog
 //= require jquery-tablesorter
 //= require jquery.dependent.fields
-//= require active_admin/base
 //= require gateway_form
 //= require table_highlights
 //= require import_form
 //= require panel_toggle
 //= require action_buttons
 //= require server_clock
-//= require theme_toggle
 //= require scrollbar_width
 //= require tooltip
 //= require dependent_fields
@@ -19,12 +26,8 @@
 //= require charts
 //= require cdr_stats
 //= require active_calls
-//= require active_admin_sidebar
 
 //= require active_admin_date_range_preset
-//= require active_admin_datetimepicker
-//= require datetimepicker_dark
-//= require active_admin_scoped_collection_actions
 //= require mousewheel_disable
 //= require clear_filters
 //= require debug_call_form
@@ -32,7 +35,6 @@
 //= require index_as_table_visible_columns
 //= require sidebar_filter_actions
 //= require sorting_persist
-//= require modal_confirm_fix
 //= require password-toggle
 //= require template_playground
 
@@ -74,10 +76,6 @@ $(document).ready(function () {
             });
         }
 
-    });
-
-    $('form.filter_form div.filter_date_time_range').date_range_ext_preset({
-        show_time: true
     });
 
     $('form.formtastic li.datetime_preset_pair').date_range_ext_preset({

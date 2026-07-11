@@ -1,17 +1,35 @@
-// Wrap customizations in #active_admin_content to increase styles priority,
-// because due to bugs in sass compiling tom-select own css loaded after active admin styles,
-// see config/initializers/active_admin.rb
+// Sizes are px, not em. `0.95em` was written against ActiveAdmin 3's 11.52px body
+// (`body.active_admin { font-size: 72% }`), i.e. 10.9px; against AA4's 14px base
+// the same declaration renders 13.3px, and it moves again whenever the enclosing
+// font changes. (`height: 1.15em` and the `--ts-pr-*` paddings stay em: they are
+// relative to the control's OWN font-size, which is now pinned.)
+//
+// tom-select ships its own stylesheet, which `active_admin/_html_head` loads
+// AFTER ours, so every rule here has to out-specify it rather than merely follow
+// it. Under ActiveAdmin 3 that was done by nesting the file in
+// `#active_admin_content` (an id, specificity 1,0,0).
+//
+// ActiveAdmin 4 renders that id only on index pages, and the filters sidebar is
+// now a SIBLING of the content div rather than a child — so the id scope covered
+// neither the forms (new/edit) nor the filters. Every rule below was dead, and
+// tom-select rendered stock: a white 47px control in a dark 29px-input theme.
+//
+// `html body` is used instead. It adds two element selectors (0,0,2), which
+// beats tom-select's own class-only rules at equal class count, and it matches
+// on every page.
 
 // Dark-mode scope helper. This file compiles as a separate asset (require_tree
 // in yeti.css), so the theme's `aa-dark` mixin isn't visible here — re-declare
-// the same two triggers. The --aa-* custom properties ARE global at runtime, so
-// the theme's dark palette is available. Use at the top level (see end of file).
+// it. ActiveAdmin 4 puts `.dark` on <html>; keying off prefers-color-scheme and
+// [data-theme] (as this did) never matched. The --aa-* custom properties ARE
+// global at runtime, so the theme's dark palette is available.
 @mixin ts-dark {
-  @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) { @content; } }
-  html[data-theme="dark"] { @content; }
+  html.dark {
+    @content;
+  }
 }
 
-#active_admin_content {
+html body {
 
   // Width variants for Tom Select
   .ts-wrapper.tom-select {
@@ -44,17 +62,27 @@
     }
   }
 
-  // Match ActiveAdmin form styling
+  // Match the native form controls. The tokens keep the widget the same height,
+  // radius and colour as a plain <input> in both palettes; zero vertical padding
+  // + centering means the control is exactly --aa-input-height, whatever it is
+  // set to (tom-select's own 8px/8px padding would otherwise add 16px).
+  //
+  // These have to be set here, not only in yeti_admin.css.scss: that file scopes
+  // its input rules to [data-test-page-content], and the filters sidebar is a
+  // sibling of the content div, so its widgets are not covered by them.
   .ts-wrapper {
     .ts-control {
-      border: 1px solid #A1A7B2;
-      border-radius: 3px;
-      min-height: 28px;
-      background-color: #f7f7f9;
+      border: 1px solid var(--aa-input-border);
+      border-radius: var(--aa-radius);
+      min-height: var(--aa-input-height);
+      padding-top: 0;
+      padding-bottom: 0;
+      align-items: center;
+      background-color: var(--aa-input-bg);
     }
 
     .ts-dropdown {
-      border: 1px solid #A1A7B2;
+      border: 1px solid var(--aa-input-border);
 
       // Match control width; long option text wraps within the dropdown.
       // Avoiding width: max-content prevents the absolutely-positioned dropdown
@@ -93,15 +121,21 @@
     // height stays driven by the label text. border-left: 0 drops the vertical
     // separator the remove_button plugin draws between the label and the ×.
     .remove {
-      font-size: 1.7em;
+      font-size: 22px;
       line-height: 0; // glyph no longer contributes height, so the chip height
       border-left: 0;  // stays driven by the label regardless of icon size
       margin-left: 0;  // drop the plugin's separator spacing (keep its padding)
     }
   }
 
-  // caret icon
+  // caret icon.
+  //
+  // `background-color` is repeated here because tom-select's own
+  // `.ts-wrapper.single.input-active .ts-control { background: #fff }` (three
+  // classes) out-specifies the two-class base rule above: clicking a single
+  // select turned it white, which only shows in dark mode.
   .ts-wrapper.single .ts-control, .ts-wrapper.single.input-active .ts-control {
+    background-color: var(--aa-input-bg);
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
     background-position: right .55rem center;
     background-repeat: no-repeat;
@@ -121,7 +155,7 @@
   // Always show clear button when a value is selected
   .ts-wrapper.plugin-clear_button.has-items .clear-button {
     opacity: 1;
-    font-size: 1.6em;
+    font-size: 21px;
   }
 
   // When dropdown opens on an empty select, tom-select hides .items-placeholder
@@ -145,16 +179,15 @@
 
       .ts-control {
         width: 100%;
-        font-size: 0.95em;
+        font-size: 13px;
         line-height: 1.15;
         align-items: center;
-        padding: 2px 8px;
+        padding: 0 8px;
         row-gap: 3px; // spacing between wrapped chip rows (not the first row)
-        // match the other form selects: 1.15em content + 18px overhead
-        min-height: calc(1.15em + 18px);
+        min-height: var(--aa-input-height);
 
         input {
-          font-size: 0.95em;
+          font-size: 13px;
           line-height: 1.15;
         }
 
@@ -211,16 +244,13 @@
           text-overflow: ellipsis;
           max-width: 100%;
         }
-        font-size: 0.95em;
+        font-size: 13px;
         border: 1px solid #e6e9ee;
         line-height: 1.15;
-        // Prevent height change when transitioning empty→filled for the first time.
-        // box-sizing:border-box (tom-select default): 8px top pad + 8px bottom pad
-        // + 1px top border + 1px bottom border = 18px overhead; content = 1.15em.
-        min-height: calc(1.15em + 18px);
+        min-height: var(--aa-input-height);
 
         input {
-          font-size: 0.95em;
+          font-size: 13px;
           line-height: 1.15;
         }
 
@@ -236,28 +266,37 @@
     }
   }
 
-  form.filter_form .filter_form_field.filter_select {
+  // --- filters sidebar --------------------------------------------------------
+  // ActiveAdmin 4 renamed the filter form's classes: `form.filter_form` is now
+  // `form.filters-form`, `.filter_form_field` is `.filters-form-field`, and the
+  // predicate+value pair `.select_and_search` is `.filters-form-input-group`.
+  // The rules that used to live here matched none of them, so the sidebar's
+  // widgets fell back to the 350px width variants above and overflowed the
+  // 250px sidebar.
+  //
+  // Scoped to `#sidebar` rather than to the new class names: the sidebar is what
+  // constrains the width, and this survives the gem renaming its classes again.
+  // The id also out-specifies the `.ts-wrapper.tom-select` width variants.
+  #sidebar {
     .ts-wrapper {
       display: block;
-      // Full sidebar content width so the dropdown's left/right edges align
-      // with the other filter inputs (was fit-content + fixed 220px, which
-      // left a large asymmetric gap on the right).
       width: 100%;
+      min-width: 0;   // undo the 350px min-width of the form variants
+      max-width: 100%;
 
       .ts-control {
         width: 100%;
-        padding: 8px 10px 7px;
-        font-size: 0.95em;
+        padding: 0 10px;
+        font-size: 13px;
         line-height: 1.15;
-        // padding: 8+7px + border: 1+1px = 17px overhead (box-sizing:border-box)
-        min-height: calc(1.15em + 17px);
+        min-height: var(--aa-input-height);
 
         > .item {
           word-break: break-word;
         }
 
         input {
-          font-size: 0.95em;
+          font-size: 13px;
           line-height: 1.15;
           // below fixes width applied by active admin styles
           width: unset;
@@ -271,9 +310,9 @@
       }
 
       // Multi-select: small, symmetric padding and align-items:center so the
-      // chips sit tight and vertically centered in the control. Keep the base
-      // min-height (1.15em + 17px) so an empty multiselect is the same height as
-      // the single-select inputs; the chip just centers within that height.
+      // chips sit tight and vertically centered in the control. The base
+      // min-height (--aa-input-height) keeps an empty multiselect the same height
+      // as the single-select inputs; the chip just centers within that height.
       &.multi .ts-control {
         align-items: center;
         padding: 2px 8px 2px 4px;
@@ -283,75 +322,15 @@
         }
       }
     }
-  }
 
-  // Operator filters (text with contains/equals/starts/ends, and integer
-  // eq/gt/lt). ActiveAdmin's SearchMethodSelect renders a predicate <select>
-  // (turned into a tom-select widget) plus a value <input>. Lay the field out
-  // with flexbox: the label takes its own full row, then the predicate widget
-  // and the value input share one row and together fill the full sidebar
-  // content width, so both edges align with the other filters.
-  form.filter_form .filter_form_field.select_and_search {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    column-gap: 6px;
-    row-gap: 4px;
-
-    > label {
-      flex: 1 0 100%;
-    }
-
-    // Keep tom-select's hidden original <select> out of the flex flow.
-    // tom-select normally makes it screen-reader-only (position:absolute);
-    // it must NOT be a flex item, otherwise it consumes a wrap row and
-    // pushes the value input onto its own line.
-    > select.tomselected,
-    > select.ts-hidden-accessible {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      border: 0;
-    }
-
-    // Visible predicate widget, or a native <select> fallback when the
-    // predicate is not turned into a tom-select.
-    // Predicate column: just wide enough for the longest short label
-    // ("Greater", ~43px) plus padding and the dropdown caret. Fixed px so it
-    // stays compact and the value input gets the rest of the row.
-    > select:not(.tomselected),
-    .ts-wrapper {
-      flex: 0 0 72px;
-      width: 72px;
-      display: block;
-    }
-
-    // flex-basis 0 (not auto): the input must not claim its intrinsic ~20-char
-    // width, otherwise predicate(38%) + input(intrinsic) exceeds the row and it
-    // wraps onto its own line. With basis 0 it packs next to the predicate and
-    // grows to fill the remaining width.
-    input[type=text],
-    input[type=text].search_filter_string {
-      flex: 1 1 0;
-      width: auto;
-      min-width: 0;
-      margin-left: 0;
-    }
-
-    .ts-wrapper .ts-control {
-      padding: 4.8px 10px 4.8px;
-
-      > .item {
-        word-break: break-word;
-      }
-
-      input {
-        font-size: 0.95em;
-      }
+    // Operator filters (text with contains/equals/starts/ends, integer eq/gt/lt).
+    // ActiveAdmin 4 lays the predicate <select> and the value <input> out itself,
+    // as `.filters-form-input-group { grid grid-cols-2 gap-2 }` — the flex layout
+    // this file used to impose is no longer needed. Only the predicate widget's
+    // share of the row is narrowed: "Greater" is the longest label, so half the
+    // sidebar is far more than it needs and the value input gets the rest.
+    .filters-form-input-group {
+      grid-template-columns: 84px minmax(0, 1fr);
     }
   }
 }
@@ -361,7 +340,7 @@
 // with the rest of the tom-select styling, using the theme's --aa-* custom
 // properties. Selectors mirror (and slightly out-specify) the light rules above.
 @include ts-dark {
-  #active_admin_content {
+  body {
     .ts-wrapper .ts-control {
       background-color: var(--aa-input-bg);
       border-color: var(--aa-input-border);

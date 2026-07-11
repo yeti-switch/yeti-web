@@ -14,7 +14,7 @@ gem 'rails', '~> 8.0.0'
 gem 'responders'
 
 # Authentication
-gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
+gem 'activeadmin-oidc', '~> 2.1'
 gem 'devise', '>= 4.6.0'
 gem 'doorkeeper', '~> 5.9'
 gem 'ostruct', '~> 0.6.3'
@@ -25,18 +25,15 @@ gem 'jwt'
 gem 'jquery-ui-rails'
 
 # ActiveAdmin
-gem 'activeadmin'
+gem 'activeadmin', '4.0.0.beta22'
 gem 'active_admin_date_range_preset', github: 'activeadmin-plugins/active_admin_date_range_preset'
-gem 'active_admin_datetimepicker'
 gem 'active_admin_import'
-gem 'active_admin_scoped_collection_actions'
-gem 'active_admin_theme', github: 'yeti-switch/active_admin_theme', branch: 'dark_mode'
+gem 'cssbundling-rails'
 gem 'draper'
+gem 'importmap-rails'
 gem 'ransack'
 
 gem 'jrpc', github: 'didww/jrpc'
-
-gem 'active_admin_sidebar', '~> 3.0'
 
 # XLS generation
 # can be switched back to the original repo after ruby 3 fix PR merged

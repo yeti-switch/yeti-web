@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#charts']").on("click", function () {
+    $(".tabs [data-tab-target='#charts']").on("click", function () {
       Charts.renderRanged({
         url: "/remote_stats/<%= params[:id] %>/term_gateway.json",
         canvasId: 'term-gw-chart',

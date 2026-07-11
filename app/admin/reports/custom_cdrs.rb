@@ -23,9 +23,9 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
 
   filter :id_eq, label: 'ID'
   boolean_filter :completed
-  filter :date_start, as: :date_time_range
-  filter :date_end, as: :date_time_range
-  filter :created_at, as: :date_time_range
+  filter :date_start, as: :date_range
+  filter :date_end, as: :date_range
+  filter :created_at, as: :date_range
   filter :group_by_any, as: :select,
                         label: 'Group By',
                         collection: Report::CustomCdr::CDR_COLUMNS,
@@ -59,14 +59,14 @@ ActiveAdmin.register Report::CustomCdr, as: 'CustomCdr' do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :date_start,
-              as: :date_time_picker,
+              as: :datetime_picker,
               wrapper_html: {
                 class: 'datetime_preset_pair',
                 data: { show_time: 'true' }
               }
 
       f.input :date_end,
-              as: :date_time_picker
+              as: :datetime_picker
 
       f.contractor_input :customer_id,
                          label: 'Customer',

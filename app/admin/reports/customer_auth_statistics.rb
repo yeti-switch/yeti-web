@@ -16,7 +16,7 @@ ActiveAdmin.register Stats::CustomerAuthStats, as: 'Customer Auth Statistic' do
   filter :customer_price
   filter :customer_price_no_vat
   filter :duration
-  filter :timestamp, as: :date_time_range
+  filter :timestamp, as: :date_range
   filter :vendor_price
   filter :customer_auth, input_html: { class: 'tom-select' }
 

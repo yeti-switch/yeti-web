@@ -7,7 +7,9 @@ $(document).ready(function () {
     //   spinner         -> request in flight; the icon only swaps once the
     //                      server confirms with a 200.
     // Only shown on index pages that render an id column header.
-    var $bar = $('table.index_table thead th.col-id').first();
+    // ActiveAdmin 4 renders `table.data-table` and tags header cells with
+    // `data-column` instead of AA3's `table.index_table` / `th.col-id`.
+    var $bar = $('table.data-table thead th[data-column="id"]').first();
     if ($bar.length === 0) {
         return;
     }

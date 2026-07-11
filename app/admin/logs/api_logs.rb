@@ -27,7 +27,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
 
   filter :id
   filter :request_id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   filter :path
   filter :method
   filter :tag_eq, label: 'Tag Equals'
@@ -101,6 +101,6 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
       end
       row :remote_ip
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

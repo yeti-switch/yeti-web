@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(document).ready(function () {
-    $("div.tabs a[href='#active-calls-charts']").on("click", function () {
+    $(".tabs [data-tab-target='#active-calls-charts']").on("click", function () {
       Charts.renderRanged({
         url: "/remote_stats/<%= params[:id] %>/account_active_calls.json",
         canvasId: 'account-chart',

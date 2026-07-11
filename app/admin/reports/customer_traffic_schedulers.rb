@@ -40,7 +40,7 @@ ActiveAdmin.register Report::CustomerTrafficScheduler, as: 'CustomerTrafficSched
   end
 
   filter :id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
   show do |_s|

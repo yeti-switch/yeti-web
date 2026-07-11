@@ -70,7 +70,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          collection: proc { tag_action_value_options },
          label: 'With routing tag',
          input_html: { class: 'tom-select' }
-  filter :time_start, as: :date_time_range
+  filter :time_start, as: :date_range
 
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
   account_filter :customer_acc_id_eq, label: 'Customer account'
@@ -260,28 +260,28 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   action_item :lega_rtp_rx_streams, only: :show do
-    link_to('LegA RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
+    action_item_link('LegA RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :lega_rtp_tx_streams, only: :show do
-    link_to('LegA TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
+    action_item_link('LegA TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :legb_rtp_rx_streams, only: :show do
-    link_to('LegB RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
+    action_item_link('LegB RX RTP Streams', rtp_rx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
   action_item :legb_rtp_tx_streams, only: :show do
-    link_to('LegB TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
+    action_item_link('LegB TX RTP Streams', rtp_tx_streams_path(q: { local_tag_eq: resource.legb_local_tag, time_start_gteq_datetime_picker: resource.time_start - 300, time_start_lteq_datetime_picker: resource.time_end + 300 }))
   end
 
   action_item :routing_simulation, only: :show do
-    link_to('Routing simulation', routing_simulation_cdr_path(resource))
+    action_item_link('Routing simulation', routing_simulation_cdr_path(resource))
   end
 
   action_item :log_level_trace, only: :show, if: proc { authorized?(:dump) } do
-    link_to("#{resource.dump_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
+    action_item_link("#{resource.dump_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
   end
 
   action_item :call_record, only: :show, if: proc { authorized?(:download_call_record) } do
-    link_to('Call record', download_call_record_cdr_path(resource)) if resource.has_recording?
+    action_item_link('Call record', download_call_record_cdr_path(resource)) if resource.has_recording?
   end
 
   show do |cdr|

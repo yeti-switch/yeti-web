@@ -7,8 +7,6 @@ ActiveAdmin.register Contractor do
   acts_as_clone
   acts_as_safe_destroy
   acts_as_status
-  acts_as_async_destroy('Contractor')
-  acts_as_async_update BatchUpdateForm::Contractor
 
   acts_as_delayed_job_lock
 
@@ -82,7 +80,7 @@ ActiveAdmin.register Contractor do
       end
 
       tab 'Comments' do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
     end
   end

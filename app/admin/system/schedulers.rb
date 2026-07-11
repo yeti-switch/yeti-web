@@ -99,7 +99,7 @@ ActiveAdmin.register System::Scheduler do
       end
     end
 
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   sidebar :links, only: %i[show edit] do

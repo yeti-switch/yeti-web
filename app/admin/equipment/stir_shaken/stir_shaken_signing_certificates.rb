@@ -52,6 +52,6 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
       row :x5u
       row :updated_at
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

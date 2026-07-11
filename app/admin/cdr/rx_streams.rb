@@ -56,9 +56,9 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
   scope :no_rx, show_count: false
 
   filter :id
-  filter :time_start, as: :date_time_range
-  filter :stream_time_start, as: :date_time_range
-  filter :stream_time_end, as: :date_time_range
+  filter :time_start, as: :date_range
+  filter :stream_time_start, as: :date_range
+  filter :stream_time_end, as: :date_range
   filter :tx_stream_id
   filter :local_tag
   filter :pop

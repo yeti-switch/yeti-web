@@ -30,7 +30,7 @@ ActiveAdmin.register Routing::RoutingGroup do
       row :name
       row :routing_plans
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 
   form do |f|
