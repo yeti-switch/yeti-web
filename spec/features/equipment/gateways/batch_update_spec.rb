@@ -3,6 +3,7 @@
 RSpec.describe BatchUpdateForm::Gateway, :js do
   include_context :login_as_admin
   let!(:_gateways) { FactoryBot.create_list :gateway, 3 }
+  let!(:codec_group) { FactoryBot.create :codec_group }
   let(:pg_max_smallint) { ApplicationRecord::PG_MAX_SMALLINT }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
 
@@ -30,6 +31,7 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
       rtp_ping: true,
       proxy_media: false,
       host: 'host.example.com',
+      codec_group_id: codec_group.id.to_s,
       filter_noaudio_streams: true,
       try_avoid_transcoding: false,
       single_codec_in_200ok: true,
@@ -99,6 +101,11 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
     if assign_params.key? :host
       check :Host
       fill_in :host, with: assign_params[:host]
+    end
+
+    if assign_params.key? :codec_group_id
+      check :Codec_group_id
+      select_by_value assign_params[:codec_group_id], from: :codec_group_id
     end
 
     if assign_params.key? :filter_noaudio_streams

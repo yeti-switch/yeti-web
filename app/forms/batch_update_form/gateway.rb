@@ -12,6 +12,7 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   attribute :host
 
   # media
+  attribute :codec_group_id, type: :foreign_key, class_name: 'CodecGroup'
   attribute :filter_noaudio_streams, type: :boolean
   attribute :try_avoid_transcoding, type: :boolean
   attribute :proxy_media, type: :boolean
@@ -58,6 +59,7 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   }, if: :short_calls_limit_changed?
 
   # media
+  validates :codec_group_id, presence: true, if: :codec_group_id_changed?
   validates :rtp_interface_name, format: { without: /\s/, message: 'must contain no spaces' }, if: :rtp_interface_name_changed?
 
   validate if: :rtp_acl_changed? do
