@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack'
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 8.1.0'
 gem 'responders'
 
 # Authentication
@@ -44,10 +44,9 @@ gem 'active_admin_sidebar', '~> 3.0'
 gem 'excelinator', github: 'senid231/excelinator', branch: 'ruby3-fix'
 
 # REST API
-# TODO: switch to the official gem from rubygems.org after the 0.9.13 release
-# https://github.com/cerebris/jsonapi-resources/issues/1456#issuecomment-2710742154
-# https://github.com/cerebris/jsonapi-resources/pull/1463
-gem 'jsonapi-resources', github: 'JSONAPI-Resources/jsonapi-resources', branch: 'release-0-9'
+# Fork of release-0-9 with Rails 8.1 support: upstream passes route options positionally,
+# which the 8.1 route mapper rejects, and still calls the removed ActiveSupport::Deprecation.warn.
+gem 'jsonapi-resources', github: 'yeti-switch/jsonapi-resources', branch: 'release-0-9-rails-8-1'
 
 # gem 'activeadmin_async_export'
 
