@@ -34,7 +34,7 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
       customer_filter.dropdown.select_option(customer.display_name)
       page.find('.filter_form input[type=submit]').click
 
-      expect(CGI.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
+      expect(Rack::Utils.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
       # expect(page).to have_field_tom_select('Customer', with: customer.display_name)
       parent = find('.filter_form')
       new_customer_filter = Section::TomSelect.by_label('CUSTOMER', exact: true, parent:)

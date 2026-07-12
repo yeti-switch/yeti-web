@@ -145,6 +145,9 @@ gem 'webrick', require: false
 
 gem 'cronex'
 
+# Ruby 4.0 dropped cgi from the default gems (only cgi/escape survives), but
+# click_house's logging middleware still calls CGI.parse and upstream is unmaintained.
+gem 'cgi'
 gem 'click_house'
 
 gem 'aws-sdk-s3', require: false
