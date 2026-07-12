@@ -72,14 +72,18 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
     end
 
     context 'with ransack filters' do
-      before do
-        customers_auth = create(:customers_auth, customer: customer)
-        customers_auth.rateplan.update! rate_groups: [suitable_record.rate_group, other_record.rate_group]
-      end
-
       let(:factory) { :destination }
       let(:trait) { :with_uuid }
       let(:pk) { :uuid }
+
+      # Rates (destinations) are visible when their rate_group belongs to a
+      # rateplan of one of the customer's customers_auths. Attach every created
+      # record's rate_group to a single customer rateplan.
+      let!(:ransack_customers_auth) { create(:customers_auth, customer: customer) }
+
+      def authorize_ransack_record(record)
+        ransack_customers_auth.rateplan.rate_groups << record.rate_group
+      end
 
       it_behaves_like :jsonapi_filters_by_boolean_field, :enabled
       it_behaves_like :jsonapi_filters_by_string_field, :prefix

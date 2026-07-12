@@ -2,7 +2,7 @@
 
 echo "prepare test databases..."
 
-RAILS_ENV=test bundle exec rake db:drop \
+RAILS_ENV=test SEED_WORKERS=4 bundle exec rake db:drop \
                                 db:create \
                                 db:schema:load \
                                 db:seed \
