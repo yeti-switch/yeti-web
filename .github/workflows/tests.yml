@@ -2,7 +2,15 @@ name: Tests
 on:
   pull_request:
   push:
-    branches: [ master ]
+    branches: [master]
+
+# Cancel a superseded run when new commits are pushed to the same PR. Besides saving
+# CI minutes, this closes the narrow window where two overlapping runs of the same
+# branch could publish a new runtime-log cache mid-matrix and desync the 8-way split.
+# Push runs on master are never cancelled, so every master run persists its log.
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   gems-caching:
@@ -33,7 +41,7 @@ jobs:
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
   lint:
-    name: Rubocop and bundle audit
+    name: Rubocop
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs: gems-caching
@@ -47,8 +55,26 @@ jobs:
             .bundle
             /opt/yeti-web/vendor/rbenv
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
-      - name: Rubocop and bundle audit
+      - name: Rubocop
         run: make lint
+
+  audit:
+    name: Bundle audit
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
+    needs: gems-caching
+    steps:
+      - uses: actions/checkout@v6
+      - name: use cache
+        uses: actions/cache@v5
+        with:
+          path: |
+            vendor
+            .bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+      - name: Bundle audit
+        run: make audit
 
   database_consistency:
     name: DB consistency check
@@ -76,6 +102,7 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
+          SEED_WORKERS: 4
 
       - name: Save artifacts
         if: always()
@@ -86,7 +113,6 @@ jobs:
           include-hidden-files: true
           path: |
             log/
-
 
   annotations:
     name: Model annotations
@@ -113,7 +139,7 @@ jobs:
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
-
+          SEED_WORKERS: 4
 
   brakeman:
     name: Brakeman
@@ -168,16 +194,30 @@ jobs:
       - name: Clear tmp cache
         run: rm -rf tmp
 
+      # Exact key never hits (keyed by this run's sha); the restore-keys prefix picks the
+      # newest rspec-runtime-* cache visible to this ref — the PR's own previous run
+      # first, then master's. Missing on a brand-new branch => filesize fallback in the
+      # Makefile (safe).
+      - name: Restore rspec runtime log
+        uses: actions/cache/restore@v5
+        with:
+          path: log/parallel_runtime_rspec_full.log
+          key: rspec-runtime-${{ github.sha }}
+          restore-keys: |
+            rspec-runtime-
+
       - name: Run rspec
         run: make rspec
         env:
           PARALLEL_TEST_PROCESSORS: ${{ matrix.ci_node_total }}
           TEST_GROUP: ${{ matrix.ci_node_index }}
+          RSPEC_RUNTIME_LOG: log/parallel_runtime_rspec_full.log
           YETI_DB_HOST: db
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
           CI: true
+          SEED_WORKERS: 4
 
       - name: Save artifacts
         if: always()
@@ -190,6 +230,78 @@ jobs:
             tmp/capybara
             coverage
 
+      - name: Upload runtime log slice
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: rspec-runtime-${{ matrix.ci_node_index }}
+          path: log/parallel_runtime_rspec.log
+          if-no-files-found: ignore
+
+  # Merge the 8 per-group partial runtime logs into one complete log and persist it via
+  # cache for the next run's runtime-based grouping. Runs on PRs too: GitHub scopes
+  # caches per branch, so a PR's log lands in the PR's own scope (it cannot poison
+  # master's) and later runs of that PR read it first, falling back to master's log via
+  # the restore-keys prefix. Fork PRs get read-only cache access, so their save no-ops
+  # and they keep reading master's log. Gated on !cancelled() (not success()) so a
+  # single flaky matrix node does not skip persistence — every finished node's slice
+  # (uploaded with if: always()) still merges in.
+  rspec_runtime_log:
+    name: Persist rspec runtime log
+    runs-on: ubuntu-latest
+    # MUST run in the same container as the rspec jobs. actions/cache versions each
+    # entry by (path + compression method); the trixie image has no zstd, so the rspec
+    # jobs save/restore with gzip (cache.tgz). A bare ubuntu-latest host has zstd and
+    # would save this log with zstd (cache.tzst) under a DIFFERENT version — invisible
+    # to the gzip restore in the rspec job ("Cache not found" despite matching key+ref),
+    # so runtime grouping silently never activates and the split falls back to filesize.
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
+    needs: rspec
+    if: ${{ !cancelled() }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: rspec-runtime-*
+          path: runtime-slices
+      - name: Merge slices
+        # Write to log/ so the saved path matches the path the rspec job restores
+        # with. actions/cache derives its cache version from the path input, so a
+        # mismatched save/restore path would never resolve (and would extract to
+        # the wrong location on a hit).
+        run: |
+          mkdir -p log
+          cat runtime-slices/*/parallel_runtime_rspec.log > log/parallel_runtime_rspec_full.log
+      - uses: actions/cache/save@v5
+        with:
+          path: log/parallel_runtime_rspec_full.log
+          key: rspec-runtime-${{ github.sha }}
+      - name: Report slowest spec files
+        # Print the top 50 slowest spec files (from the merged runtime log) to the job
+        # log and the run summary, so heavy files can be spotted for future splitting.
+        # Runs after the cache save so a reporting glitch never blocks log persistence.
+        # `awk 'NR<=50'` (not `head`) reads the full stream so the sort pipeline cannot
+        # SIGPIPE-fail under `set -o pipefail`.
+        run: |
+          log=log/parallel_runtime_rspec_full.log
+          if [ ! -s "$log" ]; then
+            echo "No runtime log to report."
+            exit 0
+          fi
+          total=$(wc -l < "$log")
+          # Runtime-log lines are "path:seconds"; split on the LAST colon so paths with
+          # colons still parse. Emit "seconds<TAB>path", sort desc, keep the top 50.
+          rows=$(awk -F: '{ sec=$NF; path=substr($0,1,length($0)-length($NF)-1); printf "%s\t%s\n", sec, path }' "$log" \
+            | sort -rn \
+            | awk 'NR<=50')
+          echo "Top 50 slowest spec files (of $total total):"
+          echo "$rows" | awk -F'\t' '{ printf "%3d  %8.1fs  %s\n", NR, $1, $2 }'
+          {
+            echo "## Slowest spec files (top 50 of $total)"
+            echo ""
+            echo "| # | seconds | file |"
+            echo "|--:|--------:|------|"
+            echo "$rows" | awk -F'\t' '{ printf "| %d | %.1f | %s |\n", NR, $1, $2 }'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   rspec_oidc:
     name: Rspec tests for OIDC auth
@@ -225,6 +337,7 @@ jobs:
           CDR_DB_PORT: 5432
           CI: true
           CI_RUN_OIDC: true
+          SEED_WORKERS: 4
 
       - name: Save artifacts
         if: always()
@@ -236,8 +349,6 @@ jobs:
           path: |
             tmp/capybara
             coverage
-
-
 
   coverage:
     name: Coverage
@@ -276,7 +387,7 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: '60 80'
+          thresholds: "60 80"
 
       - name: Adding coverage report to summary
         run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY

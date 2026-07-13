@@ -199,9 +199,8 @@ else
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[custom_seeds[network_prefixes]]
 endif
 
-
 .PHONY: test
-test: lint brakeman rspec
+test: lint audit brakeman rspec
 
 
 .PHONY: rspec
@@ -211,15 +210,25 @@ ifdef spec
 	RAILS_ENV=test $(bundle_bin) exec rspec "$(spec)"
 else
 	$(info:msg=Running rspec tests)
+	@# --group-by runtime: balance groups by measured seconds (from the persisted log
+	@# pointed to by RSPEC_RUNTIME_LOG) instead of file byte size. The file list still
+	@# comes from scanning spec/ on disk, so the log never skips/adds files — it only
+	@# supplies weights. Files missing from the log (new/renamed) run with the average
+	@# known runtime as their weight. --allowed-missing 75 tolerates up to 75% of files
+	@# missing before the split hard-fails (default 50%); guards mass renames.
+	@# The $(wildcard) guard: no log present -> falls back to filesize (safe first run,
+	@# safe local dev). Keep RSPEC_RUNTIME_LOG a different path from the live
+	@# --out log/parallel_runtime_rspec.log so fresh writes don't clobber the input.
 	RAILS_ENV=test $(bundle_bin) exec parallel_test \
 		  spec/ \
 		  --type rspec \
 		  $(if $(TEST_GROUP),--only-group $(TEST_GROUP),) \
+		  $(if $(wildcard $(RSPEC_RUNTIME_LOG)),--group-by runtime --runtime-log $(RSPEC_RUNTIME_LOG) --allowed-missing 75,) \
 		  && script/format_runtime_log log/parallel_runtime_rspec.log \
 		  || { script/format_runtime_log log/parallel_runtime_rspec.log; false; }
 endif
 
-.PHONY: rspec
+.PHONY: database_consistency
 database_consistency: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml prepare-test-db
 	$(info:msg=Check the consistency of the database constraints with the application validations)
 	RAILS_ENV=test $(bundle_bin) exec database_consistency
@@ -231,8 +240,12 @@ annotations: gems-test config/database.yml config/yeti_web.yml config/policy_rol
 
 .PHONY: lint
 lint: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
-	$(info:msg=Running rubocop and bundle audit)
+	$(info:msg=Running rubocop)
 	RAILS_ENV=test $(bundle_bin) exec rubocop -P
+
+.PHONY: audit
+audit: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
+	$(info:msg=Running bundle audit)
 	RAILS_ENV=test $(bundle_bin) exec rake bundle:audit
 
 .PHONY: brakeman

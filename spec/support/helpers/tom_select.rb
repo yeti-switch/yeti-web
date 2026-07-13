@@ -34,8 +34,9 @@ module Helpers
 
     # Select known options in an ajax tom-select through its API (inject +
     # addItem), skipping the flaky type -> ajax-fetch -> render -> click chain.
-    # Pass value => text pairs, e.g.
-    #   select_tom_select_by_value 'ORIGINATION GATEWAY', gw1.id => gw1.name, gw2.id => gw2.name
+    # Pass a value => text pairs hash (brace it — a braceless trailing hash is
+    # parsed as keyword args and won't reach `pairs`), e.g.
+    #   select_tom_select_by_value 'ORIGINATION GATEWAY', { gw1.id => gw1.name, gw2.id => gw2.name }
     def select_tom_select_by_value(label, pairs, exact_label: false, selector: nil)
       tom_select = find_tom_select(label, exact: exact_label, selector:)
       tom_select.select_by_value(pairs)

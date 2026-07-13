@@ -71,17 +71,21 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
     end
 
     context 'with ransack filters' do
-      let(:api_access_attrs) {
-        super().merge allow_outgoing_numberlists_ids: [suitable_record.numberlist_id]
-      }
-
-      before do
-        create(:customers_auth, customer: customer, dst_numberlist: suitable_record.numberlist)
-        create(:customers_auth, customer: customer, dst_numberlist: other_record.numberlist)
-      end
-
       let(:factory) { :numberlist_item }
       let(:pk) { :id }
+
+      # The resource applies a hard `where(numberlist_id: allow_outgoing_numberlists_ids)`,
+      # so the token must enumerate every created item's numberlist id. Build the
+      # token from a dynamic auth_config reading an accumulator filled as records
+      # are created (evaluated lazily at request time, after all records exist).
+      let(:api_access) { nil }
+      let(:auth_config) { { customer_id: customer.id, allow_outgoing_numberlists_ids: ransack_numberlist_ids } }
+      let(:ransack_numberlist_ids) { [] }
+
+      def authorize_ransack_record(record)
+        ransack_numberlist_ids << record.numberlist_id
+        create(:customers_auth, customer: customer, dst_numberlist: record.numberlist)
+      end
 
       it_behaves_like :jsonapi_filters_by_string_field, :key
     end

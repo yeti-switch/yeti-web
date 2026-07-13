@@ -66,14 +66,14 @@ RSpec.describe Api::Rest::Customer::V1::RateplansController, type: :request do
     end
 
     context 'with ransack filters' do
-      before do
-        create(:customers_auth, customer: customer, rateplan: suitable_record)
-        create(:customers_auth, customer: customer, rateplan: other_record)
-      end
-
       let(:factory) { :rateplan }
       let(:trait) { :with_uuid }
       let(:pk) { :uuid }
+
+      # Rateplans are visible when linked to the customer via customers_auth.
+      def authorize_ransack_record(record)
+        create(:customers_auth, customer: customer, rateplan: record)
+      end
 
       it_behaves_like :jsonapi_filters_by_string_field, :name
     end
