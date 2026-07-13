@@ -43,16 +43,24 @@
                 return
             }
 
-            // by some reason el.value and ts.getValue() return empty string
-            var currentValue = el.multiple
-                ? $el.find('option[selected]').map(function() { return $(this).val() })
-                : $el.find('option[selected]').val()
             if (abortControllers[key]) abortControllers[key].abort()
             abortControllers[key] = new AbortController()
 
             fetch(path + $.param(data), { signal: abortControllers[key].signal })
                 .then(function(r) { return r.json() })
                 .then(function(items) {
+                    // Read the current selection at resolve time (not before the
+                    // fetch) so a value chosen while the request was in flight is
+                    // preserved instead of being wiped by ts.clear() below. This
+                    // is the Account-right-after-Vendor race: the parent field
+                    // change kicks off this fetch, the dependent field is filled
+                    // immediately, and the late response used to clobber it.
+                    // ts.getValue() reflects the live selection (property based);
+                    // option[selected] only carries the server-rendered initial
+                    // value, so fall back to it for the edit form.
+                    var currentValue = el.multiple
+                        ? $el.find('option[selected]').map(function() { return $(this).val() })
+                        : (ts.getValue() || $el.find('option[selected]').val())
                     ts.clear(true)
                     ts.clearOptions()
                     var hasPrev = false
