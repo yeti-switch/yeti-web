@@ -146,6 +146,26 @@ RSpec.describe Account, type: :model do
       include_examples :creates_account
     end
 
+    context 'with semi monthly invoice_period_id' do
+      let(:current_time) { Time.utc(2020, 1, 1, 12) }
+      let(:create_params) { super().merge invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY }
+      let(:expected_account_attrs) do
+        super().merge next_invoice_at: ActiveSupport::TimeZone.new(utc_timezone).parse('2020-01-16 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+
+      include_examples :creates_account
+
+      context 'when current time is in second half of month' do
+        let(:current_time) { Time.utc(2020, 1, 20, 12) }
+        let(:expected_account_attrs) do
+          super().merge next_invoice_at: ActiveSupport::TimeZone.new(utc_timezone).parse('2020-02-01 00:00:00')
+        end
+
+        include_examples :creates_account
+      end
+    end
+
     context 'with invoice_period_id and explicit next_invoice_at' do
       let(:current_time) { Time.utc(2020, 1, 1, 12) }
       let(:explicit_next_invoice_at) { ActiveSupport::TimeZone.new(utc_timezone).parse('2020-02-01 00:00:00') }
@@ -177,6 +197,36 @@ RSpec.describe Account, type: :model do
       let(:expected_account_attrs) do
         update_params.merge(
           next_invoice_at: utc_time_zone.parse('2020-01-06 00:00:00'),
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when semi monthly invoice_period_id is set' do
+      let(:update_params) { { invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY } }
+      let(:expected_account_attrs) do
+        update_params.merge(
+          next_invoice_at: utc_time_zone.parse('2020-01-16 00:00:00'),
+          next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+        )
+      end
+
+      include_examples :updates_account
+    end
+
+    context 'when timezone is changed and semi monthly invoice_period_id present' do
+      let(:account_attrs) do
+        super().merge invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY,
+                      next_invoice_at: utc_time_zone.parse('2020-01-16 00:00:00'),
+                      next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      end
+      let(:update_params) { { timezone: kyiv_timezone } }
+      let(:expected_account_attrs) do
+        update_params.merge(
+          invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY,
+          next_invoice_at: ActiveSupport::TimeZone.new(kyiv_timezone).parse('2020-01-16 00:00:00'),
           next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
         )
       end

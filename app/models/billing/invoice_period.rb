@@ -7,6 +7,7 @@ class Billing::InvoicePeriod < ApplicationEnum
   MONTHLY = 4
   BIWEEKLY_SPLIT = 5
   WEEKLY_SPLIT = 6
+  SEMI_MONTHLY = 7
 
   setup_collection do
     [
@@ -15,7 +16,8 @@ class Billing::InvoicePeriod < ApplicationEnum
       { id: BIWEEKLY, name: 'BiWeekly' },
       { id: MONTHLY, name: 'Monthly' },
       { id: BIWEEKLY_SPLIT, name: 'BiWeekly. Split by new month' },
-      { id: WEEKLY_SPLIT, name: 'Weekly. Split by new month' }
+      { id: WEEKLY_SPLIT, name: 'Weekly. Split by new month' },
+      { id: SEMI_MONTHLY, name: 'SemiMonthly' }
     ]
   end
 
