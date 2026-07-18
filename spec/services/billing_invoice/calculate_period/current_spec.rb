@@ -281,6 +281,81 @@ RSpec.describe BillingInvoice::CalculatePeriod::Current, '.call' do
     end
   end
 
+  context 'when invoice_period is semi monthly' do
+    let(:account_attrs) do
+      next_invoice_at = account_time_zone.parse('2020-01-01 00:00:00').in_time_zone(server_time_zone)
+      super().merge invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY,
+                    next_invoice_type_id: Billing::InvoiceType::AUTO_FULL,
+                    next_invoice_at: next_invoice_at
+    end
+
+    context 'when today is Tue 2020-03-17 in account timezone' do
+      it 'returns 2020-03-16 to 2020-04-01 AUTO_FULL' do
+        is_expected.to match(
+                         start_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                         end_time: account_time_zone.parse('2020-04-01 00:00:00'),
+                         type_id: Billing::InvoiceType::AUTO_FULL
+                       )
+      end
+
+      context 'when account timezone is LA' do
+        let(:account_timezone) { la_timezone }
+
+        it 'returns 2020-03-16 to 2020-04-01 AUTO_FULL' do
+          is_expected.to match(
+                           start_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                           end_time: account_time_zone.parse('2020-04-01 00:00:00'),
+                           type_id: Billing::InvoiceType::AUTO_FULL
+                         )
+        end
+      end
+    end
+
+    context 'when today is Thu 2020-03-05 in account timezone' do
+      let(:current_account_time) { account_time_zone.parse('2020-03-05 01:00:00') }
+
+      it 'returns 2020-03-01 to 2020-03-16 AUTO_FULL' do
+        is_expected.to match(
+                         start_time: account_time_zone.parse('2020-03-01 00:00:00'),
+                         end_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                         type_id: Billing::InvoiceType::AUTO_FULL
+                       )
+      end
+
+      context 'when account timezone is LA' do
+        let(:account_timezone) { la_timezone }
+
+        it 'returns 2020-03-01 to 2020-03-16 AUTO_FULL' do
+          is_expected.to match(
+                           start_time: account_time_zone.parse('2020-03-01 00:00:00'),
+                           end_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                           type_id: Billing::InvoiceType::AUTO_FULL
+                         )
+        end
+      end
+    end
+
+    context 'when account has manual invoice with end_date 2020-03-17 03:00:01' do
+      before do
+        FactoryBot.create(
+          :invoice,
+          :manual,
+          account: account,
+          start_date: account_time_zone.parse('2020-03-16 00:00:00').in_time_zone(server_time_zone),
+          end_date: account_time_zone.parse('2020-03-17 03:00:01').in_time_zone(server_time_zone)
+        )
+      end
+
+      it 'returns 2020-03-17 to 2020-04-01 AUTO_FULL' do
+        is_expected.to match(
+                         start_time: account_time_zone.parse('2020-03-17 03:00:01'),
+                         end_time: account_time_zone.parse('2020-04-01 00:00:00'),
+                         type_id: Billing::InvoiceType::AUTO_FULL
+                       )
+      end
+    end
+  end
+
   context 'when account does not have invoice_period' do
     let(:account_attrs) do
       next_invoice_at = account_time_zone.parse('2020-01-01 00:00:00').in_time_zone(server_time_zone)

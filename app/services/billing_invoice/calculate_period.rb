@@ -8,7 +8,8 @@ module BillingInvoice
       Billing::InvoicePeriod::BIWEEKLY => 'BillingPeriod::Biweekly',
       Billing::InvoicePeriod::MONTHLY => 'BillingPeriod::Monthly',
       Billing::InvoicePeriod::BIWEEKLY_SPLIT => 'BillingPeriod::BiweeklySplit',
-      Billing::InvoicePeriod::WEEKLY_SPLIT => 'BillingPeriod::WeeklySplit'
+      Billing::InvoicePeriod::WEEKLY_SPLIT => 'BillingPeriod::WeeklySplit',
+      Billing::InvoicePeriod::SEMI_MONTHLY => 'BillingPeriod::SemiMonthly'
     }.freeze
 
     module_function

@@ -110,6 +110,10 @@ FactoryBot.define do
       invoice_period_id { Billing::InvoicePeriod::WEEKLY }
     end
 
+    trait :invoice_semi_monthly do
+      invoice_period_id { Billing::InvoicePeriod::SEMI_MONTHLY }
+    end
+
     after(:create) do |record, ev|
       record.build_balance_notification_setting if record.balance_notification_setting.nil?
       record.balance_notification_setting.update!(

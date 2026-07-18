@@ -256,4 +256,61 @@ RSpec.describe BillingInvoice::CalculatePeriod::Next, '.call' do
       end
     end
   end
+
+  context 'when invoice_period is semi monthly' do
+    let(:account_attrs) do
+      next_invoice_at = account_time_zone.parse(next_invoice_at_date).in_time_zone(server_time_zone)
+      super().merge invoice_period_id: Billing::InvoicePeriod::SEMI_MONTHLY,
+                    next_invoice_type_id: Billing::InvoiceType::AUTO_FULL,
+                    next_invoice_at: next_invoice_at
+    end
+
+    context 'when next_invoice_at is Mon 2020-03-16 in account timezone' do
+      let(:next_invoice_at_date) { '2020-03-16 00:00:00' }
+
+      it 'returns 2020-03-01 to 2020-03-16 AUTO_FULL' do
+        is_expected.to match(
+                         start_time: account_time_zone.parse('2020-03-01 00:00:00'),
+                         next_end_time: account_time_zone.parse('2020-04-01 00:00:00'),
+                         next_type_id: Billing::InvoiceType::AUTO_FULL
+                       )
+      end
+
+      context 'when account timezone is LA' do
+        let(:account_timezone) { la_timezone }
+
+        it 'returns 2020-03-01 to 2020-03-16 AUTO_FULL' do
+          is_expected.to match(
+                           start_time: account_time_zone.parse('2020-03-01 00:00:00'),
+                           next_end_time: account_time_zone.parse('2020-04-01 00:00:00'),
+                           next_type_id: Billing::InvoiceType::AUTO_FULL
+                         )
+        end
+      end
+    end
+
+    context 'when next_invoice_at is Wed 2020-04-01 in account timezone' do
+      let(:next_invoice_at_date) { '2020-04-01 00:00:00' }
+
+      it 'returns 2020-03-16 to 2020-04-01 AUTO_FULL' do
+        is_expected.to match(
+                         start_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                         next_end_time: account_time_zone.parse('2020-04-16 00:00:00'),
+                         next_type_id: Billing::InvoiceType::AUTO_FULL
+                       )
+      end
+
+      context 'when account timezone is LA' do
+        let(:account_timezone) { la_timezone }
+
+        it 'returns 2020-03-16 to 2020-04-01 AUTO_FULL' do
+          is_expected.to match(
+                           start_time: account_time_zone.parse('2020-03-16 00:00:00'),
+                           next_end_time: account_time_zone.parse('2020-04-16 00:00:00'),
+                           next_type_id: Billing::InvoiceType::AUTO_FULL
+                         )
+        end
+      end
+    end
+  end
 end

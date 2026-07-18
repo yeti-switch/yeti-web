@@ -80,4 +80,28 @@ RSpec.describe Jobs::Invoice, '#call' do
       include_examples :generates_invoice
     end
   end
+
+  context 'when account invoice period is semi monthly' do
+    around { |example| travel_to(Time.utc(2020, 3, 16, 5)) { example.run } }
+
+    let(:utc_time_zone) { ActiveSupport::TimeZone.new('UTC') }
+    let(:account_traits) { [:invoice_semi_monthly] }
+    let(:account_attrs) { super().merge timezone: 'UTC' }
+    let(:next_invoice_at) { utc_time_zone.parse('2020-03-16 00:00:00') }
+
+    it 'generates invoice for 2020-03-01 - 2020-03-16 and schedules next period' do
+      expect { subject }.to change { Billing::Invoice.count }.by(1)
+
+      expect(Billing::Invoice.last!).to have_attributes(
+        account_id: account.id,
+        start_date: utc_time_zone.parse('2020-03-01 00:00:00'),
+        end_date: utc_time_zone.parse('2020-03-16 00:00:00'),
+        type_id: Billing::InvoiceType::AUTO_FULL
+      )
+      expect(account.reload).to have_attributes(
+        next_invoice_at: utc_time_zone.parse('2020-04-01 00:00:00'),
+        next_invoice_type_id: Billing::InvoiceType::AUTO_FULL
+      )
+    end
+  end
 end
