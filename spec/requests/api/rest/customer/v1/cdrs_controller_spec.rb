@@ -297,40 +297,6 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         expect(actual_ids).to match_array cdrs.map { |c| c.id.to_s }
       end
     end
-
-    context 'with include auth-orig-transport-protocol' do
-      let!(:cdrs) do
-        create_list(:cdr, 2, customer_acc: account)
-        Cdr::Cdr.where(customer_id: customer.id, is_last_cdr: true).to_a
-      end
-      let(:json_api_request_query) do
-        { include: 'auth-orig-transport-protocol' }
-      end
-
-      it 'responds with included transport-protocols' do
-        subject
-        cdrs.each do |cdr|
-          data = response_json[:data].detect { |item| item[:id] == cdr.id.to_s }
-          expect(data[:relationships][:'auth-orig-transport-protocol'][:data]).to eq(
-                                                             id: cdr.auth_orig_transport_protocol.id.to_s,
-                                                             type: 'transport-protocols'
-                                                           )
-        end
-        cdrs_transport_protocols = cdrs.map(&:auth_orig_transport_protocol).uniq
-        expect(response_json[:included]).to match_array(
-                                              cdrs_transport_protocols.map do |transport_protocol|
-                                                hash_including(id: transport_protocol.id.to_s, type: 'transport-protocols')
-                                              end
-                                            )
-      end
-
-      it 'returns records of this customer' do
-        subject
-        expect(response.status).to eq(200)
-        actual_ids = response_json[:data].map { |data| data[:id] }
-        expect(actual_ids).to match_array cdrs.map { |c| c.id.to_s }
-      end
-    end
   end
 
   describe 'GET /api/rest/customer/v1/cdrs/{id}' do
@@ -354,9 +320,6 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         'type': 'cdrs',
         'links': anything,
         'relationships': {
-          'auth-orig-transport-protocol': {
-            'links': anything
-          },
           account: {
             'links': anything
           }
@@ -410,22 +373,6 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
         expect(attribute_keys).to include(:'auth-orig-port')
         expect(attribute_keys).not_to include(:'auth-orig-ip')
         expect(attribute_keys).not_to include(:'lega-user-agent')
-      end
-    end
-
-    context 'with include auth-orig-transport-protocol' do
-      let(:json_api_request_query) { { include: 'auth-orig-transport-protocol' } }
-
-      include_examples :returns_json_api_record_relationship, :'auth-orig-transport-protocol' do
-        let(:json_api_relationship_data) do
-          { id: cdr.auth_orig_transport_protocol_id.to_s, type: 'transport-protocols' }
-        end
-      end
-
-      include_examples :returns_json_api_record_include, type: :'transport-protocols' do
-        let(:json_api_include_id) { cdr.auth_orig_transport_protocol_id.to_s }
-        let(:json_api_include_attributes) { { 'name': cdr.auth_orig_transport_protocol.name } }
-        let(:json_api_include_relationships_names) { nil }
       end
     end
 
