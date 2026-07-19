@@ -46,6 +46,7 @@
 //= require modal_link_customize
 //= require import_apply_unique_fields
 //= require tom-select
+//= require cdr_filter_builder
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
