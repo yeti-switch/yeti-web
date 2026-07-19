@@ -2,7 +2,7 @@
 
 module Authorization
   class AdminAuth
-    Result = Struct.new(:entity)
+    Result = Struct.new(:entity, :payload)
     AuthorizationError = Class.new(StandardError)
 
     class << self
@@ -34,7 +34,7 @@ module Authorization
       raise AuthorizationError if admin_user.nil?
       raise AuthorizationError unless admin_user.ip_allowed?(@remote_ip)
 
-      Result.new(admin_user)
+      Result.new(admin_user, payload)
     end
   end
 end
