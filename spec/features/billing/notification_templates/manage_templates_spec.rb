@@ -58,6 +58,31 @@ RSpec.describe 'Manage notification templates' do
       expect(page).to have_content('Low balance warning')
       expect(page).to have_content('Sample account')
     end
+
+    # The preview renders admin-authored HTML verbatim, so a template author must
+    # not be able to run script in the browser of an admin holding a higher role.
+    context 'when the stored template contains script' do
+      before do
+        template.update_column(:body, '<p>hi</p><script>alert(1)</script>')
+        visit preview_billing_notification_template_path(template)
+      end
+
+      it 'serves a policy that blocks scripts and outbound requests' do
+        csp = page.response_headers['Content-Security-Policy']
+        expect(csp).to include("default-src 'none'")
+        expect(csp).to include("form-action 'none'")
+        expect(csp).not_to include('script-src')
+      end
+
+      it 'refuses to be framed' do
+        expect(page.response_headers['X-Frame-Options']).to eq('DENY')
+        expect(page.response_headers['X-Content-Type-Options']).to eq('nosniff')
+      end
+
+      it 'still shows the markup verbatim, so the preview matches the email' do
+        expect(page.body).to include('<script>alert(1)</script>')
+      end
+    end
   end
 
   describe 'destroy' do

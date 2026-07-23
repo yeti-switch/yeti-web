@@ -14,10 +14,30 @@ ActiveAdmin.register Billing::NotificationTemplate do
 
   # Renders the template against sample data so a broken layout is visible before
   # it reaches a customer.
+  #
+  # The body is admin-authored HTML rendered verbatim so the preview matches the
+  # delivered email. That means a template author could otherwise store a script
+  # and have it run in the browser of any other admin who opens the preview — a
+  # privilege escalation, since editing templates and holding a higher role are
+  # separate permissions. Mail clients ignore scripts; browsers do not. Sanitizing
+  # instead was rejected: it would silently alter the markup, so the preview would
+  # stop matching the real email. The response is locked down instead.
   member_action :preview, method: :get do
     html = Liquid::Template
            .parse(resource.body, error_mode: :strict)
            .render!(BalanceNotificationMail.sample_assigns.deep_stringify_keys)
+
+    csp = [
+      "default-src 'none'",
+      "style-src 'unsafe-inline'", # templates rely on inline styles for mail clients
+      'img-src data:',
+      "form-action 'none'",
+      "frame-ancestors 'none'"
+    ].join('; ')
+    response.set_header('Content-Security-Policy', csp)
+    response.set_header('X-Frame-Options', 'DENY')
+    response.set_header('X-Content-Type-Options', 'nosniff')
+
     render html: html.html_safe, layout: false
   rescue StandardError => e
     flash[:warning] = "Template cannot be rendered: #{e.message}"
