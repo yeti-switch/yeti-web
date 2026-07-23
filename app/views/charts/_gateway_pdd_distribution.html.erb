@@ -1,18 +1,12 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("div.tabs a[href='#charts']").on("click", function () {
-      $.getJSON("/remote_stats/<%= params[:id] %>/gateway_pdd_distribution.json", function (json) {
-        Charts.renderBar('gateway-pdd-chart', json, {
-          placeholderId: 'chart-placeholder-gateway-pdd',
-          xAxisLabel: 'PDD (seconds)',
-          yAxisLabel: 'Count',
-          xScale: 'category',
-          yTickPrecision: 'integer'
-        });
-      });
-    });
-  });
-</script>
-<div id="chart-placeholder-gateway-pdd" class="chart-placeholder chart-container">
+<div id="chart-placeholder-gateway-pdd"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="bar"
+     data-chart-tab="#charts"
+     data-chart-url="/remote_stats/<%= params[:id] %>/gateway_pdd_distribution.json"
+     data-chart-canvas="gateway-pdd-chart"
+     data-chart-x-label="PDD (seconds)"
+     data-chart-y-label="Count"
+     data-chart-x-scale="category"
+     data-chart-y-precision="integer">
   <canvas id="gateway-pdd-chart" class="stat-chart"></canvas>
 </div>

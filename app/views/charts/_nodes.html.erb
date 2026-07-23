@@ -1,19 +1,11 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    // .off before .on so re-running this script (e.g. from a tab re-render)
-    // doesn't stack handlers and trigger the fetch multiple times per click.
-    $("div.tabs a[href='#<%= href %>']").off('click.nodesChart').on('click.nodesChart', function () {
-      Charts.renderRanged({
-        url: "/remote_stats/<%= path %>.json",
-        canvasId: 'nodes-chart',
-        placeholderId: 'chart-placeholder-nodes',
-        type: 'stackedArea',
-        chartOpts: { yTickPrecision: 'integer' }
-      });
-    });
-    $("div.tabs a[href='#<%= href %>']").trigger('click.nodesChart');
-  });
-</script>
-<div id="chart-placeholder-nodes" class="chart-placeholder chart-container">
+<div id="chart-placeholder-nodes"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="ranged"
+     data-chart-tab="#<%= href %>"
+     data-chart-url="/remote_stats/<%= path %>.json"
+     data-chart-canvas="nodes-chart"
+     data-chart-type="stackedArea"
+     data-chart-y-precision="integer"
+     data-chart-auto-trigger="true">
   <canvas id="nodes-chart" class="stat-chart"></canvas>
 </div>
