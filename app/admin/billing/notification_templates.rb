@@ -13,32 +13,15 @@ ActiveAdmin.register Billing::NotificationTemplate do
   filter :event, as: :select, collection: Billing::NotificationTemplate::CONST::EVENTS, input_html: { class: 'tom-select' }
 
   # Renders the template against sample data so a broken layout is visible before
-  # it reaches a customer.
-  #
-  # The body is admin-authored HTML rendered verbatim so the preview matches the
-  # delivered email. That means a template author could otherwise store a script
-  # and have it run in the browser of any other admin who opens the preview — a
-  # privilege escalation, since editing templates and holding a higher role are
-  # separate permissions. Mail clients ignore scripts; browsers do not. Sanitizing
-  # instead was rejected: it would silently alter the markup, so the preview would
-  # stop matching the real email. The response is locked down instead.
+  # it reaches a customer. The rendered body is untrusted admin HTML, so it goes
+  # through the same sandboxed iframe used to display email logs — see
+  # SandboxedEmailFrame for why.
   member_action :preview, method: :get do
     html = Liquid::Template
            .parse(resource.body, error_mode: :strict)
            .render!(BalanceNotificationMail.sample_assigns.deep_stringify_keys)
 
-    csp = [
-      "default-src 'none'",
-      "style-src 'unsafe-inline'", # templates rely on inline styles for mail clients
-      'img-src data:',
-      "form-action 'none'",
-      "frame-ancestors 'none'"
-    ].join('; ')
-    response.set_header('Content-Security-Policy', csp)
-    response.set_header('X-Frame-Options', 'DENY')
-    response.set_header('X-Content-Type-Options', 'nosniff')
-
-    render html: html.html_safe, layout: false
+    render html: SandboxedEmailFrame.render(html, style: 'width:100%;height:98vh'), layout: false
   rescue StandardError => e
     flash[:warning] = "Template cannot be rendered: #{e.message}"
     redirect_to action: :show

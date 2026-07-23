@@ -52,11 +52,14 @@ RSpec.describe 'Manage notification templates' do
   end
 
   describe 'preview' do
-    it 'renders the template against sample data' do
+    it 'renders the template against sample data inside a sandboxed frame' do
       visit preview_billing_notification_template_path(template)
 
-      expect(page).to have_content('Low balance warning')
-      expect(page).to have_content('Sample account')
+      iframe = page.first('iframe')
+      expect(iframe['sandbox']).to eq('')
+      # content lives in the frame's srcdoc, matching the delivered email
+      expect(page.body).to include('Low balance warning')
+      expect(page.body).to include('Sample account')
     end
 
     # The preview renders admin-authored HTML verbatim, so a template author must
@@ -67,20 +70,14 @@ RSpec.describe 'Manage notification templates' do
         visit preview_billing_notification_template_path(template)
       end
 
-      it 'serves a policy that blocks scripts and outbound requests' do
-        csp = page.response_headers['Content-Security-Policy']
-        expect(csp).to include("default-src 'none'")
-        expect(csp).to include("form-action 'none'")
-        expect(csp).not_to include('script-src')
+      it 'renders the body in a script-less sandboxed iframe' do
+        expect(page.first('iframe')['sandbox']).to eq('')
       end
 
-      it 'refuses to be framed' do
-        expect(page.response_headers['X-Frame-Options']).to eq('DENY')
-        expect(page.response_headers['X-Content-Type-Options']).to eq('nosniff')
-      end
-
-      it 'still shows the markup verbatim, so the preview matches the email' do
-        expect(page.body).to include('<script>alert(1)</script>')
+      it 'escapes the body into srcdoc rather than the page DOM' do
+        expect(page.body).to include('srcdoc=')
+        expect(page.body).to include('&lt;script&gt;alert(1)&lt;/script&gt;')
+        expect(page.body).not_to include('<script>alert(1)</script>')
       end
     end
   end

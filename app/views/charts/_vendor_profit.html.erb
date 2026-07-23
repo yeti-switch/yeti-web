@@ -1,15 +1,9 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("div.tabs a[href='#profitability']").on("click", function () {
-      $.getJSON("/remote_stats/<%= params[:id] %>/vendors_traffic.json", function (json) {
-        Charts.renderGroupedBar('vendor-profit-chart', json, {
-          placeholderId: 'chart-placeholder-vendor-profit',
-          yAxisLabel: 'Amount'
-        });
-      });
-    });
-  });
-</script>
-<div id="chart-placeholder-vendor-profit" class="chart-placeholder chart-container">
+<div id="chart-placeholder-vendor-profit"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="grouped-bar"
+     data-chart-tab="#profitability"
+     data-chart-url="/remote_stats/<%= params[:id] %>/vendors_traffic.json"
+     data-chart-canvas="vendor-profit-chart"
+     data-chart-y-label="Amount">
   <canvas id="vendor-profit-chart" class="stat-chart"></canvas>
 </div>

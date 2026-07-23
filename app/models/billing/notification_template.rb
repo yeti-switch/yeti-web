@@ -25,15 +25,10 @@ class Billing::NotificationTemplate < ApplicationRecord
   self.table_name = 'billing.notification_templates'
 
   module CONST
-    # Only balance notifications are template-driven for now. The table is keyed
-    # by event so other System::EventSubscription events can be added later
-    # without a migration.
-    EVENTS = [
-      System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_REACHED,
-      System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_REACHED,
-      System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_CLEARED,
-      System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_CLEARED
-    ].freeze
+    # Only balance notifications are template-driven for now. The authoritative
+    # list lives in BalanceNotificationMail, which defines what it can render;
+    # this points at it so the two cannot drift.
+    EVENTS = BalanceNotificationMail::EVENTS
 
     freeze
   end

@@ -1,16 +1,10 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("div.tabs a[href='#profitability']").on("click", function () {
-      $.getJSON("/remote_stats/profit.json", function (json) {
-        Charts.renderBar('profit-chart', json, {
-          placeholderId: 'chart-placeholder-profit',
-          yAxisLabel: 'Profit',
-          colorBy: 'sign'
-        });
-      });
-    });
-  });
-</script>
-<div id="chart-placeholder-profit" class="chart-placeholder chart-container">
+<div id="chart-placeholder-profit"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="bar"
+     data-chart-tab="#profitability"
+     data-chart-url="/remote_stats/profit.json"
+     data-chart-canvas="profit-chart"
+     data-chart-y-label="Profit"
+     data-chart-color-by="sign">
   <canvas id="profit-chart" class="stat-chart"></canvas>
 </div>
