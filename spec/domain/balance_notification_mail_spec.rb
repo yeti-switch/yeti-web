@@ -23,8 +23,6 @@ RSpec.describe BalanceNotificationMail do
       expect(subject).to include(account.name)
     end
 
-    # Regression: the body used to be account.attributes.to_json, which shipped
-    # every column of billing.accounts to every contact.
     it 'does not leak account columns' do
       leakable = account.attributes.keys - %w[id name balance]
       expect(leakable).not_to be_empty

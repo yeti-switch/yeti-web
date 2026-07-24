@@ -4,18 +4,12 @@ ActiveAdmin.register Billing::NotificationTemplate do
   menu parent: %w[Billing Settings], label: 'Notification templates', priority: 91
   config.batch_actions = false
 
-  # One row per event is seeded and must always exist, so rows can be edited but
-  # never created or destroyed.
   actions :index, :show, :edit, :update
 
   permit_params :subject, :body
 
   filter :event, as: :select, collection: Billing::NotificationTemplate::CONST::EVENTS, input_html: { class: 'tom-select' }
 
-  # Renders the template against sample data so a broken layout is visible before
-  # it reaches a customer. The rendered body is untrusted admin HTML, so it goes
-  # through the same sandboxed iframe used to display email logs — see
-  # SandboxedEmailFrame for why.
   member_action :preview, method: :get do
     html = Liquid::Template
            .parse(resource.body, error_mode: :strict)
@@ -56,7 +50,6 @@ ActiveAdmin.register Billing::NotificationTemplate do
       end
       para 'Email clients are not browsers: use inline styles and table layout only, ' \
            'and keep the alert legible without images.'
-      para 'There is no packaged fallback: this row is the only source of the email.'
     end
   end
 

@@ -57,13 +57,10 @@ RSpec.describe 'Manage notification templates' do
 
       iframe = page.first('iframe')
       expect(iframe['sandbox']).to eq('')
-      # content lives in the frame's srcdoc, matching the delivered email
       expect(page.body).to include('Low balance warning')
       expect(page.body).to include('Sample account')
     end
 
-    # The preview renders admin-authored HTML verbatim, so a template author must
-    # not be able to run script in the browser of an admin holding a higher role.
     context 'when the stored template contains script' do
       before do
         template.update_column(:body, '<p>hi</p><script>alert(1)</script>')

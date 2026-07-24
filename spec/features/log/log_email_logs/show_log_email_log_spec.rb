@@ -3,9 +3,6 @@
 RSpec.describe 'Show Log Email log', type: :feature do
   include_context :login_as_admin
 
-  # The message body can be admin-authored HTML (notification templates), so the
-  # email log page must not let a stored script run in the viewing admin's
-  # session. It is rendered inside a script-less sandboxed iframe instead.
   context 'when the message body contains script' do
     let(:email_log) do
       create(:email_log, msg: '<div>hello body</div><script>alert(1)</script>')

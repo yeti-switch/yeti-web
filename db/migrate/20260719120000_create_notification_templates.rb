@@ -12,10 +12,6 @@ class CreateNotificationTemplates < ActiveRecord::Migration[7.2]
       CREATE UNIQUE INDEX notification_templates_event_key ON billing.notification_templates USING btree (event);
     }
 
-    # Seed the templates. A row must exist for every balance event: it is the only
-    # source of the email, there is no packaged fallback. The admin UI can edit
-    # them but never create or destroy. Fresh installs load db/structure.sql
-    # (schema only, no data) and get these from db/seeds/main/billing.sql instead.
     execute <<~'SQL'
       INSERT INTO billing.notification_templates (id, event, subject, body) VALUES (1, $tpl$AccountLowThesholdReached$tpl$, $tpl$Low balance warning: {{ account.name }} ({{ account.balance }} {{ account.currency }})$tpl$, $tpl$
       <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f5;padding:24px 0;font-family:Arial,Helvetica,sans-serif;">
