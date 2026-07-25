@@ -37,14 +37,23 @@ class Billing::NotificationTemplate < ApplicationRecord
   end
 
   def render_subject(assigns)
-    parse(subject).render!(assigns.deep_stringify_keys)
+    render_template(subject, assigns)
   end
 
   def render_body(assigns)
-    parse(body).render!(assigns.deep_stringify_keys)
+    render_template(body, assigns)
   end
 
   private
+
+  def render_template(source, assigns)
+    template = parse(source)
+    output = template.render(assigns.deep_stringify_keys, strict_variables: true)
+    if template.errors.any?
+      Rails.logger.warn { "Billing::NotificationTemplate##{id} render: #{template.errors.map(&:message).join('; ')}" }
+    end
+    output
+  end
 
   def parse(source)
     (@parsed ||= {})[source] ||= Liquid::Template.parse(source, error_mode: :strict)

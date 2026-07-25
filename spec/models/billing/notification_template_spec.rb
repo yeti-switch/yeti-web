@@ -65,4 +65,27 @@ RSpec.describe Billing::NotificationTemplate do
       end
     end
   end
+
+  describe '#render_body' do
+    let(:assigns) { BalanceNotificationMail.sample_assigns }
+
+    it 'renders the stored template' do
+      template.update!(body: 'Balance {{ account.balance }}')
+      expect(template.render_body(assigns)).to eq('Balance 42.00')
+    end
+
+    context 'when a row bypasses validation with an unknown variable' do
+      before { template.update_column(:body, 'X {{ account.nope }} Y') }
+
+      it 'degrades to a blank instead of raising, so the balance job is not wedged' do
+        expect { @rendered = template.render_body(assigns) }.not_to raise_error
+        expect(@rendered).to eq('X  Y')
+      end
+
+      it 'logs the undefined variable rather than failing silently' do
+        expect(Rails.logger).to receive(:warn)
+        template.render_body(assigns)
+      end
+    end
+  end
 end

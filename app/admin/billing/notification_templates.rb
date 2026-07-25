@@ -11,9 +11,7 @@ ActiveAdmin.register Billing::NotificationTemplate do
   filter :event, as: :select, collection: Billing::NotificationTemplate::CONST::EVENTS, input_html: { class: 'tom-select' }
 
   member_action :preview, method: :get do
-    html = Liquid::Template
-           .parse(resource.body, error_mode: :strict)
-           .render!(BalanceNotificationMail.sample_assigns.deep_stringify_keys)
+    html = resource.render_body(BalanceNotificationMail.sample_assigns)
 
     render html: SandboxedEmailFrame.render(html, style: 'width:100%;height:98vh'), layout: false
   rescue StandardError => e
