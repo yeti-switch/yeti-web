@@ -112,8 +112,8 @@ class NotificationEvent
     mail = BalanceNotificationMail.new(account, event)
     fire_event(
       event,
-      subject: mail.subject,
-      message: mail.body,
+      subject: -> { mail.subject },
+      message: -> { mail.body },
       additional_contacts: account_email_recipients(account),
       event_data: account_threshold_data(account)
     )
@@ -152,8 +152,17 @@ class NotificationEvent
 
     ApplicationRecord.transaction do
       send_http_event(subscription, event_data) if subscription.url.present?
-      ContactEmailSender.batch_send_emails(contacts, subject: subject, message: message) unless contacts.empty?
+      unless contacts.empty?
+        ContactEmailSender.batch_send_emails(contacts, subject: resolve(subject), message: resolve(message))
+      end
     end
+  end
+
+  # subject/message may be a String (most events) or a callable that renders it
+  # lazily (threshold events), so an expensive template render only happens when
+  # there are recipients to send to.
+  def resolve(value)
+    value.respond_to?(:call) ? value.call : value
   end
 
   def find_subscription(event)

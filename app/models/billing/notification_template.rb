@@ -47,7 +47,7 @@ class Billing::NotificationTemplate < ApplicationRecord
   private
 
   def parse(source)
-    Liquid::Template.parse(source, error_mode: :strict)
+    (@parsed ||= {})[source] ||= Liquid::Template.parse(source, error_mode: :strict)
   end
 
   def validate_liquid_syntax

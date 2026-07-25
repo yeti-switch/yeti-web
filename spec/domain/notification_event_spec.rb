@@ -83,6 +83,11 @@ RSpec.describe NotificationEvent do
       include_examples :does_not_send_email
       include_examples :does_not_enqueue_send_http_job
 
+      it 'does not render the email template when there are no recipients' do
+        expect(Billing::NotificationTemplate).not_to receive(:find_by!)
+        subject
+      end
+
       context 'when event_subscription has url filled' do
         before do
           event_subscription.update! url: 'http://example.com/cb'
@@ -90,6 +95,11 @@ RSpec.describe NotificationEvent do
 
         include_examples :does_not_send_email
         include_examples :enqueues_send_http_job
+
+        it 'sends the webhook without rendering the email template' do
+          expect(Billing::NotificationTemplate).not_to receive(:find_by!)
+          expect { subject }.to have_enqueued_job(Worker::SendHttpJob)
+        end
       end
     end
 
