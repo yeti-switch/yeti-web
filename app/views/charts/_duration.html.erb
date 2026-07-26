@@ -1,18 +1,10 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("div.tabs a[href='#calls-duration']").on("click", function () {
-      $.getJSON("/remote_stats/duration.json", function (json) {
-        json[0].values = json[0].values.map(function (p) {
-          return { x: p.x, y: parseFloat(p.y) / 60.0 };
-        });
-        Charts.renderBar('duration-chart', json, {
-          placeholderId: 'chart-placeholder-duration',
-          yAxisLabel: 'Duration (min)'
-        });
-      });
-    });
-  });
-</script>
-<div id="chart-placeholder-duration" class="chart-placeholder chart-container">
+<div id="chart-placeholder-duration"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="bar"
+     data-chart-tab="#calls-duration"
+     data-chart-url="/remote_stats/duration.json"
+     data-chart-canvas="duration-chart"
+     data-chart-y-label="Duration (min)"
+     data-chart-transform="durationSeconds">
   <canvas id="duration-chart" class="stat-chart"></canvas>
 </div>

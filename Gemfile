@@ -53,6 +53,11 @@ gem 'jsonapi-resources', github: 'yeti-switch/jsonapi-resources', branch: 'relea
 # Ext
 gem 'validates_timeliness', '~> 8.0.0'
 
+# Sandboxed templating for admin-editable email templates.
+# Deliberately not ERB: templates are stored in the DB and edited via admin UI,
+# so the engine must not be able to execute arbitrary ruby.
+gem 'liquid', '~> 5.13'
+
 # Object-oriented authorization for Rails applications
 gem 'pundit'
 

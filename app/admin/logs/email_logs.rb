@@ -54,7 +54,7 @@ ActiveAdmin.register Log::EmailLog do
       row :mail_to
       row :subject
       row :msg do |r|
-        raw(r.msg)
+        SandboxedEmailFrame.render(r.msg) if r.msg.present?
       end
       row 'Attachments' do |r|
         raw(r.attachments_no_data.map { |rg| link_to rg.basename, export_log_email_log_path(r, attachment: rg.id) }.sort.join(', '))

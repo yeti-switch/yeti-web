@@ -11360,6 +11360,38 @@ ALTER SEQUENCE billing.invoices_templates_id_seq OWNED BY billing.invoice_templa
 
 
 --
+-- Name: notification_templates; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.notification_templates (
+    id integer NOT NULL,
+    event character varying NOT NULL,
+    subject character varying NOT NULL,
+    body text NOT NULL
+);
+
+
+--
+-- Name: notification_templates_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.notification_templates_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notification_templates_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.notification_templates_id_seq OWNED BY billing.notification_templates.id;
+
+
+--
 -- Name: package_counters; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -16111,6 +16143,13 @@ ALTER TABLE ONLY billing.invoice_templates ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: notification_templates id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.notification_templates ALTER COLUMN id SET DEFAULT nextval('billing.notification_templates_id_seq'::regclass);
+
+
+--
 -- Name: package_counters id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -17007,6 +17046,14 @@ ALTER TABLE ONLY billing.invoice_templates
 
 ALTER TABLE ONLY billing.invoice_templates
     ADD CONSTRAINT invoices_templates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notification_templates notification_templates_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.notification_templates
+    ADD CONSTRAINT notification_templates_pkey PRIMARY KEY (id);
 
 
 --
@@ -18724,6 +18771,13 @@ CREATE INDEX accounts_contractor_id_idx ON billing.accounts USING btree (contrac
 --
 
 CREATE INDEX accounts_currency_id_idx ON billing.accounts USING btree (currency_id);
+
+
+--
+-- Name: notification_templates_event_key; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE UNIQUE INDEX notification_templates_event_key ON billing.notification_templates USING btree (event);
 
 
 --
@@ -20680,6 +20734,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260719120000'),
 ('20260705140000'),
 ('20260704115624'),
 ('20260703164410'),

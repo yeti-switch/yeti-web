@@ -17,6 +17,7 @@
 //= require luxon.min
 //= require chartjs-adapter-luxon.umd
 //= require charts
+//= require chart_init
 //= require cdr_stats
 //= require active_calls
 //= require active_admin_sidebar

@@ -1,16 +1,11 @@
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("div.tabs a[href='#active-calls-charts']").on("click", function () {
-      Charts.renderRanged({
-        url: "/remote_stats/<%= params[:id] %>/account_active_calls.json",
-        canvasId: 'account-chart',
-        placeholderId: 'chart-placeholder-account',
-        type: 'line',
-        chartOpts: { yAxisLabel: 'Active Calls', yTickPrecision: 'integer' }
-      });
-    });
-  });
-</script>
-<div id="chart-placeholder-account" class="chart-placeholder chart-container">
+<div id="chart-placeholder-account"
+     class="chart-placeholder chart-container js-chart"
+     data-chart-render="ranged"
+     data-chart-tab="#active-calls-charts"
+     data-chart-url="/remote_stats/<%= params[:id] %>/account_active_calls.json"
+     data-chart-canvas="account-chart"
+     data-chart-type="line"
+     data-chart-y-label="Active Calls"
+     data-chart-y-precision="integer">
   <canvas id="account-chart" class="stat-chart"></canvas>
 </div>

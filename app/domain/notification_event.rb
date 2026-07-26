@@ -20,43 +20,19 @@ class NotificationEvent
   end
 
   def low_threshold_reached(account)
-    fire_event(
-      System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_REACHED,
-      subject: "Account with id #{account.id} low balance",
-      message: account_threshold_message(account),
-      additional_contacts: account_email_recipients(account),
-      event_data: account_threshold_data(account)
-    )
+    fire_threshold_event(System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_REACHED, account)
   end
 
   def high_threshold_reached(account)
-    fire_event(
-      System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_REACHED,
-      subject: "Account with id #{account.id} high balance",
-      message: account_threshold_message(account),
-      additional_contacts: account_email_recipients(account),
-      event_data: account_threshold_data(account)
-    )
+    fire_threshold_event(System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_REACHED, account)
   end
 
   def low_threshold_cleared(account)
-    fire_event(
-      System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_CLEARED,
-      subject: "Account with id #{account.id} low balance cleared",
-      message: account_threshold_message(account),
-      additional_contacts: account_email_recipients(account),
-      event_data: account_threshold_data(account)
-    )
+    fire_threshold_event(System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_CLEARED, account)
   end
 
   def high_threshold_cleared(account)
-    fire_event(
-      System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_CLEARED,
-      subject: "Account with id #{account.id} high balance cleared",
-      message: account_threshold_message(account),
-      additional_contacts: account_email_recipients(account),
-      event_data: account_threshold_data(account)
-    )
+    fire_threshold_event(System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_CLEARED, account)
   end
 
   def dialpeer_locked(dialpeer, quality_stat)
@@ -132,15 +108,20 @@ class NotificationEvent
 
   private
 
-  def account_threshold_message(account)
-    data = account.attributes.merge(
-      balance_low_threshold: account.balance_notification_setting.low_threshold,
-      balance_high_threshold: account.balance_notification_setting.high_threshold,
-      send_balance_notifications_to: account_contacts(account).map(&:email).compact
+  def fire_threshold_event(event, account)
+    mail = BalanceNotificationMail.new(account, event)
+    fire_event(
+      event,
+      subject: -> { mail.subject },
+      message: -> { mail.body },
+      additional_contacts: account_email_recipients(account),
+      event_data: account_threshold_data(account)
     )
-    data.to_json
   end
 
+  # NOTE: this is the HTTP webhook payload for System::EventSubscription#url, not
+  # the email body. Subscribers parse it, so its shape must stay stable — it is
+  # deliberately not shared with BalanceNotificationMail#assigns.
   def account_threshold_data(account)
     account.attributes.merge(
       balance_low_threshold: account.balance_notification_setting.low_threshold,
@@ -171,8 +152,17 @@ class NotificationEvent
 
     ApplicationRecord.transaction do
       send_http_event(subscription, event_data) if subscription.url.present?
-      ContactEmailSender.batch_send_emails(contacts, subject: subject, message: message) unless contacts.empty?
+      unless contacts.empty?
+        ContactEmailSender.batch_send_emails(contacts, subject: resolve(subject), message: resolve(message))
+      end
     end
+  end
+
+  # subject/message may be a String (most events) or a callable that renders it
+  # lazily (threshold events), so an expensive template render only happens when
+  # there are recipients to send to.
+  def resolve(value)
+    value.respond_to?(:call) ? value.call : value
   end
 
   def find_subscription(event)
