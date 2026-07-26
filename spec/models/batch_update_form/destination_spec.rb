@@ -113,7 +113,16 @@ RSpec.describe BatchUpdateForm::Destination do
 
       it 'should have error: :valid_from must be before or equal to' do
         subject
-        expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{assign_params[:valid_till]}"
+        expect(subject.errors.to_a).to contain_exactly 'Valid from must be before or equal to 2020-01-01 00:00:00'
+      end
+    end
+
+    context 'when :valid_from time is later than :valid_till time of the same date' do
+      let(:assign_params) { { valid_from: '2020-01-01 15:00', valid_till: '2020-01-01 10:30' } }
+
+      it 'should have error: :valid_from must be before or equal to' do
+        subject
+        expect(subject.errors.to_a).to contain_exactly 'Valid from must be before or equal to 2020-01-01 10:30:00'
       end
     end
 

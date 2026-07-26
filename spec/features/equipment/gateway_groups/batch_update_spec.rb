@@ -23,6 +23,7 @@ RSpec.describe BatchUpdateForm::GatewayGroup, :js do
   subject do
     fill_batch_form
     click_button 'OK'
+    confirm_batch_update
   end
 
   context 'when all field filled with valid values' do

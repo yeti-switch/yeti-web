@@ -15,6 +15,28 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
     end
   end
 
+  context 'with expired scope' do
+    subject do
+      visit destinations_path(scope: 'expired')
+    end
+
+    let!(:expired_destinations) do
+      create_list(:destination, 3, valid_from: 1.day.ago, valid_till: 1.second.ago)
+    end
+
+    before do
+      create(:destination, valid_from: 1.day.ago, valid_till: 1.minute.from_now)
+    end
+
+    it 'responds with correct rows' do
+      subject
+      expect(page).to have_table_row(count: expired_destinations.size)
+      expired_destinations.each do |destination|
+        expect(page).to have_table_cell(column: 'ID', exact_text: destination.id.to_s)
+      end
+    end
+  end
+
   context 'when filter by country and network' do
     let!(:country) { System::Country.find_by!(name: 'United States') }
     let!(:network) { create(:network, name: 'some network') }

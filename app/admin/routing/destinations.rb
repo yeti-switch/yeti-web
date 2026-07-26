@@ -59,6 +59,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   scope :low_quality, show_count: false
   scope :time_valid, show_count: false
+  scope :expired, show_count: false
   scope :scheduled, show_count: false
 
   filter :id

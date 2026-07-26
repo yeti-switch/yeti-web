@@ -12,8 +12,8 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :reject_calls, type: :boolean
   attribute :quality_alarm, type: :boolean
   attribute :rate_group_id, type: :foreign_key, class_name: 'Routing::RateGroup'
-  attribute :valid_from, type: :date
-  attribute :valid_till, type: :date
+  attribute :valid_from, type: :datetime
+  attribute :valid_till, type: :datetime
   attribute :rate_policy_id, type: :integer_collection, collection: Routing::DestinationRatePolicy::POLICIES.invert.to_a
   attribute :initial_interval
   attribute :initial_rate
@@ -108,7 +108,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   validates :next_rate, numericality: { allow_blank: true }, if: :next_rate_changed?
 
   # date validations
-  validates_date :valid_from, on_or_before: :valid_till, if: -> { valid_from.present? && valid_till.present? }
+  validates_datetime :valid_from, on_or_before: :valid_till, if: -> { valid_from.present? && valid_till.present? }
 
   # format validations
   validates :prefix, format: { without: /\s/, message: I18n.t('activerecord.errors.models.routing\destination.attributes.prefix.with_spaces') }, if: :prefix_changed?

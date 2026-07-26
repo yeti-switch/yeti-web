@@ -47,8 +47,8 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       vendor_id: vendor_main.id.to_s,
       account_id: account_vendors.id.to_s,
       routeset_discriminator_id: routeset_discriminator.id.to_s,
-      valid_from: '2020-01-10',
-      valid_till: '2020-01-20',
+      valid_from: '2020-01-10 10:15',
+      valid_till: '2020-01-20 20:45',
       asr_limit: '0.9',
       acd_limit: '0.9',
       short_calls_limit: '0.9',
@@ -239,6 +239,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
   subject do
     fill_batch_form
     click_button 'OK'
+    confirm_batch_update
   end
 
   context 'check validation' do
@@ -279,7 +280,10 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
   end
 
   context 'when user wants to change routing_tag_ids to "ANY TAG"' do
-    subject { click_button :OK }
+    subject do
+      click_button :OK
+      confirm_batch_update
+    end
 
     let(:_dialpeers) { nil }
     let(:routing_group) { nil }

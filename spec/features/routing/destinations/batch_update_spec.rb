@@ -12,6 +12,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   subject do
     fill_batch_form
     click_button 'OK'
+    confirm_batch_update
   end
 
   let(:assign_params) do
@@ -24,8 +25,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       reject_calls: false,
       quality_alarm: true,
       rate_group_id: rate_group.id.to_s,
-      valid_from: '2020-01-10',
-      valid_till: '2020-01-20',
+      valid_from: '2020-01-10 10:15',
+      valid_till: '2020-01-20 20:45',
       rate_policy_id: rate_policy_id.to_s,
       initial_interval: '1',
       initial_rate: '1',
@@ -218,7 +219,10 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   end
 
   context 'when user wants to change routing_tag_ids to "NOT TAGGED"' do
-    subject { click_button :OK }
+    subject do
+      click_button :OK
+      confirm_batch_update
+    end
 
     let(:_destinations) { nil }
     let(:assign_params) { {} }
