@@ -48,6 +48,7 @@ class Billing::NotificationTemplate < ApplicationRecord
 
   def render_template(source, assigns)
     template = parse(source)
+    template.errors.clear # parse memoizes the template; only log this render's errors
     output = template.render(assigns.deep_stringify_keys, strict_variables: true)
     if template.errors.any?
       Rails.logger.warn { "Billing::NotificationTemplate##{id} render: #{template.errors.map(&:message).join('; ')}" }
