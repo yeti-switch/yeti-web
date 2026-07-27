@@ -7,6 +7,9 @@ $.ui.dialog.prototype._allowInteraction = function (event) {
     return dialogAllowInteraction.call(this, event) || !!$(event.target).closest('.xdsoft_datetimepicker').length;
 };
 
+// dialog is built after the page is loaded, so inputs of BatchUpdateForm::Base#form_data_datetime
+// are not picked up by active_admin_datetimepicker itself. setupDateTimePicker is a global
+// defined by that gem in app/assets/javascripts/active_admin_datetimepicker.js
 $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
     setupDateTimePicker(form);
 });

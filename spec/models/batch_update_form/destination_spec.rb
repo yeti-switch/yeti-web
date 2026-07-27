@@ -108,12 +108,15 @@ RSpec.describe BatchUpdateForm::Destination do
 
     it { is_expected.to_not allow_value('string test').for(:prefix).with_message(prefix_err_message) }
 
+    # :valid_till as it is displayed in the validation error
+    let(:formatted_valid_till) { Time.zone.parse(assign_params[:valid_till]).strftime('%Y-%m-%d %H:%M:%S') }
+
     context 'when :valid_from date is later than :valid_till date' do
       let(:assign_params) { { valid_from: '2020-09-09', valid_till: '2020-01-01' } }
 
       it 'should have error: :valid_from must be before or equal to' do
         subject
-        expect(subject.errors.to_a).to contain_exactly 'Valid from must be before or equal to 2020-01-01 00:00:00'
+        expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{formatted_valid_till}"
       end
     end
 
@@ -122,7 +125,7 @@ RSpec.describe BatchUpdateForm::Destination do
 
       it 'should have error: :valid_from must be before or equal to' do
         subject
-        expect(subject.errors.to_a).to contain_exactly 'Valid from must be before or equal to 2020-01-01 10:30:00'
+        expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{formatted_valid_till}"
       end
     end
 
