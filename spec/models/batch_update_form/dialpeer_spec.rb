@@ -222,12 +222,24 @@ RSpec.describe BatchUpdateForm::Dialpeer do
         it 'should pass validations' do expect(subject).to be_valid end
       end
 
+      # :valid_till as it is displayed in the validation error
+      let(:formatted_valid_till) { Time.zone.parse(assign_params[:valid_till]).strftime('%Y-%m-%d %H:%M:%S') }
+
       context 'when :valid_till is before than :valid_from' do
         let(:assign_params) { { valid_from: '2020-05-05', valid_till: '2020-01-01' } }
 
         it 'should have error:' do
           subject
-          expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{assign_params[:valid_till]}"
+          expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{formatted_valid_till}"
+        end
+      end
+
+      context 'when :valid_till time is before than :valid_from time of the same date' do
+        let(:assign_params) { { valid_from: '2020-01-01 15:00', valid_till: '2020-01-01 10:30' } }
+
+        it 'should have error:' do
+          subject
+          expect(subject.errors.to_a).to contain_exactly "Valid from must be before or equal to #{formatted_valid_till}"
         end
       end
 

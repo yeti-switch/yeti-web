@@ -50,6 +50,7 @@
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
+//= require batch_update_datetimepicker
 //= require ajax_tab
 //= require rtp_diagram
 

@@ -25,8 +25,8 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :vendor_id, type: :foreign_key, class_name: 'Contractor', scope: :vendors
   attribute :account_id, type: :foreign_key, class_name: 'Account'
   attribute :routeset_discriminator_id, type: :foreign_key, class_name: 'Routing::RoutesetDiscriminator'
-  attribute :valid_from, type: :date
-  attribute :valid_till, type: :date
+  attribute :valid_from, type: :datetime
+  attribute :valid_till, type: :datetime
   attribute :asr_limit
   attribute :acd_limit
   attribute :short_calls_limit
@@ -166,5 +166,5 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     Gateway.find_by(id: gateway_id)&.is_shared?
   end
 
-  validates_date :valid_from, on_or_before: :valid_till, if: -> { valid_from.present? && valid_till.present? }
+  validates_datetime :valid_from, on_or_before: :valid_till, if: -> { valid_from.present? && valid_till.present? }
 end

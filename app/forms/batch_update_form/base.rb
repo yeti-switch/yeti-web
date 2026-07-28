@@ -115,6 +115,11 @@ class BatchUpdateForm::Base
       'datepicker'
     end
 
+    # rendered as a plain input, turned into date time picker by batch_update_datetimepicker.js
+    def form_data_datetime(_options)
+      { type: 'text', class: 'date-time-picker' }
+    end
+
     def form_data_boolean(_options)
       [%w[Yes true], %w[No false]]
     end

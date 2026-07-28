@@ -73,7 +73,8 @@ class Routing::Destination < ApplicationRecord
   include RoutingTagIdsScopeable
 
   scope :low_quality, -> { where quality_alarm: true }
-  scope :time_valid, -> { where('valid_till >= :time AND valid_from < :time', time: Time.now) }
+  scope :time_valid, -> { where('valid_till >= NOW() AND valid_from < NOW()') }
+  scope :expired, -> { where('valid_till < NOW()') }
 
   scope :rateplan_id_filter, lambda { |value|
     rate_group_ids = Routing::RatePlanGroup.where(rateplan_id: value).pluck(:rate_group_id).uniq

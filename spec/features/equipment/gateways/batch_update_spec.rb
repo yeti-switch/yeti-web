@@ -16,6 +16,7 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
   subject do
     fill_batch_form
     click_button 'OK'
+    confirm_batch_update
   end
 
   let(:assign_params) do

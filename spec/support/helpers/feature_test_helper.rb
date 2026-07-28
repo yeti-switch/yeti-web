@@ -71,4 +71,11 @@ module FeatureTestHelper
   def within_main_content(&block)
     within('#main_content_wrapper', &block)
   end
+
+  # confirms "Update batch" dialog after it was submitted
+  def confirm_batch_update
+    within('.active_admin_dialog_confirm_submit') do
+      click_button 'OK'
+    end
+  end
 end

@@ -39,6 +39,7 @@ RSpec.describe BatchUpdateForm::RoutingPlan, :js do
   subject do
     fill_batch_form
     click_button 'OK'
+    confirm_batch_update
   end
 
   context 'should check validates for the field:' do
