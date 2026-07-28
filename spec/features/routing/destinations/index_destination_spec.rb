@@ -21,11 +21,11 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
     end
 
     let!(:expired_destinations) do
-      create_list(:destination, 3, valid_from: 1.day.ago, valid_till: 1.second.ago)
+      create_list(:destination, 3, valid_from: 2.days.ago, valid_till: 1.hour.ago)
     end
 
     before do
-      create(:destination, valid_from: 1.day.ago, valid_till: 1.minute.from_now)
+      create(:destination, valid_from: 1.day.ago, valid_till: 1.day.from_now)
     end
 
     it 'responds with correct rows' do
