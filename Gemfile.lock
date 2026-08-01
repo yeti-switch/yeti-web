@@ -317,6 +317,10 @@ GEM
     docile (1.4.1)
     doorkeeper (5.9.3)
       railties (>= 5)
+    doorkeeper-openid_connect (1.10.5)
+      doorkeeper (>= 5.5, < 6.0)
+      jwt (>= 2.5)
+      ostruct (>= 0.5)
     draper (4.0.6)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -457,7 +461,7 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    httpx (1.8.0)
+    httpx (1.8.1)
       http-2 (>= 1.2.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
@@ -1106,6 +1110,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (>= 4.6.0)
   doorkeeper (~> 5.9)
+  doorkeeper-openid_connect (~> 1.10)
   draper
   dry-validation (~> 1.0)
   elasticsearch

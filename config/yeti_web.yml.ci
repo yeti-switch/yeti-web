@@ -43,6 +43,13 @@ sentry:
 oauth:
   enabled: true # mount Doorkeeper OAuth provider — required for the spec suite
 
+  # OIDC provider — required for the spec suite. The key below is a throwaway
+  # committed for the tests; it signs nothing real.
+  oidc:
+    enabled: true
+    issuer: http://www.example.com
+    signing_key_path: spec/fixtures/oidc_test_signing_key.pem
+
 mcp:
   enabled: true # mount /api/mcp; requires oauth.enabled — required for the spec suite
 

@@ -43,6 +43,22 @@ sentry:
 oauth:
   enabled: false # mount Doorkeeper OAuth provider (/oauth/*, /.well-known/oauth-authorization-server)
 
+  # Also act as an OpenID Connect provider, so other yeti components
+  # (yeti-statistics, Grafana, ...) can use admin_users as their login. Adds
+  # /.well-known/openid-configuration, /oauth/discovery/keys and
+  # /oauth/userinfo, and makes the token endpoint issue an id_token for
+  # clients that request the `openid` scope.
+  #oidc:
+  #  enabled: true
+  #  # MUST equal, byte for byte, the issuer configured on the client side —
+  #  # a trailing slash is enough to break every login.
+  #  issuer: https://web.example.com
+  #  # RS256 private key that signs the id_token. Generate with
+  #  #   bundle exec rake oauth:oidc:generate_signing_key[/etc/yeti-web/oidc_signing_key.pem]
+  #  # and deploy it out of band: whoever can read it can mint an identity for
+  #  # any admin.
+  #  signing_key_path: /etc/yeti-web/oidc_signing_key.pem
+
 mcp:
   enabled: false # mount /api/mcp; requires oauth.enabled
 

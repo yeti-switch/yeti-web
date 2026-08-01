@@ -180,6 +180,15 @@ en:
     display_tag_action_value: 'Tag Action Value'
 
   activerecord:
+    models:
+      # Otherwise ActiveAdmin humanizes the class name to "Oauth Application"
+      # in the page title, the New button and the pagination counter.
+      oauth_application:
+        one: 'OAuth Application'
+        other: 'OAuth Applications'
+      oauth_access_token:
+        one: 'OAuth Access Token'
+        other: 'OAuth Access Tokens'
     attributes:
       customers_auth:
         ip: 'IP'

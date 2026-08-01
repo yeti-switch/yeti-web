@@ -96,6 +96,17 @@ Config.setup do |setup_config|
     # Block AND `enabled` key are both optional; missing → treated as false.
     optional(:oauth).schema do
       optional(:enabled).value(:bool?)
+
+      # Turns the OAuth provider into an OIDC provider as well: id_token,
+      # /.well-known/openid-configuration, JWKS and userinfo. Requires
+      # oauth.enabled. `issuer` and `signing_key_path` are mandatory once
+      # enabled, but that is enforced in the initializer rather than here so
+      # the message can say what to do about it.
+      optional(:oidc).schema do
+        optional(:enabled).value(:bool?)
+        optional(:issuer).maybe(:string)
+        optional(:signing_key_path).maybe(:string)
+      end
     end
 
     # Mounts /api/mcp. Requires oauth.enabled (MCP authenticates via OAuth

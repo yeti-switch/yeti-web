@@ -37,4 +37,16 @@ class OauthAccessToken < ApplicationRecord
   # the AA index page can eager-load with `.includes(:resource_owner)` and
   # avoid an N+1 in the Owner column for root admins.
   belongs_to :resource_owner, class_name: 'AdminUser', foreign_key: :resource_owner_id, optional: true
+
+  # A token is only as valid as the admin behind it. Doorkeeper's own answer is
+  # "not expired and not revoked", which leaves a disabled admin's unexpired
+  # token working until it runs out — up to an hour of access after offboarding,
+  # on every endpoint that authorizes with it (/oauth/userinfo, introspection,
+  # /api/mcp). Checking the owner here revokes that access immediately, in one
+  # place, instead of once per endpoint.
+  def accessible?
+    return super if resource_owner_id.nil?
+
+    super && AdminUser.exists?(id: resource_owner_id, enabled: true)
+  end
 end
