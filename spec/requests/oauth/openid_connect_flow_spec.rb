@@ -68,7 +68,7 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
     end
 
     it 'signs the id_token with the published key and binds it to this client' do
-      expect(claims['iss']).to eq(YetiConfig.oauth.oidc.issuer)
+      expect(claims['iss']).to eq(YetiConfig.oauth.issuer)
       expect(claims['aud']).to eq(application.uid)
       # Replay protection: the client checks this against what it sent.
       expect(claims['nonce']).to eq(nonce)

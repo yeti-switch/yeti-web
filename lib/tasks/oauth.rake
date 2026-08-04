@@ -17,18 +17,29 @@ namespace :oauth do
     desc 'Generate the RSA key that signs id_tokens'
     task :generate_signing_key, [:path] do |_t, args|
       path = args[:path].presence || 'config/oidc_signing_key.pem'
-      raise ArgumentError, "refusing to overwrite existing key at #{path}" if File.exist?(path)
 
       key = OpenSSL::PKey::RSA.new(2048)
-      File.write(path, key.to_pem)
-      File.chmod(0o400, path)
+
+      # Created at 0400 rather than written and then chmod'ed: File.write would
+      # apply the process umask, typically leaving the key world-readable until
+      # the next statement ran — a window another user on the host can read it
+      # in. O_EXCL makes the refusal-to-overwrite atomic too, where a preceding
+      # File.exist? check would be a TOCTOU.
+      begin
+        File.open(path, File::WRONLY | File::CREAT | File::EXCL, 0o400) do |f|
+          f.write(key.to_pem)
+        end
+      rescue Errno::EEXIST
+        raise ArgumentError, "refusing to overwrite existing key at #{path}"
+      end
 
       puts "Wrote a 2048-bit RSA private key to #{path} (mode 0400)."
       puts 'Point yeti_web.yml at it:'
       puts '  oauth:'
+      puts '    enabled: true'
+      puts '    issuer: https://web.example.com'
       puts '    oidc:'
       puts '      enabled: true'
-      puts '      issuer: https://web.example.com'
       puts "      signing_key_path: #{path}"
     end
   end

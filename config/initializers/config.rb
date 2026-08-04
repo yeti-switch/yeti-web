@@ -97,14 +97,24 @@ Config.setup do |setup_config|
     optional(:oauth).schema do
       optional(:enabled).value(:bool?)
 
+      # How yeti identifies itself as an authorization server, in both
+      # /.well-known/oauth-authorization-server and, when OIDC is on,
+      # /.well-known/openid-configuration and every id_token. One server, one
+      # identity — the two documents must never disagree.
+      #
+      # Optional: the RFC 8414 document falls back to the request's own base
+      # URL, which is what keeps MCP one-click connect zero-config. Mandatory
+      # once oauth.oidc.enabled, since an id_token's `iss` is compared byte for
+      # byte by the client and cannot be derived per request. That is enforced
+      # in the initializer rather than here so the message can say what to do
+      # about it.
+      optional(:issuer).maybe(:string)
+
       # Turns the OAuth provider into an OIDC provider as well: id_token,
       # /.well-known/openid-configuration, JWKS and userinfo. Requires
-      # oauth.enabled. `issuer` and `signing_key_path` are mandatory once
-      # enabled, but that is enforced in the initializer rather than here so
-      # the message can say what to do about it.
+      # oauth.enabled.
       optional(:oidc).schema do
         optional(:enabled).value(:bool?)
-        optional(:issuer).maybe(:string)
         optional(:signing_key_path).maybe(:string)
       end
     end

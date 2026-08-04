@@ -6,13 +6,23 @@
 #
 # MCP clients (Claude Code, Cursor, ...) do not need this page: they self-register
 # through POST /oauth/register (RFC 7591) as public PKCE clients. They still show
-# up in the list once they have.
+# up in the list once they have. That endpoint is unauthenticated, so it hands out
+# the MCP scope and nothing else — the OIDC scopes carry the admin's email and
+# roles and can only be granted here. See SELF_REGISTRABLE_SCOPES in
+# app/controllers/oauth/registrations_controller.rb.
 #
-# Access is role-gated by OauthApplicationPolicy, and root-only until some role
-# is granted the "System/OauthApplication" section in config/policy_roles.yml.
-# That default matters more here than on most pages: the show page displays the
+# Access is role-gated by OauthApplicationPolicy through the
+# "System/OauthApplication" section of config/policy_roles.yml. A role with no
+# such section falls back to its "Default" section, and the shipped template
+# (config/policy_roles.yml.distr) gives `user` a permissive Default — so `user`
+# manages clients out of the box, which is intended: it is an administrator role
+# here. `reporter` reaches the page read-only by the same fallback.
+#
+# Read access matters more here than on most pages: the show page displays the
 # client secret in cleartext — which is how Doorkeeper stores it, and which an
-# operator configuring a client has to be able to read back.
+# operator configuring a client has to be able to read back. A deployment that
+# wants either role kept off the page adds an explicit
+# "System/OauthApplication" section for it.
 ActiveAdmin.register OauthApplication do
   menu parent: ['System', 'Admin Access'], label: 'OAuth Applications', priority: 98
 

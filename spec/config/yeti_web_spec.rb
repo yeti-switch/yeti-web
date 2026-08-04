@@ -100,9 +100,9 @@ RSpec.describe 'config/yeti_web.yml' do
       admin_ui: be_kind_of(Hash),
       oauth: {
         enabled: boolean,
+        issuer: a_kind_of(String),
         oidc: {
           enabled: boolean,
-          issuer: a_kind_of(String),
           signing_key_path: a_kind_of(String)
         }
       },

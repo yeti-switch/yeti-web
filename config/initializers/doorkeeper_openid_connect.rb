@@ -28,9 +28,9 @@ oidc_issuer = nil
 oidc_signing_key = nil
 
 if oidc_enabled
-  oidc_issuer = YetiConfig.oauth.oidc.issuer.presence
+  oidc_issuer = YetiConfig.oauth.issuer.presence
   if oidc_issuer.nil?
-    raise 'yeti_web.yml: oauth.oidc.issuer is required when oauth.oidc.enabled. ' \
+    raise 'yeti_web.yml: oauth.issuer is required when oauth.oidc.enabled. ' \
           'It must equal, byte for byte, the issuer configured on every client — ' \
           'clients compare it against the discovery document and the id_token, ' \
           'and a trailing slash is enough to break every login.'

@@ -14,7 +14,7 @@ RSpec.describe 'OIDC discovery', type: :request do
 
       # A client compares this against the URL it was configured with and
       # against the id_token's iss; all three must be identical.
-      expect(payload['issuer']).to eq(YetiConfig.oauth.oidc.issuer)
+      expect(payload['issuer']).to eq(YetiConfig.oauth.issuer)
 
       expect(payload['authorization_endpoint']).to end_with('/oauth/authorize')
       expect(payload['token_endpoint']).to end_with('/oauth/token')
