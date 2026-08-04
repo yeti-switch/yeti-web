@@ -43,16 +43,13 @@ sentry:
 oauth:
   enabled: false # mount Doorkeeper OAuth provider (/oauth/*, /.well-known/oauth-authorization-server)
 
-  # The URL clients actually reach yeti-web on. Reported as `issuer` in both
-  # discovery documents and carried in every id_token. Optional while only
-  # OAuth is enabled (the metadata document then reports the URL the request
-  # came in on); mandatory once oidc.enabled below, where it MUST equal, byte
-  # for byte, the issuer configured on the client side — a trailing slash is
-  # enough to break every login.
+  # The URL clients actually reach yeti-web on. Optional for OAuth alone;
+  # mandatory once oidc.enabled below, where it MUST equal, byte for byte, the
+  # issuer configured on the client side.
   #issuer: https://web.example.com
 
-  # Also act as an OpenID Connect provider, so other yeti components
-  # (yeti-statistics, Grafana, ...) can use admin_users as their login. Adds
+  # Also act as an OpenID Connect provider, so other components can use
+  # admin_users as their login. Adds
   # /.well-known/openid-configuration, /oauth/discovery/keys and
   # /oauth/userinfo, and makes the token endpoint issue an id_token for
   # clients that request the `openid` scope.

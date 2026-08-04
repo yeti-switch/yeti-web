@@ -1,38 +1,11 @@
 # frozen_string_literal: true
 
-# Registered OAuth/OIDC clients — the things that sign users in through yeti or
-# call its API: yeti-statistics, Grafana, an internal tool. This page is the only
-# way to register one.
-#
-# MCP clients (Claude Code, Cursor, ...) do not need this page: they self-register
-# through POST /oauth/register (RFC 7591) as public PKCE clients. They still show
-# up in the list once they have. That endpoint is unauthenticated, so it hands out
-# the MCP scope and nothing else — the OIDC scopes carry the admin's email and
-# roles and can only be granted here. See SELF_REGISTRABLE_SCOPES in
-# app/controllers/oauth/registrations_controller.rb.
-#
-# Access is role-gated by OauthApplicationPolicy through the
-# "System/OauthApplication" section of config/policy_roles.yml. A role with no
-# such section falls back to its "Default" section, and the shipped template
-# (config/policy_roles.yml.distr) gives `user` a permissive Default — so `user`
-# manages clients out of the box, which is intended: it is an administrator role
-# here. `reporter` reaches the page read-only by the same fallback.
-#
-# Read access matters more here than on most pages: the show page displays the
-# client secret in cleartext — which is how Doorkeeper stores it, and which an
-# operator configuring a client has to be able to read back. A deployment that
-# wants either role kept off the page adds an explicit
-# "System/OauthApplication" section for it.
 ActiveAdmin.register OauthApplication do
   menu parent: ['System', 'Admin Access'], label: 'OAuth Applications', priority: 98
 
   config.batch_actions = false
   config.sort_order = 'created_at_desc'
 
-  # uid and secret may only be chosen at registration time — letting them change
-  # afterwards would silently break a client that is already using them, and the
-  # form doesn't offer them on edit. Permitting them only on create means a
-  # hand-crafted POST can't do it either.
   permit_params do
     permitted = %i[name redirect_uri confidential]
     permitted += %i[uid secret] if params[:action] == 'create'
@@ -61,8 +34,6 @@ ActiveAdmin.register OauthApplication do
       row :id
       row :name
       row('Client ID', &:uid)
-      # Cleartext, deliberately: this is the only place an operator can recover
-      # it, and Doorkeeper is storing it in cleartext regardless.
       row('Client secret', &:plaintext_secret)
       row :scopes
       row('Confidential', &:confidential?)
@@ -72,7 +43,6 @@ ActiveAdmin.register OauthApplication do
     end
 
     panel 'Active tokens' do
-      # Deleting the client deletes these with it (dependent: :delete_all).
       para "#{oauth_application.access_tokens.where(revoked_at: nil).count} not revoked"
     end
   end
@@ -88,10 +58,8 @@ ActiveAdmin.register OauthApplication do
               hint: 'Where the client is sent back after sign-in. Must match what the client ' \
                     'sends byte for byte, base path included, and must be HTTPS unless the host ' \
                     'is a loopback address. One per line for several.'
-      # Before :scopes, not after — a lone boolean checkbox rendered directly
-      # beneath the scopes checkbox list reads as one more scope.
       f.input :confidential,
-              hint: 'On for a client that can keep a secret (a server, like yeti-statistics). ' \
+              hint: 'On for a client that can keep a secret (a server-side app). ' \
                     'Off for a public client that authenticates with PKCE alone.'
       f.input :scopes,
               as: :check_boxes,
@@ -100,9 +68,6 @@ ActiveAdmin.register OauthApplication do
                     'Leave empty to grant the default scopes.'
 
       if f.object.new_record?
-        # required: false — the model does validate presence, but Doorkeeper
-        # fills both in before validation when they are blank, so marking them
-        # required would claim the operator has to invent them.
         f.input :uid, label: 'Client ID',
                       required: false,
                       hint: 'Leave blank to generate. Set it to a fixed value when the client ' \
@@ -116,9 +81,6 @@ ActiveAdmin.register OauthApplication do
     f.actions
   end
 
-  # Replaces a leaked or rotated secret without deleting the client, so existing
-  # tokens keep working — only the client's ability to get new ones is affected
-  # until its config is updated.
   member_action :rotate_secret, method: :put do
     resource.renew_secret
     resource.save!
@@ -127,9 +89,6 @@ ActiveAdmin.register OauthApplication do
 
   action_item :rotate_secret, only: :show do
     if authorized?(:rotate_secret)
-      # Url options and html options must stay separate hashes here, or `method`
-      # and `data` end up as query parameters and the link silently becomes a GET
-      # with no confirmation.
       link_to 'Rotate secret',
               { action: :rotate_secret, id: resource.id },
               method: :put,

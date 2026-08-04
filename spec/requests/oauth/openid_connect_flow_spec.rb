@@ -8,7 +8,7 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
   let(:admin) { create(:admin_user, :filled, roles: %w[admin noc]) }
   let(:application) do
     create_oauth_application(
-      name: 'yeti-statistics',
+      name: 'stats-client',
       confidential: true,
       scopes: 'openid profile email',
       redirect_uri: 'https://stats.example.com/api/auth/callback'

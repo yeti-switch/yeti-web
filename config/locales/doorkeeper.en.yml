@@ -19,19 +19,11 @@ en:
               not_match_configured: "doesn't match those configured on the server."
 
   doorkeeper:
-    # One line per scope on the consent screen, under "This application will be
-    # able to:". Whatever is missing here renders as a translation_missing span,
-    # so every scope the server offers needs an entry.
+    # Shown on the consent screen; a scope with no entry here renders as a
+    # translation_missing span. profile / email keep the OIDC gem's wording.
     scopes:
       mcp: 'Use the MCP API as you: read CDRs and simulate routing'
-      # Overrides the OIDC gem's "Authenticate your account", which is true but
-      # incomplete: the `groups` claim rides on this scope (see
-      # config/initializers/doorkeeper_openid_connect.rb) and carries the admin
-      # roles a client authorises against. An admin approving a sign-in should
-      # see that they are handing over their roles, not just their identity.
       openid: 'Sign you in, and share your username and admin roles'
-      # profile / email keep the gem's wording — "View your profile information"
-      # and "View your email address" — which describe those claims accurately.
 
     applications:
       confirmations:

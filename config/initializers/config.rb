@@ -92,27 +92,12 @@ Config.setup do |setup_config|
 
     # Mounts the Doorkeeper OAuth provider (/oauth/authorize, /oauth/token,
     # /oauth/register, /.well-known/oauth-authorization-server). Independent
-    # of MCP — can be enabled on its own to power Grafana SSO or other clients.
+    # of MCP — can be enabled on its own to power SSO for other clients.
     # Block AND `enabled` key are both optional; missing → treated as false.
     optional(:oauth).schema do
       optional(:enabled).value(:bool?)
-
-      # How yeti identifies itself as an authorization server, in both
-      # /.well-known/oauth-authorization-server and, when OIDC is on,
-      # /.well-known/openid-configuration and every id_token. One server, one
-      # identity — the two documents must never disagree.
-      #
-      # Optional: the RFC 8414 document falls back to the request's own base
-      # URL, which is what keeps MCP one-click connect zero-config. Mandatory
-      # once oauth.oidc.enabled, since an id_token's `iss` is compared byte for
-      # byte by the client and cannot be derived per request. That is enforced
-      # in the initializer rather than here so the message can say what to do
-      # about it.
       optional(:issuer).maybe(:string)
 
-      # Turns the OAuth provider into an OIDC provider as well: id_token,
-      # /.well-known/openid-configuration, JWKS and userinfo. Requires
-      # oauth.enabled.
       optional(:oidc).schema do
         optional(:enabled).value(:bool?)
         optional(:signing_key_path).maybe(:string)

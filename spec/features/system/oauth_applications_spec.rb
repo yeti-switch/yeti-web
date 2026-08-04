@@ -7,7 +7,7 @@ RSpec.describe 'OAuth Applications page', :js do
 
   let!(:application) do
     create_oauth_application(
-      name: 'yeti-statistics',
+      name: 'stats-client',
       confidential: true,
       scopes: 'openid profile email',
       redirect_uri: 'https://stats.example.com/api/auth/callback'
@@ -19,7 +19,7 @@ RSpec.describe 'OAuth Applications page', :js do
 
     it 'lists registered clients with their client id' do
       visit oauth_applications_path
-      expect(page).to have_content('yeti-statistics')
+      expect(page).to have_content('stats-client')
       expect(page).to have_content(application.uid)
     end
 
@@ -33,12 +33,12 @@ RSpec.describe 'OAuth Applications page', :js do
 
     it 'registers a new client with a generated client id and secret' do
       visit new_oauth_application_path
-      fill_in 'Name', with: 'grafana'
-      fill_in 'Redirect uri', with: 'https://grafana.example.com/login/generic_oauth'
+      fill_in 'Name', with: 'dashboards'
+      fill_in 'Redirect uri', with: 'https://dashboards.example.com/login/generic_oauth'
       check 'openid'
       click_button 'Create'
 
-      created = OauthApplication.find_by(name: 'grafana')
+      created = OauthApplication.find_by(name: 'dashboards')
       expect(created).to be_present
       expect(created.uid).to be_present
       expect(created.plaintext_secret).to be_present
