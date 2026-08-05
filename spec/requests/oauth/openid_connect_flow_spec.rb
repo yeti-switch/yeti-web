@@ -79,10 +79,9 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
       expect(claims['sub']).to eq(admin.id.to_s)
     end
 
-    # These are in the id_token only because every claim declares
-    # response: [:id_token, :user_info]. The gem's default is user_info alone,
-    # which would leave a client that never calls /oauth/userinfo — the normal
-    # case — with a token carrying nothing but sub.
+    # In the id_token only because every claim declares response: both. The gem
+    # defaults to user_info alone, which leaves a client that never calls
+    # /oauth/userinfo with a token carrying nothing but sub.
     it 'carries the profile claims in the id_token itself' do
       expect(claims['name']).to eq(admin.username)
       expect(claims['preferred_username']).to eq(admin.username)

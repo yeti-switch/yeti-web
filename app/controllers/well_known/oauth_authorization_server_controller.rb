@@ -24,31 +24,18 @@ module WellKnown
 
     private
 
-    # The one identity this authorization server claims — the same string the
-    # OIDC discovery document reports and every id_token carries in `iss`, so a
-    # client that discovers here and validates a token there sees no mismatch.
-    # Emitted verbatim: clients compare it byte for byte, so normalising a
-    # trailing slash away here would break exactly the logins it looks like it
-    # fixes.
-    #
-    # Falls back to the request's own base URL when unset, which is the MCP-only
-    # deployment: oauth.enabled with no oidc block, nothing to compare against,
-    # zero config. oauth.issuer is mandatory once OIDC is on — see
-    # config/initializers/doorkeeper_openid_connect.rb.
-    #
-    # The endpoints below deliberately stay on request.base_url: the OIDC gem
-    # builds its own discovery document from Rails URL helpers, i.e. from the
-    # request, and two documents advertising different hosts for /oauth/authorize
-    # would be a worse failure than the one this avoids. If a proxy really does
-    # rewrite host or scheme, fix it with X-Forwarded-* / default_url_options.
+    # Emitted verbatim — clients compare `iss` byte for byte, so normalising a
+    # trailing slash here would break the logins it looks like it fixes. The
+    # endpoints stay on request.base_url because the OIDC gem builds its own
+    # discovery document from the request; two documents naming different hosts
+    # for /oauth/authorize would be worse than the mismatch this avoids.
     def issuer
       YetiConfig.oauth&.issuer.presence || request.base_url
     end
 
-    # When yeti is also an OIDC provider, say so here. A client that reads only
-    # this document (it is served at a path the OIDC gem would otherwise claim
-    # — see config/routes.rb) should not conclude there is no OIDC on offer.
-    # The authoritative OIDC document is /.well-known/openid-configuration.
+    # This document is served at a path the OIDC gem would otherwise claim (see
+    # config/routes.rb), so a client reading only it must not conclude there is
+    # no OIDC on offer.
     def oidc_metadata
       return {} unless YetiConfig.oauth&.oidc&.enabled
 

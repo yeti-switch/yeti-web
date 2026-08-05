@@ -23,26 +23,20 @@ Rails.application.routes.draw do
   # Doorkeeper OAuth provider + RFC 8414 metadata + RFC 7591 dynamic client
   # registration. Gated on YetiConfig.oauth.enabled so the surface is opt-in.
   if YetiConfig.oauth&.enabled
-    # skip_controllers :applications — Doorkeeper's built-in client-management UI
-    # is deliberately unavailable (doorkeeper.rb's admin_authenticator answers
-    # 403), and clients are managed through the ActiveAdmin "OAuth Applications"
-    # page instead. Leaving it mounted would also claim the oauth_application(s)
-    # route helper names, which that AA page needs for its own links.
+    # skip_controllers :applications — clients are managed through the AA "OAuth
+    # Applications" page, and leaving Doorkeeper's own UI mounted would claim the
+    # oauth_application(s) route helper names that page needs.
     use_doorkeeper do
       skip_controllers :applications
     end
-    # Must stay above use_doorkeeper_openid_connect: the OIDC gem's discovery
-    # routes claim /.well-known/oauth-authorization-server too, and its version
-    # of that document has no registration_endpoint (it only advertises one for
-    # its own dynamic registration, which we don't use). First route wins, so
-    # this ordering is what keeps MCP clients able to self-register.
+    # Must stay above use_doorkeeper_openid_connect: the OIDC gem claims
+    # /.well-known/oauth-authorization-server too, and its version of that
+    # document has no registration_endpoint. First route wins.
     get '/.well-known/oauth-authorization-server', to: 'well_known/oauth_authorization_server#show'
     post '/oauth/register', to: 'oauth/registrations#create'
 
     # /.well-known/openid-configuration, /oauth/discovery/keys (JWKS) and
-    # /oauth/userinfo. Guarded on the same condition as the initializer —
-    # this helper reads Doorkeeper::OpenidConnect.configuration while routes
-    # are drawn and raises MissingConfiguration if it was never configured.
+    # /oauth/userinfo.
     use_doorkeeper_openid_connect if YetiConfig.oauth.oidc&.enabled
   end
 

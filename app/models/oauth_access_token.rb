@@ -32,18 +32,12 @@ class OauthAccessToken < ApplicationRecord
   include ::Doorkeeper::Orm::ActiveRecord::Mixins::AccessToken
   self.table_name = 'gui.oauth_access_tokens'
 
-  # resource_owner_id is the AdminUser id (single-tenant config — Doorkeeper
-  # supports polymorphic owners but we don't use it). Explicit belongs_to so
-  # the AA index page can eager-load with `.includes(:resource_owner)` and
-  # avoid an N+1 in the Owner column for root admins.
+  # Explicit belongs_to so the AA index page can eager-load the Owner column.
   belongs_to :resource_owner, class_name: 'AdminUser', foreign_key: :resource_owner_id, optional: true
 
-  # A token is only as valid as the admin behind it. Doorkeeper's own answer is
-  # "not expired and not revoked", which leaves a disabled admin's unexpired
-  # token working until it runs out — up to an hour of access after offboarding,
-  # on every endpoint that authorizes with it (/oauth/userinfo, introspection,
-  # /api/mcp). Checking the owner here revokes that access immediately, in one
-  # place, instead of once per endpoint.
+  # Doorkeeper's own answer is "not expired and not revoked", which leaves a
+  # disabled admin's token working until it expires. Checking the owner here
+  # cuts access off immediately, on every endpoint at once.
   def accessible?
     return super if resource_owner_id.nil?
 

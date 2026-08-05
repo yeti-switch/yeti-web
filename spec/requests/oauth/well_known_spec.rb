@@ -42,11 +42,9 @@ RSpec.describe 'OAuth Authorization Server Metadata (RFC 8414)', type: :request 
     expect(payload['id_token_signing_alg_values_supported']).to include('RS256')
   end
 
-  # Since this document also advertises jwks_uri and userinfo_endpoint, a client
-  # may discover here and then validate an id_token minted against the OIDC
-  # document's issuer. One authorization server, one identity — if these two ever
-  # disagree, every such login fails with an issuer mismatch while
-  # /.well-known/openid-configuration looks perfectly healthy.
+  # This document advertises jwks_uri and userinfo_endpoint, so a client may
+  # discover here and validate an id_token minted against the OIDC document's
+  # issuer. If the two disagree, every such login fails on issuer mismatch.
   it 'claims the same issuer as the OIDC discovery document' do
     subject
     rfc8414 = JSON.parse(response.body)
@@ -55,15 +53,13 @@ RSpec.describe 'OAuth Authorization Server Metadata (RFC 8414)', type: :request 
     openid = JSON.parse(response.body)
 
     expect(rfc8414['issuer']).to eq(openid['issuer'])
-    # ...and it is the configured issuer, not the host the request came in on —
-    # yeti_web.yml.ci sets the two to different values on purpose.
+    # yeti_web.yml.ci sets issuer and the request host to different values.
     expect(rfc8414['issuer']).to eq(YetiConfig.oauth.issuer)
     expect(rfc8414['issuer']).not_to eq('http://www.example.com')
   end
 
-  # The MCP-only deployment: oauth.enabled with no issuer configured. Nothing to
-  # compare an id_token against, so the request's own base URL is the honest
-  # answer — and it keeps one-click connect working with zero config.
+  # The MCP-only deployment: oauth.enabled with no issuer configured, so nothing
+  # to compare an id_token against and one-click connect stays zero-config.
   context 'when oauth.issuer is not configured' do
     before { allow(YetiConfig.oauth).to receive(:issuer).and_return(nil) }
 
