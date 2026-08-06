@@ -23,9 +23,21 @@ Rails.application.routes.draw do
   # Doorkeeper OAuth provider + RFC 8414 metadata + RFC 7591 dynamic client
   # registration. Gated on YetiConfig.oauth.enabled so the surface is opt-in.
   if YetiConfig.oauth&.enabled
-    use_doorkeeper
+    # skip_controllers :applications — clients are managed through the AA "OAuth
+    # Applications" page, and leaving Doorkeeper's own UI mounted would claim the
+    # oauth_application(s) route helper names that page needs.
+    use_doorkeeper do
+      skip_controllers :applications
+    end
+    # Must stay above use_doorkeeper_openid_connect: the OIDC gem claims
+    # /.well-known/oauth-authorization-server too, and its version of that
+    # document has no registration_endpoint. First route wins.
     get '/.well-known/oauth-authorization-server', to: 'well_known/oauth_authorization_server#show'
     post '/oauth/register', to: 'oauth/registrations#create'
+
+    # /.well-known/openid-configuration, /oauth/discovery/keys (JWKS) and
+    # /oauth/userinfo.
+    use_doorkeeper_openid_connect if YetiConfig.oauth.oidc&.enabled
   end
 
   # MCP server for LLM tool use. Auth via Doorkeeper OAuth bearer tokens, so

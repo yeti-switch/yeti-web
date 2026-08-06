@@ -10,6 +10,12 @@ module Oauth
     # are supported. `nil` / missing = public client (treated as 'none').
     SUPPORTED_AUTH_METHODS = %w[none client_secret_basic].freeze
 
+    # What a stranger may register itself for. Not the OIDC scopes: those carry
+    # the admin's email and roles, and are registered by an operator through the
+    # admin UI. This is the only unauthenticated way to create an application,
+    # so the check belongs here rather than at /oauth/authorize.
+    SELF_REGISTRABLE_SCOPES = %w[mcp].freeze
+
     def create
       params = JSON.parse(request.body.read)
 
@@ -21,10 +27,23 @@ module Oauth
         }, status: 400
       end
 
+      # RFC 7591 §3.2.1 allows quietly returning a narrower scope instead, but a
+      # client handed a silently trimmed one only finds out at the token endpoint.
+      requested_scopes = params['scope'].to_s.split
+      unsupported_scopes = requested_scopes - SELF_REGISTRABLE_SCOPES
+      if unsupported_scopes.any?
+        return render json: {
+          error: 'invalid_client_metadata',
+          error_description: "Unsupported scope: #{unsupported_scopes.join(' ')}. " \
+                             "Dynamic registration may request: #{SELF_REGISTRABLE_SCOPES.join(' ')}. " \
+                             'Other scopes are registered by an administrator.'
+        }, status: 400
+      end
+
       app = OauthApplication.new(
         name: params['client_name'].to_s[0, 100].presence || 'Unnamed client',
         redirect_uri: Array(params['redirect_uris']).join("\n"),
-        scopes: params['scope'].presence || Doorkeeper.config.default_scopes.to_s,
+        scopes: requested_scopes.presence&.join(' ') || Doorkeeper.config.default_scopes.to_s,
         confidential: auth_method != 'none'
       )
 

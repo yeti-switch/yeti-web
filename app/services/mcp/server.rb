@@ -57,7 +57,7 @@ module Mcp
       access_token = OauthAccessToken.by_token(raw_token)
       return nil if access_token.nil? || !access_token.accessible?
       # Require the `mcp` scope explicitly so future tokens issued for other
-      # scopes (e.g. Grafana SSO via the same OAuth server) can't call MCP.
+      # scopes (e.g. SSO via the same OAuth server) can't call MCP.
       return nil unless access_token.scopes.include?('mcp')
 
       admin_user = AdminUser.find_by(id: access_token.resource_owner_id)

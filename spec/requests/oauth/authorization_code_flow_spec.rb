@@ -43,6 +43,19 @@ RSpec.describe 'OAuth authorization code flow', type: :request do
       }
       expect(response).to have_http_status(:success)
     end
+
+    # A missing doorkeeper.scopes.* key renders a "translation missing" span
+    # rather than failing, on the screen where admins decide what to hand over.
+    it 'describes every configured scope in plain English' do
+      Doorkeeper.config.scopes.each do |scope|
+        expect(I18n.exists?("doorkeeper.scopes.#{scope}"))
+          .to be(true), "no doorkeeper.scopes.#{scope} translation for the consent screen"
+      end
+    end
+
+    it 'tells the admin that signing in also shares their roles' do
+      expect(I18n.t('doorkeeper.scopes.openid')).to match(/roles/i)
+    end
   end
 
   it 'exchanges an authorization code for an access token' do

@@ -19,6 +19,12 @@ en:
               not_match_configured: "doesn't match those configured on the server."
 
   doorkeeper:
+    # Shown on the consent screen; a scope with no entry here renders as a
+    # translation_missing span. profile / email keep the OIDC gem's wording.
+    scopes:
+      mcp: 'Use the MCP API as you: read CDRs and simulate routing'
+      openid: 'Sign you in, and share your username and admin roles'
+
     applications:
       confirmations:
         destroy: 'Are you sure?'

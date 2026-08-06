@@ -17,6 +17,11 @@ gem 'responders'
 gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'devise', '>= 4.6.0'
 gem 'doorkeeper', '~> 5.9'
+# OIDC layer on top of Doorkeeper: id_token, /.well-known/openid-configuration,
+# JWKS and userinfo. Always configured (it has to be — see
+# config/initializers/doorkeeper_openid_connect.rb), but exposes nothing unless
+# YetiConfig.oauth.oidc.enabled.
+gem 'doorkeeper-openid_connect', '~> 1.10'
 gem 'ostruct', '~> 0.6.3'
 
 # Seamless JWT authentication for Rails API

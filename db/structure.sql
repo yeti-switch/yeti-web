@@ -14666,6 +14666,36 @@ ALTER SEQUENCE gui.oauth_applications_id_seq OWNED BY gui.oauth_applications.id;
 
 
 --
+-- Name: oauth_openid_requests; Type: TABLE; Schema: gui; Owner: -
+--
+
+CREATE TABLE gui.oauth_openid_requests (
+    id bigint NOT NULL,
+    access_grant_id bigint NOT NULL,
+    nonce character varying NOT NULL
+);
+
+
+--
+-- Name: oauth_openid_requests_id_seq; Type: SEQUENCE; Schema: gui; Owner: -
+--
+
+CREATE SEQUENCE gui.oauth_openid_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: oauth_openid_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: gui; Owner: -
+--
+
+ALTER SEQUENCE gui.oauth_openid_requests_id_seq OWNED BY gui.oauth_openid_requests.id;
+
+
+--
 -- Name: sessions; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -16717,6 +16747,13 @@ ALTER TABLE ONLY gui.oauth_applications ALTER COLUMN id SET DEFAULT nextval('gui
 
 
 --
+-- Name: oauth_openid_requests id; Type: DEFAULT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_openid_requests ALTER COLUMN id SET DEFAULT nextval('gui.oauth_openid_requests_id_seq'::regclass);
+
+
+--
 -- Name: sessions id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -18185,6 +18222,14 @@ ALTER TABLE ONLY gui.oauth_applications
 
 
 --
+-- Name: oauth_openid_requests oauth_openid_requests_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_openid_requests
+    ADD CONSTRAINT oauth_openid_requests_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
@@ -19338,6 +19383,13 @@ CREATE UNIQUE INDEX index_oauth_access_tokens_on_token ON gui.oauth_access_token
 --
 
 CREATE UNIQUE INDEX index_oauth_applications_on_uid ON gui.oauth_applications USING btree (uid);
+
+
+--
+-- Name: index_oauth_openid_requests_on_access_grant_id; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE INDEX index_oauth_openid_requests_on_access_grant_id ON gui.oauth_openid_requests USING btree (access_grant_id);
 
 
 --
@@ -20496,6 +20548,14 @@ ALTER TABLE ONLY gui.oauth_access_tokens
 
 
 --
+-- Name: oauth_openid_requests oauth_openid_requests_access_grant_id_fkey; Type: FK CONSTRAINT; Schema: gui; Owner: -
+--
+
+ALTER TABLE ONLY gui.oauth_openid_requests
+    ADD CONSTRAINT oauth_openid_requests_access_grant_id_fkey FOREIGN KEY (access_grant_id) REFERENCES gui.oauth_access_grants(id) ON DELETE CASCADE;
+
+
+--
 -- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
@@ -20734,6 +20794,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260729120000'),
 ('20260719120000'),
 ('20260705140000'),
 ('20260704115624'),

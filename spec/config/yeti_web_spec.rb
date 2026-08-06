@@ -99,7 +99,12 @@ RSpec.describe 'config/yeti_web.yml' do
       tmpdir: a_kind_of(String),
       admin_ui: be_kind_of(Hash),
       oauth: {
-        enabled: boolean
+        enabled: boolean,
+        issuer: a_kind_of(String),
+        oidc: {
+          enabled: boolean,
+          signing_key_path: a_kind_of(String)
+        }
       },
       mcp: {
         enabled: boolean

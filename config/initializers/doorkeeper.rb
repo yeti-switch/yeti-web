@@ -37,8 +37,10 @@ if YetiConfig.oauth&.enabled
       )
     end
 
-    # Who can manage OAuth applications via Doorkeeper's built-in /oauth/applications
-    # web UI? Block all access — admins manage tokens via the AA page instead.
+    # Who can manage OAuth applications via Doorkeeper's built-in
+    # /oauth/applications web UI? Nobody — clients are managed through the
+    # ActiveAdmin "OAuth Applications" page instead, and routes.rb no longer
+    # mounts that controller at all. Kept as a backstop in case it ever is.
     admin_authenticator do |_routes|
       head 403
     end
@@ -200,6 +202,13 @@ if YetiConfig.oauth&.enabled
     # MCP clients (Claude Code, Cursor) are public clients and MUST use PKCE.
     force_pkce
 
+    # S256 only. Doorkeeper also accepts `plain`, where the verifier travels in
+    # the authorization request in the clear and PKCE protects nothing — while
+    # /.well-known/oauth-authorization-server has always advertised S256 alone.
+    # This makes that claim true, and keeps it consistent with the OIDC
+    # discovery document, which reports this option verbatim.
+    pkce_code_challenge_methods ['S256']
+
     # Store SHA256 of tokens, not plaintext. Stolen DB dump can't be used to
     # impersonate users.
     hash_token_secrets
@@ -261,6 +270,14 @@ if YetiConfig.oauth&.enabled
     # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
     #
     default_scopes :mcp
+
+    # OIDC scopes, offered only when oauth.oidc.enabled — withholding `openid`
+    # is what keeps the OIDC layer dormant, since it is the scope that asks for
+    # an id_token and nothing else can trigger one. Deliberately not a default
+    # scope either: a client must request it explicitly. See
+    # config/initializers/doorkeeper_openid_connect.rb for the claims each one
+    # unlocks.
+    optional_scopes :openid, :profile, :email if YetiConfig.oauth.oidc&.enabled
 
     # Allows to restrict only certain scopes for grant_type.
     # By default, all the scopes will be available for all the grant types.

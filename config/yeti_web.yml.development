@@ -43,6 +43,11 @@ sentry:
 oauth:
   enabled: false # mount Doorkeeper OAuth provider (/oauth/*, /.well-known/oauth-authorization-server)
 
+  #issuer: http://127.0.0.1:3000
+  #oidc:
+  #  enabled: true
+  #  signing_key_path: config/oidc_signing_key.pem
+
 mcp:
   enabled: false # mount /api/mcp; requires oauth.enabled
 
