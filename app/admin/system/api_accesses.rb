@@ -80,8 +80,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
     f.semantic_errors *f.object.errors.attribute_names
 
     f.inputs do
-      f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
-      f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
+      f.input :login, hint: link_to('Сlick to fill random login', '#', data: { generate_credential: '' })
+      f.input :password, as: :string, hint: link_to('Сlick to fill random password', '#', data: { generate_credential: '' })
       f.contractor_input :customer_id, label: 'Customer'
       f.account_input :account_ids,
                       multiple: true,
