@@ -402,8 +402,8 @@ ActiveAdmin.register Gateway do
               f.input :contact_user
 
               if f.object.external_id.nil? || authorized?(:allow_incoming_auth_credentials)
-                f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', '#', data: { generate_credential: '' })}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
-                f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Сlick to fill random password', '#', data: { generate_credential: '' })
+                f.input :incoming_auth_username, hint: "#{link_to('Click to fill random username', '#', data: { generate_credential: '' })}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
+                f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Click to fill random password', '#', data: { generate_credential: '' })
               end
 
               f.input :incoming_auth_allow_jwt
