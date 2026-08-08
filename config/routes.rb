@@ -113,6 +113,7 @@ Rails.application.routes.draw do
           jsonapi_resources :payments, except: %i[update destroy]
 
           jsonapi_resources :routing_plans
+          jsonapi_resources :routing_plan_static_routes
           jsonapi_resources :codec_groups
 
           jsonapi_resources :disconnect_policies

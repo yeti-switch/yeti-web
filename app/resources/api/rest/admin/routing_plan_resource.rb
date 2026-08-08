@@ -12,6 +12,13 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
                             relation_name: :routing_groups,
                             foreign_key_on: :related
 
+  # read-only: routing_plan_id is NOT NULL, so static routes can only be
+  # (re)assigned from the routing-plan-static-routes endpoint
+  has_many :static_routes, class_name: 'RoutingPlanStaticRoute',
+                           exclude_links: %i[default self],
+                           relation_name: :static_routes,
+                           foreign_key_on: :related
+
   filter :name # DEPRECATED in favor of name_eq
 
   ransack_filter :name, type: :string

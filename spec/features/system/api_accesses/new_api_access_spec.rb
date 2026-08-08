@@ -44,7 +44,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
 
     context 'when credentials is empty' do
       it 'should generate new credential by click on the link in hint for :login with 20 chars' do
-        click_link('Сlick to fill random login')
+        click_link('Click to fill random login')
         login = find_field('system_api_access_login')
         expect(login).to be_present
         expect(login.value).to be_present
@@ -53,7 +53,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
       end
 
       it 'should generate new credential by click on the link in hint for :password with 20 chars' do
-        click_link('Сlick to fill random password')
+        click_link('Click to fill random password')
         password = find_field('system_api_access_password')
         expect(password).to be_present
         expect(password.value).to be_present
@@ -81,7 +81,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
       end
 
       it 'should generate new credential by click on the link in hint for :login with 20 chars' do
-        click_link('Сlick to fill random login')
+        click_link('Click to fill random login')
         login = find_field('system_api_access_login')
         expect(login).to be_present
         expect(login.value).to be_present
@@ -91,7 +91,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
       end
 
       it 'should generate new credential by click on the link in hint for :password with 20 chars' do
-        click_link('Сlick to fill random password')
+        click_link('Click to fill random password')
         password = find_field('system_api_access_password')
         expect(password).to be_present
         expect(password.value).to be_present
