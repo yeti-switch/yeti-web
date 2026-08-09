@@ -9,9 +9,11 @@ RSpec.describe 'Create new Invoice Template', type: :feature do
 
   include_context :fill_form, 'new_billing_invoice_template' do
     let(:html_template) { '<html><body>{{ invoice.reference }}</body></html>' }
+    let(:filename_template) { 'invoice-{{invoice.reference}}' }
     let(:attributes) do
       {
         name: 'new template',
+        filename_template: filename_template,
         html_template: html_template
       }
     end
@@ -22,6 +24,7 @@ RSpec.describe 'Create new Invoice Template', type: :feature do
 
       expect(Billing::InvoiceTemplate.last).to have_attributes(
         name: attributes[:name],
+        filename_template: filename_template,
         html_template: html_template
       )
     end

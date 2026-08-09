@@ -5,6 +5,6 @@ class Api::Rest::Admin::InvoicesController < Api::Rest::Admin::BaseController
     doc = ::Billing::InvoiceDocument.find_by(invoice_id: params[:id])
     return head 404 if doc.nil? || doc.pdf_data.blank?
 
-    send_data doc.pdf_data, filename: "invoice-#{params[:id]}.pdf"
+    send_data doc.pdf_data, filename: "#{doc.filename}.pdf"
   end
 end

@@ -886,14 +886,14 @@ RSpec.describe Api::Rest::Admin::InvoicesController, type: :request, bullet: [:n
     let!(:contractor) { create(:customer) }
     let!(:account) { create(:account, contractor:) }
     let!(:invoice) { create(:invoice, account:) }
-    let!(:invoice_document) { create(:invoice_document, :filled, invoice:) }
+    let!(:invoice_document) { create(:invoice_document, :filled, invoice:, filename: 'INV-1_2020-01') }
 
-    it 'responds with pdf file' do
+    it 'responds with pdf file named after the stored document filename' do
       subject
       expect(response.status).to eq(200)
       expect(response.headers['Content-Transfer-Encoding']).to eq('binary')
       expect(response.headers['Content-Type']).to eq('application/pdf')
-      expect(response.headers['Content-Disposition']).to include("attachment; filename=\"invoice-#{invoice.id}.pdf\"")
+      expect(response.headers['Content-Disposition']).to include('attachment; filename="INV-1_2020-01.pdf"')
       expect(response.body).to match(invoice_document.pdf_data)
     end
 

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 # Generates the invoice PDF document: builds the raw invoice data payload, sends
-# it with the account's html_template to the external yeti-pdf service, and
-# stores the returned PDF on the InvoiceDocument.
+# it with the account's html_template and filename_template to the external
+# yeti-pdf service, and stores the returned PDF and rendered name on the
+# InvoiceDocument.
 #
 # Any generation failure (no template, yeti-pdf not configured, yeti-pdf error)
 # is recorded on invoice.pdf_error and swallowed, so a rendering problem never
@@ -19,6 +20,15 @@ module BillingInvoice
     class PdfApiNotConfigured < Error
       def initialize(invoice_id)
         super("Template for invoice #{invoice_id} has an html_template but invoice.pdf_api is not configured")
+      end
+    end
+
+    # yeti-pdf rejects a filename template that renders to something unusable,
+    # so reaching this means it answered without the header at all — a version
+    # that predates filename_template support.
+    class FilenameMissing < Error
+      def initialize(invoice_id)
+        super("yeti-pdf returned no filename for invoice #{invoice_id}")
       end
     end
 
@@ -39,12 +49,17 @@ module BillingInvoice
       raise PdfApiNotConfigured, invoice.id unless YetiPdf::Client.configured?
 
       data = InvoiceData.call(invoice: invoice)
-      pdf_data = YetiPdf::Client.render_pdf(template: template.html_template, data: data)
+      result = YetiPdf::Client.render_pdf(
+        template: template.html_template,
+        filename_template: template.filename_template,
+        data: data
+      )
+      raise FilenameMissing, invoice.id if result.filename.blank?
 
       Billing::InvoiceDocument.create!(
         invoice: invoice,
-        filename: invoice.file_name.to_s,
-        pdf_data: pdf_data
+        filename: result.filename,
+        pdf_data: result.pdf
       )
     end
 

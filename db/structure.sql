@@ -11336,7 +11336,8 @@ CREATE TABLE billing.invoice_templates (
     id integer NOT NULL,
     name character varying NOT NULL,
     created_at timestamp with time zone,
-    html_template text
+    html_template text,
+    filename_template character varying DEFAULT 'invoice-{{invoice.reference}}'::character varying NOT NULL
 );
 
 
@@ -20794,6 +20795,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260809120000'),
 ('20260729120000'),
 ('20260719120000'),
 ('20260705140000'),

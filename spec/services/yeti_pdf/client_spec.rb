@@ -23,11 +23,48 @@ RSpec.describe YetiPdf::Client do
       stub = stub_request(:post, render_url)
              .to_return(status: 200, headers: { 'Content-Type' => 'application/pdf' }, body: '%PDF-bytes')
 
-      expect(subject).to eq('%PDF-bytes')
+      expect(subject).to have_attributes(pdf: '%PDF-bytes', filename: nil)
       expect(stub).to have_been_requested
       expect(WebMock).to have_requested(:post, render_url)
         .with(headers: { 'Content-Type' => %r{application/json} },
               body: hash_including('template' => template, 'options' => {}))
+    end
+
+    it 'omits filename_template when none is given' do
+      stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
+
+      subject
+      expect(WebMock).to have_requested(:post, render_url)
+        .with { |req| !JSON.parse(req.body).key?('filename_template') }
+    end
+
+    context 'with a filename_template' do
+      subject do
+        described_class.render_pdf(template: template, data: data, filename_template: '{{ invoice.reference }}')
+      end
+
+      it 'sends it and returns the rendered name without the extension' do
+        stub_request(:post, render_url).to_return(
+          status: 200,
+          headers: { 'Content-Type' => 'application/pdf',
+                     'Content-Disposition' => 'attachment; filename="INV-1.pdf"' },
+          body: '%PDF-bytes'
+        )
+
+        expect(subject).to have_attributes(pdf: '%PDF-bytes', filename: 'INV-1')
+        expect(WebMock).to have_requested(:post, render_url)
+          .with(body: hash_including('filename_template' => '{{ invoice.reference }}'))
+      end
+
+      it 'decodes an RFC 2231 encoded name' do
+        stub_request(:post, render_url).to_return(
+          status: 200,
+          headers: { 'Content-Disposition' => "attachment; filename*=utf-8''Acm%C3%A9%20%26%20Co.pdf" },
+          body: '%PDF-bytes'
+        )
+
+        expect(subject.filename).to eq('Acmé & Co')
+      end
     end
 
     it 'raises Error with the status on a non-2xx response' do
