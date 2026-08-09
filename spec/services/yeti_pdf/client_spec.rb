@@ -17,7 +17,7 @@ RSpec.describe YetiPdf::Client do
   end
 
   describe '.render_pdf' do
-    subject { described_class.render_pdf(template: template, data: data) }
+    subject { described_class.render_pdf(template: template, data: data, filename_template: nil) }
 
     it 'posts the template and data and returns the pdf bytes' do
       stub = stub_request(:post, render_url)
@@ -30,12 +30,33 @@ RSpec.describe YetiPdf::Client do
               body: hash_including('template' => template, 'options' => {}))
     end
 
-    it 'omits filename_template when none is given' do
+    it 'omits filename_template when nil, so no name is asked for' do
       stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
 
       subject
       expect(WebMock).to have_requested(:post, render_url)
         .with { |req| !JSON.parse(req.body).key?('filename_template') }
+    end
+
+    # Blank must reach yeti-pdf: it distinguishes "no name wanted" (key absent)
+    # from "name wanted, template broken" (key present but empty) and rejects
+    # the latter, which is how the playground surfaces a cleared field.
+    it 'sends an empty filename_template rather than dropping it' do
+      stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
+
+      described_class.render_pdf(template: template, data: data, filename_template: '')
+      expect(WebMock).to have_requested(:post, render_url)
+        .with { |req| JSON.parse(req.body)['filename_template'] == '' }
+    end
+
+    it 'ignores a Content-Disposition when no filename was requested' do
+      stub_request(:post, render_url).to_return(
+        status: 200,
+        headers: { 'Content-Disposition' => 'attachment; filename="whatever.pdf"' },
+        body: '%PDF-bytes'
+      )
+
+      expect(subject.filename).to be_nil
     end
 
     context 'with a filename_template' do
@@ -92,7 +113,7 @@ RSpec.describe YetiPdf::Client do
     before { allow(YetiConfig).to receive(:invoice).and_return(nil) }
 
     it 'raises a clear Error' do
-      expect { described_class.render_pdf(template: template, data: data) }
+      expect { described_class.render_pdf(template: template, data: data, filename_template: nil) }
         .to raise_error(YetiPdf::Client::Error, /not configured/)
     end
   end

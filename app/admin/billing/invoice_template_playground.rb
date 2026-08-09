@@ -16,7 +16,10 @@ ActiveAdmin.register_page 'Template Playground' do
     data = BillingInvoice::InvoiceData.call(invoice: invoice)
     result = YetiPdf::Client.render_pdf(
       template: params[:template].to_s,
-      filename_template: params[:filename_template].presence,
+      # Sent even when empty, so clearing the field surfaces yeti-pdf's
+      # validation error here instead of silently previewing a nameless
+      # document that could never be generated for real.
+      filename_template: params[:filename_template].to_s,
       data: data
     )
     # The name the document would be filed under, for the editor to display —

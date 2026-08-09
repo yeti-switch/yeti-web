@@ -36,17 +36,27 @@ module YetiPdf
       end
     end
 
-    # Renders the document and, when filename_template is given, the name to
+    # Renders the document and, when a filename_template is given, the name to
     # store it under — one request, one data payload, both templates merged by
     # yeti-pdf. A filename template that renders to something unusable (empty,
     # a path separator, a control character) fails the whole request there, so
     # a bad name never reaches us.
     #
-    # @return [Result] the PDF bytes and the rendered filename (or nil)
-    def render_pdf(template:, data:, filename_template: nil, options: {})
+    # filename_template is required so callers state which they want, and nil
+    # differs from '': nil asks for no name at all, while '' is a request for a
+    # name with a broken template and is rejected by yeti-pdf rather than
+    # silently ignored.
+    #
+    # @return [Result] the PDF bytes and the rendered filename (nil if none was
+    #   asked for)
+    def render_pdf(template:, data:, filename_template:, options: {})
       response = post(RENDER_PATH, template: template, data: data, options: options,
                                    filename_template: filename_template)
-      Result.new(response.body.to_s, rendered_filename(response))
+      # Only a caller that asked for a name gets one back: the response header
+      # is read solely when we sent a template for it, so the result never
+      # depends on what yeti-pdf might name a document by default.
+      filename = rendered_filename(response) unless filename_template.nil?
+      Result.new(response.body.to_s, filename)
     end
 
     # @return [String] the merged HTML (pre-PDF); useful for debugging/preview
@@ -61,7 +71,10 @@ module YetiPdf
       raise Error, 'invoice.pdf_api.base_url is not configured' if cfg&.base_url.blank?
 
       payload = { template: template, data: data, options: options }
-      payload[:filename_template] = filename_template if filename_template.present?
+      # Sent verbatim when given, including '' — yeti-pdf tells absent (no name
+      # wanted) from empty (a name wanted, template broken) by the key's
+      # presence, so blank must not be dropped here.
+      payload[:filename_template] = filename_template unless filename_template.nil?
 
       proxy = proxy_for(cfg)
       http = proxy.apply(client(cfg))
