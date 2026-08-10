@@ -7,10 +7,8 @@ class CdrCompactionHookCollector < PrometheusExporter::Server::TypeCollector
   # Labels are resolved here instead of being taken from the payload, so that the counters can be
   # exported with a zero value from process start. Otherwise they only appear once the hook runs for
   # the first time, and an alert on "no executions" has no series to evaluate against.
-  #
-  # The zero seed is skipped when no cdr_compaction_hook is configured: Jobs::CdrCompaction then
-  # never runs a hook and never reports, so seeded counters would export a permanently-zero series
-  # for a feature that is switched off.
+  # Skipped when no cdr_compaction_hook is configured: the hook never runs, so a seeded zero would
+  # describe a switched-off feature forever.
   def initialize(labels = CollectorLabels.call, seed_zeros: PrometheusConfig.cdr_compaction_hook_configured?)
     super()
 

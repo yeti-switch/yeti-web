@@ -5,11 +5,8 @@ require 'config'
 # Loads config/yeti_web.yml into YetiConfig for processes that never boot Rails,
 # such as the standalone prometheus_exporter (see lib/prometheus_collectors.rb).
 #
-# The Rails application loads the same file, additionally validating it against a schema,
-# from config/initializers/config.rb. Schema validation is skipped here because the application
-# already fails loudly on an invalid config; the file itself, however, must be there and must
-# parse. A process that carried on without it would read nil for every setting and export
-# whatever that happened to produce, which is harder to diagnose than not starting at all.
+# Schema validation is skipped here: the Rails application loads the same file from
+# config/initializers/config.rb and already fails loudly on an invalid config.
 module YetiConfigLoader
   class Error < StandardError; end
 
@@ -19,13 +16,11 @@ module YetiConfigLoader
 
   # @param path [String]
   # @raise [YetiConfigLoader::Error] when the file is missing
-  # @raise [StandardError] whatever Config raises when the file does not parse
   def call(path = CONFIG_PATH)
     return if defined?(::YetiConfig)
 
-    # Config.load_and_set_settings does not object to a path that does not exist: it defines an
-    # empty YetiConfig and returns, so the absence has to be caught here. Checked before
-    # Config.setup so a failure leaves no half-applied global configuration behind.
+    # Config.load_and_set_settings accepts a missing path and defines an empty YetiConfig, so the
+    # absence has to be caught here. Checked before Config.setup to leave no global config applied.
     raise Error, "config file not found: #{path}" unless File.exist?(path)
 
     Config.setup do |config|

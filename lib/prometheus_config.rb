@@ -19,10 +19,6 @@ module PrometheusConfig
     YetiConfig.prometheus.default_labels
   end
 
-  # Whether the optional shell hooks are configured, for the collectors that seed their counters
-  # with a zero value at process start. Seeding gives a "the hook has not run" alert a series to
-  # evaluate against; where no hook is configured that series would describe a switched-off feature
-  # and the alert would fire forever.
   def partition_remove_hook_configured?
     YetiConfig.partition_remove_hook.present?
   end

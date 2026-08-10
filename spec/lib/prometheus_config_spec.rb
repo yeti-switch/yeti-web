@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe PrometheusConfig do
-  # config/yeti_web.yml ships both hooks commented out, so the unconfigured case
-  # is the real default rather than something the spec has to arrange.
   shared_examples :a_hook_reader do |method, config_key|
     subject { described_class.public_send(method) }
 

@@ -7,7 +7,6 @@ RSpec.describe CdrCompactionHookCollector, '#metrics' do
   subject { described_instance.metrics.map(&:metric_text).compact_blank.map { |metrics| metrics.split("\n") }.flatten }
 
   let(:described_instance) { described_class.new(labels, seed_zeros: seed_zeros) }
-  # The zero seed only happens where the hook is configured; see PrometheusConfig.
   let(:seed_zeros) { true }
   let(:labels) { { 'host' => 'yeti-1' } }
   let(:data) { [metric_executions, metric_success, metric_errors, metric_duration] }
@@ -95,9 +94,6 @@ RSpec.describe CdrCompactionHookCollector, '#metrics' do
     end
   end
 
-  # The reported bug: with no hook configured the counters were still seeded, so a
-  # permanently-zero series was exported for a feature that is switched off, and a
-  # "hook has not run" alert would fire against it forever.
   context 'when no cdr_compaction_hook is configured' do
     let(:seed_zeros) { false }
     let(:data) { [] }
@@ -113,7 +109,6 @@ RSpec.describe CdrCompactionHookCollector, '#metrics' do
   end
 
   describe 'the zero seed' do
-    # Built per example rather than via subject, so each one sees its own stub.
     def seeded_series
       described_class.new(labels).metrics.map(&:metric_text).compact_blank
     end
