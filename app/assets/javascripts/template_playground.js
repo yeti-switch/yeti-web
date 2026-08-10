@@ -11,6 +11,8 @@ $(document).ready(function () {
     var csrf = csrfEl ? csrfEl.content : '';
     var invoiceSel = document.getElementById('tp-invoice');
     var editor = document.getElementById('tp-template');
+    var filenameInput = document.getElementById('tp-filename');
+    var filenamePreview = document.getElementById('tp-filename-preview');
     var iframe = document.getElementById('tp-pdf');
     var errorBox = document.getElementById('tp-error');
     var body = container.querySelector('.tp-body');
@@ -84,6 +86,14 @@ $(document).ready(function () {
         errorBox.style.display = 'none';
     }
 
+    // The name the document would be stored under, as rendered by yeti-pdf
+    // (URL-encoded by the preview action so it survives the header).
+    function showFilename(encoded) {
+        if (!filenamePreview) return;
+        var name = encoded ? decodeURIComponent(encoded) : '';
+        filenamePreview.textContent = name ? '→ ' + name + '.pdf' : '';
+    }
+
     // Render the current template against the selected invoice. A spinner is
     // shown over the previous PDF until the response arrives.
     var spinner = container.querySelector('.tp-spinner');
@@ -103,13 +113,19 @@ $(document).ready(function () {
                 'X-CSRF-Token': csrf,
                 'Accept': 'application/pdf'
             },
-            body: JSON.stringify({ invoice_id: invoiceSel.value, template: templateValue() })
+            body: JSON.stringify({
+                invoice_id: invoiceSel.value,
+                template: templateValue(),
+                filename_template: filenameInput ? filenameInput.value : ''
+            })
         }).then(function (resp) {
             if (resp.ok) {
+                showFilename(resp.headers.get('X-Rendered-Filename'));
                 return resp.blob().then(function (blob) {
                     iframe.src = URL.createObjectURL(blob);
                 });
             }
+            showFilename('');
             return resp.text().then(function (t) { showError('Render failed: ' + t); });
         }).catch(function (e) {
             showError('Request failed: ' + e.message);
@@ -125,6 +141,7 @@ $(document).ready(function () {
     }
 
     invoiceSel.addEventListener('change', render); // immediate on invoice change
+    if (filenameInput) { filenameInput.addEventListener('input', scheduleRender); }
     if (cm) {
         cm.on('change', scheduleRender);
     } else {
@@ -146,7 +163,11 @@ $(document).ready(function () {
         hideError();
         fetch(templateUrl + '?template_id=' + encodeURIComponent(templateId), { headers: { 'Accept': 'application/json' } })
             .then(function (r) { return r.json(); })
-            .then(function (j) { setTemplate(j.html_template || ''); render(); })
+            .then(function (j) {
+                setTemplate(j.html_template || '');
+                if (filenameInput) { filenameInput.value = j.filename_template || ''; }
+                render();
+            })
             .catch(function (e) { showError('Reload failed: ' + e.message); });
     });
 
@@ -157,7 +178,11 @@ $(document).ready(function () {
         fetch(saveUrl, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf, 'Accept': 'application/json' },
-            body: JSON.stringify({ template_id: templateId, html_template: templateValue() })
+            body: JSON.stringify({
+                template_id: templateId,
+                html_template: templateValue(),
+                filename_template: filenameInput ? filenameInput.value : ''
+            })
         }).then(function (r) {
             if (r.ok) {
                 if (saveStatus) {

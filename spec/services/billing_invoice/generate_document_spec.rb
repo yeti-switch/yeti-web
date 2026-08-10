@@ -21,34 +21,51 @@ RSpec.describe BillingInvoice::GenerateDocument do
 
   context 'when yeti-pdf is configured and succeeds' do
     let(:pdf_bytes) { '%PDF-1.7 rendered' }
+    let(:rendered_filename) { 'INV-1_2020-01' }
 
     before do
       allow(YetiPdf::Client).to receive(:configured?).and_return(true)
-      allow(YetiPdf::Client).to receive(:render_pdf).and_return(pdf_bytes)
+      allow(YetiPdf::Client).to receive(:render_pdf)
+        .and_return(YetiPdf::Client::Result.new(pdf_bytes, rendered_filename))
     end
 
-    it 'stores the pdf on a new invoice document' do
+    it 'stores the pdf and the name yeti-pdf rendered on a new invoice document' do
       expect { subject }.to change { Billing::InvoiceDocument.count }.by(1)
       doc = Billing::InvoiceDocument.last!
       expect(doc).to have_attributes(
         invoice: invoice,
-        filename: invoice.file_name.to_s,
+        filename: rendered_filename,
         pdf_data: pdf_bytes
       )
     end
 
-    it 'sends the html_template and the nested raw data payload to the client' do
+    it 'sends both templates and the nested raw data payload in one request' do
       subject
       expect(YetiPdf::Client).to have_received(:render_pdf).with(
         template: '<p>{{ invoice.reference }}</p>',
+        filename_template: invoice_template.filename_template,
         data: hash_including(:account, :contractor, :invoice)
-      )
+      ).once
     end
 
     it 'clears a previously recorded pdf_error' do
       invoice.update_column(:pdf_error, 'old error')
       subject
       expect(invoice.reload.pdf_error).to be_nil
+    end
+  end
+
+  context 'when yeti-pdf answers without a filename' do
+    before do
+      allow(YetiPdf::Client).to receive(:configured?).and_return(true)
+      allow(YetiPdf::Client).to receive(:render_pdf)
+        .and_return(YetiPdf::Client::Result.new('%PDF-1.7', nil))
+    end
+
+    it 'records the error rather than storing a nameless document' do
+      subject
+      expect(invoice.reload.pdf_error).to match(/returned no filename/)
+      expect(Billing::InvoiceDocument.count).to eq(0)
     end
   end
 

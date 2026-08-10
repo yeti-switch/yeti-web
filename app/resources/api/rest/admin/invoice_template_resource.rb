@@ -3,7 +3,7 @@
 class Api::Rest::Admin::InvoiceTemplateResource < ::BaseResource
   model_name 'Billing::InvoiceTemplate'
 
-  attributes :name, :html_template
+  attributes :name, :html_template, :filename_template
 
   paginator :paged
 

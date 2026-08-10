@@ -5,10 +5,11 @@
 # Table name: billing.invoice_templates
 # Database name: primary
 #
-#  id            :integer(4)       not null, primary key
-#  html_template :text
-#  name          :string           not null
-#  created_at    :timestamptz
+#  id                :integer(4)       not null, primary key
+#  filename_template :string           default("invoice-{{invoice.reference}}"), not null
+#  html_template     :text
+#  name              :string           not null
+#  created_at        :timestamptz
 #
 # Indexes
 #

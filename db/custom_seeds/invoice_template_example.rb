@@ -9,4 +9,7 @@
 # Created once; an existing row with the same name is left untouched.
 Billing::InvoiceTemplate.find_or_create_by!(name: 'Example (HTML)') do |template|
   template.html_template = File.read(Rails.root.join('db/custom_seeds/invoice_template_example.html'))
+  # Rendered by yeti-pdf alongside the document itself; no extension, ".pdf" is
+  # appended when the document is served.
+  template.filename_template = 'invoice-{{invoice.reference}}-{{ invoice.end_date|strfdate:"%Y-%m" }}'
 end

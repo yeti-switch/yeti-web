@@ -13,27 +13,42 @@ ActiveAdmin.register_page 'Template Playground' do
     invoice = Billing::Invoice.find(params[:invoice_id])
     return render(plain: 'Not authorized to read this invoice', status: 403) unless authorized?(:read, invoice)
 
+    # A blank filename template is invalid here (the column is NOT NULL and the
+    # model requires it), so it is caught locally — previewing a document that
+    # could never be generated for real would be misleading, and there is
+    # nothing to ask yeti-pdf about.
+    if params[:filename_template].blank?
+      return render(plain: 'Filename template must not be blank', status: :unprocessable_entity)
+    end
+
     data = BillingInvoice::InvoiceData.call(invoice: invoice)
-    pdf = YetiPdf::Client.render_pdf(template: params[:template].to_s, data: data)
-    send_data pdf, type: 'application/pdf', disposition: 'inline'
+    result = YetiPdf::Client.render_pdf(
+      template: params[:template].to_s,
+      filename_template: params[:filename_template].to_s,
+      data: data
+    )
+    # The name the document would be filed under, for the editor to display —
+    # a header, so it rides along with the inline PDF the iframe is loading.
+    response.set_header('X-Rendered-Filename', ERB::Util.url_encode(result.filename.to_s))
+    send_data result.pdf, type: 'application/pdf', disposition: 'inline'
   rescue ActiveRecord::RecordNotFound
     render plain: 'Invoice not found', status: 404
   rescue YetiPdf::Client::Error => e
     render plain: e.message, status: :unprocessable_entity
   end
 
-  # GET ?template_id= -> the saved html_template, for the "Rollback" button.
+  # GET ?template_id= -> the saved templates, for the "Rollback" button.
   page_action :template, method: :get do
     template = Billing::InvoiceTemplate.find(params[:template_id])
-    render json: { html_template: template.html_template.to_s }
+    render json: { html_template: template.html_template.to_s, filename_template: template.filename_template.to_s }
   rescue ActiveRecord::RecordNotFound
-    render json: { html_template: '' }, status: 404
+    render json: { html_template: '', filename_template: '' }, status: 404
   end
 
-  # PATCH -> persist the edited html_template back to the template.
+  # PATCH -> persist the edited templates back to the template record.
   page_action :save, method: :patch do
     template = Billing::InvoiceTemplate.find(params[:template_id])
-    template.update!(html_template: params[:html_template].to_s)
+    template.update!(html_template: params[:html_template].to_s, filename_template: params[:filename_template].to_s)
     render json: { ok: true }
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Template not found' }, status: 404
@@ -64,6 +79,16 @@ ActiveAdmin.register_page 'Template Playground' do
             option "##{inv.id} — #{inv.reference} — #{inv.account&.name}", value: inv.id
           end
         end
+      end
+
+      div class: 'tp-filename-row',
+          style: 'display:flex; gap:8px; align-items:center; margin-bottom:8px;' do
+        label 'Filename:', for: 'tp-filename'
+        input type: 'text', id: 'tp-filename', spellcheck: 'false', style: 'flex:1;',
+              value: template&.filename_template.to_s
+        # Filled from the preview response with the name yeti-pdf actually
+        # rendered — the template author sees the result, not just the source.
+        span '', id: 'tp-filename-preview', style: 'opacity:.75; white-space:nowrap;'
       end
 
       div class: 'tp-body' do

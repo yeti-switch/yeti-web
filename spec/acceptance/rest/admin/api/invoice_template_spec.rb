@@ -31,11 +31,14 @@ RSpec.resource 'Invoice template' do
     # html_template dasherizes to the "html-template" param, whose value
     # rspec_api_documentation looks up by that (dashed) name; point it back at
     # the underscored let so the value is actually sent (otherwise it arrives
-    # blank and the required validation returns 422).
+    # blank and the required validation returns 422). Same for
+    # filename_template.
     jsonapi_attribute(:html_template, required: true, method: :html_template)
+    jsonapi_attribute(:filename_template, required: true, method: :filename_template)
 
     let(:name) { 'Daily' }
     let(:html_template) { '<p>{{ invoice.reference }}</p>' }
+    let(:filename_template) { 'invoice-{{invoice.reference}}' }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

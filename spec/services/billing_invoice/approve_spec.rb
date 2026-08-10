@@ -11,7 +11,7 @@ RSpec.describe BillingInvoice::Approve, type: :service do
     let!(:account) { FactoryBot.create(:account, contractor:, send_invoices_to: [contact.id]) }
     let(:invoice_attrs) { { account:, contractor: } }
     let!(:invoice) { FactoryBot.create(:invoice, :pending, invoice_attrs) }
-    let(:invoice_document_attrs) { { invoice:, filename: "#{invoice.id}_#{invoice.start_date}_#{invoice.end_date}" } }
+    let(:invoice_document_attrs) { { invoice:, filename: "invoice-#{invoice.reference}" } }
     let!(:invoice_document) { FactoryBot.create(:invoice_document, :filled, invoice_document_attrs) }
 
     before { FactoryBot.create(:smtp_connection, global: true) }

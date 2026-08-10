@@ -6,7 +6,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
   actions :all # :index,:create, :new, :destroy, :delete, :edit, :update
   before_action :left_sidebar!
 
-  permit_params :name, :html_template
+  permit_params :name, :html_template, :filename_template
 
   acts_as_export :id, :name, :created_at
 
@@ -39,6 +39,10 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
+      f.input :filename_template,
+              hint: 'pongo2 template naming the generated file, rendered against the same data as the ' \
+                    'HTML template. No extension — ".pdf" is added when the document is served. ' \
+                    'Example: {{ invoice.reference }}_{{ invoice.start_date|strfdate:"%Y-%m" }}'
       f.input :html_template, as: :text, input_html: { rows: 24 }
     end
     f.actions
@@ -48,6 +52,7 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     attributes_table do
       row :id
       row :name
+      row :filename_template
       row :created_at
     end
 

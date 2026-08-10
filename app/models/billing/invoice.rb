@@ -210,10 +210,6 @@ class Billing::Invoice < Cdr::Base
     end
   end
 
-  def file_name
-    "#{id}_#{start_date}_#{end_date}"
-  end
-
   delegate :contacts_for_invoices, :invoice_period, to: :account
 
   def subject
