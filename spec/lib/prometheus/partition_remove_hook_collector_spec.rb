@@ -7,7 +7,7 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
   subject { described_instance.metrics.map(&:metric_text).compact_blank.map { |metrics| metrics.split("\n") }.flatten }
 
   let(:described_instance) { described_class.new(labels, seed_zeros: seed_zeros) }
-  # The zero seed only happens where the hook is configured; see HookConfig.
+  # The zero seed only happens where the hook is configured; see PrometheusConfig.
   let(:seed_zeros) { true }
   let(:labels) { { 'host' => 'yeti-1' } }
   let(:data) { [metric_executions, metric_success, metric_errors, metric_duration] }
@@ -119,12 +119,12 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
     end
 
     it 'is skipped when the hook is not configured' do
-      allow(HookConfig).to receive(:configured?).with(:partition_remove_hook).and_return(false)
+      allow(PrometheusConfig).to receive(:partition_remove_hook_configured?).and_return(false)
       expect(seeded_series).to be_empty
     end
 
     it 'happens when the hook is configured' do
-      allow(HookConfig).to receive(:configured?).with(:partition_remove_hook).and_return(true)
+      allow(PrometheusConfig).to receive(:partition_remove_hook_configured?).and_return(true)
       expect(seeded_series).not_to be_empty
     end
   end

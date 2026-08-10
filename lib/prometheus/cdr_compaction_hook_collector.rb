@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './collector_labels'
-require_relative './hook_config'
+require_relative '../prometheus_config'
 
 class CdrCompactionHookCollector < PrometheusExporter::Server::TypeCollector
   # Labels are resolved here instead of being taken from the payload, so that the counters can be
@@ -11,7 +11,7 @@ class CdrCompactionHookCollector < PrometheusExporter::Server::TypeCollector
   # The zero seed is skipped when no cdr_compaction_hook is configured: Jobs::CdrCompaction then
   # never runs a hook and never reports, so seeded counters would export a permanently-zero series
   # for a feature that is switched off.
-  def initialize(labels = CollectorLabels.call, seed_zeros: HookConfig.configured?(:cdr_compaction_hook))
+  def initialize(labels = CollectorLabels.call, seed_zeros: PrometheusConfig.cdr_compaction_hook_configured?)
     super()
 
     @labels = labels

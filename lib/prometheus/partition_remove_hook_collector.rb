@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './collector_labels'
-require_relative './hook_config'
+require_relative '../prometheus_config'
 
 class PartitionRemoveHookCollector < PrometheusExporter::Server::TypeCollector
   # Labels are resolved here instead of being taken from the payload, so that the counters can be
@@ -12,7 +12,7 @@ class PartitionRemoveHookCollector < PrometheusExporter::Server::TypeCollector
   # then never runs a hook and never reports, so seeded counters would export a permanently-zero
   # series for a feature that is switched off. Without the seed the counters carry no series at all
   # (only HELP/TYPE headers), which is what an unconfigured hook should look like.
-  def initialize(labels = CollectorLabels.call, seed_zeros: HookConfig.configured?(:partition_remove_hook))
+  def initialize(labels = CollectorLabels.call, seed_zeros: PrometheusConfig.partition_remove_hook_configured?)
     super()
 
     @labels = labels
