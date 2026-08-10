@@ -6,7 +6,9 @@ class CdrCompactionHookCollector < PrometheusExporter::Server::TypeCollector
   # Labels are resolved here instead of being taken from the payload, so that the counters can be
   # exported with a zero value from process start. Otherwise they only appear once the hook runs for
   # the first time, and an alert on "no executions" has no series to evaluate against.
-  def initialize(labels = CollectorLabels.call)
+  # Skipped when no cdr_compaction_hook is configured: the hook never runs, so a seeded zero would
+  # describe a switched-off feature forever.
+  def initialize(labels = CollectorLabels.call, seed_zeros: YetiConfig.cdr_compaction_hook.present?)
     super()
 
     @labels = labels
@@ -16,7 +18,7 @@ class CdrCompactionHookCollector < PrometheusExporter::Server::TypeCollector
       'errors' => PrometheusExporter::Metric::Counter.new('yeti_cdr_compaction_hook_errors', 'Sum of Yeti CDR Compaction Hook execution fails'),
       'duration' => PrometheusExporter::Metric::Counter.new('yeti_cdr_compaction_hook_duration', 'Sum of Yeti CDR Compaction Hook execution duration in seconds')
     }
-    @observers.each_value { |observer| observer.observe(0, @labels) }
+    @observers.each_value { |observer| observer.observe(0, @labels) } if seed_zeros
   end
 
   def type

@@ -12,16 +12,11 @@ require_relative '../prometheus_config'
 module CollectorLabels
   module_function
 
-  # @return [Hash<String, String>] empty when YetiConfig is unavailable or defines no default_labels
+  # @return [Hash<String, String>] empty when no default_labels are configured
   def call
     labels = PrometheusConfig.default_labels
     return {} if labels.nil?
 
     labels.to_h.to_h { |name, value| [name.to_s, value.to_s] }
-  rescue StandardError => e
-    # YetiConfig is absent when config/yeti_web.yml could not be loaded (see YetiConfigLoader).
-    # Unlabelled counters are strictly better than an exporter that refuses to start.
-    warn "CollectorLabels: #{e.class} #{e.message}"
-    {}
   end
 end

@@ -1,35 +1,37 @@
 # frozen_string_literal: true
 
 require 'config'
+require_relative 'yeti_config_schema'
 
-# Loads config/yeti_web.yml into YetiConfig for processes that never boot Rails,
-# such as the standalone prometheus_exporter (see lib/prometheus_collectors.rb).
-#
-# The Rails application loads the same file, additionally validating it against a schema,
-# from config/initializers/config.rb. Schema validation is skipped here: the application
-# already fails loudly on an invalid config, and the exporter must keep exporting metrics
-# of every other yeti process regardless.
+# Loads config/yeti_web.yml into YetiConfig. Used both by the Rails application
+# (config/initializers/config.rb) and by processes that never boot Rails, such as the standalone
+# prometheus_exporter (lib/prometheus_collectors.rb), so that every reader of YetiConfig gets the
+# same file validated against the same schema.
 module YetiConfigLoader
+  class Error < StandardError; end
+
   CONFIG_PATH = File.expand_path('../config/yeti_web.yml', __dir__)
 
   module_function
 
   # @param path [String]
-  # @return [Boolean] whether YetiConfig is available afterwards
+  # @raise [YetiConfigLoader::Error] when the file is missing or does not satisfy YetiConfigSchema
   def call(path = CONFIG_PATH)
-    return true if defined?(::YetiConfig)
+    return if defined?(::YetiConfig)
+
+    # Config.load_and_set_settings accepts a missing path and defines an empty YetiConfig, so the
+    # absence has to be caught here. Checked before Config.setup to leave no global config applied.
+    raise Error, "config file not found: #{path}" unless File.exist?(path)
 
     Config.setup do |config|
       config.const_name = 'YetiConfig'
       config.use_env = false
+      YetiConfigSchema.apply(config)
     end
     Config.evaluate_erb_in_yaml = true
     Config.load_and_set_settings(path)
-    true
-  rescue StandardError => e
-    # A missing or broken config must not prevent the exporter from starting, otherwise every
-    # metric of every yeti process disappears at once.
-    warn "YetiConfigLoader: #{e.class} #{e.message}"
-    false
+    nil
+  rescue Config::Validation::Error => e
+    raise Error, "invalid config #{path}: #{e.message}"
   end
 end

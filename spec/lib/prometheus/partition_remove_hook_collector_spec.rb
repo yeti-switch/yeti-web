@@ -6,7 +6,8 @@ require_relative Rails.root.join('lib/prometheus/partition_remove_hook_collector
 RSpec.describe PartitionRemoveHookCollector, '#metrics' do
   subject { described_instance.metrics.map(&:metric_text).compact_blank.map { |metrics| metrics.split("\n") }.flatten }
 
-  let(:described_instance) { described_class.new(labels) }
+  let(:described_instance) { described_class.new(labels, seed_zeros: seed_zeros) }
+  let(:seed_zeros) { true }
   let(:labels) { { 'host' => 'yeti-1' } }
   let(:data) { [metric_executions, metric_success, metric_errors, metric_duration] }
   let(:metric_executions) { { executions: 1 } }
@@ -85,11 +86,41 @@ RSpec.describe PartitionRemoveHookCollector, '#metrics' do
   end
 
   describe 'default labels' do
-    subject { described_class.new }
+    subject { described_class.new(seed_zeros: true) }
 
     it 'resolves them from PrometheusConfig, matching the client custom_labels' do
       allow(PrometheusConfig).to receive(:default_labels).and_return({ host: :'yeti-2' })
       expect(subject.metrics.map(&:metric_text)).to include('yeti_partition_removing_hook_executions{host="yeti-2"} 0')
+    end
+  end
+
+  context 'when no partition_remove_hook is configured' do
+    let(:seed_zeros) { false }
+    let(:data) { [] }
+
+    it 'exports no series at all' do
+      expect(subject).to be_empty
+    end
+
+    it 'still records anything the job does report' do
+      described_instance.collect('executions' => 1)
+      expect(subject).to contain_exactly('yeti_partition_removing_hook_executions{host="yeti-1"} 1')
+    end
+  end
+
+  describe 'the zero seed' do
+    def seeded_series
+      described_class.new(labels).metrics.map(&:metric_text).compact_blank
+    end
+
+    it 'is skipped when the hook is not configured' do
+      allow(YetiConfig).to receive(:partition_remove_hook).and_return(nil)
+      expect(seeded_series).to be_empty
+    end
+
+    it 'happens when the hook is configured' do
+      allow(YetiConfig).to receive(:partition_remove_hook).and_return('/usr/local/bin/hook')
+      expect(seeded_series).not_to be_empty
     end
   end
 end
