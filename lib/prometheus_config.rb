@@ -18,12 +18,4 @@ module PrometheusConfig
   def default_labels
     YetiConfig.prometheus.default_labels
   end
-
-  def partition_remove_hook_configured?
-    YetiConfig.partition_remove_hook.present?
-  end
-
-  def cdr_compaction_hook_configured?
-    YetiConfig.cdr_compaction_hook.present?
-  end
 end

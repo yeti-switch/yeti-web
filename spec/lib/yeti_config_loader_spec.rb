@@ -19,5 +19,13 @@ RSpec.describe YetiConfigLoader, '.call' do
       expect(Config).not_to receive(:setup)
       expect { described_class.call('/nonexistent/yeti_web.yml') }.to raise_error(YetiConfigLoader::Error)
     end
+
+    it 'reports an invalid config as its own error, not the gem class' do
+      allow(Config).to receive(:load_and_set_settings)
+        .and_raise(Config::Validation::Error, 'site_title: must be a string')
+
+      expect { described_class.call }
+        .to raise_error(YetiConfigLoader::Error, /invalid config .*yeti_web\.yml: site_title: must be a string/)
+    end
   end
 end

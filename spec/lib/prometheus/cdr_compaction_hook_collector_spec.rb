@@ -114,12 +114,12 @@ RSpec.describe CdrCompactionHookCollector, '#metrics' do
     end
 
     it 'is skipped when the hook is not configured' do
-      allow(PrometheusConfig).to receive(:cdr_compaction_hook_configured?).and_return(false)
+      allow(YetiConfig).to receive(:cdr_compaction_hook).and_return(nil)
       expect(seeded_series).to be_empty
     end
 
     it 'happens when the hook is configured' do
-      allow(PrometheusConfig).to receive(:cdr_compaction_hook_configured?).and_return(true)
+      allow(YetiConfig).to receive(:cdr_compaction_hook).and_return('/usr/local/bin/hook')
       expect(seeded_series).not_to be_empty
     end
   end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require 'config'
+require_relative 'yeti_config_schema'
 
-# Loads config/yeti_web.yml into YetiConfig for processes that never boot Rails,
-# such as the standalone prometheus_exporter (see lib/prometheus_collectors.rb).
-#
-# Schema validation is skipped here: the Rails application loads the same file from
-# config/initializers/config.rb and already fails loudly on an invalid config.
+# Loads config/yeti_web.yml into YetiConfig. Used both by the Rails application
+# (config/initializers/config.rb) and by processes that never boot Rails, such as the standalone
+# prometheus_exporter (lib/prometheus_collectors.rb), so that every reader of YetiConfig gets the
+# same file validated against the same schema.
 module YetiConfigLoader
   class Error < StandardError; end
 
@@ -15,7 +15,7 @@ module YetiConfigLoader
   module_function
 
   # @param path [String]
-  # @raise [YetiConfigLoader::Error] when the file is missing
+  # @raise [YetiConfigLoader::Error] when the file is missing or does not satisfy YetiConfigSchema
   def call(path = CONFIG_PATH)
     return if defined?(::YetiConfig)
 
@@ -26,9 +26,12 @@ module YetiConfigLoader
     Config.setup do |config|
       config.const_name = 'YetiConfig'
       config.use_env = false
+      YetiConfigSchema.apply(config)
     end
     Config.evaluate_erb_in_yaml = true
     Config.load_and_set_settings(path)
     nil
+  rescue Config::Validation::Error => e
+    raise Error, "invalid config #{path}: #{e.message}"
   end
 end

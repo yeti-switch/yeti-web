@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative './collector_labels'
-require_relative '../prometheus_config'
 
 class PartitionRemoveHookCollector < PrometheusExporter::Server::TypeCollector
   # Labels are resolved here instead of being taken from the payload, so that the counters can be
@@ -9,7 +8,7 @@ class PartitionRemoveHookCollector < PrometheusExporter::Server::TypeCollector
   # the first time, and an alert on "no executions" has no series to evaluate against.
   # Skipped when no partition_remove_hook is configured: the hook never runs, so a seeded zero would
   # describe a switched-off feature forever.
-  def initialize(labels = CollectorLabels.call, seed_zeros: PrometheusConfig.partition_remove_hook_configured?)
+  def initialize(labels = CollectorLabels.call, seed_zeros: YetiConfig.partition_remove_hook.present?)
     super()
 
     @labels = labels
