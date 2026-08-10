@@ -13,12 +13,17 @@ ActiveAdmin.register_page 'Template Playground' do
     invoice = Billing::Invoice.find(params[:invoice_id])
     return render(plain: 'Not authorized to read this invoice', status: 403) unless authorized?(:read, invoice)
 
+    # A blank filename template is invalid here (the column is NOT NULL and the
+    # model requires it), so it is caught locally — previewing a document that
+    # could never be generated for real would be misleading, and there is
+    # nothing to ask yeti-pdf about.
+    if params[:filename_template].blank?
+      return render(plain: 'Filename template must not be blank', status: :unprocessable_entity)
+    end
+
     data = BillingInvoice::InvoiceData.call(invoice: invoice)
     result = YetiPdf::Client.render_pdf(
       template: params[:template].to_s,
-      # Sent even when empty, so clearing the field surfaces yeti-pdf's
-      # validation error here instead of silently previewing a nameless
-      # document that could never be generated for real.
       filename_template: params[:filename_template].to_s,
       data: data
     )

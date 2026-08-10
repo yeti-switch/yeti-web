@@ -17,75 +17,43 @@ RSpec.describe YetiPdf::Client do
   end
 
   describe '.render_pdf' do
-    subject { described_class.render_pdf(template: template, data: data, filename_template: nil) }
+    subject { described_class.render_pdf(template: template, data: data, filename_template: filename_template) }
 
-    it 'posts the template and data and returns the pdf bytes' do
-      stub = stub_request(:post, render_url)
-             .to_return(status: 200, headers: { 'Content-Type' => 'application/pdf' }, body: '%PDF-bytes')
+    let(:filename_template) { '{{ invoice.reference }}' }
 
-      expect(subject).to have_attributes(pdf: '%PDF-bytes', filename: nil)
-      expect(stub).to have_been_requested
-      expect(WebMock).to have_requested(:post, render_url)
-        .with(headers: { 'Content-Type' => %r{application/json} },
-              body: hash_including('template' => template, 'options' => {}))
-    end
-
-    it 'omits filename_template when nil, so no name is asked for' do
-      stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
-
-      subject
-      expect(WebMock).to have_requested(:post, render_url)
-        .with { |req| !JSON.parse(req.body).key?('filename_template') }
-    end
-
-    # Blank must reach yeti-pdf: it distinguishes "no name wanted" (key absent)
-    # from "name wanted, template broken" (key present but empty) and rejects
-    # the latter, which is how the playground surfaces a cleared field.
-    it 'sends an empty filename_template rather than dropping it' do
-      stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
-
-      described_class.render_pdf(template: template, data: data, filename_template: '')
-      expect(WebMock).to have_requested(:post, render_url)
-        .with { |req| JSON.parse(req.body)['filename_template'] == '' }
-    end
-
-    it 'ignores a Content-Disposition when no filename was requested' do
-      stub_request(:post, render_url).to_return(
+    it 'posts both templates and the data, and returns the pdf and the rendered name' do
+      stub = stub_request(:post, render_url).to_return(
         status: 200,
-        headers: { 'Content-Disposition' => 'attachment; filename="whatever.pdf"' },
+        headers: { 'Content-Type' => 'application/pdf',
+                   'Content-Disposition' => 'attachment; filename="INV-1.pdf"' },
         body: '%PDF-bytes'
       )
 
-      expect(subject.filename).to be_nil
+      expect(subject).to have_attributes(pdf: '%PDF-bytes', filename: 'INV-1')
+      expect(stub).to have_been_requested
+      expect(WebMock).to have_requested(:post, render_url)
+        .with(headers: { 'Content-Type' => %r{application/json} },
+              body: hash_including('template' => template,
+                                   'filename_template' => filename_template,
+                                   'options' => {}))
     end
 
-    context 'with a filename_template' do
-      subject do
-        described_class.render_pdf(template: template, data: data, filename_template: '{{ invoice.reference }}')
-      end
+    it 'decodes an RFC 2231 encoded name' do
+      stub_request(:post, render_url).to_return(
+        status: 200,
+        headers: { 'Content-Disposition' => "attachment; filename*=utf-8''Acm%C3%A9%20%26%20Co.pdf" },
+        body: '%PDF-bytes'
+      )
 
-      it 'sends it and returns the rendered name without the extension' do
-        stub_request(:post, render_url).to_return(
-          status: 200,
-          headers: { 'Content-Type' => 'application/pdf',
-                     'Content-Disposition' => 'attachment; filename="INV-1.pdf"' },
-          body: '%PDF-bytes'
-        )
+      expect(subject.filename).to eq('Acmé & Co')
+    end
 
-        expect(subject).to have_attributes(pdf: '%PDF-bytes', filename: 'INV-1')
-        expect(WebMock).to have_requested(:post, render_url)
-          .with(body: hash_including('filename_template' => '{{ invoice.reference }}'))
-      end
+    # Only reachable against a yeti-pdf too old to know filename_template;
+    # BillingInvoice::GenerateDocument turns it into a recorded pdf_error.
+    it 'reports no filename when the response carries none' do
+      stub_request(:post, render_url).to_return(status: 200, body: '%PDF-bytes')
 
-      it 'decodes an RFC 2231 encoded name' do
-        stub_request(:post, render_url).to_return(
-          status: 200,
-          headers: { 'Content-Disposition' => "attachment; filename*=utf-8''Acm%C3%A9%20%26%20Co.pdf" },
-          body: '%PDF-bytes'
-        )
-
-        expect(subject.filename).to eq('Acmé & Co')
-      end
+      expect(subject.filename).to be_nil
     end
 
     it 'raises Error with the status on a non-2xx response' do
@@ -107,13 +75,21 @@ RSpec.describe YetiPdf::Client do
 
       expect(described_class.render_html(template: template, data: data)).to eq('<p>INV-1</p>')
     end
+
+    it 'sends no filename_template — the endpoint renders no document to name' do
+      stub_request(:post, html_url).to_return(status: 200, body: '<p>INV-1</p>')
+
+      described_class.render_html(template: template, data: data)
+      expect(WebMock).to have_requested(:post, html_url)
+        .with { |req| !JSON.parse(req.body).key?('filename_template') }
+    end
   end
 
   context 'when pdf_api is not configured' do
     before { allow(YetiConfig).to receive(:invoice).and_return(nil) }
 
     it 'raises a clear Error' do
-      expect { described_class.render_pdf(template: template, data: data, filename_template: nil) }
+      expect { described_class.render_pdf(template: template, data: data, filename_template: 'x') }
         .to raise_error(YetiPdf::Client::Error, /not configured/)
     end
   end

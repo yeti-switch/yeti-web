@@ -36,27 +36,21 @@ module YetiPdf
       end
     end
 
-    # Renders the document and, when a filename_template is given, the name to
-    # store it under — one request, one data payload, both templates merged by
-    # yeti-pdf. A filename template that renders to something unusable (empty,
-    # a path separator, a control character) fails the whole request there, so
-    # a bad name never reaches us.
+    # Renders the document and the name to store it under — one request, one
+    # data payload, both templates merged by yeti-pdf. A filename template that
+    # renders to something unusable (empty, a path separator, a control
+    # character) fails the whole request there, so a bad name never reaches us.
     #
-    # filename_template is required so callers state which they want, and nil
-    # differs from '': nil asks for no name at all, while '' is a request for a
-    # name with a broken template and is rejected by yeti-pdf rather than
-    # silently ignored.
+    # filename_template is required: yeti-web always names its documents, so
+    # every Content-Disposition on the response is a name we asked for. The
+    # endpoint itself allows the field to be omitted, but no caller here does.
     #
-    # @return [Result] the PDF bytes and the rendered filename (nil if none was
-    #   asked for)
+    # @return [Result] the PDF bytes and the rendered filename (nil only if
+    #   yeti-pdf answered without one)
     def render_pdf(template:, data:, filename_template:, options: {})
       response = post(RENDER_PATH, template: template, data: data, options: options,
                                    filename_template: filename_template)
-      # Only a caller that asked for a name gets one back: the response header
-      # is read solely when we sent a template for it, so the result never
-      # depends on what yeti-pdf might name a document by default.
-      filename = rendered_filename(response) unless filename_template.nil?
-      Result.new(response.body.to_s, filename)
+      Result.new(response.body.to_s, rendered_filename(response))
     end
 
     # @return [String] the merged HTML (pre-PDF); useful for debugging/preview
@@ -66,15 +60,12 @@ module YetiPdf
 
     private
 
-    def post(path, template:, data:, options:, filename_template: nil)
+    # Every keyword becomes a field of the JSON body, so each endpoint sends
+    # exactly the keys it was given — render_html has no filename_template to
+    # pass and therefore never sends one.
+    def post(path, **payload)
       cfg = YetiConfig.invoice&.pdf_api
       raise Error, 'invoice.pdf_api.base_url is not configured' if cfg&.base_url.blank?
-
-      payload = { template: template, data: data, options: options }
-      # Sent verbatim when given, including '' — yeti-pdf tells absent (no name
-      # wanted) from empty (a name wanted, template broken) by the key's
-      # presence, so blank must not be dropped here.
-      payload[:filename_template] = filename_template unless filename_template.nil?
 
       proxy = proxy_for(cfg)
       http = proxy.apply(client(cfg))
