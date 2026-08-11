@@ -66,6 +66,29 @@ RSpec.describe YetiMail do
       end
     end
 
+    context 'with a plain-text alternative but no HTML body' do
+      let(:send_params) do
+        { subject: 'test', message: nil, text_message: 'Hello' }
+      end
+
+      # Reachable when a template renders one body and fails the other: a blank
+      # html part would be the LAST part a client understands, so it would win
+      # and the recipient would see an empty email.
+      it 'sends a single-part plain-text message rather than an empty HTML one' do
+        expect(subject).not_to be_multipart
+        expect(subject.content_type).to start_with('text/plain')
+        expect(subject.body.to_s).to include('Hello')
+      end
+    end
+
+    context 'with neither body' do
+      let(:send_params) { { subject: 'test', attachments: [attachment] } }
+
+      it 'still sends, because the message is really its attachments' do
+        expect(subject.attachments.map(&:filename)).to eq(['test.txt'])
+      end
+    end
+
     context 'with a plain-text alternative and attachments' do
       let(:send_params) do
         { subject: 'test', message: '<h1>Hello</h1>', text_message: 'Hello', attachments: [attachment] }

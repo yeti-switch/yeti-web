@@ -152,7 +152,7 @@ RSpec.describe ContactEmailSender do
       contacts.each do |contact|
         sender_stub = instance_double(described_class)
         expect(described_class).to receive(:new).with(contact).once.and_return(sender_stub)
-        expect(sender_stub).to receive(:send_email).with(forwarded_params).once
+        expect(sender_stub).to receive(:send_email).with(**forwarded_params).once
       end
       subject
     end
@@ -167,7 +167,7 @@ RSpec.describe ContactEmailSender do
         contacts.uniq.each do |contact|
           sender_stub = instance_double(described_class)
           expect(described_class).to receive(:new).with(contact).once.and_return(sender_stub)
-          expect(sender_stub).to receive(:send_email).with(forwarded_params).once
+          expect(sender_stub).to receive(:send_email).with(**forwarded_params).once
         end
         subject
       end

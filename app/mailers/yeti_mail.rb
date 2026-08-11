@@ -19,9 +19,18 @@ class YetiMail < ActionMailer::Base
       # (text before html, so clients pick the richest part they understand) is
       # ActionMailer's parts_order, not this block's order.
       format.text { render plain: email_log.text_msg } if email_log.text_msg.present?
-      # Some body is required even when the message is really just its
-      # attachments, hence the blank placeholder.
-      format.html { render html: email_log.msg&.html_safe || '  ' }
+
+      if email_log.msg.present?
+        format.html { render html: email_log.msg.html_safe }
+      elsif email_log.text_msg.blank?
+        # No body at all — the message is really just its attachments, but Mail
+        # still needs something to send, hence the historical placeholder.
+        format.html { render html: '  ' }
+      end
+      # An empty msg alongside a real text_msg deliberately adds NO html part:
+      # a client picks the last part it understands, so a blank one would win
+      # and hide the only body there is. This is the degraded-template case —
+      # InvoiceMail renders the two bodies independently, so one can fail alone.
     end
   end
 end

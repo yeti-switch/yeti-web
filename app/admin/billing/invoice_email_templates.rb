@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::InvoiceEmailTemplate, as: 'InvoiceEmailTemplate' do
-  menu parent: %w[Billing Settings], label: 'Invoice email template', priority: 92
+  menu parent: %w[Billing Settings], label: 'Invoice email templates', priority: 91
   config.batch_actions = false
   config.filters = false
 

@@ -13,7 +13,7 @@ RSpec.describe 'Manage the invoice email template' do
     end
 
     it 'offers no way to create one' do
-      expect(page).not_to have_link('New Invoice email template')
+      expect(page).not_to have_selector("a[href$='/invoice_email_templates/new']")
     end
   end
 
