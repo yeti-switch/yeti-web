@@ -31,10 +31,6 @@ class Billing::InvoiceDocument < Cdr::Base
     ].reject { |a| a.data.blank? }
   end
 
-  def subject
-    invoice.display_name
-  end
-
   delegate :account, to: :invoice
 
   # after_create do
@@ -48,9 +44,15 @@ class Billing::InvoiceDocument < Cdr::Base
     # create attachments
     files = attachments
     files.each(&:save!)
+    # Rendered once for the whole batch — the template has no per-contact
+    # variables, so every recipient gets the same message and the same
+    # attachment row.
+    mail = InvoiceMail.new(self)
     ContactEmailSender.batch_send_emails(
       contacts,
-      subject: subject,
+      subject: mail.subject,
+      message: mail.html_body,
+      text_message: mail.text_body,
       attachments: files
     )
   end

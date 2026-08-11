@@ -15,21 +15,31 @@ module BillingInvoice
   # (pongo2 coerces) rather than bare `{% if v %}` on them — "0" is truthy.
   class InvoiceData < ApplicationService
     parameter :invoice, required: true
+    # The per-destination and per-network breakdowns are what make this payload
+    # big — thousands of rows on a busy account. The invoice email quotes only
+    # the totals, so it asks for details: false and skips those four queries.
+    parameter :details, default: true
 
     def call
       {
         account: account_data,
         contractor: contractor_data,
         invoice: invoice_data,
-        originated_destinations: destinations(invoice.originated_destinations.for_invoice.order('dst_prefix')),
-        terminated_destinations: destinations(invoice.terminated_destinations.for_invoice.order('dst_prefix')),
-        originated_networks: networks(invoice.originated_networks.for_invoice.order('country_id, network_id')),
-        terminated_networks: networks(invoice.terminated_networks.for_invoice.order('country_id, network_id')),
+        **(details ? detail_data : {}),
         service_data: services(invoice.service_data.for_invoice)
       }
     end
 
     private
+
+    def detail_data
+      {
+        originated_destinations: destinations(invoice.originated_destinations.for_invoice.order('dst_prefix')),
+        terminated_destinations: destinations(invoice.terminated_destinations.for_invoice.order('dst_prefix')),
+        originated_networks: networks(invoice.originated_networks.for_invoice.order('country_id, network_id')),
+        terminated_networks: networks(invoice.terminated_networks.for_invoice.order('country_id, network_id'))
+      }
+    end
 
     def account_data
       account = invoice.account

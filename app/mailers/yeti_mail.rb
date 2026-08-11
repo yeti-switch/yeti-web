@@ -14,6 +14,13 @@ class YetiMail < ActionMailer::Base
       from: email_log.mail_from,
       delivery_method_options: email_log.smtp_connection.delivery_options
     ) do |format|
+      # Only senders that store a plain-text alternative produce a multipart
+      # message; the rest stay single-part HTML exactly as before. Wire order
+      # (text before html, so clients pick the richest part they understand) is
+      # ActionMailer's parts_order, not this block's order.
+      format.text { render plain: email_log.text_msg } if email_log.text_msg.present?
+      # Some body is required even when the message is really just its
+      # attachments, hence the blank placeholder.
       format.html { render html: email_log.msg&.html_safe || '  ' }
     end
   end

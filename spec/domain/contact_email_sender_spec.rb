@@ -14,6 +14,7 @@ RSpec.describe ContactEmailSender do
         mail_from: global_smtp_connection.from_address,
         subject: service_params[:subject],
         msg: service_params[:message],
+        text_msg: nil,
         attachment_id: nil
       }
     end
@@ -46,6 +47,17 @@ RSpec.describe ContactEmailSender do
     end
 
     include_examples :creates_email_log
+
+    context 'when a plain-text alternative is supplied' do
+      let(:service_params) do
+        { subject: 'Hello test', message: 'some <b>text</b>', text_message: 'some text' }
+      end
+      let(:expected_email_log_attrs) do
+        super().merge text_msg: 'some text'
+      end
+
+      include_examples :creates_email_log
+    end
 
     context 'when contact.contractor has smtp_connection' do
       let!(:smtp_connection) do
@@ -133,12 +145,14 @@ RSpec.describe ContactEmailSender do
         attachments: FactoryBot.create_list(:notification_attachment, 2)
       }
     end
+    # every keyword is forwarded, including the ones the caller left out
+    let(:forwarded_params) { { text_message: nil }.merge(service_params) }
 
     it 'send emails to all contacts' do
       contacts.each do |contact|
         sender_stub = instance_double(described_class)
         expect(described_class).to receive(:new).with(contact).once.and_return(sender_stub)
-        expect(sender_stub).to receive(:send_email).with(service_params).once
+        expect(sender_stub).to receive(:send_email).with(forwarded_params).once
       end
       subject
     end
@@ -153,7 +167,7 @@ RSpec.describe ContactEmailSender do
         contacts.uniq.each do |contact|
           sender_stub = instance_double(described_class)
           expect(described_class).to receive(:new).with(contact).once.and_return(sender_stub)
-          expect(sender_stub).to receive(:send_email).with(service_params).once
+          expect(sender_stub).to receive(:send_email).with(forwarded_params).once
         end
         subject
       end

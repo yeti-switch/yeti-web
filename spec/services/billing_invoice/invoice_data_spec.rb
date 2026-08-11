@@ -49,4 +49,25 @@ RSpec.describe BillingInvoice::InvoiceData do
   it 'formats timestamps as ISO-8601 strings' do
     expect(payload[:invoice][:start_date]).to eq(invoice.start_date.iso8601)
   end
+
+  context 'with details: false' do
+    subject(:payload) { described_class.call(invoice: invoice, details: false) }
+
+    it 'drops the per-destination and per-network breakdowns' do
+      expect(payload).not_to include(:originated_destinations, :terminated_destinations,
+                                     :originated_networks, :terminated_networks)
+    end
+
+    it 'keeps everything else exactly as the full payload has it' do
+      full = described_class.call(invoice: invoice)
+      expect(payload).to eq(full.except(:originated_destinations, :terminated_destinations,
+                                        :originated_networks, :terminated_networks))
+    end
+
+    it 'does not query the detail collections' do
+      expect(invoice).not_to receive(:originated_destinations)
+      expect(invoice).not_to receive(:terminated_networks)
+      payload
+    end
+  end
 end

@@ -53,6 +53,9 @@ ActiveAdmin.register Log::EmailLog do
       row :mail_from
       row :mail_to
       row :subject
+      row :text_msg do |r|
+        pre(style: 'white-space: pre-wrap; word-break: break-word;') { r.text_msg } if r.text_msg.present?
+      end
       row :msg do |r|
         SandboxedEmailFrame.render(r.msg) if r.msg.present?
       end

@@ -25,10 +25,11 @@ class Billing::NotificationTemplate < ApplicationRecord
   end
 
   include WithPaperTrail
+  include LiquidTemplate
 
   validates :event, :subject, :body, presence: true
   validates :event, uniqueness: true, inclusion: { in: CONST::EVENTS }
-  validate :validate_liquid_syntax
+  validates_liquid_syntax :subject, :body, sample: -> { BalanceNotificationMail.sample_assigns }
 
   before_destroy { throw :abort }
 
@@ -37,44 +38,10 @@ class Billing::NotificationTemplate < ApplicationRecord
   end
 
   def render_subject(assigns)
-    render_template(subject, assigns)
+    render_liquid(subject, assigns)
   end
 
   def render_body(assigns)
-    render_template(body, assigns)
-  end
-
-  private
-
-  def render_template(source, assigns)
-    template = parse(source)
-    template.errors.clear # parse memoizes the template; only log this render's errors
-    output = template.render(assigns.deep_stringify_keys, strict_variables: true)
-    if template.errors.any?
-      Rails.logger.warn { "Billing::NotificationTemplate##{id} render: #{template.errors.map(&:message).join('; ')}" }
-    end
-    output
-  end
-
-  def parse(source)
-    (@parsed ||= {})[source] ||= Liquid::Template.parse(source, error_mode: :strict)
-  end
-
-  def validate_liquid_syntax
-    sample = BalanceNotificationMail.sample_assigns.deep_stringify_keys
-
-    { subject: subject, body: body }.each do |attribute, source|
-      next if source.blank?
-
-      begin
-        parse(source).render!(sample, strict_variables: true)
-      rescue Liquid::SyntaxError => e
-        errors.add(attribute, "liquid syntax error: #{e.message}")
-      rescue Liquid::UndefinedVariable => e
-        errors.add(attribute, "unknown variable: #{e.message}")
-      rescue Liquid::Error => e
-        errors.add(attribute, "liquid error: #{e.message}")
-      end
-    end
+    render_liquid(body, assigns)
   end
 end
