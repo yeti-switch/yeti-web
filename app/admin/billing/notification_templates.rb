@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Billing::NotificationTemplate do
-  menu parent: %w[Billing Settings], label: 'Notification templates', priority: 91
+  menu parent: %w[Billing Settings], label: 'Notification templates', priority: 92
   config.batch_actions = false
 
   actions :index, :show, :edit, :update

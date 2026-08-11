@@ -23,6 +23,21 @@ RSpec.describe BillingInvoice::Approve, type: :service do
     it 'enqueues email worker' do
       expect { subject }.to have_enqueued_job(Worker::SendEmailLogJob)
     end
+
+    it 'logs an email rendered from the invoice email template' do
+      Billing::InvoiceEmailTemplate.instance.update!(
+        subject: 'Invoice {{ invoice.reference }}',
+        html_body: '<b>{{ invoice.reference }}</b>',
+        text_body: 'ref {{ invoice.reference }}'
+      )
+
+      expect { subject }.to change { Log::EmailLog.count }.by(1)
+      expect(Log::EmailLog.last!).to have_attributes(
+        subject: "Invoice #{invoice.reference}",
+        msg: "<b>#{invoice.reference}</b>",
+        text_msg: "ref #{invoice.reference}"
+      )
+    end
   end
 
   context 'when invoice already approved' do

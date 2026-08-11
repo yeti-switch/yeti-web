@@ -11329,6 +11329,19 @@ ALTER SEQUENCE billing.currencies_id_seq OWNED BY billing.currencies.id;
 
 
 --
+-- Name: invoice_email_templates; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.invoice_email_templates (
+    id smallint DEFAULT 1 NOT NULL,
+    subject character varying NOT NULL,
+    html_body text NOT NULL,
+    text_body text NOT NULL,
+    CONSTRAINT invoice_email_templates_singleton CHECK ((id = 1))
+);
+
+
+--
 -- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -14989,7 +15002,8 @@ CREATE TABLE notifications.email_logs (
     subject character varying NOT NULL,
     msg character varying,
     error character varying,
-    attachment_id integer[]
+    attachment_id integer[],
+    text_msg text
 );
 
 
@@ -17068,6 +17082,14 @@ ALTER TABLE ONLY billing.currencies
 
 ALTER TABLE ONLY billing.currencies
     ADD CONSTRAINT currencies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invoice_email_templates invoice_email_templates_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.invoice_email_templates
+    ADD CONSTRAINT invoice_email_templates_pkey PRIMARY KEY (id);
 
 
 --
@@ -20795,6 +20817,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260810120001'),
+('20260810120000'),
 ('20260809120000'),
 ('20260729120000'),
 ('20260719120000'),

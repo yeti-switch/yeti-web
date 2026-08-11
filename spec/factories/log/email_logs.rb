@@ -12,6 +12,7 @@
 #  msg                :string
 #  sent_at            :timestamptz
 #  subject            :string           not null
+#  text_msg           :text
 #  created_at         :timestamptz
 #  attachment_id      :integer(4)       is an Array
 #  batch_id           :bigint(8)
