@@ -18,9 +18,10 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
   let(:code_challenge) { Base64.urlsafe_encode64(Digest::SHA256.digest(code_verifier), padding: false) }
   let(:nonce) { SecureRandom.urlsafe_base64(16) }
 
-  # As in the plain OAuth flow spec, the consent POST can't be driven from a
-  # request spec (CSRF), so the grant is issued directly. The nonce row is what
+  # Shortcut for the specs below, which are about the token exchange rather than
+  # consent: the grant is issued directly, and the nonce row is what
   # Doorkeeper::OpenidConnect::OAuth::Authorization::Code would have written.
+  # The consent screen itself is driven for real in the context further down.
   def create_authorization_code(scopes: 'openid profile email', with_nonce: true)
     grant = OauthAccessGrant.create!(
       application: application,
@@ -92,6 +93,50 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
     # The authorisation boundary: clients filter on this.
     it 'carries the admin roles as the groups claim' do
       expect(claims['groups']).to match_array(%w[admin noc])
+    end
+  end
+
+  # Regression: Doorkeeper's stock consent view resubmits every pre-auth
+  # parameter except the nonce, so the first authorization for a client — the
+  # only one that renders this screen, since afterwards can_authorize_response?
+  # skips it — wrote no OauthOpenidRequest row and produced a nonce-less
+  # id_token that every client rejects as a nonce mismatch. Fixed by
+  # app/views/doorkeeper/authorizations/new.html.erb.
+  context 'POST /oauth/authorize (first authorization, consent screen)' do
+    include_context :login_as_admin
+
+    # Drives consent the way a browser does: render the screen, then submit
+    # exactly the fields the form carries. That is the point of the test — the
+    # bug was a missing field, so anything that builds the params by hand would
+    # pass against the broken view. The authenticity_token comes along with the
+    # rest because the test env keeps allow_forgery_protection on (same
+    # approach as spec/requests/invoice_template_playground_spec.rb).
+    def consent_form_fields
+      get '/oauth/authorize', params: {
+        response_type: 'code',
+        client_id: application.uid,
+        redirect_uri: application.redirect_uri,
+        scope: 'openid profile email',
+        code_challenge: code_challenge,
+        code_challenge_method: 'S256',
+        state: 'xyz',
+        nonce: nonce
+      }
+      expect(response).to have_http_status(:success)
+
+      authorize_form = Nokogiri::HTML(response.body).css('form').first
+      authorize_form.css('input[type="hidden"]').to_h { |input| [input['name'], input['value']] }
+    end
+
+    it 'carries the nonce through consent and onto the issued grant' do
+      fields = consent_form_fields
+      expect(fields['nonce']).to eq(nonce)
+
+      post '/oauth/authorize', params: fields
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.location).to start_with(application.redirect_uri)
+      expect(OauthOpenidRequest.find_by(access_grant: OauthAccessGrant.last)&.nonce).to eq(nonce)
     end
   end
 
