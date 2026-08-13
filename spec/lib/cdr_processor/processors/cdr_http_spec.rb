@@ -116,6 +116,33 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     end
   end
 
+  # HTTPX only fails on 4xx/5xx, so without an explicit check a redirect would
+  # count as a delivered CDR.
+  describe 'response status' do
+    context 'when the endpoint answers with a redirect' do
+      before do
+        stub_request(:post, /#{config['url']}/).to_return(status: 302, headers: { 'Location' => 'https://moved/api/cdr' })
+      end
+
+      it 'raises and stops after the first CDR' do
+        expect { subject }.to raise_error(
+          CdrProcessor::Processors::CdrHttpBase::UnexpectedResponseStatus,
+          'unexpected HTTP status 302 (expected 2xx), location: https://moved/api/cdr'
+        )
+        expect(WebMock).to have_requested(:post, config['url']).once
+      end
+    end
+
+    context 'when the endpoint answers 204' do
+      before { stub_request(:post, /#{config['url']}/).to_return(status: 204) }
+
+      it 'treats it as delivered' do
+        subject
+        expect(WebMock).to have_requested(:post, config['url']).times(2)
+      end
+    end
+  end
+
   # Proxy behaviour is covered in spec/lib/httpx_proxy_spec.rb; here we only
   # verify the processor wires its config into HttpxProxy.
   describe 'http proxy config' do

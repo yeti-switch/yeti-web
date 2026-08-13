@@ -5,7 +5,26 @@ require 'httpx'
 module CdrProcessor
   module Processors
     class CdrHttpBase < CdrProcessor::ConsumerGroup
+      # Raised for any response that is neither an HTTPX error nor 2xx, i.e. in
+      # practice for redirects. HTTPX#raise_for_status only fails on 4xx/5xx, so
+      # without this a 301/302 (endpoint moved, plain HTTP redirected to HTTPS,
+      # a proxy or auth portal answering instead of the endpoint) would count as
+      # a successful delivery: the batch gets finished and the CDRs are dropped
+      # although the endpoint never received them.
+      class UnexpectedResponseStatus < StandardError
+        attr_reader :response
+
+        def initialize(response)
+          @response = response
+          message = "unexpected HTTP status #{response.status} (expected 2xx)"
+          location = response.headers['location']
+          message += ", location: #{location}" if location.present?
+          super(message)
+        end
+      end
+
       AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
+      SUCCESS_STATUSES = (200..299)
       HTTP_TIMEOUTS = {
         connect_timeout: 20,
         write_timeout: 30,
@@ -87,6 +106,8 @@ module CdrProcessor
         client = proxy.apply(client)
         response = proxy.run { client.public_send(http_method, http_url, **kwargs) }
         response.raise_for_status
+        raise UnexpectedResponseStatus, response unless SUCCESS_STATUSES.cover?(response.status)
+
         response
       end
 

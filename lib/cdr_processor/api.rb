@@ -23,14 +23,32 @@ module CdrProcessor
       connection.select_value(sanitize_sql_array(['SELECT pgq.event_retry(?, ?, ?)', batch_id, event_id, retry_seconds])).to_i
     end
 
+    # The adapter casts the boolean result, so anything but true (including the
+    # NULL returned for an unknown event) means "not done".
     def pgq_event_done?(consumer, batch_id, event_id)
       result = connection.select_value(sanitize_sql_array(['SELECT pgq_ext.is_event_done(?, ?, ?)', consumer, batch_id, event_id]))
-      result == 't'
+      result == true
     end
 
+    # Returns true when the event has just been marked as done, false when it
+    # already was.
     def pgq_event_done!(consumer, batch_id, event_id)
       result = connection.select_value(sanitize_sql_array(['SELECT pgq_ext.set_event_done(?, ?, ?)', consumer, batch_id, event_id]))
-      result == 't'
+      result == true
+    end
+
+    # Marks every given event of the batch as done in a single statement.
+    # Calling #pgq_event_done! per event costs one round trip per CDR, which
+    # dominates batch time at CDR volumes.
+    def pgq_events_done!(consumer, batch_id, event_ids)
+      return if event_ids.blank?
+
+      ids = event_ids.map(&:to_i).join(',')
+      connection.execute(
+        sanitize_sql_array(
+          ['SELECT pgq_ext.set_event_done(?, ?, ev_id) FROM unnest(?::bigint[]) AS ev_id', consumer, batch_id, "{#{ids}}"]
+        )
+      )
     end
 
     # == info methods
