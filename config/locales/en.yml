@@ -133,6 +133,10 @@ en:
         hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
       system_scheduler:
         use_reject_calls: "Try to block traffic using reject_calls mechanism when possible"
+      system_smtp_connection:
+        auth_user: "Fill in both User and Password to enable SMTP authentication. Leave both empty to connect without it."
+        auth_password: "Fill in both User and Password to enable SMTP authentication. Leave both empty to connect without it."
+        auth_type: "Only used when User and Password are both filled in. With both empty the connection is made without SMTP-AUTH, whatever is selected here."
       customers_auth:
         check_account_balance: "Reject calls if originator hasn't enough funds"
         ip: 'Comma-separated list of IPs with masks'

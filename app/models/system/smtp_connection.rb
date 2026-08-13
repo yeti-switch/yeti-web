@@ -43,13 +43,22 @@ class System::SmtpConnection < ApplicationRecord
   end
 
   def delivery_options
-    {
+    options = { address: host, port: port }
+
+    # A connection with no credentials must omit :authentication entirely, not
+    # merely leave it blank. net-smtp >= 0.5.0 checks
+    # `if user || secret || authtype` in do_start and raises
+    # "SMTP-AUTH requested but missing user name"; <= 0.4.0 checked
+    # `if user or secret`, so the key was ignored without credentials. The
+    # reject below cannot drop it — auth_type is NOT NULL, defaults to 'plain',
+    # and a Symbol is never blank.
+    return options if auth_user.blank? && auth_password.blank?
+
+    options.merge(
       user_name: auth_user,
       password: auth_password,
-      authentication: auth_type.to_sym,
-      address: host,
-      port: port
-    }.reject { |_, v| v.blank? }
+      authentication: auth_type.to_sym
+    ).reject { |_, v| v.blank? }
   end
 
   def from
