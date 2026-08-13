@@ -102,6 +102,46 @@ http_batch:
   # Payload:
   #   {"batch_id": 12345, "data": [{"id": 1, ...}, {"id": 2, ...}]}
 
+http_bulk:
+  mode: production
+  class: cdr_http_bulk
+  queue: cdr_billing
+  # Every consumer needs its own registration in the CDR database:
+  #   SELECT pgq.register_consumer('cdr_billing', 'cdr_http_bulk');
+  # Register it only when the processor is actually going to run - pgq keeps
+  # every event of a registered consumer until it is consumed, so an idle
+  # registered consumer makes the queue grow without bound.
+  consumer: cdr_http_bulk
+  url: "http://example.com/api/cdrs"
+  # Maximum number of CDRs per HTTP request. Omit it to send the whole pgq
+  # batch in a single request.
+  bulk_size: 500
+  # When set, the request body is signed with HMAC-SHA256 and the hex digest is
+  # sent in the X-HMAC-Signature header.
+  # hmac_secret: "secret"
+  # auth_user: user
+  # auth_password: password
+  # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
+  # http_proxy: http://proxy.example.com:3128
+  # use_env_proxy: false
+  # may be an array, see the http section above
+  cdr_fields: all
+  # data_filters - same syntax as in the http section above.
+  # Custom static headers. Cannot override built-in headers: X-Request-Id,
+  # X-Yeti-Cdr-*, X-HMAC-Signature.
+  # headers:
+  #   X-Api-Key: "secret-key"
+  # Sends CDRs in bulks of bulk_size, acknowledging each bulk once its request
+  # succeeded, so a restart resumes at the first unsent bulk.
+  # Supported method: POST
+  # Built-in headers (always set):
+  #   X-Request-Id: <uuid>
+  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  #   X-HMAC-Signature: <hexdigest>  (only when hmac_secret is set)
+  # Payload:
+  #   {"event_bulk_id": "9f2c...", "batch_id": 12345,
+  #    "data": [{"type": "cdr_full", "payload": {"id": 1, ...}}]}
+
 amqp:
   mode: production
   class: cdr_amqp

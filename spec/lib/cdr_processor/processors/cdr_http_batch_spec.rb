@@ -126,4 +126,16 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
       )
     end
   end
+
+  # HTTPX only fails on 4xx/5xx, so without an explicit check a redirect would
+  # finish the batch as if it had been delivered.
+  context 'when the endpoint answers with a redirect' do
+    before do
+      stub_request(:post, /#{config['url']}/).to_return(status: 301, headers: { 'Location' => 'https://moved/api/cdr' })
+    end
+
+    it 'raises instead of treating the batch as delivered' do
+      expect { subject }.to raise_error(described_class::UnexpectedResponseStatus, /301/)
+    end
+  end
 end

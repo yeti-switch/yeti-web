@@ -19,3 +19,13 @@ cdr_http_batch:
   url: "http://example.com/api/cdrs"
   method: POST
   cdr_fields: all
+
+cdr_http_bulk:
+  mode: test
+  class: cdr_http_bulk
+  queue: cdr_billing
+  consumer: cdr_billing
+  url: "http://example.com/api/cdrs"
+  bulk_size: 500
+  hmac_secret: "secret"
+  cdr_fields: all
