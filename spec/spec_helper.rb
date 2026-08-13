@@ -177,11 +177,17 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:each, type: :request) do
-    allow(ApiLogThread).to receive(:new).and_yield
-  end
-
-  config.before(:each, type: :controller) do
+  # Every /api/ request spawns a detached ApiLogThread
+  # (config/initializers/instrumentation_notification.rb) whose INSERT runs on
+  # its own connection, so it commits outside the example's transaction and
+  # lands in whichever example happens to be running when the thread is
+  # scheduled — leaking rows into unrelated specs that count log records.
+  # Yielding inline makes the write synchronous, and therefore rolled back.
+  #
+  # Deliberately not scoped to :request/:controller: spec/acceptance runs as
+  # type: :acceptance (rspec_api_documentation registers that directory
+  # mapping) and exercises /api/rest/... throughout.
+  config.before(:each) do
     allow(ApiLogThread).to receive(:new).and_yield
   end
 end
