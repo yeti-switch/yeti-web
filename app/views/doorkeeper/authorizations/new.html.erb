@@ -1,0 +1,74 @@
+<%#
+  Copy of doorkeeper-5.9.3's app/views/doorkeeper/authorizations/new.html.erb
+  with one addition: the `nonce` hidden field, in both forms.
+
+  This override is required, not cosmetic. Doorkeeper's own consent form
+  resubmits every pre-authorization parameter except the OIDC nonce, and
+  doorkeeper-openid_connect whitelists the parameter
+  (AuthorizationsExtension#pre_auth_param_fields) without shipping a view that
+  renders it — the gem's docs put the tweak on the host app instead:
+  https://github.com/doorkeeper-gem/doorkeeper-openid_connect/wiki/Nonces
+
+  Without it the nonce survives the GET that renders this page and is dropped
+  by the POST: pre_auth.nonce comes back nil,
+  Doorkeeper::OpenidConnect::OAuth::Authorization::Code#issue_token! skips
+  create_openid_request, no gui.oauth_openid_requests row is written, and the
+  id_token is issued with no nonce claim. The client rejects the login with
+  "nonce mismatch".
+
+  It only bites on the first authorization for a client: afterwards Doorkeeper's
+  can_authorize_response? finds a matching token, skips this screen entirely,
+  and the nonce reaches issue_token! straight from the query string — which is
+  why the failure looks intermittent.
+
+  Re-check this file when upgrading doorkeeper or doorkeeper-openid_connect; if
+  upstream starts rendering the nonce itself, drop the override.
+%>
+<header class="page-header" role="banner">
+  <h1><%= t('.title') %></h1>
+</header>
+
+<main role="main">
+  <p class="h4">
+    <%= raw t('.prompt', client_name: content_tag(:strong, class: 'text-info') { @pre_auth.client.name }) %>
+  </p>
+
+  <% if @pre_auth.scopes.count > 0 %>
+    <div id="oauth-permissions">
+      <p><%= t('.able_to') %></p>
+
+      <ul class="text-info">
+        <% @pre_auth.scopes.each do |scope| %>
+          <li><%= t scope, scope: [:doorkeeper, :scopes] %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form_tag oauth_authorization_path, method: :post do %>
+      <%= hidden_field_tag :client_id, @pre_auth.client.uid, id: nil %>
+      <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri, id: nil %>
+      <%= hidden_field_tag :state, @pre_auth.state, id: nil %>
+      <%= hidden_field_tag :response_type, @pre_auth.response_type, id: nil %>
+      <%= hidden_field_tag :response_mode, @pre_auth.response_mode, id: nil %>
+      <%= hidden_field_tag :scope, @pre_auth.scope, id: nil %>
+      <%= hidden_field_tag :code_challenge, @pre_auth.code_challenge, id: nil %>
+      <%= hidden_field_tag :code_challenge_method, @pre_auth.code_challenge_method, id: nil %>
+      <%= hidden_field_tag :nonce, @pre_auth.nonce, id: nil %>
+      <%= submit_tag t('doorkeeper.authorizations.buttons.authorize'), class: "btn btn-success btn-lg btn-block" %>
+    <% end %>
+    <%= form_tag oauth_authorization_path, method: :delete do %>
+      <%= hidden_field_tag :client_id, @pre_auth.client.uid, id: nil %>
+      <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri, id: nil %>
+      <%= hidden_field_tag :state, @pre_auth.state, id: nil %>
+      <%= hidden_field_tag :response_type, @pre_auth.response_type, id: nil %>
+      <%= hidden_field_tag :response_mode, @pre_auth.response_mode, id: nil %>
+      <%= hidden_field_tag :scope, @pre_auth.scope, id: nil %>
+      <%= hidden_field_tag :code_challenge, @pre_auth.code_challenge, id: nil %>
+      <%= hidden_field_tag :code_challenge_method, @pre_auth.code_challenge_method, id: nil %>
+      <%= hidden_field_tag :nonce, @pre_auth.nonce, id: nil %>
+      <%= submit_tag t('doorkeeper.authorizations.buttons.deny'), class: "btn btn-danger btn-lg btn-block" %>
+    <% end %>
+  </div>
+</main>
