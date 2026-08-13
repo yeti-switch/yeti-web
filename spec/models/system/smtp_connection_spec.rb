@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: sys.smtp_connections
+# Database name: primary
+#
+#  id            :integer(4)       not null, primary key
+#  auth_password :string
+#  auth_type     :string           default("plain"), not null
+#  auth_user     :string
+#  from_address  :string           not null
+#  global        :boolean          default(TRUE), not null
+#  host          :string           not null
+#  name          :string           not null
+#  port          :integer(4)       default(25), not null
+#
+# Indexes
+#
+#  smtp_connections_name_key  (name) UNIQUE
+#
 RSpec.describe System::SmtpConnection do
   describe '#delivery_options' do
     subject { smtp_connection.delivery_options }
