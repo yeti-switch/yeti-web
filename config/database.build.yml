@@ -7,7 +7,7 @@ production:
     username: postgres
     password:
     host: <%= (ENV['YETI_DB_HOST'] || 'localhost') %>
-    schema_search_path: >
+    schema_search_path: >-
       gui, public, switch,
       billing, class4, runtime_stats,
       sys, logs, data_import
