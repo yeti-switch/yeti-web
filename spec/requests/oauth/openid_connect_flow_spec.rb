@@ -124,7 +124,14 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
       }
       expect(response).to have_http_status(:success)
 
-      authorize_form = Nokogiri::HTML(response.body).css('form').first
+      # The page holds two forms posting to the same URL; the deny one is a
+      # DELETE tunnelled through _method, so pick by that rather than by
+      # position.
+      authorize_form = Nokogiri::HTML(response.body).css('form').find do |form|
+        form.at_css('input[name="_method"][value="delete"]').nil?
+      end
+      expect(authorize_form).to be_present
+
       authorize_form.css('input[type="hidden"]').to_h { |input| [input['name'], input['value']] }
     end
 
@@ -136,7 +143,13 @@ RSpec.describe 'OIDC authorization code flow', type: :request do
 
       expect(response).to have_http_status(:redirect)
       expect(response.location).to start_with(application.redirect_uri)
-      expect(OauthOpenidRequest.find_by(access_grant: OauthAccessGrant.last)&.nonce).to eq(nonce)
+
+      # Identified by the code we were just handed, not by the newest row —
+      # hash_token_secrets is on, so by_token does the digest lookup for us.
+      issued_code = Rack::Utils.parse_nested_query(URI.parse(response.location).query)['code']
+      grant = OauthAccessGrant.by_token(issued_code)
+      expect(grant).to be_present
+      expect(OauthOpenidRequest.find_by(access_grant: grant)&.nonce).to eq(nonce)
     end
   end
 
