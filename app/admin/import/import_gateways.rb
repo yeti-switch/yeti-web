@@ -47,6 +47,7 @@ ActiveAdmin.register Importing::Gateway do
     column :host
     column :port
     column :registered_aor_mode, &:registered_aor_mode_display_name
+    column :pidflo_mode, &:pidflo_mode_display_name
 
     column :origination_capacity
     column :termination_capacity

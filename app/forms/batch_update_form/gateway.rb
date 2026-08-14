@@ -29,6 +29,9 @@ class BatchUpdateForm::Gateway < BatchUpdateForm::Base
   attribute :rtcp_feedback_mode_id, type: :integer_collection, collection: Gateway::RTCP_FEEDBACK_MODES.invert.to_a
   attribute :rtp_acl
 
+  # signaling
+  attribute :pidflo_mode_id, type: :integer_collection, collection: Gateway::PIDFLO_MODES.invert.to_a
+
   # presence
   validates :priority, presence: true, if: :priority_changed?
   validates :weight, presence: true, if: :weight_changed?

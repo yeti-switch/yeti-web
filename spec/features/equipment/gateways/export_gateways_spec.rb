@@ -141,6 +141,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Stir shaken mode name',              item.stir_shaken_mode_name],
         ['Stir shaken crt name',               item.stir_shaken_crt.name],
         ['Privacy mode name',                  item.privacy_mode_name],
+        ['Pidflo mode name',                   item.pidflo_mode_name],
         ['Dump level name',                    item.dump_level_name],
         ['Scheduler name',                     item.scheduler.name]
       ]

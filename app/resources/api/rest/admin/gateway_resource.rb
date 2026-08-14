@@ -23,6 +23,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
              :origination_capacity, :termination_capacity,
              :force_cancel_routeset, :sip_schema_id, :ice_mode_id, :rtcp_mux_mode_id, :rtcp_feedback_mode_id,
+             :pidflo_mode_id,
              :allowed_methods,
              :supported_tags
 
@@ -160,6 +161,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :ice_mode_id, type: :number
   ransack_filter :rtcp_mux_mode_id, type: :number
   ransack_filter :rtcp_feedback_mode_id, type: :number
+  ransack_filter :pidflo_mode_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -249,6 +251,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       ice_mode_id
       rtcp_mux_mode_id
       rtcp_feedback_mode_id
+      pidflo_mode_id
       preserve_anonymous_from_domain
       registered_aor_mode_id
       origination_capacity

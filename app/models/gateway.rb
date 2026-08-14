@@ -118,6 +118,7 @@
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
 #  pai_send_mode_id                 :integer(2)       default(0), not null
+#  pidflo_mode_id                   :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
 #  radius_accounting_profile_id     :integer(2)
@@ -250,6 +251,13 @@ class Gateway < ApplicationRecord
     PRIVACY_MODE_APPLY => 'Not trusted gw. Apply',
     PRIVACY_MODE_TRUSTED => 'Trusted gw. Forward',
     PRIVACY_MODE_TRUSTED_REMOVE_FROM => 'Trusted gw. Forward. Anonymize from'
+  }.freeze
+
+  PIDFLO_MODE_NO_SEND = 0
+  PIDFLO_MODE_RELAY = 1
+  PIDFLO_MODES = {
+    PIDFLO_MODE_NO_SEND => 'Do not send',
+    PIDFLO_MODE_RELAY => 'Relay'
   }.freeze
 
   DUMP_LEVEL_DISABLED = 0
@@ -412,6 +420,7 @@ class Gateway < ApplicationRecord
   validates :stir_shaken_mode_id, inclusion: { in: STIR_SHAKEN_MODES.keys }, allow_nil: false
   validates :sip_schema_id, inclusion: { in: SIP_SCHEMAS.keys }, allow_nil: false
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
+  validates :pidflo_mode_id, inclusion: { in: PIDFLO_MODES.keys }, allow_nil: false
 
   validate :vendor_owners_the_gateway_group
   validate :vendor_can_be_changed
@@ -575,6 +584,10 @@ class Gateway < ApplicationRecord
 
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
+  end
+
+  def pidflo_mode_name
+    PIDFLO_MODES[pidflo_mode_id]
   end
 
   def ice_mode_name

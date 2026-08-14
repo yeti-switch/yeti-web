@@ -55,6 +55,7 @@
 #  orig_next_hop                      :string
 #  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
+#  pidflo_mode_name                   :string
 #  pop_name                           :string
 #  port                               :integer(4)
 #  prefer_existing_codecs             :boolean
@@ -122,6 +123,7 @@
 #  network_protocol_priority_id       :integer(2)
 #  o_id                               :integer(4)
 #  orig_disconnect_policy_id          :integer(4)
+#  pidflo_mode_id                     :integer(2)
 #  pop_id                             :integer(4)
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)

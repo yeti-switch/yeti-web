@@ -55,6 +55,7 @@
 #  orig_next_hop                      :string
 #  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
+#  pidflo_mode_name                   :string
 #  pop_name                           :string
 #  port                               :integer(4)
 #  prefer_existing_codecs             :boolean
@@ -122,6 +123,7 @@
 #  network_protocol_priority_id       :integer(2)
 #  o_id                               :integer(4)
 #  orig_disconnect_policy_id          :integer(4)
+#  pidflo_mode_id                     :integer(2)
 #  pop_id                             :integer(4)
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
@@ -229,6 +231,7 @@ class Importing::Gateway < Importing::Base
     force_cancel_routeset
     scheduler_id
     contact_user
+    pidflo_mode_id
   ]
 
   self.strict_unique_attributes = %w[name]
@@ -243,9 +246,14 @@ class Importing::Gateway < Importing::Base
     sip_schema_id.nil? ? 'unknown' : Gateway::SIP_SCHEMAS[sip_schema_id]
   end
 
+  def pidflo_mode_display_name
+    pidflo_mode_id.nil? ? 'unknown' : Gateway::PIDFLO_MODES[pidflo_mode_id]
+  end
+
   def self.after_import_hook
     resolve_integer_constant('registered_aor_mode_id', 'registered_aor_mode_name', Gateway::REGISTERED_AOR_MODES)
     resolve_integer_constant('sip_schema_id', 'sip_schema_name', Gateway::SIP_SCHEMAS)
+    resolve_integer_constant('pidflo_mode_id', 'pidflo_mode_name', Gateway::PIDFLO_MODES)
     super
   end
 end

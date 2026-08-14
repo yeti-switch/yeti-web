@@ -27,7 +27,8 @@ RSpec.describe BatchUpdateForm::Gateway do
       ice_mode_id: Gateway::ICE_MODE_ACCEPT.to_s,
       rtcp_mux_mode_id: Gateway::RTCP_MUX_MODE_DISABLED.to_s,
       rtcp_feedback_mode_id: Gateway::RTCP_FEEDBACK_MODE_INITIATE.to_s,
-      rtp_acl: '192.168.0.0/24, 10.0.0.1'
+      rtp_acl: '192.168.0.0/24, 10.0.0.1',
+      pidflo_mode_id: Gateway::PIDFLO_MODE_RELAY.to_s
     }
   end
 

@@ -44,7 +44,8 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
       ice_mode_id: Gateway::ICE_MODE_ACCEPT.to_s,
       rtcp_mux_mode_id: Gateway::RTCP_MUX_MODE_DISABLED.to_s,
       rtcp_feedback_mode_id: Gateway::RTCP_FEEDBACK_MODE_INITIATE.to_s,
-      rtp_acl: '192.168.0.0/24,10.0.0.1'
+      rtp_acl: '192.168.0.0/24,10.0.0.1',
+      pidflo_mode_id: Gateway::PIDFLO_MODE_RELAY.to_s
     }
   end
 
@@ -167,6 +168,11 @@ RSpec.describe BatchUpdateForm::Gateway, :js do
     if assign_params.key? :rtp_acl
       check :Rtp_acl
       fill_in :rtp_acl, with: assign_params[:rtp_acl]
+    end
+
+    if assign_params.key? :pidflo_mode_id
+      check :Pidflo_mode_id
+      select_by_value assign_params[:pidflo_mode_id], from: :pidflo_mode_id
     end
   end
 
