@@ -95,6 +95,7 @@ ActiveAdmin.register Gateway do
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects,
                  :privacy_mode_name,
+                 :pidflo_mode_name,
                  :stir_shaken_mode_name,
                  [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }],
                  :dump_level_name
@@ -314,6 +315,7 @@ ActiveAdmin.register Gateway do
   filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }, input_html: { class: 'tom-select' }
   filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }, input_html: { class: 'tom-select' }
   filter :dump_level_id, as: :select, collection: proc { Gateway::DUMP_LEVELS.invert }, input_html: { class: 'tom-select' }
+  filter :pidflo_mode_id, as: :select, collection: proc { Gateway::PIDFLO_MODES.invert }, input_html: { class: 'tom-select' }
 
   association_ajax_filter :termination_src_numberlist_id_eq,
                           label: 'Termination SRC Numberlist',
@@ -460,6 +462,7 @@ ActiveAdmin.register Gateway do
               f.input :suppress_early_media
               f.input :fake_180_timer
               f.input :send_lnp_information
+              f.input :pidflo_mode_id, as: :select, include_blank: false, collection: Gateway::PIDFLO_MODES.invert, input_html: { class: 'tom-select' }
               f.input :throttling_profile, input_html: { class: 'tom-select' }, include_blank: true
             end
           end
@@ -686,6 +689,7 @@ ActiveAdmin.register Gateway do
             row :suppress_early_media
             row :fake_180_timer
             row :send_lnp_information
+            row :pidflo_mode_id, &:pidflo_mode_name
             row :throttling_profile
           end
         end

@@ -118,6 +118,7 @@
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
 #  pai_send_mode_id                 :integer(2)       default(0), not null
+#  pidflo_mode_id                   :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
 #  radius_accounting_profile_id     :integer(2)
