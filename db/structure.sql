@@ -482,7 +482,8 @@ CREATE TYPE switch22.callprofile_ty AS (
 	customer_currency_rate double precision,
 	vendor_currency_rate double precision,
 	destination_attempt_fee numeric,
-	dialpeer_attempt_fee numeric
+	dialpeer_attempt_fee numeric,
+	pidflo_mode_id smallint
 );
 
 
@@ -3058,7 +3059,8 @@ CREATE TABLE class4.gateways (
     allowed_methods character varying[],
     supported_tags character varying[],
     term_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
-    orig_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL
+    orig_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    pidflo_mode_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -4256,6 +4258,8 @@ BEGIN
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
+  i_profile.pidflo_mode_id = i_vendor_gw.pidflo_mode_id;
+
   i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
 
   /*dbg{*/
@@ -5081,6 +5085,8 @@ BEGIN
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
+  i_profile.pidflo_mode_id = i_vendor_gw.pidflo_mode_id;
+
   i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
 
   /*dbg{*/
@@ -5828,6 +5834,8 @@ BEGIN
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
+
+  i_profile.pidflo_mode_id = i_vendor_gw.pidflo_mode_id;
 
   i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
 
@@ -14085,7 +14093,9 @@ CREATE TABLE data_import.import_gateways (
     scheduler_name character varying,
     contact_user character varying,
     term_route_set character varying[],
-    orig_route_set character varying[]
+    orig_route_set character varying[],
+    pidflo_mode_id smallint,
+    pidflo_mode_name character varying
 );
 
 
@@ -20817,6 +20827,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260813120000'),
 ('20260810120001'),
 ('20260810120000'),
 ('20260809120000'),
