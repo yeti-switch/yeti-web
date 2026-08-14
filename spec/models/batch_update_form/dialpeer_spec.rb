@@ -31,7 +31,6 @@ RSpec.describe BatchUpdateForm::Dialpeer do
       connect_fee: '12',
       lcr_rate_multiplier: '12',
       gateway_id: gateway_vendors.id.to_s,
-      gateway_group_id: gateway_group_vendors.id.to_s,
       vendor_id: vendor_main.id.to_s,
       account_id: account_vendors.id.to_s,
       routeset_discriminator_id: Routing::RoutesetDiscriminator.last!.id.to_s,
@@ -83,7 +82,6 @@ RSpec.describe BatchUpdateForm::Dialpeer do
           {
             account_id: account_vendors.id.to_s,
             gateway_id: gateway_not_allow_termination.id.to_s,
-            gateway_group_id: gateway_group_vendors.id.to_s,
             vendor_id: vendor_main.id.to_s
           }
         end
@@ -95,12 +93,11 @@ RSpec.describe BatchUpdateForm::Dialpeer do
         end
       end
 
-      context 'when :account_id, :gateway_id and :gateway_group_id is not owned by selected :vendor_id' do
+      context 'when :account_id and :gateway_id is not owned by selected :vendor_id' do
         let(:assign_params) do
           {
             account_id: account_vendors.id.to_s,
             gateway_id: gateway_vendors.id.to_s,
-            gateway_group_id: gateway_group_vendors.id.to_s,
             vendor_id: vendor_other.id.to_s
           }
         end
@@ -108,9 +105,41 @@ RSpec.describe BatchUpdateForm::Dialpeer do
         it 'should have errors' do
           subject
           expect(subject.errors[:gateway_id]).to contain_exactly I18n.t('activerecord.errors.models.dialpeer.attributes.gateway.wrong_owner')
+          expect(subject.errors[:account_id]).to contain_exactly I18n.t('activerecord.errors.models.dialpeer.attributes.account.wrong_owner')
+          expect(subject.errors.size).to eq 2
+        end
+      end
+
+      context 'when :account_id and :gateway_group_id is not owned by selected :vendor_id' do
+        let(:assign_params) do
+          {
+            account_id: account_vendors.id.to_s,
+            gateway_group_id: gateway_group_vendors.id.to_s,
+            vendor_id: vendor_other.id.to_s
+          }
+        end
+
+        it 'should have errors' do
+          subject
           expect(subject.errors[:gateway_group_id]).to contain_exactly I18n.t('activerecord.errors.models.dialpeer.attributes.gateway_group.wrong_owner')
           expect(subject.errors[:account_id]).to contain_exactly I18n.t('activerecord.errors.models.dialpeer.attributes.account.wrong_owner')
-          expect(subject.errors.size).to eq 3
+          expect(subject.errors.size).to eq 2
+        end
+      end
+
+      context 'when both :gateway_id and :gateway_group_id are selected' do
+        let(:assign_params) do
+          {
+            account_id: account_vendors.id.to_s,
+            gateway_id: gateway_vendors.id.to_s,
+            gateway_group_id: gateway_group_vendors.id.to_s,
+            vendor_id: vendor_main.id.to_s
+          }
+        end
+
+        it "should have error: can't be set in a same time" do
+          subject
+          expect(subject.errors.to_a).to contain_exactly "both gateway and gateway_group can't be set in a same time"
         end
       end
 
@@ -136,8 +165,7 @@ RSpec.describe BatchUpdateForm::Dialpeer do
           subject
           errors_for_vendor = :vendor_id, [
             'must be changed together with Account',
-            'must be changed together with Gateway',
-            'must be changed together with Gateway group'
+            'must be changed together with Gateway or Gateway group'
           ]
           expect(subject.errors.messages).to contain_exactly errors_for_vendor
         end
@@ -167,12 +195,36 @@ RSpec.describe BatchUpdateForm::Dialpeer do
         end
       end
 
-      context 'when change account, gateway, vendor and gateway_group with valid values' do
+      context 'when change account, gateway and vendor with valid values' do
         let(:assign_params) do
           {
             account_id: account_vendors.id,
             gateway_id: gateway_vendors.id,
+            vendor_id: vendor_main.id
+          }
+        end
+
+        it 'should pass validations' do expect(subject).to be_valid end
+      end
+
+      context 'when change account, gateway_group and vendor with valid values' do
+        let(:assign_params) do
+          {
+            account_id: account_vendors.id,
             gateway_group_id: gateway_group_vendors.id,
+            vendor_id: vendor_main.id
+          }
+        end
+
+        it 'should pass validations' do expect(subject).to be_valid end
+      end
+
+      context 'when selected :vendor_id is a customer and a vendor at the same time' do
+        let!(:vendor_main) { FactoryBot.create :vendor, customer: true }
+        let(:assign_params) do
+          {
+            account_id: account_vendors.id,
+            gateway_id: gateway_vendors.id,
             vendor_id: vendor_main.id
           }
         end
@@ -357,6 +409,50 @@ RSpec.describe BatchUpdateForm::Dialpeer do
       # format validation
       it { is_expected.to_not allow_value('test prefix').for :prefix }
       it { is_expected.to allow_value('test_prefix').for :prefix }
+    end
+  end
+
+  describe '#attributes' do
+    context 'when :gateway_id is selected' do
+      let(:assign_params) do
+        {
+          account_id: account_vendors.id.to_s,
+          gateway_id: gateway_vendors.id.to_s,
+          vendor_id: vendor_main.id.to_s
+        }
+      end
+
+      it 'clears :gateway_group_id' do
+        expect(subject.attributes).to include(
+          gateway_id: gateway_vendors.id.to_s,
+          gateway_group_id: nil
+        )
+      end
+    end
+
+    context 'when :gateway_group_id is selected' do
+      let(:assign_params) do
+        {
+          account_id: account_vendors.id.to_s,
+          gateway_group_id: gateway_group_vendors.id.to_s,
+          vendor_id: vendor_main.id.to_s
+        }
+      end
+
+      it 'clears :gateway_id' do
+        expect(subject.attributes).to include(
+          gateway_group_id: gateway_group_vendors.id.to_s,
+          gateway_id: nil
+        )
+      end
+    end
+
+    context 'when neither :gateway_id nor :gateway_group_id is selected' do
+      let(:assign_params) { { prefix: 'string' } }
+
+      it 'does not touch them' do
+        expect(subject.attributes.keys).to_not include(:gateway_id, :gateway_group_id)
+      end
     end
   end
 end
