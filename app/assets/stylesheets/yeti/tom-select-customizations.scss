@@ -360,46 +360,77 @@
 // tom-select isn't an ActiveAdmin component, so its dark-mode recolor lives here
 // with the rest of the tom-select styling, using the theme's --aa-* custom
 // properties. Selectors mirror (and slightly out-specify) the light rules above.
+//
+// Packaged as a mixin because it has to be applied under two different roots:
+// the page content, and the jQuery UI dialog used by the batch-update action.
+@mixin ts-dark-rules {
+  .ts-wrapper .ts-control {
+    background-color: var(--aa-input-bg);
+    border-color: var(--aa-input-border);
+    color: var(--aa-text);
+  }
+  // The .tom-select* variants above set a lighter border at higher specificity;
+  // match it here so the dark border wins for those widgets too.
+  form.formtastic .ts-wrapper.tom-select .ts-control,
+  form.formtastic .ts-wrapper.tom-select-ajax .ts-control,
+  form.formtastic .ts-wrapper.tom-select-ajax-fillable .ts-control,
+  form.formtastic .ts-wrapper.tom-select-sortable .ts-control {
+    border-color: var(--aa-input-border);
+  }
+  .ts-control input { color: var(--aa-text); }
+  .ts-control input::placeholder { color: var(--aa-text-muted); }
+  // Clear-all (✗) button carries a fixed dark glyph color that is invisible
+  // against the dark input; recolor it for the dark palette.
+  .ts-control .clear-button { color: var(--aa-text-muted); }
+  .ts-control .clear-button:hover { color: var(--aa-text); }
+  // Selected chips (multi-select). --aa-surface-2 equals --aa-input-bg in the
+  // dark palette, so it can't be used as a chip color — the chips would vanish
+  // into the control. Use a tinted blue fill (the dark analog of the light
+  // #d6e4f7 chip) so selected values stay legible against the input.
+  .ts-wrapper.multi .ts-control > .item {
+    background: #33506b;
+    color: #e4eef8;
+  }
+  .ts-dropdown {
+    background: var(--aa-surface);
+    border-color: var(--aa-input-border);
+    color: var(--aa-text);
+  }
+  .ts-dropdown .option, .ts-dropdown .optgroup-header { color: var(--aa-text); }
+  // Highlighted option: tom-select's stock highlight is a near-white fill, which
+  // against the dark option text leaves the row unreadable. Reuse the blue fill
+  // the light rules give it - it reads well on either palette.
+  .ts-dropdown .option.active {
+    background: #3875d7;
+    color: #fff;
+  }
+  .ts-dropdown .create:hover { background: var(--aa-surface-hover); }
+  // Single-select chevron: light stroke for the dark control.
+  .ts-wrapper.single .ts-control,
+  .ts-wrapper.single.input-active .ts-control {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23aab1bb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  // Dropdown filter input of the dropdown_input plugin: it sits on the dropdown
+  // surface (not on .ts-control), so it needs the text colour set explicitly -
+  // otherwise it keeps the light-mode colour and is unreadable.
+  .ts-dropdown .dropdown-input {
+    background: var(--aa-input-bg);
+    border-color: var(--aa-input-border);
+    color: var(--aa-text);
+  }
+}
+
 @include ts-dark {
   #active_admin_content {
-    .ts-wrapper .ts-control {
-      background-color: var(--aa-input-bg);
-      border-color: var(--aa-input-border);
-      color: var(--aa-text);
-    }
-    // The .tom-select* variants above set a lighter border at higher specificity;
-    // match it here so the dark border wins for those widgets too.
-    form.formtastic .ts-wrapper.tom-select .ts-control,
-    form.formtastic .ts-wrapper.tom-select-ajax .ts-control,
-    form.formtastic .ts-wrapper.tom-select-ajax-fillable .ts-control,
-    form.formtastic .ts-wrapper.tom-select-sortable .ts-control {
-      border-color: var(--aa-input-border);
-    }
-    .ts-control input { color: var(--aa-text); }
-    .ts-control input::placeholder { color: var(--aa-text-muted); }
-    // Clear-all (✗) button carries a fixed dark glyph color that is invisible
-    // against the dark input; recolor it for the dark palette.
-    .ts-control .clear-button { color: var(--aa-text-muted); }
-    .ts-control .clear-button:hover { color: var(--aa-text); }
-    // Selected chips (multi-select). --aa-surface-2 equals --aa-input-bg in the
-    // dark palette, so it can't be used as a chip color — the chips would vanish
-    // into the control. Use a tinted blue fill (the dark analog of the light
-    // #d6e4f7 chip) so selected values stay legible against the input.
-    .ts-wrapper.multi .ts-control > .item {
-      background: #33506b;
-      color: #e4eef8;
-    }
-    .ts-dropdown {
-      background: var(--aa-surface);
-      border-color: var(--aa-input-border);
-      color: var(--aa-text);
-    }
-    .ts-dropdown .option, .ts-dropdown .optgroup-header { color: var(--aa-text); }
-    .ts-dropdown .create:hover { background: var(--aa-surface-hover); }
-    // Single-select chevron: light stroke for the dark control.
-    .ts-wrapper.single .ts-control,
-    .ts-wrapper.single.input-active .ts-control {
-      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23aab1bb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
-    }
+    @include ts-dark-rules;
+  }
+
+  // Scoped-collection-action dialogs (the "Update batch" form) are jQuery UI
+  // dialogs appended to <body>, so they live outside #active_admin_content and
+  // pick up none of the rules above - their tom-select widgets kept tom-select's
+  // stock light colours and rendered as a white box on the dark dialog.
+  .ui-dialog {
+    @include ts-dark-rules;
   }
 }

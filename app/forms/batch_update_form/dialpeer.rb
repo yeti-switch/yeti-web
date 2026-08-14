@@ -62,10 +62,10 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
 
   # required with
   validates :account_id, required_with: :vendor_id
-  validates :gateway_id, required_with: :vendor_id, unless: :gateway_is_shared?
-  validates :gateway_group_id, required_with: :vendor_id
   validates :valid_from, required_with: :valid_till, if: -> { valid_from.nil? || valid_till.nil? }
   validates :dst_number_min_length, required_with: :dst_number_max_length
+
+  validate :termination_target_changed_with_vendor
 
   # numericality
   validates :lcr_rate_multiplier, numericality: { allow_blank: true }, if: :lcr_rate_multiplier_changed?
@@ -123,7 +123,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   validate :vendor_owners_the_gateway_group, if: %i[vendor_id_changed? gateway_group_id_changed?]
 
   validate if: :vendor_id_changed? do
-    errors.add(:vendor_id, I18n.t('activerecord.errors.models.dialpeer.attributes.vendor.contractor_is_not_vendor')) if is_customer?(vendor_id)
+    errors.add(:vendor_id, I18n.t('activerecord.errors.models.dialpeer.attributes.vendor.contractor_is_not_vendor')) unless is_vendor?(vendor_id)
   end
 
   validate if: %i[account_id_changed? vendor_id_changed?] do
@@ -156,8 +156,47 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     errors.add(:gateway_group_id, I18n.t('activerecord.errors.models.gateway.attributes.gateway_group.wrong_owner')) if gateway_group&.vendor_id != vendor_id.to_i
   end
 
-  def is_customer?(id)
-    Contractor.find(id).customer?
+  # Gateway and gateway group are the two mutually exclusive termination targets
+  # (see Dialpeer#gateway_presence), so selecting one of them clears the other.
+  # Without this, updating dialpeers that currently point at the opposite target
+  # would leave both set and fail the record validation.
+  def attributes
+    data = super
+
+    if data[:gateway_id].present?
+      data[:gateway_group_id] = nil
+    elsif data[:gateway_group_id].present?
+      data[:gateway_id] = nil
+    end
+
+    data
+  end
+
+  # A contractor may be a customer and a vendor at the same time, so the vendor flag
+  # is what decides here - not the absence of the customer flag. Mirrors
+  # Dialpeer#contractor_is_vendor.
+  def is_vendor?(id)
+    Contractor.find_by(id: id)&.vendor
+  end
+
+  # A dialpeer terminates either to a gateway or to a gateway group, never to both
+  # (see Dialpeer#gateway_presence). So changing the vendor has to come together with
+  # exactly one of them, to keep the termination target owned by the new vendor.
+  def termination_target_changed_with_vendor
+    gateway_selected = gateway_id.present?
+    gateway_group_selected = gateway_group_id.present?
+
+    if gateway_selected && gateway_group_selected
+      errors.add(:base, "both Gateway and Gateway group can't be set in a same time")
+    elsif vendor_id.present?
+      unless gateway_selected || gateway_group_selected
+        errors.add(:vendor_id, 'must be changed together with Gateway or Gateway group')
+      end
+    elsif gateway_group_selected
+      errors.add(:gateway_group_id, 'must be changed together with Vendor')
+    elsif gateway_selected && !gateway_is_shared?
+      errors.add(:gateway_id, 'must be changed together with Vendor')
+    end
   end
 
   def gateway_is_shared?

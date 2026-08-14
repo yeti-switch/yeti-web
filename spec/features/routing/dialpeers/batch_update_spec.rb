@@ -43,7 +43,6 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       connect_fee: '12',
       lcr_rate_multiplier: '12',
       gateway_id: gateway_vendors.id.to_s,
-      gateway_group_id: gateway_group_vendors.id.to_s,
       vendor_id: vendor_main.id.to_s,
       account_id: account_vendors.id.to_s,
       routeset_discriminator_id: routeset_discriminator.id.to_s,
@@ -259,11 +258,14 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
         super().merge routing_tag_ids: routing_tags.first(2).sort_by(&:name).map { |tag| tag.id.to_s }
       end
 
+      # selecting a gateway clears the gateway group, they are mutually exclusive
+      let(:expected_changes) { assign_params.merge gateway_group_id: nil }
+
       it 'should pass validation' do
         expect do
           subject
           expect(page).to have_selector '.flash', text: success_message
-        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Dialpeer', be_present, assign_params, be_present
+        end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Dialpeer', be_present, expected_changes, be_present
       end
     end
 
