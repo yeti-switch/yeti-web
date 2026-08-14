@@ -187,7 +187,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
     gateway_group_selected = gateway_group_id.present?
 
     if gateway_selected && gateway_group_selected
-      errors.add(:base, "both Gateway and Gateway group can't be set in a same time")
+      errors.add(:base, "both gateway and gateway_group can't be set in a same time")
     elsif vendor_id.present?
       unless gateway_selected || gateway_group_selected
         errors.add(:vendor_id, 'must be changed together with Gateway or Gateway group')

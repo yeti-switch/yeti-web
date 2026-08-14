@@ -139,7 +139,7 @@ RSpec.describe BatchUpdateForm::Dialpeer do
 
         it "should have error: can't be set in a same time" do
           subject
-          expect(subject.errors.to_a).to contain_exactly "both Gateway and Gateway group can't be set in a same time"
+          expect(subject.errors.to_a).to contain_exactly "both gateway and gateway_group can't be set in a same time"
         end
       end
 
