@@ -65,7 +65,7 @@ RSpec.describe 'Active Calls Batch actions', js: true do
           "#{node.id}*#{calls_attributes.first[:local_tag]}",
           "#{node.id}*#{calls_attributes.last[:local_tag]}"
         ].each do |id|
-          within_table_row(id: id) { page.find('.resource_selection_cell').click }
+          within_table_row(id: id) { page.find('.batch-actions-resource-selection').click }
         end
       end
       let(:calls_to_disconnect) do

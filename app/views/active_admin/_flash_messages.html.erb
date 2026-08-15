@@ -1,0 +1,40 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+
+    AA4 renders flash messages with Tailwind utility classes only — no role, no
+    id, no class that says what the message *is*. The three types differ solely
+    by colour (bg-green-50 / bg-yellow-50 / bg-red-50), so nothing can identify a
+    flash by type without matching on its palette.
+
+    Restored here:
+      - `role="alert"`, so assistive technology announces the message. AA4
+        renders no role at all, which is an accessibility gap independent of
+        anything else.
+      - `.flashes` on the container and `.flash flash_<type>` on each message —
+        the ActiveAdmin 3 convention. It gives the app a stable hook to style or
+        target flashes by type, and is what capybara_active_admin's
+        flash_message_selector expects, so that DSL keeps working unchanged.
+
+    Colours, spacing, icons and the per-type branching are AA4's, untouched, so
+    this stays easy to diff against the gem's partial. %>
+<% if flash_messages.present? %>
+  <div class="flashes px-2.5 lg:px-5 mb-8">
+    <% flash_messages.each do |type, message| %>
+      <% if type == "error" %>
+        <div role="alert" class="flash flash_error flex items-center gap-3 p-4 mb-2 rounded-lg bg-red-50 text-red-800 dark:bg-red-800 dark:text-red-300">
+          <svg class="w-5 h-5 shrink-0 text-red-400 dark:text-red-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/></svg>
+          <%= message %>
+        </div>
+      <% elsif type == "alert" %>
+        <div role="alert" class="flash flash_alert flex items-center gap-3 p-4 mb-2 rounded-lg bg-yellow-50 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-300">
+          <svg class="w-5 h-5 shrink-0 rtl:-scale-x-100 text-yellow-400 dark:text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/></svg>
+          <%= message %>
+        </div>
+      <% elsif type == "notice" %>
+        <div role="alert" class="flash flash_notice flex items-center gap-3 p-4 mb-2 rounded-lg bg-green-50 text-green-800 dark:bg-green-800 dark:text-green-300">
+          <svg class="w-5 h-5 shrink-0 rtl:-scale-x-100 text-green-400 dark:text-green-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/></svg>
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

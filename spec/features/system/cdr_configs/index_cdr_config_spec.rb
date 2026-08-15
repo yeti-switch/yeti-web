@@ -8,6 +8,6 @@ RSpec.describe 'Index System Cdr Configs', type: :feature do
     CdrRoundMode = System::CdrRoundMode.find(cdr_config.call_duration_round_mode_id).name
     visit system_cdr_configs_path
     expect(page).to have_http_status(:ok)
-    expect(page).to have_css('tr.row-call_duration_round_mode td', text: CdrRoundMode.to_s)
+    expect(page).to have_css('tr[data-row="call_duration_round_mode"] td', text: CdrRoundMode.to_s)
   end
 end

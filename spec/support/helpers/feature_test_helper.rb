@@ -58,13 +58,17 @@ module FeatureTestHelper
     end
   end
 
+  # AA4 dropped the .resource_selection_toggle_cell / .resource_selection_cell
+  # wrappers; the checkboxes now carry .batch-actions-toggle-all and
+  # .batch-actions-resource-selection. The toggle-all input is still wrapped in
+  # a <label>, which is what gets clicked.
   def table_select_all
-    page.find('.resource_selection_toggle_cell label').click
+    page.find('.batch-actions-toggle-all', visible: :all).ancestor('label').click
   end
 
   def table_select_row(id)
     within_table_row(id:) do
-      find('.resource_selection_cell .collection_selection').set(true)
+      find('.batch-actions-resource-selection').set(true)
     end
   end
 

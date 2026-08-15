@@ -20,7 +20,9 @@ RSpec.shared_examples :test_unset_tag_action_value do |factory: nil, controller_
 
   it 'saves empyt array' do
     subject
-    find('body.show') # wait page load
+    # AA4 puts no action/resource classes on <body>; the show page is identified
+    # by the attributes table it renders (the edit page does not have one).
+    find('.attributes-table') # wait page load
     expect(record.reload.tag_action_value).to be_empty
   end
 end

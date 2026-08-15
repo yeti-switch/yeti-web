@@ -12,7 +12,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'SRC Prefix', with: prefix
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_src.id
         expect(page).to have_field 'SRC Prefix', with: prefix
       end
@@ -24,7 +24,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'DST Prefix', with: prefix
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_dst.id
         expect(page).to have_field 'DST Prefix', with: prefix
       end
@@ -36,7 +36,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'URI Domain', with: domain
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_domain.id
         expect(page).to have_field 'URI Domain', with: domain
       end
@@ -48,7 +48,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'From Domain', with: domain
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_f_domain.id
         expect(page).to have_field 'From Domain', with: domain
       end
@@ -60,7 +60,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'To Domain', with: domain
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_t_domain.id
         expect(page).to have_field 'To Domain', with: domain
       end
@@ -72,7 +72,7 @@ RSpec.describe 'Filter Customers Auths records', :js do
       it 'should have filtered record only' do
         fill_in 'X-Yeti-Auth', with: domain
         click_button :Filter
-        expect(page).to have_css 'table.index_table tbody tr', count: 1
+        expect(page).to have_css '.index-as-table table tbody tr', count: 1
         expect(page).to have_css '.resource_id_link', text: customers_auth_x_domain.id
         expect(page).to have_field 'X-Yeti-Auth', with: domain
       end
@@ -88,12 +88,12 @@ RSpec.describe 'Filter Customers Auths records', :js do
     end
 
     it 'labels the default string filter predicates from the locale' do
-      expect(option_texts('.filter_form_field.filter_string.select_and_search'))
+      expect(option_texts('.filters-form-field.string .filters-form-input-group'))
         .to match_array(ransack_predicate_labels(:eq, :cont, :start, :end))
     end
 
     it 'labels numeric filter predicates from the locale' do
-      expect(option_texts('.filter_form_field.filter_numeric'))
+      expect(option_texts('.filters-form-field.numeric .filters-form-input-group'))
         .to match_array(ransack_predicate_labels(:eq, :gt, :lt))
     end
   end

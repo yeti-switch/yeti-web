@@ -28,7 +28,7 @@ RSpec.describe 'OAuth Access Tokens page', :js do
   # timestamps, version banners ("Routing 20260527160430"), and other digits
   # on the full page.
   def table_row_ids
-    page.all('table.index_table tbody tr').map { |row| row['id'].to_s.sub(/^.*_/, '') }
+    page.all('.index-as-table table tbody tr').map { |row| row['id'].to_s.sub(/^.*_/, '') }
   end
 
   context 'as an admin whose role allows access' do
@@ -44,7 +44,7 @@ RSpec.describe 'OAuth Access Tokens page', :js do
 
     it 'exposes the Application, Resource owner and Scopes filters' do
       visit oauth_access_tokens_path
-      within '.filter_form' do
+      within '.filters-form' do
         expect(page).to have_field('Application')
         expect(page).to have_field('Resource owner')
         expect(page).to have_field('Scopes')
@@ -53,7 +53,7 @@ RSpec.describe 'OAuth Access Tokens page', :js do
 
     it 'filters the list by Resource owner' do
       visit oauth_access_tokens_path
-      within('.filter_form') { select other_admin.username, from: 'Resource owner' }
+      within('.filters-form') { select other_admin.username, from: 'Resource owner' }
       click_button 'Filter'
       expect(table_row_ids).to contain_exactly(other_token.id.to_s)
     end
@@ -83,7 +83,7 @@ RSpec.describe 'OAuth Access Tokens page', :js do
     it 'is redirected away from the page' do
       visit oauth_access_tokens_path
       expect(page).to have_current_path(root_path)
-      expect(page).not_to have_css('table.index_table')
+      expect(page).not_to have_css('.index-as-table table')
     end
   end
 end

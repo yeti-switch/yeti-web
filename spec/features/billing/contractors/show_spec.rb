@@ -11,7 +11,7 @@ RSpec.describe 'Show Contractors', type: :feature do
   it 'has link to create new contractor' do
     subject
     expect(page).to have_selector(
-      ".title_bar .action_items .action_item a[href=\"#{new_contractor_path}\"]",
+      "[data-test-action-items] a[href=\"#{new_contractor_path}\"]",
       text: 'New Contractor',
       count: 1
     )

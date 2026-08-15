@@ -120,8 +120,12 @@ function initTomSelect(parent, options = {}) {
         initTomSelectAjaxFillable(this, options)
     })
 
-    // Filter form selects
-    parent.find('form.filter_form div.select_and_search > select').each(function () {
+    // Filter form predicate selects (the "Equals / Greater / Less" dropdown that
+    // sits next to the value input). ActiveAdmin 4 renamed the filter markup:
+    // `form.filter_form` -> `form.filters-form` and the predicate+value wrapper
+    // `div.select_and_search` -> `div.filters-form-input-group`. The predicate
+    // select is still that wrapper's direct <select> child.
+    parent.find('form.filters-form div.filters-form-input-group > select').each(function () {
         if (this.tomselect) return
         new TomSelect(this, {
             plugins: [],

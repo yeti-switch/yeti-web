@@ -20,7 +20,9 @@ RSpec.shared_examples :test_unset_routing_tag_ids do |factory: nil, controller_n
   end
 
   it 'saves empyt array' do
-    find('body.show') # wait page load
+    # AA4 puts no action/resource classes on <body>; the show page is identified
+    # by the attributes table it renders (the edit page does not have one).
+    find('.attributes-table') # wait page load
     expect(record.reload.routing_tag_ids).to be_empty
   end
 end

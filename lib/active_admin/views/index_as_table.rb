@@ -51,6 +51,32 @@ module ActiveAdmin
         super if assigns[:visible_columns].include?(column_js_code)
       end
 
+      # ActiveAdmin 3's id_column marked the link `class: "resource_id_link"`;
+      # AA4 renders a bare link_to. The class is a convention this app relies on
+      # — app/admin/cdr/cdrs.rb sets it by hand on its own id links, and the
+      # feature specs locate the ID cell by it — so restore it here rather than
+      # scatter the workaround across resources.
+      #
+      # Mirrors AA4's own id_column (lib/active_admin/views/index_as_table.rb);
+      # keep in sync when upgrading ActiveAdmin.
+      def id_column(*args)
+        raise "#{resource_class.name} has no primary_key!" unless resource_class.primary_key
+
+        options = args.extract_options!
+        title = args[0].presence || resource_class.human_attribute_name(resource_class.primary_key)
+        sortable = options.fetch(:sortable, resource_class.primary_key)
+
+        column(title, sortable: sortable) do |resource|
+          if controller.action_methods.include?('show')
+            link_to resource.id, resource_path(resource), class: 'resource_id_link'
+          elsif controller.action_methods.include?('edit')
+            link_to resource.id, edit_resource_path(resource), class: 'resource_id_link'
+          else
+            resource.id
+          end
+        end
+      end
+
       def boolean_edit_column(attribute_name)
         column(attribute_name, sortable: attribute_name, class: 'editable_column') do |resource|
           value = resource.send(attribute_name)
