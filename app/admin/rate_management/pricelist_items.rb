@@ -64,24 +64,28 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
     end
   end
 
+  # ActiveAdmin 4 renders action_item blocks in an ERB view context, where `self`
+  # is the view and `helpers` does not exist (AA3 evaluated them in Arbre, where it
+  # did). `parent` is a helper method, so call it directly. The show/index blocks
+  # below are still Arbre and keep using `helpers.parent`.
   action_item :detect_dialpeers do
-    if authorized?(:detect_dialpeers) && helpers.parent.new? && !helpers.parent.has_background_job?
+    if authorized?(:detect_dialpeers) && parent.new? && !parent.has_background_job?
       action_item_link 'Detect Dialpeers',
-              detect_dialpeers_rate_management_pricelist_path(helpers.parent)
+              detect_dialpeers_rate_management_pricelist_path(parent)
     end
   end
 
   action_item :redetect_dialpeers do
-    if authorized?(:redetect_dialpeers) && helpers.parent.dialpeers_detected? && !helpers.parent.has_background_job?
+    if authorized?(:redetect_dialpeers) && parent.dialpeers_detected? && !parent.has_background_job?
       action_item_link 'Redetect Dialpeers',
-              redetect_dialpeers_rate_management_pricelist_path(helpers.parent)
+              redetect_dialpeers_rate_management_pricelist_path(parent)
     end
   end
 
   action_item :apply_changes do
-    if authorized?(:apply_changes) && helpers.parent.dialpeers_detected? && !helpers.parent.has_background_job? && !helpers.parent.items.with_error.exists?
+    if authorized?(:apply_changes) && parent.dialpeers_detected? && !parent.has_background_job? && !parent.items.with_error.exists?
       action_item_link 'Apply Changes',
-              apply_changes_rate_management_pricelist_path(helpers.parent),
+              apply_changes_rate_management_pricelist_path(parent),
               data: { confirm: 'Are you sure you want to start Apply Changes?' }
     end
   end
@@ -89,14 +93,14 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
   action_item :edit do
     if authorized?(:update)
       action_item_link 'Edit Pricelist',
-              edit_rate_management_pricelist_path(helpers.parent)
+              edit_rate_management_pricelist_path(parent)
     end
   end
 
   action_item :destroy do
     if authorized?(:remove)
       action_item_link 'Delete Pricelist',
-              rate_management_pricelist_path(helpers.parent),
+              rate_management_pricelist_path(parent),
               method: :delete,
               data: { confirm: I18n.t('active_admin.delete_confirmation') }
     end

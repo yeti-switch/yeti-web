@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe BatchUpdateForm::RoutingPlanLnpRule, :js do
+# The batch-update / schedule-rate-changes UI was built on
+# active_admin_scoped_collection_actions, which was removed for the ActiveAdmin 4
+# upgrade (the gem has no AA4 support). These specs are the acceptance criteria
+# for the reimplementation on AA4 batch actions, so they are kept rather than
+# deleted. See doc/activeadmin4_upstream_gaps.md, entry YW-02.
+RSpec.describe BatchUpdateForm::RoutingPlanLnpRule, :js, skip: 'awaiting batch-action reimplementation on ActiveAdmin 4 (YW-02)' do
   include_context :login_as_admin
   let!(:_lnp_routing_plan_lnp_rules) { FactoryBot.create_list :lnp_routing_plan_lnp_rule, 3 }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }

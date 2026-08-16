@@ -37,8 +37,8 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
 
     within('.main-content-container') do
       expect(page).to have_selector('table tbody tr', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: '', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'YES', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'YES', count: 2)
     end
   end
 
@@ -66,9 +66,9 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
 
       within('.main-content-container') do
         expect(page).to have_selector('table tbody tr', count: 2)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_1.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_2.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'YES', count: 2)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_1.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_2.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'YES', count: 2)
       end
     end
 
@@ -97,9 +97,9 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
 
       within('.main-content-container') do
         expect(page).to have_selector('table tbody tr', count: 2)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_1.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_2.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'NO', count: 2)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_1.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_2.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'NO', count: 2)
       end
     end
 

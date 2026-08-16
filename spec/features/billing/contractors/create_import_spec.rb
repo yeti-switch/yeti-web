@@ -22,8 +22,8 @@ RSpec.describe 'Create Import Contractors', type: :feature, js: true do
 
     within('.main-content-container') do
       expect(page).to have_selector('table tbody tr', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: '', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: '', count: 2)
     end
   end
 

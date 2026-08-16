@@ -16,7 +16,8 @@
 # Through ActiveAdmin 3 this file carried a full copy of TableFor, because the
 # footer hooks did not exist. It is now a patch: ActiveAdmin 4's own
 # `build_table_cell` -> `helpers.format_attribute` already renders booleans as
-# status tags, which is all the old `render_data` override did.
+# status tags, which is nearly all the old `render_data` override did — except
+# for nil, see NilBooleanCell below.
 
 require 'active_admin/views/components/table_for'
 

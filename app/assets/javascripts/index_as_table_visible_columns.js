@@ -1,5 +1,10 @@
 $(document).ready(function(){
-    if ($('.index_as_table table, .index_as_list table').length && $('#block_available_columns').length) {
+    // ActiveAdmin 4 renamed the index wrapper class from `index_as_table` to
+    // `index-as-table` (see lib/active_admin/views/index_as_table.rb). While this
+    // guard still named the AA3 class it never matched, so neither the "Visible
+    // columns" dialog nor the reset link was ever bound — both were dead.
+    // `index_as_list` is gone in AA4 and unused here, so it is dropped.
+    if ($('.index-as-table table').length && $('#block_available_columns').length) {
 
         $( "#block_available_columns" ).dialog({
             autoOpen: false,

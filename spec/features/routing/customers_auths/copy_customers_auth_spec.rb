@@ -30,7 +30,9 @@ RSpec.describe 'Copy Customers Auth', type: :feature do
   subject do
     visit customers_auth_path(record.id)
     click_link 'Copy'
-    find('#page_title', text: 'New Customers Auth') # wait page load
+    # AA3's `#page_title` is gone; ActiveAdmin 4 renders the title as the <h2> in
+    # the page header bar (see app/views/active_admin/_page_header.html.erb).
+    find(page_title_selector, text: 'New Customers Auth') # wait page load
   end
 
   it 'check if every type of attribute cloned as expected' do

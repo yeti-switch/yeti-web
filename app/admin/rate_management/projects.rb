@@ -47,54 +47,60 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
   show do
     columns do
       column do
-        attributes_table title: 'Project details' do
-          row :id
-          row :name
-          row :pricelists, &:pricelists_link
-          row :dialpeers, &:dialpeers_link
-          row :keep_applied_pricelists_days
-          row :created_at
-          row :updated_at
+        panel 'Project details' do
+          attributes_table do
+            row :id
+            row :name
+            row :pricelists, &:pricelists_link
+            row :dialpeers, &:dialpeers_link
+            row :keep_applied_pricelists_days
+            row :created_at
+            row :updated_at
+          end
         end
 
-        attributes_table title: 'Scope attributes' do
-          row :vendor
-          row :account
-          row :routeset_discriminator
-          row :routing_group
+        panel 'Scope attributes' do
+          attributes_table do
+            row :vendor
+            row :account
+            row :routeset_discriminator
+            row :routing_group
+          end
         end
       end
 
       column do
-        attributes_table title: 'Constant attributes' do
-          row :enabled
-          row :gateway
-          row :gateway_group
-          row :acd_limit
-          row :asr_limit
-          row :short_calls_limit
-          row :capacity
-          row :src_name_rewrite_result
-          row :src_name_rewrite_rule
-          row :src_rewrite_result
-          row :src_rewrite_rule
-          row :dst_number_max_length
-          row :dst_number_min_length
-          row :dst_rewrite_result
-          row :dst_rewrite_rule
-          row :initial_interval
-          row :next_interval
-          row :priority
-          row :lcr_rate_multiplier
-          row :exclusive_route
-          row :force_hit_rate
-          row :reverse_billing
-          row :routing_tags do
-            div style: 'white-space: break-spaces;' do
-              resource.routing_tags
+        panel 'Constant attributes' do
+          attributes_table do
+            row :enabled
+            row :gateway
+            row :gateway_group
+            row :acd_limit
+            row :asr_limit
+            row :short_calls_limit
+            row :capacity
+            row :src_name_rewrite_result
+            row :src_name_rewrite_rule
+            row :src_rewrite_result
+            row :src_rewrite_rule
+            row :dst_number_max_length
+            row :dst_number_min_length
+            row :dst_rewrite_result
+            row :dst_rewrite_rule
+            row :initial_interval
+            row :next_interval
+            row :priority
+            row :lcr_rate_multiplier
+            row :exclusive_route
+            row :force_hit_rate
+            row :reverse_billing
+            row :routing_tags do
+              div style: 'white-space: break-spaces;' do
+                resource.routing_tags
+              end
             end
+            row :routing_tag_mode, &:routing_tag_mode_name
           end
-          row :routing_tag_mode, &:routing_tag_mode_name
         end
       end
     end

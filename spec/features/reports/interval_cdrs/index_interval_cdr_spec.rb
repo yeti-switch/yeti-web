@@ -7,7 +7,7 @@ RSpec.describe 'Index Reports Interval cdr', type: :feature do
     interval_cdrs = create_list(:interval_cdr, 2)
     visit report_interval_cdrs_path
     interval_cdrs.each do |interval_cdr|
-      expect(page).to have_css('.col-id', text: interval_cdr.id)
+      expect(page).to have_css('td[data-column="id"]', text: interval_cdr.id)
     end
   end
 end

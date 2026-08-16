@@ -27,7 +27,11 @@ $(document).ready(function () {
     // event. ActiveAdmin 4 has no jQuery, and the tabs component
     // (lib/active_admin/views/components/tabs.rb) now emits Flowbite markup, so
     // bind to the tab button's click instead. `data-tab-target` is set there.
-    $('#active_admin_content .tabs').on('click', '[data-tab-target]', function () {
+    //
+    // Delegated from `document`, not from `#active_admin_content`: ActiveAdmin 4
+    // renders that id on index pages only, and tabs live on SHOW pages, so
+    // scoping to it bound nothing and no ajax tab ever loaded.
+    $(document).on('click', '.tabs [data-tab-target]', function () {
         var panel = $($(this).data('tab-target'));
         if (panel.length === 0) return;
 

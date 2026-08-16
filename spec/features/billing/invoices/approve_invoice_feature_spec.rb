@@ -20,12 +20,14 @@ RSpec.describe 'Approve invoice feature', type: :feature do
   end
 
   context 'when approve from batch action' do
-    subject { click_button :OK }
+    # The batch action declares `confirm:`. ActiveAdmin 3 rendered that as an
+    # in-page modal with an OK button; ActiveAdmin 4 hands it to rails-ujs as
+    # `data-confirm`, which is a native browser dialog.
+    subject { accept_confirm { click_batch_action 'Approve Selected' } }
 
     before do
       visit invoices_path
-      check class: 'toggle_all'
-      click_batch_action 'Approve Selected'
+      table_select_all
     end
 
     it 'should approve invoice', :js do

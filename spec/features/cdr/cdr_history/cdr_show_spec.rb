@@ -58,7 +58,8 @@ RSpec.describe 'CDR show', type: :feature do
       expect(page).to have_attribute_row('ID', exact_text: cdr.id)
       expect(page).to have_attribute_row('Routing Tags', exact_text: 'Empty')
       within_attribute_row('Routing Tags') do
-        expect(page).to have_selector('.empty', exact_text: 'Empty')
+        # AA4 renamed the attributes-table placeholder class from `empty`.
+        expect(page).to have_selector('.attributes-table-empty-value', exact_text: 'Empty')
       end
     end
 

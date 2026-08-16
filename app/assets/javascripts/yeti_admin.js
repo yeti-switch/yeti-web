@@ -45,6 +45,7 @@
 //= require vendor/highlightjs/languages/xml.min
 //= require vendor/highlightjs/languages/django.min
 //= require highlightjs
+//= require modal_dialog
 //= require modal_link
 //= require modal_link_customize
 //= require import_apply_unique_fields
@@ -59,14 +60,12 @@
 
 $(document).ready(function () {
 
-    $('#active_admin_content .tabs').on("tabsactivate", function (event, ui) {
-
-    }).on('tabsbeforeactivate', function (event, ui) {
-        chart = $(".chart-container", $(ui.newPanel));
-        $(".chart-container svg").empty();
-        chart.addClass('chart-placeholder');
-    });
-
+    // Removed: a pair of jQuery UI `tabsactivate` / `tabsbeforeactivate` handlers
+    // that reset chart <svg> elements before a tab was shown. Both were dead —
+    // ActiveAdmin 4's tabs are Flowbite, which never fires those events, and they
+    // were bound to `#active_admin_content`, which AA4 only renders on index
+    // pages. They are also obsolete: charts render to <canvas> now, and
+    // charts.js#destroyExisting handles teardown itself.
 
     $('input.prefix_detector').blur(function () {
         self = $(this);

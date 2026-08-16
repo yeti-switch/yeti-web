@@ -35,6 +35,6 @@ RSpec.describe 'Rate Management Pricelists', bullet: [:n], js: true do
       end
     end
 
-    expect(page).to have_selector('.batch_actions_selector')
+    expect(page).to have_selector('.batch-actions-dropdown')
   end
 end

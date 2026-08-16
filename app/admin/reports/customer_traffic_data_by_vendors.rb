@@ -38,11 +38,11 @@ ActiveAdmin.register Report::CustomerTrafficDataByVendor, as: 'CustomerTrafficDa
   end
 
   action_item :by_destinations, only: :index do
-    action_item_link('By destinations', customer_traffic_customer_traffic_data_by_destinations_path(assigns[:customer_traffic].id))
+    action_item_link('By destinations', customer_traffic_customer_traffic_data_by_destinations_path(@customer_traffic.id))
   end
 
   action_item :by_destinations_vendors, method: :get do
-    action_item_link('By vendors and destinations', customer_traffic_customer_traffic_data_fulls_path(assigns[:customer_traffic].id))
+    action_item_link('By vendors and destinations', customer_traffic_customer_traffic_data_fulls_path(@customer_traffic.id))
   end
 
   sidebar 'Customer traffic report', priority: 0, only: :index do

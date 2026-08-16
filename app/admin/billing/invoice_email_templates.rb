@@ -74,7 +74,9 @@ ActiveAdmin.register Billing::InvoiceEmailTemplate, as: 'InvoiceEmailTemplate' d
            'and keep the plain text body readable on its own — some recipients never see the HTML part.'
     end
 
-    active_admin_comments
+    # ActiveAdmin 4 renamed the AA3 `active_admin_comments` builder, which used
+    # the implicit resource, to `active_admin_comments_for(resource)`.
+    active_admin_comments_for(resource)
   end
 
   form do |f|

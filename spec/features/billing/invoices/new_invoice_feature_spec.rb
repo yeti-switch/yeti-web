@@ -34,8 +34,13 @@ RSpec.describe 'New Invoice', type: :feature, js: true do
     within_form_for do
       fill_in_tom_select 'Contractor', with: contractor.display_name, search: true
       fill_in_tom_select 'Account', with: account.display_name, search: true
-      fill_in 'Start date', with: '2020-01-01'
-      fill_in 'End date', with: '2020-02-01'
+      # These are native `datetime-local` inputs since ActiveAdmin 4 (the
+      # `:datetime_picker` input now resolves to Formtastic's, not the removed
+      # active_admin_datetimepicker gem's text field). Filling one with a bare
+      # date makes the browser supply the missing time in ITS OWN timezone, so
+      # give the full value and leave no room for interpretation.
+      fill_in 'Start date', with: '2020-01-01T00:00'
+      fill_in 'End date', with: '2020-02-01T00:00'
     end
   end
 

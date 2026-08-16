@@ -13,7 +13,7 @@ RSpec.describe 'Index Incoming Registrations', type: :feature do
   end
 
   it 'has record' do
-    expect(page).to have_css('.col-path', text: record_attributes[:path])
+    expect(page).to have_css('td[data-column="path"]', text: record_attributes[:path])
     expect(page).to_not have_css('flash-warning')
     expect(page).to_not have_css('flash-error')
   end

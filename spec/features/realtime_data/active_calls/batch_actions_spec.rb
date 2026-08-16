@@ -38,8 +38,10 @@ RSpec.describe 'Active Calls Batch actions', js: true do
 
   context 'Terminate Selected' do
     let(:click_batch_action!) do
-      click_batch_action('Terminate Selected')
-      confirm_modal_dialog
+      # ActiveAdmin 4 confirms batch actions through rails-ujs `data-confirm`, a
+      # native browser dialog raised DURING the click — so it must be accepted
+      # around the click, not after it as AA3's in-page modal was.
+      accept_confirm { click_batch_action('Terminate Selected') }
     end
     let(:calls_to_disconnect) { calls_attributes }
     let!(:stub_disconnect_calls) do

@@ -5,7 +5,11 @@
                                    outgoing_registrations)
       disable_blank_slate_link: -> true suppresses the "create one" link
                                    (cnam_databases, lnp_databases) %>
-<div class="w-full rounded-lg border-2 border-dashed border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600 px-6 py-12 text-center">
+<%# `blank_slate` is ActiveAdmin 3's class name, kept because AA4 gives this
+    element no hook at all — only Tailwind utilities — so there is nothing stable
+    to style or select it by otherwise. Same reasoning as `#sidebar` and
+    `resource_id_link` elsewhere in this upgrade. %>
+<div class="blank_slate w-full rounded-lg border-2 border-dashed border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600 px-6 py-12 text-center">
   <h2 class="block mb-4 only:mb-0 font-semibold leading-6 text-gray-900 dark:text-gray-200">
     <% content = page_presenter.options[:blank_slate_content] %>
     <% content = instance_exec(&content) if content.is_a?(Proc) %>

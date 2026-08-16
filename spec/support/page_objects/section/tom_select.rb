@@ -235,16 +235,36 @@ module Section
     # loader would have produced for a matching search, so the underlying
     # <select> submits the value. arguments[0..2] are wrapper, value, text.
     def add_option_and_select(value, text)
-      root_element.session.execute_script(<<~JS, root_element, value.to_s, text.to_s)
-        #{INSTANCE_JS}
-        if (ts) {
-          var opt = {};
-          opt[ts.settings.valueField] = arguments[1];
-          opt[ts.settings.labelField] = arguments[2];
-          ts.addOption(opt);
-          ts.addItem(String(arguments[1]), false);
-        }
-      JS
+      # This used to be `if (ts) { ... }` with no else and no return value: when
+      # the instance had not been resolved yet the injection silently did
+      # nothing, the <select> stayed empty, and the failure surfaced much later
+      # as a validation error ("Account must exist") on submit. tom-select
+      # initialises asynchronously, so under load the wrapper can exist a beat
+      # before its instance does — poll for it, and raise rather than no-op, the
+      # same way #add_item_by_text does.
+      result = nil
+      started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+      loop do
+        result = root_element.session.evaluate_script(<<~JS, root_element, value.to_s, text.to_s)
+          (function () {
+            #{INSTANCE_JS}
+            if (!ts) { return 'no-instance'; }
+            var opt = {};
+            opt[ts.settings.valueField] = arguments[1];
+            opt[ts.settings.labelField] = arguments[2];
+            ts.addOption(opt);
+            ts.addItem(String(arguments[1]), false);
+            return ts.items.indexOf(String(arguments[1])) === -1 ? 'not-added' : 'ok';
+          })(arguments[0], arguments[1], arguments[2])
+        JS
+        break if result == 'ok'
+        break if Process.clock_gettime(Process::CLOCK_MONOTONIC) - started > Capybara.default_max_wait_time
+
+        sleep 0.05
+      end
+
+      raise "tom-select: could not select #{text.inspect} by value #{value.inspect} (#{result})" unless result == 'ok'
     end
   end
 end

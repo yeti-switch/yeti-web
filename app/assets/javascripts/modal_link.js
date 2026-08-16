@@ -33,7 +33,9 @@ $(document).ready(function () {
 
     $('body').trigger('modal-link:before_open', [title, link]);
 
-    ActiveAdmin.modal_dialog(title, inputs, function (payload) {
+    // Was ActiveAdmin.modal_dialog before ActiveAdmin 4 removed it; restored in
+    // app/assets/javascripts/modal_dialog.js.
+    ModalDialog(title, inputs, function (payload) {
       var form = $('form#dialog_confirm');
       $('body').trigger('modal-link:submit', [title, payload, form, link]);
     });

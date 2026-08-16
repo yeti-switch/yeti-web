@@ -187,6 +187,11 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
   end
 
+  # `Valid till` is a native datetime-local input since ActiveAdmin 4 (the
+  # :datetime_picker input now resolves to Formtastic's, not the removed
+  # active_admin_datetimepicker gem's text field), and those are minute
+  # precision — seconds entered here are dropped on submit. Truncate to the
+  # minute so the expectation matches what the control can actually hold.
   context 'with changed Valid till' do
     let(:fill_form!) do
       super()
@@ -194,7 +199,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_till is 2 months from now' do
-      let(:valid_till) { 2.months.from_now.round }
+      let(:valid_till) { 2.months.from_now.beginning_of_minute }
 
       it 'should be create pricelist' do
         expect(RateManagement::PricelistItemsParser).to receive(:call).and_call_original
@@ -221,7 +226,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_till is 2 hours from now' do
-      let(:valid_till) { 2.hours.from_now.round }
+      let(:valid_till) { 2.hours.from_now.beginning_of_minute }
 
       it 'should be create pricelist' do
         expect(RateManagement::PricelistItemsParser).to receive(:call).and_call_original
@@ -261,7 +266,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_till in the past' do
-      let(:valid_till) { 1.day.ago.round }
+      let(:valid_till) { 1.day.ago.beginning_of_minute }
 
       it 'should be raise validation error' do
         expect do
@@ -281,7 +286,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_from is 2 days from now' do
-      let(:valid_from) { 2.days.from_now.round }
+      let(:valid_from) { 2.days.from_now.beginning_of_minute }
 
       it 'should be create pricelist' do
         expect(RateManagement::PricelistItemsParser).to receive(:call).and_call_original
@@ -306,7 +311,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_from is 2 hours from now' do
-      let(:valid_from) { 2.hours.from_now.round }
+      let(:valid_from) { 2.hours.from_now.beginning_of_minute }
 
       it 'should be create pricelist' do
         expect(RateManagement::PricelistItemsParser).to receive(:call).and_call_original
@@ -344,7 +349,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
     end
 
     context 'when valid_from in the past' do
-      let(:valid_from) { 1.day.ago.round }
+      let(:valid_from) { 1.day.ago.beginning_of_minute }
 
       it 'should be raise validation error' do
         expect do
@@ -362,7 +367,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
         fill_in 'Valid till', with: valid_till
       end
       let(:valid_till) { valid_from }
-      let(:valid_from) { 2.days.from_now.round }
+      let(:valid_from) { 2.days.from_now.beginning_of_minute }
 
       it 'should be raise validation error' do
         expect do
