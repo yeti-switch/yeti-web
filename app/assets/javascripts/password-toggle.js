@@ -24,8 +24,12 @@ $(document).ready(function () {
     wrapper.find('.password-toggle span').click();
   });
 
-  // Show page table row
-  $('tr.row.password-mask').each(function(_, el) {
+  // Show page table row.
+  // Was `tr.row.password-mask`: ActiveAdmin 3 put `row` on every attributes-table
+  // <tr> alongside the custom class. AA4 identifies rows with a `data-row`
+  // attribute and emits no `row` class, so that selector matched nothing and the
+  // password toggle never appeared on show pages.
+  $('tr.password-mask').each(function(_, el) {
     var wrapper = $(el).find('td');
 
     wrapper.html('<span class="value">' + wrapper.text() +'</span>');

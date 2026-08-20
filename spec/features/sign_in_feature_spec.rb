@@ -4,7 +4,7 @@ RSpec.describe 'the sign in process', js: true do
   subject do
     visit new_admin_user_session_path
     fill_form!
-    click_button 'Login'
+    click_button 'Sign In'
   end
 
   let!(:admin_user) { FactoryBot.create(:admin_user, admin_user_attrs) }
@@ -88,7 +88,7 @@ RSpec.describe 'the sign in process', js: true do
 
     it 'should render dashboard page without any content', :js do
       fill_form!
-      click_button 'Login'
+      click_button 'Sign In'
       expect(page).to have_selector('small', text: 'You have limited access to dashboard content.')
       expect(page).to have_current_path root_path
     end

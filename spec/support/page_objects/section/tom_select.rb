@@ -242,8 +242,16 @@ module Section
       # initialises asynchronously, so under load the wrapper can exist a beat
       # before its instance does — poll for it, and raise rather than no-op, the
       # same way #add_item_by_text does.
+      # The selection must also SURVIVE. tom-select-ajax.js binds `change` on a
+      # widget's path-param sources and responds with `ts.clear(); ts.clearOptions()`
+      # (see its `$(pathParams[requiredParam]).on('change', ...)`), so filling a
+      # parent field — Vendor before Account, say — schedules an asynchronous wipe
+      # of the dependent one. Injecting into the child while that wipe is still in
+      # flight looks like it worked and is then undone, surfacing later as
+      # "Account must exist". So re-check after a beat and re-inject if it was
+      # cleared, until the value sticks.
       result = nil
-      started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + Capybara.default_max_wait_time
 
       loop do
         result = root_element.session.evaluate_script(<<~JS, root_element, value.to_s, text.to_s)
@@ -258,13 +266,29 @@ module Section
             return ts.items.indexOf(String(arguments[1])) === -1 ? 'not-added' : 'ok';
           })(arguments[0], arguments[1], arguments[2])
         JS
+
+        if result == 'ok'
+          sleep 0.15
+          result = 'cleared' unless still_selected?(value)
+        end
+
         break if result == 'ok'
-        break if Process.clock_gettime(Process::CLOCK_MONOTONIC) - started > Capybara.default_max_wait_time
+        break if Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
 
         sleep 0.05
       end
 
       raise "tom-select: could not select #{text.inspect} by value #{value.inspect} (#{result})" unless result == 'ok'
+    end
+
+    # True when `value` is still among the widget's selected items.
+    def still_selected?(value)
+      root_element.session.evaluate_script(<<~JS, root_element, value.to_s) == true
+        (function () {
+          #{INSTANCE_JS}
+          return !!ts && ts.items.indexOf(String(arguments[1])) !== -1;
+        })(arguments[0], arguments[1])
+      JS
     end
   end
 end

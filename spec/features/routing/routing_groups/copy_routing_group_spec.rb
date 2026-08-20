@@ -21,7 +21,10 @@ RSpec.describe 'Copy Routing group action', type: :feature do
 
     subject do
       find('input[type=submit]').click
-      find('h3', text: 'Routing Group Details') # wait page reload
+      # ActiveAdmin 3's `attributes_table` wrapped itself in a panel titled
+      # "<Resource> Details"; AA4 renders the table with no panel and no heading,
+      # so wait for the table itself instead.
+      expect(page).to have_selector('.attributes-table') # wait page reload
     end
 
     it 'creates new Routing group with identical fields, except name' do
