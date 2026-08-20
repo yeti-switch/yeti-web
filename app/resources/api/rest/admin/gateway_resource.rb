@@ -10,7 +10,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :auth_from_domain, :term_route_set,
              :term_next_hop_for_replies, :term_next_hop, :term_append_headers_req,
              :orig_append_headers_req, :orig_append_headers_reply,
-             :orig_route_set,
+             :orig_route_set, :privacy_mode_id,
              :sdp_alines_filter_list, :ringing_timeout, :relay_options, :relay_reinvite, :relay_hold, :relay_prack,
              :relay_update, :suppress_early_media, :fake_180_timer,
              :transit_headers_from_origination, :transit_headers_from_termination,
@@ -77,6 +77,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :port, type: :number
   ransack_filter :src_rewrite_rule, type: :string
   ransack_filter :dst_rewrite_rule, type: :string
+  ransack_filter :privacy_mode_id, type: :number
   ransack_filter :acd_limit, type: :number
   ransack_filter :asr_limit, type: :number
   ransack_filter :enabled, type: :boolean
@@ -218,6 +219,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       orig_append_headers_reply
       orig_route_set
       orig_disconnect_policy
+      privacy_mode_id
       sdp_alines_filter_list
       ringing_timeout
       relay_options

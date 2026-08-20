@@ -461,6 +461,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'auth-from-domain': gateway.auth_from_domain,
         'term-route-set': gateway.term_route_set,
         'orig-route-set': gateway.orig_route_set,
+        'privacy-mode-id': gateway.privacy_mode_id,
         'termination-capacity': gateway.termination_capacity,
         'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
         'term-next-hop': gateway.term_next_hop,
@@ -559,6 +560,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'ice-mode-id': 2,
         'rtcp-mux-mode-id': 1,
         'rtcp-feedback-mode-id': 0,
+        'privacy-mode-id': 3,
         'allowed-methods': %w[INVITE ACK],
         'supported-tags': %w[100rel timer]
       }
@@ -630,6 +632,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   tx_inband_dtmf_filtering_mode: tx_inband_dtmf_filtering_mode,
                                   network_protocol_priority: network_protocol_priority,
                                   media_encryption_mode: media_encryption_mode,
+                                  privacy_mode_id: json_api_request_attributes[:'privacy-mode-id'],
                                   sip_schema_id: json_api_request_attributes[:'sip-schema-id'],
                                   ice_mode_id: json_api_request_attributes[:'ice-mode-id'],
                                   rtcp_mux_mode_id: json_api_request_attributes[:'rtcp-mux-mode-id'],
