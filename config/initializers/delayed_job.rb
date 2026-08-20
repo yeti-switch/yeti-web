@@ -12,6 +12,10 @@ if Rails.env.development?
   require 'delayed_job/dev_no_daemon'
 end
 
+if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+  require 'delayed_job/semantic_logger_reopen'
+end
+
 Delayed::Worker.destroy_failed_jobs = false
 Delayed::Worker.read_ahead = 1
 Delayed::Worker.raise_signal_exceptions = true

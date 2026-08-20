@@ -120,10 +120,12 @@ module Yeti
     if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
       $stdout.sync = true
       config.rails_semantic_logger.semantic = true
+      # Static tags (YetiConfig.logs.tags) are not added here on purpose: log_tags
+      # are applied by the rack middleware only, so they would be missing in the
+      # logs of delayed_job/scheduler. They are added by YetiLogFormatter instead.
       config.log_tags = {
         request_id: :request_id,
-        remote_ip: :remote_ip,
-        **(YetiConfig.logs&.tags&.to_h || {})
+        remote_ip: :remote_ip
       }
     end
   end

@@ -90,9 +90,8 @@ elasticsearch:
   transport_options:
     params:
       _msg_field: 'message'
-      _stream_fields:
-        - system
-        - hostname
+      _time_field: 'timestamp'
+      _stream_fields: 'system,host,component'
 
 s3_storage:
   endpoint: ''

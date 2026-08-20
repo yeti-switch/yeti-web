@@ -13,6 +13,11 @@ require 'active_support/all'
 require_relative 'yeti_config_loader'
 YetiConfigLoader.call
 
+# This process is not started by bin/*, so SemanticLogger is configured here.
+require_relative 'yeti_log_setup'
+logger = YetiLogSetup.call(component: 'prometheus_exporter')
+logger.info 'Loading prometheus collectors'
+
 Dir[File.join(__dir__, 'prometheus/*_collector.rb')].each do |filename|
   require_relative filename
 end
