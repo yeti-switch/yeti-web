@@ -122,11 +122,22 @@ module Yeti
       config.rails_semantic_logger.semantic = true
       # Static tags (YetiConfig.logs.tags) are not added here on purpose: log_tags
       # are applied by the rack middleware only, so they would be missing in the
-      # logs of delayed_job/scheduler. They are added by YetiLogFormatter instead.
+      # logs of delayed_job/scheduler. YetiLogFormatter adds them to every record of
+      # the elasticsearch appender instead. The stdout appenders keep the `:default`
+      # format and log no static tags at all - the process is identified there by the
+      # systemd unit(SyslogIdentifier).
       config.log_tags = {
         request_id: :request_id,
         remote_ip: :remote_ip
       }
+
+      # Every environment logs the same way - to stdout, plus elasticsearch when it is
+      # configured, see config/initializers/semantic_logger.rb. Only the test environment
+      # keeps the log/test.log file appender instead, to leave the rspec output readable.
+      unless Rails.env.test?
+        config.rails_semantic_logger.add_file_appender = false
+        config.semantic_logger.add_appender(io: $stdout, formatter: :default)
+      end
     end
   end
 end

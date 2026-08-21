@@ -11,11 +11,14 @@
 # This file is loaded before Bundler.require, so it must not depend on gems.
 module YetiLogComponent
   class << self
-    attr_writer :name
-
     # @return [String]
     def name
-      @name ||= detect.freeze
+      @name ||= normalize(detect)
+    end
+
+    # @param name [String] assigned by an entry point before Rails is booted.
+    def name=(name)
+      @name = normalize(name)
     end
 
     # Resets the name, for specs.
@@ -24,6 +27,14 @@ module YetiLogComponent
     end
 
     private
+
+    # A frozen copy, so that the component of the process cannot be changed by
+    # mutating the string that was assigned.
+    #
+    # @return [String]
+    def normalize(name)
+      -name.to_s
+    end
 
     # @return [String]
     def detect

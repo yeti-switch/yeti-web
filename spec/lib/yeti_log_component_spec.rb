@@ -14,6 +14,17 @@ RSpec.describe YetiLogComponent do
       before { described_class.name = 'delayed_job' }
 
       it { is_expected.to eq('delayed_job') }
+
+      it 'is frozen, so that it cannot be changed by mutating the assigned string' do
+        expect(subject).to be_frozen
+      end
+    end
+
+    it 'keeps no reference to the assigned string' do
+      name = +'delayed_job'
+      described_class.name = name
+      name << '_mutated'
+      expect(described_class.name).to eq('delayed_job')
     end
 
     context 'when the name was not assigned' do

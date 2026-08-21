@@ -117,3 +117,20 @@ tmpdir: 'tmp'
 #  http_proxy: http://proxy.example.com:3128
 #  # Honour the standard HTTP(S)_PROXY env vars when http_proxy is not set.
 #  use_env_proxy: false
+
+# Logging (optional). Every component - puma, delayed_job, scheduler, cdr_processor,
+# prometheus exporter - logs to stdout and, when an url is set below, ships the same
+# records to elasticsearch/VictoriaLogs. An empty url disables it.
+#elasticsearch:
+#  url: 'http://localhost:9428/insert/elasticsearch'
+#  transport_options:
+#    params:
+#      _msg_field: 'message'
+#      _time_field: 'timestamp'
+#      _stream_fields: 'system,host,component'
+#
+# Static fields added to every log record shipped to elasticsearch.
+#logs:
+#  tags:
+#    env: 'production'
+#    system: 'yeti'

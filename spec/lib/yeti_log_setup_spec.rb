@@ -17,32 +17,49 @@ RSpec.describe YetiLogSetup do
   end
 
   describe '.add_elasticsearch_appender' do
-    subject { described_class.add_elasticsearch_appender(tags: { processor: 'cdr_billing' }) }
+    subject { described_class.add_elasticsearch_appender(tags: { processor: 'cdr_billing' })&.appender }
 
-    it 'adds the appender with the transport options of the config' do
-      expect(SemanticLogger).to receive(:add_appender).with(
-        hash_including(
-          appender: :elasticsearch,
-          url: 'http://localhost:9428/insert/elasticsearch',
-          transport_options: { params: { _msg_field: 'message' } }
-        )
-      )
+    # SemanticLogger.add_appender returns the SemanticLogger::Appender::AsyncBatch wrapper.
+    # Stubbed, so that the specs never register a real appender in the global SemanticLogger.
+    before do
+      allow(SemanticLogger).to receive(:add_appender) do |appender:, **|
+        instance_double(SemanticLogger::Appender::AsyncBatch, appender:)
+      end
+    end
+
+    it 'adds an appender that never raises, so that a broken elasticsearch cannot hang the process' do
+      expect(subject).to be_a(YetiElasticsearchAppender)
+    end
+
+    it 'batches the records' do
       subject
+      expect(SemanticLogger).to have_received(:add_appender).with(hash_including(batch_size: 10))
+    end
+
+    it 'uses the url and the transport options of the config' do
+      expect(subject.url).to eq('http://localhost:9428/insert/elasticsearch')
+      expect(subject.elasticsearch_args[:transport_options]).to include(params: { _msg_field: 'message' })
     end
 
     it 'adds static tags of the config and the given ones to every record' do
-      expect(SemanticLogger).to receive(:add_appender) do |options|
-        expect(options[:formatter].static_tags).to eq(env: 'production', system: 'yeti', processor: 'cdr_billing')
-      end
-      subject
+      expect(subject.formatter.static_tags).to eq(env: 'production', system: 'yeti', processor: 'cdr_billing')
     end
 
     context 'when elasticsearch is not configured' do
       let(:elasticsearch_config) { nil }
 
       it 'adds no appender' do
-        expect(SemanticLogger).not_to receive(:add_appender)
         expect(subject).to be_nil
+        expect(SemanticLogger).not_to have_received(:add_appender)
+      end
+    end
+
+    context 'when the elasticsearch url is empty' do
+      let(:elasticsearch_config) { OpenStruct.new(url: '', index: nil, transport_options: nil) }
+
+      it 'adds no appender' do
+        expect(subject).to be_nil
+        expect(SemanticLogger).not_to have_received(:add_appender)
       end
     end
   end

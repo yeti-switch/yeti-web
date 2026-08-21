@@ -3,6 +3,7 @@
 require 'active_support/core_ext/object/blank'
 require 'semantic_logger'
 require_relative 'yeti_config_loader'
+require_relative 'yeti_elasticsearch_appender'
 require_relative 'yeti_log_component'
 require_relative 'yeti_log_formatter'
 require_relative 'yeti_plain_log_formatter'
@@ -41,18 +42,17 @@ module YetiLogSetup
     logger
   end
 
-  # Requires YetiConfig to be loaded.
+  # Requires YetiConfig to be loaded. Applied in every environment: a blank
+  # `elasticsearch.url` is what disables the logging to elasticsearch.
   #
   # @param tags [Hash] extra static tags, added to YetiConfig.logs.tags.
   # @return [SemanticLogger::Subscriber, nil] nil when elasticsearch is not configured.
   def add_elasticsearch_appender(tags: {})
-    return if YetiConfig.elasticsearch.blank?
+    return if YetiConfig.elasticsearch.blank? || YetiConfig.elasticsearch.url.blank?
 
     static_tags = (YetiConfig.logs&.tags&.to_h || {}).merge(tags)
-    SemanticLogger.add_appender(
-      appender: :elasticsearch,
+    appender = YetiElasticsearchAppender.new(
       url: YetiConfig.elasticsearch.url,
-      batch_size: 10,
       retry_on_failure: true,
       type: nil,
       index: YetiConfig.elasticsearch.index,
@@ -60,5 +60,6 @@ module YetiLogSetup
       transport_options: YetiConfig.elasticsearch.transport_options&.to_h || {},
       formatter: YetiLogFormatter.new(time_format: :iso_8601, time_key: :timestamp, static_tags:)
     )
+    SemanticLogger.add_appender(appender:, batch_size: 10)
   end
 end
