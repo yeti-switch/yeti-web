@@ -67,7 +67,9 @@ RSpec.describe YetiLogSetup do
   describe '.call' do
     subject { described_class.call(component: 'cdr_processor', level: 'DEBUG') }
 
-    let(:default_level) { SemanticLogger.default_level }
+    # let! and not let: the subject changes the level, so a lazy let would first be
+    # evaluated by the after hook and restore the changed level to the whole suite.
+    let!(:default_level) { SemanticLogger.default_level }
 
     before do
       allow(SemanticLogger).to receive(:add_appender)
@@ -82,7 +84,7 @@ RSpec.describe YetiLogSetup do
 
     it 'sets the component of the process' do
       subject
-      expect(YetiLogComponent.name).to eq('cdr_processor')
+      expect(YetiLogComponent.current).to eq('cdr_processor')
     end
 
     it 'returns the logger of the component' do

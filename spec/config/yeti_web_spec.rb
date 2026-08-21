@@ -74,6 +74,10 @@ RSpec.describe 'config/yeti_web.yml' do
       logs: {
         tags: a_kind_of(Hash)
       },
+      elasticsearch: {
+        url: a_kind_of(String),
+        transport_options: a_kind_of(Hash)
+      },
       s3_storage: {
         endpoint: a_kind_of(String),
         access_key_id: a_kind_of(String),

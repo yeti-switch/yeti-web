@@ -17,8 +17,10 @@ require_relative 'yeti_log_component'
 # not boot Rails as well.
 class YetiLogFormatter < SemanticLogger::Formatters::Raw
   # Fields written by the formatter itself. A tag is never allowed to overwrite them.
+  # `name` and `level_index` are dropped by the formatter, so a tag is not allowed
+  # to bring them back either.
   RESERVED_KEYS = %i[
-    host application environment component time timestamp level pid
+    host application environment component time timestamp level level_index name pid
     thread file line duration duration_ms tags named_tags message payload
     exception cause metric metric_amount
   ].freeze
@@ -37,7 +39,7 @@ class YetiLogFormatter < SemanticLogger::Formatters::Raw
 
   # Name of the component(process) that emitted the record.
   def component
-    hash[:component] = YetiLogComponent.name
+    hash[:component] = YetiLogComponent.current
   end
 
   # Only the name of the level is emitted: `level_index` is the same thing as a

@@ -11,19 +11,22 @@
 # This file is loaded before Bundler.require, so it must not depend on gems.
 module YetiLogComponent
   class << self
+    # Not called `name`: that would override Module#name, so every reflection over
+    # the constant - an error message, a backtrace - would read the component instead.
+    #
     # @return [String]
-    def name
-      @name ||= normalize(detect)
+    def current
+      @current ||= normalize(detect)
     end
 
     # @param name [String] assigned by an entry point before Rails is booted.
-    def name=(name)
-      @name = normalize(name)
+    def current=(name)
+      @current = normalize(name)
     end
 
-    # Resets the name, for specs.
+    # Resets the component, for specs.
     def reset!
-      @name = nil
+      @current = nil
     end
 
     private

@@ -121,13 +121,15 @@ tmpdir: 'tmp'
 # Logging (optional). Every component - puma, delayed_job, scheduler, cdr_processor,
 # prometheus exporter - logs to stdout and, when an url is set below, ships the same
 # records to elasticsearch/VictoriaLogs. An empty url disables it.
+# _stream_fields may name any static tag of the logs block below as well, `system` for
+# example, on top of the fields that every record carries: host, component.
 #elasticsearch:
 #  url: 'http://localhost:9428/insert/elasticsearch'
 #  transport_options:
 #    params:
 #      _msg_field: 'message'
 #      _time_field: 'timestamp'
-#      _stream_fields: 'system,host,component'
+#      _stream_fields: 'host,component'
 #
 # Static fields added to every log record shipped to elasticsearch.
 #logs:

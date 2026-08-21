@@ -3,7 +3,6 @@
 require 'active_support/core_ext/object/blank'
 require 'semantic_logger'
 require_relative 'yeti_config_loader'
-require_relative 'yeti_elasticsearch_appender'
 require_relative 'yeti_log_component'
 require_relative 'yeti_log_formatter'
 require_relative 'yeti_plain_log_formatter'
@@ -24,7 +23,7 @@ module YetiLogSetup
   # @param tags [Hash] extra static tags of every log record.
   # @return [SemanticLogger::Logger]
   def call(component:, level: :info, tags: {})
-    YetiLogComponent.name = component
+    YetiLogComponent.current = component
     SemanticLogger.default_level = level.to_s.downcase.to_sym
     SemanticLogger.add_appender(io: $stdout, formatter: YetiPlainLogFormatter.new)
     logger = SemanticLogger[component]
@@ -35,8 +34,11 @@ module YetiLogSetup
       # only costs the logging to elasticsearch.
       YetiConfigLoader.call
       add_elasticsearch_appender(tags:)
-    rescue YetiConfigLoader::Error => e
-      logger.warn "Logging to elasticsearch is disabled: #{e.message}"
+    rescue StandardError => e
+      # StandardError and not YetiConfigLoader::Error only: an invalid url or transport
+      # option makes Elasticsearch::Client.new raise anything from URI::InvalidURIError
+      # to Faraday::Error, and none of that may stop the process either.
+      logger.warn "Logging to elasticsearch is disabled: #{e.class}: #{e.message}"
     end
 
     logger
@@ -49,6 +51,10 @@ module YetiLogSetup
   # @return [SemanticLogger::Subscriber, nil] nil when elasticsearch is not configured.
   def add_elasticsearch_appender(tags: {})
     return if YetiConfig.elasticsearch.blank? || YetiConfig.elasticsearch.url.blank?
+
+    # Required here and not at the top of the file: it loads the whole elasticsearch and
+    # faraday stack, that bin/cdr_processor has no other use for.
+    require_relative 'yeti_elasticsearch_appender'
 
     static_tags = (YetiConfig.logs&.tags&.to_h || {}).merge(tags)
     appender = YetiElasticsearchAppender.new(

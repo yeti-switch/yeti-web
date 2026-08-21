@@ -3,7 +3,7 @@
 # This file is used by Rack-based servers to start the application.
 
 require_relative 'lib/yeti_log_component'
-YetiLogComponent.name = 'puma'
+YetiLogComponent.current = 'puma'
 
 require_relative 'config/environment'
 

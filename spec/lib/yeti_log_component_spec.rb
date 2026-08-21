@@ -3,15 +3,15 @@
 require 'yeti_log_component'
 
 RSpec.describe YetiLogComponent do
-  describe '.name' do
-    subject { described_class.name }
+  describe '.current' do
+    subject { described_class.current }
 
     before { described_class.reset! }
 
     after { described_class.reset! }
 
     context 'when the entry point assigned the name' do
-      before { described_class.name = 'delayed_job' }
+      before { described_class.current = 'delayed_job' }
 
       it { is_expected.to eq('delayed_job') }
 
@@ -22,9 +22,9 @@ RSpec.describe YetiLogComponent do
 
     it 'keeps no reference to the assigned string' do
       name = +'delayed_job'
-      described_class.name = name
+      described_class.current = name
       name << '_mutated'
-      expect(described_class.name).to eq('delayed_job')
+      expect(described_class.current).to eq('delayed_job')
     end
 
     context 'when the name was not assigned' do
@@ -44,7 +44,7 @@ RSpec.describe YetiLogComponent do
     end
 
     it 'memoizes the name' do
-      expect(subject).to equal(described_class.name)
+      expect(subject).to equal(described_class.current)
     end
   end
 end

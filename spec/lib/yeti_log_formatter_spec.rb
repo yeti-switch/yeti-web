@@ -17,7 +17,7 @@ RSpec.describe YetiLogFormatter do
     end
   end
 
-  before { allow(YetiLogComponent).to receive(:name).and_return('puma') }
+  before { allow(YetiLogComponent).to receive(:current).and_return('puma') }
 
   it 'puts named tags on the top level' do
     expect(subject).to include(request_id: 'req-1', remote_ip: '127.0.0.1')
