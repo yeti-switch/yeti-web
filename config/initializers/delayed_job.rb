@@ -8,8 +8,12 @@ if PrometheusConfig.enabled?
   require 'delayed_job/prometheus_plugin'
 end
 
-if Rails.env.development?
-  require 'delayed_job/dev_no_daemon'
+if ENV['DELAYED_JOB_NO_DAEMON'].present?
+  require 'delayed_job/no_daemon'
+end
+
+if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+  require 'delayed_job/semantic_logger_reopen'
 end
 
 Delayed::Worker.destroy_failed_jobs = false

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 user=yeti-web
-services="yeti-web.service yeti-scheduler.service yeti-delayed-job.service yeti-prometheus.service"
+services="yeti-web.service yeti-scheduler.service yeti-prometheus.service"
+# one process per worker, see debian/yeti-web.yeti-delayed-job@.service
+delayed_job_workers="0 1 2 3"
 
 case "$1" in
 	configure)
@@ -22,10 +24,19 @@ case "$1" in
         	rm -f /lib/systemd/system/yeti-cdr-billing.service || true
         	rm -f /etc/cron.d/yeti-web || true
 
+		# the single daemonizing delayed_job unit was replaced by the template one
+		rm -f /lib/systemd/system/yeti-delayed-job.service || true
+		if [ -x /usr/bin/deb-systemd-helper ]; then
+			deb-systemd-helper purge yeti-delayed-job.service >/dev/null || true
+		fi
+
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
 			systemctl enable yeti-cdr-processor@billing
 			systemctl enable yeti-cdr-processor@stats
+			for w in ${delayed_job_workers}; do
+				systemctl enable yeti-delayed-job@$w
+			done
 		fi
 
 		if [ ! -f /opt/yeti-web/config/cdr_processors.yml ]; then

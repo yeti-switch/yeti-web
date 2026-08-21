@@ -106,11 +106,12 @@ Process.setproctitle(prog_name)
 $PROGRAM_NAME = prog_name
 
 $stdout.sync = true
-logger = Logger.new($stdout, progname: prog_name)
-logger.level = all_config.fetch('log_level', 'info').upcase
-logger.formatter = proc { |severity, time, _progname, msg|
-  "#{time.strftime('%Y-%m-%dT%H:%M:%S.%6N')} #{severity} #{msg}\n"
-}
+require 'yeti_log_setup'
+logger = YetiLogSetup.call(
+  component: 'cdr_processor',
+  level: all_config.fetch('log_level', 'info'),
+  tags: { processor: processor_name }
+)
 
 # Enable ActiveRecord SQL logging at debug level
 ActiveRecord::Base.logger = logger

@@ -1,5 +1,5 @@
 [Unit]
-Description=YETI system web interface delayed jobs
+Description=YETI system web interface delayed jobs: %i
 Documentation=https://yeti-switch.org/docs/
 
 [Install]
@@ -19,16 +19,17 @@ Environment=RAKE_ENV=production
 Environment=BUNDLE_GEMFILE=/opt/yeti-web/Gemfile
 Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 Environment=IS_DELAYED_JOB=true
+# The worker stays in the foreground, so that its logs reach the journal:
+# the daemonized worker writes them to /dev/null, see lib/delayed_job/no_daemon.rb.
+Environment=DELAYED_JOB_NO_DAEMON=true
 
-
-RuntimeDirectory=yeti-delayed-job
+WorkingDirectory=/opt/yeti-web
 ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/vendor/bundler/bin/bundle exec \
 	/opt/yeti-web/bin/delayed_job \
-	start -n 4 --pid-dir=/run/yeti-delayed-job
+	start -i %i
 
-SyslogIdentifier=yeti-delayed-job
-Type=forking
+SyslogIdentifier=yeti-delayed-job@%i
+Type=simple
 Restart=always
 RestartSec=30s
-
