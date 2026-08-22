@@ -11,14 +11,15 @@ require_relative 'yeti_log_component'
 #   * static tags (YetiConfig.logs.tags) are emitted by every process, not only
 #     by puma inside a request;
 #   * `component` tells which process wrote the record;
-#   * the logger name, `level_index`, `application` and `environment` are dropped.
+#   * the logger name, `level_index`, `duration_ms`, `application` and `environment`
+#     are dropped. `duration` is the number of milliseconds.
 #
 # Depends on semantic_logger only, so that it can be used by the processes that do
 # not boot Rails as well.
 class YetiLogFormatter < SemanticLogger::Formatters::Raw
   # Fields written by the formatter itself. A tag is never allowed to overwrite them.
-  # `name` and `level_index` are dropped by the formatter, so a tag is not allowed
-  # to bring them back either.
+  # `name`, `level_index` and `duration_ms` are dropped by the formatter, so a tag is
+  # not allowed to bring them back either.
   RESERVED_KEYS = %i[
     host application environment component time timestamp level level_index name pid
     thread file line duration duration_ms tags named_tags message payload
@@ -46,6 +47,16 @@ class YetiLogFormatter < SemanticLogger::Formatters::Raw
   # number, that a log storage indexes as yet another field.
   def level
     hash[:level] = log.level
+  end
+
+  # The number of milliseconds, rounded to a microsecond: the float carries a dozen
+  # meaningless digits otherwise. The Raw formatter emits it twice instead - as
+  # `duration_ms` and as `duration`, the same value formatted for a human('1.658ms'),
+  # that a log storage can neither sum nor compare.
+  def duration
+    return unless log.duration
+
+    hash[:duration] = log.duration.round(3)
   end
 
   # Name of the logger is not emitted: it is whatever class happened to log the

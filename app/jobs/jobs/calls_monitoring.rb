@@ -525,7 +525,7 @@ module Jobs
 
     def log_time(name, &block)
       logger.info { "Operation #{name} started." }
-      seconds = logger.tagged(name) { ::Benchmark.realtime(&block) }
+      seconds = logger.tagged(operation: name) { ::Benchmark.realtime(&block) }
       logger.info { format("Operation #{name} finished %.6f sec.", seconds) }
     end
   end

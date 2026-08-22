@@ -100,7 +100,8 @@ class Scheduler::Base
 
   # @param opts [Hash]
   #   :wait [Boolean] whether block execution until scheduler shutdown (default true).
-  #   :request_id [Boolean] whether add unique uuid to log tags on each run (default false).
+  #   :run_id [Boolean] whether to tag every record logged by a run with a unique uuid
+  #     (default false), so that the records of one run of a job can be told apart.
   def initialize(opts = {})
     @opts = opts
     @rufus_scheduler = nil
@@ -157,9 +158,11 @@ class Scheduler::Base
     start_clock = ::Process.clock_gettime(::Process::CLOCK_MONOTONIC)
 
     options = RunOptions.new(job.name, handler_class, job, time, now_time)
-    log_tags = [self.class.name, Process.pid]
-    log_tags += [SecureRandom.uuid] if opts[:request_id]
-    with_log_tags(*log_tags) do
+    # Neither the class of the scheduler nor the pid are tagged: a log record carries
+    # the process in the `component` and `pid` fields already.
+    log_tags = { job: handler_class.name }
+    log_tags[:run_id] = SecureRandom.uuid if opts[:run_id]
+    with_log_tags(log_tags) do
       log_run_start(options)
       handler_callable = build_handler_callable(handler_class, start_clock)
       handler = wrap_with_middlewares(handler_callable)
@@ -239,12 +242,12 @@ class Scheduler::Base
     text
   end
 
-  # @param tags [Array<String>]
+  # @param tags [Hash] named tags added to every record logged within the block.
   # yield within tagged logger if logger assigned.
-  def with_log_tags(*tags)
-    return yield if logger.nil?
+  def with_log_tags(tags)
+    return yield if logger.nil? || tags.empty?
 
-    logger.tagged(*tags) { yield }
+    logger.tagged(tags) { yield }
   end
 
   # @return [Time] current time.

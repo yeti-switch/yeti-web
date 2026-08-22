@@ -23,12 +23,12 @@ class BaseJob < Scheduler::Job::Base
     end
   end
 
+  # Not tagged with the job here: Scheduler::Base#run_handler tags the whole run, so
+  # that the records it logs itself - started, succeed, failed - carry the job as well.
   def call
-    logger.tagged(self.class.name) do
-      after_start
-      execute
-      before_finish
-    end
+    after_start
+    execute
+    before_finish
   end
 
   def execute

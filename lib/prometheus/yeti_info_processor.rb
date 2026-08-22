@@ -51,10 +51,12 @@ class YetiInfoProcessor < BaseProcessor
       defined?(@thread) && @thread
     end
 
-    def wrap_thread_loop(*tags)
+    # @param name [String] name of the collector, tagged by name and not positionally:
+    #   YetiLogFormatter merges named tags into the root of the log record.
+    def wrap_thread_loop(name)
       return yield if logger.nil? || !logger.respond_to?(:tagged)
 
-      logger.tagged(*tags) { yield }
+      logger.tagged(processor: name) { yield }
     end
   end
 

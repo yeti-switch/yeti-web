@@ -7,4 +7,4 @@ YetiLogComponent.current = 'scheduler'
 require_relative '../config/environment'
 require_relative '../lib/yeti_scheduler'
 
-YetiScheduler.start! request_id: Rails.env.production?
+YetiScheduler.start! run_id: Rails.env.production?

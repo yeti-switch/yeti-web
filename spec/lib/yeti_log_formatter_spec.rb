@@ -36,6 +36,20 @@ RSpec.describe YetiLogFormatter do
     expect(subject).to include(message: 'some message', level: :info)
   end
 
+  context 'when the record has a duration' do
+    let(:log) do
+      SemanticLogger::Log.new('SomeClass', :info).tap do |log|
+        log.message = 'some message'
+        log.duration = 1.6581108570098877
+      end
+    end
+
+    it 'emits the duration once, as the number of milliseconds rounded to a microsecond' do
+      expect(subject).to include(duration: 1.658)
+      expect(subject).not_to have_key(:duration_ms)
+    end
+  end
+
   it 'does not emit the logger name' do
     expect(subject).not_to have_key(:name)
   end

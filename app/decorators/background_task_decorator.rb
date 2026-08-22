@@ -4,10 +4,9 @@ class BackgroundTaskDecorator < Draper::Decorator
   delegate_all
   decorates BackgroundTask
 
+  # The same value the `job` tag of the logs carries, see Delayed::LogJobTagsPlugin.
   def name
-    return model.payload_object.class.name unless model.payload_object.respond_to?(:job_data)
-
-    model.payload_object.job_data['job_class']
+    Delayed::JobName.call(model.payload_object)
   end
 
   def args

@@ -6,6 +6,7 @@
 return if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] == 'true'
 
 require 'yeti_log_setup'
+require 'active_job/named_log_tags'
 
 # Applied in every environment but test: an elasticsearch url in config/yeti_web.yml is
 # what enables it, not the environment the application runs in. The test suite is excluded
