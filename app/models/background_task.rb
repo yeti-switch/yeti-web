@@ -33,9 +33,11 @@ class BackgroundTask < ApplicationRecord
   scope :pending, -> { where(attempts: 0, locked_by: nil) }
   scope :to_retry, -> { where('failed_at IS NULL AND attempts > ?', 0) }
 
+  # @raise [Delayed::DeserializationError] when the handler references a class that a
+  #   deploy has renamed or removed.
   def payload_object
     @payload_object ||= YAML.load_dj(handler)
   rescue TypeError, LoadError, NameError, ArgumentError, SyntaxError, Psych::SyntaxError => e
-    raise DeserializationError, "Job failed to load: #{e.message}. Handler: #{handler.inspect}"
+    raise Delayed::DeserializationError, "Job failed to load: #{e.message}. Handler: #{handler.inspect}"
   end
 end

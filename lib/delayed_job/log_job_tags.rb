@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'delayed/plugin'
+require 'delayed_job'
+require 'semantic_logger'
 require_relative 'job_name'
 
 # Adds the job to every record logged while it runs - by the worker, by ActiveJob and by

@@ -2,6 +2,7 @@
 
 require 'rufus-scheduler'
 require 'securerandom'
+require_relative '../yeti_log_tags'
 
 class Scheduler::Base
   RunOptions = Struct.new(
@@ -244,10 +245,8 @@ class Scheduler::Base
 
   # @param tags [Hash] named tags added to every record logged within the block.
   # yield within tagged logger if logger assigned.
-  def with_log_tags(tags)
-    return yield if logger.nil? || tags.empty?
-
-    logger.tagged(tags) { yield }
+  def with_log_tags(tags, &block)
+    YetiLogTags.tagged(logger, tags, &block)
   end
 
   # @return [Time] current time.

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'delayed/backend/base'
+
 module Delayed
   # Name of a job: the class of the job and, for ActiveJob, the wrapped job class and
   # not the wrapper. Shared by the Background Tasks page(BackgroundTaskDecorator#name)
@@ -17,6 +19,15 @@ module Delayed
       return payload_object.job_data['job_class'] if payload_object.respond_to?(:job_data)
 
       payload_object.class.name
+    end
+
+    # For a job that does not deserialize any more, the only name left is the one written
+    # in its YAML.
+    #
+    # @param handler [String] Delayed::Job#handler.
+    # @return [String, nil] nil when the YAML holds no class name either.
+    def from_handler(handler)
+      Delayed::Backend::Base::ParseObjectFromYaml.match(handler.to_s)&.[](1)
     end
   end
 end

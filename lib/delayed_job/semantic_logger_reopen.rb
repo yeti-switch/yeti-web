@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'delayed/worker'
+require 'delayed_job'
+require 'semantic_logger'
 
 # Reopens SemanticLogger in the daemonized worker.
 #

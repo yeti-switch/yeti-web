@@ -2,6 +2,7 @@
 
 require 'pgq_prometheus'
 require 'pgq_prometheus/processor'
+require_relative '../yeti_log_tags'
 
 PgqPrometheus.configure do |config|
   config.type = 'yeti_pgq_cdr'
@@ -11,11 +12,15 @@ end
 # `tags: ["PgqPrometheus::Processor"]`. Tagged by name instead, so that YetiLogFormatter
 # merges it into the root of the log record, the way YetiInfoProcessor does.
 module PgqPrometheus::NamedLogTags
-  # @param name [String] name of the collector.
-  def wrap_thread_loop(name, &block)
-    return yield if logger.nil? || !logger.respond_to?(:tagged)
+  # The splat of the gem is kept and anything but its single tag is delegated: this runs
+  # as the whole body of the Thread of Processor.start, that nothing joins, so a version
+  # of the gem passing another tag would kill the collector thread unnoticed.
+  #
+  # @param tags [Array<String>] name of the collector.
+  def wrap_thread_loop(*tags, &block)
+    return super unless tags.size == 1
 
-    logger.tagged(processor: name, &block)
+    YetiLogTags.tagged(logger, { processor: tags.first }, &block)
   end
 end
 
