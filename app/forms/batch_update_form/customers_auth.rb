@@ -16,6 +16,22 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :routing_plan_id, type: :foreign_key, class_name: 'Routing::RoutingPlan'
   attribute :lua_script_id, type: :foreign_key, class_name: 'System::LuaScript'
 
+  # number & name translations
+  attribute :src_name_field_id, type: :integer_collection, collection: CustomersAuth::SRC_NAME_FIELDS.invert.to_a
+  attribute :src_name_rewrite_rule
+  attribute :src_name_rewrite_result
+  attribute :src_number_field_id, type: :integer_collection, collection: CustomersAuth::SRC_NUMBER_FIELDS.invert.to_a
+  attribute :src_rewrite_rule
+  attribute :src_rewrite_result
+  attribute :dst_number_field_id, type: :integer_collection, collection: CustomersAuth::DST_NUMBER_FIELDS.invert.to_a
+  attribute :dst_rewrite_rule
+  attribute :dst_rewrite_result
+
+  # privacy
+  attribute :privacy_mode_id, type: :integer_collection, collection: CustomersAuth::PRIVACY_MODES.invert.to_a
+  attribute :diversion_policy_id, type: :integer_collection, collection: CustomersAuth::DIVERSION_POLICIES.invert.to_a
+  attribute :pai_policy_id, type: :integer_collection, collection: CustomersAuth::PAI_POLICIES.invert.to_a
+
   # required with
   validates :src_number_min_length, required_with: :src_number_max_length, if: -> { src_number_min_length.nil? || src_number_max_length.nil? }
   validates :dst_number_min_length, required_with: :dst_number_max_length, if: -> { dst_number_min_length.nil? || dst_number_max_length.nil? }
