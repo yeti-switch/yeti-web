@@ -2,7 +2,24 @@
 
 module ResourceDSL
   module ActsAsImportPreview
+    # Every Importing::* staging model registers itself here when its ActiveAdmin
+    # resource declares acts_as_import_preview. ActsAsImport's pending-session guard
+    # reads this registry instead of a hand-maintained list, so the two can't drift
+    # apart. Class names are stored (not classes) to stay safe across dev reloads.
+    def self.registered_imports
+      @registered_imports ||= Set.new
+    end
+
+    # Staging model that still holds rows of an unfinished import session, if any.
+    # Lazily, so that the models after the first pending one are neither resolved
+    # nor queried.
+    def self.pending_import
+      registered_imports.sort.lazy.map(&:constantize).find(&:any?)
+    end
+
     def acts_as_import_preview
+      ActsAsImportPreview.registered_imports << config.resource_class.name
+
       menu false
 
       # actions :all, except: :new
