@@ -58,6 +58,12 @@ class BatchUpdateForm::Base
     raw_value
   end
 
+  # Collection keys are integers, but the value always comes from a select as a string.
+  # Normalize it, so validations and the enqueued payload don't depend on the caller.
+  def type_cast_integer_collection(raw_value)
+    raw_value.to_s
+  end
+
   def method_missing(method, *args)
     if method.to_s.start_with?('type_cast_')
       args[0]

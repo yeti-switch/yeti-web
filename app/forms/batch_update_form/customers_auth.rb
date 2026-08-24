@@ -42,7 +42,7 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
   validates :dst_number_max_length, presence: true, if: :dst_number_max_length_changed?
 
-  # inclusion. Values of :integer_collection attributes reach the form as strings,
+  # inclusion. :integer_collection values are normalized to strings by the base class,
   # so the allowed keys have to be compared as strings too.
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys.map(&:to_s) }, if: :dump_level_id_changed?
   validates :src_name_field_id, inclusion: { in: CustomersAuth::SRC_NAME_FIELDS.keys.map(&:to_s) }, if: :src_name_field_id_changed?
