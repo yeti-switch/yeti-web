@@ -11,8 +11,10 @@ module ResourceDSL
     end
 
     # Staging model that still holds rows of an unfinished import session, if any.
+    # Lazily, so that the models after the first pending one are neither resolved
+    # nor queried.
     def self.pending_import
-      registered_imports.sort.map(&:constantize).detect(&:any?)
+      registered_imports.sort.lazy.map(&:constantize).find(&:any?)
     end
 
     def acts_as_import_preview
