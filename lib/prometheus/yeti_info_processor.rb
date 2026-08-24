@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './base_processor'
+require_relative '../yeti_log_tags'
 
 class YetiInfoProcessor < BaseProcessor
   self.logger = Rails.logger
@@ -51,10 +52,10 @@ class YetiInfoProcessor < BaseProcessor
       defined?(@thread) && @thread
     end
 
-    def wrap_thread_loop(*tags)
-      return yield if logger.nil? || !logger.respond_to?(:tagged)
-
-      logger.tagged(*tags) { yield }
+    # @param name [String] name of the collector, tagged by name and not positionally:
+    #   YetiLogFormatter merges named tags into the root of the log record.
+    def wrap_thread_loop(name, &block)
+      YetiLogTags.tagged(logger, { processor: name }, &block)
     end
   end
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'prometheus/active_calls_processor'
+require 'yeti_log_tags'
 
 module Jobs
   class CallsMonitoring < ::BaseJob
@@ -525,7 +526,7 @@ module Jobs
 
     def log_time(name, &block)
       logger.info { "Operation #{name} started." }
-      seconds = logger.tagged(name) { ::Benchmark.realtime(&block) }
+      seconds = YetiLogTags.tagged(logger, { operation: name }) { ::Benchmark.realtime(&block) }
       logger.info { format("Operation #{name} finished %.6f sec.", seconds) }
     end
   end

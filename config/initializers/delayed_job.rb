@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'delayed_job/fill_provider_job_id'
+require 'delayed_job/job_name'
 require 'delayed_job/unique_name'
 require 'prometheus_config'
 
@@ -13,6 +14,7 @@ if ENV['DELAYED_JOB_NO_DAEMON'].present?
 end
 
 if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+  require 'delayed_job/log_job_tags'
   require 'delayed_job/semantic_logger_reopen'
 end
 

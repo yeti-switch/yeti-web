@@ -269,4 +269,61 @@ RSpec.describe YetiScheduler do
       end
     end
   end
+  # Every record logged by a run carries the job it belongs to, and - when the scheduler
+  # is started with run_id - a uuid unique to that run, so that the records of one run
+  # can be told apart from a concurrent or a previous one (lib/scheduler/base.rb).
+  describe '#run_handler named log tags' do
+    subject do
+      described_instance.run_handler(handler_class, job_double, time_double)
+    end
+
+    let(:described_instance) { described_class.new(**scheduler_opts) }
+    let(:scheduler_opts) { { wait: true } }
+    let(:handler_class) { described_class._cron_handlers.first }
+    let(:handler_name) { handler_class.scheduler_options[:name] }
+    let!(:job_double) { instance_double(Rufus::Scheduler::CronJob, name: handler_name) }
+    let!(:time_double) { instance_double(EtOrbi::EoTime) }
+
+    # Tags are only visible while the run is in progress, so capture them from inside
+    # the handler rather than after #run_handler returned.
+    let(:tags_while_running) { [] }
+
+    before do
+      allow(ApplicationRecord.connection_pool).to receive(:lease_connection)
+      allow(ApplicationRecord.connection_pool).to receive(:release_connection)
+      allow(Cdr::Base.connection_pool).to receive(:lease_connection)
+      allow(Cdr::Base.connection_pool).to receive(:release_connection)
+      stub_const('CronJobInfo', double(find_by!: double(update!: true)))
+      allow(handler_class).to receive(:call) { tags_while_running << SemanticLogger.named_tags.dup }
+    end
+
+    context 'when run_id is disabled' do
+      it 'tags the job only, and generates no uuid' do
+        expect(SecureRandom).not_to receive(:uuid)
+        subject
+
+        expect(tags_while_running).to eq([{ job: handler_class.name }])
+      end
+    end
+
+    context 'when run_id is enabled' do
+      let(:scheduler_opts) { { wait: true, run_id: true } }
+
+      before { allow(SecureRandom).to receive(:uuid).and_return('11111111-2222-3333-4444-555555555555') }
+
+      it 'tags the job and the run_id' do
+        subject
+
+        expect(tags_while_running).to eq(
+          [{ job: handler_class.name, run_id: '11111111-2222-3333-4444-555555555555' }]
+        )
+      end
+    end
+
+    it 'does not leak the tags outside of the run' do
+      subject
+
+      expect(SemanticLogger.named_tags).to be_blank
+    end
+  end
 end
