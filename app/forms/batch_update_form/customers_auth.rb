@@ -42,8 +42,15 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
   validates :dst_number_max_length, presence: true, if: :dst_number_max_length_changed?
 
-  # TODO: Why it doesn't work??
-  # validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }
+  # inclusion. Values of :integer_collection attributes reach the form as strings,
+  # so the allowed keys have to be compared as strings too.
+  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys.map(&:to_s) }, if: :dump_level_id_changed?
+  validates :src_name_field_id, inclusion: { in: CustomersAuth::SRC_NAME_FIELDS.keys.map(&:to_s) }, if: :src_name_field_id_changed?
+  validates :src_number_field_id, inclusion: { in: CustomersAuth::SRC_NUMBER_FIELDS.keys.map(&:to_s) }, if: :src_number_field_id_changed?
+  validates :dst_number_field_id, inclusion: { in: CustomersAuth::DST_NUMBER_FIELDS.keys.map(&:to_s) }, if: :dst_number_field_id_changed?
+  validates :privacy_mode_id, inclusion: { in: CustomersAuth::PRIVACY_MODES.keys.map(&:to_s) }, if: :privacy_mode_id_changed?
+  validates :diversion_policy_id, inclusion: { in: CustomersAuth::DIVERSION_POLICIES.keys.map(&:to_s) }, if: :diversion_policy_id_changed?
+  validates :pai_policy_id, inclusion: { in: CustomersAuth::PAI_POLICIES.keys.map(&:to_s) }, if: :pai_policy_id_changed?
 
   # numericality
   validates :src_number_max_length, numericality: {
