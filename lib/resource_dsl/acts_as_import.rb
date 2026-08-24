@@ -2,24 +2,6 @@
 
 module ResourceDSL
   module ActsAsImport
-    REGISTERED_IMPORTS = [
-      Importing::Dialpeer,
-      Importing::Account,
-      Importing::CodecGroup,
-      Importing::CodecGroupCodec,
-      Importing::Contractor,
-      Importing::CustomersAuth,
-      Importing::Destination,
-      Importing::Dialpeer,
-      Importing::DisconnectPolicy,
-      Importing::Gateway,
-      Importing::GatewayGroup,
-      Importing::Rateplan,
-      Importing::Registration,
-      Importing::RoutingGroup,
-      Importing::RoutingTagDetectionRule
-    ].freeze
-
     def acts_as_import(options)
       skip_columns = options.delete(:skip_columns) || []
 
@@ -71,11 +53,14 @@ module ResourceDSL
       #   end
       # end
 
-      before_action only: [:import] do
+      # ":do_import" must be guarded too, not only the ":import" form: the form is a
+      # plain page, so a browser "back" (or a second tab) lets the same form be POSTed
+      # again and appends a second CSV to the staging table of the running session.
+      before_action only: %i[import do_import] do
         # if Importing::ImportingDelayedJob.jobs?
         #   raise ApplicationController::ImportDisabled.new('Import in progress')
         # end
-        pending_import = REGISTERED_IMPORTS.detect(&:any?)
+        pending_import = ResourceDSL::ActsAsImportPreview.pending_import
         if pending_import
           raise ApplicationController::ImportPending.new(
             active_admin_config.namespace.resource_for(pending_import).route_collection_path,
