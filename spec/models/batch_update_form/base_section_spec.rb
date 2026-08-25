@@ -123,4 +123,76 @@ RSpec.describe BatchUpdateForm::Base do
       expect(result).to eq('America/New_York')
     end
   end
+
+  describe '#type_cast_integer_collection' do
+    let(:test_form_class) do
+      Class.new(described_class) do
+        model_class 'Account'
+        attribute :mode_id, type: :integer_collection, collection: [['First', 1], ['Second', 2], ['Zero', 0]]
+      end
+    end
+
+    it 'casts integer to string' do
+      form = test_form_class.new
+      result = form.type_cast_integer_collection(2)
+
+      expect(result).to eq('2')
+    end
+
+    it 'keeps string as is' do
+      form = test_form_class.new
+      result = form.type_cast_integer_collection('2')
+
+      expect(result).to eq('2')
+    end
+
+    context 'when initialized with an integer' do
+      it 'stores and exposes the string form' do
+        form = test_form_class.new(mode_id: 2)
+
+        expect(form.mode_id).to eq('2')
+        expect(form.mode_id_changed?).to be true
+        expect(form.attributes).to eq(mode_id: '2')
+      end
+    end
+
+    context 'when initialized with a string' do
+      it 'stores and exposes the same string' do
+        form = test_form_class.new(mode_id: '2')
+
+        expect(form.mode_id).to eq('2')
+        expect(form.attributes).to eq(mode_id: '2')
+      end
+    end
+
+    context 'when initialized with integer zero' do
+      it 'keeps the value instead of treating it as blank' do
+        form = test_form_class.new(mode_id: 0)
+
+        expect(form.mode_id).to eq('0')
+        expect(form.mode_id_changed?).to be true
+        expect(form.attributes).to eq(mode_id: '0')
+      end
+    end
+
+    context 'when the attribute is omitted' do
+      it 'stays nil and is not included in attributes' do
+        form = test_form_class.new
+
+        expect(form.mode_id).to be_nil
+        expect(form.mode_id_changed?).to be false
+        expect(form.attributes).to eq({})
+      end
+    end
+
+    context 'when the attribute is explicitly nil' do
+      it 'stays nil and is not included in attributes' do
+        form = test_form_class.new(mode_id: nil)
+
+        expect(form.mode_id).to be_nil
+        expect(form.mode_id_changed?).to be false
+        expect(form.attributes).to eq({})
+      end
+    end
+  end
 end
