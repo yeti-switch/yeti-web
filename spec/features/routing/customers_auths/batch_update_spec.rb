@@ -43,7 +43,11 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
       dst_rewrite_result: 'dst-result',
       privacy_mode_id: CustomersAuth::PRIVACY_MODE_REJECT.to_s,
       diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT.to_s,
-      pai_policy_id: CustomersAuth::PAI_POLICY_REQUIRE.to_s
+      diversion_rewrite_rule: 'diversion-rule',
+      diversion_rewrite_result: 'diversion-result',
+      pai_policy_id: CustomersAuth::PAI_POLICY_REQUIRE.to_s,
+      pai_rewrite_rule: 'pai-rule',
+      pai_rewrite_result: 'pai-result'
     }
   end
 
@@ -120,7 +124,8 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
       select_by_value assign_params[attr], from: attr
     end
 
-    %i[src_name_rewrite_rule src_name_rewrite_result src_rewrite_rule src_rewrite_result dst_rewrite_rule dst_rewrite_result].each do |attr|
+    %i[src_name_rewrite_rule src_name_rewrite_result src_rewrite_rule src_rewrite_result dst_rewrite_rule dst_rewrite_result
+       diversion_rewrite_rule diversion_rewrite_result pai_rewrite_rule pai_rewrite_result].each do |attr|
       next unless assign_params.key? attr
 
       check attr.to_s.capitalize

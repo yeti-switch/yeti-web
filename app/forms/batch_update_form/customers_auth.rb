@@ -30,7 +30,11 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   # privacy
   attribute :privacy_mode_id, type: :integer_collection, collection: CustomersAuth::PRIVACY_MODES.invert.to_a
   attribute :diversion_policy_id, type: :integer_collection, collection: CustomersAuth::DIVERSION_POLICIES.invert.to_a
+  attribute :diversion_rewrite_rule
+  attribute :diversion_rewrite_result
   attribute :pai_policy_id, type: :integer_collection, collection: CustomersAuth::PAI_POLICIES.invert.to_a
+  attribute :pai_rewrite_rule
+  attribute :pai_rewrite_result
 
   # required with
   validates :src_number_min_length, required_with: :src_number_max_length, if: -> { src_number_min_length.nil? || src_number_max_length.nil? }
