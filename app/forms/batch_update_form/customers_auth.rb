@@ -16,6 +16,26 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   attribute :routing_plan_id, type: :foreign_key, class_name: 'Routing::RoutingPlan'
   attribute :lua_script_id, type: :foreign_key, class_name: 'System::LuaScript'
 
+  # number & name translations
+  attribute :src_name_field_id, type: :integer_collection, collection: CustomersAuth::SRC_NAME_FIELDS.invert.to_a
+  attribute :src_name_rewrite_rule
+  attribute :src_name_rewrite_result
+  attribute :src_number_field_id, type: :integer_collection, collection: CustomersAuth::SRC_NUMBER_FIELDS.invert.to_a
+  attribute :src_rewrite_rule
+  attribute :src_rewrite_result
+  attribute :dst_number_field_id, type: :integer_collection, collection: CustomersAuth::DST_NUMBER_FIELDS.invert.to_a
+  attribute :dst_rewrite_rule
+  attribute :dst_rewrite_result
+
+  # privacy
+  attribute :privacy_mode_id, type: :integer_collection, collection: CustomersAuth::PRIVACY_MODES.invert.to_a
+  attribute :diversion_policy_id, type: :integer_collection, collection: CustomersAuth::DIVERSION_POLICIES.invert.to_a
+  attribute :diversion_rewrite_rule
+  attribute :diversion_rewrite_result
+  attribute :pai_policy_id, type: :integer_collection, collection: CustomersAuth::PAI_POLICIES.invert.to_a
+  attribute :pai_rewrite_rule
+  attribute :pai_rewrite_result
+
   # required with
   validates :src_number_min_length, required_with: :src_number_max_length, if: -> { src_number_min_length.nil? || src_number_max_length.nil? }
   validates :dst_number_min_length, required_with: :dst_number_max_length, if: -> { dst_number_min_length.nil? || dst_number_max_length.nil? }
@@ -26,8 +46,15 @@ class BatchUpdateForm::CustomersAuth < BatchUpdateForm::Base
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
   validates :dst_number_max_length, presence: true, if: :dst_number_max_length_changed?
 
-  # TODO: Why it doesn't work??
-  # validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }
+  # inclusion. :integer_collection values are normalized to strings by the base class,
+  # so the allowed keys have to be compared as strings too.
+  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys.map(&:to_s) }, if: :dump_level_id_changed?
+  validates :src_name_field_id, inclusion: { in: CustomersAuth::SRC_NAME_FIELDS.keys.map(&:to_s) }, if: :src_name_field_id_changed?
+  validates :src_number_field_id, inclusion: { in: CustomersAuth::SRC_NUMBER_FIELDS.keys.map(&:to_s) }, if: :src_number_field_id_changed?
+  validates :dst_number_field_id, inclusion: { in: CustomersAuth::DST_NUMBER_FIELDS.keys.map(&:to_s) }, if: :dst_number_field_id_changed?
+  validates :privacy_mode_id, inclusion: { in: CustomersAuth::PRIVACY_MODES.keys.map(&:to_s) }, if: :privacy_mode_id_changed?
+  validates :diversion_policy_id, inclusion: { in: CustomersAuth::DIVERSION_POLICIES.keys.map(&:to_s) }, if: :diversion_policy_id_changed?
+  validates :pai_policy_id, inclusion: { in: CustomersAuth::PAI_POLICIES.keys.map(&:to_s) }, if: :pai_policy_id_changed?
 
   # numericality
   validates :src_number_max_length, numericality: {

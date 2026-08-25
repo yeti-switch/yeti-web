@@ -31,7 +31,23 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
       dump_level_id: dump_level_id.to_s,
       rateplan_id: rateplan.id.to_s,
       routing_plan_id: routing_plan.id.to_s,
-      lua_script_id: lua_script.id.to_s
+      lua_script_id: lua_script.id.to_s,
+      src_name_field_id: CustomersAuth::SRC_NAME_FIELD_FROM_USERPART.to_s,
+      src_name_rewrite_rule: 'src-name-rule',
+      src_name_rewrite_result: 'src-name-result',
+      src_number_field_id: CustomersAuth::SRC_NUMBER_FIELD_RURI_USERPART.to_s,
+      src_rewrite_rule: 'src-rule',
+      src_rewrite_result: 'src-result',
+      dst_number_field_id: CustomersAuth::DST_NUMBER_FIELD_TO_USERPART.to_s,
+      dst_rewrite_rule: 'dst-rule',
+      dst_rewrite_result: 'dst-result',
+      privacy_mode_id: CustomersAuth::PRIVACY_MODE_REJECT.to_s,
+      diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT.to_s,
+      diversion_rewrite_rule: 'diversion-rule',
+      diversion_rewrite_result: 'diversion-result',
+      pai_policy_id: CustomersAuth::PAI_POLICY_REQUIRE.to_s,
+      pai_rewrite_rule: 'pai-rule',
+      pai_rewrite_result: 'pai-result'
     }
   end
 
@@ -99,6 +115,21 @@ RSpec.describe BatchUpdateForm::CustomersAuth, :js do
     if assign_params.key? :lua_script_id
       check :Lua_script_id
       select_by_value assign_params[:lua_script_id], from: :lua_script_id
+    end
+
+    %i[src_name_field_id src_number_field_id dst_number_field_id privacy_mode_id diversion_policy_id pai_policy_id].each do |attr|
+      next unless assign_params.key? attr
+
+      check attr.to_s.capitalize
+      select_by_value assign_params[attr], from: attr
+    end
+
+    %i[src_name_rewrite_rule src_name_rewrite_result src_rewrite_rule src_rewrite_result dst_rewrite_rule dst_rewrite_result
+       diversion_rewrite_rule diversion_rewrite_result pai_rewrite_rule pai_rewrite_result].each do |attr|
+      next unless assign_params.key? attr
+
+      check attr.to_s.capitalize
+      fill_in attr, with: assign_params[attr]
     end
   end
 
