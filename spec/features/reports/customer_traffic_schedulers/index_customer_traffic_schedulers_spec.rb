@@ -7,7 +7,7 @@ RSpec.describe 'Index Reports Customer Traffic Schedulers', type: :feature do
     customer_traffic_schedulers = create_list(:customer_traffic_scheduler, 2)
     visit customer_traffic_schedulers_path
     customer_traffic_schedulers.each do |traffic_scheduler|
-      expect(page).to have_css('.col-id', text: traffic_scheduler.id)
+      expect(page).to have_css('td[data-column="id"]', text: traffic_scheduler.id)
     end
   end
 end

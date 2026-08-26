@@ -45,7 +45,10 @@ module Helpers
     def fill_in_filter_type_tom_select(label, with:, exact_label: false, parent: nil)
       parent ||= Capybara.current_session
       label = parent.find(:label, label, exact: exact_label)
-      root_element = label.ancestor('.select_and_search').find('.ts-wrapper')
+      # ActiveAdmin 4 renamed the filter markup: the AA3 `.select_and_search`
+      # wrapper is now `.filters-form-input-group`, and it no longer contains
+      # the label — the enclosing `.filters-form-field` does.
+      root_element = label.ancestor('.filters-form-field').find('.ts-wrapper')
       tom_select = Section::TomSelect.new(parent, root_element)
       tom_select.select(with, exact: true)
     end

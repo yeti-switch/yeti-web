@@ -17,7 +17,7 @@ module ResourceDSL
       action_item(:new_on_show, only: :show) do
         if controller.action_methods.include?('new') && authorized?(:new, config.resource_class)
           localizer = ActiveAdmin::Localizers.resource(active_admin_config)
-          link_to localizer.t(:new_model), new_resource_path
+          action_item_link localizer.t(:new_model), new_resource_path
         end
       end
     end

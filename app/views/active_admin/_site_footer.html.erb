@@ -1,0 +1,13 @@
+<%# Overrides ActiveAdmin 4's partial. Replaces what `config.footer` did before
+    ActiveAdmin 4 removed the setting (it rendered active_admin/_footer). %>
+<%# No padding, no top divider, left aligned on the page's 16px gutter (mx-4,
+    matching [data-test-page-content]'s px-4), small type. %>
+<div class="site-footer text-xs text-start mt-2 mb-2 mx-4 text-gray-500">
+  <span>
+    Copyright <%= Date.today.year %> Yeti Switch
+    <%= Rails.application.config.app_build_info.fetch('version', 'unknown') %>.
+    Routing <%= ApplicationRecord::DB_VER %>.
+    CDR <%= Cdr::Base::DB_VER %>.
+    Зроблено в Україні.
+  </span>
+</div>

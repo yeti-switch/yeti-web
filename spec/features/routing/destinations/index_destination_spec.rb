@@ -51,15 +51,15 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
     it 'selects correct network' do
       subject
 
-      page.scroll_to('.filter_form input[type="submit"]')
-      page.within('.filter_form') do
+      page.scroll_to('.filters-form input[type="submit"]')
+      page.within('.filters-form') do
         fill_in_tom_select('COUNTRY', with: country.display_name)
         fill_in_tom_select('NETWORK', with: network.name, search: true)
         page.find('input[type="submit"]').click
       end
 
       expect(page).to have_css('.resource_id_link', text: matched_record.id)
-      expect(page).to have_css('table.index_table tbody tr', count: 1)
+      expect(page).to have_css('.index-as-table table tbody tr', count: 1)
     end
   end
 end

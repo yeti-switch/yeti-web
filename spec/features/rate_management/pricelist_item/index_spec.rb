@@ -83,7 +83,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
       end
     end
 
-    expect(page).not_to have_selector('.batch_actions_selector')
+    expect(page).not_to have_selector('.batch-actions-dropdown')
     expect(page).to have_action_item('Detect Dialpeers')
     expect(page).not_to have_action_item('Redetect Dialpeers')
     expect(page).not_to have_action_item('Apply Changes')
@@ -155,7 +155,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         end
       end
 
-      expect(page).not_to have_selector('.batch_actions_selector')
+      expect(page).not_to have_selector('.batch-actions-dropdown')
       expect(page).to have_action_item('Detect Dialpeers')
       expect(page).not_to have_action_item('Redetect Dialpeers')
       expect(page).not_to have_action_item('Apply Changes')
@@ -198,7 +198,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         end
       end
 
-      expect(page).not_to have_selector('.batch_actions_selector')
+      expect(page).not_to have_selector('.batch-actions-dropdown')
       expect(page).to have_action_item('Detect Dialpeers')
       expect(page).not_to have_action_item('Redetect Dialpeers')
       expect(page).not_to have_action_item('Apply Changes')
@@ -241,7 +241,7 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         end
       end
 
-      expect(page).not_to have_selector('.batch_actions_selector')
+      expect(page).not_to have_selector('.batch-actions-dropdown')
       expect(page).to have_action_item('Detect Dialpeers')
       expect(page).not_to have_action_item('Redetect Dialpeers')
       expect(page).not_to have_action_item('Apply Changes')

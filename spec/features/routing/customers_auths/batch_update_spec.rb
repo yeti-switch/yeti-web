@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe BatchUpdateForm::CustomersAuth, :js do
+# The batch-update / schedule-rate-changes UI was built on
+# active_admin_scoped_collection_actions, which was removed for the ActiveAdmin 4
+# upgrade (the gem has no AA4 support). These specs are the acceptance criteria
+# for the reimplementation on AA4 batch actions, so they are kept rather than
+# deleted. See doc/activeadmin4_upstream_gaps.md, entry YW-02.
+RSpec.describe BatchUpdateForm::CustomersAuth, :js, skip: 'awaiting batch-action reimplementation on ActiveAdmin 4 (YW-02)' do
   include_context :login_as_admin
   let!(:_customers_auth) { FactoryBot.create_list :customers_auth, 3 }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }

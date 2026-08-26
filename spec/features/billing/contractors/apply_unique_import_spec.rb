@@ -2,7 +2,7 @@
 
 RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: true do
   subject do
-    within('#titlebar_right') { click_link 'Apply unique columns' }
+    within('[data-test-action-items]') { click_link 'Apply unique columns' }
     within('.ui-dialog') do
       click_button 'OK'
     end
@@ -26,7 +26,7 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
 
   before do
     visit contractors_path
-    within('#titlebar_right') { click_link 'Import Contractors' }
+    within('[data-test-action-items]') { click_link 'Import Contractors' }
     expect(page).to have_current_path(importing_contractors_path)
     expect(page).to have_selector('.flashes .flash.flash_notice', text: 'Please finish your previous import session.')
   end
@@ -35,10 +35,10 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
     subject
     expect(page).to have_selector('.flashes .flash.flash_notice', text: 'Unique columns applied!')
 
-    within('.index_content') do
+    within('.main-content-container') do
       expect(page).to have_selector('table tbody tr', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: '', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'YES', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'YES', count: 2)
     end
   end
 
@@ -64,11 +64,11 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
       subject
       expect(page).to have_selector('.flashes .flash.flash_notice', text: 'Unique columns applied!')
 
-      within('.index_content') do
+      within('.main-content-container') do
         expect(page).to have_selector('table tbody tr', count: 2)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_1.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_2.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'YES', count: 2)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_1.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_2.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'YES', count: 2)
       end
     end
 
@@ -95,11 +95,11 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
       subject
       expect(page).to have_selector('.flashes .flash.flash_notice', text: 'Unique columns applied!')
 
-      within('.index_content') do
+      within('.main-content-container') do
         expect(page).to have_selector('table tbody tr', count: 2)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_1.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: contractor_2.id.to_s, count: 1)
-        expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: 'NO', count: 2)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_1.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: contractor_2.id.to_s, count: 1)
+        expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: 'NO', count: 2)
       end
     end
 

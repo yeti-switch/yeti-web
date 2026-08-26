@@ -19,9 +19,9 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
 
   filter :id
   boolean_filter :completed
-  filter :date_start, as: :date_time_range
-  filter :date_end, as: :date_time_range
-  filter :created_at, as: :date_time_range
+  filter :date_start, as: :date_range
+  filter :date_end, as: :date_range
+  filter :created_at, as: :date_range
 
   contractor_filter :customer_id_eq,
                     label: 'Customer',
@@ -51,14 +51,14 @@ ActiveAdmin.register Report::CustomerTraffic, as: 'CustomerTraffic' do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :date_start,
-              as: :date_time_picker,
+              as: :datetime_picker,
               wrapper_html: {
                 class: 'datetime_preset_pair',
                 data: { show_time: 'true' }
               }
 
       f.input :date_end,
-              as: :date_time_picker
+              as: :datetime_picker
 
       f.contractor_input :customer_id,
                          label: 'Customer',

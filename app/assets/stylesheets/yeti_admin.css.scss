@@ -1,0 +1,1594 @@
+// Yeti's own admin styles, loaded alongside ActiveAdmin 4's Tailwind bundle
+// (app/assets/builds/active_admin.css, built from active_admin.tailwind.css).
+//
+// This file was `active_admin.css.scss` under ActiveAdmin 3, where it also
+// pulled in AA's SCSS (`active_admin/mixins`, `active_admin/base`) and layered
+// overrides on top. AA4 ships Tailwind instead, so those imports are gone and
+// most of the AA3-chrome overrides below are dead — they target a DOM
+// (#wrapper, #header, #title_bar, .table_tools) that no longer exists. They are
+// left in place, inert, to be triaged during the Tailwind theming rework.
+@import "themes/*";
+@import "active_admin_date_range_preset";
+@import "font-awesome";
+@import "vendor/highlightjs/default";
+
+// Attribute-name column, shared by the two places an attribute sits beside its
+// value: the form rows (label + input) and the show page's attributes table.
+//
+// A fixed width, not the 20% ActiveAdmin 3 used: the form's width now depends on
+// whether the page has a sidebar (250px + gap), so a percentage made the label
+// column — and with it every input's left edge — 251px on /gateways/22/edit but
+// 310px on /accounts/new.
+// Shared height of the one-line chrome: panel headers, tabs, the index toolbar's
+// buttons and scope pills, the login card's header.
+$index-control-height: 30px;
+
+$form-label-col: 200px;
+$form-row-gap: 12px;
+// The label track. Capped at 40% of the row so narrow forms stay usable: the
+// login card is 448px wide, where a flat 200px label left a 126px input. Every
+// resource form is far wider than 500px (with or without a sidebar), so there the
+// cap never binds and the column is a stable 200px.
+$form-label-track: unquote("min(#{$form-label-col}, 40%)");
+// `ol { padding: 0 12px }` + `li { padding: … 10px }` — the inset from a fieldset's
+// edge to its first label. The attributes table reuses it so a show page's labels
+// land on the same x as the edit page's.
+$form-gutter: 22px;
+
+// Dark-mode recolor for the highlight.js JSON blocks (e.g. the CDR "Identity"
+// SHAKEN passport). The vendor highlight theme imported above is light; scope a
+// dark palette to dark mode via the aa-dark helper + --aa-* vars (themes/tokens).
+@include aa-dark {
+  .hljs { background: var(--aa-surface-2); color: var(--aa-text); }
+  .hljs-attr, .hljs-attribute, .hljs-name      { color: #9cdcfe; } // keys
+  .hljs-string, .hljs-symbol                   { color: #ce9178; } // strings
+  .hljs-number                                 { color: #b5cea8; } // numbers
+  .hljs-literal, .hljs-keyword, .hljs-built_in { color: #569cd6; } // true/false/null
+  // .hljs-tag = the angle-bracket punctuation (< </ >); the light theme leaves
+  // it dark (#444a), which is invisible on a dark background.
+  .hljs-tag, .hljs-punctuation, .hljs-comment  { color: var(--aa-text-muted); }
+  // pongo2 / Jinja template tags — the light theme colors these dark red.
+  .hljs-template-tag                           { color: #c586c0; } // {% ... %}
+  .hljs-template-variable                      { color: #dcdcaa; } // {{ ... }}
+}
+
+.panel {
+  > h3 {
+    margin-top: 0;
+  }
+}
+
+// Sizes
+//$horizontal-page-margin: 15px;
+//$sidebar-width: 800px;
+//$cell-padding: 5px 5px 3px 5px;
+//$cell-horizontal-padding: 10px;
+//$section-padding: 7px;
+//$text-input-horizontal-padding: 5px;
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+.attributes_table table th, .attributes_table table td {
+  padding: 5px 0;
+}
+
+.attributes_table table th {
+  width: 200px;
+}
+
+form fieldset ol > li {
+  padding: 5px 10px;
+}
+
+
+
+//dirty fix for #268
+form.filter_form .filter_form_field.select_and_search input[type=text].search_filter_string {
+  margin-left: 0px;
+  width: 218px;
+}
+
+#wrapper .sidebar_section.panel .filter_form_field input {
+  border: 1px solid #A1A7B2;
+  background-color: #fdfefe;
+}
+
+.sidebar_section {
+  margin-bottom: 14px;
+}
+
+// for static messages
+#wrapper .flashes .flash_ok_message {
+  background-color: #4676c1;
+  border-bottom: 2px solid #243c63;
+}
+
+#wrapper .flashes .flash_notice_message {
+  background-color: #669148;
+  border-bottom: 2px solid #496834;
+}
+
+#wrapper .flashes .flash_warning_message {
+  background-color: #BDBC45;
+  border-bottom: 2px solid #6f6e29;
+}
+
+#wrapper .flashes .flash_error_message {
+  background-color: #CD3333;
+  border-bottom: 2px solid #731c1c;
+}
+
+#wrapper .flashes .flash_alert {
+  background-color: #d87543;
+}
+
+#wrapper .flashes .flash_authorize_error {
+  background-color: #CD3333;
+  border-bottom: 2px solid #731c1c;
+}
+
+#wrapper .flashes .flash {
+  white-space: pre-wrap;
+}
+
+// "Visible columns" / "Reset" tools — rendered as buttons in the table_tools row
+// (ActiveAdmin::Views::Pages::Index#build_additional_tools). Positioning only; the
+// button look comes from the theme's generic a.table_tools_button rule.
+#wrapper #active_admin_content .table_tools #additional_table_tools {
+  float: left; // sits inline after the scopes
+  margin-left: 10px; // gap from the scopes
+  a.table_tools_button + a.table_tools_button { margin-left: 6px; } // gap between Visible columns & Reset
+  // Center the icon-only glyph in the 30px button; line-height centering leaves the
+  // baseline-aligned icon a few px high.
+  a.table_tools_button { display: inline-flex; align-items: center; justify-content: center; }
+  a.table_tools_button .fa { font-size: 16px; } // larger glyph than the inherited button text size
+}
+
+// jQuery UI tooltip (with_tooltip helper) ships a light grey glow (ui-widget-shadow:
+// 0 0 5px #aaa) that reads as a white outline on the dark page. Use a dark drop shadow.
+.ui-tooltip.ui-widget-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+#block_available_columns {
+  margin: 7px 15px 0 15px;
+  select {
+    width: 100%;
+  }
+}
+
+body.active_admin.index #active_admin_content {
+  .collapse_btn, .uncollapse_btn {
+    display: none;
+  }
+}
+
+// The CDRs "Statistic" sidebar section. `font-size: 1.05em` was written against
+// ActiveAdmin 3's 11.52px body (`body.active_admin { font-size: 72% }`) and came
+// out at 12.1px; against AA4's 14px base the same rule renders 14.7px, larger
+// than the index table. Pinned in px, like the rest of the chrome.
+.cdr-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 6px;
+  font-size: 12px;
+  padding: 2px 0;
+
+  .cdr-stat-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+
+    .cdr-stat-label {
+      color: var(--aa-text-muted);
+      font-size: 0.9em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .cdr-stat-value {
+      font-weight: 600;
+      line-height: 1.3;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .cdr-stat-by-currency {
+    padding: 0 0 1px 8px;
+
+    .cdr-stat-currency-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      color: var(--aa-text-muted);
+      line-height: 1.4;
+    }
+
+    .cdr-stat-currency-value {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+  }
+}
+
+// NOTE: the ActiveAdmin 3 rule `#active_admin_content { margin: 0; padding: 15px }`
+// used to live here. Unlike the rest of the chrome above it was NOT inert —
+// app/views/active_admin/resource/index.html.arb still emits that id — and its
+// padding pushed the batch-actions toolbar 15px down and right, so it no longer
+// lined up with the filters sidebar. The layout already supplies the page gutter
+// (`px-2.5 lg:px-5` on [data-test-page-content]), so the padding is dropped and
+// the toolbar now aligns with the sidebar's panel header.
+
+#footer {
+  padding: 0px 15px 0px;
+  font-size: 0.8em;
+  clear: both;
+}
+
+#main_content_wrapper {
+  float: inherit;
+  width: auto;
+}
+
+// Floating column headers, native CSS — replaces the jquery.stickytableheaders
+// plugin (was app/assets/javascripts/sticky_headers.js). Scoped to index tables
+// only. The admin #header and #title_bar are sticky on `left` only (no `top`),
+// so they scroll off vertically — the header sticks flush at the viewport top
+// with no offset needed. border-collapse is `separate` (border-spacing: 0), so
+// each th paints its own borders and the bottom/right lines travel with the
+// sticky cell. The th already has an opaque background (theme); z-index keeps it
+// above the body rows that scroll under it. (The index-table borders, corner
+// rounding and bottom-edge de-doubling now live in the theme's
+// table.index_table block.)
+#wrapper table.index_table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+// Header pinning + logo centering. (Header padding and the logo max-height are
+// now theme variables — $skinHeaderPaddingY / $skinHeaderLogoMaxHeight, set in
+// themes/variables.scss.)
+#wrapper #header {
+  // Pin the header to the viewport's left edge and cap it to the viewport width
+  // so it does NOT scroll sideways with wide tables — keeping the logo and nav
+  // menu always visible. Same technique as #title_bar; unquote so Sass emits the
+  // CSS min() literally (it can't mix % and vw). No `top` set, so it still
+  // scrolls vertically like normal.
+  position: sticky;
+  left: 0;
+  // 100vw includes the vertical scrollbar, which makes this left-pinned bar
+  // overshoot the visible viewport and get clamped (shifting left) at far-right
+  // scroll when a vertical scrollbar is present. Subtract the scrollbar width
+  // (a JS-set CSS var, 0 when there's no scrollbar — see scrollbar_width.js).
+  width: unquote("min(calc(100vw - var(--scrollbar-width, 0px)), 100%)");
+  // Pinning activates the header's z-index:900, so its drop shadow would now
+  // paint a dark line over the title bar below (previously the title bar, painted
+  // later, covered it). Drop the shadow — the two dark bars sit flush.
+  box-shadow: none;
+}
+
+#header h1 {
+  padding-top: 0;
+  padding-bottom: 0;
+  // Collapse the text baseline strut (theme sets line-height: 1.2) so the
+  // inline logo centers cleanly via the table-cell's vertical-align: middle.
+  line-height: 0;
+}
+
+#header h1 img{
+  // Keep the logo inline + vertical-align: middle so it stays centered in the
+  // table-cell row. top:0 resets the theme's -2px nudge. (max-height is the
+  // theme's $skinHeaderLogoMaxHeight var.)
+  vertical-align: middle;
+  top: 0;
+}
+
+// The nav menus (global + utility) are `ul.header-item.tabs` table-cells. The
+// theme nudges every .header-item down 2px (tuned for the old taller header),
+// which knocks them off-center. Reset it so vertical-align: middle centers them.
+#header .header-item {
+  top: 0;
+}
+
+// Trim the tab pills' vertical margins (theme default 5px) so the nav cell does
+// not grow the header past the logo; they stay centered via vertical-align.
+#header ul.tabs > li {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+// Menu font size, dropdown sizing (no-wrap/size-to-content), and dropdown row
+// density are now theme variables/fixes — $skinMenuFontSize, $skinMenuItemPaddingY,
+// $skinMenuItemLineHeight (see themes/variables.scss).
+
+// Menu colors (panel, pills, dropdown item text/hover, the bridge border) are
+// now themed via the active_admin_theme menu variables — see
+// app/assets/stylesheets/themes/variables.scss.
+
+// Show the Logout menu item as an icon instead of the "Logout" text. The text
+// is kept in the DOM (just sized to 0) so screen readers still announce it, and
+// the working logout link/method (built by add_logout_button_to_menu) is left
+// intact. FontAwesome 4: fa-sign-out = \f08b.
+// inline-flex + align-items: center keeps the icon vertically centered with the
+// adjacent text items (admin name, clock); font-size:0 alone collapses the line
+// box so the glyph would otherwise sit a few px low.
+#header #logout > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
+  height: 12px; // match the text items' content height
+}
+#header #logout > a::before {
+  font-family: 'FontAwesome';
+  content: '\f08b';
+  font-size: 18px;
+  line-height: 1;
+}
+
+// Dark-mode toggle button (theme_toggle.js injects #theme_toggle into the
+// utility nav). Same icon treatment as the logout icon. The glyph reflects the
+// current mode (cycles auto → light → dark): adjust = auto (follows OS),
+// sun = forced light, moon = forced dark.
+#header #theme_toggle > a {
+  font-size: 0;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
+  height: 12px;
+  cursor: pointer;
+}
+#header #theme_toggle > a::before {
+  font-family: 'FontAwesome';
+  font-size: 18px;
+  line-height: 1;
+  display: inline-block;
+  width: 1.28571em; // fixed-width (fa-fw) so the differently-sized glyphs below
+  text-align: center; // don't change the toggle's width and shift the clock
+  content: '\f042'; // fa-adjust — auto (default before JS sets data-mode)
+}
+#header #theme_toggle[data-mode="light"] > a::before {
+  content: '\f185'; // fa-sun-o — forced light
+}
+#header #theme_toggle[data-mode="dark"] > a::before {
+  content: '\f186'; // fa-moon-o — forced dark
+}
+
+// Server clock (server_clock.js) shown as two compact lines: time + timezone,
+// then year/month/day. Kept small (10px/12px) so both lines fit within the logo
+// height and the header height is unchanged. vertical-align: middle centers the
+// two-line block with the adjacent admin name / logout icon.
+// Clock: a centered flex column (time line larger, date line smaller). Sized to
+// the nav pills' band (~24px, same as the menu items and admin/logout) rather
+// than the taller logo, so its top/bottom line up with the rest of the header
+// instead of hanging lower. Header height is unchanged.
+// These were scoped to `#header`, which ActiveAdmin 4's layout no longer emits,
+// so the two lines collapsed into one run of text. The clock now lives in
+// app/views/active_admin/_site_header.html.erb, still as `#servertime > a`.
+#servertime > a {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end; // right-align both lines
+  vertical-align: middle;
+  height: 26px;
+  text-decoration: none;
+  pointer-events: none; // it's a clock, not a link
+  font-size: 0;         // hide the raw server-time label until JS formats it (the
+                        // .clock-time/.clock-date spans set their own size)
+  // Monospace so every glyph (digits included) is fixed-width — the ticking
+  // time keeps a constant width, so the items to its right don't jitter every
+  // second. (font-variant-numeric: tabular-nums is unreliable here because the
+  // header font has no tabular figures.)
+  font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+#servertime .clock-time {
+  font-size: 12px;
+  line-height: 1.1;
+}
+#servertime .clock-date {
+  font-size: 9px;
+  line-height: 1.1;
+}
+
+.ul-list-comma-separated {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+
+  li {
+    display: inline;
+  }
+
+  li::after {
+    content: ", ";
+  }
+
+  li:last-child:after {
+    content: "";
+  }
+}
+
+// fix checkbox input for active admin form
+form fieldset > ol > li.boolean label {
+  width: 100%;
+}
+
+// The "Set range" preset menu (active_admin_date_range_preset) is appended to
+// <body> as `.block_timerange` with `position:absolute` but no z-index, so it
+// stacks below tom-select dropdowns (`.ts-dropdown` has z-index: 10). Lift it
+// above them.
+.block_timerange {
+  z-index: 1000;
+  // Follow dark mode — the plugin hardcodes a light #f4f4f4 bg, black border and
+  // blue links; re-point to the palette so it themes in both modes.
+  background-color: var(--aa-surface);
+  border-color: var(--aa-border);
+  color: var(--aa-text);
+  > div span { color: var(--aa-link); }
+}
+
+// RTP diagram (rtp_diagram.js) renders an SVG with hardcoded light fills/strokes.
+// In dark mode, re-point the light-only ones (node panels, port boxes, labels,
+// borders) to the palette via attribute selectors — CSS overrides SVG
+// presentation attributes. Arrows (#2a7/#27a) and the orange highlight (#f60)
+// are left as-is; they read fine on the dark page.
+@mixin rtp-diagram-dark {
+  .rtp-diagram {
+    // The container is transparent + borderless in both modes (no inline
+    // bg/border from rtp_diagram.js), so only the SVG content needs re-pointing.
+    [fill="#fff"]     { fill: var(--aa-surface); }            // node body + port box bg
+    [fill="#eef1f5"]  { fill: var(--aa-panel-header); }       // node header bar
+    [fill="#5e6469"]  { fill: var(--aa-panel-header-text); }  // node header text
+    [fill="#222"]     { fill: var(--aa-text); }               // port labels
+    [fill="#555"]     { fill: var(--aa-text-muted); }         // packet-count labels
+    [stroke="#d7dce4"] { stroke: var(--aa-border); }          // node border + divider
+    [stroke="#666"]   { stroke: var(--aa-border); }           // port box border
+  }
+  // The "click an arrow" stream-details panel (inline-styled light card).
+  .rtp-stream-panel {
+    background: var(--aa-surface) !important;
+    border-color: var(--aa-border) !important;
+    color: var(--aa-text) !important;
+    // The title (h4) and the details grid carry hardcoded light inline colors
+    // (#222) that don't inherit the panel color, and the grid's key labels are
+    // #666 — all dark-on-dark here. Override them. The grid is rendered as
+    // key/val/key/val, so its odd children are the (muted) key labels.
+    h4, > div { color: var(--aa-text) !important; }
+    > div > :nth-child(odd) { color: var(--aa-text-muted) !important; }
+  }
+}
+html[data-theme="dark"] { @include rtp-diagram-dark; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { @include rtp-diagram-dark; }
+}
+
+// Date range filters (e.g. "Time start"): label on its own row, then the two
+// range inputs share one row and together fill the full sidebar content width,
+// so they align with the other filters instead of leaving a gap on the right.
+form.filter_form .filter_form_field.filter_date_range {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 6px;
+  row-gap: 4px;
+
+  > label {
+    flex: 1 0 100%;
+  }
+
+  input[type=text],
+  input[type=datetime-local] {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+}
+
+// Fix asymmetric right gap on sidebar filter inputs.
+// ActiveAdmin's _forms.scss sets the filter text-input width to
+// `$sidebar-inner-content-width - $text-input-horizontal-padding * 2`, which
+// was written for content-box. With the global `box-sizing: border-box`
+// (_base.scss) that subtraction is double-counted, so the input renders ~20px
+// narrower than the <select> / section width; being left-aligned, the whole
+// gap lands on the right and looks like 2x the left padding.
+// Restore full content width (matching <select>) for standalone single-line
+// filters; the side-by-side / range layouts set their own widths and keep them.
+form.filter_form .filter_form_field:not(.select_and_search):not(.filter_date_range):not(.filter_numeric) {
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=tel] {
+    width: 100%;
+  }
+}
+
+// Operator filters (predicate <select> + value input — string-with-predicate
+// and integer/numeric, both carry `.select_and_search`) are laid out in
+// app/assets/stylesheets/yeti/tom-select-customizations.scss, because the
+// predicate <select> is rendered as a tom-select widget that must be sized
+// together with the value input on one full-width row.
+
+// Sidebar panels (app/views/active_admin/shared/_sidebar_sections) supply each
+// section's title in a panel header, ActiveAdmin 3 style. ActiveAdmin 4 renders
+// its own heading inside the section body instead, which would now duplicate it.
+#sidebar .filters-form-title,
+#sidebar .active-filters-title {
+  display: none;
+}
+
+// `.filters-form` carries `mb-6` from ActiveAdmin's Tailwind plugin; inside a
+// panel that bottom margin shows as dead space under the Filter button.
+#sidebar .filters-form {
+  margin-bottom: 0;
+}
+
+// Action items sit inside the 37px page header (app/views/active_admin/_page_header).
+//
+// Every action item carries `.action-item-button` — ActiveAdmin 4's contract for
+// them. The gem adds it to the "New <resource>" item it generates; the ~56
+// `action_item` blocks in app/admin and lib/resource_dsl get it from the
+// `action_item_link` helper (app/helpers/active_admin/action_item_helper.rb).
+//
+// Two departures from the gem's own `.action-item-button`:
+//   - `py-2 px-3 text-sm` renders 38px tall, taller than the bar's 36px content box
+//   - its fill is `bg-white dark:bg-gray-800`, a different grey from the panels
+//     next to it; the --aa-* tokens keep the header consistent with the rest
+// The radius stays at the gem's 6px (`rounded-md`), not --aa-radius.
+//
+// This stylesheet loads after the Tailwind bundle, so these win at equal specificity.
+.action-item-button {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: var(--aa-text);
+  background-color: var(--aa-surface);
+  border-color: var(--aa-border);
+}
+
+.action-item-button:hover {
+  color: var(--aa-link);
+  background-color: var(--aa-surface-hover);
+}
+
+// ---------------------------------------------------------------------------
+// Wide index tables: no word wrapping, page scrolls horizontally.
+//
+// ActiveAdmin 4 confines the index table: `.paginated-collection-contents` and
+// `.index-as-table` are `overflow-x-auto` and `.data-table` is `w-full`, so wide
+// tables wrap their cells to fit the column instead of overflowing. yeti tables
+// are wide by design — let them size to their content and let the BROWSER show
+// the horizontal scrollbar, as in ActiveAdmin 3.
+//
+// Scoped to `#active_admin_content` (emitted only by the index page, see
+// app/views/active_admin/resource/index.html.arb) so nested tables on show pages
+// keep their own scroll container.
+#active_admin_content {
+  .index-as-table,
+  .paginated-collection,
+  .paginated-collection-contents {
+    overflow: visible;
+  }
+
+  table.data-table {
+    width: auto;
+    min-width: 100%;
+
+    th, td {
+      white-space: nowrap;
+    }
+  }
+}
+
+// A sticky element can only stick inside its containing block. The table merely
+// overflows the wrapper, so without this the wrapper stays viewport-wide and the
+// pinned page header slides off (left: -scrollX). Grow the wrapper to the widest
+// content on index pages only — show pages must keep their normal width, or long
+// <pre> blocks and text would stretch the page.
+//
+// Only the page header is pinned. The footer is deliberately NOT: it scrolls
+// away with the table, like any other in-flow content.
+#page_wrapper:has(#active_admin_content) {
+  min-width: max-content;
+
+  // With the page scrolling sideways, the page header would slide out of view and
+  // its background would stop at the old viewport edge. Pin it to the left of the
+  // scrollport, the way ActiveAdmin 3 pinned #header / #title_bar. 100vw includes
+  // the vertical scrollbar, so subtract it (--scrollbar-width is set by
+  // scrollbar_width.js, 0 when absent). The site header is `fixed`, so it needs
+  // nothing.
+  [data-test-page-header] {
+    position: sticky;
+    left: 0;
+    width: unquote("min(calc(100vw - var(--scrollbar-width, 0px)), 100%)");
+  }
+}
+
+// Compact index rows: 29px, including the 1px row border (the last row has none,
+// so it measures 28.5px). ActiveAdmin's plugin ships `td { px-3 py-4 }` — 52px
+// rows — and `th { py-3.5 }`, with 14px body / 12px header type.
+//
+// The row height is set by the tallest cell's LINE BOX, not by the font size, so
+// `line-height` is pinned at 18px and the font can shrink independently.
+// `.status-tag` (the Yes/No pills) ships 2px of vertical padding on top of its
+// line box, which alone dragged rows to 33px — capped here to the line box.
+#active_admin_content table.data-table {
+  font-size: 12px;
+
+  th {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 10px;
+  }
+
+  td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 18px;
+  }
+
+}
+
+// --- login card -------------------------------------------------------------
+// ActiveAdmin 3's `#login`, from pages/_logged_out.scss + the theme fork:
+//
+//   #content_wrapper       { width: 500px; margin: 70px auto }
+//   #active_admin_content  { background: surface; border: 1px; radius; padding: 13px 30px }
+//   h2                     { margin: -13px -30px 20px; panel-header fill + bottom border }
+//   #login form fieldset   { border: none; background: none; padding: 0; margin-bottom: 0 }
+//   #login form fieldset li{ padding: 10px 0 }
+//   #login form input      { width: 70% }
+//   #login fieldset.buttons{ margin-left: 20% }
+//
+// ActiveAdmin 4 renders a centred `p-6 sm:p-8 max-w-md shadow` card with a plain
+// bold <h2> and a full-width submit. The 500px width and the 70px top offset live
+// in the view/layout; the chrome is here.
+//
+// The fieldset needs no reset: the panel rule is scoped to [data-test-page-content],
+// which the logged-out layout does not emit, so it is already chrome-less.
+html body #login {
+  background-color: var(--aa-surface);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius);
+  padding: 13px 30px;
+
+  // The header bleeds out to the card's edges, so it needs the card's own top
+  // radius — the card cannot simply clip it with `overflow: hidden`, which would
+  // also clip the focus rings on the inputs.
+  > h2 {
+    display: flex;
+    align-items: center;
+    height: $index-control-height;
+    margin: -13px -30px 20px;
+    padding: 0 15px;
+    background-color: var(--aa-panel-header);
+    color: var(--aa-panel-header-text);
+    border-bottom: 1px solid var(--aa-border);
+    border-top-left-radius: var(--aa-radius);
+    border-top-right-radius: var(--aa-radius);
+    font-size: 13px;
+    font-weight: 700; // AA3 matched the tab label weight
+    line-height: 1.35;
+  }
+
+  // AA3's login rows: a 20% label column (not the 200px the resource forms use —
+  // the card is only 500px wide) and 10px of vertical breathing room.
+  form.formtastic fieldset > ol > li.input {
+    grid-template-columns: 20% minmax(0, 1fr);
+    padding: 10px 0;
+  }
+
+  // The submit sits under the inputs rather than spanning the card: the label
+  // column, then the same gap that separates a label from its input. The action
+  // row's own <li> drops the 10px that `form fieldset ol > li` gives every row,
+  // which would otherwise push the button past the inputs' left edge.
+  form.formtastic fieldset.actions {
+    margin-left: 20%;
+    padding-left: $form-row-gap;
+
+    > ol > li {
+      padding-left: 0;
+    }
+  }
+}
+
+// --- attributes table (show pages) ------------------------------------------
+// ActiveAdmin 3 + the old theme fork rendered this as a plain two-column list:
+//
+//   .attributes_table table th, td { padding: 10px 0; vertical-align: top;
+//                                    border-bottom: 1px solid #e8e8e8 }
+//   th { width: 150px; padding-left: 0; text-transform: uppercase;
+//        font-size: 0.9em; color: var(--aa-label-text); }   (no fill)
+//   .empty { color: #bbb; font-size: 0.8em; text-transform: uppercase;
+//            letter-spacing: 0.2em }
+//
+// ActiveAdmin 4 fills the label column grey, pads every cell 12px, aligns to the
+// baseline and sizes the label column `w-32 sm:w-40`. Restored below.
+//
+// (AA3 also striped `col.even`/`col.odd`, but only for a COLLECTION of records —
+// `build_colgroups` returns early for a single record, so show pages never had it.)
+//
+// The gem's rules use `:where(…)`, which contributes no specificity, so these win
+// on `html body` alone.
+html body .attributes-table {
+  // The cells drop their horizontal padding (AA3's `th { padding-left: 0 }`), so
+  // the gutter moves to the box — and it is the FORM's gutter, so the labels and
+  // values on a show page sit at the same x as on the edit page.
+  padding: 0 $form-gutter;
+}
+
+html body .attributes-table :where(tbody > tr) {
+  border-bottom: 0; // moved onto the cells, as in AA3
+}
+
+// 5px, not the 10px the theme fork set: yeti overrode it (`.attributes_table table
+// th, td { padding: 5px 0 }`, still visible in the dead AA3 block at the top of
+// this file), which is what made AA3's rows 28.28px — 10px padding + a 17.28px
+// line box (11.52 × 1.5) + the 1px border. The 18px line box pins ours to 29px,
+// the same height as an index-table row.
+html body .attributes-table tbody > tr > th,
+html body .attributes-table tbody > tr > td {
+  padding: 5px 0;
+  line-height: 18px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--aa-border);
+}
+
+html body .attributes-table tbody > tr:last-child > th,
+html body .attributes-table tbody > tr:last-child > td {
+  border-bottom: 0;
+}
+
+// The label column lines up with the form's: `$form-label-col` of label plus the
+// `$form-row-gap` that separates it from the control. Both boxes have the same
+// 12px left gutter, so the values start at the same x as the inputs on the edit
+// page. (AA3 hard-coded 150px here and 20% in the form; they never agreed.)
+html body .attributes-table tbody > tr > th {
+  box-sizing: border-box;
+  width: $form-label-col + $form-row-gap;
+  padding-right: $form-row-gap;
+  background: none;
+  color: var(--aa-label-text);
+}
+
+// AA3's `.empty`: smaller than the value it stands in for, and widely tracked.
+html body .attributes-table-empty-value {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--aa-text-muted);
+  opacity: 0.7;
+}
+
+// Inside a tab the content box is already the frame — same rule as the fieldsets,
+// and like them the panel drops its padding so the table owns the whole gutter.
+html body .tabs .tab-content .attributes-table {
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+html body .tabs .tab-content > [role="tabpanel"]:has(> .attributes-table) {
+  padding: 0;
+}
+
+// --- status tags ------------------------------------------------------------
+// ActiveAdmin 4 renders status tags as sentence-case `rounded-full` pills, 24px
+// tall. Restore the ActiveAdmin 3 look: uppercase and only slightly rounded.
+// `border-radius: 2px` came from the old active_admin_theme fork; AA3's own
+// .status_tag had no radius. (AA3 also letter-spaced the label by 0.15em —
+// deliberately not carried over.) AA4 ships `px-2.5` (10px), the old theme fork
+// used 4px; 6px sits between the two.
+//
+// NOT scoped to the index table: this used to be nested in
+// `#active_admin_content table.data-table`, so the same Yes/No tag rendered
+// 18px/11px/uppercase in the index and 24px/14px/sentence-case on the show page.
+//
+// The 18px line box also caps the index row height at 29px — `.status-tag` ships
+// `py-0.5` on top of its line box, which alone dragged rows to 33px.
+//
+// `.status_tag` (underscore) is what `boolean_edit_column` emits
+// (lib/active_admin/views/index_as_table.rb). No resource calls it today, but it
+// would render as bare text — AA4 styles only the hyphenated class — so it is
+// folded in here. It still gets no fill; that lives on AA4's `[data-status]`.
+html body .status-tag,
+html body .status_tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  line-height: 18px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: 2px;
+}
+
+// ---------------------------------------------------------------------------
+// Pagination bar: one left-aligned line, visually detached from the table.
+//
+// ActiveAdmin 4 renders three siblings inside `.paginated-collection` (which
+// carries the border/rounding, so the bars read as part of the table):
+//   .paginated-collection-contents    the table
+//   .paginated-collection-pagination  "Showing all N" + the paginator   (border-t, p-2/3)
+//   .paginated-collection-footer      [ Per page <select> ] [ Download: CSV ]  (border-t, p-3)
+//
+// `display: contents` dissolves the two bars so their children become flex items
+// of one row, which can then be ordered independently:
+//   Per page | Showing all N | paginator | Download: CSV
+// The border moves onto `.contents` so only the table looks like a panel.
+#active_admin_content {
+  // GRID, not flex. A wrapping flex container reports its max-content as if every
+  // item fit on one line, so the table's width and the bar's width get SUMMED —
+  // and because #page_wrapper is `min-width: max-content` (for the sticky page
+  // header), that inflated every index page by the width of the bar and produced
+  // a phantom horizontal scrollbar on tables that otherwise fit. A grid's
+  // intrinsic width is the max across its rows.
+  // Three max-content columns for the bar (per page, "Showing all N", paginator)
+  // and a final 1fr that soaks up the remaining width. The 1fr is what lets the
+  // table — which spans every column — stretch to the full container width when
+  // it is narrower than the viewport; with all-max-content columns it stopped at
+  // its own intrinsic width.
+  //
+  // `justify-items: start` keeps the bar items at their natural width (otherwise
+  // a 4th item, the paginator's Download, would stretch across the 1fr column);
+  // the table opts back in with `justify-self: stretch`.
+  .paginated-collection {
+    display: grid;
+    grid-template-columns: repeat(3, max-content) minmax(0, 1fr);
+    justify-items: start;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 6px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 13px;
+  }
+
+  // Colour and radius come from the ActiveAdmin 3 chrome block at the end of
+  // this file (var(--aa-border)); only the layout belongs here.
+  .paginated-collection-contents {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  .paginated-collection-pagination,
+  .paginated-collection-footer {
+    display: contents;
+  }
+
+  // Order the now-flattened children. `:has()` keeps this robust when the footer
+  // renders only one of its two divs (per_page not an Array, or no download formats).
+  .paginated-collection-footer > div:has(select.pagination-per-page) {
+    order: 1;
+  }
+
+  .pagination-information {
+    order: 2;
+  }
+
+  .paginated-collection .pagination {
+    order: 3;
+  }
+
+  .paginated-collection-footer > div:has(a) {
+    order: 4;
+  }
+
+  // The per-page <select> is the tallest item in the row (30px). Its 13px type
+  // comes from --text-sm (it is a `text-sm` component); only the padding is ours.
+  select.pagination-per-page {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+}
+
+// (The contents border colour is var(--aa-border) in both modes — see the
+// ActiveAdmin 3 chrome block at the end of this file. It used to be hard-coded
+// here, which made the table border disagree with the sidebar's in dark mode.)
+
+// ---------------------------------------------------------------------------
+// One shared control height across the index page, so the batch-actions button,
+// the scope buttons, the table's header row and the filters sidebar's panel
+// header all line up on the same baseline.
+//
+// Everything here is `box-sizing: border-box` (Tailwind preflight), so the
+// height includes each element's 1px border. Padding is zeroed and the content
+// is centred with flex instead, which keeps the height exact regardless of font.
+
+// (Panel headers get this same 30px height in the shared .panel block below.)
+
+#active_admin_content {
+  table.data-table th {
+    height: $index-control-height;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .index-data-table-toolbar {
+    // ActiveAdmin ships these at 38px (py-2 + 20px line box + border) and 14px type.
+    .batch-actions-dropdown-toggle,
+    .index-button {
+      display: inline-flex;
+      align-items: center;
+      height: $index-control-height;
+      padding-top: 0;
+      padding-bottom: 0;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+  }
+}
+
+// (Zebra striping lives in the ActiveAdmin 3 chrome block at the end of this
+// file, driven by --aa-surface / --aa-surface-2.)
+
+// ===========================================================================
+// ActiveAdmin 3 chrome colours, driven by the tokens in themes/tokens.scss.
+//
+// ActiveAdmin 4 hard-codes its palette as Tailwind utilities, both in the gem's
+// plugin.js and in our view overrides. This block re-points the chrome at the
+// `--aa-*` variables. This stylesheet loads AFTER the Tailwind bundle, so an
+// equal-specificity rule wins — but Tailwind's `dark:` variant compiles to
+// `.dark .utility` (0,2,0), so the dark-mode chrome needs at least that much.
+// Selectors below are written to clear both.
+// ===========================================================================
+
+// --- page background --------------------------------------------------------
+html body[class] {
+  background-color: var(--aa-page-bg);
+  color: var(--aa-text);
+}
+
+// --- site header + top navigation (dark in BOTH modes, as in AA3) -----------
+html body [data-test-site-title] {
+  color: var(--aa-menu-text);
+}
+
+html body > div.fixed:has([data-test-site-title]) {
+  background-color: var(--aa-header-bg);
+  border-bottom-color: var(--aa-header-bg);
+  color: var(--aa-menu-text);
+}
+
+html body #servertime,
+html body #servertime > a,
+html body .dark-mode-toggle,
+html body #user-menu-button {
+  color: var(--aa-menu-text);
+}
+
+// Top-level menu items: plain, then the current/hover "pill".
+html body [data-item-id] > a,
+html body [data-item-id] > button,
+html body [data-item-id] > span {
+  color: var(--aa-menu-text);
+}
+
+html body [data-item-id] > a:hover,
+html body [data-item-id] > button:hover,
+html body [data-item-id] > a.selected,
+html body [data-item-id] > button.selected {
+  background-color: var(--aa-menu-pill);
+  color: var(--aa-menu-pill-text);
+}
+
+// Dropdown panels hanging off the top bar.
+html body [id^="topnav-panel-"] {
+  background-color: var(--aa-menu-panel);
+  color: var(--aa-menu-text);
+}
+
+html body [id^="topnav-panel-"] a,
+html body [id^="topnav-panel-"] button {
+  color: var(--aa-menu-text);
+}
+
+html body [id^="topnav-panel-"] a:hover,
+html body [id^="topnav-panel-"] button:hover,
+html body [id^="topnav-panel-"] a.selected {
+  background-color: var(--aa-menu-item-hover);
+  color: var(--aa-menu-item-hover-text);
+}
+
+// --- page header (AA3's title bar) ------------------------------------------
+html body [data-test-page-header] {
+  background-color: var(--aa-titlebar);
+  border-bottom-color: var(--aa-titlebar);
+  color: var(--aa-titlebar-text);
+}
+
+html body [data-test-page-header] h2,
+html body [data-test-page-header] nav a {
+  color: var(--aa-titlebar-text);
+}
+
+// --- panels -----------------------------------------------------------------
+// One style for every panel: the filters sidebar sections (which now emit the
+// same .panel > h3.panel-title + .panel-body markup as the gem, see
+// app/views/active_admin/shared/_sidebar_sections) and ActiveAdmin 4's own
+// `panel` component used on the dashboard and show pages.
+//
+// AA4 ships `.panel { mb-6 border rounded-md shadow-xs }`,
+// `.panel-title { font-bold bg-gray-100 rounded-t-md p-3 }` and
+// `.panel-body { py-5 px-3 }` — a taller, differently-coloured header.
+html body .panel {
+  background-color: var(--aa-surface);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius);
+  box-shadow: none;
+  overflow: hidden; // so the header's fill follows the rounded top corners
+}
+
+html body .panel > .panel-title {
+  display: flex;
+  align-items: center;
+  height: $index-control-height;
+  margin: 0;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 600;
+  border-radius: 0;
+  background-color: var(--aa-panel-header);
+  border-bottom: 1px solid var(--aa-border);
+  color: var(--aa-panel-header-text);
+}
+
+html body .panel > .panel-body {
+  padding: 10px 12px;
+}
+
+// Sidebar sections sit 16px apart — the same `gap-4` the layout puts between the
+// sidebar column and the content column.
+//
+// The column carries `space-y-4`, but in Tailwind v4 that is `margin-block-END on
+// every :not(:last-child)`, not a top margin, so the blanket `margin-bottom: 0`
+// this rule used to apply (to drop AA4's `.panel { mb-6 }`) also removed every
+// gap. Set both halves explicitly rather than relying on which of `.panel` and
+// `.space-y-4` wins: AA4's 24px was in fact beating the utility's 16px.
+html body #sidebar > .panel {
+  margin-bottom: 16px;
+}
+
+html body #sidebar > .panel:last-child {
+  margin-bottom: 0;
+}
+
+// --- index table ------------------------------------------------------------
+//
+// The wrapper owns the 1px border and the 6px radius. Its rounded corners were
+// being painted over by the square backgrounds of the corner cells, because
+// `overflow: hidden` is not available here — that is what makes the table scroll
+// horizontally with the page (see the nowrap block above).
+//
+// So the corner CELLS carry the radius instead. That needs `border-collapse:
+// separate`: in the collapsed model border-radius on cells is ignored. Switching
+// models also means row borders and backgrounds stop painting from the <tr>, so
+// both move onto the cells — which is exactly how ActiveAdmin 3 did it
+// (`tr:nth-child(even) > td { background: var(--aa-surface-2) }`).
+// Corner cells sit inside the wrapper's 1px border, so they round 1px tighter.
+// Kept as Sass because `calc(var(--aa-radius) - 1px)` on a table cell is not
+// interpolable when the radius token changes.
+$table-inner-radius: 3px; // var(--aa-radius) - 1px
+
+html body #active_admin_content .paginated-collection-contents {
+  background-color: var(--aa-surface);
+  border-color: var(--aa-border);
+  border-radius: var(--aa-radius);
+}
+
+html body #active_admin_content table.data-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+html body #active_admin_content table.data-table th {
+  background-color: var(--aa-surface-2);
+  border-bottom: 1px solid var(--aa-border);
+  color: var(--aa-table-header-text);
+}
+
+// AA3 tinted the EVEN rows and left the odd ones on the surface colour.
+html body #active_admin_content table.data-table tbody tr > td {
+  border-bottom: 1px solid var(--aa-border);
+}
+
+html body #active_admin_content table.data-table tbody tr:last-child > td {
+  border-bottom: 0;
+}
+
+html body #active_admin_content table.data-table tbody tr:nth-child(odd) > td {
+  background-color: var(--aa-surface);
+}
+
+html body #active_admin_content table.data-table tbody tr:nth-child(even) > td {
+  background-color: var(--aa-surface-2);
+}
+
+html body #active_admin_content table.data-table tbody tr:hover > td {
+  background-color: var(--aa-surface-hover);
+}
+
+// The <tr> must stay transparent, or it paints over the cells' rounded corners.
+html body #active_admin_content table.data-table tbody tr {
+  background-color: transparent;
+  border-bottom: 0;
+}
+
+// Round the four corner cells so they follow the wrapper's radius.
+html body #active_admin_content table.data-table thead th:first-child {
+  border-top-left-radius: $table-inner-radius;
+}
+
+html body #active_admin_content table.data-table thead th:last-child {
+  border-top-right-radius: $table-inner-radius;
+}
+
+html body #active_admin_content table.data-table tbody tr:last-child > td:first-child {
+  border-bottom-left-radius: $table-inner-radius;
+}
+
+html body #active_admin_content table.data-table tbody tr:last-child > td:last-child {
+  border-bottom-right-radius: $table-inner-radius;
+}
+
+// --- index toolbar (batch actions + scopes) ---------------------------------
+// ActiveAdmin 4 leaves these on stock Tailwind (bg-white / gray borders), so
+// they disagreed with the themed table and sidebar.
+html body #active_admin_content .index-data-table-toolbar .batch-actions-dropdown-toggle {
+  background-color: var(--aa-table-tool-batch-actions);
+  border-color: var(--aa-border);
+  color: var(--aa-text);
+}
+
+html body #active_admin_content .index-data-table-toolbar .index-button {
+  background-color: var(--aa-table-tool-scope);
+  border-color: var(--aa-border);
+  color: var(--aa-text);
+}
+
+html body #active_admin_content .index-data-table-toolbar .index-button:hover {
+  background-color: var(--aa-surface-hover);
+}
+
+html body #active_admin_content .index-data-table-toolbar .index-button-selected {
+  background-color: var(--aa-table-tool-selected);
+  color: var(--aa-text);
+}
+
+// The batch-actions toggle is disabled until rows are selected; keep it legible
+// but clearly inert.
+html body #active_admin_content .index-data-table-toolbar .batch-actions-dropdown-toggle:disabled {
+  color: var(--aa-text-muted);
+}
+
+// --- corner rounding --------------------------------------------------------
+// ActiveAdmin 4 rounds everything at 6px (Tailwind `rounded-md`); AA3 used 4px
+// ($skinBorderRadius). Driven by --aa-radius so it is one knob.
+// Status tags keep their own tighter 2px (see the .status-tag rule above).
+// (The page header's action items keep ActiveAdmin 4's own rounding.)
+html body #sidebar > div,
+html body #active_admin_content .index-data-table-toolbar .batch-actions-dropdown-toggle,
+html body #active_admin_content .index-data-table-toolbar .index-button,
+html body .dropdown_menu > div,
+html body [id^="topnav-panel-"],
+html body #user-menu,
+html body [data-item-id] > a,
+html body [data-item-id] > button {
+  border-radius: var(--aa-radius);
+}
+
+// The batch-actions / scope buttons are a segmented group: only the outer edges
+// of `.index-button-group` should round, or every button reads as separate.
+html body #active_admin_content .index-button-group > .index-button:not(:first-child) {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+html body #active_admin_content .index-button-group > .index-button:not(:last-child) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+// --- content links ----------------------------------------------------------
+// ActiveAdmin 3's rule was:
+//   a:not(.button):not(.action_item):not(.table_tools_button):not(.dropdown_menu_button)
+//     :not(.ui-tabs-anchor):not([data-method="delete"]) { color: var(--aa-link); }
+//   a[data-method="delete"], a.delete_link { color: var(--aa-delete-link); }
+//
+// Ported to the AA4 DOM: scoped to the content and the sidebar (so the header
+// menu keeps --aa-menu-text), excluding anything that is a button rather than a
+// link. `data-method="delete"` still marks the row Delete links.
+html body #active_admin_content a:not(.index-button):not(.action-item-button):not(.table_tools_button):not([role="tab"]):not([data-dropdown-toggle]),
+html body #sidebar a:not(.button):not(.filters-form-clear) {
+  color: var(--aa-link);
+}
+
+html body #active_admin_content a[data-method="delete"],
+html body #active_admin_content a.delete_link {
+  color: var(--aa-delete-link);
+}
+
+// Column headers are sort LINKS, so the content-link rule above would tint them.
+// ActiveAdmin 3 pinned them to the header text colour instead, and needed
+// `!important` to do it — the content-link rule carries five :not() classes
+// (specificity 1,5,2), which outranks any sane `thead th a` selector (1,1,6).
+// Same here. The sort chevron (an ::after pseudo-element, see
+// yeti/sortable_header_chevrons) inherits this colour.
+html body #active_admin_content table.data-table thead th a {
+  color: var(--aa-table-header-text) !important;
+}
+
+// --- form controls ----------------------------------------------------------
+// ActiveAdmin 4 renders inputs at 38px (`py-2` + 14px type); ActiveAdmin 3 was
+// 32px. Height is pinned (box-sizing is border-box, so it absorbs the 1px
+// border) and the vertical padding zeroed, so the height holds regardless of
+// font. Horizontal padding is left alone — `select` needs its arrow gutter.
+//
+// Excluded: checkboxes/radios/buttons/file inputs, textareas (they must grow),
+// and `.pagination-per-page`, which is sized to the 13px pagination bar.
+// Scoped to [data-test-page-content] (the layout row holding the sidebar AND the
+// yielded page), not #active_admin_content — that id is emitted only by our
+// index template, so form pages would have been missed.
+// `:not(.ts-wrapper *)`: tom-select builds its widget out of real <input>s
+// (`.items-placeholder`, the dropdown search box, the sortable control input)
+// nested inside `.ts-control`. Sizing those to the full input height made the
+// control 29px of inner input + its own 8px/8px padding + borders = 47px.
+// The widget's height belongs to `.ts-control` (below), not to its inner inputs.
+html body [data-test-page-content] input:not(.ts-wrapper *):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="file"]):not([type="image"]),
+html body [data-test-page-content] select:not(.pagination-per-page) {
+  height: var(--aa-input-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  border-radius: var(--aa-radius);
+}
+
+html body [data-test-page-content] textarea {
+  font-size: 13px;
+  line-height: 1.35;
+  border-radius: var(--aa-radius);
+}
+
+// tom-select renders a div, not an <input>, so it needs the height separately.
+// The vertical padding goes to zero and the contents are centered instead: the
+// control has to end up exactly --aa-input-height like its native neighbours,
+// and multi-select chips carry their own margins.
+html body [data-test-page-content] .ts-control {
+  min-height: var(--aa-input-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
+  font-size: 13px;
+  border-radius: var(--aa-radius);
+}
+
+// --- secondary buttons ------------------------------------------------------
+// The form's "Cancel" and the filters sidebar's "Clear Filters" are the only two
+// controls that sit next to a submit button and are not buttons: ActiveAdmin 4
+// renders `.cancel-link` as bare text and `.filters-form-clear` as a borderless
+// rounded box. Both get the outlined look — an outlined secondary next to the
+// filled primary, sized to match the submit beside it.
+//
+// Each keeps its neighbour's padding and radius: `.formtastic [type=submit]` is
+// `rounded-lg px-4 py-2` (8px), `.filters-form-submit` is `rounded-md px-3 py-2`
+// (6px). Matching per-pair rather than picking one keeps each row aligned.
+html body form.formtastic .actions .cancel-link,
+html body #sidebar .filters-form-clear {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--aa-border);
+  background-color: var(--aa-surface);
+  color: var(--aa-text);
+  text-decoration: none;
+}
+
+html body form.formtastic .actions .cancel-link:hover,
+html body #sidebar .filters-form-clear:hover {
+  background-color: var(--aa-surface-hover);
+  color: var(--aa-link);
+  text-decoration: none;
+}
+
+// An explicit height rather than the submit's `py-2`: the border adds 2px, and
+// `.cancel-link` also carries `leading-6` (a 24px line box against the submit's
+// 20px), which together made it 42px next to a 36px submit.
+html body form.formtastic .actions .cancel-link {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 8px;
+}
+
+html body #sidebar .filters-form-clear {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+}
+
+// --- filter labels ----------------------------------------------------------
+// ActiveAdmin 3: `.sidebar_section label { text-transform: uppercase;
+// font-weight: bold; font-size: 0.9em; color: $form-label-color }`, recoloured
+// by the theme via --aa-label-text. ActiveAdmin 4 renders them sentence-case,
+// 14px, regular weight.
+html body #sidebar .filters-form .label,
+html body #sidebar label {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--aa-label-text);
+}
+
+// --- filter density ---------------------------------------------------------
+// ActiveAdmin 3: `.filter_form_field { margin-bottom: 10px }` with the label a
+// plain block (no bottom margin). ActiveAdmin 4 uses `mb-4` on the field and
+// `mb-1.5` on the label, which gives a ~70px pitch per filter.
+html body #sidebar .filters-form-field {
+  margin-bottom: 10px;
+}
+
+html body #sidebar .filters-form .label {
+  margin-bottom: 2px;
+}
+
+// The panel body's vertical padding is the last of the slack.
+// (.panel-body padding lives in the shared .panel block above.)
+
+// --- tabs (ActiveAdmin 3 folder tabs) ---------------------------------------
+// Flowbite's "Default tabs" shape, coloured from the tokens. AA3:
+//   inactive: bg --aa-tab-inactive, 1px border, no bottom border, top radius
+//   active:   bg --aa-surface, bottom border painted in --aa-surface so the tab
+//             merges into the content panel below it
+//   content:  bg --aa-surface, 1px border, rounded except the top-left corner
+// $skinTabPaddingY: 8px, $skinTabPaddingX: 15px (yeti's overrides).
+html body .tabs .aa-tablist {
+  border-bottom: 1px solid var(--aa-border);
+}
+
+// Same type as a panel header, so tabs and panels read as one system. An inactive
+// tab is 1px SHORTER than the active one: at equal heights its bottom edge lands
+// exactly on the tablist's 1px baseline and hides it, which makes the tab look
+// merged into the content panel — i.e. active. The active tab keeps the full
+// height and deliberately paints over that baseline (below).
+html body .tabs [role="tab"] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: $index-control-height - 1px;
+  padding: 0 15px; // $skinTabPaddingX
+  margin-right: 5px;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 600;
+  border: 1px solid var(--aa-border);
+  border-bottom: 0;
+  border-top-left-radius: var(--aa-radius);
+  border-top-right-radius: var(--aa-radius);
+  // Explicitly square the bottom corners, as ActiveAdmin 3 did: inside a <form>
+  // the tab is a <button>, and ActiveAdmin 4 rounds form buttons (rounded-lg),
+  // which made the tabs on edit/new pages read as detached pills.
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: var(--aa-tab-inactive);
+  color: var(--aa-inactive-tab-text);
+  cursor: pointer;
+}
+
+html body .tabs [role="tab"]:hover {
+  color: var(--aa-active-tab-text);
+}
+
+// Clicking a tab focuses the <button>, and the browser paints its focus ring on
+// the tab's border. Drop it for pointer focus; keep a themed ring for keyboard
+// users (:focus-visible), inset so it does not bleed past the tab's edges.
+html body .tabs [role="tab"]:focus {
+  outline: none;
+}
+
+html body .tabs [role="tab"]:focus-visible {
+  outline: 2px solid var(--aa-accent);
+  outline-offset: -2px;
+}
+
+// The active tab sits above the list's baseline border and fills with the panel
+// colour, so the seam between tab and content disappears.
+html body .tabs [role="tab"][aria-selected="true"] {
+  z-index: 2;
+  height: $index-control-height; // matches the panel header
+  background-color: var(--aa-surface);
+  color: var(--aa-active-tab-text);
+  border-bottom: 1px solid var(--aa-surface);
+  margin-bottom: -1px;
+}
+
+html body .tabs .tab-content {
+  background-color: var(--aa-surface);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius);
+  border-top-left-radius: 0;
+}
+
+// The padding sits on the panel rather than on .tab-content, so a tab whose
+// content is form fieldsets can drop it: those fieldsets supply their own
+// header bars, which have to run edge to edge (see the fieldset block below).
+html body .tabs .tab-content > [role="tabpanel"] {
+  padding: 12px;
+}
+
+html body .tabs .tab-content > [role="tabpanel"]:has(> fieldset.inputs) {
+  padding: 0;
+}
+
+// --- form fieldsets ---------------------------------------------------------
+// Every form is framed. ActiveAdmin 4 renders `fieldset.inputs` with no chrome
+// at all — a bare <legend> over a bare <ol> — so forms like /dialpeers/new drew
+// their inputs straight onto the page background. ActiveAdmin 3 gave the
+// fieldset `@include section-background` and its legend `@include section-header`,
+// i.e. exactly a panel with a header bar.
+//
+// Two cases, because a fieldset is either the frame or is inside one:
+//
+//   * standalone (/dialpeers/new, /accounts/new) — the fieldset IS the panel.
+//   * inside a tab (/gateways/22/edit, /customers_auths/new) — the tab's content
+//     box is already the panel, so the fieldset stays flat and only its legend
+//     draws a header bar, flush with the box edges. Consecutive fieldsets in one
+//     tab are separated by a rule.
+//
+// The legend is matched by tag, not by `.fieldset-title`: ActiveAdmin's form
+// builder adds that class, but pages built with plain Formtastic
+// (`semantic_form_for` — the shared import form, app/views/shared/import.html.erb)
+// emit `<legend><span>Title</span></legend>` with no class at all.
+//
+// `float: left; width: 100%` on the legend: a <legend> is laid out into its
+// fieldset's border, not as a normal block, and cannot be given a background bar.
+// Floating it opts out of that special layout. (`display: block` alone does not.)
+%aa-fieldset-legend {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: $index-control-height;
+  margin: 0;
+  padding: 0 12px;
+  border-width: 0;
+  border-bottom: 1px solid var(--aa-border);
+  border-radius: 0;
+  background-color: var(--aa-panel-header);
+  color: var(--aa-panel-header-text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+// `fieldset.actions` (the submit row) and `.has-many-fields` keep ActiveAdmin 4's
+// own styling — neither is a section of the form.
+//
+// Scoped to `[data-test-page-content]`, which only the logged-in layout emits.
+// The devise pages (layouts/active_admin_logged_out) already render their form
+// inside a card, so a framed fieldset would draw a box inside that box; there the
+// fieldset stays chrome-less and the card is the panel.
+html body [data-test-page-content] form.formtastic fieldset.inputs:not(.has-many-fields) {
+  background-color: var(--aa-surface);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius);
+  overflow: hidden; // the header bar's fill follows the rounded top corners
+  padding: 0;
+  margin-bottom: 16px;
+
+  > legend {
+    @extend %aa-fieldset-legend;
+  }
+
+  > ol {
+    padding: 10px 12px;
+  }
+}
+
+// Inside a tab the content box is the frame; the fieldset must not draw a second.
+html body [data-test-page-content] .tabs .tab-content form.formtastic fieldset.inputs:not(.has-many-fields),
+html body [data-test-page-content] form.formtastic .tabs .tab-content fieldset.inputs:not(.has-many-fields) {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+
+  + fieldset.inputs {
+    border-top: 1px solid var(--aa-border);
+  }
+}
+
+// Formtastic emits an empty <legend> when `f.inputs` is given no name
+// (/customers_auths/new); an empty header bar would just be a grey stripe.
+html body form.formtastic fieldset.inputs > legend:empty {
+  display: none;
+}
+
+// --- form rows: label beside the input --------------------------------------
+// ActiveAdmin 3 laid each formtastic row out as `label { float: left; width: 20% }`
+// with the control filling the rest and hints/errors offset by `margin-left: 20%`.
+// ActiveAdmin 4 stacks the label above the control.
+//
+// Reproduced with a grid rather than floats (no clearfix, and hints land in the
+// control column automatically). Boolean rows put the checkbox and its own label
+// in the control column, so checkboxes align with the inputs above and below.
+// (declared at the top of this file — the attributes table shares them)
+
+html body form.formtastic fieldset > ol > li.input {
+  display: grid;
+  grid-template-columns: $form-label-track minmax(0, 1fr);
+  align-items: center;
+  column-gap: $form-row-gap;
+  row-gap: 4px;
+
+  // 13px, from --text-sm (`.label` is a `text-sm` component). AA3 used
+  // `font-size: 1.0em` against its 11.52px body = 11.5px.
+  > label.label {
+    grid-column: 1;
+    margin: 0;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  // Everything that is not the row label is the control.
+  > *:not(label.label) {
+    grid-column: 2;
+  }
+
+  > p.inline-hints,
+  > p.inline-errors {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  // AA3: `p.inline-hints { font-size: 0.95em; font-style: italic; color: #666 }`
+  > p.inline-hints {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--aa-text-muted);
+  }
+}
+
+// Boolean rows render <input type=checkbox> before their <label>, so they need a
+// third track to sit side by side instead of stacking.
+// The gap stays $form-row-gap so the checkbox lines up exactly with the inputs
+// above and below it; `max-content` keeps the checkbox track at its own width.
+html body form.formtastic fieldset > ol > li.boolean {
+  grid-template-columns: $form-label-track max-content minmax(0, 1fr);
+
+  > input[type="checkbox"] {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  // The boolean row's label IS the attribute name, so it matches the labels above.
+  > label {
+    grid-column: 3;
+    justify-self: start;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  > p.inline-hints,
+  > p.inline-errors {
+    grid-column: 2 / -1;
+  }
+}

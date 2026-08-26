@@ -43,7 +43,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   includes destination: [:rate_group]
 
   action_item :destinations, only: [:index] do
-    link_to 'Destinations', destinations_path
+    action_item_link 'Destinations', destinations_path
   end
 
   sidebar :destination, priority: 1, only: %i[new update], if: proc { assigns[:destination].present? } do
@@ -70,7 +70,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
       f.input :next_rate
       f.input :connect_fee
       f.input :attempt_fee
-      f.input :apply_time, as: :date_time_picker, datepicker_options: { defaultTime: '00:00' }
+      f.input :apply_time, as: :datetime_picker
     end
     f.actions
   end
@@ -92,8 +92,8 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   filter :next_interval
   filter :connect_fee
   filter :attempt_fee
-  filter :created_at, as: :date_time_range
-  filter :updated_at, as: :date_time_range
+  filter :created_at, as: :date_range
+  filter :updated_at, as: :date_range
   filter :external_id
 
   index do

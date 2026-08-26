@@ -8,8 +8,10 @@ RSpec.describe 'Batch Destroy System Background Tasks', type: :feature, js: true
   subject do
     visit background_tasks_path
     table_select_all
-    click_batch_action('Delete Selected')
-    confirm_modal_dialog
+    # ActiveAdmin 4 confirms batch actions through rails-ujs `data-confirm`, a
+    # native browser dialog raised DURING the click — so it must be accepted
+    # around the click, not after it as AA3's in-page modal was.
+    accept_confirm { click_batch_action('Delete Selected') }
   end
 
   it 'selected records should be destroyed' do

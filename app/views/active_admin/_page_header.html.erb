@@ -1,0 +1,44 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+
+    Compact 37px bar, matching the site header. The gem stacks the breadcrumb
+    above an h2.text-2xl inside p-4, which renders 71px (index) / 101px (show).
+    Here the breadcrumb, the title and the action items all share one row:
+      - the breadcrumb never wraps (flex-nowrap + whitespace-nowrap)
+      - a chevron joins the last crumb to the title, so it reads
+        "Gateways > seed_term_gw3 | 22"
+      - the title truncates rather than growing the bar
+
+    ActiveAdmin's `.action-item-button` is 38px tall (py-2 + text-sm + border),
+    which alone would overflow the 36px content box; it is restyled in
+    app/assets/stylesheets/yeti_admin.css.scss. %>
+<div data-test-page-header class="bg-gray-50 border-b border-gray-200 px-4 h-[37px] mb-4 flex items-center justify-between gap-4 dark:border-gray-800/50 dark:bg-inherit">
+  <% breadcrumb_links = build_breadcrumb_links(request.path, class: "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 no-underline") %>
+  <% chevron = capture do %>
+    <svg class="h-4 w-4 text-gray-300 dark:text-gray-700 shrink-0 rtl:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/>
+    </svg>
+  <% end %>
+
+  <div class="flex items-center gap-1 min-w-0">
+    <% if breadcrumb_links.present? %>
+      <nav aria-label="breadcrumb" class="min-w-0">
+        <ol class="flex flex-nowrap items-center gap-1 text-[13px]/[1.35]">
+          <% breadcrumb_links.each_with_index do |link, index| %>
+            <li class="inline-flex items-center gap-1 whitespace-nowrap">
+              <%= chevron if index > 0 %>
+              <%= link %>
+            </li>
+          <% end %>
+        </ol>
+      </nav>
+      <%= chevron %>
+    <% end %>
+    <h2 class="text-[15px]/[1.35] font-semibold truncate"><%= title %></h2>
+  </div>
+
+  <% if action_items_for_action.present? %>
+    <div data-test-action-items class="flex items-center gap-2 shrink-0">
+      <%= render "active_admin/shared/action_items" %>
+    </div>
+  <% end %>
+</div>

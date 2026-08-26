@@ -18,9 +18,9 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
 
   filter :id
   boolean_filter :completed
-  filter :date_start, as: :date_time_range
-  filter :date_end, as: :date_time_range
-  filter :created_at, as: :date_time_range
+  filter :date_start, as: :date_range
+  filter :date_end, as: :date_range
+  filter :created_at, as: :date_range
   filter :interval_length
 
   filter :aggregate_by,
@@ -62,14 +62,14 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :date_start,
-              as: :date_time_picker,
+              as: :datetime_picker,
               wrapper_html: {
                 class: 'datetime_preset_pair',
                 data: { show_time: 'true' }
               }
 
       f.input :date_end,
-              as: :date_time_picker
+              as: :datetime_picker
 
       f.input :interval_length,
               as: :select,

@@ -30,7 +30,9 @@ RSpec.describe 'Create new Destinations', type: :feature do
 
     it 'creates new Destination and show it' do
       click_on_submit
-      expect(page).to have_css('body.show.destinations')
+      # AA3 marked the page with `body.show.destinations`; AA4 puts no action or
+      # resource classes on <body>, so assert the redirect to the show page.
+      expect(page).to have_current_path(%r{/destinations/\d+\z})
 
       expect(Routing::Destination.last).to have_attributes(
         prefix: attributes[:batch_prefix],

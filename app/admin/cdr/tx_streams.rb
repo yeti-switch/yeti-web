@@ -52,9 +52,9 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
   scope :no_tx, show_count: false
 
   filter :id
-  filter :time_start, as: :date_time_range
-  filter :stream_time_start, as: :date_time_range
-  filter :stream_time_end, as: :date_time_range
+  filter :time_start, as: :date_range
+  filter :stream_time_start, as: :date_range
+  filter :stream_time_end, as: :date_range
   filter :pop
   filter :node
   filter :gateway,

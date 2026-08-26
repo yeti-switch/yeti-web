@@ -146,8 +146,10 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
       super()
 
       select_records!
-      click_batch_action(batch_action_name)
-      confirm_modal_dialog
+      # ActiveAdmin 4 confirms batch actions through rails-ujs `data-confirm`, a
+      # native browser dialog raised DURING the click — so it must be accepted
+      # around the click, not after it as AA3's in-page modal was.
+      accept_confirm { click_batch_action(batch_action_name) }
     end
 
     context 'Delete' do

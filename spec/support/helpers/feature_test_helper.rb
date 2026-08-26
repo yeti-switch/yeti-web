@@ -16,10 +16,16 @@ module FeatureTestHelper
   end
 
   # override Capybara::ActiveAdmin::Selectors::Form#has_many_fields_selector
+  #
+  # ActiveAdmin 4 dashed the class names and, more importantly, moved the
+  # association from a class on the container to a `data-has-many-association`
+  # attribute (see the gem's form_builder.rb#wrap_div_or_li), so the association
+  # can no longer be matched as `.has_many_container.<assoc>`.
+  #
   # @param association_name [String]
   # @return [String] selector.
   def has_many_fields_selector(association_name)
-    ".has_many_container.#{association_name} > fieldset.inputs.has_many_fields"
+    %(.has-many-container[data-has-many-association="#{association_name}"] > fieldset.inputs.has-many-fields)
   end
 
   def response_csv
@@ -46,7 +52,11 @@ module FeatureTestHelper
     input_id = page.find('label', text: field)['for']
     input = find_field(input_id)
     input.set(with)
-    input.send_keys(:enter)
+    # No trailing `send_keys(:enter)`: that existed to dismiss the JS picker
+    # active_admin_datetimepicker rendered over a text input. Since ActiveAdmin 4
+    # these are native `datetime-local` inputs with no picker to dismiss, and
+    # Enter in a form field SUBMITS the form — so the page navigated away
+    # mid-fill and the later `click_submit` found no button.
   end
 
   def have_semantic_error_texts(*texts)
@@ -58,18 +68,25 @@ module FeatureTestHelper
     end
   end
 
+  # AA4 dropped the .resource_selection_toggle_cell / .resource_selection_cell
+  # wrappers; the checkboxes now carry .batch-actions-toggle-all and
+  # .batch-actions-resource-selection. The toggle-all input is still wrapped in
+  # a <label>, which is what gets clicked.
   def table_select_all
-    page.find('.resource_selection_toggle_cell label').click
+    page.find('.batch-actions-toggle-all', visible: :all).ancestor('label').click
   end
 
   def table_select_row(id)
     within_table_row(id:) do
-      find('.resource_selection_cell .collection_selection').set(true)
+      find('.batch-actions-resource-selection').set(true)
     end
   end
 
+  # AA3's `#main_content_wrapper` is gone; ActiveAdmin 4 wraps page content in
+  # `.main-content-container` (see the gem's resource/index.html.arb, show.html.arb
+  # and _form.html.arb).
   def within_main_content(&block)
-    within('#main_content_wrapper', &block)
+    within('.main-content-container', &block)
   end
 
   # confirms "Update batch" dialog after it was submitted

@@ -36,11 +36,11 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   filter :time_zone_name
 
   action_item(:download, only: [:show]) do
-    link_to 'Download', action: :download if resource.completed?
+    action_item_link 'Download', action: :download if resource.completed?
   end
 
   action_item(:delete_file, only: [:show]) do
-    link_to('Delete File', { action: :delete_file }, method: :delete) if resource.completed?
+    action_item_link('Delete File', { action: :delete_file }, method: :delete) if resource.completed?
   end
 
   index do
@@ -87,7 +87,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
           row 'Time format', &:time_format_with_hint
           row 'Time zone name', &:time_zone_name
         end
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
 
       column do
@@ -212,9 +212,9 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       gateways = Gateway.order(:name)
       boolean_options = [['Any', nil], ['Yes', true], ['No', false]]
 
-      ff.input :time_start_gteq, as: :date_time_picker, required: true
-      ff.input :time_start_lteq, as: :date_time_picker, required: false
-      ff.input :time_start_lt, as: :date_time_picker, required: false
+      ff.input :time_start_gteq, as: :datetime_picker, required: true
+      ff.input :time_start_lteq, as: :datetime_picker, required: false
+      ff.input :time_start_lt, as: :datetime_picker, required: false
 
       ff.contractor_input :customer_id_eq,
                           label: 'Customer id eq',

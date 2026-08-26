@@ -16,11 +16,11 @@ RSpec.describe 'Index Outgoing Registrations', type: :feature do
   end
 
   it 'has record' do
-    expect(page).to have_css('.col-id', text: record_attributes[:id])
-    expect(page).to have_css('.col-pop a', text: pop.name)
-    expect(page).to have_css('.col-node a', text: node.name)
-    expect(page).to have_css('.col-last_reply_contacts', text: record_attributes[:last_reply_contacts])
-    expect(page).to have_css('.col-last_request_contact', text: record_attributes[:last_request_contact])
+    expect(page).to have_css('td[data-column="id"]', text: record_attributes[:id])
+    expect(page).to have_css('td[data-column="pop"] a', text: pop.name)
+    expect(page).to have_css('td[data-column="node"] a', text: node.name)
+    expect(page).to have_css('td[data-column="last_reply_contacts"]', text: record_attributes[:last_reply_contacts])
+    expect(page).to have_css('td[data-column="last_request_contact"]', text: record_attributes[:last_request_contact])
     expect(page).to_not have_css('flash-warning')
     expect(page).to_not have_css('flash-error')
   end
@@ -29,11 +29,11 @@ RSpec.describe 'Index Outgoing Registrations', type: :feature do
     let(:record_attributes) { { id: 123 } }
 
     it 'has record' do
-      expect(page).to have_css('.col-id', text: record_attributes[:id])
-      expect(page).to have_css('.col-pop', exact_text: '')
-      expect(page).to have_css('.col-node', exact_text: '')
-      expect(page).to have_css('.col-last_reply_contacts', exact_text: '')
-      expect(page).to have_css('.col-last_request_contact', exact_text: '')
+      expect(page).to have_css('td[data-column="id"]', text: record_attributes[:id])
+      expect(page).to have_css('td[data-column="pop"]', exact_text: '')
+      expect(page).to have_css('td[data-column="node"]', exact_text: '')
+      expect(page).to have_css('td[data-column="last_reply_contacts"]', exact_text: '')
+      expect(page).to have_css('td[data-column="last_request_contact"]', exact_text: '')
       expect(page).to_not have_css('flash-warning')
       expect(page).to_not have_css('flash-error')
     end

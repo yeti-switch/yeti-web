@@ -6,8 +6,6 @@ ActiveAdmin.register GatewayGroup do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_async_destroy('GatewayGroup')
-  acts_as_async_update BatchUpdateForm::GatewayGroup
 
   acts_as_delayed_job_lock
 

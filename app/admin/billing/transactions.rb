@@ -23,7 +23,7 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
   end
 
   filter :id
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   account_filter :account_id_eq
   filter :service_id, label: 'Service ID'
   filter :service, input_html: { class: 'tom-select' }

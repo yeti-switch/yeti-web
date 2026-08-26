@@ -7,7 +7,7 @@ RSpec.describe 'Index Reports Custom Cdrs', type: :feature do
     custom_cdrs = create_list(:custom_cdr, 2)
     visit custom_cdrs_path
     custom_cdrs.each do |custom_cdr|
-      expect(page).to have_css('.col-id', text: custom_cdr.id)
+      expect(page).to have_css('td[data-column="id"]', text: custom_cdr.id)
     end
   end
 

@@ -1,6 +1,15 @@
+// Fills the collapsible "Statistic" sidebar section on the CDRs index the first
+// time it is opened (the section is declared in lib/resource_dsl/acts_as_cdr_stat.rb,
+// and panel_toggle.js fires `panel:opened` after the slide finishes).
+//
+// The guard used to be `$('body').is('.index.cdrs')`, relying on the body classes
+// ActiveAdmin 3 emitted and 4 does not. Binding straight to the section is both
+// the correct precondition (it exists only on that page) and independent of the
+// gem's markup for page identity.
 $(document).ready(function () {
-    if ($('body').is('.index.cdrs')) {
-        $("#statistic_sidebar_section .panel_contents").one('panel:opened', function () {
+    var $section = $("#statistic_sidebar_section .panel-body");
+    if ($section.length) {
+        $section.one('panel:opened', function () {
             var div = $("#cdr_statistic");
             if (div) {
 

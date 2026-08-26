@@ -2,7 +2,7 @@
 
 RSpec.describe 'Apply Create and update Import Contractor', type: :feature, js: true do
   subject do
-    within('#titlebar_right') { click_link 'Create and update' }
+    within('[data-test-action-items]') { click_link 'Create and update' }
     expect(page).to have_current_path(importing_contractors_path)
   end
 

@@ -22,7 +22,7 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
       subject
       customer = match_customers.first
 
-      parent = find('.filter_form')
+      parent = find('.filters-form')
       customer_filter = Section::TomSelect.by_label('CUSTOMER', exact: true, parent:)
       customer_filter.control.click # open dropdown
       customer_filter.dropdown.search('cus')
@@ -32,11 +32,11 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
 
       # filtered correctly
       customer_filter.dropdown.select_option(customer.display_name)
-      page.find('.filter_form input[type=submit]').click
+      page.find('.filters-form input[type=submit]').click
 
       expect(Rack::Utils.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
       # expect(page).to have_field_tom_select('Customer', with: customer.display_name)
-      parent = find('.filter_form')
+      parent = find('.filters-form')
       new_customer_filter = Section::TomSelect.by_label('CUSTOMER', exact: true, parent:)
       expect(new_customer_filter).to have_selected_text customer.display_name
     end

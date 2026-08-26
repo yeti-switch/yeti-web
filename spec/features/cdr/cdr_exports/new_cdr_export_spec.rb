@@ -35,8 +35,8 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fill_form!) do
       fill_in_tom_select 'Fields', with: %w[success id], exact: true
       fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
-      fill_in 'Time start gteq', with: '2018-01-01'
-      fill_in 'Time start lteq', with: '2018-03-01'
+      fill_in 'Time start gteq', with: '2018-01-01T00:00'
+      fill_in 'Time start lteq', with: '2018-03-01T00:00'
     end
 
     it 'cdr export should be created' do
@@ -66,8 +66,8 @@ RSpec.describe 'Create new CDR export', js: true do
 
     let(:fill_form!) do
       fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
-      fill_in 'Time start gteq', with: '2018-01-01'
-      fill_in 'Time start lteq', with: '2018-03-01'
+      fill_in 'Time start gteq', with: '2018-01-01T00:00'
+      fill_in 'Time start lteq', with: '2018-03-01T00:00'
     end
 
     it 'cdr export should be created' do
@@ -157,9 +157,9 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in_tom_select 'Orig gw id eq', with: "#{gateway1.name} | #{gateway1.id}"
         fill_in 'Term gw external id eq', with: '1237'
         fill_in_tom_select 'Term gw id eq', with: "#{gateway2.name} | #{gateway2.id}"
-        fill_in 'Time start gteq', with: '2018-01-01'
-        fill_in 'Time start lteq', with: '2018-03-01'
-        fill_in 'Time start lt', with: '2018-03-01', exact: true
+        fill_in 'Time start gteq', with: '2018-01-01T00:00'
+        fill_in 'Time start lteq', with: '2018-03-01T00:00'
+        fill_in 'Time start lt', with: '2018-03-01T00:00', exact: true
         fill_in 'Customer auth external type eq', with: 'term'
         fill_in 'Customer auth external type not eq', with: 'em'
         fill_in_tom_select 'Customer auth external id in', with: customer_auth.name, multiple: true, search: true
@@ -250,8 +250,8 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fill_form!) do
       within_form_for do
         fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
-        fill_in 'Time start gteq', with: '2018-01-01'
-        fill_in 'Time start lteq', with: '2018-03-01'
+        fill_in 'Time start gteq', with: '2018-01-01T00:00'
+        fill_in 'Time start lteq', with: '2018-03-01T00:00'
       end
     end
 
@@ -279,8 +279,8 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fill_form!) do
       fill_in_tom_select 'Fields', with: 'success', multiple: true
       fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
-      fill_in 'Time start gteq', with: '2018-01-01'
-      fill_in 'Time start lt', with: '2018-03-01', exact: true
+      fill_in 'Time start gteq', with: '2018-01-01T00:00'
+      fill_in 'Time start lt', with: '2018-03-01T00:00', exact: true
     end
 
     it 'cdr export should be created' do
@@ -330,8 +330,8 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'without fields' do
     let(:fill_form!) do
-      fill_in 'Time start gteq', with: '2018-01-01'
-      fill_in 'Time start lteq', with: '2018-03-01', exact: true
+      fill_in 'Time start gteq', with: '2018-01-01T00:00'
+      fill_in 'Time start lteq', with: '2018-03-01T00:00', exact: true
     end
 
     it 'should rise semantic error' do

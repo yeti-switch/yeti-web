@@ -1,28 +1,44 @@
 # frozen_string_literal: true
 
+require 'active_admin/views/index_as_table'
+
 module ActiveAdmin
   module Views
     class IndexAsTable < ActiveAdmin::Component
-      def table_for(*args, &block)
-        # The "Visible columns" / "Reset" controls now render in the table_tools
-        # row (ActiveAdmin::Views::Pages::Index#build_additional_tools); only the
-        # hidden dialog block stays here.
-        insert_tag IndexTableFor, *args, &block
+      # Mirrors ActiveAdmin 4's own IndexAsTable#build, with two additions:
+      #   - `footer_data:` is threaded through to TableFor (see
+      #     lib/active_admin/views/components/table_for.rb)
+      #   - the hidden "Visible columns" dialog is appended after the table
+      #     (its trigger buttons render in the table_tools row)
+      # Keep in sync with the gem when upgrading ActiveAdmin.
+      def build(page_presenter, collection)
+        add_class 'index-as-table'
+        table_options = {
+          id: "index_table_#{active_admin_config.resource_name.plural}",
+          sortable: true,
+          i18n: active_admin_config.resource_class,
+          paginator: page_presenter[:paginator] != false,
+          tbody_html: page_presenter[:tbody_html],
+          row_html: page_presenter[:row_html],
+          # To be deprecated, please use row_html instead.
+          row_class: page_presenter[:row_class],
+          footer_data: page_presenter[:footer_data]
+        }
 
-        if assigns[:visible_columns].is_a?(Array)
-          div id: 'block_available_columns', title: 'Visible table columns' do
-            select_tag(:select_available_columns,
-                       options_for_select(assigns[:all_available_columns],
-                                          assigns[:visible_columns].any? ? assigns[:visible_columns] : assigns[:all_available_columns]),
-                       multiple: true, size: 20)
+        if page_presenter.block
+          insert_tag(IndexTableFor, collection, table_options) do |t|
+            instance_exec(t, &page_presenter.block)
           end
+        else
+          render 'index_as_table_default', table_options: table_options
         end
+
+        build_available_columns_dialog
       end
 
-      # Display columns only listed in assigns[:visible_columns]
-      # or all if assigns[:visible_columns] is empty
-      # if assigns[:visible_columns] not empty
-      # than display only columns listed in @visible_columns
+      # Display only the columns listed in assigns[:visible_columns], or all of
+      # them when that list is empty. Every column encountered is recorded in
+      # assigns[:all_available_columns] so the dialog can offer it.
       def column(*args, &block)
         return super unless assigns.key?(:visible_columns) || args[0].nil?
 
@@ -35,20 +51,29 @@ module ActiveAdmin
         super if assigns[:visible_columns].include?(column_js_code)
       end
 
-      def build(page_presenter, collection)
-        table_options = {
-          id: "index_table_#{active_admin_config.resource_name.plural}",
-          sortable: true,
-          class: 'index_table index',
-          i18n: active_admin_config.resource_class,
-          paginator: page_presenter[:paginator] != false,
-          row_class: page_presenter[:row_class],
-          footer_data: page_presenter[:footer_data]
-        }
+      # ActiveAdmin 3's id_column marked the link `class: "resource_id_link"`;
+      # AA4 renders a bare link_to. The class is a convention this app relies on
+      # — app/admin/cdr/cdrs.rb sets it by hand on its own id links, and the
+      # feature specs locate the ID cell by it — so restore it here rather than
+      # scatter the workaround across resources.
+      #
+      # Mirrors AA4's own id_column (lib/active_admin/views/index_as_table.rb);
+      # keep in sync when upgrading ActiveAdmin.
+      def id_column(*args)
+        raise "#{resource_class.name} has no primary_key!" unless resource_class.primary_key
 
-        table_for collection, table_options do |t|
-          table_config_block = page_presenter.block || default_table
-          instance_exec(t, &table_config_block)
+        options = args.extract_options!
+        title = args[0].presence || resource_class.human_attribute_name(resource_class.primary_key)
+        sortable = options.fetch(:sortable, resource_class.primary_key)
+
+        column(title, sortable: sortable) do |resource|
+          if controller.action_methods.include?('show')
+            link_to resource.id, resource_path(resource), class: 'resource_id_link'
+          elsif controller.action_methods.include?('edit')
+            link_to resource.id, edit_resource_path(resource), class: 'resource_id_link'
+          else
+            resource.id
+          end
         end
       end
 
@@ -60,6 +85,19 @@ module ActiveAdmin
               value ? 'Yes' : 'No'
             end
           end
+        end
+      end
+
+      private
+
+      def build_available_columns_dialog
+        return unless assigns[:visible_columns].is_a?(Array)
+
+        selected = assigns[:visible_columns].presence || assigns[:all_available_columns]
+        div id: 'block_available_columns', title: 'Visible table columns' do
+          select_tag(:select_available_columns,
+                     options_for_select(assigns[:all_available_columns], selected),
+                     multiple: true, size: 20)
         end
       end
     end

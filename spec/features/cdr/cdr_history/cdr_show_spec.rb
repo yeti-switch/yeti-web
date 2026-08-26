@@ -43,8 +43,8 @@ RSpec.describe 'CDR show', type: :feature do
 
   it 'does not have link to create new cdr' do
     subject
-    expect(page).to have_selector('tr.row-routing_tags')
-    expect(page).to_not have_selector('.title_bar .action_items .action_item a[href="/cdrs/new"]')
+    expect(page).to have_selector('tr[data-row="routing_tags"]')
+    expect(page).to_not have_selector('[data-test-action-items] a[href="/cdrs/new"]')
   end
 
   context 'when CDR has no routing tags' do
@@ -58,7 +58,8 @@ RSpec.describe 'CDR show', type: :feature do
       expect(page).to have_attribute_row('ID', exact_text: cdr.id)
       expect(page).to have_attribute_row('Routing Tags', exact_text: 'Empty')
       within_attribute_row('Routing Tags') do
-        expect(page).to have_selector('.empty', exact_text: 'Empty')
+        # AA4 renamed the attributes-table placeholder class from `empty`.
+        expect(page).to have_selector('.attributes-table-empty-value', exact_text: 'Empty')
       end
     end
 

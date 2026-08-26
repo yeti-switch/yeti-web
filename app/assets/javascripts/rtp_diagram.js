@@ -738,8 +738,13 @@
     }
 
     $(document).ready(function () {
-        $('#active_admin_content .tabs').on('tabsactivate', function (event, ui) {
-            ui.newPanel.find('.rtp-diagram-container[data-rtp-diagram-url]').each(function () {
+        // Was bound to jQuery UI's `tabsactivate` on `#active_admin_content`.
+        // Both halves are gone in ActiveAdmin 4 — its tabs are Flowbite and fire
+        // no such event, and that id is only rendered on index pages while these
+        // diagrams live on show pages — so RTP diagrams never loaded at all.
+        // Hook the tab button the same way ajax_tab.js does.
+        $(document).on('click', '.tabs [data-tab-target]', function () {
+            $($(this).data('tab-target')).find('.rtp-diagram-container[data-rtp-diagram-url]').each(function () {
                 loadInto(this);
             });
         });

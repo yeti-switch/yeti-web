@@ -12,7 +12,7 @@ RSpec.describe 'Create Import Contractors', type: :feature, js: true do
 
   before do
     visit contractors_path
-    within('#titlebar_right') { click_link 'Import Contractors' }
+    within('[data-test-action-items]') { click_link 'Import Contractors' }
     expect(page).to have_current_path(import_contractors_path)
     attach_file 'File', Rails.root.join('spec/fixtures/files/import_contractors.csv')
   end
@@ -20,10 +20,10 @@ RSpec.describe 'Create Import Contractors', type: :feature, js: true do
   it 'creates import' do
     subject
 
-    within('.index_content') do
+    within('.main-content-container') do
       expect(page).to have_selector('table tbody tr', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-o_id', exact_text: '', count: 2)
-      expect(page).to have_selector('table tbody tr td.col-is_changed', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="o_id"]', exact_text: '', count: 2)
+      expect(page).to have_selector('table tbody tr td[data-column="is_changed"]', exact_text: '', count: 2)
     end
   end
 

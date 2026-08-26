@@ -1,25 +1,32 @@
-// The icon is an <a>, so the theme's high-specificity link-colour rule
-// (#wrapper #active_admin_content a:not(...) { color: var(--aa-link) }) would
-// override our colours. The leading #active_admin_content gives these rules a
-// 3rd id selector, which wins on specificity.
-#active_admin_content #sidebar #filters_sidebar_section  {
+// Icon-only filter-saving toggle, injected into the filters panel header by
+// sidebar_filter_actions.js.
+//
+// These rules were scoped `#active_admin_content #sidebar #filters_sidebar_section`:
+// under ActiveAdmin 3 the sidebar lived inside #active_admin_content, and the
+// third id was needed to outrank the theme's link-colour rule. In ActiveAdmin 4
+// the sidebar is a SIBLING of #active_admin_content, so that selector matched
+// nothing and the toggle rendered unstyled beside the "Filters" text.
+//
+// Two ids still outrank the content-link rule in yeti_admin.css.scss, which is
+// scoped `#sidebar a:not(.button)`.
+#sidebar #filters_sidebar_section {
 
-  // Icon-only filter-saving toggle in the section header.
+  // The panel header is a flex row (see yeti_admin.css.scss), so `float: right`
+  // no longer pushes the icon over; `margin-inline-start: auto` does. Flex also
+  // centres it vertically, so the old `margin-top: 2px` nudge is gone.
   .filter_indicator_persist {
-    float: right;
-    // No margin-right: the h3's 15px padding already lines the icon's right
-    // edge up with the filter inputs below it. float:right keeps that right
-    // edge fixed as the glyph swaps.
-    margin-top: 2px; // center the 16px icon in the ~19px header content box
+    margin-inline-start: auto;
     font-size: 14px;
     line-height: 16px;
     cursor: pointer;
     color: #8a949e; // off (saving disabled)
     text-decoration: none;
+
     &:hover {
       color: #6b7680;
       text-decoration: none;
     }
+
     .fa {
       display: block;
     }
@@ -27,6 +34,7 @@
 
   .filter_indicator_persist.persist {
     color: #e29b20; // on (saving enabled) — amber to stand out as the active state
+
     &:hover {
       color: #c8861a;
     }
@@ -36,9 +44,9 @@
   .filter_indicator_persist.busy {
     color: #8a949e;
     cursor: default;
+
     &:hover {
       color: #8a949e;
     }
   }
-
 }

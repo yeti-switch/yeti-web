@@ -1,0 +1,17 @@
+<%# Overrides ActiveAdmin 4's partial. Keep in sync with the gem on upgrade.
+
+    Only delta: the `blank_slate` class.
+
+    ActiveAdmin 3 rendered this state through the BlankSlate component itself —
+    `render_empty_results` did `insert_tag(view_factory.blank_slate, ...)` — so
+    "no results for these filters" and "nothing here yet" shared one class. AA4
+    split them into two partials with identical styling and no class on either,
+    leaving nothing to select or style them by. `_index_blank_slate.html.erb`
+    carries the same class for the same reason.
+
+    The text is unchanged: active_admin.pagination.empty, "No %{model} found". %>
+<div class="blank_slate w-full rounded-lg border-2 border-dashed border-gray-300 hover:border-gray-400 dark:border-gray-700 dark:hover:border-gray-600 px-6 py-12 text-center min-h-20">
+  <h2 class="block mb-4 only:mb-0 font-semibold leading-6 text-gray-900 dark:text-gray-200">
+    <%= I18n.t("active_admin.pagination.empty", model: active_admin_config.plural_resource_label) %>
+  </h2>
+</div>

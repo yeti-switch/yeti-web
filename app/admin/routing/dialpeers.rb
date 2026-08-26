@@ -11,8 +11,6 @@ ActiveAdmin.register Dialpeer do
   acts_as_quality_stat
   acts_as_lock DialpeerQualityCheck
   acts_as_stats_actions
-  acts_as_async_destroy('Dialpeer')
-  acts_as_async_update BatchUpdateForm::Dialpeer
 
   acts_as_delayed_job_lock
 
@@ -75,15 +73,15 @@ ActiveAdmin.register Dialpeer do
   end
 
   action_item :show_rates, only: [:show] do
-    link_to 'Show Rates', dialpeer_dialpeer_next_rates_path(resource.id)
+    action_item_link 'Show Rates', dialpeer_dialpeer_next_rates_path(resource.id)
   end
 
   action_item :new_rate, only: [:show] do
-    link_to 'New Rate', new_dialpeer_dialpeer_next_rate_path(resource.id)
+    action_item_link 'New Rate', new_dialpeer_dialpeer_next_rate_path(resource.id)
   end
 
   action_item :next_rates, only: [:index] do
-    link_to 'Next rates', dialpeer_next_rates_path
+    action_item_link 'Next rates', dialpeer_next_rates_path
   end
 
   index do
@@ -173,8 +171,8 @@ ActiveAdmin.register Dialpeer do
   filter :routing_group_routing_plans_id_eq, as: :select, input_html: { class: 'tom-select' }, label: 'Routing Plan', collection: -> { Routing::RoutingPlan.all }
 
   boolean_filter :locked
-  filter :valid_from, as: :date_time_range
-  filter :valid_till, as: :date_time_range
+  filter :valid_from, as: :date_range
+  filter :valid_till, as: :date_range
   filter :statistic_calls, as: :numeric
   filter :statistic_total_duration, as: :numeric
   filter :statistic_asr, as: :numeric
@@ -198,7 +196,7 @@ ActiveAdmin.register Dialpeer do
          input_html: { class: 'tom-select' },
          collection: -> { System::NetworkType.collection }
 
-  filter :created_at, as: :date_time_range
+  filter :created_at, as: :date_range
   filter :external_id
   boolean_filter :exclusive_route
 
@@ -284,8 +282,8 @@ ActiveAdmin.register Dialpeer do
                                  'data-required-param': 'q[vendor_id_eq]'
                                }
 
-      f.input :valid_from, as: :date_time_picker
-      f.input :valid_till, as: :date_time_picker
+      f.input :valid_from, as: :datetime_picker
+      f.input :valid_till, as: :datetime_picker
       f.input :acd_limit
       f.input :asr_limit
       f.input :short_calls_limit
@@ -389,6 +387,6 @@ ActiveAdmin.register Dialpeer do
         end
       end
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end

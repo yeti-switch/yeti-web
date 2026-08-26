@@ -13,12 +13,12 @@ RSpec.describe 'Cdrs index filter predicate labels' do
   end
 
   it 'labels string filter predicates from the locale' do
-    expect(option_texts('.filter_form_field.filter_string.select_and_search'))
+    expect(option_texts('.filters-form-field.string .filters-form-input-group'))
       .to match_array(ransack_predicate_labels(:eq, :cont, :start, :end))
   end
 
   it 'labels numeric/integer filter predicates from the locale' do
-    expect(option_texts('.filter_form_field.filter_numeric'))
+    expect(option_texts('.filters-form-field.numeric .filters-form-input-group'))
       .to match_array(ransack_predicate_labels(:eq, :gt, :lt))
   end
 end

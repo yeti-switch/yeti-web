@@ -119,6 +119,9 @@ RSpec.configure do |config|
   config.include RspecRequestHelper, type: :controller
   config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
   config.include Helpers::ActiveAdminForms::Examples, type: :feature
+  # Must come after Capybara::ActiveAdmin::TestHelpers (included by
+  # capybara/active_admin/rspec above) so its AA4 selectors win.
+  config.include CapybaraActiveAdminAa4, type: :feature
   config.include FeatureTestHelper, type: :feature
   config.include Helpers::TomSelect, type: :feature
   config.include JRPCMockHelper

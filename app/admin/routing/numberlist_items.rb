@@ -56,8 +56,8 @@ ActiveAdmin.register Routing::NumberlistItem do
                         input_html: { class: 'tom-select' }
 
   filter :tag_action, input_html: { class: 'tom-select' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
-  filter :created_at, as: :date_time_range
-  filter :updated_at, as: :date_time_range
+  filter :created_at, as: :date_range
+  filter :updated_at, as: :date_range
   filter :defer_src_rewrite
   filter :defer_dst_rewrite
   filter :rewrite_ss_status_id_eq,
@@ -128,7 +128,7 @@ ActiveAdmin.register Routing::NumberlistItem do
         end
       end
       tab :comments do
-        active_admin_comments
+        active_admin_comments_for(resource)
       end
     end
   end

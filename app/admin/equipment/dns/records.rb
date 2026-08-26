@@ -56,6 +56,6 @@ ActiveAdmin.register Equipment::Dns::Record do
       row :content
       row :contractor
     end
-    active_admin_comments
+    active_admin_comments_for(resource)
   end
 end
