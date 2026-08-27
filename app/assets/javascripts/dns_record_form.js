@@ -6,7 +6,7 @@ $(document).ready(function () {
     }
 
     var hints = $content.data('content-hints') || {};
-    // on validation error formtastic wraps the input into div.field_with_errors,
+    // on validation error formtastic wraps the input in div.field_with_errors,
     // so hint and error are looked up in the whole input wrapper, not in input siblings.
     var $wrapper = $content.closest('li');
     var $hint = $wrapper.find('p.inline-hints');

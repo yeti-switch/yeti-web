@@ -41,8 +41,8 @@ class Equipment::Dns::Record < ApplicationRecord
     'NS' => 'Name server hostname. Example: ns1.example.com.',
     'A' => 'IPv4 address. Example: 192.0.2.1',
     'AAAA' => 'IPv6 address. Example: 2001:db8::1',
-    'MX' => 'Priority(0..65535) and mail server hostname, separated by space. Example: 10 mail.example.com.',
-    'SRV' => 'Priority, weight, port(0..65535 each) and target hostname, separated by spaces. ' \
+    'MX' => 'Priority (0..65535) and mail server hostname, separated by space. Example: 10 mail.example.com.',
+    'SRV' => 'Priority, weight, port (0..65535 each) and target hostname, separated by spaces. ' \
              'Example: 10 5 5060 sip.example.com.',
     'CNAME' => 'Canonical hostname. Example: example.com. or @',
     'TXT' => 'Arbitrary text. Quote values containing spaces or ";". Example: "v=spf1 -all"'
