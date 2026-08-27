@@ -181,12 +181,23 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
         content: '192.0.2.2'
       )
     end
+    let!(:record_four) do
+      create(
+        :dns_record,
+        zone: zone,
+        contractor: nil,
+        name: '@',
+        record_type: 'MX',
+        content: '10 mail.example.com.'
+      )
+    end
 
     let(:expected_zonefile_payload) do
       zone.reload
-      ordered_records = [record_one, record_two, record_three].sort_by(&:id)
+      ordered_records = [record_one, record_two, record_three, record_four].sort_by(&:id)
       a_records = ordered_records.select { |record| record.record_type == 'A' }
       cname_records = ordered_records.select { |record| record.record_type == 'CNAME' }
+      mx_records = ordered_records.select { |record| record.record_type == 'MX' }
       <<~ZONEFILE
         $ORIGIN .
         $TTL #{zone.minimum}
@@ -207,6 +218,9 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
 
         ; CNAME Record
         #{cname_records.first.name} #{cname_records.first.record_type} #{cname_records.first.content}
+
+        ; MX Record
+        #{mx_records.first.name} #{mx_records.first.record_type} #{mx_records.first.content}
 
       ZONEFILE
     end
@@ -235,9 +249,10 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
 
       let(:expected_zonefile_payload) do
         zone.reload
-        ordered_records = [record_one, record_two, record_three].sort_by(&:id)
+        ordered_records = [record_one, record_two, record_three, record_four].sort_by(&:id)
         a_records = ordered_records.select { |record| record.record_type == 'A' }
         cname_records = ordered_records.select { |record| record.record_type == 'CNAME' }
+        mx_records = ordered_records.select { |record| record.record_type == 'MX' }
         <<~ZONEFILE
           $ORIGIN .
           $TTL #{zone.minimum}
@@ -258,6 +273,9 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
 
           ; CNAME Record
           #{cname_records.first.name} #{cname_records.first.record_type} #{cname_records.first.content}
+
+          ; MX Record
+          #{mx_records.first.name} #{mx_records.first.record_type} #{mx_records.first.content}
 
         ZONEFILE
       end

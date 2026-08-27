@@ -40,8 +40,13 @@ ActiveAdmin.register Equipment::Dns::Record do
               as: :select,
               include_blank: false,
               collection: Equipment::Dns::Record::RECORD_TYPES.invert,
-              input_html: { class: 'tom-select' }
-      f.input :content
+              input_html: { class: 'tom-select dns-record-type' }
+      f.input :content,
+              hint: Equipment::Dns::Record.content_hint(f.object.record_type || Equipment::Dns::Record::RECORD_TYPES.keys.first),
+              input_html: {
+                class: 'dns-record-content',
+                data: { content_hints: Equipment::Dns::Record::CONTENT_HINTS.to_json }
+              }
       f.contractor_input :contractor_id
     end
     f.actions
