@@ -45,10 +45,11 @@ class Equipment::Dns::Record < ApplicationRecord
     'SRV' => 'Priority, weight, port(0..65535 each) and target hostname, separated by spaces. ' \
              'Example: 10 5 5060 sip.example.com.',
     'CNAME' => 'Canonical hostname. Example: example.com. or @',
-    'TXT' => 'Arbitrary text. Example: v=spf1 -all'
+    'TXT' => 'Arbitrary text. Quote values containing spaces or ";". Example: "v=spf1 -all"'
   }.freeze
 
   UINT16_RANGE = (0..65_535)
+  LINE_BREAK_REGEXP = /[\r\n]/
   HOSTNAME_LABEL = '[a-zA-Z0-9_](?:[a-zA-Z0-9_-]*[a-zA-Z0-9_])?'
   HOSTNAME_REGEXP = /\A#{HOSTNAME_LABEL}(?:\.#{HOSTNAME_LABEL})*\.?\z/
 
@@ -79,6 +80,12 @@ class Equipment::Dns::Record < ApplicationRecord
 
   def validate_content_format
     return if content.blank? || !RECORD_TYPES.key?(record_type)
+
+    if content.match?(LINE_BREAK_REGEXP)
+      errors.add(:content, 'must not contain line breaks')
+      return
+    end
+
     return if content_format_valid?
 
     errors.add(:content, "is invalid for #{record_type} record. #{CONTENT_HINTS[record_type]}")
@@ -105,14 +112,19 @@ class Equipment::Dns::Record < ApplicationRecord
 
   def mx_content?
     priority, target, *rest = content.split
-    rest.empty? && uint16?(priority) && hostname?(target)
+    rest.empty? && uint16?(priority) && target_hostname?(target)
   end
 
   def srv_content?
     priority, weight, port, target, *rest = content.split
     rest.empty? &&
       [priority, weight, port].all? { |value| uint16?(value) } &&
-      (target == '.' || hostname?(target))
+      target_hostname?(target)
+  end
+
+  # root target means "no service/mail here", see RFC 2782 and RFC 7505
+  def target_hostname?(value)
+    value == '.' || hostname?(value)
   end
 
   def uint16?(value)

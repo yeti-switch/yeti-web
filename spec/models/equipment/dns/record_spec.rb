@@ -49,7 +49,7 @@ RSpec.describe Equipment::Dns::Record, type: :model do
       'NS' => ['ns1.example.com.', 'ns1.example.com', '@'],
       'A' => ['192.0.2.1'],
       'AAAA' => ['2001:db8::1'],
-      'MX' => ['10 mail.example.com.', '0 @', '65535 mail.example.com.'],
+      'MX' => ['10 mail.example.com.', '0 @', '65535 mail.example.com.', '0 .'],
       'SRV' => ['10 5 5060 sip.example.com.', '0 0 0 .'],
       'CNAME' => ['example.com.', '@'],
       'TXT' => ['v=spf1 -all', 'any text at all']
@@ -82,6 +82,21 @@ RSpec.describe Equipment::Dns::Record, type: :model do
             content: "is invalid for #{type} record. #{Equipment::Dns::Record::CONTENT_HINTS[type]}"
           }
         end
+      end
+    end
+
+    {
+      'MX' => "10\nmail.example.com.",
+      'SRV' => "10 5 5060\nsip.example.com.",
+      'TXT' => "first line\nsecond line"
+    }.each do |type, multiline_content|
+      context "with #{type} record and multiline content" do
+        let(:record_type) { type }
+        let(:content) { multiline_content }
+
+        include_examples :does_not_create_record, errors: {
+          content: 'must not contain line breaks'
+        }
       end
     end
   end
