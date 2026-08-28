@@ -30,34 +30,14 @@
             ...options
         })
 
-        // set when the widget was cleared because the master field was empty, and
-        // not because it was cleared by the user
-        var clearedByMaster = false
-        var selfUpdating = false
-        // last value the user picked, initially the one rendered by the server
-        var lastUserValues = optionValues('option[selected]')
-
         // tom-select marks selected options with the `selected` property and not
-        // with the attribute, so only `option:selected` sees the live selection
-        $el.on('change', function() {
-            if (!selfUpdating) lastUserValues = optionValues('option:selected')
-        })
-
-        function optionValues(selector) {
-            return $el.find(selector)
+        // with the attribute, so `option[selected]` only ever sees the value the
+        // page was rendered with, not the one selected afterwards
+        function selectedValues() {
+            return $el.find('option:selected')
                 .map(function() { return String($(this).val()) })
                 .get()
                 .filter(function(value) { return value !== '' })
-        }
-
-        function selectedValues() {
-            var values = optionValues('option:selected')
-            if (values.length || !clearedByMaster) return values
-
-            // the selection was dropped only because the master field went empty
-            // for a moment (tom-select clears it while its own options reload), so
-            // bring the last value picked by the user back instead of losing it
-            return lastUserValues
         }
 
         function fillOptions() {
@@ -72,11 +52,8 @@
             if (abortControllers[key]) abortControllers[key].abort()
 
             if (requiredParam && !data[requiredParam]) {
-                clearedByMaster = true
-                selfUpdating = true
                 ts.clear()
                 ts.clearOptions()
-                selfUpdating = false
                 return
             }
 
@@ -88,7 +65,6 @@
                     // read the selection right before dropping options, so a value
                     // selected while the request was in flight is kept as well
                     var prevValues = selectedValues()
-                    clearedByMaster = false
                     ts.clear(true)
                     ts.clearOptions()
                     var newValues = []
@@ -111,10 +87,13 @@
                 })
         }
 
-        // Listen to parent field changes
+        // Listen to parent field changes. Only the select itself is a master
+        // field: tom-select copies its classes onto the wrapper, and the change
+        // of the dropdown search input bubbles up to that wrapper while the
+        // select is still empty, which would clear this field for nothing.
         if (pathParams) {
             Object.values(pathParams).forEach(function(sel) {
-                $(sel).on('change', fillOptions)
+                $(sel).filter('select').on('change', fillOptions)
             })
         }
 
