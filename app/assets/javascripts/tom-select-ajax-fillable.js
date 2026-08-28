@@ -47,13 +47,16 @@
                     data[name] = $(pathParams[name]).val()
                 })
             }
+            // drop the in-flight request in both branches, otherwise its late
+            // response repopulates options that do not match the master field anymore
+            if (abortControllers[key]) abortControllers[key].abort()
+
             if (requiredParam && !data[requiredParam]) {
                 ts.clear()
                 ts.clearOptions()
                 return
             }
 
-            if (abortControllers[key]) abortControllers[key].abort()
             abortControllers[key] = new AbortController()
 
             fetch(path + $.param(data), { signal: abortControllers[key].signal })
@@ -64,11 +67,16 @@
                     var prevValues = selectedValues()
                     ts.clear(true)
                     ts.clearOptions()
-                    var restoreValues = []
+                    var newValues = []
                     items.forEach(function(i) {
                         var val = String(i.id)
-                        if (prevValues.indexOf(val) !== -1) restoreValues.push(val)
+                        newValues.push(val)
                         ts.addOption({ value: val, text: i.value })
+                    })
+                    // keep the selection order of the previous values, not the one
+                    // the search endpoint returned them in
+                    var restoreValues = prevValues.filter(function(value) {
+                        return newValues.indexOf(value) !== -1
                     })
                     if (restoreValues.length) {
                         ts.setValue(el.multiple ? restoreValues : restoreValues[0], true)
