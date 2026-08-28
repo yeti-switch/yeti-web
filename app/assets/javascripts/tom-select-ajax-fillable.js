@@ -30,6 +30,16 @@
             ...options
         })
 
+        // tom-select marks selected options with the `selected` property and not
+        // with the attribute, so `option[selected]` only ever sees the value the
+        // page was rendered with, not the one selected afterwards
+        function selectedValues() {
+            return $el.find('option:selected')
+                .map(function() { return String($(this).val()) })
+                .get()
+                .filter(function(value) { return value !== '' })
+        }
+
         function fillOptions() {
             var data = {}
             if (pathParams) {
@@ -37,32 +47,39 @@
                     data[name] = $(pathParams[name]).val()
                 })
             }
+            // drop the in-flight request in both branches, otherwise its late
+            // response repopulates options that do not match the master field anymore
+            if (abortControllers[key]) abortControllers[key].abort()
+
             if (requiredParam && !data[requiredParam]) {
                 ts.clear()
                 ts.clearOptions()
                 return
             }
 
-            // by some reason el.value and ts.getValue() return empty string
-            var currentValue = el.multiple
-                ? $el.find('option[selected]').map(function() { return $(this).val() })
-                : $el.find('option[selected]').val()
-            if (abortControllers[key]) abortControllers[key].abort()
             abortControllers[key] = new AbortController()
 
             fetch(path + $.param(data), { signal: abortControllers[key].signal })
                 .then(function(r) { return r.json() })
                 .then(function(items) {
+                    // read the selection right before dropping options, so a value
+                    // selected while the request was in flight is kept as well
+                    var prevValues = selectedValues()
                     ts.clear(true)
                     ts.clearOptions()
-                    var hasPrev = false
+                    var newValues = []
                     items.forEach(function(i) {
                         var val = String(i.id)
-                        if (val === currentValue) hasPrev = true
+                        newValues.push(val)
                         ts.addOption({ value: val, text: i.value })
                     })
-                    if (hasPrev) {
-                        ts.setValue(currentValue, true)
+                    // keep the selection order of the previous values, not the one
+                    // the search endpoint returned them in
+                    var restoreValues = prevValues.filter(function(value) {
+                        return newValues.indexOf(value) !== -1
+                    })
+                    if (restoreValues.length) {
+                        ts.setValue(el.multiple ? restoreValues : restoreValues[0], true)
                     }
                 })
                 .catch(function(e) {
@@ -70,10 +87,13 @@
                 })
         }
 
-        // Listen to parent field changes
+        // Listen to parent field changes. Only the select itself is a master
+        // field: tom-select copies its classes onto the wrapper, and the change
+        // of the dropdown search input bubbles up to that wrapper while the
+        // select is still empty, which would clear this field for nothing.
         if (pathParams) {
             Object.values(pathParams).forEach(function(sel) {
-                $(sel).on('change', fillOptions)
+                $(sel).filter('select').on('change', fillOptions)
             })
         }
 
