@@ -4,6 +4,7 @@
 //= require jquery.dependent.fields
 //= require active_admin/base
 //= require gateway_form
+//= require dns_record_form
 //= require table_highlights
 //= require import_form
 //= require panel_toggle
