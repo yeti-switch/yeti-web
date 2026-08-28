@@ -30,14 +30,22 @@
             ...options
         })
 
+        function optionValues(selector) {
+            return $el.find(selector)
+                .map(function() { return String($(this).val()) })
+                .get()
+                .filter(function(value) { return value !== '' })
+        }
+
         // tom-select marks selected options with the `selected` property and not
         // with the attribute, so `option[selected]` only ever sees the value the
         // page was rendered with, not the one selected afterwards.
         function selectedValues() {
-            return $el.find('option:selected')
-                .map(function() { return String($(this).val()) })
-                .get()
-                .filter(function(value) { return value !== '' })
+            var values = optionValues('option:selected')
+            // nothing is selected right now: tom-select clears the master field for
+            // a moment while switching its value, and that clears dependent fields
+            // too, so fall back to the value the page was rendered with
+            return values.length ? values : optionValues('option[selected]')
         }
 
         function fillOptions() {
