@@ -13,6 +13,7 @@ module Report
     validate :validate_customer
     validate :validate_group_by
     validate :validate_send_to
+    validate :validate_filter
 
     # @!method customer
     define_memoizable :customer, apply: lambda {
@@ -59,6 +60,11 @@ module Report
       if customer_id && customer.nil?
         errors.add(:customer_id, :invalid)
       end
+    end
+
+    def validate_filter
+      message = CdrReportFilter.error_for(filter)
+      errors.add(:filter, message) if message
     end
   end
 end

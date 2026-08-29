@@ -1,0 +1,89 @@
+// Chips + autocomplete filter builder on the CDR report forms
+// (cdr_filter_builder.js).
+.cdr-filter-builder {
+  position: relative;
+  margin-bottom: 6px;
+
+  // The input-looking box that holds chips + the text entry.
+  .cdr-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    min-height: 32px;
+    padding: 3px 6px;
+    border: 1px solid #c9d0d6;
+    border-radius: 3px;
+    background: #fff;
+    cursor: text;
+  }
+
+  .cdr-chip-entry {
+    flex: 1;
+    min-width: 140px;
+    border: 0;
+    outline: 0;
+    padding: 2px;
+    font-size: 13px;
+  }
+
+  .cdr-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #eef3f8;
+    border: 1px solid #d4dde6;
+    font-size: 12px;
+    white-space: nowrap;
+
+    &.cdr-chip-pending {
+      background: #fff7e6;
+      border-color: #f0d9a8;
+      color: #8a6d3b;
+    }
+  }
+
+  .cdr-chip-remove {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
+    padding: 0 1px;
+
+    &:hover { color: #c0392b; }
+  }
+
+  // Autocomplete dropdown. Position/width are set in JS to match the chips box.
+  .cdr-suggest {
+    position: absolute;
+    z-index: 20;
+    max-height: 260px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #c9d0d6;
+    border-top: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    .cdr-suggest-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 4px 8px;
+      cursor: pointer;
+
+      &.active { background: #2d8ceb; color: #fff; }
+      &.disabled { color: #999; cursor: default; }
+
+      .cdr-suggest-hint { font-size: 11px; opacity: 0.7; margin-left: 8px; }
+    }
+  }
+}
+
+// Live preview of the resulting Ransack query, shown as the field hint.
+.cdr-filter-preview {
+  font-family: monospace;
+  word-break: break-all;
+}
