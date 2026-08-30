@@ -71,12 +71,16 @@ RSpec.describe 'config/yeti_web.yml' do
         }
       },
       api_log_enabled: boolean,
-      logs: {
-        tags: a_kind_of(Hash)
-      },
-      elasticsearch: {
-        url: a_kind_of(String),
-        transport_options: a_kind_of(Hash)
+      logging: {
+        stdout: {
+          level: a_kind_of(String)
+        },
+        elasticsearch: {
+          level: a_kind_of(String),
+          url: a_kind_of(String),
+          tags: a_kind_of(Hash),
+          transport_options: a_kind_of(Hash)
+        }
       },
       s3_storage: {
         endpoint: a_kind_of(String),

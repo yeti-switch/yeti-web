@@ -8,8 +8,8 @@ require_relative 'yeti_log_component'
 #
 #   * named tags (config.log_tags, SemanticLogger.tagged) are merged into the
 #     root of the record instead of being nested under `named_tags`;
-#   * static tags (YetiConfig.logs.tags) are emitted by every process, not only
-#     by puma inside a request;
+#   * static tags (YetiConfig.logging.elasticsearch.tags) are emitted by every process,
+#     not only by puma inside a request;
 #   * `component` tells which process wrote the record;
 #   * the logger name, `level_index`, `duration_ms`, `application` and `environment`
 #     are dropped. `duration` is the number of milliseconds.
@@ -30,7 +30,7 @@ class YetiLogFormatter < SemanticLogger::Formatters::Raw
 
   # `application` and `environment` of SemanticLogger are not emitted by default:
   # they are constants of the process, that are configured as static tags instead
-  # (YetiConfig.logs.tags), so that every such field is defined in one place.
+  # (YetiConfig.logging.elasticsearch.tags), so that every such field is defined in one place.
   #
   # @param static_tags [Hash] tags added to every log record.
   def initialize(static_tags: {}, log_application: false, log_environment: false, **args)

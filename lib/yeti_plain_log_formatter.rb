@@ -6,8 +6,12 @@ require 'semantic_logger'
 #
 #   2026-08-20T15:35:34.103216 INFO Worker for CdrProcessor::Processors::CdrBilling started
 #
-# Keeps the format that bin/cdr_processor had before it switched to SemanticLogger,
-# see YetiLogSetup.
+# The `:default` format of the Rails processes is not used here - and this is not only
+# the format bin/cdr_processor had before it switched to SemanticLogger. These processes
+# have no named tags and no request/SQL durations to show, so all `:default` would add is
+# the pid, the thread and the logger name, that the systemd unit of the process already
+# carries into journald. The record shipped to elasticsearch keeps every field regardless,
+# it is formatted by YetiLogFormatter. See YetiLogSetup.add_stdout_appender.
 class YetiPlainLogFormatter < SemanticLogger::Formatters::Base
   TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%6N'
 
