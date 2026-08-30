@@ -9,9 +9,11 @@ RSpec.describe YetiLogSetup do
       url: 'http://localhost:9428/insert/elasticsearch',
       index: nil,
       tags: { env: 'production', system: 'yeti' },
-      transport_options: { params: { _msg_field: 'message' } }
+      transport_options: { params: { _msg_field: 'message' } },
+      **batch_config
     )
   end
+  let(:batch_config) { {} }
   let(:elasticsearch_level) { nil }
   let(:stdout_level) { nil }
   let(:logging_config) do
@@ -90,6 +92,40 @@ RSpec.describe YetiLogSetup do
       expect(described_class).to have_received(:add_elasticsearch_appender).with(tags: {}, level: :debug)
     end
 
+    # Lowering the global level is what lets the more verbose appender receive its
+    # records, so the other one has to be pinned instead of following it.
+    context 'when only the stdout appender is given a level of its own' do
+      let(:stdout_level) { 'error' }
+      let(:elasticsearch_level) { nil }
+
+      it 'keeps the elasticsearch appender at the default level instead of starving it' do
+        subject
+        expect(SemanticLogger.default_level).to eq(:info)
+        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: :info))
+      end
+
+      it 'applies the configured level to the stdout appender' do
+        subject
+        expect(stdout_appender.level).to eq(:error)
+      end
+    end
+
+    context 'when only the elasticsearch appender is given a level of its own' do
+      let(:stdout_level) { nil }
+      let(:elasticsearch_level) { 'debug' }
+
+      it 'keeps the stdout appender at the default level instead of flooding it' do
+        subject
+        expect(SemanticLogger.default_level).to eq(:debug)
+        expect(stdout_appender.level).to eq(:info)
+      end
+
+      it 'applies the configured level to the elasticsearch appender' do
+        subject
+        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: :debug))
+      end
+    end
+
     context 'when no appender is given a level of its own' do
       let(:stdout_level) { nil }
       let(:elasticsearch_level) { nil }
@@ -99,9 +135,13 @@ RSpec.describe YetiLogSetup do
         expect(SemanticLogger.default_level).to eq(:info)
       end
 
-      it 'leaves the stdout appender following the global level' do
+      # :trace is what SemanticLogger::Subscriber reports for an appender without a level
+      # of its own, so the global level is the only one that applies - as it was before
+      # the appenders could be levelled separately.
+      it 'leaves both appenders following the global level' do
         subject
         expect(stdout_appender.level).to eq(:trace)
+        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: nil))
       end
     end
 
@@ -120,11 +160,11 @@ RSpec.describe YetiLogSetup do
 
     let(:level) { {} }
 
-    # SemanticLogger.add_appender returns the SemanticLogger::Appender::AsyncBatch wrapper.
+    # SemanticLogger.add_appender returns the SemanticLogger::Appender::Async wrapper.
     # Stubbed, so that the specs never register a real appender in the global SemanticLogger.
     before do
       allow(SemanticLogger).to receive(:add_appender) do |appender:, **|
-        instance_double(SemanticLogger::Appender::AsyncBatch, appender:)
+        instance_double(SemanticLogger::Appender::Async, appender:)
       end
     end
 
@@ -137,9 +177,34 @@ RSpec.describe YetiLogSetup do
       expect(SemanticLogger).to have_received(:add_appender).with(hash_including(batch_size: 10))
     end
 
+    it 'leaves the batching defaults of SemanticLogger to it when they are not configured' do
+      subject
+      expect(SemanticLogger).to have_received(:add_appender) do |**options|
+        expect(options.keys).not_to include(:batch_seconds, :max_queue_size)
+      end
+    end
+
+    # Not configurable: a full queue drops the records rather than blocking the thread
+    # that wrote them, in every installation.
+    it 'always drops the records of a full queue and reports the count of them' do
+      subject
+      expect(SemanticLogger).to have_received(:add_appender)
+        .with(hash_including(non_blocking: true, dropped_message_report_seconds: 30))
+    end
+
+    context 'with the batching configured' do
+      let(:batch_config) { { batch_size: 100, batch_seconds: 30, max_queue_size: 10_000 } }
+
+      it 'passes every option to the batching proxy' do
+        subject
+        expect(SemanticLogger).to have_received(:add_appender)
+          .with(hash_including(batch_size: 100, batch_seconds: 30, max_queue_size: 10_000))
+      end
+    end
+
     it 'uses the url and the transport options of the config' do
       expect(subject.url).to eq('http://localhost:9428/insert/elasticsearch')
-      expect(subject.elasticsearch_args[:transport_options]).to include(params: { _msg_field: 'message' })
+      expect(subject.client_args[:transport_options]).to include(params: { _msg_field: 'message' })
     end
 
     it 'adds static tags of the config and the given ones to every record' do

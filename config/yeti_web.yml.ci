@@ -98,6 +98,9 @@ logging:
         _stream_fields:
           - system
           - host
+    batch_size: 10
+    batch_seconds: 5
+    max_queue_size: 10000
 
 s3_storage:
   endpoint: ''

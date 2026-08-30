@@ -79,7 +79,10 @@ RSpec.describe 'config/yeti_web.yml' do
           level: a_kind_of(String),
           url: a_kind_of(String),
           tags: a_kind_of(Hash),
-          transport_options: a_kind_of(Hash)
+          transport_options: a_kind_of(Hash),
+          batch_size: a_kind_of(Integer),
+          batch_seconds: a_kind_of(Integer),
+          max_queue_size: a_kind_of(Integer)
         }
       },
       s3_storage: {

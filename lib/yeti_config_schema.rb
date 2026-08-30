@@ -86,13 +86,19 @@ module YetiConfigSchema
         end
 
         # A blank `url` is what disables the appender. `tags` are the static fields added
-        # to every record it ships, the stdout appender emits none.
+        # to every record it ships, the stdout appender emits none. The records are
+        # queued and written in bulk, see YetiLogSetup.batch_options: `max_queue_size`
+        # is either -1, for a queue that grows without a limit, or the number of records
+        # to hold before they start being dropped.
         optional(:elasticsearch).schema do
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
           optional(:url).maybe(:string)
           optional(:index).maybe(:string)
           optional(:tags).hash
           optional(:transport_options).hash
+          optional(:batch_size).maybe(:integer, gt?: 0)
+          optional(:batch_seconds).maybe(:integer, gt?: 0)
+          optional(:max_queue_size).maybe(:integer, gteq?: -1, excluded_from?: [0])
         end
       end
 

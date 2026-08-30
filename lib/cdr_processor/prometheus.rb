@@ -2,9 +2,14 @@
 
 require 'prometheus_exporter'
 require 'prometheus_exporter/client'
+require_relative '../yeti_log_stats'
 
 module CdrProcessor
   class Prometheus
+    # Seconds between two reports of the log queue state, matching the interval
+    # YetiInfoProcessor reports at in the Rails processes.
+    LOG_STATS_INTERVAL = 30
+
     attr_reader :client
 
     def initialize(host:, port:, default_labels: {})
@@ -13,6 +18,27 @@ module CdrProcessor
         port: port,
         custom_labels: default_labels
       )
+    end
+
+    # Reports the queue state of the logging pipeline until the process exits, see
+    # YetiLogStats. A thread of its own and not a part of the batch loop: a backlog
+    # matters most when the processor is stuck and writes no batches at all.
+    #
+    # @param processor_name [String]
+    # @param logger [SemanticLogger::Logger]
+    # @return [Thread]
+    def start_log_stats(processor_name:, logger:, interval: LOG_STATS_INTERVAL)
+      Thread.new do
+        loop do
+          begin
+            YetiLogStats.metrics(processor: processor_name).each { |metric| @client.send_json(metric) }
+          rescue StandardError => e
+            # Never through the logger of the appender whose queue is being reported.
+            logger.warn "Failed to report the log queue state: #{e.class}: #{e.message}"
+          end
+          sleep interval
+        end
+      end
     end
 
     # @param processor_name [String]

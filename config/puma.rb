@@ -73,6 +73,10 @@ before_worker_boot do
 
   if PrometheusConfig.enabled?
     require 'prometheus_exporter/instrumentation'
+    require 'prometheus/semantic_logger_processor'
     PrometheusExporter::Instrumentation::Process.start(type: 'web')
+    # Per worker and not in `before_fork`: the queue it reports is the one this worker
+    # got from the SemanticLogger.reopen above, the master has a different one.
+    SemanticLoggerProcessor.start
   end
 end

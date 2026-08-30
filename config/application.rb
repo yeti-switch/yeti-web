@@ -135,15 +135,16 @@ module Yeti
 
       # Every environment logs the same way - to stdout, plus elasticsearch when it is
       # configured, see config/initializers/semantic_logger.rb. Only the test environment
-      # keeps the log/test.log file appender instead, to leave the rspec output readable.
+      # keeps the log/test.log file appender instead, to leave the rspec output readable:
+      # declaring no appender at all is what leaves rails_semantic_logger building its own.
       #
-      # Added here and not from an initializer: `add_file_appender` is read by the
-      # :initialize_logger initializer of rails_semantic_logger, that runs before
-      # config/initializers/*, and until the stdout appender is registered SemanticLogger
-      # has none at all - everything logged during the boot would be dropped.
+      # Declared here and not added from an initializer: the gem creates the declared
+      # appenders in its :initialize_logger initializer, that runs before
+      # config/initializers/*, so that the boot itself is logged as well.
       unless Rails.env.test?
-        config.rails_semantic_logger.add_file_appender = false
-        YetiLogSetup.add_stdout_appender(formatter: :default)
+        config.rails_semantic_logger.appenders do |appenders|
+          appenders.add(**YetiLogSetup.stdout_appender_options(formatter: :default))
+        end
       end
     end
   end
