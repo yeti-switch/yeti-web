@@ -137,8 +137,8 @@ module YetiLogSetup
 
   # Requires YetiConfig to be loaded.
   #
-  # @return [Array(Symbol, Symbol)] the stdout and the elasticsearch level, nil for an
-  #   appender that is given none and follows the global level.
+  # @return [Array<Symbol, nil>] two elements, the stdout and the elasticsearch level,
+  #   nil for an appender that is given none of its own.
   def configured_levels
     logging = YetiConfig.logging
     [logging&.stdout&.level, logging&.elasticsearch&.level].map { |level| level&.to_s&.downcase&.to_sym }

@@ -127,7 +127,7 @@ module Yeti
       # are applied by the rack middleware only, so they would be missing in the
       # logs of delayed_job/scheduler. YetiLogFormatter adds them to every record of
       # the elasticsearch appender instead. The stdout appender logs no static tags at
-      # all - the process is identified there by the systemd unit(SyslogIdentifier).
+      # all - the process is identified there by the systemd unit (SyslogIdentifier).
       config.log_tags = {
         request_id: :request_id,
         remote_ip: :remote_ip
