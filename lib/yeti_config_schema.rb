@@ -77,19 +77,16 @@ module YetiConfigSchema
         optional(:default_labels).hash
       end
 
-      # Logging, see YetiLogSetup. One block per appender. Every level is optional: an
-      # appender without one of its own follows the global level (config.log_level,
-      # RAILS_LOG_LEVEL).
+      # Logging, see YetiLogSetup. One block per appender. An appender without a level of
+      # its own follows the global one (config.log_level, RAILS_LOG_LEVEL).
       optional(:logging).schema do
         optional(:stdout).schema do
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
         end
 
-        # A blank `url` is what disables the appender. `tags` are the static fields added
-        # to every record it ships, the stdout appender emits none. The records are
-        # queued and written in bulk, see YetiLogSetup.batch_options: `max_queue_size`
-        # is either -1, for a queue that grows without a limit, or the number of records
-        # to hold before they start being dropped.
+        # A blank `url` disables the appender. `tags` are the static fields added to
+        # every record it ships. `max_queue_size` is either -1, for a queue that grows
+        # without a limit, or the records to hold before they start being dropped.
         optional(:elasticsearch).schema do
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
           optional(:url).maybe(:string)

@@ -133,20 +133,15 @@ module Yeti
         remote_ip: :remote_ip
       }
 
-      # Every environment logs the same way - to stdout, plus elasticsearch when it is
-      # configured, see config/initializers/semantic_logger.rb. Only the test environment
-      # keeps the log/test.log file appender instead, to leave the rspec output readable:
-      # declaring no appender at all is what leaves rails_semantic_logger building its own.
-      #
-      # Declared here and not added from an initializer: the gem creates the declared
-      # appenders in its :initialize_logger initializer, that runs before
-      # config/initializers/*, so that the boot itself is logged as well.
+      # Every environment logs to stdout, plus elasticsearch when it is configured, see
+      # config/initializers/semantic_logger.rb. Only the test environment keeps the
+      # log/test.log appender, to leave the rspec output readable: declaring none is what
+      # leaves rails_semantic_logger building its own. Declared and not added, so that the
+      # gem creates it in :initialize_logger, before the initializers that log the boot.
       unless Rails.env.test?
         config.rails_semantic_logger.appenders do |appenders|
-          # The level is applied here and not left to the .apply_levels! of
-          # config/initializers/semantic_logger.rb: that one runs after the initializers
-          # that log the boot, so a `logging.stdout.level` applied only there would let
-          # everything they write through first.
+          # The level is applied here and not left to .apply_levels!: that runs after the
+          # initializers that log the boot, and would let their records through first.
           appenders.add(
             **YetiLogSetup.stdout_appender_options(
               formatter: :default,

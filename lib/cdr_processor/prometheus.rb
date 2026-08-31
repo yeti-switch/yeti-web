@@ -6,8 +6,7 @@ require_relative '../yeti_log_stats'
 
 module CdrProcessor
   class Prometheus
-    # Seconds between two reports of the log queue state, matching the interval
-    # YetiInfoProcessor reports at in the Rails processes.
+    # Matches the interval SemanticLoggerProcessor reports at in the Rails processes.
     LOG_STATS_INTERVAL = 30
 
     attr_reader :client
@@ -20,9 +19,9 @@ module CdrProcessor
       )
     end
 
-    # Reports the queue state of the logging pipeline until the process exits, see
-    # YetiLogStats. A thread of its own and not a part of the batch loop: a backlog
-    # matters most when the processor is stuck and writes no batches at all.
+    # Reports the queue state of the logging pipeline, see YetiLogStats. A thread of its
+    # own and not a part of the batch loop: a backlog matters most when the processor is
+    # stuck and writes no batches at all.
     #
     # @param processor_name [String]
     # @return [Thread]
@@ -54,19 +53,18 @@ module CdrProcessor
     private
 
     def report(processor_name)
+      # Per payload: one queue failing to report must not stop the next one.
       YetiLogStats.metrics(processor: processor_name).each do |metric|
         @client.send_json(metric)
       rescue StandardError => e
-        # Per payload: one queue failing to report must not stop the next one.
         report_failure(e)
       end
     rescue StandardError => e
       report_failure(e)
     end
 
-    # Through the internal logger of SemanticLogger - stderr - and never through a
-    # SemanticLogger::Logger: that one writes to the elasticsearch appender whose queue
-    # is being reported, so a report of a full queue would be fed back into it.
+    # Never through a SemanticLogger::Logger: it writes to the elasticsearch appender
+    # whose queue is being reported, so a report of a full queue would feed back into it.
     def report_failure(error)
       SemanticLogger::Processor.logger.warn("Failed to report the log queue state: #{error.class}: #{error.message}")
     rescue StandardError

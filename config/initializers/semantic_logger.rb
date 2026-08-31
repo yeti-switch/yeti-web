@@ -9,8 +9,7 @@ require 'yeti_log_setup'
 require 'active_job/named_log_tags'
 
 # Adds the elasticsearch appender and applies the per appender levels of
-# config/yeti_web.yml to it and to the stdout appender of config/application.rb. The
-# first point of the boot where YetiConfig is loaded, by config/initializers/config.rb.
+# config/yeti_web.yml.
 #
 # Applied in every environment but test: an elasticsearch url in config/yeti_web.yml is
 # what enables it, not the environment the application runs in. The test suite is excluded
@@ -19,7 +18,7 @@ require 'active_job/named_log_tags'
 Rails.configuration.after_initialize do
   next if Rails.env.test?
 
-  # config.log_level is what rails_semantic_logger has already applied globally, so an
-  # unconfigured `logging.stdout.level`/`logging.elasticsearch.level` changes nothing.
+  # config.log_level is what rails_semantic_logger already applied, so an unconfigured
+  # `logging` block changes nothing.
   YetiLogSetup.apply_levels!(default_level: Rails.application.config.log_level)
 end

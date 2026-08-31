@@ -6,26 +6,19 @@ require_relative 'yeti_log_component'
 # Turns SemanticLogger.stats into the metric payloads of prometheus_exporter, see
 # SemanticLoggerCollector for the series they end up as.
 #
-# Every queue reported here is private to one process: SemanticLogger hands each log
-# record to a single processing thread, that hands it to the thread of every appender
-# that writes asynchronously. So a backlog is a property of the process that has it, and
-# the payloads name that process the way its own log records do - `component`, the field
-# YetiLogFormatter writes into every record, so that a series and the logs behind it are
-# selected by the same label - plus a `pid`, because puma runs several workers per host
-# and they would otherwise overwrite each other's series.
+# Every queue is private to one process, so the payloads carry `component` - the field
+# YetiLogFormatter writes into every log record, so that a series and its logs share a
+# label - and a `pid`, without which the puma workers of a host overwrite each other.
 #
-# Depends on semantic_logger only, so that bin/cdr_processor, that does not boot Rails,
-# reports the same metrics as the rest.
+# Depends on semantic_logger only, so that bin/cdr_processor reports the same metrics.
 module YetiLogStats
   TYPE = 'yeti_log'
 
-  # The queue of SemanticLogger itself, that every log record passes through, as opposed
-  # to the queue of one asynchronous appender.
+  # The queue of SemanticLogger itself, that every record passes through.
   PROCESSOR_QUEUE = 'processor'
 
-  # `max_queue_size` of a queue that holds as much as it is given. The sentinel of the
-  # `logging.elasticsearch.max_queue_size` config, and not 0 or a missing series, so that
-  # an unbounded queue is still visible as one.
+  # The sentinel of `logging.elasticsearch.max_queue_size`, and not nil: Gauge#observe
+  # deletes the series for nil, hiding an unbounded queue behind a silent process.
   UNBOUNDED = -1
 
   module_function
@@ -38,7 +31,7 @@ module YetiLogStats
 
     payloads = [queue_metric(stats, common.merge(queue: PROCESSOR_QUEUE))]
     stats[:appenders].each do |appender|
-      # An appender that writes inline has no queue and no counters of its own.
+      # An appender that writes inline has no queue of its own.
       next unless appender[:async]
 
       payloads << queue_metric(appender, common.merge(queue: appender[:name]))

@@ -12,13 +12,10 @@ module YetiConfigLoader
 
   CONFIG_PATH = File.expand_path('../config/yeti_web.yml', __dir__)
 
-  # Top level keys of the logging configuration that preceded the `logging` block, see
-  # YetiLogSetup. Rejected explicitly because nothing else would: YetiConfigSchema cannot
-  # turn on the `validate_keys` of dry-schema - it has no way to allow the user defined
-  # keys of `logging.elasticsearch.tags` and of the other free form blocks, see
-  # https://github.com/dry-rb/dry-schema/issues/37 - so an unknown key is simply ignored.
-  # A configuration still using these would load, and then silently stop shipping the
-  # logs to elasticsearch, with nothing pointing at the renamed key.
+  # Renamed into the `logging` block, see YetiLogSetup. Rejected explicitly because
+  # nothing else would: the `validate_keys` of dry-schema cannot be turned on while the
+  # config has free form blocks (dry-rb/dry-schema#37), so an unknown key is ignored and
+  # an outdated config would load and silently stop shipping the logs.
   LEGACY_KEYS = %i[logs elasticsearch].freeze
 
   module_function
@@ -26,7 +23,11 @@ module YetiConfigLoader
   # @param path [String]
   # @raise [YetiConfigLoader::Error] when the file is missing or does not satisfy YetiConfigSchema
   def call(path = CONFIG_PATH)
-    return if defined?(::YetiConfig)
+    # Already loaded - but still validated: load_and_set_settings defines the settings
+    # before the legacy keys can be rejected, so a caller that rescued the error left a
+    # loaded YetiConfig behind (YetiLogSetup.preloaded_stdout_level does), and returning
+    # here would hide the outdated config from the caller that reports it.
+    return reject_legacy_keys!(path) if defined?(::YetiConfig)
 
     # Config.load_and_set_settings accepts a missing path and defines an empty YetiConfig, so the
     # absence has to be caught here. Checked before Config.setup to leave no global config applied.

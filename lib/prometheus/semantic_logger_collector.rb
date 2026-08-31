@@ -4,13 +4,10 @@ require_relative '../yeti_log_stats'
 
 # Queue state of the logging pipeline of every yeti-web process, see YetiLogStats.
 #
-# The payloads are buffered rather than accumulated, the same way YetiInfoCollector does
-# it: each one describes one queue of one process at one moment, so a process that stops
-# reporting - it was restarted, or its `pid` changed - has to stop being exported instead
-# of freezing at its last value.
+# Buffered rather than accumulated, as YetiInfoCollector does it: a process that stops
+# reporting has to stop being exported instead of freezing at its last value.
 class SemanticLoggerCollector < PrometheusExporter::Server::TypeCollector
-  # Twice the interval the processors report at, so that a scrape between two reports
-  # still finds the previous one.
+  # Twice the reporting interval, so a scrape between two reports still finds one.
   class_attribute :max_metric_age, instance_writer: false, default: 60
 
   GAUGES = {
@@ -20,8 +17,7 @@ class SemanticLoggerCollector < PrometheusExporter::Server::TypeCollector
     'thread_active' => ['yeti_log_thread_active', 'Whether the thread draining the queue is running']
   }.freeze
 
-  # Cumulative since the process started, so they are set to the reported value rather
-  # than incremented by it - see #observe_counter.
+  # Cumulative in the process already, so they are set rather than incremented.
   COUNTERS = {
     'processed' => ['yeti_log_processed_total', 'Log records written'],
     'dropped' => ['yeti_log_dropped_total', 'Log records dropped because the queue was full']
