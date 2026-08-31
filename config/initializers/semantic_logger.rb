@@ -8,6 +8,9 @@ return if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] == 'true'
 require 'yeti_log_setup'
 require 'active_job/named_log_tags'
 
+# Adds the elasticsearch appender and applies the per appender levels of
+# config/yeti_web.yml.
+#
 # Applied in every environment but test: an elasticsearch url in config/yeti_web.yml is
 # what enables it, not the environment the application runs in. The test suite is excluded
 # because config/yeti_web.yml is not environment scoped: a production config copied to a
@@ -15,5 +18,7 @@ require 'active_job/named_log_tags'
 Rails.configuration.after_initialize do
   next if Rails.env.test?
 
-  YetiLogSetup.add_elasticsearch_appender
+  # config.log_level is what rails_semantic_logger already applied, so an unconfigured
+  # `logging` block changes nothing.
+  YetiLogSetup.apply_levels!(default_level: Rails.application.config.log_level)
 end

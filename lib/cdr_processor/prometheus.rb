@@ -2,9 +2,13 @@
 
 require 'prometheus_exporter'
 require 'prometheus_exporter/client'
+require_relative '../yeti_log_stats'
 
 module CdrProcessor
   class Prometheus
+    # Matches the interval SemanticLoggerProcessor reports at in the Rails processes.
+    LOG_STATS_INTERVAL = 30
+
     attr_reader :client
 
     def initialize(host:, port:, default_labels: {})
@@ -13,6 +17,21 @@ module CdrProcessor
         port: port,
         custom_labels: default_labels
       )
+    end
+
+    # Reports the queue state of the logging pipeline, see YetiLogStats. A thread of its
+    # own and not a part of the batch loop: a backlog matters most when the processor is
+    # stuck and writes no batches at all.
+    #
+    # @param processor_name [String]
+    # @return [Thread]
+    def start_log_stats(processor_name:, interval: LOG_STATS_INTERVAL)
+      Thread.new do
+        loop do
+          report(processor_name)
+          sleep interval
+        end
+      end
     end
 
     # @param processor_name [String]
@@ -29,6 +48,27 @@ module CdrProcessor
       }
       metric[:perform_group_duration] = perform_group_duration_ms if perform_group_duration_ms
       @client.send_json(metric)
+    end
+
+    private
+
+    def report(processor_name)
+      # Per payload: one queue failing to report must not stop the next one.
+      YetiLogStats.metrics(processor: processor_name).each do |metric|
+        @client.send_json(metric)
+      rescue StandardError => e
+        report_failure(e)
+      end
+    rescue StandardError => e
+      report_failure(e)
+    end
+
+    # Never through a SemanticLogger::Logger: it writes to the elasticsearch appender
+    # whose queue is being reported, so a report of a full queue would feed back into it.
+    def report_failure(error)
+      SemanticLogger::Processor.logger.warn("Failed to report the log queue state: #{error.class}: #{error.message}")
+    rescue StandardError
+      nil
     end
   end
 end

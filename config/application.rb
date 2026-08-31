@@ -20,6 +20,9 @@ require 'action_view/railtie'
 require_relative '../lib/capture_error'
 if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
   require 'rails_semantic_logger'
+  # require_relative and not require: lib is not on the $LOAD_PATH yet. Inside the guard,
+  # because it requires the semantic_logger gem, that is `require: false` in the Gemfile.
+  require_relative '../lib/yeti_log_setup'
 end
 require 'config'
 
@@ -120,23 +123,32 @@ module Yeti
     if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
       $stdout.sync = true
       config.rails_semantic_logger.semantic = true
-      # Static tags (YetiConfig.logs.tags) are not added here on purpose: log_tags
+      # Static tags (YetiConfig.logging.elasticsearch.tags) are not added here on purpose: log_tags
       # are applied by the rack middleware only, so they would be missing in the
       # logs of delayed_job/scheduler. YetiLogFormatter adds them to every record of
-      # the elasticsearch appender instead. The stdout appenders keep the `:default`
-      # format and log no static tags at all - the process is identified there by the
-      # systemd unit(SyslogIdentifier).
+      # the elasticsearch appender instead. The stdout appender logs no static tags at
+      # all - the process is identified there by the systemd unit (SyslogIdentifier).
       config.log_tags = {
         request_id: :request_id,
         remote_ip: :remote_ip
       }
 
-      # Every environment logs the same way - to stdout, plus elasticsearch when it is
-      # configured, see config/initializers/semantic_logger.rb. Only the test environment
-      # keeps the log/test.log file appender instead, to leave the rspec output readable.
+      # Every environment logs to stdout, plus elasticsearch when it is configured, see
+      # config/initializers/semantic_logger.rb. Only the test environment keeps the
+      # log/test.log appender, to leave the rspec output readable: declaring none is what
+      # leaves rails_semantic_logger building its own. Declared and not added, so that the
+      # gem creates it in :initialize_logger, before the initializers that log the boot.
       unless Rails.env.test?
-        config.rails_semantic_logger.add_file_appender = false
-        config.semantic_logger.add_appender(io: $stdout, formatter: :default)
+        config.rails_semantic_logger.appenders do |appenders|
+          # The level is applied here and not left to .apply_levels!: that runs after the
+          # initializers that log the boot, and would let their records through first.
+          appenders.add(
+            **YetiLogSetup.stdout_appender_options(
+              formatter: :default,
+              level: YetiLogSetup.preloaded_stdout_level
+            )
+          )
+        end
       end
     end
   end

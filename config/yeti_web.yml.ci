@@ -80,21 +80,27 @@ invoice:
     timeout: 30
 
 api_log_enabled: true
-logs:
-  tags:
-    env: 'production'
-    system: 'yeti'
+logging:
+  stdout:
+    level: 'info'
 
-# Not applied by the test suite, see config/initializers/semantic_logger.rb.
-# Kept here so that spec/config/yeti_web_spec.rb validates the block against the schema.
-elasticsearch:
-  url: 'http://localhost:9428/insert/elasticsearch'
-  transport_options:
-    params:
-      _msg_field: 'message'
-      _stream_fields:
-        - system
-        - host
+  # Not applied by the test suite, see config/initializers/semantic_logger.rb.
+  # Kept here so that spec/config/yeti_web_spec.rb validates the block against the schema.
+  elasticsearch:
+    level: 'info'
+    url: 'http://localhost:9428/insert/elasticsearch'
+    tags:
+      env: 'production'
+      system: 'yeti'
+    transport_options:
+      params:
+        _msg_field: 'message'
+        _stream_fields:
+          - system
+          - host
+    batch_size: 10
+    batch_seconds: 5
+    max_queue_size: 10000
 
 s3_storage:
   endpoint: ''

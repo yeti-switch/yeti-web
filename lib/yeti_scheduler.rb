@@ -4,6 +4,7 @@ require 'scheduler'
 require 'prometheus_config'
 require 'prometheus/yeti_cron_job_processor'
 require 'prometheus/yeti_info_processor'
+require 'prometheus/semantic_logger_processor'
 
 class YetiScheduler < Scheduler::Base
   CaptureErrorMiddleware = Class.new(Scheduler::Middleware::Base) do
@@ -84,6 +85,7 @@ class YetiScheduler < Scheduler::Base
 
     if PrometheusConfig.enabled?
       YetiInfoProcessor.start(labels: { app_type: 'scheduler' })
+      SemanticLoggerProcessor.start
     end
   end
 

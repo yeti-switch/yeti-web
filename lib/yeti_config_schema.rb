@@ -6,6 +6,10 @@ require 'dry-validation'
 # that YetiConfigLoader can apply it for every process reading YetiConfig, Rails or not.
 # See https://github.com/dry-rb/dry-validation for the DSL.
 module YetiConfigSchema
+  # SemanticLogger::Levels::LEVELS, spelled out rather than required: this file is loaded
+  # by every reader of YetiConfig, including the ones that never log through it.
+  LOG_LEVELS = %w[trace debug info warn error fatal].freeze
+
   module_function
 
   # @param setup_config [Config::Options] the object yielded by Config.setup
@@ -71,6 +75,28 @@ module YetiConfigSchema
         required(:host).maybe(:string)
         required(:port).maybe(:int?)
         optional(:default_labels).hash
+      end
+
+      # Logging, see YetiLogSetup. One block per appender. An appender without a level of
+      # its own follows the global one (config.log_level, RAILS_LOG_LEVEL).
+      optional(:logging).schema do
+        optional(:stdout).schema do
+          optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
+        end
+
+        # A blank `url` disables the appender. `tags` are the static fields added to
+        # every record it ships. `max_queue_size` is either -1, for a queue that grows
+        # without a limit, or the records to hold before they start being dropped.
+        optional(:elasticsearch).schema do
+          optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
+          optional(:url).maybe(:string)
+          optional(:index).maybe(:string)
+          optional(:tags).hash
+          optional(:transport_options).hash
+          optional(:batch_size).maybe(:integer, gt?: 0)
+          optional(:batch_seconds).maybe(:integer, gt?: 0)
+          optional(:max_queue_size).maybe(:integer, gteq?: -1, excluded_from?: [0])
+        end
       end
 
       required(:sentry).schema do

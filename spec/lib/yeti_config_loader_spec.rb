@@ -20,6 +20,30 @@ RSpec.describe YetiConfigLoader, '.call' do
       expect { described_class.call('/nonexistent/yeti_web.yml') }.to raise_error(YetiConfigLoader::Error)
     end
 
+    # `logs` and `elasticsearch` moved under `logging`. Nothing else rejects them: the
+    # `validate_keys` of dry-schema cannot be turned on while the config has free form
+    # blocks, so an unknown key is ignored and the logs would silently stop being shipped.
+    # YetiConfig is defined by the load itself: stubbing it before the call would make
+    # .call return early, as it does for an already loaded config.
+    def stub_loaded_config(settings)
+      allow(Config).to receive(:load_and_set_settings) { stub_const('YetiConfig', OpenStruct.new(settings)) }
+    end
+
+    %i[logs elasticsearch].each do |key|
+      it "rejects the outdated top level `#{key}` key" do
+        stub_loaded_config(key => {})
+
+        expect { described_class.call }
+          .to raise_error(YetiConfigLoader::Error, /outdated config .*#{key} moved under `logging`/)
+      end
+    end
+
+    it 'accepts a config that uses the current keys' do
+      stub_loaded_config(logging: {})
+
+      expect { described_class.call }.not_to raise_error
+    end
+
     it 'reports an invalid config as its own error, not the gem class' do
       allow(Config).to receive(:load_and_set_settings)
         .and_raise(Config::Validation::Error, 'site_title: must be a string')
