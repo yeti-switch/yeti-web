@@ -57,12 +57,25 @@ class SemanticLoggerProcessor
     private
 
     def report(client, labels)
-      YetiLogStats.metrics(labels).each { |metric| client.send_json(metric) }
+      YetiLogStats.metrics(labels).each do |metric|
+        client.send_json(metric)
+      rescue StandardError => e
+        # Per payload: one queue failing to report must not stop the next one.
+        report_failure(e)
+      end
     rescue StandardError => e
-      # A failure to report a queue must not stop the reporting of the next one, and
-      # must not take the process down either.
-      logger&.error { "#{name}: #{e.class} #{e.message}" }
-      CaptureError.capture(e, tags: { component: 'Prometheus', processor: name })
+      # And a failure to read the stats at all must not take the process down either.
+      report_failure(e)
+    end
+
+    def report_failure(error)
+      # Through the internal logger of SemanticLogger - stderr - and never through
+      # Rails.logger: that one writes to the elasticsearch appender whose queue is being
+      # reported, so a report of a full queue would be fed back into it.
+      SemanticLogger::Processor.logger.error("#{name}: #{error.class} #{error.message}")
+      CaptureError.capture(error, tags: { component: 'Prometheus', processor: name })
+    rescue StandardError
+      nil
     end
   end
 end

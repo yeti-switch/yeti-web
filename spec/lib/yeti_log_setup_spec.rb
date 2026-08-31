@@ -47,6 +47,37 @@ RSpec.describe YetiLogSetup do
     end
   end
 
+  describe '.preloaded_stdout_level' do
+    subject { described_class.preloaded_stdout_level }
+
+    before { allow(YetiConfigLoader).to receive(:call) }
+
+    let(:stdout_level) { 'info' }
+
+    it 'loads the config itself, as the Rails initializers have not run yet' do
+      subject
+      expect(YetiConfigLoader).to have_received(:call)
+    end
+
+    it 'returns the configured level' do
+      is_expected.to eq(:info)
+    end
+
+    context 'when no level is configured' do
+      let(:stdout_level) { nil }
+
+      it { is_expected.to be_nil }
+    end
+
+    # The boot must not fail here: config/initializers/config.rb reports a missing or
+    # invalid config properly a moment later.
+    context 'when the config cannot be read' do
+      before { allow(YetiConfigLoader).to receive(:call).and_raise(YetiConfigLoader::Error, 'not found') }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe '.most_verbose' do
     it 'returns the least severe level, that SemanticLogger indexes lowest' do
       expect(described_class.most_verbose(:error, :info)).to eq(:info)

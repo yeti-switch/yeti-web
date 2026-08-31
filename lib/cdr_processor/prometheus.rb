@@ -25,17 +25,11 @@ module CdrProcessor
     # matters most when the processor is stuck and writes no batches at all.
     #
     # @param processor_name [String]
-    # @param logger [SemanticLogger::Logger]
     # @return [Thread]
-    def start_log_stats(processor_name:, logger:, interval: LOG_STATS_INTERVAL)
+    def start_log_stats(processor_name:, interval: LOG_STATS_INTERVAL)
       Thread.new do
         loop do
-          begin
-            YetiLogStats.metrics(processor: processor_name).each { |metric| @client.send_json(metric) }
-          rescue StandardError => e
-            # Never through the logger of the appender whose queue is being reported.
-            logger.warn "Failed to report the log queue state: #{e.class}: #{e.message}"
-          end
+          report(processor_name)
           sleep interval
         end
       end
@@ -55,6 +49,28 @@ module CdrProcessor
       }
       metric[:perform_group_duration] = perform_group_duration_ms if perform_group_duration_ms
       @client.send_json(metric)
+    end
+
+    private
+
+    def report(processor_name)
+      YetiLogStats.metrics(processor: processor_name).each do |metric|
+        @client.send_json(metric)
+      rescue StandardError => e
+        # Per payload: one queue failing to report must not stop the next one.
+        report_failure(e)
+      end
+    rescue StandardError => e
+      report_failure(e)
+    end
+
+    # Through the internal logger of SemanticLogger - stderr - and never through a
+    # SemanticLogger::Logger: that one writes to the elasticsearch appender whose queue
+    # is being reported, so a report of a full queue would be fed back into it.
+    def report_failure(error)
+      SemanticLogger::Processor.logger.warn("Failed to report the log queue state: #{error.class}: #{error.message}")
+    rescue StandardError
+      nil
     end
   end
 end

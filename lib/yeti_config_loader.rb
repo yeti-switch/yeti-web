@@ -12,6 +12,15 @@ module YetiConfigLoader
 
   CONFIG_PATH = File.expand_path('../config/yeti_web.yml', __dir__)
 
+  # Top level keys of the logging configuration that preceded the `logging` block, see
+  # YetiLogSetup. Rejected explicitly because nothing else would: YetiConfigSchema cannot
+  # turn on the `validate_keys` of dry-schema - it has no way to allow the user defined
+  # keys of `logging.elasticsearch.tags` and of the other free form blocks, see
+  # https://github.com/dry-rb/dry-schema/issues/37 - so an unknown key is simply ignored.
+  # A configuration still using these would load, and then silently stop shipping the
+  # logs to elasticsearch, with nothing pointing at the renamed key.
+  LEGACY_KEYS = %i[logs elasticsearch].freeze
+
   module_function
 
   # @param path [String]
@@ -30,8 +39,20 @@ module YetiConfigLoader
     end
     Config.evaluate_erb_in_yaml = true
     Config.load_and_set_settings(path)
+    reject_legacy_keys!(path)
     nil
   rescue Config::Validation::Error => e
     raise Error, "invalid config #{path}: #{e.message}"
+  end
+
+  # @param path [String]
+  # @raise [YetiConfigLoader::Error] when the configuration still uses a renamed key.
+  def reject_legacy_keys!(path)
+    keys = ::YetiConfig.to_h.keys
+    outdated = LEGACY_KEYS & keys
+    return if outdated.empty?
+
+    raise Error, "outdated config #{path}: #{outdated.join(', ')} moved under `logging`, " \
+                 'see the logging block of config/yeti_web.yml.distr'
   end
 end

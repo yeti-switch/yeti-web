@@ -147,7 +147,7 @@ if prometheus_config&.fetch('enabled', false)
     port: prometheus_config['port'],
     default_labels: prometheus_config.fetch('default_labels', {})
   )
-  prometheus.start_log_stats(processor_name: processor_name, logger: logger)
+  prometheus.start_log_stats(processor_name: processor_name)
   logger.info "Prometheus metrics enabled (#{prometheus_config['host']}:#{prometheus_config['port']})"
 end
 

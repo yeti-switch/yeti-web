@@ -135,6 +135,21 @@ module YetiLogSetup
     add_elasticsearch_appender(tags:, level: elasticsearch_level)
   end
 
+  # The stdout level for the callers that need it before the Rails initializers have run.
+  # config/application.rb declares the appender while YetiConfig is not loaded yet, and
+  # the boot is already being logged by then - .apply_levels! only runs once the
+  # initializers have loaded the config, several hundred records later.
+  #
+  # @return [Symbol, nil] nil when no level is configured, and when the config cannot be
+  #   read at all: config/initializers/config.rb reports that properly a moment later,
+  #   and until then the appender follows the global level as it always did.
+  def preloaded_stdout_level
+    YetiConfigLoader.call
+    configured_levels.first
+  rescue StandardError
+    nil
+  end
+
   # Requires YetiConfig to be loaded.
   #
   # @return [Array<Symbol, nil>] two elements, the stdout and the elasticsearch level,

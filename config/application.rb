@@ -143,7 +143,16 @@ module Yeti
       # config/initializers/*, so that the boot itself is logged as well.
       unless Rails.env.test?
         config.rails_semantic_logger.appenders do |appenders|
-          appenders.add(**YetiLogSetup.stdout_appender_options(formatter: :default))
+          # The level is applied here and not left to the .apply_levels! of
+          # config/initializers/semantic_logger.rb: that one runs after the initializers
+          # that log the boot, so a `logging.stdout.level` applied only there would let
+          # everything they write through first.
+          appenders.add(
+            **YetiLogSetup.stdout_appender_options(
+              formatter: :default,
+              level: YetiLogSetup.preloaded_stdout_level
+            )
+          )
         end
       end
     end
