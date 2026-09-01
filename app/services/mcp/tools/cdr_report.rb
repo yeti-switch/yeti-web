@@ -21,6 +21,9 @@ module Mcp
     #                uniq() measures, so their *cardinality* is exposed but never
     #                their values, and they are absent from DIMENSIONS/FILTERS so
     #                there's no value-probing WHERE oracle either.
+    #   DICTIONARIES - post-query id => display-name resolution, REFERENCE DATA
+    #                ONLY. Counterparty identity and prefix-valued references are
+    #                never resolved; see DICTIONARIES.
     #
     # Run this tool's ClickHouse user as read-only, scoped to the cdrs table;
     # per-query caps are also added in a SETTINGS clause as defense in depth.
@@ -36,10 +39,11 @@ module Mcp
 
       # name => SQL fragment (constant; the LLM only sends the name)
       DIMENSIONS = {
-        'customer_id' => 'customer_id',
+        # Contractor references are reachable only as uuids.
+        'customer_uuid' => 'customer_id',
+        'vendor_uuid' => 'vendor_id',
         'customer_acc_id' => 'customer_acc_id',
         'customer_auth_id' => 'customer_auth_id',
-        'vendor_id' => 'vendor_id',
         'vendor_acc_id' => 'vendor_acc_id',
         'orig_gw_id' => 'orig_gw_id',
         'term_gw_id' => 'term_gw_id',
@@ -52,6 +56,8 @@ module Mcp
         'dst_network_id' => 'dst_network_id',
         'src_country_id' => 'src_country_id',
         'src_network_id' => 'src_network_id',
+        'dst_network_type_id' => 'dst_network_type_id',
+        'src_network_type_id' => 'src_network_type_id',
         'disconnect_initiator_id' => 'disconnect_initiator_id',
         'internal_disconnect_code_id' => 'internal_disconnect_code_id',
         'internal_disconnect_code' => 'internal_disconnect_code',
@@ -99,6 +105,20 @@ module Mcp
         'avg_pdd' => 'round(avg(pdd), 3)',
         'avg_rtt' => 'round(avg(rtt), 3)',
         'avg_routing_delay' => 'round(avg(routing_delay), 3)',
+        # PDD/RTT conditioned on a positive sample so unset values don't drag
+        # the quantile to 0; acd_* is duration over answered calls.
+        'pdd_p50' => 'round(quantileIf(0.5)(pdd, pdd > 0), 3)',
+        'pdd_p95' => 'round(quantileIf(0.95)(pdd, pdd > 0), 3)',
+        'pdd_p99' => 'round(quantileIf(0.99)(pdd, pdd > 0), 3)',
+        'rtt_p50' => 'round(quantileIf(0.5)(rtt, rtt > 0), 3)',
+        'rtt_p95' => 'round(quantileIf(0.95)(rtt, rtt > 0), 3)',
+        'rtt_p99' => 'round(quantileIf(0.99)(rtt, rtt > 0), 3)',
+        'acd_p50' => 'round(quantileIf(0.5)(duration, success = 1), 1)',
+        'acd_p95' => 'round(quantileIf(0.95)(duration, success = 1), 1)',
+        'acd_p99' => 'round(quantileIf(0.99)(duration, success = 1), 1)',
+        'short_calls' => 'countIf(success = 1 AND duration <= {short_call_seconds: UInt16})',
+        'short_calls_ratio' => 'round(countIf(success = 1 AND duration <= {short_call_seconds: UInt16}) / ' \
+                               'nullIf(countIf(success = 1), 0), 4)',
         'revenue' => 'round(sum(customer_price), 4)',
         'cost' => 'round(sum(vendor_price), 4)',
         'profit' => 'round(sum(profit), 4)',
@@ -113,10 +133,10 @@ module Mcp
       # name => { col:, type: } for WHERE conditions. Deliberately excludes the
       # raw number/IP/name columns (those are uniq-measure inputs only).
       FILTERS = {
-        'customer_id' => { col: 'customer_id', type: 'Int32' },
+        'customer_uuid' => { col: 'customer_id', type: 'Int32', uuid: true },
+        'vendor_uuid' => { col: 'vendor_id', type: 'Int32', uuid: true },
         'customer_acc_id' => { col: 'customer_acc_id', type: 'Int32' },
         'customer_auth_id' => { col: 'customer_auth_id', type: 'Int32' },
-        'vendor_id' => { col: 'vendor_id', type: 'Int32' },
         'vendor_acc_id' => { col: 'vendor_acc_id', type: 'Int32' },
         'orig_gw_id' => { col: 'orig_gw_id', type: 'Int32' },
         'term_gw_id' => { col: 'term_gw_id', type: 'Int32' },
@@ -129,6 +149,8 @@ module Mcp
         'dst_network_id' => { col: 'dst_network_id', type: 'Int32' },
         'src_country_id' => { col: 'src_country_id', type: 'Int32' },
         'src_network_id' => { col: 'src_network_id', type: 'Int32' },
+        'dst_network_type_id' => { col: 'dst_network_type_id', type: 'Int16' },
+        'src_network_type_id' => { col: 'src_network_type_id', type: 'Int16' },
         'disconnect_initiator_id' => { col: 'disconnect_initiator_id', type: 'Int32' },
         'internal_disconnect_code_id' => { col: 'internal_disconnect_code_id', type: 'Int16' },
         'internal_disconnect_code' => { col: 'internal_disconnect_code', type: 'Int32' },
@@ -137,6 +159,8 @@ module Mcp
         'lega_disconnect_reason' => { col: 'lega_disconnect_reason', type: 'String' },
         'legb_disconnect_code' => { col: 'legb_disconnect_code', type: 'Int32' },
         'legb_disconnect_reason' => { col: 'legb_disconnect_reason', type: 'String' },
+        'lega_user_agent' => { col: 'lega_user_agent', type: 'String' },
+        'legb_user_agent' => { col: 'legb_user_agent', type: 'String' },
         'pop_id' => { col: 'pop_id', type: 'Int32' },
         'node_id' => { col: 'node_id', type: 'Int32' },
         'failed_resource_type_id' => { col: 'failed_resource_type_id', type: 'Int8' },
@@ -155,8 +179,46 @@ module Mcp
         'lt' => { array: false, sql: ->(c, p) { "#{c} < #{p}" } },
         'lte' => { array: false, sql: ->(c, p) { "#{c} <= #{p}" } },
         'in' => { array: true, sql: ->(c, p) { "#{c} IN #{p}" } },
-        'not_in' => { array: true, sql: ->(c, p) { "#{c} NOT IN #{p}" } }
+        'not_in' => { array: true, sql: ->(c, p) { "#{c} NOT IN #{p}" } },
+        # `text_only` rejects these on numeric columns.
+        'contains' => {
+          array: false, text_only: true,
+          sql: ->(c, p) { "positionCaseInsensitive(#{c}, #{p}) > 0" }
+        },
+        'not_contains' => {
+          array: false, text_only: true,
+          sql: ->(c, p) { "positionCaseInsensitive(#{c}, #{p}) = 0" }
+        }
       }.freeze
+
+      # An allowlist: adding a key here is what discloses a name. Two classes
+      # must stay out — counterparty identity (customer, vendor, account,
+      # customer auth, gateway, rateplan) and prefix-valued references
+      # (destination, dialpeer), whose display value is a phone number.
+      DICTIONARIES = {
+        'dst_country_id' => { model: 'System::Country' },
+        'src_country_id' => { model: 'System::Country' },
+        'dst_network_id' => { model: 'System::Network' },
+        'src_network_id' => { model: 'System::Network' },
+        'dst_network_type_id' => { model: 'System::NetworkType' },
+        'src_network_type_id' => { model: 'System::NetworkType' },
+        'routing_group_id' => { model: 'Routing::RoutingGroup' },
+        'routing_plan_id' => { model: 'Routing::RoutingPlan' },
+        'pop_id' => { model: 'Pop' },
+        'node_id' => { model: 'Node' },
+        'sign_orig_transport_protocol_id' => { model: 'Equipment::TransportProtocol' },
+        'sign_term_transport_protocol_id' => { model: 'Equipment::TransportProtocol' },
+        'auth_orig_transport_protocol_id' => { model: 'Equipment::TransportProtocol' },
+        'disconnect_initiator_id' => { static: -> { Cdr::Cdr::DISCONNECT_INITIATORS } }
+      }.freeze
+
+      # Selected as an id, returned as contractors.uuid.
+      UUID_DIMENSIONS = %w[customer_uuid vendor_uuid].freeze
+
+      # Measures whose SQL carries the {short_call_seconds} placeholder.
+      SHORT_CALL_MEASURES = %w[short_calls short_calls_ratio].freeze
+      SHORT_CALL_DEFAULT_SECONDS = 6
+      SHORT_CALL_MAX_SECONDS = 300
 
       def self.descriptor
         {
@@ -172,6 +234,42 @@ module Mcp
             any actual numbers/IPs/names: e.g. high `calls` with
             `distinct_src_numbers` = 1 means every call shares a single CLI;
             `distinct_orig_ips` spiking on an account suggests credential sharing.
+
+            Reference dimensions are returned with their display name alongside
+            the id (dst_country_id => dst_country_name, dst_network_id =>
+            dst_network_name, dst_network_type_id => dst_network_type_name, and
+            likewise for routing group/plan, pop, node, transport protocol and
+            disconnect initiator). Set `resolve_names` to false to skip it.
+
+            Contractors appear ONLY as `customer_uuid` / `vendor_uuid` - there is
+            no customer_id dimension or filter. To narrow to one contractor, pass
+            its uuid: {field: "customer_uuid", op: "eq", value:
+            "9f8a2c14-6b3e-4d71-b2a0-8c5e1f04a933"}. A bare numeric id is
+            rejected. Uuids are stable, so you can correlate the same contractor
+            across reports, but they carry no ordering or count information - do
+            not try to derive one, and do not guess which real company a uuid is.
+
+            Other counterparty dimensions - account, customer auth, gateway,
+            rateplan - are returned as bare ids and have no name form; this tool
+            does not disclose who a trading partner is. destination_id and
+            dialpeer_id are likewise unresolved (their value is a dial prefix).
+            Report all of these as-is and let the reader resolve them in the
+            admin UI.
+
+            Distribution measures: `pdd_p50/p95/p99`, `rtt_p50/p95/p99` (both
+            over samples with a positive value) and `acd_p50/p95/p99` (call
+            duration over ANSWERED calls - the percentile form of `acd`). Prefer
+            these over the avg_* measures when a few outliers can skew the mean.
+
+            `short_calls` / `short_calls_ratio` count answered calls no longer
+            than `short_call_seconds` (default #{SHORT_CALL_DEFAULT_SECONDS}s),
+            as a share of answered calls - a high ratio on a route suggests FAS
+            or early teardown rather than genuine short conversations.
+
+            The `contains` / `not_contains` operators do a case-insensitive
+            substring match and apply to text fields only (user agents,
+            disconnect reasons) - e.g. filter lega_user_agent contains
+            "Asterisk" to segment traffic by the customer's platform.
 
             Coded value semantics:
             - `success`: 0 = failed/unanswered, 1 = answered.
@@ -213,12 +311,27 @@ module Mcp
               order_by: {
                 type: 'object',
                 properties: {
-                  field: { type: 'string', enum: (DIMENSIONS.keys + MEASURES.keys) },
+                  field: { type: 'string', enum: (DIMENSIONS.keys - UUID_DIMENSIONS + MEASURES.keys) },
                   dir: { type: 'string', enum: %w[asc desc] }
                 },
                 required: %w[field]
               },
-              limit: { type: 'integer', default: DEFAULT_LIMIT, maximum: MAX_LIMIT }
+              limit: { type: 'integer', default: DEFAULT_LIMIT, maximum: MAX_LIMIT },
+              short_call_seconds: {
+                type: 'integer',
+                default: SHORT_CALL_DEFAULT_SECONDS,
+                maximum: SHORT_CALL_MAX_SECONDS,
+                description: 'Duration threshold (seconds) for the short_calls / ' \
+                             'short_calls_ratio measures.'
+              },
+              resolve_names: {
+                type: 'boolean',
+                default: true,
+                description: 'Append a `*_name` column for the reference dimensions ' \
+                             '(country, network, network type, routing group/plan, pop, ' \
+                             'node, transport protocol, disconnect initiator). Set false ' \
+                             'for id-only output.'
+              }
             },
             required: %w[measures from to]
           }
@@ -254,7 +367,8 @@ module Mcp
             return log_and_fail(sql, "ClickHouse responded HTTP #{response.status}: #{detail}")
           end
 
-          { content: [{ type: 'text', text: JSON.pretty_generate(rows: body['rows'], data: body['data']) }] }
+          data = present_rows(body['data'])
+          { content: [{ type: 'text', text: JSON.pretty_generate(rows: body['rows'], data: data) }] }
         rescue StandardError => e
           log_and_fail(sql, "#{e.class}: #{e.message}", e)
         end
@@ -309,8 +423,17 @@ module Mcp
 
       # SELECT: dimension + measure fragments (constants), each aliased to its key.
       def select_clause
+        @params['param_short_call_seconds'] = short_call_seconds if measures.intersect?(SHORT_CALL_MEASURES)
+
         (dimensions.map { |k| "#{DIMENSIONS[k]} AS #{k}" } +
          measures.map { |k| "#{MEASURES[k]} AS #{k}" }).join(', ')
+      end
+
+      def short_call_seconds
+        n = Integer(@args['short_call_seconds'] || SHORT_CALL_DEFAULT_SECONDS)
+        n.clamp(1, SHORT_CALL_MAX_SECONDS)
+      rescue ArgumentError, TypeError
+        raise ArgumentError, 'short_call_seconds must be an integer'
       end
 
       # GROUP BY the dimension fragments (constants); empty string when no
@@ -355,6 +478,10 @@ module Mcp
         spec = FILTERS[f['field']] or raise ArgumentError, "unknown filter field #{f['field'].inspect}"
         op = OPS[f['op']] or raise ArgumentError, "unknown operator #{f['op'].inspect}"
 
+        if op[:text_only] && spec[:type] != 'String'
+          raise ArgumentError, "operator #{f['op']} applies to text fields only, not #{f['field']}"
+        end
+
         name = next_param
         if op[:array]
           values = f['value']
@@ -364,13 +491,14 @@ module Mcp
             raise ArgumentError, "operator #{f['op']} needs a non-empty array value"
           end
 
-          @params["param_#{name}"] = values.map { |v| coerce_filter_value(v, spec[:type], f['field']) }
+          coerced = values.map { |v| coerce_filter_value(v, spec, f['field']) }
+          @params["param_#{name}"] = format_array_param(coerced, spec[:type])
           placeholder = "{#{name}: Array(#{spec[:type]})}"
         else
           value = f['value']
           raise ArgumentError, "operator #{f['op']} needs a scalar value" if value.nil? || value.is_a?(Array)
 
-          @params["param_#{name}"] = coerce_filter_value(value, spec[:type], f['field'])
+          @params["param_#{name}"] = coerce_filter_value(value, spec, f['field'])
           placeholder = "{#{name}: #{spec[:type]}}"
         end
         op[:sql].call(spec[:col], placeholder)
@@ -382,7 +510,10 @@ module Mcp
       # so map booleans to 0/1 and accept integer-ish values, rejecting the rest as
       # invalid input (clear client error rather than a server-side CH failure).
       # Non-integer columns (e.g. String reason filters) bind their value as-is.
-      def coerce_filter_value(value, type, field)
+      def coerce_filter_value(value, spec, field)
+        return coerce_uuid(value, field) if spec[:uuid]
+
+        type = spec[:type]
         return value unless type.start_with?('Int', 'UInt')
 
         case value
@@ -397,6 +528,17 @@ module Mcp
         end
       end
 
+      # A bare integer must be rejected, or the filter becomes an enumeration
+      # oracle. An unknown uuid binds an id nothing matches rather than raising,
+      # so the filter does not answer "does this contractor exist?" either.
+      def coerce_uuid(value, field)
+        unless value.to_s.strip.match?(Contractor::UUID_FORMAT)
+          raise ArgumentError, "filter #{field}: expected a contractor uuid, got #{value.inspect}"
+        end
+
+        Contractor.id_by_uuid(value) || 0
+      end
+
       # ORDER BY references a SELECT alias (a constant from our maps), never input
       # text; direction is forced to ASC/DESC. Defaults to first measure desc.
       def order_clause
@@ -406,6 +548,11 @@ module Mcp
         field = ob['field']
         # Must be a key actually in SELECT (a measure or dimension of THIS query),
         # otherwise ClickHouse raises "Unknown identifier" on the alias.
+        # Sorting by a uuid sorts by the id it hides.
+        if UUID_DIMENSIONS.include?(field)
+          raise ArgumentError, "order_by field #{field.inspect} is not sortable; order by a measure instead"
+        end
+
         unless (measures + dimensions).include?(field)
           raise ArgumentError, "order_by field #{field.inspect} must be one of the selected measures or dimensions"
         end
@@ -446,6 +593,80 @@ module Mcp
       def next_param
         @param_seq += 1
         "f#{@param_seq}"
+      end
+
+      # ClickHouse HTTP params are scalar strings, so an Array(T) must be sent
+      # as its literal — "[1,7]" / "['a','b']". A Ruby Array encodes as repeated
+      # `param_x[]=` keys, which ClickHouse cannot parse.
+      def format_array_param(values, type)
+        "[#{values.map { |v| quote_array_element(v, type) }.join(',')}]"
+      end
+
+      def quote_array_element(value, type)
+        return value.to_s if type.start_with?('Int', 'UInt', 'Float')
+
+        "'#{value.to_s.gsub(/[\\']/) { |m| "\\#{m}" }}'"
+      end
+
+      def present_rows(data)
+        return data if data.blank?
+
+        resolve_names(replace_ids_with_uuids(data))
+      end
+
+      # In place: the raw id must not survive into the response.
+      def replace_ids_with_uuids(data)
+        keys = dimensions & UUID_DIMENSIONS
+        return data if keys.empty?
+
+        ids = data.flat_map { |row| keys.map { |key| contractor_id(row[key]) } }.compact.uniq
+        uuids = ids.empty? ? {} : Contractor.where(id: ids).pluck(:id, :uuid).to_h
+
+        data.each do |row|
+          keys.each { |key| row[key] = uuids[contractor_id(row[key])] }
+        end
+      end
+
+      # ClickHouse renders 64-bit ints as quoted strings, so accept both forms.
+      def contractor_id(value)
+        return value if value.is_a?(Integer) && value.positive?
+
+        id = Integer(value.to_s, 10, exception: false)
+        id if id&.positive?
+      end
+
+      # Best-effort: a reference lookup failing must not lose the report.
+      def resolve_names(data)
+        return data if data.blank? || @args['resolve_names'] == false
+
+        dicts = dimensions & DICTIONARIES.keys
+        return data if dicts.empty?
+
+        lookups = dicts.index_with { |dim| dictionary_for(dim, data) }
+        data.map { |row| row_with_names(row, lookups) }
+      rescue StandardError => e
+        Rails.logger.error("[MCP] cdr.report name resolution failed: #{e.class}: #{e.message}")
+        data
+      end
+
+      # Each name sits directly after the id it explains.
+      def row_with_names(row, lookups)
+        row.each_with_object({}) do |(key, value), out|
+          out[key] = value
+          next unless lookups.key?(key)
+
+          out["#{key.delete_suffix('_id')}_name"] = value.nil? ? nil : lookups[key][value]
+        end
+      end
+
+      def dictionary_for(dim, data)
+        spec = DICTIONARIES[dim]
+        return spec[:static].call if spec[:static]
+
+        ids = data.filter_map { |row| row[dim] }.uniq
+        return {} if ids.empty?
+
+        spec[:model].constantize.where(id: ids).pluck(:id, :name).to_h
       end
     end
   end

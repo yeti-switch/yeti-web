@@ -12,7 +12,7 @@ ActiveAdmin.register Contractor do
 
   acts_as_delayed_job_lock
 
-  acts_as_export :id, :name,
+  acts_as_export :id, :name, :uuid,
                  :enabled, :vendor, :customer,
                  [:smtp_connection_name, proc { |row| row.smtp_connection.try(:name) }]
 
@@ -29,6 +29,7 @@ ActiveAdmin.register Contractor do
     selectable_column
     id_column
     actions
+    column :uuid
     column :enabled
     column :name
     column :vendor
@@ -45,6 +46,7 @@ ActiveAdmin.register Contractor do
       tab 'Details' do
         attributes_table do
           row :id
+          row :uuid
           row :name
           row :external_id
           row :enabled
@@ -103,6 +105,7 @@ ActiveAdmin.register Contractor do
   end
 
   filter :id
+  filter :uuid_eq, as: :string, label: 'UUID'
   filter :name
   filter :address
   filter :description

@@ -7,6 +7,17 @@ RSpec.describe YetiConfigLoader, '.call' do
     expect { described_class.call('/nonexistent/yeti_web.yml') }.not_to raise_error
   end
 
+  # Config.load_and_set_settings defines the settings before the outdated keys can be
+  # rejected, so a caller that rescues the error - the config/application.rb preload of
+  # YetiLogSetup.preloaded_stdout_level - leaves a loaded YetiConfig behind. The next
+  # caller must still be told, or Rails boots with the logging silently disabled.
+  it 'still reports an outdated config that a previous caller loaded and rescued' do
+    stub_const('YetiConfig', OpenStruct.new(logs: {}))
+
+    expect { described_class.call('/some/yeti_web.yml') }
+      .to raise_error(YetiConfigLoader::Error, /outdated config .*logs moved under `logging`/)
+  end
+
   context 'when YetiConfig has not been loaded yet' do
     before { hide_const('YetiConfig') }
 

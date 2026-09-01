@@ -12,6 +12,7 @@
 #  enabled            :boolean          not null
 #  name               :string           not null
 #  phones             :string
+#  uuid               :uuid             not null
 #  vendor             :boolean          not null
 #  external_id        :bigint(8)
 #  smtp_connection_id :integer(4)
@@ -20,6 +21,7 @@
 #
 #  contractors_external_id_key  (external_id) UNIQUE
 #  contractors_name_unique      (name) UNIQUE
+#  contractors_uuid_key         (uuid) UNIQUE
 #
 # Foreign Keys
 #
@@ -96,6 +98,16 @@ class Contractor < ApplicationRecord
       errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
       throw(:abort)
     end
+  end
+
+  UUID_FORMAT = /\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/
+
+  # @return [Integer, nil] nil for a malformed uuid or one nobody holds
+  def self.id_by_uuid(value)
+    uuid = value.to_s.strip.downcase
+    return nil unless uuid.match?(UUID_FORMAT)
+
+    where(uuid: uuid).pick(:id)
   end
 
   def self.ransackable_scopes(_auth_object = nil)

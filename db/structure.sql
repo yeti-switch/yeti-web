@@ -15062,7 +15062,8 @@ CREATE TABLE public.contractors (
     address character varying,
     phones character varying,
     smtp_connection_id integer,
-    external_id bigint
+    external_id bigint,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
 );
 
 
@@ -18383,6 +18384,14 @@ ALTER TABLE ONLY public.contractors
 
 
 --
+-- Name: contractors contractors_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.contractors
+    ADD CONSTRAINT contractors_uuid_key UNIQUE (uuid);
+
+
+--
 -- Name: pricelist_items pricelist_items_pkey; Type: CONSTRAINT; Schema: ratemanagement; Owner: -
 --
 
@@ -20827,6 +20836,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260901120000'),
 ('20260813120000'),
 ('20260810120001'),
 ('20260810120000'),
