@@ -58,7 +58,7 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
     it 'rejects an unknown operator' do
       call_tool(
         'measures' => ['calls'],
-        'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'like', 'value' => 1 }],
+        'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'like', 'value' => 1 }],
         'from' => from, 'to' => to
       )
       expect(result['isError']).to be true
@@ -92,7 +92,7 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
         status: 200,
         body: {
           'rows' => 1,
-          'data' => [{ 'customer_acc_id' => 5, 'calls' => 100, 'distinct_src_numbers' => 1 }]
+          'data' => [{ 'internal_disconnect_code_id' => 5, 'calls' => 100, 'distinct_src_numbers' => 1 }]
         }
       )
     end
@@ -105,14 +105,14 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
     it 'returns the aggregated rows' do
       call_tool(
         'measures' => %w[calls distinct_src_numbers],
-        'dimensions' => ['customer_acc_id'],
+        'dimensions' => ['internal_disconnect_code_id'],
         'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [1, 7] }],
         'from' => from, 'to' => to
       )
       expect(result['isError']).to be_falsey
       payload = JSON.parse(error_text)
       expect(payload['rows']).to eq(1)
-      expect(payload['data'].first).to include('customer_acc_id' => 5, 'distinct_src_numbers' => 1)
+      expect(payload['data'].first).to include('internal_disconnect_code_id' => 5, 'distinct_src_numbers' => 1)
     end
 
     it 'binds values as params instead of interpolating them, and pins the window to UTC' do
@@ -125,8 +125,8 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
 
       call_tool(
         'measures' => %w[calls distinct_src_numbers],
-        'dimensions' => %w[customer_acc_id hour],
-        'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => 42 }],
+        'dimensions' => %w[internal_disconnect_code_id hour],
+        'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'eq', 'value' => 42 }],
         'from' => from, 'to' => to
       )
 
@@ -249,7 +249,7 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
     it 'rejects contains on a numeric field' do
       call_tool(
         'measures' => ['calls'],
-        'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'contains', 'value' => 'Asterisk' }],
+        'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'contains', 'value' => 'Asterisk' }],
         'from' => from, 'to' => to
       )
 
@@ -435,6 +435,63 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
       expect(rows.map { |r| r['customer_uuid'] }).to match_array(([customer] + others).map(&:uuid))
     end
 
+    it 'returns account references as uuids too' do
+      account = create(:account)
+      allow(ch_response).to receive(:body).and_return(
+        { 'rows' => 1,
+          'data' => [{ 'customer_uuid' => customer.id, 'customer_acc_uuid' => account.id, 'calls' => 1 }] }
+      )
+      call_tool(
+        'measures' => ['calls'], 'dimensions' => %w[customer_uuid customer_acc_uuid],
+        'from' => from, 'to' => to
+      )
+
+      expect(result['isError']).to be_falsey
+      expect(captured[:sql]).to include('customer_acc_id AS customer_acc_uuid')
+      expect(rows.first).to include(
+        'customer_uuid' => customer.uuid,
+        'customer_acc_uuid' => account.uuid
+      )
+    end
+
+    it 'filters by account uuid, binding the resolved account id' do
+      account = create(:account)
+      call_tool(
+        'measures' => ['calls'],
+        'filters' => [{ 'field' => 'customer_acc_uuid', 'op' => 'eq', 'value' => account.uuid }],
+        'from' => from, 'to' => to
+      )
+
+      expect(result['isError']).to be_falsey
+      expect(captured[:sql]).to include('customer_acc_id = {f1: Int32}')
+      expect(captured[:params]['param_f1']).to eq(account.id)
+    end
+
+    it 'has no dimension or filter for the raw account id' do
+      %w[customer_acc_id vendor_acc_id].each do |field|
+        call_tool('measures' => ['calls'], 'dimensions' => [field], 'from' => from, 'to' => to)
+        expect(error_text).to match(/unknown dimension/i)
+      end
+    end
+
+    # Contractors and accounts are looked up separately; neither is per-row.
+    it 'uses one lookup per referenced model, not per dimension or row' do
+      accounts = create_list(:account, 3)
+      allow(ch_response).to receive(:body).and_return(
+        { 'rows' => 3,
+          'data' => accounts.map { |a| { 'customer_uuid' => customer.id, 'customer_acc_uuid' => a.id, 'calls' => 1 } } }
+      )
+
+      expect(Contractor).to receive(:where).once.and_call_original
+      expect(Account).to receive(:where).once.and_call_original
+
+      call_tool(
+        'measures' => ['calls'], 'dimensions' => %w[customer_uuid customer_acc_uuid],
+        'from' => from, 'to' => to
+      )
+      expect(result['isError']).to be_falsey
+    end
+
     it 'yields nil rather than failing on a value that cannot be a contractor id' do
       allow(ch_response).to receive(:body).and_return(
         { 'rows' => 2, 'data' => [{ 'customer_uuid' => nil, 'calls' => 1 },
@@ -490,9 +547,8 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
 
     it 'has no dictionary for counterparty or prefix-valued dimensions' do
       forbidden = %w[
-        customer_uuid vendor_uuid customer_acc_id vendor_acc_id
-        customer_auth_id orig_gw_id term_gw_id rateplan_id destination_id
-        dialpeer_id
+        customer_uuid vendor_uuid customer_acc_uuid vendor_acc_uuid
+        orig_gw_id term_gw_id rateplan_id destination_id dialpeer_id
       ]
 
       expect(Mcp::Tools::CdrReport::DICTIONARIES.keys & forbidden).to be_empty

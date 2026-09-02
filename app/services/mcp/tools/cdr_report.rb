@@ -39,12 +39,11 @@ module Mcp
 
       # name => SQL fragment (constant; the LLM only sends the name)
       DIMENSIONS = {
-        # Contractor references are reachable only as uuids.
+        # Contractor and account references are reachable only as uuids.
         'customer_uuid' => 'customer_id',
         'vendor_uuid' => 'vendor_id',
-        'customer_acc_id' => 'customer_acc_id',
-        'customer_auth_id' => 'customer_auth_id',
-        'vendor_acc_id' => 'vendor_acc_id',
+        'customer_acc_uuid' => 'customer_acc_id',
+        'vendor_acc_uuid' => 'vendor_acc_id',
         'orig_gw_id' => 'orig_gw_id',
         'term_gw_id' => 'term_gw_id',
         'dialpeer_id' => 'dialpeer_id',
@@ -133,11 +132,10 @@ module Mcp
       # name => { col:, type: } for WHERE conditions. Deliberately excludes the
       # raw number/IP/name columns (those are uniq-measure inputs only).
       FILTERS = {
-        'customer_uuid' => { col: 'customer_id', type: 'Int32', uuid: true },
-        'vendor_uuid' => { col: 'vendor_id', type: 'Int32', uuid: true },
-        'customer_acc_id' => { col: 'customer_acc_id', type: 'Int32' },
-        'customer_auth_id' => { col: 'customer_auth_id', type: 'Int32' },
-        'vendor_acc_id' => { col: 'vendor_acc_id', type: 'Int32' },
+        'customer_uuid' => { col: 'customer_id', type: 'Int32', uuid: 'Contractor' },
+        'vendor_uuid' => { col: 'vendor_id', type: 'Int32', uuid: 'Contractor' },
+        'customer_acc_uuid' => { col: 'customer_acc_id', type: 'Int32', uuid: 'Account' },
+        'vendor_acc_uuid' => { col: 'vendor_acc_id', type: 'Int32', uuid: 'Account' },
         'orig_gw_id' => { col: 'orig_gw_id', type: 'Int32' },
         'term_gw_id' => { col: 'term_gw_id', type: 'Int32' },
         'dialpeer_id' => { col: 'dialpeer_id', type: 'Int32' },
@@ -193,7 +191,7 @@ module Mcp
 
       # An allowlist: adding a key here is what discloses a name. Two classes
       # must stay out — counterparty identity (customer, vendor, account,
-      # customer auth, gateway, rateplan) and prefix-valued references
+      # gateway, rateplan) and prefix-valued references
       # (destination, dialpeer), whose display value is a phone number.
       DICTIONARIES = {
         'dst_country_id' => { model: 'System::Country' },
@@ -212,8 +210,13 @@ module Mcp
         'disconnect_initiator_id' => { static: -> { Cdr::Cdr::DISCONNECT_INITIATORS } }
       }.freeze
 
-      # Selected as an id, returned as contractors.uuid.
-      UUID_DIMENSIONS = %w[customer_uuid vendor_uuid].freeze
+      # Selected as an id, returned as the referenced record's uuid.
+      UUID_DIMENSIONS = {
+        'customer_uuid' => 'Contractor',
+        'vendor_uuid' => 'Contractor',
+        'customer_acc_uuid' => 'Account',
+        'vendor_acc_uuid' => 'Account'
+      }.freeze
 
       # Measures whose SQL carries the {short_call_seconds} placeholder.
       SHORT_CALL_MEASURES = %w[short_calls short_calls_ratio].freeze
@@ -241,16 +244,18 @@ module Mcp
             likewise for routing group/plan, pop, node, transport protocol and
             disconnect initiator). Set `resolve_names` to false to skip it.
 
-            Contractors appear ONLY as `customer_uuid` / `vendor_uuid` - there is
-            no customer_id dimension or filter. To narrow to one contractor, pass
-            its uuid: {field: "customer_uuid", op: "eq", value:
+            Contractors and accounts appear ONLY as uuids - `customer_uuid`,
+            `vendor_uuid`, `customer_acc_uuid`, `vendor_acc_uuid`. There is no
+            customer_id or customer_acc_id dimension or filter. To narrow to one,
+            pass its uuid: {field: "customer_uuid", op: "eq", value:
             "9f8a2c14-6b3e-4d71-b2a0-8c5e1f04a933"}. A bare numeric id is
             rejected. Uuids are stable, so you can correlate the same contractor
-            across reports, but they carry no ordering or count information - do
-            not try to derive one, and do not guess which real company a uuid is.
+            or account across reports, but they carry no ordering or count
+            information - do not try to derive one, and do not guess which real
+            company a uuid is.
 
-            Other counterparty dimensions - account, customer auth, gateway,
-            rateplan - are returned as bare ids and have no name form; this tool
+            The remaining counterparty dimensions - gateway, rateplan - are
+            returned as bare ids and have no name form; this tool
             does not disclose who a trading partner is. destination_id and
             dialpeer_id are likewise unresolved (their value is a dial prefix).
             Report all of these as-is and let the reader resolve them in the
@@ -311,7 +316,7 @@ module Mcp
               order_by: {
                 type: 'object',
                 properties: {
-                  field: { type: 'string', enum: (DIMENSIONS.keys - UUID_DIMENSIONS + MEASURES.keys) },
+                  field: { type: 'string', enum: (DIMENSIONS.keys - UUID_DIMENSIONS.keys + MEASURES.keys) },
                   dir: { type: 'string', enum: %w[asc desc] }
                 },
                 required: %w[field]
@@ -511,7 +516,7 @@ module Mcp
       # invalid input (clear client error rather than a server-side CH failure).
       # Non-integer columns (e.g. String reason filters) bind their value as-is.
       def coerce_filter_value(value, spec, field)
-        return coerce_uuid(value, field) if spec[:uuid]
+        return coerce_uuid(value, field, spec[:uuid]) if spec[:uuid]
 
         type = spec[:type]
         return value unless type.start_with?('Int', 'UInt')
@@ -531,12 +536,12 @@ module Mcp
       # A bare integer must be rejected, or the filter becomes an enumeration
       # oracle. An unknown uuid binds an id nothing matches rather than raising,
       # so the filter does not answer "does this contractor exist?" either.
-      def coerce_uuid(value, field)
-        unless value.to_s.strip.match?(Contractor::UUID_FORMAT)
-          raise ArgumentError, "filter #{field}: expected a contractor uuid, got #{value.inspect}"
+      def coerce_uuid(value, field, model)
+        unless value.to_s.strip.match?(UuidLookup::UUID_FORMAT)
+          raise ArgumentError, "filter #{field}: expected a uuid, got #{value.inspect}"
         end
 
-        Contractor.id_by_uuid(value) || 0
+        model.constantize.id_by_uuid(value) || 0
       end
 
       # ORDER BY references a SELECT alias (a constant from our maps), never input
@@ -549,7 +554,7 @@ module Mcp
         # Must be a key actually in SELECT (a measure or dimension of THIS query),
         # otherwise ClickHouse raises "Unknown identifier" on the alias.
         # Sorting by a uuid sorts by the id it hides.
-        if UUID_DIMENSIONS.include?(field)
+        if UUID_DIMENSIONS.key?(field)
           raise ArgumentError, "order_by field #{field.inspect} is not sortable; order by a measure instead"
         end
 
@@ -615,20 +620,24 @@ module Mcp
       end
 
       # In place: the raw id must not survive into the response.
+      # One lookup per referenced model, not per dimension.
       def replace_ids_with_uuids(data)
-        keys = dimensions & UUID_DIMENSIONS
+        keys = dimensions & UUID_DIMENSIONS.keys
         return data if keys.empty?
 
-        ids = data.flat_map { |row| keys.map { |key| contractor_id(row[key]) } }.compact.uniq
-        uuids = ids.empty? ? {} : Contractor.where(id: ids).pluck(:id, :uuid).to_h
+        uuids = {}
+        keys.group_by { |key| UUID_DIMENSIONS[key] }.each do |model, group|
+          ids = data.flat_map { |row| group.map { |key| reference_id(row[key]) } }.compact.uniq
+          uuids[model] = ids.empty? ? {} : model.constantize.where(id: ids).pluck(:id, :uuid).to_h
+        end
 
         data.each do |row|
-          keys.each { |key| row[key] = uuids[contractor_id(row[key])] }
+          keys.each { |key| row[key] = uuids[UUID_DIMENSIONS[key]][reference_id(row[key])] }
         end
       end
 
       # ClickHouse renders 64-bit ints as quoted strings, so accept both forms.
-      def contractor_id(value)
+      def reference_id(value)
         return value if value.is_a?(Integer) && value.positive?
 
         id = Integer(value.to_s, 10, exception: false)

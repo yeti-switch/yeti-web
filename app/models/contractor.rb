@@ -53,6 +53,7 @@ class Contractor < ApplicationRecord
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
   include WithPaperTrail
+  include UuidLookup
 
   scope :customers, -> { where customer: true }
   scope :vendors, -> { where vendor: true }
@@ -98,16 +99,6 @@ class Contractor < ApplicationRecord
       errors.add(:base, "Can't be deleted because linked to not applied Rate Management Pricelist(s) ##{pricelist_ids.join(', #')}")
       throw(:abort)
     end
-  end
-
-  UUID_FORMAT = /\A\h{8}-\h{4}-\h{4}-\h{4}-\h{12}\z/
-
-  # @return [Integer, nil] nil for a malformed uuid or one nobody holds
-  def self.id_by_uuid(value)
-    uuid = value.to_s.strip.downcase
-    return nil unless uuid.match?(UUID_FORMAT)
-
-    where(uuid: uuid).pick(:id)
   end
 
   def self.ransackable_scopes(_auth_object = nil)

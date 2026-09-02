@@ -129,6 +129,7 @@ module YetiConfigSchema
       # Block AND `enabled` key are both optional; missing → treated as false.
       optional(:mcp).schema do
         optional(:enabled).value(:bool?)
+        optional(:tools).array(:string)
       end
 
       required(:versioning_disable_for_models).each(:string)
