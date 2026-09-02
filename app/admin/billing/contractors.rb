@@ -29,7 +29,6 @@ ActiveAdmin.register Contractor do
     selectable_column
     id_column
     actions
-    column :uuid
     column :enabled
     column :name
     column :vendor
@@ -39,6 +38,7 @@ ActiveAdmin.register Contractor do
     column :address
     column :phones
     column :smtp_connection
+    column :uuid
   end
 
   show do |s|
