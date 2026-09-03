@@ -376,7 +376,7 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
         )
 
         expect(result['isError']).to be true
-        expect(error_text).to match(/expected a contractor uuid/i)
+        expect(error_text).to match(/expected a uuid/i)
       end
     end
 
