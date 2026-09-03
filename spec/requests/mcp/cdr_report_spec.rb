@@ -467,11 +467,36 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
       expect(captured[:params]['param_f1']).to eq(account.id)
     end
 
-    it 'has no dimension or filter for the raw account id' do
-      %w[customer_acc_id vendor_acc_id].each do |field|
+    it 'has no dimension or filter for the raw account or gateway id' do
+      %w[customer_acc_id vendor_acc_id orig_gw_id term_gw_id].each do |field|
         call_tool('measures' => ['calls'], 'dimensions' => [field], 'from' => from, 'to' => to)
         expect(error_text).to match(/unknown dimension/i)
       end
+    end
+
+    it 'returns gateway references as uuids' do
+      gateway = create(:gateway)
+      allow(ch_response).to receive(:body).and_return(
+        { 'rows' => 1, 'data' => [{ 'term_gw_uuid' => gateway.id, 'calls' => 1 }] }
+      )
+      call_tool('measures' => ['calls'], 'dimensions' => ['term_gw_uuid'], 'from' => from, 'to' => to)
+
+      expect(result['isError']).to be_falsey
+      expect(captured[:sql]).to include('term_gw_id AS term_gw_uuid')
+      expect(rows.first).to eq('term_gw_uuid' => gateway.uuid, 'calls' => 1)
+    end
+
+    it 'filters by gateway uuid, binding the resolved gateway id' do
+      gateway = create(:gateway)
+      call_tool(
+        'measures' => ['calls'],
+        'filters' => [{ 'field' => 'term_gw_uuid', 'op' => 'eq', 'value' => gateway.uuid }],
+        'from' => from, 'to' => to
+      )
+
+      expect(result['isError']).to be_falsey
+      expect(captured[:sql]).to include('term_gw_id = {f1: Int32}')
+      expect(captured[:params]['param_f1']).to eq(gateway.id)
     end
 
     # Contractors and accounts are looked up separately; neither is per-row.
@@ -548,7 +573,7 @@ RSpec.describe 'MCP cdr_report tool', type: :request do
     it 'has no dictionary for counterparty or prefix-valued dimensions' do
       forbidden = %w[
         customer_uuid vendor_uuid customer_acc_uuid vendor_acc_uuid
-        orig_gw_id term_gw_id rateplan_id destination_id dialpeer_id
+        orig_gw_uuid term_gw_uuid rateplan_id destination_id dialpeer_id
       ]
 
       expect(Mcp::Tools::CdrReport::DICTIONARIES.keys & forbidden).to be_empty

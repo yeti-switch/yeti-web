@@ -39,13 +39,13 @@ module Mcp
 
       # name => SQL fragment (constant; the LLM only sends the name)
       DIMENSIONS = {
-        # Contractor and account references are reachable only as uuids.
+        # Contractor, account and gateway references are reachable only as uuids.
         'customer_uuid' => 'customer_id',
         'vendor_uuid' => 'vendor_id',
         'customer_acc_uuid' => 'customer_acc_id',
         'vendor_acc_uuid' => 'vendor_acc_id',
-        'orig_gw_id' => 'orig_gw_id',
-        'term_gw_id' => 'term_gw_id',
+        'orig_gw_uuid' => 'orig_gw_id',
+        'term_gw_uuid' => 'term_gw_id',
         'dialpeer_id' => 'dialpeer_id',
         'destination_id' => 'destination_id',
         'routing_group_id' => 'routing_group_id',
@@ -136,8 +136,8 @@ module Mcp
         'vendor_uuid' => { col: 'vendor_id', type: 'Int32', uuid: 'Contractor' },
         'customer_acc_uuid' => { col: 'customer_acc_id', type: 'Int32', uuid: 'Account' },
         'vendor_acc_uuid' => { col: 'vendor_acc_id', type: 'Int32', uuid: 'Account' },
-        'orig_gw_id' => { col: 'orig_gw_id', type: 'Int32' },
-        'term_gw_id' => { col: 'term_gw_id', type: 'Int32' },
+        'orig_gw_uuid' => { col: 'orig_gw_id', type: 'Int32', uuid: 'Gateway' },
+        'term_gw_uuid' => { col: 'term_gw_id', type: 'Int32', uuid: 'Gateway' },
         'dialpeer_id' => { col: 'dialpeer_id', type: 'Int32' },
         'destination_id' => { col: 'destination_id', type: 'Int32' },
         'routing_group_id' => { col: 'routing_group_id', type: 'Int32' },
@@ -215,7 +215,9 @@ module Mcp
         'customer_uuid' => 'Contractor',
         'vendor_uuid' => 'Contractor',
         'customer_acc_uuid' => 'Account',
-        'vendor_acc_uuid' => 'Account'
+        'vendor_acc_uuid' => 'Account',
+        'orig_gw_uuid' => 'Gateway',
+        'term_gw_uuid' => 'Gateway'
       }.freeze
 
       # Measures whose SQL carries the {short_call_seconds} placeholder.
@@ -244,19 +246,20 @@ module Mcp
             likewise for routing group/plan, pop, node, transport protocol and
             disconnect initiator). Set `resolve_names` to false to skip it.
 
-            Contractors and accounts appear ONLY as uuids - `customer_uuid`,
-            `vendor_uuid`, `customer_acc_uuid`, `vendor_acc_uuid`. There is no
-            customer_id or customer_acc_id dimension or filter. To narrow to one,
-            pass its uuid: {field: "customer_uuid", op: "eq", value:
+            Contractors, accounts and gateways appear ONLY as uuids -
+            `customer_uuid`, `vendor_uuid`, `customer_acc_uuid`,
+            `vendor_acc_uuid`, `orig_gw_uuid`, `term_gw_uuid`. There is no
+            customer_id, customer_acc_id or term_gw_id dimension or filter. To
+            narrow to one, pass its uuid: {field: "customer_uuid", op: "eq", value:
             "9f8a2c14-6b3e-4d71-b2a0-8c5e1f04a933"}. A bare numeric id is
             rejected. Uuids are stable, so you can correlate the same contractor
-            or account across reports, but they carry no ordering or count
+            account or gateway across reports, but they carry no ordering or count
             information - do not try to derive one, and do not guess which real
             company a uuid is.
 
-            The remaining counterparty dimensions - gateway, rateplan - are
-            returned as bare ids and have no name form; this tool
-            does not disclose who a trading partner is. destination_id and
+            The remaining counterparty dimension - rateplan - is returned as a
+            bare id and has no name form; this tool does not disclose who a
+            trading partner is. destination_id and
             dialpeer_id are likewise unresolved (their value is a dial prefix).
             Report all of these as-is and let the reader resolve them in the
             admin UI.
