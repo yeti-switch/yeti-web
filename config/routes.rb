@@ -18,7 +18,16 @@ Rails.application.routes.draw do
     resource(name.to_s.dasherize.to_sym, **options, &block)
   end
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  # activeadmin-oidc 2.2 draws its own :sessions-shaped routes (login_path /
+  # logout_path, default /admin/login and /admin/logout) whenever AdminUser
+  # is in OIDC mode — see ActiveAdmin::Oidc::Engine#mount_oidc_sessions_routes.
+  # AdminUser keeps :database_authenticatable there so Devise mounts a
+  # sessions controller too, which would draw the very same route names
+  # ('new_admin_user_session' / 'destroy_admin_user_session') a second time
+  # and blow up route finalization. Skip Devise's own :sessions routes in
+  # that mode; in DB-auth mode (no config/oidc.yml) AdminUser has no
+  # :omniauthable, the gem draws nothing, and Devise must keep drawing them.
+  devise_for :admin_users, ActiveAdmin::Devise.config.merge(skip: (AdminUser.oidc? ? [:sessions] : []))
 
   # Doorkeeper OAuth provider + RFC 8414 metadata + RFC 7591 dynamic client
   # registration. Gated on YetiConfig.oauth.enabled so the surface is opt-in.
@@ -298,6 +307,19 @@ Rails.application.routes.draw do
     end
   end
 
+  # activeadmin-oidc 2.2 mounts its own /admin/login and /admin/logout (see
+  # config/initializers/activeadmin_oidc.rb and
+  # ActiveAdmin::Oidc::Engine#mount_oidc_sessions_routes) by *appending* to
+  # the route set from an after_initialize hook, so they land after every
+  # route this file draws -- including the catch-all right below. Without
+  # this exclusion the catch-all would win first and both routes would
+  # 404. Logout is GET-reachable too: ActiveAdmin 3.x's default
+  # logout_link_method is :get.
+  oidc_session_path = lambda do |req|
+    cfg = ActiveAdmin::Oidc.config
+    ![cfg.login_path, cfg.logout_path].include?(req.path)
+  end
+
   # 404
-  match '*a' => 'application#render_404', via: :get
+  match '*a' => 'application#render_404', via: :get, constraints: oidc_session_path
 end
