@@ -24,15 +24,15 @@ RSpec.describe Mcp::Tools::CdrReport do
 
   describe '#select_clause' do
     it 'maps dimension and measure keys to their constant fragments, aliased to the key' do
-      sql = tool('measures' => %w[calls distinct_src_numbers], 'dimensions' => %w[customer_acc_id hour]).send(:select_clause)
+      sql = tool('measures' => %w[calls distinct_src_numbers], 'dimensions' => %w[internal_disconnect_code_id hour]).send(:select_clause)
       expect(sql).to eq(
-        'customer_acc_id AS customer_acc_id, toStartOfHour(time_start) AS hour, ' \
+        'internal_disconnect_code_id AS internal_disconnect_code_id, toStartOfHour(time_start) AS hour, ' \
         'count() AS calls, uniq(src_prefix_in) AS distinct_src_numbers'
       )
     end
 
     it 'requires at least one measure' do
-      expect { tool('dimensions' => ['customer_acc_id']).send(:select_clause) }
+      expect { tool('dimensions' => ['internal_disconnect_code_id']).send(:select_clause) }
         .to raise_error(ArgumentError, /at least one measure/)
     end
 
@@ -53,8 +53,8 @@ RSpec.describe Mcp::Tools::CdrReport do
     end
 
     it 'groups by the dimension fragments' do
-      expect(tool('measures' => ['calls'], 'dimensions' => %w[customer_acc_id day]).send(:group_by_clause))
-        .to eq('GROUP BY customer_acc_id, toDate(time_start)')
+      expect(tool('measures' => ['calls'], 'dimensions' => %w[internal_disconnect_code_id day]).send(:group_by_clause))
+        .to eq('GROUP BY internal_disconnect_code_id, toDate(time_start)')
     end
   end
 
@@ -69,9 +69,9 @@ RSpec.describe Mcp::Tools::CdrReport do
     end
 
     it 'binds a scalar filter value as a typed param and never inlines it' do
-      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => 42 }])
+      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'eq', 'value' => 42 }])
       where = t.send(:where_clause)
-      expect(where).to include('customer_acc_id = {f1: Int32}')
+      expect(where).to include('internal_disconnect_code_id = {f1: Int16}')
       expect(where).not_to include('42')
       expect(params_of(t)).to include('param_f1' => 42)
     end
@@ -91,14 +91,14 @@ RSpec.describe Mcp::Tools::CdrReport do
     it 'coerces array filter values too' do
       t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'success', 'op' => 'in', 'value' => [true, false] }])
       t.send(:where_clause)
-      expect(params_of(t)).to include('param_f1' => [1, 0])
+      expect(params_of(t)).to include('param_f1' => '[1,0]')
     end
 
     it 'rejects a non-integer filter value as invalid input' do
       expect do
         windowed('measures' => ['calls'],
-                 'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => 'abc' }]).send(:where_clause)
-      end.to raise_error(ArgumentError, /not a valid Int32/)
+                 'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'eq', 'value' => 'abc' }]).send(:where_clause)
+      end.to raise_error(ArgumentError, /not a valid Int16/)
     end
 
     it 'binds a String filter value as-is (no integer coercion)' do
@@ -111,7 +111,7 @@ RSpec.describe Mcp::Tools::CdrReport do
     it 'binds an array filter value as Array(Type)' do
       t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [1, 7] }])
       expect(t.send(:where_clause)).to include('dst_country_id IN {f1: Array(Int32)}')
-      expect(params_of(t)).to include('param_f1' => [1, 7])
+      expect(params_of(t)).to include('param_f1' => '[1,7]')
     end
 
     it 'rejects a scalar value for an array operator (no silent coercion)' do
@@ -124,13 +124,26 @@ RSpec.describe Mcp::Tools::CdrReport do
         .to raise_error(ArgumentError, /non-empty array/)
     end
 
+    it 'rejects a filter value that is not a uuid, before any lookup' do
+      [42, '42', 'not-a-uuid'].each do |value|
+        expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'customer_uuid', 'op' => 'eq', 'value' => value }]).send(:where_clause) }
+          .to raise_error(ArgumentError, /expected a uuid/)
+      end
+    end
+
+    it 'binds an id nothing matches for a well-formed uuid nobody holds' do
+      t = windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'customer_uuid', 'op' => 'eq', 'value' => SecureRandom.uuid }])
+      expect(t.send(:where_clause)).to include('customer_id = {f1: Int32}')
+      expect(params_of(t)).to include('param_f1' => 0)
+    end
+
     it 'rejects a raw PII column as a filter field' do
       expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'sign_orig_ip', 'op' => 'eq', 'value' => 'x' }]).send(:where_clause) }
         .to raise_error(ArgumentError, /unknown filter field/)
     end
 
     it 'rejects an unknown operator' do
-      expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'like', 'value' => 1 }]).send(:where_clause) }
+      expect { windowed('measures' => ['calls'], 'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'like', 'value' => 1 }]).send(:where_clause) }
         .to raise_error(ArgumentError, /unknown operator/)
     end
 
@@ -202,10 +215,10 @@ RSpec.describe Mcp::Tools::CdrReport do
       expect do
         windowed(
           'measures' => ['calls'],
-          'dimensions' => ['customer_acc_id'],
-          'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq', 'value' => '1); DROP TABLE cdrs;--' }]
+          'dimensions' => ['internal_disconnect_code_id'],
+          'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'eq', 'value' => '1); DROP TABLE cdrs;--' }]
         ).send(:build_sql)
-      end.to raise_error(ArgumentError, /not a valid Int32/)
+      end.to raise_error(ArgumentError, /not a valid Int16/)
     end
 
     it 'rejects injection routed through any key (measure/dimension/filter field/op/order)' do
@@ -213,7 +226,7 @@ RSpec.describe Mcp::Tools::CdrReport do
         { 'measures' => ['count(); DROP'] },
         { 'measures' => ['calls'], 'dimensions' => ['1; DROP'] },
         { 'measures' => ['calls'], 'filters' => [{ 'field' => 'x; DROP', 'op' => 'eq', 'value' => 1 }] },
-        { 'measures' => ['calls'], 'filters' => [{ 'field' => 'customer_acc_id', 'op' => 'eq); DROP--', 'value' => 1 }] },
+        { 'measures' => ['calls'], 'filters' => [{ 'field' => 'internal_disconnect_code_id', 'op' => 'eq); DROP--', 'value' => 1 }] },
         { 'measures' => ['calls'], 'order_by' => { 'field' => 'calls; DROP' } }
       ].each do |bad|
         expect { windowed(bad).send(:build_sql) }.to raise_error(ArgumentError)
@@ -223,13 +236,13 @@ RSpec.describe Mcp::Tools::CdrReport do
     it 'produces a statement whose only braces are typed {param:Type} placeholders' do
       t = windowed(
         'measures' => %w[calls distinct_src_numbers],
-        'dimensions' => ['customer_acc_id'],
+        'dimensions' => ['internal_disconnect_code_id'],
         'filters' => [{ 'field' => 'dst_country_id', 'op' => 'in', 'value' => [1] }]
       )
       sql = t.send(:build_sql)
       expect(sql).to start_with('SELECT ')
       expect(sql).to include('FROM cdrs')
-      expect(sql).to include('GROUP BY customer_acc_id')
+      expect(sql).to include('GROUP BY internal_disconnect_code_id')
       expect(sql).to include('SETTINGS max_execution_time')
       expect(sql).to end_with('FORMAT JSON') # so the gem parses the body to a Hash
       # every {...} in the final SQL is one of our generated typed params

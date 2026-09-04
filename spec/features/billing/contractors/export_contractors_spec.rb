@@ -21,6 +21,7 @@ RSpec.describe 'Export Contractors', type: :feature do
       [
         ['Id',                   item.id.to_s],
         ['Name',                 item.name],
+        ['Uuid',                 item.uuid],
         ['Enabled',              item.enabled.to_s],
         ['Vendor',               item.vendor.to_s],
         ['Customer',             item.customer.to_s],

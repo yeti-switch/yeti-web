@@ -19,7 +19,8 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::ContractorsController do
             external_id: record.external_id,
             enabled: record.enabled,
             vendor: record.vendor,
-            customer: record.customer
+            customer: record.customer,
+            uuid: record.uuid
           }
         end
       end

@@ -12,6 +12,7 @@
 #  enabled            :boolean          not null
 #  name               :string           not null
 #  phones             :string
+#  uuid               :uuid             not null
 #  vendor             :boolean          not null
 #  external_id        :bigint(8)
 #  smtp_connection_id :integer(4)
@@ -20,6 +21,7 @@
 #
 #  contractors_external_id_key  (external_id) UNIQUE
 #  contractors_name_unique      (name) UNIQUE
+#  contractors_uuid_key         (uuid) UNIQUE
 #
 # Foreign Keys
 #

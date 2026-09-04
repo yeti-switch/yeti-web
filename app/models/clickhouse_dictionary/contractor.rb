@@ -9,6 +9,7 @@ module ClickhouseDictionary
                :enabled,
                :external_id,
                :vendor,
-               :customer
+               :customer,
+               :uuid
   end
 end

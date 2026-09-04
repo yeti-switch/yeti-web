@@ -47,6 +47,7 @@ class Account < ApplicationRecord
   self.table_name = 'billing.accounts'
 
   include WithPaperTrail
+  include UuidLookup
 
   class << self
     def totals_per_currency

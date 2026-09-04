@@ -47,6 +47,55 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
     end
   end
 
+  describe 'mcp.tools allowlist' do
+    def stub_tools(value)
+      allow(YetiConfig).to receive(:mcp).and_return(OpenStruct.new(enabled: true, tools: value))
+    end
+
+    def listed_tools
+      mcp_call(token: token.plaintext_token, method: 'tools/list')
+      JSON.parse(response.body).dig('result', 'tools').map { |t| t['name'] }
+    end
+
+    it 'exposes every tool when unset' do
+      stub_tools(nil)
+
+      expect(listed_tools).to match_array(Mcp::Tools::REGISTRY.keys)
+    end
+
+    it 'exposes only the listed tools' do
+      stub_tools(['cdr_report'])
+
+      expect(listed_tools).to eq(['cdr_report'])
+    end
+
+    it 'exposes nothing for an empty list' do
+      stub_tools([])
+
+      expect(listed_tools).to be_empty
+    end
+
+    # Hiding a tool from tools/list is not enough on its own.
+    it 'refuses to call a tool that is not allowed' do
+      stub_tools(['cdr_report'])
+      mcp_call(
+        token: token.plaintext_token,
+        method: 'tools/call',
+        params: { name: 'routing_simulate', arguments: {} }
+      )
+
+      expect(JSON.parse(response.body).dig('result', 'isError')).to be true
+      expect(JSON.parse(response.body).dig('result', 'content', 0, 'text')).to match(/unknown tool/i)
+    end
+
+    it 'ignores an unknown name and says so in the log' do
+      stub_tools(%w[cdr_report nope])
+      expect(Rails.logger).to receive(:warn).with(/unknown tools: nope/)
+
+      expect(listed_tools).to eq(['cdr_report'])
+    end
+  end
+
   describe 'JSON-RPC dispatch' do
     it 'responds to initialize' do
       mcp_call(token: token.plaintext_token, method: 'initialize')
