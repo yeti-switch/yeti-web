@@ -12,11 +12,19 @@ RSpec.configure do |config|
   config.after(:each, :oidc_mode) { reset_oidc_stubs }
 
   # `oidc_mode: true` specs need config/oidc.yml in place (AdminUser gets
-  # :omniauthable only then — see AdminUser.oidc_config_exists?). Skip them
-  # rather than fail when it's absent, so the regular suite stays green
-  # without it.
+  # :omniauthable only then — see AdminUser.oidc_config_exists?).
+  #
+  # Locally, skip them rather than fail when it's absent, so the regular suite
+  # stays green without it. In the dedicated CI OIDC job (CI_RUN_OIDC=true)
+  # these are the *only* specs that run, so skipping them all would turn a
+  # broken setup into a green run that tested nothing — fail loudly instead.
   config.before(:each, :oidc_mode) do
-    skip 'requires OIDC mode (run with config/oidc.yml in place and CI_RUN_OIDC=true)' unless AdminUser.oidc?
+    next if AdminUser.oidc?
+
+    message = 'requires OIDC mode (run with config/oidc.yml in place and CI_RUN_OIDC=true)'
+    raise message if ENV['CI_RUN_OIDC'].present?
+
+    skip message
   end
 
   # CI runs OIDC specs in a dedicated job (config/oidc.yml + CI_RUN_OIDC=true)
