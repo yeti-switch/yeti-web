@@ -61,4 +61,30 @@ RSpec.describe CdrProcessor::Api do
       expect(event_done?(1)).to be(false)
     end
   end
+
+  describe '.pgq_consumer_lock!' do
+    let(:queue_name) { "spec_queue_#{SecureRandom.hex(4)}" }
+
+    it 'takes the lock and reports holding it' do
+      expect(CdrProcessor::CdrDb.pgq_consumer_lock?(queue_name, consumer_name)).to be(false)
+      expect(CdrProcessor::CdrDb.pgq_consumer_lock!(queue_name, consumer_name)).to be(true)
+      expect(CdrProcessor::CdrDb.pgq_consumer_lock?(queue_name, consumer_name)).to be(true)
+    end
+
+    it 'does not report holding another consumer lock' do
+      CdrProcessor::CdrDb.pgq_consumer_lock!(queue_name, consumer_name)
+
+      expect(CdrProcessor::CdrDb.pgq_consumer_lock?(queue_name, 'other_consumer')).to be(false)
+    end
+  end
+
+  # the key must stay stable across restarts and deploys, or a worker would take
+  # a different lock than the instance it is meant to exclude
+  describe '.pgq_lock_key' do
+    it 'folds CRC32 into signed int4' do
+      expect(CdrProcessor::CdrDb.pgq_lock_key('yeti.cdr_processor')).to eq(1_361_771_982)
+      expect(CdrProcessor::CdrDb.pgq_lock_key('cdr_billing/cdr_billing')).to eq(1_490_344_555)
+      expect(CdrProcessor::CdrDb.pgq_lock_key('cdr_stats/cdr_stats')).to eq(-405_628_283)
+    end
+  end
 end
