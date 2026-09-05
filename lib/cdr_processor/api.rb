@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'zlib'
+
 module CdrProcessor
   module Api
     # == consuming
@@ -49,6 +51,50 @@ module CdrProcessor
           ['SELECT pgq_ext.set_event_done(?, ?, ev_id) FROM unnest(?::bigint[]) AS ev_id', consumer, batch_id, "{#{ids}}"]
         )
       )
+    end
+
+    # == consumer lock
+
+    # Advisory locks are global to the database, so the key is namespaced:
+    # classid identifies the component, objid the queue/consumer pair.
+    LOCK_NAMESPACE = 'yeti.cdr_processor'
+
+    # pg_try_advisory_lock takes signed int4, so the unsigned CRC32 is
+    # reinterpreted as signed. pg_locks reports the unsigned value, but comparing
+    # it against the signed literal matches - int4 casts to oid bitwise.
+    def pgq_lock_key(value)
+      [Zlib.crc32(value)].pack('L').unpack1('l')
+    end
+
+    def pgq_consumer_key(queue_name, consumer_name)
+      pgq_lock_key("#{queue_name}/#{consumer_name}")
+    end
+
+    # Session level, so it spans the several autocommit statements a batch takes
+    # (next_batch .. get_batch_events .. finish_batch). Never unlocked - the
+    # session ends with the process, which releases it.
+    def pgq_consumer_lock!(queue_name, consumer_name)
+      connection.select_value(
+        sanitize_sql_array(
+          ['SELECT pg_try_advisory_lock(?, ?)', pgq_lock_key(LOCK_NAMESPACE), pgq_consumer_key(queue_name, consumer_name)]
+        )
+      ) == true
+    end
+
+    # objsubid is 2 for the two argument form of pg_try_advisory_lock.
+    def pgq_consumer_lock?(queue_name, consumer_name)
+      connection.select_value(
+        sanitize_sql_array(
+          [
+            "SELECT EXISTS (
+               SELECT 1 FROM pg_locks
+               WHERE locktype = 'advisory' AND pid = pg_backend_pid() AND granted
+                 AND objsubid = 2 AND classid = ? AND objid = ?
+             )",
+            pgq_lock_key(LOCK_NAMESPACE), pgq_consumer_key(queue_name, consumer_name)
+          ]
+        )
+      ) == true
     end
 
     # == info methods

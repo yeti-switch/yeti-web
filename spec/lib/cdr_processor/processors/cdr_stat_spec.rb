@@ -17,6 +17,7 @@ RSpec.describe CdrProcessor::Processors::CdrStat do
   end
 
   before do
+    allow(CdrProcessor::CdrDb).to receive(:pgq_consumer_lock!).and_return(true)
     allow(CdrProcessor::CdrDb.connection).to receive(:select_value).once.with(expected_sql).and_return(return_value)
   end
 

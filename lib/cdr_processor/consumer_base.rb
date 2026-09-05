@@ -41,11 +41,14 @@ module CdrProcessor
 
       self.logger = logger
       @batch_id = nil
+      @consumer_lock_taken = false
     end
 
     def perform_batch
       events = []
       safe_batch_perform do
+        return 0 unless consumer_lock_ok?
+
         pgq_events = get_batch_events
 
         return 0 if pgq_events.nil? # if no batch
@@ -66,6 +69,26 @@ module CdrProcessor
       end
 
       events.size
+    end
+
+    # pgq.next_batch reads pgq.subscription without FOR UPDATE, so two workers
+    # sharing a consumer can be handed different batch ids for the same events.
+    # Losing the lock after it was taken means our session died, which breaks
+    # that exclusivity - fail so the worker restarts on a fresh connection.
+    def consumer_lock_ok?
+      if @consumer_lock_taken
+        raise "Lost the advisory lock on #{queue_name}/#{consumer_name}" unless CdrProcessor::CdrDb.pgq_consumer_lock?(queue_name, consumer_name)
+
+        return true
+      end
+
+      @consumer_lock_taken = CdrProcessor::CdrDb.pgq_consumer_lock!(queue_name, consumer_name)
+      # the loop retries every sleep_time, so report the wait only once
+      unless @consumer_lock_taken || @consumer_lock_reported
+        @consumer_lock_reported = true
+        log_info "Another instance holds #{queue_name}/#{consumer_name}, idling"
+      end
+      @consumer_lock_taken
     end
 
     def safe_batch_perform

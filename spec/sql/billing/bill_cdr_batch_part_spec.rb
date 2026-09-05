@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe 'billing.bill_cdr_batch' do
+RSpec.describe 'billing.bill_cdr_batch_part' do
   subject do
-    SqlCaller::Yeti.execute('SELECT * FROM billing.bill_cdr_batch(?,?)', batch_id, batch_data.to_json)
+    SqlCaller::Yeti.execute('SELECT * FROM billing.bill_cdr_batch_part(?,?::jsonb)', batch_id, batch_data.to_json)
   end
+
+  let(:batch_id) { 1 }
+
+  # the part is only billable inside the transaction that claimed the batch -
+  # under transactional fixtures the example itself provides that transaction
+  before { SqlCaller::Yeti.select_value('SELECT billing.bill_cdr_batch_start(?)', batch_id) }
 
   let(:customer_acc1) { FactoryBot.create(:account, balance: 10) }
   let(:customer_acc2) { FactoryBot.create(:account, balance: 20) }
@@ -14,7 +20,6 @@ RSpec.describe 'billing.bill_cdr_batch' do
 
   let(:package_counter) { FactoryBot.create(:billing_package_counter, account_id: customer_acc1.id, duration: 120) }
 
-  let(:batch_id) { 1 }
   let(:batch_data) do
     [
       {
@@ -238,6 +243,18 @@ RSpec.describe 'billing.bill_cdr_batch' do
                                      asr: 0,
                                      acd: 0
                                    )
+    end
+  end
+
+  context 'when the batch was not started in this transaction' do
+    subject do
+      SqlCaller::Yeti.execute('SELECT * FROM billing.bill_cdr_batch_part(?,?::jsonb)', other_batch_id, batch_data.to_json)
+    end
+
+    let(:other_batch_id) { batch_id + 1 }
+
+    it 'raises' do
+      expect { subject }.to raise_error(ActiveRecord::StatementInvalid, /was not started in this transaction/)
     end
   end
 end

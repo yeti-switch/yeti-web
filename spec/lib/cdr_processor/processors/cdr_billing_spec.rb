@@ -30,8 +30,10 @@ RSpec.describe CdrProcessor::Processors::CdrBilling do
     ]
   end
 
+  let(:batch_id) { (Time.now.to_f * 1000).to_i }
+
   before do
-    consumer.instance_variable_set(:@batch_id, (Time.now.to_f * 1000).to_i)
+    consumer.instance_variable_set(:@batch_id, batch_id)
   end
 
   subject { consumer.perform_group cdrs }
@@ -108,6 +110,76 @@ RSpec.describe CdrProcessor::Processors::CdrBilling do
 
     it 'matches the billing.cdr_v2 composite type' do
       expect(described_class::BILLED_FIELDS).to eq(cdr_v2_attributes)
+    end
+  end
+
+  context 'when the group spans several parts' do
+    let(:cdrs) do
+      Array.new(2) do |i|
+        {
+          id: i,
+          dialpeer_reverse_billing: vendor_reverse,
+          vendor_price: 5.0,
+          vendor_acc_id: vendor_acc.id,
+          destination_reverse_billing: customer_reverse,
+          customer_price: 10.0,
+          customer_acc_id: customer_acc.id
+        }
+      end
+    end
+
+    before { stub_const("#{described_class}::PART_SIZE", 1) }
+
+    it 'bills every part' do
+      subject
+      expect(vendor_acc.reload.balance.to_f).to eq(110.0)
+      expect(customer_acc.reload.balance.to_f).to eq(80.0)
+    end
+
+    it 'sends one statement per part' do
+      expect(consumer).to receive(:bill_part).twice.and_call_original
+      subject
+    end
+
+    it 'wraps the parts in a transaction' do
+      expect(consumer.primary_connection).to receive(:transaction).and_call_original
+      subject
+    end
+
+    # requires_new gives the savepoint that perform_group's own transaction is
+    # in production - under transactional fixtures it would otherwise join the
+    # example's transaction and never roll back on its own.
+    it 'rolls the whole batch back when a part fails' do
+      calls = 0
+      allow(consumer).to receive(:bill_part).and_wrap_original do |method, *args|
+        calls += 1
+        raise 'part failed' if calls == 2
+
+        method.call(*args)
+      end
+
+      expect do
+        consumer.primary_connection.transaction(requires_new: true) { subject }
+      end.to raise_error(RuntimeError, 'part failed')
+
+      expect(customer_acc.reload.balance.to_f).to eq(100.0)
+      expect(vendor_acc.reload.balance.to_f).to eq(100.0)
+      expect(Billing::CdrBatch.where(id: batch_id)).to be_empty
+    end
+  end
+
+  context 'when the batch was already billed' do
+    before { SqlCaller::Yeti.select_value('SELECT billing.bill_cdr_batch_start(?)', batch_id) }
+
+    it 'does not bill it again' do
+      subject
+      expect(vendor_acc.reload.balance.to_f).to eq(100.0)
+      expect(customer_acc.reload.balance.to_f).to eq(100.0)
+    end
+
+    it 'does not send any part' do
+      expect(consumer).not_to receive(:bill_part)
+      subject
     end
   end
 end

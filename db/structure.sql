@@ -647,40 +647,27 @@ $$;
 
 
 --
--- Name: bill_cdr_batch(bigint, text, integer); Type: FUNCTION; Schema: billing; Owner: -
+-- Name: bill_cdr_batch_part(bigint, jsonb, integer); Type: FUNCTION; Schema: billing; Owner: -
 --
 
-CREATE FUNCTION billing.bill_cdr_batch(i_batch_id bigint, i_data text, i_data_version integer DEFAULT 2) RETURNS void
+CREATE FUNCTION billing.bill_cdr_batch_part(i_batch_id bigint, i_data jsonb, i_data_version integer DEFAULT 2) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
-    v_batch_data billing.cdr_v2;
     v_package_data record;
     v_c_acc_data record;
     v_v_acc_data record;
     v_dp_stats_data record;
     v_gw_stats_data record;
-    _j_data json;
 BEGIN
-    begin
-        _j_data:=i_data::json;
-    exception
-        when others then
-            RAISE exception 'billing.bill_cdr_batch: Invalid json payload';
-    end;
-
-    BEGIN
-        insert into billing.cdr_batches(id) values(i_batch_id);
-    exception
-        WHEN unique_violation then
-            RAISE WARNING 'billing.bill_cdr_batch:  Data batch % already billed. Skip it.',i_batch_id;
-            return; -- batch already processed;
-    end ;
+    if current_setting('billing.cdr_batch', true) is distinct from i_batch_id::text then
+        RAISE EXCEPTION 'billing.bill_cdr_batch_part: batch % was not started in this transaction',i_batch_id;
+    end if;
 
     if i_data_version=2 then
         --- ok;
     else
-        RAISE EXCEPTION 'billing.bill_cdr_batch: No logic for this data version';
+        RAISE EXCEPTION 'billing.bill_cdr_batch_part: No logic for this data version';
     end if;
 
     for v_c_acc_data in
@@ -688,7 +675,7 @@ BEGIN
         customer_acc_id,
         sum(customer_price) as customer_price,
         destination_reverse_billing
-      from json_populate_recordset(null::billing.cdr_v2,_j_data)
+      from jsonb_populate_recordset(null::billing.cdr_v2,i_data)
       where customer_acc_id is not null AND customer_price > 0 AND package_counter_id is null
       group by customer_acc_id, destination_reverse_billing
     LOOP
@@ -703,7 +690,7 @@ BEGIN
       select
         package_counter_id,
         sum(customer_duration) as customer_duration
-      from json_populate_recordset(null::billing.cdr_v2,_j_data)
+      from jsonb_populate_recordset(null::billing.cdr_v2,i_data)
       where customer_duration is not null AND package_counter_id is not null
       group by package_counter_id
     LOOP
@@ -715,7 +702,7 @@ BEGIN
         vendor_acc_id,
         sum(vendor_price) as vendor_price,
         dialpeer_reverse_billing
-      from json_populate_recordset(null::billing.cdr_v2,_j_data)
+      from jsonb_populate_recordset(null::billing.cdr_v2,i_data)
       where vendor_acc_id is not null AND vendor_price>0
       group by vendor_acc_id, dialpeer_reverse_billing
     LOOP
@@ -733,7 +720,7 @@ BEGIN
         count(*)::integer as calls,
         (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
         (count(*) FILTER(WHERE duration=0))::integer as failed_calls
-      FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
+      FROM jsonb_populate_recordset(null::billing.cdr_v2,i_data)
       WHERE dialpeer_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY dialpeer_id
     LOOP
@@ -753,7 +740,7 @@ BEGIN
         count(*)::integer as calls,
         (count(*) FILTER(WHERE duration>0))::integer as successful_calls,
         (count(*) FILTER(WHERE duration=0))::integer as failed_calls
-      FROM json_populate_recordset(null::billing.cdr_v2,_j_data)
+      FROM jsonb_populate_recordset(null::billing.cdr_v2,i_data)
       WHERE term_gw_id is not null AND duration is not null AND duration >= 0 /* Negative duration should not exists */
       GROUP BY term_gw_id
     LOOP
@@ -766,6 +753,26 @@ BEGIN
       );
     END LOOP;
 
+END;
+$$;
+
+
+--
+-- Name: bill_cdr_batch_start(bigint); Type: FUNCTION; Schema: billing; Owner: -
+--
+
+CREATE FUNCTION billing.bill_cdr_batch_start(i_batch_id bigint) RETURNS boolean
+    LANGUAGE plpgsql SECURITY DEFINER COST 10
+    AS $$
+BEGIN
+    insert into billing.cdr_batches(id) values(i_batch_id);
+    -- claims the batch for this transaction, see billing.bill_cdr_batch_part
+    perform set_config('billing.cdr_batch', i_batch_id::text, true);
+    return true;
+exception
+    WHEN unique_violation then
+        RAISE WARNING 'billing.bill_cdr_batch_start:  Data batch % already billed. Skip it.',i_batch_id;
+        return false; -- batch already processed;
 END;
 $$;
 
@@ -20836,6 +20843,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260905120000'),
 ('20260901120000'),
 ('20260813120000'),
 ('20260810120001'),
