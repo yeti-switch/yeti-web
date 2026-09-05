@@ -12,11 +12,12 @@ RSpec.describe Billing::Provisioning::PhoneSystems::GatewayService do
       codecs: %w[telephone-event]
     }
   end
+  let(:service_variables) { { attributes: { name: 'ACME Ltd' }, ps_trm_gw: ps_trm_gw } }
   let(:service_attrs) do
     {
       type: service_type,
       uuid: SecureRandom.uuid,
-      variables: { ps_trm_gw: ps_trm_gw }
+      variables: service_variables
     }
   end
   let(:service) { FactoryBot.create(:service, service_attrs) }
@@ -83,18 +84,20 @@ RSpec.describe Billing::Provisioning::PhoneSystems::GatewayService do
       before do
         WebMock
           .stub_request(:post, telecom_center_api_endpoint)
-          .with(body: hash_including(data: hash_including(attributes: expected_attributes.as_json)))
           .to_return(status: 200, body: { data: { id: 123, type: 'termination_gateways' } }.to_json)
       end
 
       it 'sends them unchanged instead of generating a pair' do
         subject
-        expect(WebMock).to have_requested(:post, telecom_center_api_endpoint).once
+
+        expect(WebMock).to have_requested(:post, telecom_center_api_endpoint).with { |request|
+          JSON.parse(request.body).dig('data', 'attributes') == expected_attributes.as_json
+        }
       end
     end
 
     context 'when ps_trm_gw is not defined at all' do
-      let(:service_attrs) { super().merge(variables: {}) }
+      let(:service_variables) { { attributes: { name: 'ACME Ltd' } } }
 
       before do
         WebMock.stub_request(:post, telecom_center_api_endpoint)
@@ -170,7 +173,7 @@ RSpec.describe Billing::Provisioning::PhoneSystems::GatewayService do
     end
 
     context 'when ps_trm_gw is not defined at all' do
-      let(:service_attrs) { super().merge(variables: {}) }
+      let(:service_variables) { { attributes: { name: 'ACME Ltd' } } }
 
       it 'still creates the gateway but leaves the incoming auth empty' do
         expect { subject }.to change { Gateway.where(name: "ps-#{service.id}").count }.by(1)

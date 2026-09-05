@@ -8,7 +8,7 @@ module Billing
 
         def initialize(service, response = {})
           @service = service
-          @service_variables = service.type.variables.merge(service.variables)
+          @service_variables = service.type.variables.merge(service.variables.to_h)
           @api_client = PhoneSystemsApiClient.new(@service_variables)
           @domain = response.dig('data', 'attributes', 'domain')
         end
