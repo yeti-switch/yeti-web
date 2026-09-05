@@ -6,7 +6,10 @@ RSpec.describe Billing::Provisioning::PhoneSystems do
   let(:generate_name) { "gw-#{random_uuid}" }
   let(:telecom_center_api_host) { 'https://api.telecom.center' }
   let(:telecom_center_api_endpoint) { "#{telecom_center_api_host}/api/rest/public/operator/customers" }
-  let(:service_type_attrs) { { variables: { endpoint: telecom_center_api_host, username: 'user', password: 'pass' } } }
+  let(:ps_trm_gw) { { host: 'sip.yeti-switch.org' } }
+  let(:service_type_attrs) do
+    { variables: { endpoint: telecom_center_api_host, username: 'user', password: 'pass', ps_trm_gw: ps_trm_gw } }
+  end
   let(:service_type) { FactoryBot.create(:service_type, service_type_attrs) }
   let(:service) { FactoryBot.create(:service, service_attrs) }
   let(:stub_customer_post_request!) do
@@ -50,7 +53,7 @@ RSpec.describe Billing::Provisioning::PhoneSystems do
              body: {
                data: {
                  type: 'termination_gateways',
-                 attributes: { host: 'sip.yeti-switch.org', authorization_name: username, authorization_password: password, name: generate_name },
+                 attributes: ps_trm_gw.merge(name: generate_name, authorization_name: username, authorization_password: password),
                  relationships: {
                    customer: {
                      data: {
@@ -113,8 +116,8 @@ RSpec.describe Billing::Provisioning::PhoneSystems do
              }.to_json
            )
   end
-  let(:password) { SecureRandom.alphanumeric(20) }
-  let(:username) { SecureRandom.alphanumeric(20) }
+  let(:password) { 'generatedAuthPassword' }
+  let(:username) { 'generatedAuthUsername' }
   let(:service_attrs) do
     {
       type: service_type,
@@ -129,8 +132,9 @@ RSpec.describe Billing::Provisioning::PhoneSystems do
 
   before do
     allow_any_instance_of(Billing::Provisioning::PhoneSystems::IncomingTrunkService).to receive(:generate_name).and_return(generate_name)
-    allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:generate_auth_username).and_return(username)
-    allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:generate_auth_password).and_return(password)
+    allow(SecureRandom).to receive(:alphanumeric).and_call_original
+    allow(SecureRandom).to receive(:alphanumeric).with(Billing::Provisioning::PhoneSystems::GatewayService::AUTH_CREDENTIAL_LENGTH)
+                                                 .and_return(username, password)
     allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:phone_systems_gateway_name).and_return(generate_name)
     allow_any_instance_of(Billing::Provisioning::PhoneSystems::RouteService).to receive(:generate_name).and_return(generate_name)
     allow(service).to receive(:update)
