@@ -13,7 +13,10 @@ module Billing
         def configure_services
           response = configure_incoming_trunk
           response = configure_gateway(response)
-          configure_route(response)
+          # No ps_trm_gw means no termination gateway on the phone.systems side, so there
+          # is nothing for the termination route to reference - the customer is left with
+          # an inbound-only configuration.
+          configure_route(response) if response.present?
         end
 
         def delete_configuration
