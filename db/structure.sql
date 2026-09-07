@@ -14472,10 +14472,10 @@ CREATE TABLE dns.dns_zones (
     soa_mname character varying NOT NULL,
     soa_rname character varying NOT NULL,
     serial bigint DEFAULT 0 NOT NULL,
-    refresh smallint DEFAULT 600 NOT NULL,
-    retry smallint DEFAULT 600 NOT NULL,
-    expire smallint DEFAULT 1800 NOT NULL,
-    minimum smallint DEFAULT 3600 NOT NULL
+    refresh integer DEFAULT 600 NOT NULL,
+    retry integer DEFAULT 600 NOT NULL,
+    expire integer DEFAULT 1209600 NOT NULL,
+    minimum integer DEFAULT 300 NOT NULL
 );
 
 
@@ -20843,6 +20843,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260907120001'),
+('20260907120000'),
 ('20260905120000'),
 ('20260901120000'),
 ('20260813120000'),

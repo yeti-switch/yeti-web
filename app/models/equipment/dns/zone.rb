@@ -6,11 +6,11 @@
 # Database name: primary
 #
 #  id        :integer(2)       not null, primary key
-#  expire    :integer(2)       default(1800), not null
-#  minimum   :integer(2)       default(3600), not null
+#  expire    :integer(4)       default(1209600), not null
+#  minimum   :integer(4)       default(300), not null
 #  name      :string           not null
-#  refresh   :integer(2)       default(600), not null
-#  retry     :integer(2)       default(600), not null
+#  refresh   :integer(4)       default(600), not null
+#  retry     :integer(4)       default(600), not null
 #  serial    :bigint(8)        default(0), not null
 #  soa_mname :string           not null
 #  soa_rname :string           not null
