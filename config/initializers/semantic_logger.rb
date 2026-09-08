@@ -8,10 +8,10 @@ return if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] == 'true'
 require 'yeti_log_setup'
 require 'active_job/named_log_tags'
 
-# Adds the elasticsearch appender and applies the per appender levels of
+# Adds the VictoriaLogs appender and applies the per appender levels of
 # config/yeti_web.yml.
 #
-# Applied in every environment but test: an elasticsearch url in config/yeti_web.yml is
+# Applied in every environment but test: a victorialogs url in config/yeti_web.yml is
 # what enables it, not the environment the application runs in. The test suite is excluded
 # because config/yeti_web.yml is not environment scoped: a production config copied to a
 # developer machine would make every `rspec` run ship records to the production storage.

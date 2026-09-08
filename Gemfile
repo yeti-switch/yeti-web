@@ -162,8 +162,8 @@ gem 'click_house'
 
 gem 'aws-sdk-s3', require: false
 gem 'cryptomus', '~> 0.2.2'
-gem 'elasticsearch', require: false
 gem 'opentelemetry-exporter-otlp'
 gem 'opentelemetry-instrumentation-all'
 gem 'opentelemetry-sdk'
 gem 'rails_semantic_logger', require: false
+gem 'semantic_logger', github: 'dmitry-sinina/semantic_logger', branch: 'ndjson_formatter', require: false

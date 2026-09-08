@@ -63,7 +63,7 @@ module CdrProcessor
       report_failure(e)
     end
 
-    # Never through a SemanticLogger::Logger: it writes to the elasticsearch appender
+    # Never through a SemanticLogger::Logger: it writes to the VictoriaLogs appender
     # whose queue is being reported, so a report of a full queue would feed back into it.
     def report_failure(error)
       SemanticLogger::Processor.logger.warn("Failed to report the log queue state: #{error.class}: #{error.message}")

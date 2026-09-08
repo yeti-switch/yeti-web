@@ -9,7 +9,7 @@ require 'semantic_logger'
 # Not the `:default` format of the Rails processes: these have no named tags and no
 # request/SQL durations to show, so all it would add is the pid, the thread and the logger
 # name, that the systemd unit already carries into journald. The record shipped to
-# elasticsearch keeps every field regardless, see YetiLogFormatter.
+# VictoriaLogs keeps every field regardless, see YetiLogFormatter.
 class YetiPlainLogFormatter < SemanticLogger::Formatters::Base
   TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%6N'
 

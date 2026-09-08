@@ -84,15 +84,14 @@ module YetiConfigSchema
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
         end
 
-        # A blank `url` disables the appender. `tags` are the static fields added to
-        # every record it ships. `max_queue_size` is either -1, for a queue that grows
-        # without a limit, or the records to hold before they start being dropped.
-        optional(:elasticsearch).schema do
+        # A blank `url` disables the appender. The ingestion settings of VictoriaLogs are
+        # the query string of the url. `tags` are the static fields added to every record
+        # it ships. `max_queue_size` is either -1, for a queue that grows without a limit,
+        # or the records to hold before they start being dropped.
+        optional(:victorialogs).schema do
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
           optional(:url).maybe(:string)
-          optional(:index).maybe(:string)
           optional(:tags).hash
-          optional(:transport_options).hash
           optional(:batch_size).maybe(:integer, gt?: 0)
           optional(:batch_seconds).maybe(:integer, gt?: 0)
           optional(:max_queue_size).maybe(:integer, gteq?: -1, excluded_from?: [0])

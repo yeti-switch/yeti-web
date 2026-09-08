@@ -3,7 +3,9 @@
 require 'yeti_log_formatter'
 
 RSpec.describe YetiLogFormatter do
-  subject { formatter.call(log, logger) }
+  # The formatter emits NDJSON, parsed back here so that every example below asserts on
+  # the fields rather than on their JSON representation.
+  subject { JSON.parse(formatter.call(log, logger), symbolize_names: true) }
 
   let(:formatter) { described_class.new(time_format: :iso_8601, time_key: :timestamp, static_tags:) }
   let(:static_tags) { { env: 'production', system: 'yeti' } }
@@ -33,7 +35,7 @@ RSpec.describe YetiLogFormatter do
   end
 
   it 'keeps the fields of the record itself' do
-    expect(subject).to include(message: 'some message', level: :info)
+    expect(subject).to include(message: 'some message', level: 'info')
   end
 
   context 'when the record has a duration' do
@@ -55,7 +57,7 @@ RSpec.describe YetiLogFormatter do
   end
 
   it 'does not emit level_index, it duplicates level' do
-    expect(subject).to include(level: :info)
+    expect(subject).to include(level: 'info')
     expect(subject).not_to have_key(:level_index)
   end
 
@@ -80,11 +82,24 @@ RSpec.describe YetiLogFormatter do
     end
   end
 
+  describe '#call' do
+    it 'returns one JSON object, not a hash' do
+      expect(formatter.call(log, logger)).to be_a(String).and(end_with('}'))
+    end
+  end
+
+  describe '#batch' do
+    it 'returns newline delimited JSON, terminating every line' do
+      expect(formatter.batch([log, log], logger).lines).to all(be_a(String).and(end_with("\n")))
+      expect(formatter.batch([log, log], logger).lines.size).to eq(2)
+    end
+  end
+
   context 'when a tag has the same name as a record field' do
     let(:named_tags) { { message: 'hacked', component: 'hacked', level: 'hacked' } }
 
     it 'does not overwrite the record field' do
-      expect(subject).to include(message: 'some message', component: 'puma', level: :info)
+      expect(subject).to include(message: 'some message', component: 'puma', level: 'info')
     end
   end
 end

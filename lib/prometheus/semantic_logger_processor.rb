@@ -62,7 +62,7 @@ class SemanticLoggerProcessor
     end
 
     def report_failure(error)
-      # Never through Rails.logger: it writes to the elasticsearch appender whose queue is
+      # Never through Rails.logger: it writes to the VictoriaLogs appender whose queue is
       # being reported, so a report of a full queue would be fed back into it.
       SemanticLogger::Processor.logger.error("#{name}: #{error.class} #{error.message}")
       CaptureError.capture(error, tags: { component: 'Prometheus', processor: name })

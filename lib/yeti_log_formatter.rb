@@ -3,12 +3,12 @@
 require 'semantic_logger'
 require_relative 'yeti_log_component'
 
-# Raw formatter that keeps the log record flat, for storages that can only
+# NDJSON formatter that keeps the log record flat, for storages that can only
 # index/label top level fields (VictoriaLogs stream fields, ES keyword fields):
 #
 #   * named tags (config.log_tags, SemanticLogger.tagged) are merged into the
 #     root of the record instead of being nested under `named_tags`;
-#   * static tags (YetiConfig.logging.elasticsearch.tags) are emitted by every process,
+#   * static tags (YetiConfig.logging.victorialogs.tags) are emitted by every process,
 #     not only by puma inside a request;
 #   * `component` tells which process wrote the record;
 #   * the logger name, `level_index`, `duration_ms`, `application` and `environment`
@@ -16,7 +16,7 @@ require_relative 'yeti_log_component'
 #
 # Depends on semantic_logger only, so that it can be used by the processes that do
 # not boot Rails as well.
-class YetiLogFormatter < SemanticLogger::Formatters::Raw
+class YetiLogFormatter < SemanticLogger::Formatters::Ndjson
   # Fields written by the formatter itself. A tag is never allowed to overwrite them.
   # `name`, `level_index` and `duration_ms` are dropped by the formatter, so a tag is
   # not allowed to bring them back either.
@@ -30,17 +30,12 @@ class YetiLogFormatter < SemanticLogger::Formatters::Raw
 
   # `application` and `environment` of SemanticLogger are not emitted by default:
   # they are constants of the process, that are configured as static tags instead
-  # (YetiConfig.logging.elasticsearch.tags), so that every such field is defined in one place.
+  # (YetiConfig.logging.victorialogs.tags), so that every such field is defined in one place.
   #
   # @param static_tags [Hash] tags added to every log record.
   def initialize(static_tags: {}, log_application: false, log_environment: false, **args)
     @static_tags = static_tags.to_h { |key, value| [key.to_sym, value] }.freeze
     super(log_application:, log_environment:, **args)
-  end
-
-  # Name of the component(process) that emitted the record.
-  def component
-    hash[:component] = YetiLogComponent.current
   end
 
   # Only the name of the level is emitted: `level_index` is the same thing as a
@@ -65,17 +60,16 @@ class YetiLogFormatter < SemanticLogger::Formatters::Raw
   # everything that logs through Rails.logger. Use tags for anything to filter by.
   def name; end
 
-  # Static and named tags, merged into the top level of the record.
-  # Named tags win over static ones, both lose to the fields of the record itself.
+  # Static and named tags, merged into the top level of the record, plus the name of
+  # the component(process) that emitted it. Named tags win over static ones, both lose
+  # to the fields of the record itself.
+  #
+  # Called by Formatters::Raw#call, so that the record is complete before
+  # Formatters::Json#call serialises it.
   def named_tags
     merge_tags(static_tags)
     merge_tags(log.named_tags)
-  end
-
-  def call(log, logger)
-    super
-    component
-    hash
+    hash[:component] = YetiLogComponent.current
   end
 
   private

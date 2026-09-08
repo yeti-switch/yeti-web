@@ -18,6 +18,10 @@ module YetiConfigLoader
   # an outdated config would load and silently stop shipping the logs.
   LEGACY_KEYS = %i[logs elasticsearch].freeze
 
+  # Renamed inside the `logging` block, see YetiLogSetup. Rejected for the same reason as
+  # LEGACY_KEYS: an outdated config would load and silently stop shipping the logs.
+  LEGACY_LOGGING_KEYS = { elasticsearch: :victorialogs }.freeze
+
   module_function
 
   # @param path [String]
@@ -49,11 +53,17 @@ module YetiConfigLoader
   # @param path [String]
   # @raise [YetiConfigLoader::Error] when the configuration still uses a renamed key.
   def reject_legacy_keys!(path)
-    keys = ::YetiConfig.to_h.keys
-    outdated = LEGACY_KEYS & keys
-    return if outdated.empty?
+    outdated = LEGACY_KEYS & ::YetiConfig.to_h.keys
+    unless outdated.empty?
+      raise Error, "outdated config #{path}: #{outdated.join(', ')} moved under `logging`, " \
+                   'see the logging block of config/yeti_web.yml.distr'
+    end
 
-    raise Error, "outdated config #{path}: #{outdated.join(', ')} moved under `logging`, " \
+    renamed = LEGACY_LOGGING_KEYS.slice(*(::YetiConfig.logging&.to_h&.keys || []))
+    return if renamed.empty?
+
+    renamed = renamed.map { |from, to| "logging.#{from} is now logging.#{to}" }
+    raise Error, "outdated config #{path}: #{renamed.join(', ')}, " \
                  'see the logging block of config/yeti_web.yml.distr'
   end
 end

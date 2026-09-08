@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RemoteStatsController < ApplicationController
+  include WithAdminUserPayload
+
   # ActiveModel::Serializers::JSON.include_root_in_json disabled because out JS charts use old format - without root
   # TODO fix JS and enable include_root_in_json
 

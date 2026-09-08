@@ -94,4 +94,30 @@ RSpec.describe RemoteStatsController do
       end
     end
   end
+
+  # The log record of every request carries the admin that made it, see
+  # WithAdminUserPayload. This controller is not an ActiveAdmin one, so it includes the
+  # concern of its own rather than inheriting it from ActiveAdmin::BaseController.
+  describe 'logging' do
+    subject { get '/remote_stats/nodes.json' }
+
+    let(:payloads) { [] }
+
+    around do |example|
+      subscriber = ActiveSupport::Notifications.subscribe('process_action.action_controller') do |*, payload|
+        payloads << payload
+      end
+      example.run
+      ActiveSupport::Notifications.unsubscribe(subscriber)
+    end
+
+    it 'adds the admin user to the log payload of the request' do
+      subject
+      expect(payloads.last).to include(
+        controller: 'RemoteStatsController',
+        admin_user: admin_user.username,
+        admin_user_id: admin_user.id
+      )
+    end
+  end
 end

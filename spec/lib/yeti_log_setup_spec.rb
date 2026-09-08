@@ -3,23 +3,22 @@
 require 'yeti_log_setup'
 
 RSpec.describe YetiLogSetup do
-  let(:elasticsearch_config) do
+  let(:victorialogs_config) do
     OpenStruct.new(
-      level: elasticsearch_level,
-      url: 'http://localhost:9428/insert/elasticsearch',
-      index: nil,
+      level: victorialogs_level,
+      url: victorialogs_url,
       tags: { env: 'production', system: 'yeti' },
-      transport_options: { params: { _msg_field: 'message' } },
       **batch_config
     )
   end
+  let(:victorialogs_url) { 'http://localhost:9428/insert/jsonline?_msg_field=message' }
   let(:batch_config) { {} }
-  let(:elasticsearch_level) { nil }
+  let(:victorialogs_level) { nil }
   let(:stdout_level) { nil }
   let(:logging_config) do
     OpenStruct.new(
       stdout: OpenStruct.new(level: stdout_level),
-      elasticsearch: elasticsearch_config
+      victorialogs: victorialogs_config
     )
   end
 
@@ -94,7 +93,7 @@ RSpec.describe YetiLogSetup do
     subject { described_class.apply_levels!(default_level: 'info') }
 
     let(:stdout_level) { 'error' }
-    let(:elasticsearch_level) { 'debug' }
+    let(:victorialogs_level) { 'debug' }
     let(:stdout_appender) { SemanticLogger::Appender::IO.new($stdout) }
 
     # let! and not let: the subject changes the level, so a lazy let would first be
@@ -103,7 +102,7 @@ RSpec.describe YetiLogSetup do
 
     before do
       allow(SemanticLogger).to receive(:appenders).and_return([stdout_appender])
-      allow(described_class).to receive(:add_elasticsearch_appender)
+      allow(described_class).to receive(:add_victorialogs_appender)
     end
 
     after { SemanticLogger.default_level = default_level }
@@ -118,21 +117,21 @@ RSpec.describe YetiLogSetup do
       expect(stdout_appender.level).to eq(:error)
     end
 
-    it 'passes the configured level to the elasticsearch appender' do
+    it 'passes the configured level to the VictoriaLogs appender' do
       subject
-      expect(described_class).to have_received(:add_elasticsearch_appender).with(tags: {}, level: :debug)
+      expect(described_class).to have_received(:add_victorialogs_appender).with(tags: {}, level: :debug)
     end
 
     # Lowering the global level is what lets the more verbose appender receive its
     # records, so the other one has to be pinned instead of following it.
     context 'when only the stdout appender is given a level of its own' do
       let(:stdout_level) { 'error' }
-      let(:elasticsearch_level) { nil }
+      let(:victorialogs_level) { nil }
 
-      it 'keeps the elasticsearch appender at the default level instead of starving it' do
+      it 'keeps the VictoriaLogs appender at the default level instead of starving it' do
         subject
         expect(SemanticLogger.default_level).to eq(:info)
-        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: :info))
+        expect(described_class).to have_received(:add_victorialogs_appender).with(hash_including(level: :info))
       end
 
       it 'applies the configured level to the stdout appender' do
@@ -141,9 +140,9 @@ RSpec.describe YetiLogSetup do
       end
     end
 
-    context 'when only the elasticsearch appender is given a level of its own' do
+    context 'when only the VictoriaLogs appender is given a level of its own' do
       let(:stdout_level) { nil }
-      let(:elasticsearch_level) { 'debug' }
+      let(:victorialogs_level) { 'debug' }
 
       it 'keeps the stdout appender at the default level instead of flooding it' do
         subject
@@ -151,15 +150,15 @@ RSpec.describe YetiLogSetup do
         expect(stdout_appender.level).to eq(:info)
       end
 
-      it 'applies the configured level to the elasticsearch appender' do
+      it 'applies the configured level to the VictoriaLogs appender' do
         subject
-        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: :debug))
+        expect(described_class).to have_received(:add_victorialogs_appender).with(hash_including(level: :debug))
       end
     end
 
     context 'when no appender is given a level of its own' do
       let(:stdout_level) { nil }
-      let(:elasticsearch_level) { nil }
+      let(:victorialogs_level) { nil }
 
       it 'falls back to the given default level' do
         subject
@@ -172,7 +171,7 @@ RSpec.describe YetiLogSetup do
       it 'leaves both appenders following the global level' do
         subject
         expect(stdout_appender.level).to eq(:trace)
-        expect(described_class).to have_received(:add_elasticsearch_appender).with(hash_including(level: nil))
+        expect(described_class).to have_received(:add_victorialogs_appender).with(hash_including(level: nil))
       end
     end
 
@@ -186,8 +185,8 @@ RSpec.describe YetiLogSetup do
     end
   end
 
-  describe '.add_elasticsearch_appender' do
-    subject { described_class.add_elasticsearch_appender(tags: { processor: 'cdr_billing' }, **level)&.appender }
+  describe '.add_victorialogs_appender' do
+    subject { described_class.add_victorialogs_appender(tags: { processor: 'cdr_billing' }, **level)&.appender }
 
     let(:level) { {} }
 
@@ -199,8 +198,15 @@ RSpec.describe YetiLogSetup do
       end
     end
 
-    it 'adds an appender that never raises, so that a broken elasticsearch cannot hang the process' do
-      expect(subject).to be_a(YetiElasticsearchAppender)
+    it 'adds an appender that never raises, so that a broken VictoriaLogs cannot hang the process' do
+      expect(subject).to be_a(YetiVictoriaLogsAppender)
+    end
+
+    # Appender::Http does not opt into batching through #batch_by_default?, so without an
+    # explicit `batch` the records would be posted one by one from the calling thread.
+    it 'batches explicitly, the HTTP appender does not do it by default' do
+      subject
+      expect(SemanticLogger).to have_received(:add_appender).with(hash_including(batch: true))
     end
 
     it 'batches the records' do
@@ -233,9 +239,10 @@ RSpec.describe YetiLogSetup do
       end
     end
 
-    it 'uses the url and the transport options of the config' do
-      expect(subject.url).to eq('http://localhost:9428/insert/elasticsearch')
-      expect(subject.client_args[:transport_options]).to include(params: { _msg_field: 'message' })
+    it 'uses the url of the config, keeping the ingestion settings of its query string' do
+      expect(subject.url).to eq('http://localhost:9428/insert/jsonline?_msg_field=message')
+      expect(subject.path).to eq('/insert/jsonline')
+      expect(subject.query).to eq('_msg_field=message')
     end
 
     it 'adds static tags of the config and the given ones to every record' do
@@ -256,8 +263,8 @@ RSpec.describe YetiLogSetup do
       end
     end
 
-    context 'when elasticsearch is not configured' do
-      let(:elasticsearch_config) { nil }
+    context 'when VictoriaLogs is not configured' do
+      let(:victorialogs_config) { nil }
 
       it 'adds no appender' do
         expect(subject).to be_nil
@@ -265,8 +272,8 @@ RSpec.describe YetiLogSetup do
       end
     end
 
-    context 'when the elasticsearch url is empty' do
-      let(:elasticsearch_config) { OpenStruct.new(url: '', index: nil, tags: nil, transport_options: nil) }
+    context 'when the VictoriaLogs url is empty' do
+      let(:victorialogs_config) { OpenStruct.new(url: '', tags: nil) }
 
       it 'adds no appender' do
         expect(subject).to be_nil
@@ -309,14 +316,14 @@ RSpec.describe YetiLogSetup do
 
     context 'when config/yeti_web.yml gives the appenders levels of their own' do
       let(:stdout_level) { 'error' }
-      let(:elasticsearch_level) { 'info' }
+      let(:victorialogs_level) { 'info' }
 
-      before { allow(described_class).to receive(:add_elasticsearch_appender) }
+      before { allow(described_class).to receive(:add_victorialogs_appender) }
 
       it 'prefers them over the given level' do
         subject
         expect(SemanticLogger.default_level).to eq(:info)
-        expect(described_class).to have_received(:add_elasticsearch_appender)
+        expect(described_class).to have_received(:add_victorialogs_appender)
           .with(hash_including(level: :info))
       end
     end
