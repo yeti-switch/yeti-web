@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'benchmark'
 require 'yeti_victorialogs_appender'
 
 RSpec.describe YetiVictoriaLogsAppender do
@@ -10,6 +11,13 @@ RSpec.describe YetiVictoriaLogsAppender do
 
   let(:log) do
     SemanticLogger::Log.new('SomeClass', :info).tap { |log| log.message = 'some message' }
+  end
+
+  # The real budget is seconds of wall clock, see the class. Shortened here so that the
+  # examples that exhaust it stay fast; the ones that assert on it set their own.
+  before do
+    stub_const("#{described_class}::RETRY_BUDGET_SECONDS", 0.05)
+    stub_const("#{described_class}::RETRY_INITIAL_DELAY", 0.01)
   end
 
   describe '#initialize' do
@@ -64,6 +72,8 @@ RSpec.describe YetiVictoriaLogsAppender do
 
   context 'when every attempt hits a closed connection' do
     before do
+      # Budget spent, so only the single reconnect of #process_request is left.
+      stub_const("#{described_class}::RETRY_BUDGET_SECONDS", 0.0)
       stub_request(:post, url).to_raise(EOFError)
       allow(subject.logger).to receive(:error)
     end
@@ -73,6 +83,49 @@ RSpec.describe YetiVictoriaLogsAppender do
       expect(WebMock).to have_requested(:post, url).twice
       expect(subject.logger).to have_received(:error)
         .with('VictoriaLogs: 1 log record(s) discarded', kind_of(StandardError))
+    end
+  end
+
+  describe 'retrying an unreachable VictoriaLogs' do
+    before { allow(subject.logger).to receive(:error) }
+
+    context 'when it comes back within the budget' do
+      before do
+        stub_const("#{described_class}::RETRY_BUDGET_SECONDS", 5.0)
+        stub_request(:post, url).to_raise(Errno::ECONNREFUSED).times(2).then.to_return(status: 204)
+      end
+
+      it 'keeps the batch and delivers it, without discarding' do
+        expect(subject.batch([log])).to be true
+        expect(WebMock).to have_requested(:post, url).times(3)
+        expect(subject.logger).not_to have_received(:error)
+      end
+    end
+
+    context 'when it stays down' do
+      before do
+        stub_const("#{described_class}::RETRY_BUDGET_SECONDS", 0.3)
+        stub_request(:post, url).to_raise(Errno::ECONNREFUSED)
+      end
+
+      it 'gives up within the budget and discards the batch' do
+        elapsed = Benchmark.realtime { subject.batch([log, log]) }
+
+        expect(elapsed).to be < 1.0
+        expect(subject.logger).to have_received(:error)
+          .with('VictoriaLogs: 2 log record(s) discarded', kind_of(StandardError))
+      end
+    end
+
+    # A rejected batch would never be accepted, so retrying it would hold every record
+    # behind it for the whole budget.
+    context 'when VictoriaLogs answers with an error' do
+      before { stub_request(:post, url).to_return(status: 400, body: 'bad request') }
+
+      it 'does not retry the batch' do
+        subject.batch([log])
+        expect(WebMock).to have_requested(:post, url).once
+      end
     end
   end
 
