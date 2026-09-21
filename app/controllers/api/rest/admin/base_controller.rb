@@ -3,6 +3,7 @@
 class Api::Rest::Admin::BaseController < Api::RestController
   include JSONAPI::ActsAsResourceController
   include AdminApiAuthorizable
+  include WithAdminUserPayload
 
   before_action :set_paper_trail_whodunnit # must be after `include AdminApiAuthorizable`
 

@@ -15,7 +15,7 @@ RSpec.describe YetiLogStats, '.metrics' do
     [
       { name: 'SemanticLogger::Appender::IO', async: false },
       {
-        name: 'YetiElasticsearchAppender', async: true, thread_active: true,
+        name: 'YetiVictoriaLogsAppender', async: true, thread_active: true,
         queue_size: 7, capped: true, max_queue_size: 10_000, processed: 100, dropped: 5
       }
     ]
@@ -30,7 +30,7 @@ RSpec.describe YetiLogStats, '.metrics' do
 
   it 'reports the queue of SemanticLogger itself and of every asynchronous appender' do
     expect(subject.map { |metric| metric[:metric_labels][:queue] })
-      .to eq(%w[processor YetiElasticsearchAppender])
+      .to eq(%w[processor YetiVictoriaLogsAppender])
   end
 
   it 'skips the appenders that write inline and have no queue' do
@@ -62,7 +62,7 @@ RSpec.describe YetiLogStats, '.metrics' do
   context 'with an unbounded queue' do
     let(:appenders) do
       [{
-        name: 'YetiElasticsearchAppender', async: true, thread_active: false,
+        name: 'YetiVictoriaLogsAppender', async: true, thread_active: false,
         queue_size: 900, capped: false, max_queue_size: nil, processed: 1, dropped: 0
       }]
     end

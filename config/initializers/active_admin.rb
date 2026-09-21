@@ -223,6 +223,7 @@ ActiveAdmin.setup do |config|
   config.disable_streaming_in = []
 end
 
+require Rails.root.join('lib/with_admin_user_payload')
 Dir[Rails.root.join('lib/active_admin/**/*.rb')].each { |s| require s }
 
 ActiveAdmin.before_load do
@@ -241,7 +242,7 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBatchChangeable
   ActiveAdmin::ResourceDSL.include ResourceDSL::ReportScheduler
   ActiveAdmin::ResourceController.include ActiveAdmin::PerPageExtension
-  ActiveAdmin::BaseController.include ActiveAdmin::WithPayloads
+  ActiveAdmin::BaseController.include WithAdminUserPayload
   ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncUpdate

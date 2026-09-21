@@ -13,7 +13,7 @@ require_relative 'job_name'
 #   * `job_id` - the id ActiveJob assigned when the job was enqueued. Kept by the retries
 #     of the same job, so it correlates every attempt. Only ActiveJob jobs have it.
 #
-# Named tags: YetiLogFormatter merges them into the root of the elasticsearch record,
+# Named tags: YetiLogFormatter merges them into the root of the VictoriaLogs record,
 # next to `component`.
 class Delayed::LogJobTagsPlugin < Delayed::Plugin
   # @return [Hash]

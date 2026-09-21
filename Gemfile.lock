@@ -45,6 +45,14 @@ GIT
     prometheus_exporter (0.5.1)
 
 GIT
+  remote: https://github.com/dmitry-sinina/semantic_logger.git
+  revision: 494bf1962871411136112b5fe085075a8dcd61f6
+  branch: ndjson_formatter
+  specs:
+    semantic_logger (5.1.0)
+      concurrent-ruby (~> 1.0)
+
+GIT
   remote: https://github.com/senid231/excelinator.git
   revision: 25afcc544a6f287a2ace9018adbe6fc96ea29cb2
   branch: ruby3-fix
@@ -359,15 +367,6 @@ GEM
       dry-initializer (~> 3.2)
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
-    elastic-transport (8.5.2)
-      faraday (< 3)
-      multi_json
-    elasticsearch (9.4.3)
-      elastic-transport (~> 8.3)
-      elasticsearch-api (= 9.4.3)
-    elasticsearch-api (9.4.3)
-      base64
-      multi_json
     erb (6.0.4)
     erubi (1.13.1)
     et-orbi (1.4.0)
@@ -540,7 +539,6 @@ GEM
       drb (~> 2.0)
       prism (~> 1.5)
     msgpack (1.8.3)
-    multi_json (1.21.1)
     multi_xml (0.9.1)
       bigdecimal (>= 3.1, < 5)
     mustache (1.1.2)
@@ -852,7 +850,7 @@ GEM
     rails-html-sanitizer (1.7.1)
       loofah (~> 2.25, >= 2.25.2)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    rails_semantic_logger (5.1.0)
+    rails_semantic_logger (5.2.0)
       rack
       railties (>= 7.2)
       semantic_logger (>= 5.1)
@@ -960,8 +958,6 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    semantic_logger (5.1.0)
-      concurrent-ruby (~> 1.0)
     sentry-delayed_job (6.6.2)
       delayed_job (>= 4.0)
       sentry-ruby (~> 6.6.2)
@@ -1108,7 +1104,6 @@ DEPENDENCIES
   doorkeeper-openid_connect (~> 1.10)
   draper
   dry-validation (~> 1.0)
-  elasticsearch
   excelinator!
   factory_bot_rails
   ferrum
@@ -1155,6 +1150,7 @@ DEPENDENCIES
   rubocop-rspec
   rufus-scheduler
   sass-rails
+  semantic_logger!
   sentry-delayed_job
   sentry-rails
   sentry-ruby

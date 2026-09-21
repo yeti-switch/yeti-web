@@ -17,7 +17,7 @@ module YetiLogStats
   # The queue of SemanticLogger itself, that every record passes through.
   PROCESSOR_QUEUE = 'processor'
 
-  # The sentinel of `logging.elasticsearch.max_queue_size`, and not nil: Gauge#observe
+  # The sentinel of `logging.victorialogs.max_queue_size`, and not nil: Gauge#observe
   # deletes the series for nil, hiding an unbounded queue behind a silent process.
   UNBOUNDED = -1
 
