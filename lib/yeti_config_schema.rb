@@ -90,7 +90,7 @@ module YetiConfigSchema
         # or the records to hold before they start being dropped.
         optional(:victorialogs).schema do
           optional(:level).maybe(:string, included_in?: YetiConfigSchema::LOG_LEVELS)
-          optional(:url).maybe(:string)
+          optional(:url).maybe(:string, format?: %r{\A(https?://\S+)?\z}i)
           optional(:tags).hash
           optional(:batch_size).maybe(:integer, gt?: 0)
           optional(:batch_seconds).maybe(:integer, gt?: 0)

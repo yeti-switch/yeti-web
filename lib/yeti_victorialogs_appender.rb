@@ -8,8 +8,9 @@ require 'semantic_logger/appender/http'
 # SemanticLogger::Appender::Http connects while it is built - #reopen ends with
 # Net::HTTP#start - and config/initializers/semantic_logger.rb builds the appender in an
 # after_initialize that rescues nothing, so an unreachable VictoriaLogs would fail the
-# boot of every Rails process. The connection is established on the first write instead,
-# and retried on every following one.
+# boot of every Rails process. The connection is still attempted there, which holds the
+# boot for up to open_timeout when the packets are dropped rather than refused, but a
+# failure is only reported, and the connection is retried on every write.
 #
 # SemanticLogger::QueueProcessor pops the whole queue at once, writes the log records
 # first and only then replies to the :flush/:close commands it popped along with them.
@@ -96,8 +97,10 @@ class YetiVictoriaLogsAppender < SemanticLogger::Appender::Http
   # not retry the request itself either: Net::HTTP#max_retries applies to the idempotent
   # methods only, and a POST is not one of them. Retried once here, on a new connection.
   #
-  # A batch that the server did receive before it hung up is delivered twice, which for
-  # log records is better than losing it.
+  # A batch that the server did receive before it hung up is delivered again, and once
+  # more by every retry of #batch: a connection that is closed twice in a row is an
+  # unreachable VictoriaLogs to it, a port-forward to a pod that is gone looks just like
+  # that. For log records a duplicate is better than a loss.
   def process_request(request, body = nil)
     retried = false
     begin
