@@ -182,6 +182,18 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBulk do
     end
   end
 
+  describe 'logging' do
+    let(:logger) { SemanticLogger::Test::CaptureLogEvents.new(level: :info) }
+
+    it 'tags the request records with the event_bulk_id sent in the body' do
+      subject
+      records = logger.events.select { |event| event.message == 'HTTP request completed' }
+      expect(records.size).to eq(2)
+      expect(records.map { |record| record.named_tags[:event_bulk_id] })
+        .to eq(requests.map { |request| request_body(request)['event_bulk_id'] })
+    end
+  end
+
   describe 'HMAC signature' do
     context 'when hmac_secret is configured' do
       let(:hmac_secret) { SecureRandom.hex(64) }

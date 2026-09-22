@@ -167,6 +167,54 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     end
   end
 
+  describe 'logging' do
+    let(:logger) { SemanticLogger::Test::CaptureLogEvents.new(level: :info) }
+    let(:cdrs) { [{ id: 1, duration: 2 }] }
+
+    before { consumer.instance_variable_set(:@batch_id, 42) }
+
+    context 'with debug level' do
+      let(:logger) { SemanticLogger::Test::CaptureLogEvents.new(level: :debug) }
+
+      it 'forwards HTTPX debug output to the logger' do
+        subject
+        expect(WebMock).to have_requested(:post, config['url']).once
+        expect(logger.events.map(&:level)).to include(:debug)
+      end
+    end
+
+    it 'tags the request record with ids and http_status and measures it' do
+      subject
+      record = logger.events.find { |event| event.message == 'HTTP request completed' }
+      expect(record.level).to eq(:info)
+      expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1, http_status: 200)
+      expect(record.duration).to be_a(Float)
+    end
+
+    context 'when the endpoint fails' do
+      before { stub_request(:post, /#{config['url']}/).to_return(status: 503) }
+
+      it 'logs the error with http_status' do
+        expect { subject }.to raise_error(HTTPX::HTTPError)
+        record = logger.events.find { |event| event.level == :error }
+        expect(record.message).to start_with('HTTP request failed: <HTTPX::HTTPError>')
+        expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1, http_status: 503)
+        expect(record.duration).to be_a(Float)
+      end
+    end
+
+    context 'when the request times out' do
+      before { stub_request(:post, /#{config['url']}/).to_raise(HTTPX::TimeoutError.new(30, 'Timed out after 30 seconds')) }
+
+      it 'logs the error without http_status' do
+        expect { subject }.to raise_error(HTTPX::TimeoutError)
+        record = logger.events.find { |event| event.level == :error }
+        expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1)
+        expect(record.named_tags).not_to have_key(:http_status)
+      end
+    end
+  end
+
   describe 'http timeouts config' do
     let(:cdrs) { [{ id: 1, duration: 2 }] }
 

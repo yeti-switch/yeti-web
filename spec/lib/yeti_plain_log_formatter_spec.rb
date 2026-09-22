@@ -29,6 +29,22 @@ RSpec.describe YetiPlainLogFormatter do
     it { is_expected.to eq('2026-08-20T15:55:34.103215 INFO some message {job: "SomeJob"}') }
   end
 
+  context 'with named tags' do
+    before { log.named_tags = { batch_id: 42, request_id: 'req-1' } }
+
+    it 'appends them as key=value pairs' do
+      expect(subject).to eq('2026-08-20T15:55:34.103215 INFO some message batch_id=42 request_id=req-1')
+    end
+  end
+
+  context 'with duration' do
+    before { log.duration = 12.345678 }
+
+    it 'appends the milliseconds rounded to a tenth' do
+      expect(subject).to eq('2026-08-20T15:55:34.103215 INFO some message duration=12.3ms')
+    end
+  end
+
   context 'with exception' do
     before do
       exception = StandardError.new('some error')

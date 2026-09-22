@@ -23,6 +23,17 @@ module CdrProcessor
         end
       end
 
+      # HTTPX writes its debug lines to an IO-like with `<<`, that SemanticLogger has not.
+      class DebugStream
+        def initialize(logger)
+          @logger = logger
+        end
+
+        def <<(message)
+          @logger.debug(message.chomp)
+        end
+      end
+
       AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
       SUCCESS_STATUSES = (200..299)
       # Defaults, each overridable by the same key in the processor config (seconds).
@@ -87,23 +98,26 @@ module CdrProcessor
 
       def perform_http_request(payload)
         @request_id = SecureRandom.uuid
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-        unless AVAILABLE_HTTP_METHODS.include?(http_method)
-          raise ArgumentError, "unsupported HTTP method '#{http_method}', should be one of: post, put, patch"
+        SemanticLogger.named_tagged({ request_id: @request_id, event_id: @current_event_id }.compact) do
+          unless AVAILABLE_HTTP_METHODS.include?(http_method)
+            raise ArgumentError, "unsupported HTTP method '#{http_method}', should be one of: post, put, patch"
+          end
+
+          response = send_http_request(payload)
+          log_request(:info, 'HTTP request completed', response.status, start_time)
+        rescue StandardError => e
+          log_request(:error, "HTTP request failed: <#{e.class}> #{e.message}", exception_http_status(e), start_time)
+          raise e
         end
-
-        response = send_http_request(payload)
-        log_response(response)
-      rescue StandardError => e
-        logger.error { "#{log_prefix} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
-        raise e
       end
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
         client = HTTPX.with(timeout: @http_timeouts)
         if logger.debug?
-          client = client.with(debug: logger, debug_level: 1)
+          client = client.with(debug: DebugStream.new(logger), debug_level: 1)
         end
         if @params['auth_user'].present?
           client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
@@ -122,12 +136,19 @@ module CdrProcessor
         @proxy ||= HttpxProxy.new(http_proxy: @params['http_proxy'], use_env_proxy: @params['use_env_proxy'])
       end
 
-      def log_prefix
-        "request_id=#{@request_id} batch_id=#{@batch_id} event_id=#{@current_event_id}"
+      # http_status is a named tag, not a payload field: YetiLogFormatter puts named tags
+      # at the root of the record, next to request_id and batch_id.
+      def log_request(level, message, http_status, start_time)
+        duration = elapsed_ms(start_time)
+        SemanticLogger.named_tagged({ http_status: http_status }.compact) do
+          logger.public_send(level, message: message, duration: duration)
+        end
       end
 
-      def log_response(response)
-        logger.info { "#{log_prefix} status=#{response.status}" }
+      # HTTPX::HTTPError and UnexpectedResponseStatus carry the response, timeouts do not.
+      def exception_http_status(exception)
+        response = exception.response if exception.respond_to?(:response)
+        response.status if response.respond_to?(:status)
       end
 
       def permit_field_for(event)
