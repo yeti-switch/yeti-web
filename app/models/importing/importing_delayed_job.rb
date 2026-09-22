@@ -11,8 +11,8 @@ class Importing::ImportingDelayedJob
   end
 
   def self.create_jobs(klass, options)
-    options[:max_jobs_count] = ::GuiConfig.import_max_threads - 1
-    (0..options[:max_jobs_count]).each do |job_number|
+    options[:max_jobs_count] = ::GuiConfig.import_max_threads
+    options[:max_jobs_count].times do |job_number|
       options[:job_number] = job_number
       Delayed::Job.enqueue ::Importing::ImportingDelayedJob.new(klass, options)
     end

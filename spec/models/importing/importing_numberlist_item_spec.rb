@@ -51,4 +51,35 @@ RSpec.describe Importing::NumberlistItem do
 
     let(:real_item) { described_class.import_class.last }
   end
+
+  describe '.resolve_object_id' do
+    subject { described_class.resolve_object_id(described_class.strict_unique_attributes) }
+
+    let(:numberlist) { create(:numberlist) }
+    let!(:first_item) { create(:importing_numberlist_item, key: '123', _numberlist: numberlist) }
+    let!(:duplicate_item) { create(:importing_numberlist_item, key: '123', _numberlist: numberlist) }
+    let!(:other_numberlist_item) { create(:importing_numberlist_item, key: '123', _numberlist: create(:numberlist)) }
+
+    it 'marks all rows of the same key except the first one as duplicates', :aggregate_failures do
+      expect(subject).to eq(1)
+      expect(first_item.reload).to have_attributes(is_changed: true, error_string: nil)
+      expect(other_numberlist_item.reload).to have_attributes(is_changed: true, error_string: nil)
+      expect(duplicate_item.reload).to have_attributes(
+        is_changed: false,
+        error_string: "Duplicate of row ##{first_item.id}"
+      )
+    end
+
+    context 'when first row was removed and unique columns applied again' do
+      before do
+        described_class.resolve_object_id(described_class.strict_unique_attributes)
+        first_item.delete
+      end
+
+      it 'clears duplicate mark', :aggregate_failures do
+        expect(subject).to eq(0)
+        expect(duplicate_item.reload).to have_attributes(is_changed: true, error_string: nil)
+      end
+    end
+  end
 end

@@ -119,8 +119,11 @@ module ResourceDSL
           extra_condition = permitted_params[:additional_filter]
         end
         begin
-          acts_as_import_resource_class.resolve_object_id(unique_columns, extra_condition)
+          duplicates_count = acts_as_import_resource_class.resolve_object_id(unique_columns, extra_condition)
           flash[:notice] = 'Unique columns applied!'
+          if duplicates_count.positive?
+            flash[:warning] = "#{duplicates_count} duplicate rows found, they will not be imported"
+          end
         rescue Importing::Base::Error => e
           flash[:error] = e.message
         end
