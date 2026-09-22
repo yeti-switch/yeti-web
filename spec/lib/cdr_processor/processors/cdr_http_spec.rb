@@ -215,24 +215,78 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     end
   end
 
+  describe 'persistent connections' do
+    let(:client) { consumer.send(:http_client) }
+
+    it 'builds one persistent session per processor with a single reconnect retry', :aggregate_failures do
+      expect(client).to be(consumer.send(:http_client))
+      expect(client.class.ancestors).to include(HTTPX::Plugins::Persistent::InstanceMethods)
+      expect(client.instance_variable_get(:@options)).to have_attributes(persistent: true, max_retries: 1)
+    end
+
+    context 'against a keep-alive endpoint' do
+      let(:server) { TCPServer.new('127.0.0.1', 0) }
+      let(:config) { super().merge('url' => "http://127.0.0.1:#{server.addr[1]}/cdr") }
+      let(:accepted) { [] }
+      let(:cdrs) { (1..3).map { |id| { id: id, duration: 2 } } }
+
+      # A real connection is the point here, so the WebMock adapter is taken out of the way.
+      around do |example|
+        WebMock.disable!
+        example.run
+      ensure
+        WebMock.enable!
+      end
+
+      # `let` values are resolved here, on the example thread: RSpec memoization is not
+      # callable from the acceptor thread.
+      let!(:acceptor) do
+        listener = server
+        connections = accepted
+        Thread.new do
+          loop do
+            conn = listener.accept
+            connections << conn
+            Thread.new(conn) { |socket| serve_keep_alive(socket) }
+          end
+        end
+      end
+
+      after do
+        acceptor.kill
+        server.close
+      end
+
+      def serve_keep_alive(socket)
+        loop do
+          head = +''
+          head << socket.readline until head.end_with?("\r\n\r\n")
+          socket.read(head[/content-length: (\d+)/i, 1].to_i)
+          socket.write "HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok"
+        end
+      rescue IOError, SystemCallError
+        socket.close
+      end
+
+      it 'sends every request over the same TCP connection' do
+        subject
+        expect(accepted.size).to eq(1)
+      end
+    end
+  end
+
   describe 'http timeouts config' do
-    let(:cdrs) { [{ id: 1, duration: 2 }] }
+    let(:timeouts) { consumer.send(:http_client).instance_variable_get(:@options).timeout }
 
     it 'uses default timeouts' do
-      expect(HTTPX).to receive(:with).with(
-        timeout: { connect_timeout: 20, write_timeout: 30, read_timeout: 30, request_timeout: 60 }
-      ).and_call_original
-      subject
+      expect(timeouts).to include(connect_timeout: 20, write_timeout: 30, read_timeout: 30, request_timeout: 60)
     end
 
     context 'with timeouts in config' do
       let(:config) { super().merge('read_timeout' => 300, 'request_timeout' => '600') }
 
       it 'overrides configured timeouts and keeps defaults for the rest' do
-        expect(HTTPX).to receive(:with).with(
-          timeout: { connect_timeout: 20, write_timeout: 30, read_timeout: 300.0, request_timeout: 600.0 }
-        ).and_call_original
-        subject
+        expect(timeouts).to include(connect_timeout: 20, write_timeout: 30, read_timeout: 300.0, request_timeout: 600.0)
       end
     end
 

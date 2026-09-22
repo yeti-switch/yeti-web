@@ -115,19 +115,30 @@ module CdrProcessor
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
-        client = HTTPX.with(timeout: @http_timeouts)
+        response = proxy.run { http_client.public_send(http_method, http_url, **kwargs) }
+        response.raise_for_status
+        raise UnexpectedResponseStatus, response unless SUCCESS_STATUSES.cover?(response.status)
+
+        response
+      end
+
+      # One session per processor. The persistent plugin keeps the connection to the
+      # endpoint open between requests and, when the endpoint dropped it while the
+      # processor was idle, re-sends the request once on a new connection - for any
+      # method, but only on connection errors: a timed out POST is not retried.
+      def http_client
+        @http_client ||= build_http_client
+      end
+
+      def build_http_client
+        client = HTTPX.plugin(:persistent).with(timeout: @http_timeouts)
         if logger.debug?
           client = client.with(debug: DebugStream.new(logger), debug_level: 1)
         end
         if @params['auth_user'].present?
           client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
         end
-        client = proxy.apply(client)
-        response = proxy.run { client.public_send(http_method, http_url, **kwargs) }
-        response.raise_for_status
-        raise UnexpectedResponseStatus, response unless SUCCESS_STATUSES.cover?(response.status)
-
-        response
+        proxy.apply(client)
       end
 
       # Outbound HTTP proxy for CDR export requests, controlled per processor via
