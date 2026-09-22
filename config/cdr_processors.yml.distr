@@ -35,6 +35,14 @@ http:
   # vars when http_proxy is unset.
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # The connection to the endpoint is kept open between requests.
+  # HTTP timeouts in seconds, defaults shown. read_timeout is the wait for the
+  # first response bytes, request_timeout caps the whole request, so raise both
+  # for endpoints that process the batch before answering.
+  # connect_timeout: 20
+  # write_timeout: 30
+  # read_timeout: 30
+  # request_timeout: 60
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -87,6 +95,7 @@ http_batch:
   # vars when http_proxy is unset.
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -101,6 +110,38 @@ http_batch:
   #   X-Yeti-Cdr-Batch-Id: <batch_id>
   # Payload:
   #   {"batch_id": 12345, "data": [{"id": 1, ...}, {"id": 2, ...}]}
+
+http_ndjson:
+  mode: production
+  class: cdr_http_ndjson
+  queue: cdr_billing
+  consumer: cdr_http_ndjson
+  url: "http://example.com/api/cdrs"
+  # auth_user: user
+  # auth_password: password
+  # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
+  # http_proxy: http://proxy.example.com:3128
+  # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
+  # may be an array, see the http section above
+  cdr_fields: all
+  # data_filters - same syntax as in the http section above.
+  # Content-Type header, default application/x-ndjson.
+  # content_type: "application/x-ndjson"
+  # Header carrying the pgq batch id, default X-Yeti-Cdr-Batch-Id.
+  # batch_id_header: "X-Yeti-Cdr-Batch-Id"
+  # Custom static headers. Cannot override X-Request-Id and the batch id header.
+  # headers:
+  #   X-Api-Key: "secret-key"
+  # Sends all CDRs from a batch in a single HTTP request as newline-delimited JSON:
+  # one CDR per line, no envelope, no trailing newline.
+  # Supported method: POST
+  # Built-in headers (always set):
+  #   X-Request-Id: <uuid>
+  #   <batch_id_header>: <batch_id>
+  # Payload:
+  #   {"id": 1, "duration": 2, ...}
+  #   {"id": 2, "duration": 0, ...}
 
 http_bulk:
   mode: production
@@ -124,6 +165,7 @@ http_bulk:
   # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   # may be an array, see the http section above
   cdr_fields: all
   # data_filters - same syntax as in the http section above.
@@ -166,6 +208,7 @@ clickhouse:
   url: "http://clickhouse.example.com"
   # auth_user: user
   # auth_password: password
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   clickhouse_db: main
   clickhouse_table: cdrs
   # may be an array:

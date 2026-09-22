@@ -16,10 +16,10 @@ RSpec.describe 'bin/cdr_processor --check' do
   bin = File.join(root, 'bin/cdr_processor')
   config = File.join(root, 'spec/fixtures/cdr_processors_check.yml')
 
-  # Both HTTP processors resolve HttpxProxy via CdrHttpBase#proxy; the other
+  # The HTTP processors resolve HttpxProxy via CdrHttpBase#proxy; the other
   # processors are excluded because their constructors open real connections
   # (cdr_amqp) or otherwise require external services.
-  %w[cdr_http cdr_http_batch cdr_http_bulk].each do |processor|
+  %w[cdr_http cdr_http_batch cdr_http_bulk cdr_http_ndjson].each do |processor|
     it "boots the #{processor} processor with all constants resolved" do
       out, status = Open3.capture2e(RbConfig.ruby, bin, processor, config, '--check', chdir: root)
 

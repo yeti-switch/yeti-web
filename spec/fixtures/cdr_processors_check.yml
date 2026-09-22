@@ -29,3 +29,12 @@ cdr_http_bulk:
   bulk_size: 500
   hmac_secret: "secret"
   cdr_fields: all
+
+cdr_http_ndjson:
+  mode: test
+  class: cdr_http_ndjson
+  queue: cdr_billing
+  consumer: cdr_billing
+  url: "http://example.com/api/cdrs"
+  batch_id_header: X-Batch-Id
+  cdr_fields: all

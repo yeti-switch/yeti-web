@@ -69,12 +69,15 @@ module CdrProcessor
       def perform_events(events)
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         each_bulk(events) do |bulk|
-          # The body is built before #perform_http_request: the HMAC signature
-          # is a header calculated over the exact bytes sent, and the request
-          # headers are evaluated before the body in CdrHttpBase.
-          @request_body = build_request_body(bulk)
-          perform_http_request(bulk)
-          ack_events(bulk)
+          bulk_id = event_bulk_id(bulk)
+          SemanticLogger.named_tagged(event_bulk_id: bulk_id) do
+            # The body is built before #perform_http_request: the HMAC signature
+            # is a header calculated over the exact bytes sent, and the request
+            # headers are evaluated before the body in CdrHttpBase.
+            @request_body = build_request_body(bulk, bulk_id)
+            perform_http_request(bulk)
+            ack_events(bulk)
+          end
         end
       ensure
         @request_body = nil
@@ -113,9 +116,9 @@ module CdrProcessor
         CdrProcessor::CdrDb.pgq_events_done!(consumer_name, @batch_id, bulk.map(&:id))
       end
 
-      def build_request_body(bulk)
+      def build_request_body(bulk, bulk_id)
         {
-          event_bulk_id: event_bulk_id(bulk),
+          event_bulk_id: bulk_id,
           batch_id: @batch_id,
           data: bulk.map { |event| { type: event.type, payload: permit_field_for(event.data) } }
         }.to_json

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'semantic_logger'
+
 module CdrProcessor
   class ConsumerBase
     attr_accessor :logger, :queue_name, :consumer_name
@@ -49,23 +51,27 @@ module CdrProcessor
       safe_batch_perform do
         return 0 unless consumer_lock_ok?
 
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         pgq_events = get_batch_events
 
         return 0 if pgq_events.nil? # if no batch
 
-        if pgq_events.blank? # if batch is empty
-          log_info 'Empty batch'
+        tagged_batch do
+          if pgq_events.blank? # if batch is empty
+            log_info 'Empty batch'
+            finish_batch
+            return -1
+          end
+
+          events = pgq_events.map { |ev| CdrProcessor::Event.new(self, ev) }
+          size = events.size
+          log_info "batch(#{@batch_id}): events #{size}"
+
+          perform_events(events)
+
           finish_batch
-          return -1
+          log_info "batch finished: events #{size}", duration: elapsed_ms(start_time)
         end
-
-        events = pgq_events.map { |ev| CdrProcessor::Event.new(self, ev) }
-        size = events.size
-        log_info "batch(#{@batch_id}): events #{size}"
-
-        perform_events(events)
-
-        finish_batch
       end
 
       events.size
@@ -96,8 +102,13 @@ module CdrProcessor
     rescue SystemExit
       log_error('System Exit')
     rescue StandardError => e
-      log_error("<#{e.class}> #{e.message}\n#{e.backtrace&.join("\n")}")
+      tagged_batch { log_error("<#{e.class}> #{e.message}\n#{e.backtrace&.join("\n")}") }
       CdrProcessor::Worker.shutdown!(e) unless CdrProcessor::Worker.interrupted?
+    end
+
+    # batch_id of every record logged while the batch is processed, see YetiLogFormatter.
+    def tagged_batch(&block)
+      SemanticLogger.named_tagged({ batch_id: @batch_id }.compact, &block)
     end
 
     def perform_events(events)
@@ -107,25 +118,27 @@ module CdrProcessor
     end
 
     def perform_event(event)
-      logger.debug "performing event: Event: #{event.id}, Batch: #{@batch_id}"
+      SemanticLogger.named_tagged(event_id: event.id) do
+        logger.debug "performing event: Event: #{event.id}, Batch: #{@batch_id}"
 
-      CdrProcessor::Worker.check_interrupted(__FILE__, __LINE__)
+        CdrProcessor::Worker.check_interrupted(__FILE__, __LINE__)
 
-      type = event.type
-      data = event.data
+        type = event.type
+        data = event.data
 
-      if event.done?
-        log_debug("An event #{type} has done")
-        return
+        if event.done?
+          log_debug("An event #{type} has done")
+          return
+        end
+
+        perform(type, data)
+
+        event.done!
+        log_debug("Set an event #{type} to done")
+      rescue Exception => ex
+        log_error(event.exception_message(ex))
+        raise ex
       end
-
-      perform(type, data)
-
-      event.done!
-      log_debug("Set an event #{type} to done")
-    rescue Exception => ex
-      log_error(event.exception_message(ex))
-      raise ex
     end
 
     def perform(_type, *_data)
@@ -166,12 +179,19 @@ module CdrProcessor
       @logger&.debug(mes)
     end
 
-    def log_info(mes)
-      @logger&.info(mes)
+    # @param duration [Float, nil] milliseconds, emitted as the `duration` field.
+    def log_info(mes, duration: nil)
+      return @logger&.info(mes) if duration.nil?
+
+      @logger&.info(message: mes, duration: duration)
     end
 
     def log_error(mes)
       @logger&.error(mes)
+    end
+
+    def elapsed_ms(start_time)
+      (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time) * 1000
     end
   end
 end
