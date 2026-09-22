@@ -58,7 +58,10 @@ module CdrProcessor
       end
 
       def http_headers
-        super.merge('X-Yeti-Cdr-Event-Id' => @current_event_id.to_s)
+        super.merge(
+          'X-Yeti-Cdr-Batch-Id' => @batch_id.to_s,
+          'X-Yeti-Cdr-Event-Id' => @current_event_id.to_s
+        )
       end
     end
   end

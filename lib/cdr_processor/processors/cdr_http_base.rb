@@ -4,12 +4,6 @@ require 'httpx'
 
 module CdrProcessor
   module Processors
-    # Common options:
-    #   url, method (post/put/patch), auth_user, auth_password,
-    #   http_proxy, use_env_proxy, cdr_fields, data_filters,
-    #   headers          - extra request headers (User-Agent is ignored)
-    #   content_type     - Content-Type header, default application/json
-    #   batch_id_header  - header carrying the pgq batch id, default X-Yeti-Cdr-Batch-Id
     class CdrHttpBase < CdrProcessor::ConsumerGroup
       # Raised for any response that is neither an HTTPX error nor 2xx, i.e. in
       # practice for redirects. HTTPX#raise_for_status only fails on 4xx/5xx, so
@@ -31,8 +25,6 @@ module CdrProcessor
 
       AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
       SUCCESS_STATUSES = (200..299)
-      DEFAULT_BATCH_ID_HEADER = 'X-Yeti-Cdr-Batch-Id'
-      DEFAULT_CONTENT_TYPE = 'application/json'
       HTTP_TIMEOUTS = {
         connect_timeout: 20,
         write_timeout: 30,
@@ -50,8 +42,6 @@ module CdrProcessor
         end
         custom_headers = @params['headers'] || {}
         @custom_headers = custom_headers.reject { |key, _| key.casecmp('user-agent').zero? }
-        @batch_id_header = @params['batch_id_header'].presence || DEFAULT_BATCH_ID_HEADER
-        @content_type = @params['content_type'].presence || default_content_type
       end
 
       def perform_events(events)
@@ -74,11 +64,6 @@ module CdrProcessor
         @data_filters.all? { |filter| filter.match?(event) }
       end
 
-      # Applies data_filters and cdr_fields to a group of CDRs.
-      def sendable_events(events)
-        events.select { |event| send_event?(event) }.map { |event| permit_field_for(event) }
-      end
-
       def http_method
         :post
       end
@@ -91,15 +76,8 @@ module CdrProcessor
         payload.to_json
       end
 
-      def default_content_type
-        DEFAULT_CONTENT_TYPE
-      end
-
-      # Precedence: content_type < headers < X-Request-Id and batch_id_header.
       def http_headers
-        { 'Content-Type' => @content_type }
-          .merge(@custom_headers)
-          .merge('X-Request-Id' => @request_id, @batch_id_header => @batch_id.to_s)
+        @custom_headers.merge('X-Request-Id' => @request_id)
       end
 
       def perform_http_request(payload)

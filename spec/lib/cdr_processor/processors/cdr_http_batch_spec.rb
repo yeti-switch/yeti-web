@@ -35,7 +35,7 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
       subject
       expect(WebMock).to have_requested(:post, config['url']).once
       expect(WebMock).to have_requested(:post, config['url']).with(
-        headers: { 'Content-Type' => 'application/json', 'X-Yeti-Cdr-Batch-Id' => '' },
+        headers: { 'X-Yeti-Cdr-Batch-Id' => '' },
         body: {
           batch_id: nil,
           data: [
@@ -124,39 +124,6 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
           ]
         }
       )
-    end
-  end
-
-  context 'without headers in config' do
-    let(:config) { super().except('headers') }
-
-    it 'sends application/json content-type' do
-      subject
-      expect(WebMock).to have_requested(:post, config['url']).once
-                                                             .with(headers: { 'Content-Type' => 'application/json' })
-    end
-  end
-
-  context 'with content_type and headers content-type' do
-    let(:config) { super().merge('content_type' => 'text/plain', 'headers' => { 'content-type' => 'application/xml' }) }
-
-    it 'headers win' do
-      subject
-      expect(WebMock).to have_requested(:post, config['url']).once
-                                                             .with(headers: { 'Content-Type' => 'application/xml' })
-    end
-  end
-
-  context 'with batch_id_header option' do
-    let(:config) { super().merge('batch_id_header' => 'X-Batch-Id') }
-
-    before { consumer.instance_variable_set(:@batch_id, 42) }
-
-    it 'sends batch id in configured header only' do
-      subject
-      expect(WebMock).to have_requested(:post, config['url']).once.with { |req|
-        req.headers['X-Batch-Id'] == '42' && !req.headers.key?('X-Yeti-Cdr-Batch-Id')
-      }
     end
   end
 

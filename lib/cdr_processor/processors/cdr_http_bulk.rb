@@ -130,7 +130,8 @@ module CdrProcessor
       end
 
       def http_headers
-        headers = super
+        headers = { 'Content-Type' => 'application/json' }.merge(super)
+        headers['X-Yeti-Cdr-Batch-Id'] = @batch_id.to_s
         headers[HMAC_SIGNATURE_HEADER] = hmac_signature if hmac_secret.present?
         headers
       end
