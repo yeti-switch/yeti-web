@@ -50,6 +50,7 @@ class Importing::Base < ApplicationRecord
   class_attribute :import_attributes, :import_class, :strict_unique_attributes
 
   ALLOWED_OPTIONS_KEYS = %i[controller_info max_jobs_count job_number action].freeze
+  DUPLICATE_ERROR = 'Duplicate of row #'
 
   # Resolve foreign_keys
   def self.after_import_hook
@@ -70,7 +71,7 @@ class Importing::Base < ApplicationRecord
     options.assert_valid_keys(ALLOWED_OPTIONS_KEYS)
     PaperTrail.request.whodunnit = options[:controller_info][:whodunnit]
     PaperTrail.request.controller_info = options[:controller_info][:controller_info]
-    query = where('id % ? = ?', options[:max_jobs_count], options[:job_number])
+    query = for_job(options[:max_jobs_count], options[:job_number])
     query = query.where(is_changed: true)
     query = query.send(options[:action]) if options[:action]
     ApplicationRecord.transaction do
@@ -78,6 +79,17 @@ class Importing::Base < ApplicationRecord
         batch.each { |item| move_one!(item) }
       end
     end
+  end
+
+  # Rows with equal unique key must be processed by the same job,
+  # otherwise parallel jobs wait for each other on the unique index and deadlock.
+  def self.for_job(max_jobs_count, job_number)
+    partition_sql = 'id'
+    if strict_unique_attributes.present?
+      columns = strict_unique_attributes.map { |col| connection.quote_column_name(col) }
+      partition_sql = "abs(hashtext(ROW(#{columns.join(', ')})::text)::bigint)"
+    end
+    where("#{partition_sql} % ? = ?", max_jobs_count, job_number)
   end
 
   # Update or Create real item from importing-data
@@ -111,6 +123,23 @@ class Importing::Base < ApplicationRecord
       update_relations_for_each!(import_class.table_name, :o, unique_columns, extra_condition)
     end
     apply_is_changed!
+    mark_duplicates!(unique_columns)
+  end
+
+  # Keeps first row of each group with equal unique columns, the rest are excluded from import.
+  # @return [Integer] count of rows marked as duplicates
+  def self.mark_duplicates!(unique_columns)
+    where('error_string LIKE ?', "#{DUPLICATE_ERROR}%").update_all(error_string: nil)
+    return 0 if unique_columns.empty?
+
+    columns = unique_columns.map { |col| connection.quote_column_name(col) }.join(', ')
+    sql = [
+      "UPDATE #{table_name} ta",
+      "SET is_changed = false, error_string = #{connection.quote(DUPLICATE_ERROR)} || tb.first_id",
+      "FROM (SELECT id, first_value(id) OVER (PARTITION BY #{columns} ORDER BY id) AS first_id FROM #{table_name}) tb",
+      'WHERE ta.id = tb.id AND ta.id <> tb.first_id'
+    ].join(' ')
+    ApplicationRecord.connection.execute(sql).cmd_tuples
   end
 
   def self.apply_is_changed!
