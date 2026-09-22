@@ -35,6 +35,13 @@ http:
   # vars when http_proxy is unset.
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # HTTP timeouts in seconds, defaults shown. read_timeout is the wait for the
+  # first response bytes, request_timeout caps the whole request, so raise both
+  # for endpoints that process the batch before answering.
+  # connect_timeout: 20
+  # write_timeout: 30
+  # read_timeout: 30
+  # request_timeout: 60
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -87,6 +94,7 @@ http_batch:
   # vars when http_proxy is unset.
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -113,6 +121,7 @@ http_ndjson:
   # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   # may be an array, see the http section above
   cdr_fields: all
   # data_filters - same syntax as in the http section above.
@@ -155,6 +164,7 @@ http_bulk:
   # Outbound proxy. Defaults to direct (ignores any HTTP(S)_PROXY env vars).
   # http_proxy: http://proxy.example.com:3128
   # use_env_proxy: false
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   # may be an array, see the http section above
   cdr_fields: all
   # data_filters - same syntax as in the http section above.
@@ -197,6 +207,7 @@ clickhouse:
   url: "http://clickhouse.example.com"
   # auth_user: user
   # auth_password: password
+  # connect_timeout, write_timeout, read_timeout, request_timeout - same as in the http section above.
   clickhouse_db: main
   clickhouse_table: cdrs
   # may be an array:

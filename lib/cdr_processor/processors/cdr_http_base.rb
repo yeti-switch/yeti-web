@@ -25,6 +25,7 @@ module CdrProcessor
 
       AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
       SUCCESS_STATUSES = (200..299)
+      # Defaults, each overridable by the same key in the processor config (seconds).
       HTTP_TIMEOUTS = {
         connect_timeout: 20,
         write_timeout: 30,
@@ -42,6 +43,10 @@ module CdrProcessor
         end
         custom_headers = @params['headers'] || {}
         @custom_headers = custom_headers.reject { |key, _| key.casecmp('user-agent').zero? }
+        @http_timeouts = HTTP_TIMEOUTS.to_h do |key, default|
+          value = @params[key.to_s]
+          [key, value.nil? ? default : Float(value)]
+        end
       end
 
       def perform_events(events)
@@ -96,7 +101,7 @@ module CdrProcessor
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
-        client = HTTPX.with(timeout: HTTP_TIMEOUTS)
+        client = HTTPX.with(timeout: @http_timeouts)
         if logger.debug?
           client = client.with(debug: logger, debug_level: 1)
         end

@@ -166,4 +166,34 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       end
     end
   end
+
+  describe 'http timeouts config' do
+    let(:cdrs) { [{ id: 1, duration: 2 }] }
+
+    it 'uses default timeouts' do
+      expect(HTTPX).to receive(:with).with(
+        timeout: { connect_timeout: 20, write_timeout: 30, read_timeout: 30, request_timeout: 60 }
+      ).and_call_original
+      subject
+    end
+
+    context 'with timeouts in config' do
+      let(:config) { super().merge('read_timeout' => 300, 'request_timeout' => '600') }
+
+      it 'overrides configured timeouts and keeps defaults for the rest' do
+        expect(HTTPX).to receive(:with).with(
+          timeout: { connect_timeout: 20, write_timeout: 30, read_timeout: 300.0, request_timeout: 600.0 }
+        ).and_call_original
+        subject
+      end
+    end
+
+    context 'with non-numeric timeout' do
+      let(:config) { super().merge('read_timeout' => 'never') }
+
+      it 'raises on initialization' do
+        expect { consumer }.to raise_error(ArgumentError, /invalid value for Float/)
+      end
+    end
+  end
 end
