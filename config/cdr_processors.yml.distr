@@ -59,16 +59,19 @@ http:
   #   - field: vendor_id
   #     op: in
   #     value: [1, 2, 3]
-  # Custom static headers. Cannot override built-in headers: X-Request-Id, X-Yeti-Cdr-*.
+  # Content-Type header, default application/json.
+  # content_type: "application/json"
+  # Header carrying the pgq batch id, default X-Yeti-Cdr-Batch-Id.
+  # batch_id_header: "X-Yeti-Cdr-Batch-Id"
+  # Custom static headers. Cannot override X-Request-Id, the batch id header and X-Yeti-Cdr-Event-Id.
   # headers:
-  #   content-type: "application/json"
   #   accept: "application/json"
   #   X-Api-Key: "secret-key"
   # Sends each CDR as a separate HTTP request.
   # Supported methods: POST, PUT, PATCH
   # Built-in headers (always set):
   #   X-Request-Id: <uuid>
-  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  #   <batch_id_header>: <batch_id>
   #   X-Yeti-Cdr-Event-Id: <event_id>
   # Payload:
   #   {"id": 1, "duration": 2, "src_prefix_in": "123", ...}
@@ -95,12 +98,37 @@ http_batch:
   #                 'destination_next_rate', 'customer_price',  'orig_call_id', 'local_tag', 'term_call_id'
   #              ]
   cdr_fields: all
+  # data_filters, headers, content_type, batch_id_header - same as in the http section above.
   # Sends all CDRs from a batch in a single HTTP request.
   # Built-in headers (always set):
   #   X-Request-Id: <uuid>
-  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  #   <batch_id_header>: <batch_id>
   # Payload:
   #   {"batch_id": 12345, "data": [{"id": 1, ...}, {"id": 2, ...}]}
+
+http_ndjson:
+  mode: production
+  class: cdr_http_ndjson
+  queue: cdr_billing
+  consumer: cdr_http_ndjson
+  url: "http://example.com/api/cdrs"
+  # auth_user: user
+  # auth_password: password
+  # http_proxy: http://proxy.example.com:3128
+  # use_env_proxy: false
+  # may be an array, see the http section above
+  cdr_fields: all
+  # data_filters, headers, content_type, batch_id_header - same as in the http section above.
+  # content_type defaults to application/x-ndjson.
+  # Sends all CDRs from a batch in a single HTTP request as newline-delimited JSON:
+  # one CDR per line, no envelope, no trailing newline.
+  # Supported method: POST
+  # Built-in headers (always set):
+  #   X-Request-Id: <uuid>
+  #   <batch_id_header>: <batch_id>
+  # Payload:
+  #   {"id": 1, "duration": 2, ...}
+  #   {"id": 2, "duration": 0, ...}
 
 http_bulk:
   mode: production
@@ -127,8 +155,9 @@ http_bulk:
   # may be an array, see the http section above
   cdr_fields: all
   # data_filters - same syntax as in the http section above.
-  # Custom static headers. Cannot override built-in headers: X-Request-Id,
-  # X-Yeti-Cdr-*, X-HMAC-Signature.
+  # content_type, batch_id_header - same as in the http section above.
+  # Custom static headers. Cannot override X-Request-Id, the batch id header
+  # and X-HMAC-Signature.
   # headers:
   #   X-Api-Key: "secret-key"
   # Sends CDRs in bulks of bulk_size, acknowledging each bulk once its request
@@ -136,7 +165,7 @@ http_bulk:
   # Supported method: POST
   # Built-in headers (always set):
   #   X-Request-Id: <uuid>
-  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  #   <batch_id_header>: <batch_id>
   #   X-HMAC-Signature: <hexdigest>  (only when hmac_secret is set)
   # Payload:
   #   {"event_bulk_id": "9f2c...", "batch_id": 12345,

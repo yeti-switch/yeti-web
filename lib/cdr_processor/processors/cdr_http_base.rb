@@ -74,6 +74,11 @@ module CdrProcessor
         @data_filters.all? { |filter| filter.match?(event) }
       end
 
+      # Applies data_filters and cdr_fields to a group of CDRs.
+      def sendable_events(events)
+        events.select { |event| send_event?(event) }.map { |event| permit_field_for(event) }
+      end
+
       def http_method
         :post
       end

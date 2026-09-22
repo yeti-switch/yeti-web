@@ -127,61 +127,6 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
     end
   end
 
-  context 'with body_format ndjson' do
-    let(:config) { super().except('headers').merge('body_format' => 'ndjson') }
-    let(:cdrs) do
-      [
-        { id: 1, duration: 2, comment: "multi\nline" },
-        { id: 2, duration: 2 }
-      ]
-    end
-
-    it 'sends one CDR per line without envelope' do
-      subject
-      expect(WebMock).to have_requested(:post, config['url']).once
-      expect(WebMock).to have_requested(:post, config['url']).with(
-        headers: { 'Content-Type' => 'application/x-ndjson', 'X-Yeti-Cdr-Batch-Id' => '' },
-        body: "{\"id\":1,\"duration\":2,\"comment\":\"multi\\nline\"}\n{\"id\":2,\"duration\":2}"
-      )
-    end
-
-    context 'with content_type option' do
-      let(:config) { super().merge('content_type' => 'text/plain') }
-
-      it 'sends configured content-type' do
-        subject
-        expect(WebMock).to have_requested(:post, config['url']).once
-                                                               .with(headers: { 'Content-Type' => 'text/plain' })
-      end
-    end
-
-    context 'when cdr_fields is an array' do
-      let(:cdr_fields) { ['id'] }
-
-      it 'sends only permitted fields' do
-        subject
-        expect(WebMock).to have_requested(:post, config['url']).with(body: "{\"id\":1}\n{\"id\":2}")
-      end
-    end
-
-    context 'when all events are filtered out' do
-      let(:config) { super().merge('data_filters' => [{ field: 'id', op: 'eq', value: 3 }]) }
-
-      it 'does not send any requests' do
-        subject
-        expect(WebMock).not_to have_requested(:post, config['url'])
-      end
-    end
-  end
-
-  context 'with unsupported body_format' do
-    let(:config) { super().merge('body_format' => 'xml') }
-
-    it 'raises on initialization' do
-      expect { consumer }.to raise_error(ArgumentError, /unsupported body_format 'xml'/)
-    end
-  end
-
   context 'without headers in config' do
     let(:config) { super().except('headers') }
 

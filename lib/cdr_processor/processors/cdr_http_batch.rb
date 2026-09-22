@@ -63,54 +63,15 @@ module CdrProcessor
     #       }
     #     ]
     #   }
-    #
-    # With `body_format: ndjson` the request body is newline-delimited JSON:
-    # one CDR object per line, no envelope. The batch id is only available in
-    # the `batch_id_header` header. `content_type` defaults to
-    # application/x-ndjson.
-    #
-    #   POST https://external-endpoint/api/cdr
-    #   Content-Type: application/x-ndjson
-    #   X-Request-Id: 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
-    #   X-Yeti-Cdr-Batch-Id: 42
-    #
-    #   {"id":12345,"uuid":"8f14e45f-ceea-467d-9e08-7c1b6c2f1a3e","time_start":"2026-06-04T10:15:30.000Z", ...}
-    #   {"id":12346,"uuid":"c9f0f895-fb98-4b9c-9c5d-2f3b0c1a4d7e","time_start":"2026-06-04T10:17:05.000Z", ...}
     class CdrHttpBatch < CdrProcessor::Processors::CdrHttpBase
-      BODY_FORMATS = %w[json ndjson].freeze
-
-      def initialize(...)
-        super(...)
-        return if BODY_FORMATS.include?(body_format)
-
-        raise ArgumentError, "unsupported body_format '#{@params['body_format']}', should be one of: #{BODY_FORMATS.join(', ')}"
-      end
-
       def perform_group(events)
-        events_to_send = events.select { |event| send_event?(event) }
-        return if events_to_send.empty?
-
-        permitted_events = events_to_send.map { |event| permit_field_for(event) }
-        perform_http_request(permitted_events)
+        events_to_send = sendable_events(events)
+        perform_http_request(events_to_send) if events_to_send.any?
       end
 
       private
 
-      def body_format
-        (@params['body_format'] || 'json').to_s.downcase
-      end
-
-      def ndjson?
-        body_format == 'ndjson'
-      end
-
-      def default_content_type
-        ndjson? ? 'application/x-ndjson' : super
-      end
-
       def http_body(events)
-        return events.map(&:to_json).join("\n") if ndjson?
-
         { batch_id: @batch_id, data: events }.to_json
       end
     end
