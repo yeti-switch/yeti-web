@@ -6,6 +6,6 @@ if YetiConfig.telemetry&.enabled
 
   OpenTelemetry::SDK.configure do |c|
     c.service_name = 'yeti-web'
-    c.use_all # enables all instrumentation!
+    c.use_all('OpenTelemetry::Instrumentation::Rack' => { untraced_endpoints: ['/live', '/ready'] })
   end
 end

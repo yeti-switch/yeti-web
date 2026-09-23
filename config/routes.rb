@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     resource(name.to_s.dasherize.to_sym, **options, &block)
   end
 
-  # Kubernetes probes, see HealthController.
   get '/live', to: 'health#live'
   get '/ready', to: 'health#ready'
 

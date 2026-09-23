@@ -1,18 +1,30 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Kubernetes probes', type: :request do
+  let(:configurations) { ActiveRecord::Base.configurations }
+  let(:primary_config) { configurations.configs_for(env_name: 'test', name: 'primary') }
+  let(:cdr_config) { configurations.configs_for(env_name: 'test', name: 'cdr') }
+  # The databases /ready sees are stubbed: the local database.yml may or may not have a replica.
+  let(:database_configs) { [primary_config, cdr_config] }
+
+  before do
+    allow(configurations).to receive(:configs_for).and_call_original
+    allow(configurations).to receive(:configs_for).with(env_name: 'test', include_hidden: true).and_return(database_configs)
+  end
+
+  def unreachable(config, name: config.name, host: nil, port: 1)
+    hash = config.configuration_hash.merge(port: port)
+    hash = hash.merge(host: host) if host
+    ActiveRecord::DatabaseConfigurations::HashConfig.new('test', name, hash)
+  end
+
   def stub_ready_requires(flags)
     allow(YetiConfig).to receive(:probes).and_return(OpenStruct.new(ready_requires: flags))
   end
 
-  def stub_down(pool)
-    allow(pool).to receive(:with_connection).and_raise(PG::ConnectionBad, 'could not connect to server')
-  end
-
   describe 'GET /live' do
     it 'answers without touching the databases' do
-      expect(ApplicationRecord.connection_pool).not_to receive(:with_connection)
-      expect(Cdr::Base.connection_pool).not_to receive(:with_connection)
+      expect(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter).not_to receive(:new)
 
       get '/live'
 
@@ -22,7 +34,10 @@ RSpec.describe 'Kubernetes probes', type: :request do
   end
 
   describe 'GET /ready' do
-    it 'answers ok when the databases respond' do
+    it 'answers ok when the databases respond, without touching the application pools' do
+      expect(ApplicationRecord.connection_pool).not_to receive(:with_connection)
+      expect(Cdr::Base.connection_pool).not_to receive(:with_connection)
+
       get '/ready'
 
       expect(response).to have_http_status(:ok)
@@ -30,30 +45,28 @@ RSpec.describe 'Kubernetes probes', type: :request do
     end
 
     context 'when the CDR database is down' do
-      before { stub_down(Cdr::Base.connection_pool) }
+      let(:database_configs) { [primary_config, unreachable(cdr_config)] }
 
       it 'answers 503 naming the database, without the error text' do
         get '/ready'
 
         expect(response).to have_http_status(:service_unavailable)
         expect(response.parsed_body).to eq('status' => 'error', 'databases' => { 'primary' => 'ok', 'cdr' => 'error' })
-        expect(response.body).not_to include('could not connect')
+        expect(response.body).not_to include('connect')
       end
 
-      context 'when the CDR database is not required' do
-        before { stub_ready_requires(cdr: false) }
+      it 'answers ok when the CDR database is not required, still reporting it' do
+        stub_ready_requires(cdr: false)
 
-        it 'answers ok and still reports the CDR database' do
-          get '/ready'
+        get '/ready'
 
-          expect(response).to have_http_status(:ok)
-          expect(response.parsed_body).to eq('status' => 'ok', 'databases' => { 'primary' => 'ok', 'cdr' => 'error' })
-        end
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to eq('status' => 'ok', 'databases' => { 'primary' => 'ok', 'cdr' => 'error' })
       end
     end
 
     context 'when the primary database is down' do
-      before { stub_down(ApplicationRecord.connection_pool) }
+      let(:database_configs) { [unreachable(primary_config), cdr_config] }
 
       it 'answers 503' do
         get '/ready'
@@ -62,41 +75,31 @@ RSpec.describe 'Kubernetes probes', type: :request do
         expect(response.parsed_body['databases']).to eq('primary' => 'error', 'cdr' => 'ok')
       end
 
-      context 'when the primary database is not required' do
-        before { stub_ready_requires(primary: false) }
+      it 'answers ok when the primary database is not required' do
+        stub_ready_requires(primary: false)
 
-        it 'answers ok' do
-          get '/ready'
+        get '/ready'
 
-          expect(response).to have_http_status(:ok)
-          expect(response.parsed_body['databases']).to eq('primary' => 'error', 'cdr' => 'ok')
-        end
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body['databases']).to eq('primary' => 'error', 'cdr' => 'ok')
       end
     end
 
     context 'with a CDR replica configured' do
-      let(:replica_pool) { instance_double(ActiveRecord::ConnectionAdapters::ConnectionPool) }
+      let(:replica_config) { ActiveRecord::DatabaseConfigurations::HashConfig.new('test', 'cdr_replica', cdr_config.configuration_hash) }
+      let(:database_configs) { [primary_config, cdr_config, replica_config] }
 
-      before { allow(Cdr::Base).to receive(:replica_connection_pool).and_return(replica_pool) }
+      it 'reports it' do
+        get '/ready'
 
-      context 'when it responds' do
-        before { allow(replica_pool).to receive(:with_connection).and_yield(double(select_value: 1)) }
-
-        it 'reports it' do
-          get '/ready'
-
-          expect(response).to have_http_status(:ok)
-          expect(response.parsed_body['databases']).to eq('primary' => 'ok', 'cdr' => 'ok', 'cdr_replica' => 'ok')
-        end
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body['databases']).to eq('primary' => 'ok', 'cdr' => 'ok', 'cdr_replica' => 'ok')
       end
 
       context 'when it is down' do
-        before do
-          allow(replica_pool).to receive(:db_config).and_return(double(name: 'cdr_replica'))
-          stub_down(replica_pool)
-        end
+        let(:replica_config) { unreachable(cdr_config, name: 'cdr_replica') }
 
-        it 'answers ok by default: reads fall back to the CDR database' do
+        it 'answers ok by default' do
           get '/ready'
 
           expect(response).to have_http_status(:ok)
@@ -114,13 +117,27 @@ RSpec.describe 'Kubernetes probes', type: :request do
       end
     end
 
-    it 'ignores a required database that is not configured' do
+    it 'answers 503 for a required database missing from database.yml' do
       stub_ready_requires(cdr_replica: true)
 
       get '/ready'
 
-      expect(response).to have_http_status(:ok)
-      expect(response.parsed_body['databases'].keys).to eq(%w[primary cdr])
+      expect(response).to have_http_status(:service_unavailable)
+      expect(response.parsed_body['databases']).to eq('primary' => 'ok', 'cdr' => 'ok', 'cdr_replica' => 'missing')
+    end
+
+    context 'when a database host does not answer at all' do
+      let(:database_configs) { [primary_config, unreachable(cdr_config, host: '10.255.255.1', port: 5432)] }
+
+      it 'gives up within the check timeout' do
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+        get '/ready'
+
+        expect(Process.clock_gettime(Process::CLOCK_MONOTONIC) - started).to be < HealthController::CHECK_TIMEOUT + 1
+        expect(response).to have_http_status(:service_unavailable)
+        expect(response.parsed_body['databases']['cdr']).to eq('error')
+      end
     end
   end
 

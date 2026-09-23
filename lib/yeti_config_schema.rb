@@ -159,14 +159,9 @@ module YetiConfigSchema
           optional(:use_env_proxy).maybe(:bool?)
         end
       end
-      # Kubernetes probes, see HealthController. Everything is optional; a missing
-      # database defaults to HealthController::READY_REQUIRES.
+      # Kubernetes probes, see HealthController. ready_requires is keyed by database.yml name.
       optional(:probes).schema do
-        optional(:ready_requires).schema do
-          optional(:primary).value(:bool?)
-          optional(:cdr).value(:bool?)
-          optional(:cdr_replica).value(:bool?)
-        end
+        optional(:ready_requires).value(:hash)
       end
 
       optional(:admin_ui).schema do
