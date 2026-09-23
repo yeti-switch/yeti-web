@@ -4,7 +4,7 @@ class Cdr::Base < ApplicationRecord
   self.abstract_class = true
 
   def self.replica_configured?
-    !configurations.configs_for(env_name: Rails.env, name: :cdr_replica, include_hidden: true).nil?
+    configurations.configs_for(env_name: Rails.env, name: :cdr_replica, include_hidden: true).present?
   end
 
   def self.database_config

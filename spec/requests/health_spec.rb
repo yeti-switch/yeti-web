@@ -124,11 +124,29 @@ RSpec.describe 'Kubernetes probes', type: :request do
     end
   end
 
-  it 'silences the probes in the request log' do
-    silencer = Rails.application.middleware.find { |middleware| middleware.klass == Rails::Rack::SilenceRequest }
-    path = silencer.args.first[:path]
+  describe 'request log' do
+    let(:appender) { SemanticLogger::Test::CaptureLogEvents.new(level: :info) }
 
-    expect(path).to match('/live').and match('/ready')
-    expect(path).not_to match('/liveness')
+    before { SemanticLogger.add_appender(appender: appender) }
+
+    after { SemanticLogger.remove_appender(appender) }
+
+    def logged_messages
+      SemanticLogger.flush
+      appender.events.map(&:message)
+    end
+
+    it 'does not log the probes' do
+      get '/live'
+      get '/ready'
+
+      expect(logged_messages).to be_empty
+    end
+
+    it 'logs the other requests' do
+      get '/liveness'
+
+      expect(logged_messages).to include(a_string_matching(/\A(Started|Completed)/))
+    end
   end
 end
