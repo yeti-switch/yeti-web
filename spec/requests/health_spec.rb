@@ -18,8 +18,8 @@ RSpec.describe 'Kubernetes probes', type: :request do
     ActiveRecord::DatabaseConfigurations::HashConfig.new('test', name, hash)
   end
 
-  def stub_ready_requires(flags)
-    allow(YetiConfig).to receive(:probes).and_return(OpenStruct.new(ready_requires: flags))
+  def stub_required(*names)
+    allow(YetiConfig).to receive(:probes).and_return(OpenStruct.new(ready_require_databases: names))
   end
 
   describe 'GET /live' do
@@ -56,7 +56,7 @@ RSpec.describe 'Kubernetes probes', type: :request do
       end
 
       it 'answers ok when the CDR database is not required, still reporting it' do
-        stub_ready_requires(cdr: false)
+        stub_required('primary')
 
         get '/ready'
 
@@ -76,7 +76,7 @@ RSpec.describe 'Kubernetes probes', type: :request do
       end
 
       it 'answers ok when the primary database is not required' do
-        stub_ready_requires(primary: false)
+        stub_required('cdr')
 
         get '/ready'
 
@@ -107,7 +107,7 @@ RSpec.describe 'Kubernetes probes', type: :request do
         end
 
         it 'answers 503 when the replica is required' do
-          stub_ready_requires(cdr_replica: true)
+          stub_required('primary', 'cdr', 'cdr_replica')
 
           get '/ready'
 
@@ -115,15 +115,6 @@ RSpec.describe 'Kubernetes probes', type: :request do
           expect(response.parsed_body['status']).to eq('error')
         end
       end
-    end
-
-    it 'answers 503 for a required database missing from database.yml' do
-      stub_ready_requires(cdr_replica: true)
-
-      get '/ready'
-
-      expect(response).to have_http_status(:service_unavailable)
-      expect(response.parsed_body['databases']).to eq('primary' => 'ok', 'cdr' => 'ok', 'cdr_replica' => 'missing')
     end
 
     context 'when a database host does not answer at all' do

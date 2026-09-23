@@ -28,4 +28,34 @@ RSpec.describe YetiConfigLoader, '.call' do
         .to raise_error(YetiConfigLoader::Error, /invalid config .*yeti_web\.yml: site_title: must be a string/)
     end
   end
+
+  describe '.check_databases!' do
+    before { allow(YetiConfig).to receive(:probes).and_return(OpenStruct.new(ready_require_databases: names)) }
+
+    context 'when every required database is configured' do
+      let(:names) { %w[primary cdr] }
+
+      it 'passes' do
+        expect { described_class.check_databases!(%w[primary cdr cdr_replica]) }.not_to raise_error
+      end
+    end
+
+    context 'when a required database is not configured' do
+      let(:names) { %w[primary cdr_repilca] }
+
+      it 'raises naming it and the configured ones' do
+        expect { described_class.check_databases!(%w[primary cdr]) }.to raise_error(
+          YetiConfigLoader::Error, 'invalid config probes.ready_require_databases: unknown cdr_repilca, database.yml has primary, cdr'
+        )
+      end
+    end
+
+    context 'without probes config' do
+      let(:names) { nil }
+
+      it 'passes' do
+        expect { described_class.check_databases!(%w[primary]) }.not_to raise_error
+      end
+    end
+  end
 end

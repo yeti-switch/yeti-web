@@ -34,4 +34,17 @@ module YetiConfigLoader
   rescue Config::Validation::Error => e
     raise Error, "invalid config #{path}: #{e.message}"
   end
+
+  # probes.ready_require_databases against the names of database.yml. Not part of
+  # YetiConfigSchema: that is applied by processes that never read database.yml.
+  #
+  # @param database_names [Array<String>]
+  # @raise [YetiConfigLoader::Error]
+  def check_databases!(database_names)
+    unknown = Array(YetiConfig.probes&.ready_require_databases).map(&:to_s) - database_names.map(&:to_s)
+    return if unknown.empty?
+
+    raise Error, "invalid config probes.ready_require_databases: unknown #{unknown.join(', ')}, " \
+                 "database.yml has #{database_names.join(', ')}"
+  end
 end

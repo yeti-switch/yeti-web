@@ -2,7 +2,7 @@
 
 # Kubernetes probes: GET /live and GET /ready. Unauthenticated, not logged.
 class HealthController < ActionController::API
-  READY_REQUIRES = { 'primary' => true, 'cdr' => true }.freeze
+  READY_REQUIRE_DATABASES = %w[primary cdr].freeze
   CHECK_TIMEOUT = 2
 
   def live
@@ -11,7 +11,6 @@ class HealthController < ActionController::API
 
   def ready
     databases = database_configs.to_h { |config| [config.name, database_status(config)] }
-    required_databases.each { |name| databases[name] ||= 'missing' }
     ok = required_databases.all? { |name| databases[name] == 'ok' }
     render json: { status: ok ? 'ok' : 'error', databases: databases }, status: ok ? :ok : :service_unavailable
   end
@@ -23,8 +22,7 @@ class HealthController < ActionController::API
   end
 
   def required_databases
-    configured = (YetiConfig.probes&.ready_requires&.to_h || {}).transform_keys(&:to_s)
-    READY_REQUIRES.merge(configured).select { |_, required| required }.keys
+    (YetiConfig.probes&.ready_require_databases || READY_REQUIRE_DATABASES).map(&:to_s)
   end
 
   # A connection of its own, bounded by CHECK_TIMEOUT: the application pools may be busy

@@ -158,10 +158,7 @@ tmpdir: 'tmp'
 # answers 200 when the databases respond and 503 otherwise. Neither needs authentication
 # and neither is logged.
 probes:
-  # Databases of database.yml whose outage makes /ready answer 503, by name. Every
-  # configured database is checked and named in the response body either way; a required
-  # one missing from database.yml is reported as "missing". Defaults shown.
-  ready_requires:
-    primary: true
-    cdr: true
-    # cdr_replica: false
+  # Databases of database.yml whose outage makes /ready answer 503. Every configured
+  # database is checked and named in the response body either way; a name that is not in
+  # database.yml stops the application at boot. Default shown.
+  ready_require_databases: [primary, cdr]
