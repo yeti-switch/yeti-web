@@ -13,7 +13,7 @@ end
 
 begin
   YetiConfigLoader.call
-  YetiConfigLoader.check_databases!(Rails.application.config.database_configuration[Rails.env].keys)
+  YetiConfigLoader.check_databases!(Rails.application.config.database_configuration[Rails.env]&.keys)
 rescue YetiConfigLoader::Error => e
   warn e.message
   exit 1 # rubocop:disable Rails/Exit

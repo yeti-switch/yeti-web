@@ -57,5 +57,14 @@ RSpec.describe YetiConfigLoader, '.call' do
         expect { described_class.check_databases!(%w[primary]) }.not_to raise_error
       end
     end
+
+    context 'without a database.yml section for the environment' do
+      let(:names) { %w[primary cdr_repilca] }
+
+      it 'checks nothing' do
+        expect { described_class.check_databases!(nil) }.not_to raise_error
+        expect { described_class.check_databases!([]) }.not_to raise_error
+      end
+    end
   end
 end

@@ -38,10 +38,14 @@ module YetiConfigLoader
   # probes.ready_require_databases against the names of database.yml. Not part of
   # YetiConfigSchema: that is applied by processes that never read database.yml.
   #
-  # @param database_names [Array<String>]
+  # @param database_names [Array<String>, nil] nothing is checked without them: a rake task
+  #   may run in an environment database.yml has no section for.
   # @raise [YetiConfigLoader::Error]
   def check_databases!(database_names)
-    unknown = Array(YetiConfig.probes&.ready_require_databases).map(&:to_s) - database_names.map(&:to_s)
+    database_names = Array(database_names).map(&:to_s)
+    return if database_names.empty?
+
+    unknown = Array(YetiConfig.probes&.ready_require_databases).map(&:to_s) - database_names
     return if unknown.empty?
 
     raise Error, "invalid config probes.ready_require_databases: unknown #{unknown.join(', ')}, " \
