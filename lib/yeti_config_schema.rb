@@ -159,6 +159,11 @@ module YetiConfigSchema
           optional(:use_env_proxy).maybe(:bool?)
         end
       end
+      # Kubernetes probes, see HealthController.
+      optional(:probes).schema do
+        optional(:ready_require_databases).array(:string)
+      end
+
       optional(:admin_ui).schema do
         optional(:session_lifetime).maybe(:int?)
         optional(:per_page).array(:integer)

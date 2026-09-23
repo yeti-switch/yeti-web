@@ -94,6 +94,8 @@ module Yeti
 
     config.active_job.queue_adapter = :delayed_job
 
+    config.silence_healthcheck_path = Set['/live', '/ready']
+
     # Use RSpec for testing
     config.generators do |g|
       g.test_framework :rspec
