@@ -63,6 +63,15 @@ RSpec.describe 'Kubernetes probes', type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.parsed_body).to eq('status' => 'ok', 'databases' => { 'primary' => 'ok', 'cdr' => 'error' })
       end
+
+      it 'answers ok when no database is required' do
+        stub_required
+
+        get '/ready'
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to eq('status' => 'ok', 'databases' => { 'primary' => 'ok', 'cdr' => 'error' })
+      end
     end
 
     context 'when the primary database is down' do

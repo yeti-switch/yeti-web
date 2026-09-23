@@ -160,5 +160,6 @@ tmpdir: 'tmp'
 probes:
   # Databases of database.yml whose outage makes /ready answer 503. Every configured
   # database is checked and named in the response body either way; a name that is not in
-  # database.yml stops the application at boot. Default shown.
+  # database.yml stops the application at boot. Default shown; an empty list makes /ready
+  # always answer 200.
   ready_require_databases: [primary, cdr]
