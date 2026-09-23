@@ -153,3 +153,14 @@ tmpdir: 'tmp'
 #    # Neither setting protects against an unreachable VictoriaLogs: a batch that fails to
 #    # be written is discarded, and reported to stderr as "N log record(s) discarded".
 #    max_queue_size: 10000
+
+# Kubernetes probes: GET /live answers 200 once the process serves requests, GET /ready
+# answers 200 when the databases respond and 503 otherwise. Neither needs authentication
+# and neither is logged.
+probes:
+  # Databases whose outage makes /ready answer 503. Every database is checked and named
+  # in the response body either way; cdr_replica only when database.yml configures one.
+  ready_requires:
+    primary: true
+    cdr: true
+    cdr_replica: false

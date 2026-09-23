@@ -94,6 +94,9 @@ module Yeti
 
     config.active_job.queue_adapter = :delayed_job
 
+    # Kubernetes probes are not logged, see HealthController.
+    config.silence_healthcheck_path = %r{\A/(live|ready)\z}
+
     # Use RSpec for testing
     config.generators do |g|
       g.test_framework :rspec

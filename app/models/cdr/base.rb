@@ -3,14 +3,19 @@
 class Cdr::Base < ApplicationRecord
   self.abstract_class = true
 
+  def self.replica_configured?
+    !configurations.configs_for(env_name: Rails.env, name: :cdr_replica, include_hidden: true).nil?
+  end
+
   def self.database_config
     config = { writing: :cdr, reading: :cdr }
-
-    unless configurations.configs_for(env_name: Rails.env, name: :cdr_replica, include_hidden: true).nil?
-      config[:reading] = :cdr_replica
-    end
-
+    config[:reading] = :cdr_replica if replica_configured?
     config
+  end
+
+  # nil without a configured replica: the reading role is the cdr database itself then.
+  def self.replica_connection_pool
+    connected_to(role: :reading) { connection_pool } if replica_configured?
   end
 
   def self.try_replica_with_fallback(&)

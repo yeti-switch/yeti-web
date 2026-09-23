@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resource(name.to_s.dasherize.to_sym, **options, &block)
   end
 
+  # Kubernetes probes, see HealthController.
+  get '/live', to: 'health#live'
+  get '/ready', to: 'health#ready'
+
   # activeadmin-oidc 2.2 draws its own :sessions-shaped routes (login_path /
   # logout_path, default /admin/login and /admin/logout) whenever AdminUser
   # is in OIDC mode — see ActiveAdmin::Oidc::Engine#mount_oidc_sessions_routes.
