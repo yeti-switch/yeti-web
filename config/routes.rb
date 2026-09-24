@@ -113,6 +113,7 @@ Rails.application.routes.draw do
           end
           jsonapi_resources :contractors
           jsonapi_resources :contacts
+          jsonapi_resources :comments, only: %i[index show create]
           jsonapi_resources :api_accesses
           jsonapi_resources :customer_tokens, only: %i[create]
           jsonapi_resources :customers_auths
