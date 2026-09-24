@@ -50,6 +50,7 @@ ActiveAdmin.register Gateway do
                  :host,
                  :port,
                  :registered_aor_mode_name,
+                 :push_token,
                  [:network_protocol_priority_name, proc { |row| row.network_protocol_priority.try(:name) }],
                  :resolve_ruri,
                  [:diversion_send_mode_name, proc { |row| row.diversion_send_mode.try(:name) }],
@@ -431,6 +432,7 @@ ActiveAdmin.register Gateway do
               f.input :registered_aor_mode_id, as: :select, include_blank: false,
                                                collection: Gateway::REGISTERED_AOR_MODES.invert,
                                                input_html: { class: 'tom-select' }
+              f.input :push_token, hint: 'Registered AoR mode: how to wake the client when it is not registered, "<type>:<value>" (0 = FCM, 3 = webhook)'
               f.input :network_protocol_priority, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :resolve_ruri
               f.input :preserve_anonymous_from_domain
@@ -649,6 +651,7 @@ ActiveAdmin.register Gateway do
             row :port
 
             row :registered_aor_mode, &:registered_aor_mode_name
+            row :push_token
 
             row :network_protocol_priority
             row :resolve_ruri

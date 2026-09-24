@@ -121,6 +121,7 @@
 #  pidflo_mode_id                   :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
+#  push_token                       :string
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null

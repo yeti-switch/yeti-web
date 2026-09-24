@@ -121,6 +121,7 @@
 #  pidflo_mode_id                   :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
+#  push_token                       :string
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
@@ -393,6 +394,7 @@ class Gateway < ApplicationRecord
             :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema_id, presence: true
 
   validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
+  validates :push_token, format: { without: /\s/, message: 'must contain no spaces' }, length: { maximum: 4096 }, allow_nil: true
 
   validates :pai_send_mode_id, inclusion: { in: PAI_SEND_MODES.keys }, allow_nil: true
   validates :pai_domain,
