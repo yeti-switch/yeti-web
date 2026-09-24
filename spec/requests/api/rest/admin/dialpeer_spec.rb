@@ -5,12 +5,13 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
 
   describe 'GET /api/rest/admin/dialpeers' do
     subject do
-      get json_api_request_path, params: nil, headers: json_api_request_headers
+      get json_api_request_path, params: request_params, headers: json_api_request_headers
     end
 
     let!(:dialpeers) do
       FactoryBot.create_list(:dialpeer, 2)
     end
+    let(:request_params) { nil }
 
     include_examples :jsonapi_responds_with_pagination_links
     include_examples :returns_json_api_collection do
@@ -20,6 +21,65 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
     end
 
     it_behaves_like :json_api_admin_check_authorization
+
+    shared_examples :returns_filtered_dialpeers do
+      it 'returns only matching dialpeers' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].map { |r| r[:id] }
+        expect(actual_ids).to match_array dialpeers.map(&:id).map(&:to_s)
+      end
+    end
+
+    context 'with filter by vendor.id' do
+      let!(:vendor) { create(:vendor) }
+      let!(:dialpeers) { create_list(:dialpeer, 2, vendor: vendor) }
+      before { create(:dialpeer) }
+
+      let(:request_params) do
+        { filter: { 'vendor.id': vendor.id } }
+      end
+
+      include_examples :returns_filtered_dialpeers
+    end
+
+    context 'with filter by account.id' do
+      let!(:vendor) { create(:vendor) }
+      let!(:account) { create(:account, contractor: vendor) }
+      let!(:dialpeers) { create_list(:dialpeer, 2, vendor: vendor, account: account) }
+      before { create(:dialpeer, vendor: vendor) }
+
+      let(:request_params) do
+        { filter: { 'account.id': account.id } }
+      end
+
+      include_examples :returns_filtered_dialpeers
+    end
+
+    context 'with filter by gateway.id' do
+      let!(:gateway) { create(:gateway) }
+      let!(:dialpeers) { create_list(:dialpeer, 2, vendor: gateway.contractor, gateway: gateway) }
+      before { create(:dialpeer, vendor: gateway.contractor) }
+
+      let(:request_params) do
+        { filter: { 'gateway.id': gateway.id } }
+      end
+
+      include_examples :returns_filtered_dialpeers
+    end
+
+    context 'with filter by gateway_group.id' do
+      let!(:vendor) { create(:vendor) }
+      let!(:gateway_group) { create(:gateway_group, vendor: vendor) }
+      let!(:dialpeers) { create_list(:dialpeer, 2, vendor: vendor, gateway_group: gateway_group) }
+      before { create(:dialpeer, vendor: vendor) }
+
+      let(:request_params) do
+        { filter: { 'gateway_group.id': gateway_group.id } }
+      end
+
+      include_examples :returns_filtered_dialpeers
+    end
   end
 
   describe 'POST api/rest/admin/dialpeers' do
