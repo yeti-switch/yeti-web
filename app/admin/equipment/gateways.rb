@@ -432,7 +432,7 @@ ActiveAdmin.register Gateway do
               f.input :registered_aor_mode_id, as: :select, include_blank: false,
                                                collection: Gateway::REGISTERED_AOR_MODES.invert,
                                                input_html: { class: 'tom-select' }
-              f.input :push_token, hint: 'Registered AoR mode: how to wake the client when it is not registered, "<type>:<value>" (0 = FCM, 3 = webhook)'
+              f.input :push_token
               f.input :network_protocol_priority, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :resolve_ruri
               f.input :preserve_anonymous_from_domain

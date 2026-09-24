@@ -93,6 +93,7 @@ en:
         transit_headers_from_termination: "Use comma as delimiter"
         contact_user: "Contact header userpart"
         incoming_auth_username: "Will be used for authentication of incoming INVITE and REGISTER requests"
+        push_token: "Registered AOR mode only. How to wake the client when it has no active registration: the call waits for the client to register instead of failing at once. Format <type>:<value>. Type 0 - FCM, value is the device token. Type 3 - Webhook, value is sent as is to the http destination named in the yeti module push section of sems.conf. Leave empty to disable"
         fake_180_timer: "Timeout in sec."
         rtp_timeout: "Timeout in sec., 0 - do not check RTP timeout, 1-600 - valid range"
         relay_options: 'Relay in-dialog OPTIONS received on other leg to this gw'
@@ -241,6 +242,9 @@ en:
               cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
             incoming_auth_password:
               cant_be_cleared: "Can't be cleared when gateway used at Customer auth with require_incoming_auth"
+            push_token:
+              invalid_format: "must be <type>:<value> without spaces, for example 3:my-token"
+              unknown_type: "has an unknown type, allowed types: %{types}"
         customers_auth:
           attributes:
             gateway:
