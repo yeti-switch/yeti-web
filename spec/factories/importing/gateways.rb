@@ -62,6 +62,7 @@
 #  preserve_anonymous_from_domain     :boolean
 #  priority                           :integer(4)
 #  proxy_media                        :boolean
+#  push_token                         :string
 #  registered_aor_mode_name           :string
 #  rel100_mode_name                   :string
 #  relay_hold                         :boolean
