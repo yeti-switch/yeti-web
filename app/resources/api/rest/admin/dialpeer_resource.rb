@@ -22,6 +22,11 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
 
   filters :external_id, :prefix, :routing_group_id
 
+  relationship_filter :vendor
+  relationship_filter :account
+  relationship_filter :gateway
+  relationship_filter :gateway_group
+
   ransack_filter :enabled, type: :boolean
   ransack_filter :next_rate, type: :number
   ransack_filter :connect_fee, type: :number
