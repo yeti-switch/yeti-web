@@ -9,12 +9,19 @@ module CustomerV1Authorizable
     attr_reader :auth_context
   end
 
+  def meta
+    return if @jwt_payload.blank?
+
+    { 'auth' => @jwt_payload }
+  end
+
   private
 
   def authorize!
     source_context = build_source_context
-    auth_context = CustomerV1Auth::Authorizer.authorize! source_context[:token]
-    @auth_context = auth_context
+    result = CustomerV1Auth::Authorizer.authorize! source_context[:token]
+    @auth_context = result.auth_context
+    @jwt_payload = result.payload
     @response_cookie_needed = source_context[:from_cookie]
   end
 
