@@ -51,6 +51,17 @@ if processor_config.blank?
   raise "Invalid configuration file #{config_file} or section #{processor_name} does not exist."
 end
 
+# Printed directly: the stdout log appender may be configured above the info level.
+$stdout.sync = true
+build_info = begin
+  YAML.safe_load(File.read(File.join(ROOT_PATH, 'version.yml')))
+             rescue StandardError
+               {}
+end
+$stdout.puts "cdr_processor #{processor_name} starting: version #{build_info.fetch('version', 'unknown')} " \
+             "commit #{build_info.fetch('commit', 'unknown')}, class #{processor_config['class']}, " \
+             "queue #{processor_config['queue']}, consumer #{processor_config['consumer']}, config #{config_file}"
+
 # Establish ActiveRecord connection to CDR database
 db_env = processor_config['mode'] || ENV.fetch('RAILS_ENV', 'development')
 database_yml = File.join(ROOT_PATH, 'config/database.yml')
@@ -106,7 +117,6 @@ prog_name = "cdr_processor:#{processor_name}"
 Process.setproctitle(prog_name)
 $PROGRAM_NAME = prog_name
 
-$stdout.sync = true
 require 'yeti_log_setup'
 logger = YetiLogSetup.call(
   component: 'cdr_processor',
