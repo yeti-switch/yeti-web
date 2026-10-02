@@ -146,7 +146,7 @@ ruby: $(RBENV_ROOT)/versions/$(rbenv_version)
 .PHONY: bundler
 bundler: ruby
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler --version 4.0.16
+	gem install --no-document --install-dir $(gems) bundler --version 4.0.22
 	$(bundle_bin) config --local clean 'true'
 	$(bundle_bin) config --local jobs 4
 	$(bundle_bin) config --local deployment 'true'
