@@ -172,6 +172,12 @@ RSpec.configure do |config|
     NodeApi.reset_all
   end
 
+  # login_as queues a Warden proc for the next request. An example that never
+  # makes one leaves it queued, and it signs in the next example's request.
+  config.after(:each) do
+    Warden.test_reset!
+  end
+
   config.expect_with :rspec do |c|
     #  disable the should syntax...
     c.syntax = :expect
