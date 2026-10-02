@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# activeadmin-oidc 2.x ships `ActiveAdmin::Oidc::TestHelpers` (stub_oidc_sign_in,
+# activeadmin-oidc (2.x and later) ships `ActiveAdmin::Oidc::TestHelpers` (stub_oidc_sign_in,
 # stub_oidc_failure, reset_oidc_stubs) but, unlike 0.1.0, no longer auto-installs
 # RSpec tag filtering for `oidc_mode: true` — the gem's README now says to wire
 # this up in the host's rails_helper ourselves. This file is that wiring, plus

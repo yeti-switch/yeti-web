@@ -30,6 +30,6 @@ RSpec.describe 'OIDC sessions page', type: :feature, oidc_mode: true do
     button = find_button(ActiveAdmin::Oidc.config.login_button_label)
     form = button.ancestor('form')
     expect(form['method']).to match(/post/i)
-    expect(form['action']).to eq('/admin/auth/oidc')
+    expect(form['action']).to eq('/auth/oidc')
   end
 end
