@@ -15,6 +15,9 @@ development: &default
   client_id: yeti-admin
   # blank ⇒ PKCE public client
   client_secret:
+  # Must match the redirect URI registered at the IdP. OIDC_REDIRECT_URL
+  # is used when this is blank.
+  # redirect_uri: https://yeti.example.com/auth/oidc/callback
   scope: openid profile email
   identity_claim: preferred_username
   # Claim to read roles from. Two shapes are supported out of the box:

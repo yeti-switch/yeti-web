@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   get '/live', to: 'health#live'
   get '/ready', to: 'health#ready'
 
-  # activeadmin-oidc 2.2 draws its own :sessions-shaped routes (login_path /
-  # logout_path, default /admin/login and /admin/logout) whenever AdminUser
+  # activeadmin-oidc draws its own :sessions-shaped routes (login_path /
+  # logout_path, /login and /logout under our root namespace) whenever AdminUser
   # is in OIDC mode — see ActiveAdmin::Oidc::Engine#mount_oidc_sessions_routes.
   # AdminUser keeps :database_authenticatable there so Devise mounts a
   # sessions controller too, which would draw the very same route names
@@ -310,7 +310,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # activeadmin-oidc 2.2 mounts its own /admin/login and /admin/logout (see
+  # activeadmin-oidc mounts its own /login and /logout (see
   # config/initializers/activeadmin_oidc.rb and
   # ActiveAdmin::Oidc::Engine#mount_oidc_sessions_routes) by *appending* to
   # the route set from an after_initialize hook, so they land after every

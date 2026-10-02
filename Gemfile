@@ -14,7 +14,7 @@ gem 'rails', '~> 8.1.0'
 gem 'responders'
 
 # Authentication
-gem 'activeadmin-oidc', '~> 2.2'
+gem 'activeadmin-oidc', '~> 3.0'
 gem 'devise', '>= 4.6.0'
 gem 'doorkeeper', '~> 5.9'
 # OIDC layer on top of Doorkeeper: id_token, /.well-known/openid-configuration,

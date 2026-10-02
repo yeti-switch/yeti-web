@@ -39,7 +39,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
       expect(created.billing_contact.email).to eq('alice@test.com')
       expect(created.oidc_raw_info).to include('preferred_username' => 'alice', 'email' => 'alice@test.com')
       expect(created.oidc_raw_info.keys).not_to include('access_token', 'refresh_token', 'id_token')
-      expect(page).to have_current_path('/admin', ignore_query: true)
+      expect(page).to have_current_path('/', ignore_query: true)
     end
   end
 
@@ -62,6 +62,17 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
     it 'does not create a new AdminUser and refreshes roles' do
       expect { click_sso_button }.not_to change { AdminUser.count }
       expect(existing.reload.roles).to eq(['root'])
+    end
+
+    it 'signs out through /logout back to the SSO login page at /login' do
+      click_sso_button
+      expect(page).to have_current_path('/', ignore_query: true)
+
+      visit '/logout'
+      expect(page).to have_current_path('/login', ignore_query: true)
+
+      visit '/'
+      expect(page).to have_current_path('/login', ignore_query: true)
     end
   end
 
