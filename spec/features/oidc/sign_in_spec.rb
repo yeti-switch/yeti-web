@@ -64,15 +64,15 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
       expect(existing.reload.roles).to eq(['root'])
     end
 
-    it 'signs out through the logout path back to the SSO login page' do
+    it 'signs out through /logout back to the SSO login page at /login' do
       click_sso_button
       expect(page).to have_current_path('/', ignore_query: true)
 
-      visit destroy_admin_user_session_path
-      expect(page).to have_current_path(new_admin_user_session_path, ignore_query: true)
+      visit '/logout'
+      expect(page).to have_current_path('/login', ignore_query: true)
 
       visit '/'
-      expect(page).to have_current_path(new_admin_user_session_path, ignore_query: true)
+      expect(page).to have_current_path('/login', ignore_query: true)
     end
   end
 
