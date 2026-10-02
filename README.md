@@ -11,11 +11,11 @@
 
 ## Ruby
 
-You have to use Ruby version 4.0.6 with installed bundler.
+You have to use Ruby version 4.0.7 with installed bundler.
 
 ## Postgresql
 
-It is strongly recommended to use PostgreSQL version 16.
+It is strongly recommended to use PostgreSQL version 18.
 The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
 https://www.postgresql.org/download/linux/debian/
 
@@ -27,10 +27,10 @@ curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| sudo apt-key add -
 sudo add-apt-repository "deb http://pkg.yeti-switch.org/debian/buster unstable main"
 sudo add-apt-repository "deb http://deb.debian.org/debian buster main buster non-free"
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"
-sudo apt-get install postgresql-16 postgresql-contrib-13 postgresql-16-prefix postgresql-16-pgq3 postgresql-16-pgq-ext postgresql-16-yeti postgresql-16-pllua
+sudo apt-get install postgresql-18 postgresql-contrib-18 postgresql-18-prefix postgresql-18-pgq3 postgresql-18-pgq-ext postgresql-18-yeti postgresql-18-pllua
 sudo apt-get install -t buster-pgdg libpq-dev
 ```
-In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-16-yeti` https://github.com/yeti-switch/yeti-pg-ext
+In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-18-yeti` https://github.com/yeti-switch/yeti-pg-ext
 
 ## Preparing yeti-web application
 
@@ -143,32 +143,3 @@ network_prefixes = System::NetworkPrefix.order(id: :asc).pluck(*np_keys).map { |
 File.write('db/network_prefixes.yml', network_prefixes.to_yaml)
 ```
 
-## Use Docker Postgres for development
-
-For development purpouse it is convinient to use PostgreSQL from Docker image. Here is the instruction how to set it up-and-running:
-
-* Install Docker(Ubuntu example)
-
-  [Install Docker on Ubuntu 18.10](https://www.thecodecampus.de/blog/install-docker-on-ubuntu-18-10/)
-
-* Run following commands in terminal from `yeti-web` projects directory
-
-  ```
-  sudo docker build -t yeti_postgres -f ci/pg13.Dockerfile .
-  ```
-
-* Start the Postgres Server using docker image, with remapped port to 3010 and volume "yetiPgData" to persist data after docker container stops:
-
-  ```
-  sudo docker run -p 3010:5432 --volume yetiPgData:/var/lib/postgresql yeti_postgres
-  ```
-
-* Update `config/database.yml` with
-
-  ```yml
-  username: postgres
-  password:
-  port: 3010
-  ```
-
-* Initialize database with instructions described in [Contributing, Development setup](#contributing-development-setup) section(db:create, db:schema:load, etc.)
