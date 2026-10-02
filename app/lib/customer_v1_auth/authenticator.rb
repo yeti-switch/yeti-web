@@ -6,7 +6,7 @@ module CustomerV1Auth
     AUDIENCE = 'customer-v1'
     COOKIE_NAME = '_yeti_customer_v1_session'
     DYNAMIC_SUB = 'D'
-    Result = Struct.new(:token, :expires_at)
+    Result = Struct.new(:token, :expires_at, :auth_context, :payload)
     AuthenticationError = Class.new(StandardError)
 
     # @param login [String]
@@ -23,20 +23,16 @@ module CustomerV1Auth
     # @return [CustomerV1Auth::Authenticator::Result]
     def self.build_auth_data(auth_context)
       expires_at = EXPIRATION_INTERVAL&.from_now
-      token = build_token(auth_context, expires_at:)
-      Result.new(token, expires_at)
+      payload = build_payload(auth_context, expires_at:)
+      token = TokenBuilder.encode(payload)
+      Result.new(token, expires_at, auth_context, payload)
     end
 
     # @param auth_context [CustomerV1Auth::AuthContext]
     # @param expires_at [Time, nil]
     # @return [String] JWT token
     def self.build_token(auth_context, expires_at:)
-      payload = if auth_context.api_access_id.nil?
-                  { aud: AUDIENCE, sub: DYNAMIC_SUB, cfg: auth_context.to_config }
-                else
-                  { aud: AUDIENCE, sub: auth_context.api_access_id }
-                end
-      payload[:exp] = expires_at.to_i unless expires_at.nil?
+      payload = build_payload(auth_context, expires_at:)
       TokenBuilder.encode(payload)
     end
 
@@ -59,6 +55,20 @@ module CustomerV1Auth
 
       auth_context = AuthContext.from_api_access(api_access)
       self.class.build_auth_data(auth_context)
+    end
+
+    class << self
+      private
+
+      def build_payload(auth_context, expires_at:)
+        payload = if auth_context.api_access_id.nil?
+                    { aud: AUDIENCE, sub: DYNAMIC_SUB, cfg: auth_context.to_config }
+                  else
+                    { aud: AUDIENCE, sub: auth_context.api_access_id }
+                  end
+        payload[:exp] = expires_at.to_i unless expires_at.nil?
+        payload
+      end
     end
   end
 end
