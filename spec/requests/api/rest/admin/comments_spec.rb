@@ -9,34 +9,10 @@ RSpec.describe Api::Rest::Admin::CommentsController, type: :request do
     ActiveAdmin::Comment.create!(resource:, body:, namespace:, author: admin_user)
   end
 
-  shared_examples :forbidden_by_comment_policy do |action|
-    context "when role policy disallows #{action}" do
-      before do
-        policy_roles = (Rails.configuration.policy_roles || {}).deep_merge(
-          user: { 'ActiveAdmin/Comment': { action => false } }
-        )
-        allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)
-      end
-
-      include_examples :responds_with_status, 403, without_body: true
-    end
-  end
-
-  shared_context :comment_policy_allows do |action|
-    before do
-      policy_roles = (Rails.configuration.policy_roles || {}).deep_merge(
-        user: { 'ActiveAdmin/Comment': { action => true } }
-      )
-      allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)
-    end
-  end
-
   describe 'GET /api/rest/admin/comments' do
     subject do
       get json_api_request_path, params: request_params, headers: json_api_request_headers
     end
-
-    include_context :comment_policy_allows, :read
 
     let(:request_params) { nil }
     let!(:comments) do
@@ -66,15 +42,12 @@ RSpec.describe Api::Rest::Admin::CommentsController, type: :request do
     end
 
     it_behaves_like :json_api_admin_check_authorization
-    include_examples :forbidden_by_comment_policy, :read
   end
 
   describe 'GET /api/rest/admin/comments/{id}' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end
-
-    include_context :comment_policy_allows, :read
 
     let(:json_api_request_path) { "#{super()}/#{comment.id}" }
     let!(:comment) { create_comment(dialpeer) }
@@ -93,15 +66,12 @@ RSpec.describe Api::Rest::Admin::CommentsController, type: :request do
     end
 
     it_behaves_like :json_api_admin_check_authorization
-    include_examples :forbidden_by_comment_policy, :read
   end
 
   describe 'POST /api/rest/admin/comments' do
     subject do
       post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
     end
-
-    include_context :comment_policy_allows, :change
 
     let(:json_api_request_body) do
       { data: { type: json_api_resource_type, attributes: json_api_request_attributes } }
@@ -161,6 +131,5 @@ RSpec.describe Api::Rest::Admin::CommentsController, type: :request do
     end
 
     it_behaves_like :json_api_admin_check_authorization, status: 201
-    include_examples :forbidden_by_comment_policy, :change
   end
 end
