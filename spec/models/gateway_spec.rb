@@ -196,6 +196,67 @@ RSpec.describe Gateway, type: :model do
     is_expected.to validate_numericality_of(:rtp_timeout).is_greater_than_or_equal_to(Gateway::RTP_TIMEOUT_MIN)
   end
 
+  describe 'push_token validation' do
+    subject { FactoryBot.build(:gateway, push_token: push_token) }
+
+    context 'with an FCM token' do
+      let(:push_token) { "#{Gateway::PUSH_TOKEN_TYPE_FCM}:device-token" }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'with a webhook token' do
+      let(:push_token) { "#{Gateway::PUSH_TOKEN_TYPE_WEBHOOK}:sip-login" }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'when empty' do
+      let(:push_token) { '' }
+
+      it 'is valid and stored as nil' do
+        expect(subject).to be_valid
+        expect(subject.push_token).to be_nil
+      end
+    end
+
+    context 'without a type' do
+      let(:push_token) { 'device-token' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+        expect(subject.errors[:push_token]).to contain_exactly('must be <type>:<value> without spaces, for example 3:my-token')
+      end
+    end
+
+    context 'with an empty value' do
+      let(:push_token) { '3:' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+        expect(subject.errors[:push_token]).to contain_exactly('must be <type>:<value> without spaces, for example 3:my-token')
+      end
+    end
+
+    context 'with a space in the value' do
+      let(:push_token) { '3:device token' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+        expect(subject.errors[:push_token]).to contain_exactly('must be <type>:<value> without spaces, for example 3:my-token')
+      end
+    end
+
+    context 'with a type the switch does not implement' do
+      let(:push_token) { '1:apns-token' }
+
+      it 'is invalid' do
+        expect(subject).to be_invalid
+        expect(subject.errors[:push_token]).to contain_exactly('has an unknown type, allowed types: 0 (FCM), 3 (Webhook)')
+      end
+    end
+  end
+
   shared_examples :validation_error_on_is_shared_change do
     let(:expected_error_message) {}
 

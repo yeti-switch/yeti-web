@@ -483,7 +483,8 @@ CREATE TYPE switch22.callprofile_ty AS (
 	vendor_currency_rate double precision,
 	destination_attempt_fee numeric,
 	dialpeer_attempt_fee numeric,
-	pidflo_mode_id smallint
+	pidflo_mode_id smallint,
+	push_token character varying
 );
 
 
@@ -3067,7 +3068,8 @@ CREATE TABLE class4.gateways (
     supported_tags character varying[],
     term_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     orig_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
-    pidflo_mode_id smallint DEFAULT 0 NOT NULL
+    pidflo_mode_id smallint DEFAULT 0 NOT NULL,
+    push_token character varying
 );
 
 
@@ -4106,6 +4108,7 @@ BEGIN
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    i_profile.push_token = i_vendor_gw.push_token;
     v_ruri_host = 'unknown.invalid';
   else
     v_ruri_host = yeti_ext.process_templates(i_vendor_gw.host, i_call_ctx.vars);
@@ -4933,6 +4936,7 @@ BEGIN
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    i_profile.push_token = i_vendor_gw.push_token;
     v_ruri_host = 'unknown.invalid';
   else
     v_ruri_host = yeti_ext.process_templates(i_vendor_gw.host, i_call_ctx.vars);
@@ -5683,6 +5687,7 @@ BEGIN
   i_profile.registered_aor_mode_id = i_vendor_gw.registered_aor_mode_id;
   if i_vendor_gw.registered_aor_mode_id > 0  then
     i_profile.registered_aor_id=i_vendor_gw.id;
+    i_profile.push_token = i_vendor_gw.push_token;
     v_ruri_host = 'unknown.invalid';
   else
     v_ruri_host = yeti_ext.process_templates(i_vendor_gw.host, i_call_ctx.vars);
@@ -14102,7 +14107,8 @@ CREATE TABLE data_import.import_gateways (
     term_route_set character varying[],
     orig_route_set character varying[],
     pidflo_mode_id smallint,
-    pidflo_mode_name character varying
+    pidflo_mode_name character varying,
+    push_token character varying
 );
 
 
@@ -20843,6 +20849,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260924000000'),
 ('20260907120001'),
 ('20260907120000'),
 ('20260905120000'),
