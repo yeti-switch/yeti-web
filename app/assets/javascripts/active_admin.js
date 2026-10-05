@@ -10,7 +10,7 @@
 //= require panel_toggle
 //= require action_buttons
 //= require server_clock
-//= require theme_toggle
+//= require wigu/theme_toggle
 //= require scrollbar_width
 //= require tooltip
 //= require dependent_fields
