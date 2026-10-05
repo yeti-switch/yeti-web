@@ -87,8 +87,37 @@ form.filter_form .filter_form_field.select_and_search input[type=text].search_fi
   background-color: #fdfefe;
 }
 
+$sidebar-gap: 14px;
+
 .sidebar_section {
-  margin-bottom: 14px;
+  margin-bottom: $sidebar-gap;
+}
+
+// active_admin_sidebar hard-codes a 28px gutter (298px); match the gap between sidebar sections.
+body.active_admin #active_admin_content.left_sidebar #main_content_wrapper {
+  margin-left: $sidebar-width + $sidebar-gap;
+}
+
+// AA's columns component sets inline percentage widths with a 2% gap; lay them out with the same gap instead.
+#active_admin_content .columns {
+  display: flex;
+  gap: $sidebar-gap;
+
+  > .column {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto !important;
+    margin-right: 0 !important;
+  }
+
+  > :not(.column) {
+    display: none;
+  }
+}
+
+#main_content .panel,
+#main_content .tabs {
+  margin-bottom: $sidebar-gap;
 }
 
 // for static messages
@@ -303,46 +332,18 @@ body.active_admin.index #active_admin_content {
 // inline-flex + align-items: center keeps the icon vertically centered with the
 // adjacent text items (admin name, clock); font-size:0 alone collapses the line
 // box so the glyph would otherwise sit a few px low.
-#header #logout > a {
+#wrapper #header #logout > a {
   font-size: 0;
   display: inline-flex;
   align-items: center;
   vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
   height: 12px; // match the text items' content height
 }
-#header #logout > a::before {
+#wrapper #header #logout > a::before {
   font-family: 'FontAwesome';
   content: '\f08b';
   font-size: 18px;
   line-height: 1;
-}
-
-// Dark-mode toggle button (theme_toggle.js injects #theme_toggle into the
-// utility nav). Same icon treatment as the logout icon. The glyph reflects the
-// current mode (cycles auto → light → dark): adjust = auto (follows OS),
-// sun = forced light, moon = forced dark.
-#header #theme_toggle > a {
-  font-size: 0;
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle; // center the (overflowing) icon in the bar, like the clock
-  height: 12px;
-  cursor: pointer;
-}
-#header #theme_toggle > a::before {
-  font-family: 'FontAwesome';
-  font-size: 18px;
-  line-height: 1;
-  display: inline-block;
-  width: 1.28571em; // fixed-width (fa-fw) so the differently-sized glyphs below
-  text-align: center; // don't change the toggle's width and shift the clock
-  content: '\f042'; // fa-adjust — auto (default before JS sets data-mode)
-}
-#header #theme_toggle[data-mode="light"] > a::before {
-  content: '\f185'; // fa-sun-o — forced light
-}
-#header #theme_toggle[data-mode="dark"] > a::before {
-  content: '\f186'; // fa-moon-o — forced dark
 }
 
 // Server clock (server_clock.js) shown as two compact lines: time + timezone,
@@ -353,7 +354,7 @@ body.active_admin.index #active_admin_content {
 // the nav pills' band (~24px, same as the menu items and admin/logout) rather
 // than the taller logo, so its top/bottom line up with the rest of the header
 // instead of hanging lower. Header height is unchanged.
-#header #servertime > a {
+#wrapper #header #servertime > a {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -372,11 +373,11 @@ body.active_admin.index #active_admin_content {
   font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
   font-variant-numeric: tabular-nums;
 }
-#header #servertime .clock-time {
+#wrapper #header #servertime .clock-time {
   font-size: 12px;
   line-height: 1.1;
 }
-#header #servertime .clock-date {
+#wrapper #header #servertime .clock-date {
   font-size: 9px;
   line-height: 1.1;
 }
@@ -503,3 +504,59 @@ form.filter_form .filter_form_field:not(.select_and_search):not(.filter_date_ran
 // app/assets/stylesheets/yeti/tom-select-customizations.scss, because the
 // predicate <select> is rendered as a tom-select widget that must be sized
 // together with the value input on one full-width row.
+
+// Pre-3.0 active_admin_theme look, pinned for the gem upgrade. Each group is
+// independent and can be removed to adopt the upstream behaviour.
+
+// Buttons lighten on hover (3.0 darkens).
+:root { --aa-button-hover: #{lighten($skinButtonColor, 5%)}; }
+@include aa-dark { --aa-button-hover: #{lighten($skinButtonColorDark, 5%)}; }
+
+// Index-table header on surface-2 in both modes (3.0: $skinBorderWindowColor / elevated).
+:root { --aa-table-header: var(--aa-surface-2); }
+@include aa-dark { --aa-table-header: var(--aa-surface-2); }
+
+// Checked rows keep the zebra/hover fills (3.0 highlights them).
+#wrapper #active_admin_content table.index_table tbody tr.selected > td { background: var(--aa-surface); }
+#wrapper #active_admin_content table.index_table tbody tr.selected:nth-child(even) > td,
+#wrapper #active_admin_content table.index_table tbody tr.selected.even > td { background: var(--aa-surface-2); }
+#wrapper #active_admin_content table.index_table tbody tr.selected:hover > td { background: var(--aa-surface-hover); }
+
+// Link-coloured pagination chips, Clear Filters and Cancel (3.0: text colour).
+#wrapper #active_admin_content .pagination span > a { color: var(--aa-link); }
+#wrapper #active_admin_content .pagination span > a:hover { color: var(--aa-link) !important; }
+#wrapper #active_admin_content fieldset.buttons li.cancel a,
+#wrapper #active_admin_content fieldset.actions li.cancel a,
+#wrapper #active_admin_content form.filter_form a.clear_filters_btn { color: var(--aa-link); }
+
+// "Displaying …" line keeps ActiveAdmin's colours outside comments (3.0 themes it everywhere).
+.pagination_information { color: #b3bcc1; }
+.pagination_information b { color: #5c6469; }
+.comments .pagination_information,
+.comments .pagination_information b { color: var(--aa-text); }
+
+// Header dropdowns: 13px items, size to content without wrapping, rounded
+// panel with a 6px top inset, 7px bridge, PNG item marker.
+#wrapper #header ul.tabs > li { font-size: $skinMenuFontSize; }
+#wrapper #header ul.tabs li.has_nested a { padding-right: 20px; }
+#wrapper #header ul.tabs li.has_nested ul {
+  border-radius: $skinBorderRadius;
+  padding-top: 6px;
+  width: auto;
+  max-width: none;
+  overflow-wrap: normal;
+  li > a { white-space: nowrap; }
+  li.current > a::before, li:hover > a::before, li > a:focus::before {
+    width: 7px;
+    height: 4px;
+    top: 12px;
+    margin-top: 0;
+    border: 0;
+    background: transparent url($menu-arrow-dark-icon-url) no-repeat 0 0;
+    transform: rotate(-90deg);
+  }
+}
+#wrapper #header ul.tabs > li.has_nested:hover > a {
+  border-radius: $skinBorderRadius;
+  border-bottom: 7px solid $skinMenuPanelColor;
+}

@@ -18,7 +18,7 @@ $(function () {
   // xdsoft fires open.xdsoft on the input when the picker is shown (bubbles to document).
   $(document).on('open.xdsoft', sync);
 
-  // Follow runtime theme switches (theme_toggle.js sets html[data-theme]).
+  // Follow runtime theme switches (wigu/theme_toggle.js sets html[data-theme]).
   if (window.MutationObserver) {
     new MutationObserver(sync).observe(document.documentElement, {
       attributes: true,

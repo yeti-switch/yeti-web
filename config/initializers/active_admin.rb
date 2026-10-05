@@ -27,7 +27,7 @@ ActiveAdmin.setup do |config|
     # Right-aligned utility navigation, ordered by priority:
     #   username, server clock, theme switcher, logout.
     # The clock + switcher render server-side here (then populated/wired by
-    # server_clock.js / theme_toggle.js) so there is no client-side reordering.
+    # server_clock.js / wigu/theme_toggle.js from active_admin_theme) so there is no client-side reordering.
     admin.build_menu :utility_navigation do |menu|
       # http://127.0.0.1:3000/admin/admin_users/1
       menu.add label: proc { display_name current_active_admin_user },
@@ -45,7 +45,7 @@ ActiveAdmin.setup do |config|
                priority: 9_999_997,
                label: proc { Time.current.strftime('%Y %m %d %H %M %S %Z') }
 
-      # Dark-mode switcher (icon via CSS, wired by theme_toggle.js). A non-"#"
+      # Dark-mode switcher (icon + script from active_admin_theme). A non-"#"
       # anchor so AA does not treat it as a blank/hidden menu item.
       menu.add id: 'theme_toggle',
                label: '',

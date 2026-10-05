@@ -35,7 +35,7 @@ gem 'active_admin_date_range_preset', github: 'activeadmin-plugins/active_admin_
 gem 'active_admin_datetimepicker'
 gem 'active_admin_import'
 gem 'active_admin_scoped_collection_actions', github: 'yeti-switch/active_admin_scoped_collection_actions', branch: 'confirmation_with_summary'
-gem 'active_admin_theme', github: 'yeti-switch/active_admin_theme', branch: 'dark_mode'
+gem 'active_admin_theme', github: 'activeadmin-plugins/active_admin_theme', branch: 'master'
 gem 'draper'
 gem 'ransack'
 
