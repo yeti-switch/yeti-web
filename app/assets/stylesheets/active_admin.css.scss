@@ -87,8 +87,37 @@ form.filter_form .filter_form_field.select_and_search input[type=text].search_fi
   background-color: #fdfefe;
 }
 
+$sidebar-gap: 14px;
+
 .sidebar_section {
-  margin-bottom: 14px;
+  margin-bottom: $sidebar-gap;
+}
+
+// active_admin_sidebar hard-codes a 28px gutter (298px); match the gap between sidebar sections.
+body.active_admin #active_admin_content.left_sidebar #main_content_wrapper {
+  margin-left: $sidebar-width + $sidebar-gap;
+}
+
+// AA's columns component sets inline percentage widths with a 2% gap; lay them out with the same gap instead.
+#active_admin_content .columns {
+  display: flex;
+  gap: $sidebar-gap;
+
+  > .column {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto !important;
+    margin-right: 0 !important;
+  }
+
+  > :not(.column) {
+    display: none;
+  }
+}
+
+#main_content .panel,
+#main_content .tabs {
+  margin-bottom: $sidebar-gap;
 }
 
 // for static messages
