@@ -256,6 +256,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       pidflo_mode_id
       preserve_anonymous_from_domain
       registered_aor_mode_id
+      push_token
       origination_capacity
       termination_capacity
       incoming_auth_username

@@ -562,6 +562,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtcp-mux-mode-id': 1,
         'rtcp-feedback-mode-id': 0,
         'privacy-mode-id': 3,
+        'push-token': '1:device-token',
         'allowed-methods': %w[INVITE ACK],
         'supported-tags': %w[100rel timer]
       }
@@ -639,7 +640,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   rtcp_mux_mode_id: json_api_request_attributes[:'rtcp-mux-mode-id'],
                                   rtcp_feedback_mode_id: json_api_request_attributes[:'rtcp-feedback-mode-id'],
                                   allowed_methods: json_api_request_attributes[:'allowed-methods'],
-                                  supported_tags: json_api_request_attributes[:'supported-tags']
+                                  supported_tags: json_api_request_attributes[:'supported-tags'],
+                                  push_token: json_api_request_attributes[:'push-token']
                                 )
     end
 
@@ -689,7 +691,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         host: 'other.test.example.com',
         'incoming-auth-username': 'other_incoming_auth_username',
         'incoming-auth-password': 'other_incoming_auth_password',
-        'is-shared': true
+        'is-shared': true,
+        'push-token': '3:sip-login'
       }
     end
 
