@@ -222,9 +222,13 @@ class Gateway < ApplicationRecord
   }.freeze
 
   PUSH_TOKEN_TYPE_FCM = 0
+  PUSH_TOKEN_TYPE_APNS = 1
+  PUSH_TOKEN_TYPE_APNS_SANDBOX = 2
   PUSH_TOKEN_TYPE_WEBHOOK = 3
   PUSH_TOKEN_TYPES = {
     PUSH_TOKEN_TYPE_FCM => 'FCM',
+    PUSH_TOKEN_TYPE_APNS => 'APNS',
+    PUSH_TOKEN_TYPE_APNS_SANDBOX => 'APNS Sandbox',
     PUSH_TOKEN_TYPE_WEBHOOK => 'Webhook'
   }.freeze
   PUSH_TOKEN_FORMAT = /\A(\d+):(\S+)\z/

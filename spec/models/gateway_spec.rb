@@ -206,6 +206,18 @@ RSpec.describe Gateway, type: :model do
       it { is_expected.to be_valid }
     end
 
+    context 'with an APNS token' do
+      let(:push_token) { "#{Gateway::PUSH_TOKEN_TYPE_APNS}:device-token" }
+
+      it { is_expected.to be_valid }
+    end
+
+    context 'with an APNS Sandbox token' do
+      let(:push_token) { "#{Gateway::PUSH_TOKEN_TYPE_APNS_SANDBOX}:device-token" }
+
+      it { is_expected.to be_valid }
+    end
+
     context 'with a webhook token' do
       let(:push_token) { "#{Gateway::PUSH_TOKEN_TYPE_WEBHOOK}:sip-login" }
 
@@ -248,12 +260,12 @@ RSpec.describe Gateway, type: :model do
       end
     end
 
-    context 'with a type the switch does not implement' do
-      let(:push_token) { '1:apns-token' }
+    context 'with an unknown type' do
+      let(:push_token) { '4:token' }
 
       it 'is invalid' do
         expect(subject).to be_invalid
-        expect(subject.errors[:push_token]).to contain_exactly('has an unknown type, allowed types: 0 (FCM), 3 (Webhook)')
+        expect(subject.errors[:push_token]).to contain_exactly('has an unknown type, allowed types: 0 (FCM), 1 (APNS), 2 (APNS Sandbox), 3 (Webhook)')
       end
     end
   end
