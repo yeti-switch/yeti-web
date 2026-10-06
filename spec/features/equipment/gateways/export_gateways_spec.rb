@@ -20,7 +20,8 @@ RSpec.describe 'Export Gateways', type: :feature do
            termination_src_numberlist: create(:numberlist),
            lua_script: create(:lua_script),
            stir_shaken_crt: create(:stir_shaken_signing_certificate),
-           scheduler: create(:scheduler)
+           scheduler: create(:scheduler),
+           push_token: '3:sip-login'
   end
 
   before do
@@ -71,6 +72,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Host',                               item.host],
         ['Port',                               item.port.to_s],
         ['Registered aor mode name',           item.registered_aor_mode_name.to_s],
+        ['Push token',                         item.push_token],
         ['Resolve ruri',                       item.resolve_ruri.to_s],
         ['Diversion send mode name',           item.diversion_send_mode.name],
         ['Diversion domain',                   item.diversion_domain.to_s],

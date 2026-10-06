@@ -54,6 +54,7 @@
 #  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
 #  priority                         :integer(4)       default(100), not null
 #  proxy_media                      :boolean          default(TRUE), not null
+#  push_token                       :string
 #  relay_hold                       :boolean          default(FALSE), not null
 #  relay_options                    :boolean          default(FALSE), not null
 #  relay_prack                      :boolean          default(FALSE), not null

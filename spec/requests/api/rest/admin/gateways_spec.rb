@@ -507,6 +507,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtcp-mux-mode-id': gateway.rtcp_mux_mode_id,
         'rtcp-feedback-mode-id': gateway.rtcp_feedback_mode_id,
         'pidflo-mode-id': gateway.pidflo_mode_id,
+        'push-token': gateway.push_token,
         'allowed-methods': gateway.allowed_methods,
         'supported-tags': gateway.supported_tags
       }

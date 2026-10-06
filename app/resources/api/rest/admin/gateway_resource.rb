@@ -19,7 +19,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :dns_srv_failover_timer, :proxy_media, :single_codec_in_200ok,
              :force_symmetric_rtp, :symmetric_rtp_nonstop,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
-             :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id,
+             :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id, :push_token,
              :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
              :origination_capacity, :termination_capacity,
              :force_cancel_routeset, :sip_schema_id, :ice_mode_id, :rtcp_mux_mode_id, :rtcp_feedback_mode_id,

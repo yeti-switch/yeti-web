@@ -54,6 +54,7 @@
 #  preserve_anonymous_from_domain   :boolean          default(FALSE), not null
 #  priority                         :integer(4)       default(100), not null
 #  proxy_media                      :boolean          default(TRUE), not null
+#  push_token                       :string
 #  relay_hold                       :boolean          default(FALSE), not null
 #  relay_options                    :boolean          default(FALSE), not null
 #  relay_prack                      :boolean          default(FALSE), not null
@@ -219,6 +220,14 @@ class Gateway < ApplicationRecord
     REGISTERED_AOR_MODE_AS_IS => 'Use AOR as is',
     REGISTERED_AOR_MODE_REPLACE_USERPART => 'Use AOR, replace userpart with dst number'
   }.freeze
+
+  PUSH_TOKEN_TYPE_FCM = 0
+  PUSH_TOKEN_TYPE_WEBHOOK = 3
+  PUSH_TOKEN_TYPES = {
+    PUSH_TOKEN_TYPE_FCM => 'FCM',
+    PUSH_TOKEN_TYPE_WEBHOOK => 'Webhook'
+  }.freeze
+  PUSH_TOKEN_FORMAT = /\A(\d+):(\S+)\z/
 
   STIR_SHAKEN_MODE_DISABLE = 0
   STIR_SHAKEN_MODE_RELAY_INSERT = 1
@@ -393,6 +402,8 @@ class Gateway < ApplicationRecord
             :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema_id, presence: true
 
   validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
+  validates :push_token, length: { maximum: 4096 }, allow_nil: true
+  validate :validate_push_token
 
   validates :pai_send_mode_id, inclusion: { in: PAI_SEND_MODES.keys }, allow_nil: true
   validates :pai_domain,
@@ -468,6 +479,7 @@ class Gateway < ApplicationRecord
     self.term_next_hop = nil if term_next_hop.blank?
     self.auth_from_user = nil if auth_from_user.blank?
     self.auth_from_domain = nil if auth_from_domain.blank?
+    self.push_token = nil if push_token.blank?
   end
 
   before_validation :ensure_rtp_acl_format
@@ -649,6 +661,18 @@ class Gateway < ApplicationRecord
   self.state_names = %w[auth_credentials gateways_cache aleg_gateways_cache bleg_gateways_cache]
 
   private
+
+  def validate_push_token
+    return if push_token.nil?
+
+    match = PUSH_TOKEN_FORMAT.match(push_token)
+    if match.nil?
+      errors.add(:push_token, I18n.t('activerecord.errors.models.gateway.attributes.push_token.invalid_format'))
+    elsif !PUSH_TOKEN_TYPES.key?(match[1].to_i)
+      types = PUSH_TOKEN_TYPES.map { |id, name| "#{id} (#{name})" }.join(', ')
+      errors.add(:push_token, I18n.t('activerecord.errors.models.gateway.attributes.push_token.unknown_type', types: types))
+    end
+  end
 
   def validate_rtp_acl
     return unless rtp_acl.is_a?(Array)

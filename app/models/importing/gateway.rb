@@ -62,6 +62,7 @@
 #  preserve_anonymous_from_domain     :boolean
 #  priority                           :integer(4)
 #  proxy_media                        :boolean
+#  push_token                         :string
 #  registered_aor_mode_name           :string
 #  rel100_mode_name                   :string
 #  relay_hold                         :boolean
@@ -228,6 +229,7 @@ class Importing::Gateway < Importing::Base
     termination_src_numberlist_id
     lua_script_id
     registered_aor_mode_id
+    push_token
     force_cancel_routeset
     scheduler_id
     contact_user
