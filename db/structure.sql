@@ -1614,7 +1614,7 @@ $$;
 -- Name: load_bleg_gateway_attributes_cache(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_bleg_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint, transfer_append_headers_req character varying[], transfer_tel_uri_host character varying, ice_mode_id smallint, rtcp_mux_mode_id smallint, rtcp_feedback_mode_id smallint, allowed_methods character varying[], supported_tags character varying[])
+CREATE FUNCTION switch22.load_bleg_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint, transfer_append_headers_req character varying[], transfer_tel_uri_host character varying, ice_mode_id smallint, rtcp_mux_mode_id smallint, rtcp_feedback_mode_id smallint, allowed_methods character varying[], supported_tags character varying[], push_token character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -1632,7 +1632,8 @@ BEGIN
       gw.rtcp_mux_mode_id,
       gw.rtcp_feedback_mode_id,
       gw.allowed_methods,
-      gw.supported_tags
+      gw.supported_tags,
+      gw.push_token
     FROM class4.gateways gw
     LEFT JOIN class4.gateway_throttling_profiles gtp ON gtp.id = gw.throttling_profile_id
     ORDER BY gw.id;
@@ -3067,7 +3068,8 @@ CREATE TABLE class4.gateways (
     supported_tags character varying[],
     term_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     orig_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
-    pidflo_mode_id smallint DEFAULT 0 NOT NULL
+    pidflo_mode_id smallint DEFAULT 0 NOT NULL,
+    push_token character varying
 );
 
 
@@ -14102,7 +14104,8 @@ CREATE TABLE data_import.import_gateways (
     term_route_set character varying[],
     orig_route_set character varying[],
     pidflo_mode_id smallint,
-    pidflo_mode_name character varying
+    pidflo_mode_name character varying,
+    push_token character varying
 );
 
 
@@ -20843,6 +20846,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20261006120000'),
 ('20260907120001'),
 ('20260907120000'),
 ('20260905120000'),

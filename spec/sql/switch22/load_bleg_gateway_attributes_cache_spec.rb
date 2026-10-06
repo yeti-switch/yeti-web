@@ -23,7 +23,8 @@ RSpec.describe 'switch22.load_bleg_gateway_attributes_cache' do
              rtcp_mux_mode_id: 0,
              rtcp_feedback_mode_id: 2,
              allowed_methods: %w[INVITE ACK],
-             supported_tags: %w[100rel timer])
+             supported_tags: %w[100rel timer],
+             push_token: '3:sip-login')
     ]
   end
 
@@ -43,7 +44,8 @@ RSpec.describe 'switch22.load_bleg_gateway_attributes_cache' do
                              rtcp_mux_mode_id: gw.rtcp_mux_mode_id,
                              rtcp_feedback_mode_id: gw.rtcp_feedback_mode_id,
                              allowed_methods: PG::TextEncoder::Array.new.encode(gw.allowed_methods),
-                             supported_tags: PG::TextEncoder::Array.new.encode(gw.supported_tags)
+                             supported_tags: PG::TextEncoder::Array.new.encode(gw.supported_tags),
+                             push_token: gw.push_token
                            }
                          end
                        )
