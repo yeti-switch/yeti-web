@@ -14,6 +14,6 @@ class Api::Rest::Customer::V1::NetworkPrefixResource < Api::Rest::Customer::V1::
   end
 
   ransack_filter :prefix, type: :string
-  ransack_filter :number_min_length, type: :string
-  ransack_filter :number_max_length, type: :string
+  ransack_filter :number_min_length, type: :number
+  ransack_filter :number_max_length, type: :number
 end

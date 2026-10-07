@@ -23,6 +23,46 @@ RSpec.describe Api::Rest::Customer::V1::NetworkPrefixesController, type: :reques
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) { network_prefixes.map(&:uuid) }
     end
+
+    context 'with filter number_min_length_gteq' do
+      let(:json_api_request_query) { { filter: { number_min_length_gteq: 10 } } }
+      let!(:network_prefixes) do
+        System::NetworkPrefix.delete_all
+        [
+          FactoryBot.create(:network_prefix, number_min_length: 9).reload,
+          FactoryBot.create(:network_prefix, number_min_length: 10).reload,
+          FactoryBot.create(:network_prefix, number_min_length: 11).reload
+        ]
+      end
+
+      include_examples :returns_json_api_collection do
+        let(:json_api_collection_ids) { network_prefixes.last(2).map(&:uuid) }
+      end
+    end
+
+    context 'with filter number_max_length_lt' do
+      let(:json_api_request_query) { { filter: { number_max_length_lt: 12 } } }
+      let!(:network_prefixes) do
+        System::NetworkPrefix.delete_all
+        [
+          FactoryBot.create(:network_prefix, number_max_length: 11).reload,
+          FactoryBot.create(:network_prefix, number_max_length: 12).reload
+        ]
+      end
+
+      include_examples :returns_json_api_collection do
+        let(:json_api_collection_ids) { network_prefixes.first(1).map(&:uuid) }
+      end
+    end
+
+    context 'with string filter number_min_length_cont' do
+      let(:json_api_request_query) { { filter: { number_min_length_cont: 1 } } }
+
+      it 'responds with 400' do
+        subject
+        expect(response.status).to eq(400)
+      end
+    end
   end
 
   describe 'GET /api/rest/customer/v1/network-prefixes/{id}' do
