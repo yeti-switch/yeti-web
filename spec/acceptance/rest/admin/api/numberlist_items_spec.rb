@@ -13,13 +13,12 @@ RSpec.resource 'Routing NumberlistItems' do
   optional_params = %i[
     src_rewrite_rule src_rewrite_result defer_src_rewrite
     dst_rewrite_rule dst_rewrite_result defer_dst_rewrite
-    tag_action_value variables
+    tag_action_value variables action_id number_min_length number_max_length
   ]
 
   required_relationships = %i[numberlist]
 
   optional_relationships = %i[
-    action
     tag-action
   ]
 
