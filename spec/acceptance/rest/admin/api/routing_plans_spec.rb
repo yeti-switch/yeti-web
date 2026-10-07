@@ -27,10 +27,15 @@ RSpec.resource 'Routing plans' do
   post '/api/rest/admin/routing-plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
 
-    jsonapi_attributes([:name], %i[rate_delta_max use_lnp max_rerouting_attempts])
-    jsonapi_relationships([], [:sorting])
+    jsonapi_attributes([:name], %i[
+                         rate_delta_max use_lnp max_rerouting_attempts sorting_id
+                         validate_dst_number_format validate_dst_number_network external_id
+                       ])
 
     let(:name) { 'name' }
+    let(:'validate-dst-number-format') { true }
+    let(:'validate-dst-number-network') { true }
+    let(:'external-id') { 123 }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
@@ -41,7 +46,10 @@ RSpec.resource 'Routing plans' do
     parameter :type, 'Resource type (routing-plans)', scope: :data, required: true
     parameter :id, 'Routing plan ID', scope: :data, required: true
 
-    jsonapi_attributes([:name], %i[rate_delta_max use_lnp max_rerouting_attempts])
+    jsonapi_attributes([:name], %i[
+                         rate_delta_max use_lnp max_rerouting_attempts sorting_id
+                         validate_dst_number_format validate_dst_number_network external_id
+                       ])
 
     let(:id) { create(:routing_plan).id }
     let(:name) { 'name' }
