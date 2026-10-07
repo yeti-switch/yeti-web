@@ -232,6 +232,10 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
                                                  'diversion-policy-id' => CustomersAuth::DIVERSION_POLICY_ACCEPT,
                                                  'src-numberlist-use-diversion' => true
                                                )
+        expect(customers_auth.normalized_copies).to all have_attributes(
+                                                          diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                                          src_numberlist_use_diversion: true
+                                                        )
       end
     end
 
@@ -293,6 +297,10 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
                                            diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
                                            src_numberlist_use_diversion: true
                                          )
+        expect(customers_auth.normalized_copies).to all have_attributes(
+                                                          diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                                          src_numberlist_use_diversion: true
+                                                        )
       end
     end
 
