@@ -273,5 +273,67 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
         expect(actual_ids).to match_array customers_auths.map(&:id).map(&:to_s)
       end
     end
+
+    {
+      src_prefix: %w[123 456],
+      dst_prefix: %w[789 012],
+      x_yeti_auth: %w[auth-one auth-two],
+      uri_domain: %w[one.example.com two.example.com],
+      from_domain: %w[one.example.com two.example.com],
+      to_domain: %w[one.example.com two.example.com]
+    }.each do |attribute, (first_value, second_value)|
+      context "with filter #{attribute}_array_contains" do
+        let!(:customers_auths) { [create(:customers_auth, attribute => [first_value, second_value])] }
+        let!(:partial_match) { create(:customers_auth, attribute => [first_value]) }
+        let(:request_params) { { filter: { "#{attribute}_array_contains" => "#{first_value},#{second_value}" } } }
+
+        before { create(:customers_auth, attribute => ['other']) }
+
+        it 'returns records whose array contains all given values' do
+          subject
+          expect(response.status).to eq(200)
+          actual_ids = response_json[:data].map { |r| r[:id] }
+          expect(actual_ids).to match_array customers_auths.map { |r| r.id.to_s }
+        end
+      end
+    end
+
+    context 'with filter tag_action_value_array_contains' do
+      let!(:tags) { create_list(:routing_tag, 3) }
+      let!(:customers_auths) do
+        [create(:customers_auth, tag_action_value: [tags[0].id, tags[1].id])]
+      end
+      let(:request_params) { { filter: { tag_action_value_array_contains: "#{tags[0].id},#{tags[1].id}" } } }
+
+      before do
+        create(:customers_auth, tag_action_value: [tags[0].id])
+        create(:customers_auth, tag_action_value: [tags[2].id])
+      end
+
+      it 'returns records whose tag action value contains all given values' do
+        subject
+        expect(response.status).to eq(200)
+        actual_ids = response_json[:data].map { |r| r[:id] }
+        expect(actual_ids).to match_array customers_auths.map { |r| r.id.to_s }
+      end
+    end
+
+    context 'with non-integer tag_action_value_array_contains' do
+      let(:request_params) { { filter: { tag_action_value_array_contains: 'abc' } } }
+
+      it 'responds with 400' do
+        subject
+        expect(response.status).to eq(400)
+      end
+    end
+
+    context 'with removed ransack filter src_prefix_eq' do
+      let(:request_params) { { filter: { src_prefix_eq: '123' } } }
+
+      it 'responds with 400' do
+        subject
+        expect(response.status).to eq(400)
+      end
+    end
   end
 end

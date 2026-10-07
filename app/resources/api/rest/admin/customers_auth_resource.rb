@@ -39,6 +39,25 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   relationship_filter :radius_auth_profile
   relationship_filter :radius_accounting_profile
 
+  # Match condition columns are arrays, so plain ransack predicates produce invalid SQL.
+  # Each filter matches records whose array contains all given values.
+  %i[src_prefix dst_prefix x_yeti_auth uri_domain from_domain to_domain].each do |name|
+    filter :"#{name}_array_contains", apply: lambda { |records, values, _options|
+      records.public_send(:"#{name}_array_contains", values)
+    }
+  end
+  filter :tag_action_value_array_contains,
+         verify: lambda { |values, _context|
+           if values.any? { |v| !v.to_s.match?(/\A\d+\z/) }
+             raise JSONAPI::Exceptions::InvalidFilterValue.new(:tag_action_value_array_contains, values.join(','))
+           end
+
+           values.map(&:to_i)
+         },
+         apply: lambda { |records, values, _options|
+           records.tag_action_value_array_contains(values)
+         }
+
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
   ransack_filter :reject_calls, type: :boolean
@@ -53,16 +72,12 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :dst_rewrite_rule, type: :string
   ransack_filter :dst_rewrite_result, type: :string
 
-  ransack_filter :src_prefix, type: :string
   ransack_filter :src_number_min_length, type: :number
   ransack_filter :src_number_max_length, type: :number
-  ransack_filter :dst_prefix, type: :string
   ransack_filter :dst_number_min_length, type: :number
   ransack_filter :dst_number_max_length, type: :number
-  ransack_filter :x_yeti_auth, type: :string
   ransack_filter :capacity, type: :number
   ransack_filter :cps_limit, type: :number
-  ransack_filter :uri_domain, type: :string
 
   ransack_filter :diversion_policy_id, type: :number
   ransack_filter :diversion_rewrite_rule, type: :string
@@ -76,9 +91,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :dst_number_radius_rewrite_result, type: :string
   ransack_filter :check_account_balance, type: :boolean
   ransack_filter :require_incoming_auth, type: :boolean
-  ransack_filter :from_domain, type: :string
-  ransack_filter :to_domain, type: :string
-  ransack_filter :tag_action_value, type: :number
   ransack_filter :external_id, type: :number
   ransack_filter :external_type, type: :string
   ransack_filter :transport_protocol_id, type: :number
