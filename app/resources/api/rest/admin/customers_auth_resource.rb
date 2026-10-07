@@ -48,7 +48,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   end
   filter :tag_action_value_array_contains,
          verify: lambda { |values, _context|
-           if values.any? { |v| !v.to_s.match?(/\A\d+\z/) }
+           # tag_action_value is smallint[], so values above its maximum can't be queried.
+           if values.any? { |v| !v.to_s.match?(/\A\d+\z/) || v.to_i > 32_767 }
              raise JSONAPI::Exceptions::InvalidFilterValue.new(:tag_action_value_array_contains, values.join(','))
            end
 

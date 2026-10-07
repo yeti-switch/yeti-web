@@ -327,6 +327,15 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
       end
     end
 
+    context 'with tag_action_value_array_contains above smallint range' do
+      let(:request_params) { { filter: { tag_action_value_array_contains: '32768' } } }
+
+      it 'responds with 400' do
+        subject
+        expect(response.status).to eq(400)
+      end
+    end
+
     context 'with removed ransack filter src_prefix_eq' do
       let(:request_params) { { filter: { src_prefix_eq: '123' } } }
 
