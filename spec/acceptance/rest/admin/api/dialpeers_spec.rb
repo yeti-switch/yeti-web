@@ -14,11 +14,11 @@ RSpec.resource 'Dialpeers' do
     prefix src-rewrite-rule dst-rewrite-rule acd-limit asr-limit src-rewrite-result
     dst-rewrite-result locked priority exclusive-route capacity lcr-rate-multiplier
     force-hit-rate network-prefix-id created-at short-calls-limit external-id routing-tag-ids
-    dst_number-min-length dst-number-max-length reverse-billing currency
+    dst_number-min-length dst-number-max-length reverse-billing currency routing-tag-mode-id attempt-fee
   ]
 
   required_relationships = %i[routing-group vendor account routeset-discriminator]
-  optional_relationships = %i[gateway gateway-group routing-tag-modes]
+  optional_relationships = %i[gateway gateway-group]
 
   get '/api/rest/admin/dialpeers' do
     jsonapi_filters Api::Rest::Admin::DialpeerResource._allowed_filters
