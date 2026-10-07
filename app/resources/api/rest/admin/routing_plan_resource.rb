@@ -5,7 +5,8 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
 
   paginator :paged
 
-  attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts, :sorting_id
+  attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts, :sorting_id,
+             :validate_dst_number_format, :validate_dst_number_network, :external_id
 
   has_many :routing_groups, class_name: 'RoutingGroup',
                             exclude_links: %i[default self],
