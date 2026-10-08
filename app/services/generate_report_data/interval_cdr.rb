@@ -35,7 +35,7 @@ module GenerateReportData
         *report.group_by
       )
 
-      scope = scope.where(report.filter) if report.filter.present?
+      scope = scope.merge(CdrReportFilter.relation(report.filter)) if report.filter.present?
       scope
     end
   end
