@@ -37,4 +37,15 @@ RSpec.describe AdminUser, 'email → billing_contact hook' do
     user.save!
     expect(user.reload.billing_contact.email).to eq('carol@example.com')
   end
+
+  it 'does not build billing_contact when saved with blank email' do
+    user = create(:admin_user, username: 'dave', email: 'dave@example.com')
+    user.billing_contact.destroy!
+    user = described_class.find(user.id)
+
+    user.email = ''
+    user.save!
+    expect(user.association(:billing_contact).target).to be_nil
+    expect(user.save).to eq(true)
+  end
 end

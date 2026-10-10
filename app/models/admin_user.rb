@@ -58,8 +58,10 @@ class AdminUser < ApplicationRecord
   validate :validate_allowed_ips
 
   after_save do
-    contact = billing_contact || build_billing_contact
-    contact.update!(email: email) if @email.present?
+    if @email.present?
+      contact = billing_contact || build_billing_contact
+      contact.update!(email: email)
+    end
   end
 
   before_destroy :check_if_last

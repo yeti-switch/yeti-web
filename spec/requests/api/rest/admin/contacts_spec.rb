@@ -116,7 +116,7 @@ RSpec.describe Api::Rest::Admin::ContactsController, type: :request do
     let(:json_api_request_body) do
       { data: { id: record_id, type: json_api_resource_type, attributes: json_api_request_attributes } }
     end
-    let(:json_api_request_attributes) { { 'email': 'another@mail,com' } }
+    let(:json_api_request_attributes) { { 'email': 'another@mail.com' } }
 
     let!(:contact) { FactoryBot.create(:contact) }
 
