@@ -111,6 +111,19 @@ RSpec.describe ContactEmailSender do
       include_examples :creates_email_log
     end
 
+    context 'when contact email is blank' do
+      before { contact.update_column(:email, '') }
+
+      it 'should NOT create Email Log' do
+        expect { subject }.not_to change(Log::EmailLog, :count)
+      end
+
+      it 'should NOT enqueue Job' do
+        subject
+        expect(Worker::SendEmailLogJob).not_to have_been_enqueued
+      end
+    end
+
     context 'when there is NO any SMTP connection' do
       let(:global_smtp_connection) { nil }
 
@@ -155,6 +168,18 @@ RSpec.describe ContactEmailSender do
         expect(sender_stub).to receive(:send_email).with(**forwarded_params).once
       end
       subject
+    end
+
+    context 'when one of contacts has blank email' do
+      let!(:global_smtp_connection) { FactoryBot.create(:smtp_connection, global: true) }
+      let(:blank_contact) { FactoryBot.create(:contact).tap { |c| c.update_column(:email, '') } }
+      let(:valid_contact) { FactoryBot.create(:contact) }
+      let(:contacts) { [blank_contact, valid_contact] }
+
+      it 'sends email to other contacts' do
+        expect { subject }.to change(Log::EmailLog, :count).by(1)
+        expect(Log::EmailLog.last!).to have_attributes(contact_id: valid_contact.id, mail_to: valid_contact.email)
+      end
     end
 
     context 'when contacts has duplicate' do

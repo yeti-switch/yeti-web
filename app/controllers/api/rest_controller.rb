@@ -8,7 +8,7 @@ class Api::RestController < ApiController
   rescue_from AbstractController::ActionNotFound, with: :render_404
 
   def render_404(_e = nil)
-    render status: 404, nothing: true
+    head 404
   end
 
   protected

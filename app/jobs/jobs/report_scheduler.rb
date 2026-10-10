@@ -6,6 +6,8 @@ module Jobs
 
     def execute
       customer_traffic_tasks.each do |task|
+        next skip_task(task, "customer ##{task.customer_id} is missing or no longer a customer") if task.customer.nil?
+
         process_task(task) do |time_data|
           CreateReport::CustomerTraffic.call(
             date_start: time_data.date_from,
@@ -17,6 +19,8 @@ module Jobs
       end
 
       custom_cdr_tasks.each do |task|
+        next skip_task(task, "customer ##{task.customer_id} is missing") if task.customer_id && task.customer.nil?
+
         process_task(task) do |time_data|
           CreateReport::CustomCdr.call(
             date_start: time_data.date_from,
@@ -45,6 +49,8 @@ module Jobs
       end
 
       vendor_traffic_tasks.each do |task|
+        next skip_task(task, "vendor ##{task.vendor_id} is missing or no longer a vendor") if task.vendor.nil?
+
         process_task(task) do |time_data|
           CreateReport::VendorTraffic.call(
             date_start: time_data.date_from,
@@ -64,6 +70,11 @@ module Jobs
           task.update!(last_run_at: time_now, next_run_at: time_data.next_run_at)
         end
       end
+    end
+
+    def skip_task(task, reason)
+      logger.warn { "#{self.class}: skipping #{task.class.name} ##{task.id}: #{reason}" }
+      task.update_columns(next_run_at: task.reschedule(time_now).next_run_at)
     end
 
     def customer_traffic_tasks

@@ -38,7 +38,7 @@ module Rescuers
     if /(jpe?g|png|gif)/i.match?(request.path)
       render plain: '404 Yeti Not Found', status: 404
     elsif request.xhr?
-      render status: 404, nothing: true
+      head 404
     else
       render template: '404', layout: 'application', status: 404, formats: [:html]
     end

@@ -25,6 +25,17 @@ RSpec.describe ActiveCalls::CreateAccountStats, '.call' do
     end
   end
 
+  context 'with calls without account' do
+    let!(:accounts) { nil }
+    let(:customer_calls) { { '5' => [double, double], nil => [double] } }
+    let(:vendor_calls) { { nil => [double, double], '' => [double] } }
+
+    it 'creates a row only for calls with account' do
+      expect { subject }.to change { Stats::ActiveCallAccount.count }.by(1)
+      expect(Stats::ActiveCallAccount.last).to have_attributes(account_id: 5, originated_count: 2, terminated_count: 0)
+    end
+  end
+
   context 'with calls' do
     let(:customer_calls) do
       {

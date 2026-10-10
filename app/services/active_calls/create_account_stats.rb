@@ -28,9 +28,13 @@ module ActiveCalls
         }
       end
       customer_calls.each do |account_id, sub_calls|
+        next if account_id.blank?
+
         calls[account_id.to_i][:originated_count] = sub_calls.count
       end
       vendor_calls.each do |account_id, sub_calls|
+        next if account_id.blank?
+
         calls[account_id.to_i][:terminated_count] = sub_calls.count
       end
       calls.values

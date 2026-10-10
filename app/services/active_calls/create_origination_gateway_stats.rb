@@ -17,7 +17,7 @@ module ActiveCalls
     # Only gateways with active calls are stored. Absence of a row for a given
     # snapshot means zero — the chart reconstructs the zero baseline client-side.
     def build_calls_attrs_list
-      calls.map do |gateway_id, sub_calls|
+      calls.reject { |gateway_id, _| gateway_id.blank? }.map do |gateway_id, sub_calls|
         {
           count: sub_calls.count,
           created_at: current_time,

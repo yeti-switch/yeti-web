@@ -10,16 +10,16 @@ module Jobs
     end.freeze
 
     def execute
-      ApplicationRecord.transaction do
+      Cdr::Base.transaction do
         Cdr::Country.delete_all
-        Cdr::Country.import System::Country.all.to_a
+        Cdr::Country.import System::Country.all.to_a, validate: false
 
         Cdr::Network.delete_all
-        Cdr::Network.import System::Network.all.to_a
+        Cdr::Network.import System::Network.all.to_a, validate: false
 
         Cdr::NetworkPrefix.delete_all
         System::NetworkPrefix.find_in_batches(batch_size: CONST::BATCH_SIZE) do |prefixes|
-          Cdr::NetworkPrefix.import prefixes.to_a
+          Cdr::NetworkPrefix.import prefixes.to_a, validate: false
         end
       end
     end

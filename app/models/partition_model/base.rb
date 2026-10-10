@@ -134,7 +134,10 @@ module PartitionModel
 
     def destroy!
       destroy || raise(
-        ActiveRecord::RecordNotDestroyed.new("Couldn't destroy record", record)
+        ActiveRecord::RecordNotDestroyed.new(
+          "Couldn't destroy partition #{name}: #{errors.full_messages.to_sentence}",
+          self
+        )
       )
     end
   end

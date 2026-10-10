@@ -7,6 +7,7 @@ module Jobs
     include Memoizable
 
     self.cron_line = '40 */3 * * *'
+    self.timeout = 7200
 
     def execute
       partition_class = PartitionModel::Cdr

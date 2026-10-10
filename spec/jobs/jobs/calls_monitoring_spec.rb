@@ -279,6 +279,33 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
     end
   end
 
+  context 'when there is an active call without termination gateway' do
+    let(:unrouted_call) do
+      cdr_list_unsorted.first.merge(local_tag: 'unrouted-call', term_gw_id: nil, vendor_id: nil, vendor_acc_id: nil)
+    end
+
+    before do
+      allow(cdr_filter_mock).to receive(:raw_cdrs) { cdr_list_unsorted + [unrouted_call] }
+      allow(YetiConfig.calls_monitoring).to receive(:write_gateway_stats).and_return(true)
+      allow(YetiConfig.calls_monitoring).to receive(:write_account_stats).and_return(true)
+    end
+
+    it 'writes stats only for known gateways and accounts' do
+      expect_any_instance_of(Node).to receive(:drop_call).with('unrouted-call')
+
+      expect { subject }.to change { Stats::ActiveCallTermGateway.count }.by(1).and(
+        change { Stats::ActiveCallOrigGateway.count }.by(1)
+      ).and(
+        change { Stats::ActiveCallAccount.count }.by(2)
+      )
+
+      expect(Stats::ActiveCallTermGateway.last).to have_attributes(gateway_id: term_gateway.id, count: 2)
+      expect(Stats::ActiveCallOrigGateway.last).to have_attributes(gateway_id: origin_gateway.id, count: 3)
+      expect(Stats::ActiveCallAccount.find_by(account_id: account.id)).to have_attributes(originated_count: 3)
+      expect(Stats::ActiveCallAccount.find_by(account_id: vendor_acc.id)).to have_attributes(terminated_count: 2)
+    end
+  end
+
   context 'when YetiConfig.calls_monitoring.write_gateway_stats=false' do
     before do
       expect(YetiConfig.calls_monitoring).to receive(:write_gateway_stats).and_return(false)
