@@ -46,7 +46,7 @@ class AdminUser < ApplicationRecord
     self.roles = roles&.reject(&:blank?)
   end
 
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email? }
+  validates :email, format: { with: Billing::Contact::EMAIL_FORMAT, if: :validate_email? }
   validates :roles, presence: true
 
   before_validation :ensure_allowed_ips_format
@@ -58,8 +58,10 @@ class AdminUser < ApplicationRecord
   validate :validate_allowed_ips
 
   after_save do
-    contact = billing_contact || build_billing_contact
-    contact.update!(email: email) if @email
+    if @email.present?
+      contact = billing_contact || build_billing_contact
+      contact.update!(email: email)
+    end
   end
 
   before_destroy :check_if_last

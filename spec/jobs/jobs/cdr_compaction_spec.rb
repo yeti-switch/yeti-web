@@ -285,3 +285,9 @@ RSpec.describe Jobs::CdrCompaction, '#call' do
     end
   end
 end
+
+RSpec.describe Jobs::CdrCompaction, '.scheduler_options' do
+  it 'uses own timeout instead of BaseJob default' do
+    expect(described_class.scheduler_options).to include(timeout: 7200)
+  end
+end

@@ -43,6 +43,11 @@ RSpec.describe Jobs::SyncDatabaseTables, '#call' do
     let(:record_count) { 200 }
 
     include_examples 'sync database'
+
+    it 'does not validate network prefixes' do
+      expect_any_instance_of(System::NetworkPrefix).not_to receive(:validate_prefix_uniqueness)
+      subject
+    end
   end
 
   context 'with 1000 records' do

@@ -121,6 +121,27 @@ RSpec.describe Jobs::PartitionRemoving, '#call' do
         include_examples :should_not_collect_prometheus_metrics
       end
     end
+
+    context 'when removing a Cdr::Cdr partition fails' do
+      before do
+        Cdr::Cdr.add_partition_for Time.current
+        Cdr::Cdr.add_partition_for 5.days.ago
+        Log::ApiLog.add_partition_for Time.current
+        Log::ApiLog.add_partition_for Time.parse('2018-10-02 00:00:00 UTC')
+
+        allow(PgPartition::Cdr).to receive(:remove_partition).and_raise(ActiveRecord::StatementInvalid, 'boom')
+      end
+
+      it 'reports the failure and removes partitions of the remaining tables' do
+        expect(job).to receive(:capture_error).with(
+          an_instance_of(ActiveRecord::RecordNotDestroyed).and(having_attributes(message: /cdr\.cdr_\d{4}_\d{2}_\d{2}: boom/)),
+          extra: { partition_class: PartitionModel::Cdr, model_class: Cdr::Cdr }
+        )
+        expect { subject }.to change {
+          SqlCaller::Yeti.table_exist?('logs.api_requests_2018_10_02')
+        }.from(true).to(false)
+      end
+    end
   end
 
   context 'with partition_remove_hook' do

@@ -34,7 +34,7 @@ class Contractor < ApplicationRecord
   has_many :customers_auths, foreign_key: :customer_id, dependent: :restrict_with_error
   has_many :rateplans, through: :customers_auths, class_name: 'Routing::Rateplan'
   has_many :accounts, dependent: :restrict_with_error
-  has_many :contacts, class_name: 'Billing::Contact', foreign_key: 'contractor_id', dependent: :delete_all
+  has_many :contacts, class_name: 'Billing::Contact', foreign_key: 'contractor_id', dependent: :destroy
   has_many :api_access, class_name: 'System::ApiAccess', foreign_key: 'customer_id', dependent: :destroy
   has_many :active_rate_management_pricelist_items,
            -> { not_applied },
@@ -49,6 +49,9 @@ class Contractor < ApplicationRecord
   has_many :traffic_sampling_rules, class_name: 'Routing::TrafficSamplingRule', foreign_key: :customer_id, dependent: :destroy
   has_many :dns_records, class_name: 'Equipment::Dns::Record', foreign_key: :contractor_id, dependent: :destroy
   has_many :routing_routing_plan_static_routes, class_name: 'Routing::RoutingPlanStaticRoute', foreign_key: :vendor_id, dependent: :destroy
+  has_many :customer_traffic_report_schedulers, class_name: 'Report::CustomerTrafficScheduler', foreign_key: :customer_id
+  has_many :vendor_traffic_report_schedulers, class_name: 'Report::VendorTrafficScheduler', foreign_key: :vendor_id
+  has_many :custom_cdr_report_schedulers, class_name: 'Report::CustomCdrScheduler', foreign_key: :customer_id
 
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
@@ -69,6 +72,8 @@ class Contractor < ApplicationRecord
   validates :external_id, uniqueness: { allow_blank: true }
 
   before_destroy :check_associated_records
+  after_destroy_commit :remove_report_schedulers
+  after_update_commit :remove_report_schedulers_for_lost_roles
 
   def display_name
     "#{name} | #{id}"
@@ -91,6 +96,17 @@ class Contractor < ApplicationRecord
     if customer_changed?(from: true, to: false) && customers_auths.any?
       errors.add(:customer, I18n.t('activerecord.errors.models.contractor.attributes.customer'))
     end
+  end
+
+  def remove_report_schedulers
+    customer_traffic_report_schedulers.delete_all(:delete_all)
+    vendor_traffic_report_schedulers.delete_all(:delete_all)
+    custom_cdr_report_schedulers.delete_all(:delete_all)
+  end
+
+  def remove_report_schedulers_for_lost_roles
+    customer_traffic_report_schedulers.delete_all(:delete_all) if saved_change_to_customer?(from: true, to: false)
+    vendor_traffic_report_schedulers.delete_all(:delete_all) if saved_change_to_vendor?(from: true, to: false)
   end
 
   def check_associated_records

@@ -27,28 +27,27 @@ class Billing::Contact < ApplicationRecord
   self.table_name = 'notifications.contacts'
   include WithPaperTrail
 
+  EMAIL_FORMAT = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
   belongs_to :contractor, class_name: 'Contractor', foreign_key: :contractor_id, optional: true
   belongs_to :admin_user, class_name: 'AdminUser', foreign_key: :admin_user_id, optional: true
 
   scope :contractors, -> { where.not(contractor_id: nil) }
 
+  validates :email, presence: true, format: { with: EMAIL_FORMAT, allow_blank: true }
+
+  after_destroy_commit do
+    [
+      Report::CustomerTrafficScheduler,
+      Report::VendorTrafficScheduler,
+      Report::CustomCdrScheduler,
+      Report::IntervalCdrScheduler
+    ].each do |scheduler_class|
+      scheduler_class.where('? = ANY(send_to)', id).update_all(['send_to = array_remove(send_to, ?)', id])
+    end
+  end
+
   before_destroy do
-    Report::CustomerTrafficScheduler.where('? = ANY(send_to)', id).find_each do |c|
-      c.send_to = c.send_to.reject { |el| el == id }
-      c.save!
-    end
-    Report::VendorTrafficScheduler.where('? = ANY(send_to)', id).find_each do |c|
-      c.send_to = c.send_to.reject { |el| el == id }
-      c.save!
-    end
-    Report::CustomCdrScheduler.where('? = ANY(send_to)', id).find_each do |c|
-      c.send_to = c.send_to.reject { |el| el == id }
-      c.save!
-    end
-    Report::IntervalCdrScheduler.where('? = ANY(send_to)', id).find_each do |c|
-      c.send_to = c.send_to.reject { |el| el == id }
-      c.save!
-    end
     System::EventSubscription.where('? = ANY(send_to)', id).find_each do |c|
       c.send_to = c.send_to.reject { |el| el == id }
       c.save!

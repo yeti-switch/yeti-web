@@ -63,6 +63,25 @@ RSpec.describe ActiveCalls::CreateTerminationGatewayStats, '.call' do
     end
   end
 
+  context 'with calls without gateway' do
+    let!(:gateways) { nil }
+    let(:calls) { { '5' => [double, double], nil => [double], '' => [double] } }
+
+    it 'creates a row only for calls with gateway' do
+      expect { subject }.to change { Stats::ActiveCallTermGateway.count }.by(1)
+      expect(Stats::ActiveCallTermGateway.last).to have_attributes(gateway_id: 5, count: 2)
+    end
+  end
+
+  context 'with only calls without gateway' do
+    let!(:gateways) { nil }
+    let(:calls) { { nil => [double] } }
+
+    it 'does not create any stats' do
+      expect { subject }.to change { Stats::ActiveCallTermGateway.count }.by(0)
+    end
+  end
+
   context 'without gateways' do
     let!(:calls) { {} }
     let!(:gateways) { nil }

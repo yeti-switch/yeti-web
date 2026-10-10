@@ -88,5 +88,38 @@ RSpec.describe PartitionModel::Cdr do
       another_cdrs_ids = another_cdrs.map(&:id)
       expect(Cdr::Cdr.where(id: another_cdrs_ids).count).to eq(another_cdrs_ids.size)
     end
+
+    context 'when partition removal fails' do
+      before do
+        allow(PgPartition::Cdr).to receive(:remove_partition).and_raise(ActiveRecord::StatementInvalid, 'boom')
+      end
+
+      it { is_expected.to eq(false) }
+
+      it 'stores the reason in errors' do
+        subject
+        expect(record.errors.full_messages).to eq(['boom'])
+      end
+    end
+  end
+
+  describe '#destroy!' do
+    subject do
+      record.destroy!
+    end
+
+    before do
+      Cdr::Cdr.add_partition_for Date.parse('2018-12-02')
+      allow(PgPartition::Cdr).to receive(:remove_partition).and_raise(ActiveRecord::StatementInvalid, 'boom')
+    end
+
+    let(:record) { PartitionModel::Cdr.find_by_name('cdr.cdr_2018_12_02') }
+
+    it 'raises RecordNotDestroyed with the partition name and reason' do
+      expect { subject }.to raise_error(ActiveRecord::RecordNotDestroyed) { |e|
+        expect(e.message).to eq("Couldn't destroy partition cdr.cdr_2018_12_02: boom")
+        expect(e.record).to eq(record)
+      }
+    end
   end
 end

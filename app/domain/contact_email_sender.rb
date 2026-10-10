@@ -34,6 +34,11 @@ class ContactEmailSender
   def send_email(subject:, message: nil, text_message: nil, attachments: nil)
     return if contact.smtp_connection.nil?
 
+    if contact.email.blank?
+      Rails.logger.warn { "#{self.class}: contact ##{contact.id} has blank email, skipping" }
+      return
+    end
+
     ApplicationRecord.transaction do
       email_log = create_email_log(
         subject: subject,
