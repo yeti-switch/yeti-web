@@ -204,6 +204,13 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       end
     end
 
+    context 'when the response arrives before the request is fully sent' do
+      it 'reports no ttfb' do
+        consumer.instance_variable_set(:@marks, { started: 0.0, request_started: 0.001, response_started: 0.002, request_completed: 0.9 })
+        expect(consumer.send(:http_timings)).to eq(connect_time: 0.0, send_time: 899.0, ttfb: nil)
+      end
+    end
+
     context 'when the request times out' do
       before { stub_request(:post, /#{config['url']}/).to_raise(HTTPX::TimeoutError.new(30, 'Timed out after 30 seconds')) }
 

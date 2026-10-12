@@ -73,7 +73,7 @@ class Billing::Service < ApplicationRecord
 
   before_create :verify_provisioning_variables
   before_create :assign_uuid
-  before_create :lock_account, if: proc { initial_price != 0 }
+  before_create :lock_account
   before_update :verify_provisioning_variables, if: :variables_changed?
 
   after_create :create_initial_transaction

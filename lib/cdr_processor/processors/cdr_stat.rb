@@ -23,7 +23,7 @@ module CdrProcessor
 
           events_qty = events_qty.to_i
           if events_qty.zero?
-            log_info 'Empty batch'
+            log_info 'Empty batch', duration: @last_perform_group_duration_ms
             return -1
           end
 

@@ -58,7 +58,6 @@ module CdrProcessor
           value = @params[key.to_s]
           [key, value.nil? ? default : Float(value)]
         end
-        @marks = {}
       end
 
       def perform_events(events)
@@ -117,8 +116,9 @@ module CdrProcessor
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
+        client = http_client
         mark(:started)
-        response = proxy.run { http_client.public_send(http_method, http_url, **kwargs) }
+        response = proxy.run { client.public_send(http_method, http_url, **kwargs) }
         response.raise_for_status
         raise UnexpectedResponseStatus, response unless SUCCESS_STATUSES.cover?(response.status)
 
@@ -189,7 +189,7 @@ module CdrProcessor
       end
 
       def ms_between(from, to)
-        return unless @marks[from] && @marks[to]
+        return unless @marks[from] && @marks[to] && @marks[to] >= @marks[from]
 
         ((@marks[to] - @marks[from]) * 1000).round(3)
       end

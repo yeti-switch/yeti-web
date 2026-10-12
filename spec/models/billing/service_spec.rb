@@ -94,10 +94,10 @@ RSpec.describe Billing::Service do
       let(:queries) { [] }
       let(:collect_sql) { ->(_name, _start, _finish, _id, payload) { queries << payload[:sql] } }
 
-      it 'does not lock account' do
+      it 'locks account without charging it' do
         ActiveSupport::Notifications.subscribed(collect_sql, 'sql.active_record') { subject }
 
-        expect(queries).not_to include(match(/FOR UPDATE/))
+        expect(queries).to include(match(/FROM "billing"."accounts" .* FOR UPDATE/))
         expect(Billing::Transaction.count).to eq(0)
       end
     end
