@@ -53,24 +53,28 @@ module CdrProcessor
 
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         pgq_events = get_batch_events
+        fetch_duration = elapsed_ms(start_time)
 
         return 0 if pgq_events.nil? # if no batch
 
         tagged_batch do
           if pgq_events.blank? # if batch is empty
-            log_info 'Empty batch'
+            log_info 'Empty batch', duration: fetch_duration
             finish_batch
             return -1
           end
 
           events = pgq_events.map { |ev| CdrProcessor::Event.new(self, ev) }
           size = events.size
-          log_info "batch(#{@batch_id}): events #{size}"
+          log_info 'Fetched', duration: fetch_duration, events: size
 
           perform_events(events)
 
+          finish_start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
           finish_batch
-          log_info "batch finished: events #{size}", duration: elapsed_ms(start_time)
+          finish_duration = elapsed_ms(finish_start_time)
+          batch_duration = elapsed_ms(start_time).round(3)
+          log_info 'Finished', duration: finish_duration, batch_duration:, events: size
         end
       end
 
@@ -119,7 +123,7 @@ module CdrProcessor
 
     def perform_event(event)
       SemanticLogger.named_tagged(event_id: event.id) do
-        logger.debug "performing event: Event: #{event.id}, Batch: #{@batch_id}"
+        logger.debug 'Performing event'
 
         CdrProcessor::Worker.check_interrupted(__FILE__, __LINE__)
 
@@ -155,7 +159,7 @@ module CdrProcessor
     def finish_batch
       return unless @batch_id
 
-      log_debug "Finishing batch #{@batch_id}"
+      log_debug 'Finishing batch'
 
       CdrProcessor::CdrDb.pgq_finish_batch(@batch_id)
       @batch_id = nil
@@ -180,10 +184,12 @@ module CdrProcessor
     end
 
     # @param duration [Float, nil] milliseconds, emitted as the `duration` field.
-    def log_info(mes, duration: nil)
-      return @logger&.info(mes) if duration.nil?
+    # @param tags [Hash] named tags: YetiLogFormatter puts them at the root of the record.
+    def log_info(mes, duration: nil, **tags)
+      record = duration.nil? ? mes : { message: mes, duration: }
+      return @logger&.info(record) if tags.empty?
 
-      @logger&.info(message: mes, duration: duration)
+      SemanticLogger.named_tagged(tags) { @logger&.info(record) }
     end
 
     def log_error(mes)

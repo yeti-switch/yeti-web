@@ -44,4 +44,30 @@ RSpec.describe CdrProcessor::Processors::CdrStat do
       expect(subject).to eq 0
     end
   end
+
+  describe 'logging' do
+    let(:logger) { SemanticLogger::Test::CaptureLogEvents.new }
+    let(:record) { logger.events.find { |event| event.level == :info } }
+
+    context 'when stored_procedure returns 3' do
+      let(:return_value) { '3' }
+
+      it 'logs Finished with events and duration', :aggregate_failures do
+        subject
+        expect(record.message).to eq('Finished')
+        expect(record.named_tags).to include(events: 3)
+        expect(record.duration).to be_a(Float)
+      end
+    end
+
+    context 'when stored_procedure returns 0' do
+      let(:return_value) { '0' }
+
+      it 'logs Empty batch with duration', :aggregate_failures do
+        subject
+        expect(record.message).to eq('Empty batch')
+        expect(record.duration).to be_a(Float)
+      end
+    end
+  end
 end

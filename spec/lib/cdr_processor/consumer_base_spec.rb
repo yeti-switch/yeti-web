@@ -55,13 +55,32 @@ RSpec.describe CdrProcessor::ConsumerBase do
     context 'when the batch succeeds' do
       before { allow(consumer).to receive(:perform_events) }
 
-      it 'tags every record with batch_id and measures the batch', :aggregate_failures do
+      it 'tags every record with batch_id and measures the fetch, the finish and the batch', :aggregate_failures do
         expect(consumer.perform_batch).to eq(1)
 
         info_events = logger.events.select { |event| event.level == :info }
-        expect(info_events.map(&:message)).to eq(['batch(42): events 1', 'batch finished: events 1'])
+        expect(info_events.map(&:message)).to eq(%w[Fetched Finished])
         expect(logger.events.map(&:named_tags)).to all(include(batch_id: 42))
-        expect(info_events.last.duration).to be_a(Float)
+        expect(info_events.map(&:named_tags)).to all(include(events: 1))
+        expect(info_events.map(&:duration)).to all(be_a(Float))
+
+        batch_duration = info_events.last.named_tags[:batch_duration]
+        expect(batch_duration).to be_a(Float)
+        expect(batch_duration).to be >= info_events.first.duration
+        expect(batch_duration).to be >= info_events.last.duration
+        expect(info_events.first.named_tags).not_to have_key(:batch_duration)
+      end
+    end
+
+    context 'when the batch is empty' do
+      let(:pgq_events) { [] }
+
+      it 'measures the fetch', :aggregate_failures do
+        expect(consumer.perform_batch).to eq(-1)
+
+        record = logger.events.find { |event| event.level == :info }
+        expect(record.message).to eq('Empty batch')
+        expect(record.duration).to be_a(Float)
       end
     end
 

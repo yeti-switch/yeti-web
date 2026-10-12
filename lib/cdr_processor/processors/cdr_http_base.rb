@@ -98,6 +98,7 @@ module CdrProcessor
 
       def perform_http_request(payload)
         @request_id = SecureRandom.uuid
+        @marks = {}
         start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
         SemanticLogger.named_tagged({ request_id: @request_id, event_id: @current_event_id }.compact) do
@@ -115,7 +116,9 @@ module CdrProcessor
 
       def send_http_request(payload)
         kwargs = { headers: http_headers, body: http_body(payload) }
-        response = proxy.run { http_client.public_send(http_method, http_url, **kwargs) }
+        client = http_client
+        mark(:started)
+        response = proxy.run { client.public_send(http_method, http_url, **kwargs) }
         response.raise_for_status
         raise UnexpectedResponseStatus, response unless SUCCESS_STATUSES.cover?(response.status)
 
@@ -131,14 +134,29 @@ module CdrProcessor
       end
 
       def build_http_client
-        client = HTTPX.plugin(:persistent).with(timeout: @http_timeouts)
+        client = HTTPX.plugin(:persistent).plugin(:callbacks).with(timeout: @http_timeouts)
         if logger.debug?
           client = client.with(debug: DebugStream.new(logger), debug_level: 1)
         end
         if @params['auth_user'].present?
           client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
         end
-        proxy.apply(client)
+        with_timing_marks(proxy.apply(client))
+      end
+
+      # connection_opened fires for a new socket only, a reused persistent connection leaves no mark.
+      # request_started/request_completed bracket handing the request to the 16KB socket buffer, so
+      # a smaller body reaches the wire after request_completed, inside ttfb.
+      def with_timing_marks(client)
+        client
+          .on_connection_opened { |_origin, _socket| mark(:connected) }
+          .on_request_started { |_request| mark(:request_started) }
+          .on_request_completed { |_request| mark(:request_completed) }
+          .on_response_started { |_request, _response| mark(:response_started) }
+      end
+
+      def mark(name)
+        @marks[name] = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       end
 
       # Outbound HTTP proxy for CDR export requests, controlled per processor via
@@ -151,9 +169,29 @@ module CdrProcessor
       # at the root of the record, next to request_id and batch_id.
       def log_request(level, message, http_status, start_time)
         duration = elapsed_ms(start_time)
-        SemanticLogger.named_tagged({ http_status: http_status }.compact) do
+        SemanticLogger.named_tagged({ http_status: http_status, **http_timings }.compact) do
           logger.public_send(level, message: message, duration: duration)
         end
+      end
+
+      # Milliseconds between the marks of #with_timing_marks; nil when the request did not get that far.
+      def http_timings
+        connect_time = if @marks[:connected]
+                         ms_between(:started, :connected)
+                       elsif @marks[:request_started]
+                         0.0
+                       end
+        {
+          connect_time: connect_time,
+          send_time: ms_between(:request_started, :request_completed),
+          ttfb: ms_between(:request_completed, :response_started)
+        }
+      end
+
+      def ms_between(from, to)
+        return unless @marks[from] && @marks[to] && @marks[to] >= @marks[from]
+
+        ((@marks[to] - @marks[from]) * 1000).round(3)
       end
 
       # HTTPX::HTTPError and UnexpectedResponseStatus carry the response, timeouts do not.

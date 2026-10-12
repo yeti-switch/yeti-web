@@ -90,10 +90,13 @@ module CdrProcessor
       # exec_update rather than exec_query: the function returns void, which has
       # no ActiveRecord type, so building a result set logs "unknown OID 2278".
       def bill_part(part)
+        payload = coder.dump(part)
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         primary_connection.exec_update(
           'SELECT billing.bill_cdr_batch_part($1::bigint, $2::jsonb)', 'CdrBilling Part',
-          [@batch_id, coder.dump(part)]
+          [@batch_id, payload]
         )
+        log_info 'Billed', duration: elapsed_ms(start_time), events: part.size
       end
     end
   end
