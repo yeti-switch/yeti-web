@@ -73,6 +73,7 @@ class Billing::Service < ApplicationRecord
 
   before_create :verify_provisioning_variables
   before_create :assign_uuid
+  before_create :lock_account, if: proc { initial_price != 0 }
   before_update :verify_provisioning_variables, if: :variables_changed?
 
   after_create :create_initial_transaction
@@ -149,10 +150,15 @@ class Billing::Service < ApplicationRecord
     self.uuid = SecureRandom.uuid
   end
 
+  # FOR UPDATE must be taken before INSERT adds FOR KEY SHARE on the account row via FK,
+  # otherwise concurrent creates for one account deadlock on the lock upgrade.
+  def lock_account
+    account.lock! # will generate SELECT FOR UPDATE SQL statement
+  end
+
   def create_initial_transaction
     return if initial_price == 0
 
-    account.lock! # will generate SELECT FOR UPDATE SQL statement
     transaction = Billing::Transaction.new(
       service: self, account:, amount: initial_price, description: 'Service creation'
     )

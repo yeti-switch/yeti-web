@@ -65,6 +65,43 @@ RSpec.describe Billing::Service do
       let(:expected_record_attrs) { expected_attrs }
     end
 
+    context 'with non-zero initial_price' do
+      let(:queries) { [] }
+      let(:collect_sql) { ->(_name, _start, _finish, _id, payload) { queries << payload[:sql] } }
+
+      it 'locks account before inserting service' do
+        ActiveSupport::Notifications.subscribed(collect_sql, 'sql.active_record') { subject }
+
+        lock_index = queries.index { |sql| sql.match?(/FROM "billing"."accounts" .* FOR UPDATE/) }
+        insert_index = queries.index { |sql| sql.start_with?('INSERT INTO "billing"."services"') }
+        expect(lock_index).not_to be_nil
+        expect(insert_index).not_to be_nil
+        expect(lock_index).to be < insert_index
+      end
+
+      it 'charges account' do
+        expect { subject }.to change { account.reload.balance }.by(-10)
+        expect(Billing::Transaction.last).to have_attributes(
+          account_id: account.id,
+          service_id: described_class.last.id,
+          amount: 10
+        )
+      end
+    end
+
+    context 'with zero initial_price' do
+      let(:create_params) { super().merge(initial_price: 0) }
+      let(:queries) { [] }
+      let(:collect_sql) { ->(_name, _start, _finish, _id, payload) { queries << payload[:sql] } }
+
+      it 'does not lock account' do
+        ActiveSupport::Notifications.subscribed(collect_sql, 'sql.active_record') { subject }
+
+        expect(queries).not_to include(match(/FOR UPDATE/))
+        expect(Billing::Transaction.count).to eq(0)
+      end
+    end
+
     context 'with variables' do
       let(:create_params) do
         super().merge(variables: { 'foo' => 'bar' })
