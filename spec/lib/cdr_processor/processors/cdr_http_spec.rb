@@ -183,11 +183,12 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       end
     end
 
-    it 'tags the request record with ids and http_status and measures it' do
+    it 'tags the request record with ids, http_status and timings and measures it', :aggregate_failures do
       subject
       record = logger.events.find { |event| event.message == 'HTTP request completed' }
       expect(record.level).to eq(:info)
       expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1, http_status: 200)
+      expect(record.named_tags).to include(connect_time: 0.0, send_time: be_a(Float), ttfb: be_a(Float))
       expect(record.duration).to be_a(Float)
     end
 
@@ -206,11 +207,12 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     context 'when the request times out' do
       before { stub_request(:post, /#{config['url']}/).to_raise(HTTPX::TimeoutError.new(30, 'Timed out after 30 seconds')) }
 
-      it 'logs the error without http_status' do
+      it 'logs the error without http_status and ttfb', :aggregate_failures do
         expect { subject }.to raise_error(HTTPX::TimeoutError)
         record = logger.events.find { |event| event.level == :error }
-        expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1)
+        expect(record.named_tags).to include(request_id: match(/\A\h{8}-/), event_id: 1, connect_time: 0.0)
         expect(record.named_tags).not_to have_key(:http_status)
+        expect(record.named_tags).not_to have_key(:ttfb)
       end
     end
   end
@@ -271,6 +273,21 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       it 'sends every request over the same TCP connection' do
         subject
         expect(accepted.size).to eq(1)
+      end
+
+      context 'with a capturing logger' do
+        let(:logger) { SemanticLogger::Test::CaptureLogEvents.new(level: :info) }
+
+        it 'reports the connect time for the first request only', :aggregate_failures do
+          subject
+          records = logger.events.select { |event| event.message == 'HTTP request completed' }
+          timings = records.map { |record| record.named_tags.slice(:connect_time, :send_time, :ttfb) }
+          expect(timings.size).to eq(3)
+          expect(timings.first[:connect_time]).to be > 0
+          expect(timings.drop(1).map { |timing| timing[:connect_time] }).to all(eq(0.0))
+          expect(timings.map { |timing| timing[:send_time] }).to all(be_a(Float))
+          expect(timings.map { |timing| timing[:ttfb] }).to all(be > 0)
+        end
       end
     end
   end
