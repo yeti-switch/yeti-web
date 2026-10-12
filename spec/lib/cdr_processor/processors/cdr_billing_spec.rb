@@ -146,6 +146,19 @@ RSpec.describe CdrProcessor::Processors::CdrBilling do
       subject
     end
 
+    context 'with a capturing logger' do
+      let(:logger) { SemanticLogger::Test::CaptureLogEvents.new }
+
+      it 'logs every part with its size and duration', :aggregate_failures do
+        subject
+
+        records = logger.events.select { |event| event.message == 'Billed' }
+        expect(records.size).to eq(2)
+        expect(records.map(&:named_tags)).to all(include(events: 1))
+        expect(records.map(&:duration)).to all(be_a(Float))
+      end
+    end
+
     # requires_new gives the savepoint that perform_group's own transaction is
     # in production - under transactional fixtures it would otherwise join the
     # example's transaction and never roll back on its own.
