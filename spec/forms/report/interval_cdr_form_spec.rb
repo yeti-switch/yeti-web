@@ -31,4 +31,22 @@ RSpec.describe Report::IntervalCdrForm do
       expect(Report::IntervalCdr.take!).to have_attributes group_by: Report::IntervalCdr::CDR_COLUMNS.first(2).map(&:to_s)
     end
   end
+
+  context 'with a valid Ransack filter' do
+    let(:form_attributes) { super().merge filter: 'duration_gt=60' }
+
+    it 'creates the record' do
+      expect { subject }.to change(Report::IntervalCdr, :count).by(1)
+      expect(Report::IntervalCdr.take!).to have_attributes(filter: 'duration_gt=60')
+    end
+  end
+
+  context 'with a raw-SQL / injection filter' do
+    let(:form_attributes) { super().merge filter: 'duration > 0); DROP TABLE cdr.cdr;--' }
+
+    it 'is rejected and creates nothing' do
+      expect { subject }.not_to change(Report::IntervalCdr, :count)
+      expect(form.errors[:filter]).to be_present
+    end
+  end
 end
