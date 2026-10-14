@@ -24,7 +24,7 @@ RSpec.describe 'Kubernetes probes', type: :request do
 
   describe 'GET /live' do
     it 'answers without touching the databases' do
-      expect(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter).not_to receive(:new)
+      expect(PG).not_to receive(:connect)
 
       get '/live'
 
@@ -126,8 +126,75 @@ RSpec.describe 'Kubernetes probes', type: :request do
       end
     end
 
+    it 'connects with the libpq names of the database.yml keys' do
+      allow(PG).to receive(:connect).and_call_original
+
+      get '/ready'
+
+      hash = primary_config.configuration_hash
+      expect(PG).to have_received(:connect).with(
+        hash_including(dbname: hash[:database], user: hash[:username], connect_timeout: HealthController::CONNECT_TIMEOUT)
+      )
+      expect(PG).not_to have_received(:connect).with(hash_including(:database))
+      expect(PG).not_to have_received(:connect).with(hash_including(:username))
+      expect(PG).not_to have_received(:connect).with(hash_including(:adapter))
+    end
+
+    context 'when the probe query fails' do
+      let(:connection) { instance_double(PG::Connection, close: nil) }
+      let(:appender) { SemanticLogger::Test::CaptureLogEvents.new(level: :error) }
+
+      before do
+        allow(PG).to receive(:connect).and_return(connection)
+        allow(connection).to receive(:exec).and_raise(PG::ConnectionBad, 'server closed the connection')
+        SemanticLogger.add_appender(appender: appender)
+      end
+
+      after { SemanticLogger.remove_appender(appender) }
+
+      it 'closes the connection and logs the stage' do
+        get '/ready'
+
+        SemanticLogger.flush
+        expect(response).to have_http_status(:service_unavailable)
+        expect(connection).to have_received(:close).twice
+        expect(appender.events.map(&:message)).to include(
+          a_string_matching(/\Areadiness: primary database check failed at query after [\d.]+s: PG::ConnectionBad: server closed/)
+        )
+      end
+    end
+
+    context 'when every database is slow to answer' do
+      let(:replica_config) { ActiveRecord::DatabaseConfigurations::HashConfig.new('test', 'cdr_replica', cdr_config.configuration_hash) }
+      let(:database_configs) { [primary_config, cdr_config, replica_config] }
+      let(:connection) { instance_double(PG::Connection, exec: nil, close: nil) }
+
+      before do
+        allow(PG).to receive(:connect) do
+          sleep 1
+          connection
+        end
+      end
+
+      it 'checks the databases in parallel' do
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+
+        get '/ready'
+
+        expect(Process.clock_gettime(Process::CLOCK_MONOTONIC) - started).to be < 2
+        expect(response).to have_http_status(:ok)
+        expect(PG).to have_received(:connect).exactly(3).times
+      end
+    end
+
     context 'when a database host does not answer at all' do
-      let(:database_configs) { [primary_config, unreachable(cdr_config, host: '10.255.255.1', port: 5432)] }
+      let(:database_configs) do
+        [
+          primary_config,
+          unreachable(cdr_config, host: '10.255.255.1', port: 5432),
+          unreachable(cdr_config, name: 'cdr_replica', host: '10.255.255.2', port: 5432)
+        ]
+      end
 
       it 'gives up within the check timeout' do
         started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
