@@ -7,7 +7,7 @@ RSpec.resource 'Radius Auth profiles' do
   let(:type) { 'radius-auth-profiles' }
 
   required_params = %i[name server port secret timeout attempts]
-  optional_params = %i[enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting]
+  optional_params = %i[reject-on-error]
 
   get '/api/rest/admin/radius-auth-profiles' do
     jsonapi_filters Api::Rest::Admin::RadiusAuthProfileResource._allowed_filters

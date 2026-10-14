@@ -12,9 +12,10 @@ RSpec.resource 'Accounts' do
     send-invoices-to
     external-id
     balance-low-threshold balance-high-threshold send-balance-notifications-to
-    invoice-period-id timezone invoice-period-id
-    currency
+    invoice-period-id timezone destination-rate-limit max-call-duration
   ]
+  # currency can only be set when the account is created
+  create_optional_params = optional_params + %i[currency]
 
   required_relationships = %i[contractor]
   optional_relationships = %i[invoice-template]
@@ -40,7 +41,7 @@ RSpec.resource 'Accounts' do
   post '/api/rest/admin/accounts' do
     parameter :type, 'Resource type (accounts)', scope: :data, required: true
 
-    jsonapi_attributes(required_params, optional_params)
+    jsonapi_attributes(required_params, create_optional_params)
     jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }

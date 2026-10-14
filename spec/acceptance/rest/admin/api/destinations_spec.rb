@@ -13,10 +13,11 @@ RSpec.resource 'Destinations' do
   optional_params = %i[
     prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids
     dst_number-min-length dst-number-max-length reverse-billing profit-control-mode-id rate-policy-id currency
+    routing-tag-mode-id attempt-fee
   ]
 
   required_relationships = %i[rate-group]
-  optional_relationships = %i[routing-tag-modes]
+  optional_relationships = %i[]
 
   get '/api/rest/admin/destinations' do
     jsonapi_filters Api::Rest::Admin::DestinationResource._allowed_filters

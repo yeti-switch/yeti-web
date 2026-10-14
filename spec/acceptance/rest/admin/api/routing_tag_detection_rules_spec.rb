@@ -17,10 +17,10 @@ RSpec.resource 'Routing RoutingTagDetectionRules' do
 
   required_params = %i[]
 
-  optional_params = %i[src-prefix dst-prefix tag-action-value routing-tag-ids]
+  optional_params = %i[src-prefix dst-prefix tag-action-value routing-tag-ids routing-tag-mode-id]
 
   required_relationships = %i[]
-  optional_relationships = %i[src-area dst-area tag-action routing-tag-modes]
+  optional_relationships = %i[src-area dst-area tag-action routing-tag]
 
   include_context :acceptance_index_show, type: 'routing-tag-detection-rules', filters: Api::Rest::Admin::RoutingTagDetectionRuleResource._allowed_filters
   include_context :acceptance_delete, type: 'routing-tag-detection-rules'
