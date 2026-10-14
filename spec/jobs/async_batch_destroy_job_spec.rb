@@ -93,6 +93,20 @@ RSpec.describe AsyncBatchDestroyJob, type: :job do
           end
         end
       end
+
+      context 'context' do
+        let(:model_class) { 'Account' }
+        let(:sql_query) { Account.all.to_sql }
+
+        before do
+          account = FactoryBot.create(:account, :with_customer)
+          FactoryBot.create(:rate_management_pricelist_item, :with_pricelist, account: account)
+        end
+
+        it 'should' do
+          expect { subject }.to change(Account, :count).by(-1)
+        end
+      end
     end
   end
 end
