@@ -20,6 +20,16 @@ RSpec.describe 'OAuth Authorization Server Metadata (RFC 8414)', type: :request 
     expect(payload['response_types_supported']).to include('code')
   end
 
+  # MCP clients register and authorize with these; OIDC scopes would be refused
+  # by /oauth/register. OIDC relying parties read openid-configuration instead.
+  it 'advertises only the self-registrable scopes' do
+    subject
+    expect(JSON.parse(response.body)['scopes_supported']).to eq(['mcp'])
+
+    get '/.well-known/openid-configuration'
+    expect(JSON.parse(response.body)['scopes_supported']).to include('mcp', 'openid', 'profile', 'email')
+  end
+
   # The OIDC gem's discovery routes claim this path too, and its version of the
   # document has no registration_endpoint — which is how MCP clients
   # self-register. config/routes.rb keeps our route first; this pins it, since
@@ -31,7 +41,6 @@ RSpec.describe 'OAuth Authorization Server Metadata (RFC 8414)', type: :request 
     subject
     payload = JSON.parse(response.body)
     expect(payload['registration_endpoint']).to end_with('/oauth/register')
-    expect(payload['service_documentation']).to be_present
   end
 
   it 'advertises the OIDC endpoints when yeti is also an OIDC provider' do

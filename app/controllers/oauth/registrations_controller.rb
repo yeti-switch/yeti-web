@@ -14,7 +14,7 @@ module Oauth
     # the admin's email and roles, and are registered by an operator through the
     # admin UI. This is the only unauthenticated way to create an application,
     # so the check belongs here rather than at /oauth/authorize.
-    SELF_REGISTRABLE_SCOPES = %w[mcp].freeze
+    SELF_REGISTRABLE_SCOPES = [Mcp::Server::REQUIRED_SCOPE].freeze
 
     def create
       params = JSON.parse(request.body.read)

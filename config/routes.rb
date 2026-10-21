@@ -53,10 +53,12 @@ Rails.application.routes.draw do
   end
 
   # MCP server for LLM tool use. Auth via Doorkeeper OAuth bearer tokens, so
-  # this mount requires both flags. Lambda defers Mcp::Server resolution to
-  # request time so Zeitwerk has loaded app/services/mcp/ by then.
+  # this mount requires both flags.
   if YetiConfig.oauth&.enabled && YetiConfig.mcp&.enabled
-    mount ->(env) { Mcp::Server.new.call(env) }, at: '/api/mcp'
+    # RFC 9728 §3.1: metadata for the /api/mcp resource. No root document — that
+    # one would describe the whole host, which OAuth does not protect.
+    get Mcp::Server::RESOURCE_METADATA_PATH, to: 'well_known/oauth_protected_resource#show'
+    mount ->(env) { Mcp::Server.new.call(env) }, at: Mcp::Server::MOUNT_PATH
   end
 
   get 'with_contractor_accounts', to: 'accounts#with_contractor'

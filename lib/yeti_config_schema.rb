@@ -115,7 +115,9 @@ module YetiConfigSchema
       # Block AND `enabled` key are both optional; missing → treated as false.
       optional(:oauth).schema do
         optional(:enabled).value(:bool?)
-        optional(:issuer).maybe(:string)
+        # An origin only: MCP clients fetch <issuer>/.well-known/oauth-authorization-server,
+        # which is routed at the root alone.
+        optional(:issuer).maybe(:string, format?: %r{\Ahttps?://(?:[a-z0-9.-]+|\[[0-9a-f:.]+\])(?::\d+)?\z}i)
 
         optional(:oidc).schema do
           optional(:enabled).value(:bool?)

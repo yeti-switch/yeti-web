@@ -70,9 +70,9 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
            resource_id ? Gateway.where(id: resource_id) : []
          }
   filter :gateway_external_id
-  filter :remote_host
+  filter :remote_host_within, as: :string, label: 'Remote host'
   filter :remote_port
-  filter :local_host
+  filter :local_host_within, as: :string, label: 'Local host'
   filter :local_port
   filter :rx_ssrc, as: :numeric, filters: %i[hex equals]
   filter :rx_packets

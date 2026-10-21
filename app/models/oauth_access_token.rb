@@ -38,9 +38,8 @@ class OauthAccessToken < ApplicationRecord
   # Doorkeeper's own answer is "not expired and not revoked", which leaves a
   # disabled admin's token working until it expires. Checking the owner here
   # cuts access off immediately, on every endpoint at once.
+  # Owner-less tokens (no grant flow issues them today) are never accessible.
   def accessible?
-    return super if resource_owner_id.nil?
-
     super && AdminUser.exists?(id: resource_owner_id, enabled: true)
   end
 end

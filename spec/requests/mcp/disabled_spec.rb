@@ -24,6 +24,7 @@ RSpec.describe 'OAuth + MCP config gating', type: :request do
 
     it 'has no /api/mcp route' do
       expect_route_absent { post '/api/mcp', params: '{}', headers: { 'Content-Type' => 'application/json' } }
+      expect_route_absent { get '/.well-known/oauth-protected-resource/api/mcp' }
     end
   end
 
@@ -46,6 +47,7 @@ RSpec.describe 'OAuth + MCP config gating', type: :request do
 
     it 'has no /api/mcp route when mcp is off (oauth still on)' do
       expect_route_absent { post '/api/mcp', params: '{}', headers: { 'Content-Type' => 'application/json' } }
+      expect_route_absent { get '/.well-known/oauth-protected-resource/api/mcp' }
     end
   end
 end

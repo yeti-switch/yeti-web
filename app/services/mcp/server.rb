@@ -7,12 +7,15 @@ module Mcp
   # Plus the notifications/initialized one-way notification.
   # See https://spec.modelcontextprotocol.io for the wire format.
   #
-  # Auth: OAuth 2.1 access tokens via Doorkeeper. Clients obtain tokens
-  # through the standard authorization-code-with-PKCE flow against the
-  # endpoints advertised at /.well-known/oauth-authorization-server.
+  # Auth: OAuth 2.1 access tokens via Doorkeeper. Clients discover the
+  # authorization server through /.well-known/oauth-protected-resource (also
+  # named in every 401/403) and obtain tokens with authorization code + PKCE.
   class Server
     PROTOCOL_VERSION = '2025-06-18'
     SERVER_NAME = 'yeti-switch'
+    MOUNT_PATH = '/api/mcp'
+    REQUIRED_SCOPE = 'mcp'
+    RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource#{MOUNT_PATH}".freeze
     # Resolved once at class load — app is restarted on every upgrade, so the
     # version can't drift during a process's lifetime.
     SERVER_INFO = {
@@ -21,11 +24,11 @@ module Mcp
     }.freeze
 
     def call(env)
-      req = Rack::Request.new(env)
-      return [405, { 'Content-Type' => 'text/plain' }, ['Method Not Allowed']] unless req.post?
+      req = ActionDispatch::Request.new(env)
+      return [405, { 'Content-Type' => 'text/plain', 'Allow' => 'POST' }, ['Method Not Allowed']] unless req.post?
 
-      admin_user = authenticate!(req)
-      return unauthorized_response if admin_user.nil?
+      auth_error = authentication_error(req)
+      return auth_error_response(req, auth_error) if auth_error
 
       body = req.body.read
       message = JSON.parse(body)
@@ -46,33 +49,51 @@ module Mcp
 
     private
 
-    # Returns the AdminUser this token belongs to, or nil if the token is
-    # missing/invalid/expired/revoked, lacks the `mcp` scope, or its admin
-    # is disabled.
-    def authenticate!(req)
-      header = req.get_header('HTTP_AUTHORIZATION').to_s
-      return nil unless header.start_with?('Bearer ')
+    # nil when the request carries a usable token, otherwise the reason:
+    # :missing (no bearer token), :invalid_token (unknown/expired/revoked token,
+    # disabled or deleted admin), :insufficient_scope (token lacks `mcp`).
+    # Header only: the default token sources also accept ?access_token= and
+    # would parse the JSON-RPC body.
+    def authentication_error(req)
+      return :missing if Doorkeeper::OAuth::Token.from_request(req, :from_bearer_authorization).blank?
 
-      raw_token = header.sub(/\ABearer\s+/, '')
-      access_token = OauthAccessToken.by_token(raw_token)
-      return nil if access_token.nil? || !access_token.accessible?
-      # Require the `mcp` scope explicitly so future tokens issued for other
-      # scopes (e.g. SSO via the same OAuth server) can't call MCP.
-      return nil unless access_token.scopes.include?('mcp')
+      # Also revokes the refresh token this access token was rotated from.
+      access_token = Doorkeeper::OAuth::Token.authenticate(req, :from_bearer_authorization)
+      # accessible? also checks the owning admin is enabled.
+      return :invalid_token if access_token.nil? || !access_token.accessible?
+      # OIDC tokens (openid profile email) come from the same server.
+      return :insufficient_scope unless access_token.includes_scope?(REQUIRED_SCOPE)
 
-      admin_user = AdminUser.find_by(id: access_token.resource_owner_id)
-      return nil if admin_user.nil? || !admin_user.enabled?
-
-      admin_user
+      nil
     end
 
-    def unauthorized_response
-      body = { error: 'invalid_token', error_description: 'Missing, invalid, or expired access token' }.to_json
+    AUTH_ERRORS = {
+      missing: [401, nil, 'Access token required'],
+      invalid_token: [401, 'invalid_token', 'Invalid, expired, or revoked access token'],
+      insufficient_scope: [403, 'insufficient_scope', "Access token lacks the #{REQUIRED_SCOPE} scope"]
+    }.freeze
+    private_constant :AUTH_ERRORS
+
+    # RFC 6750 §3 + RFC 9728 §5.1. A request without credentials gets no error
+    # code, only the pointers needed to start the OAuth flow.
+    def auth_error_response(req, reason)
+      status, error, description = AUTH_ERRORS.fetch(reason)
+      metadata_url = "#{req.base_url}#{RESOURCE_METADATA_PATH}"
+      challenge = [
+        %(resource_metadata="#{quoted_string(metadata_url)}"),
+        %(scope="#{REQUIRED_SCOPE}")
+      ]
+      challenge << %(error="#{error}") if error
       headers = {
         'Content-Type' => 'application/json',
-        'WWW-Authenticate' => %(Bearer realm="#{SERVER_NAME}", error="invalid_token")
+        'WWW-Authenticate' => "Bearer #{challenge.join(', ')}"
       }
-      [401, headers, [body]]
+      [status, headers, [{ error: error, error_description: description }.compact.to_json]]
+    end
+
+    # RFC 9110 §5.6.4. base_url carries the raw Host / X-Forwarded-Host.
+    def quoted_string(value)
+      value.gsub(/["\\]/) { |char| "\\#{char}" }
     end
 
     def dispatch(message)
