@@ -66,7 +66,7 @@ ActiveAdmin.register RtpStatistics::TxStream, as: 'RtpTxStreams' do
 
   filter :gateway_external_id
   filter :local_tag
-  filter :local_host
+  filter :local_host_within, as: :string, label: 'Local host'
   filter :local_port
   filter :tx_ssrc, as: :numeric, filters: %i[hex equals]
   filter :tx_packets

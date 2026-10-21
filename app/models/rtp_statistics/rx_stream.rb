@@ -49,6 +49,7 @@ class RtpStatistics::RxStream < Cdr::Base
   self.primary_key = :id
 
   include Partitionable
+  include InetWithinScopeable
   self.pg_partition_name = 'PgPartition::Cdr'
   self.pg_partition_interval_type = PgPartition::INTERVAL_DAY
   self.pg_partition_depth_past = 3
@@ -60,12 +61,13 @@ class RtpStatistics::RxStream < Cdr::Base
 
   scope :no_rx, -> { where rx_packets: 0 }
   scope :rx_ssrc_hex, ->(value) { ransack(rx_ssrc_equals: value.hex).result }
+  inet_within_scopes :remote_host, :local_host
 
   def display_name
     id.to_s
   end
 
   def self.ransackable_scopes(_auth_object = nil)
-    %i[rx_ssrc_hex]
+    %i[rx_ssrc_hex remote_host_within local_host_within]
   end
 end

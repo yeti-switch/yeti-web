@@ -48,5 +48,31 @@ RSpec.describe RtpStatistics::RxStream do
         end
       end
     end
+
+    describe '.remote_host_within' do
+      let(:scope_name) { :remote_host_within }
+      let(:record_attrs) { { remote_host: '194.28.167.87' } }
+
+      [['194.28.167.87', true], ['194.28.167.0/24', true], ['194.28.168.0/24', false], ['not an ip', false]].each do |value, included|
+        context "when value is #{value.inspect}" do
+          let(:scope_value) { value }
+
+          it { included ? is_expected.to(contain_exactly(record)) : is_expected.to(be_empty) }
+        end
+      end
+    end
+
+    describe '.local_host_within' do
+      let(:scope_name) { :local_host_within }
+      let(:record_attrs) { { local_host: '194.28.167.87' } }
+
+      [['194.28.167.87', true], ['194.28.167.0/24', true], ['194.28.168.0/24', false], ['not an ip', false]].each do |value, included|
+        context "when value is #{value.inspect}" do
+          let(:scope_value) { value }
+
+          it { included ? is_expected.to(contain_exactly(record)) : is_expected.to(be_empty) }
+        end
+      end
+    end
   end
 end

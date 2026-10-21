@@ -64,5 +64,23 @@ RSpec.describe 'RX stream index', type: :feature do
         end
       end
     end
+
+    context 'by remote host' do
+      let(:record_attrs) { { remote_host: '194.28.167.87' } }
+
+      before do
+        visit rtp_rx_streams_path
+        fill_in 'Remote host', with: '194.28.167.0/24'
+      end
+
+      it 'should render records within the network only' do
+        subject
+
+        expect(page).to have_http_status :ok
+        expect(page).to have_table_row count: 1
+        expect(page).to have_table_cell column: 'Id', text: record.id
+        expect(page).to have_field 'Remote host', with: '194.28.167.0/24'
+      end
+    end
   end
 end
