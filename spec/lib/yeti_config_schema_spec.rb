@@ -56,7 +56,14 @@ RSpec.describe YetiConfigSchema do
     end
 
     # MCP clients fetch <issuer>/.well-known/oauth-authorization-server, routed at the root only.
-    ['https://web.example.com/', 'https://web.example.com/oauth', 'web.example.com'].each do |value|
+    [
+      'https://web.example.com/',
+      'https://web.example.com/oauth',
+      'https://web.example.com?tenant=yeti',
+      'https://web.example.com#yeti',
+      'https://user@web.example.com',
+      'web.example.com'
+    ].each do |value|
       context "when it is #{value.inspect}" do
         let(:issuer) { value }
 
