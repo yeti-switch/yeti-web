@@ -53,12 +53,11 @@ Rails.application.routes.draw do
   end
 
   # MCP server for LLM tool use. Auth via Doorkeeper OAuth bearer tokens, so
-  # this mount requires both flags. The lambda builds a fresh Mcp::Server per
-  # request, so code reloading in development picks up changes.
+  # this mount requires both flags.
   if YetiConfig.oauth&.enabled && YetiConfig.mcp&.enabled
     # RFC 9728 §3.1: metadata for the /api/mcp resource. No root document — that
     # one would describe the whole host, which OAuth does not protect.
-    get "/.well-known/oauth-protected-resource#{Mcp::Server::MOUNT_PATH}", to: 'well_known/oauth_protected_resource#show'
+    get Mcp::Server::RESOURCE_METADATA_PATH, to: 'well_known/oauth_protected_resource#show'
     mount ->(env) { Mcp::Server.new.call(env) }, at: Mcp::Server::MOUNT_PATH
   end
 

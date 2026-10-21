@@ -68,10 +68,7 @@ RSpec.describe 'RX stream index', type: :feature do
     context 'by remote host' do
       let(:record_attrs) { { remote_host: '194.28.167.87' } }
 
-      before do
-        visit rtp_rx_streams_path
-        fill_in 'Remote host', with: '194.28.167.0/24'
-      end
+      before { visit rtp_rx_streams_path(q: { remote_host_within: '194.28.167.0/24' }) }
 
       it 'should render records within the network only' do
         subject

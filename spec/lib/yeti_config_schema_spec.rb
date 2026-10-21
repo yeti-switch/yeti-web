@@ -47,7 +47,7 @@ RSpec.describe YetiConfigSchema do
 
     let(:config) { YetiConfig.to_h.deep_merge(oauth: { issuer: }) }
 
-    [nil, 'https://web.example.com', 'http://127.0.0.1:3000'].each do |value|
+    [nil, 'https://web.example.com', 'http://127.0.0.1:3000', 'https://[2001:db8::1]:8443'].each do |value|
       context "when it is #{value.inspect}" do
         let(:issuer) { value }
 
@@ -62,6 +62,10 @@ RSpec.describe YetiConfigSchema do
       'https://web.example.com?tenant=yeti',
       'https://web.example.com#yeti',
       'https://user@web.example.com',
+      'https://web.example.com\\oauth',
+      'https://web.example.com:abc',
+      'https://web.example.com:',
+      '',
       'web.example.com'
     ].each do |value|
       context "when it is #{value.inspect}" do

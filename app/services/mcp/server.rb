@@ -15,6 +15,7 @@ module Mcp
     SERVER_NAME = 'yeti-switch'
     MOUNT_PATH = '/api/mcp'
     REQUIRED_SCOPE = 'mcp'
+    RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource#{MOUNT_PATH}".freeze
     # Resolved once at class load — app is restarted on every upgrade, so the
     # version can't drift during a process's lifetime.
     SERVER_INFO = {
@@ -51,21 +52,17 @@ module Mcp
     # nil when the request carries a usable token, otherwise the reason:
     # :missing (no bearer token), :invalid_token (unknown/expired/revoked token,
     # disabled or deleted admin), :insufficient_scope (token lacks `mcp`).
+    # Header only: the default token sources also accept ?access_token= and
+    # would parse the JSON-RPC body.
     def authentication_error(req)
-      raw_token = req.get_header('HTTP_AUTHORIZATION').to_s[/\ABearer\s+(\S+)/i, 1]
-      return :missing if raw_token.nil?
+      return :missing if Doorkeeper::OAuth::Token.from_request(req, :from_bearer_authorization).blank?
 
-      access_token = OauthAccessToken.by_token(raw_token)
-      return :invalid_token if access_token.nil?
-
-      # Doorkeeper::OAuth::Token.authenticate does this for its own endpoints;
-      # without it the refresh token rotated out stays usable forever.
-      access_token.revoke_previous_refresh_token! if Doorkeeper.config.refresh_token_enabled?
+      # Also revokes the refresh token this access token was rotated from.
+      access_token = Doorkeeper::OAuth::Token.authenticate(req, :from_bearer_authorization)
       # accessible? also checks the owning admin is enabled.
-      return :invalid_token if access_token.resource_owner_id.nil? || !access_token.accessible?
-      # Require the `mcp` scope explicitly so future tokens issued for other
-      # scopes (e.g. SSO via the same OAuth server) can't call MCP.
-      return :insufficient_scope unless access_token.scopes.include?(REQUIRED_SCOPE)
+      return :invalid_token if access_token.nil? || !access_token.accessible?
+      # OIDC tokens (openid profile email) come from the same server.
+      return :insufficient_scope unless access_token.includes_scope?(REQUIRED_SCOPE)
 
       nil
     end
@@ -81,7 +78,7 @@ module Mcp
     # code, only the pointers needed to start the OAuth flow.
     def auth_error_response(req, reason)
       status, error, description = AUTH_ERRORS.fetch(reason)
-      metadata_url = "#{req.base_url}/.well-known/oauth-protected-resource#{MOUNT_PATH}"
+      metadata_url = "#{req.base_url}#{RESOURCE_METADATA_PATH}"
       challenge = [
         %(resource_metadata="#{quoted_string(metadata_url)}"),
         %(scope="#{REQUIRED_SCOPE}")

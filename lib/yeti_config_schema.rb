@@ -117,7 +117,7 @@ module YetiConfigSchema
         optional(:enabled).value(:bool?)
         # An origin only: MCP clients fetch <issuer>/.well-known/oauth-authorization-server,
         # which is routed at the root alone.
-        optional(:issuer).maybe(:string, format?: %r{\Ahttps?://[^/?#@\s]+\z}i)
+        optional(:issuer).maybe(:string, format?: %r{\Ahttps?://(?:[a-z0-9.-]+|\[[0-9a-f:.]+\])(?::\d+)?\z}i)
 
         optional(:oidc).schema do
           optional(:enabled).value(:bool?)

@@ -9,13 +9,17 @@ module InetWithinScopeable
   class_methods do
     def inet_within_scopes(*columns)
       columns.each do |column|
-        scope :"#{column}_within", lambda { |ip|
+        scope :"#{column}_within", lambda { |*values|
+          return none unless values.size == 1
+
           begin
-            IPAddr.new(ip)
+            addr = IPAddr.new(values.first)
           rescue IPAddr::Error
             return none
           end
-          where("#{quoted_table_name}.#{connection.quote_column_name(column)} <<= ?::inet", ip)
+          return none if addr.ipv6? && addr.zone_id
+
+          where("#{quoted_table_name}.#{connection.quote_column_name(column)} <<= ?::inet", addr.cidr)
         }
       end
     end

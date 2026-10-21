@@ -2,7 +2,7 @@
 
 # RFC 9728 OAuth 2.0 Protected Resource Metadata for the MCP endpoint. MCP
 # clients read scopes_supported here before falling back to the authorization
-# server's list, which also carries the OIDC scopes that /oauth/register refuses.
+# server's list.
 module WellKnown
   class OauthProtectedResourceController < ActionController::API
     include Issuer

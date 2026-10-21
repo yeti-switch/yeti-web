@@ -7,6 +7,12 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
   let(:application) { create_oauth_application(confidential: false) }
   let(:token) { issue_access_token(admin: admin, application: application) }
 
+  # Clients that register without `scope` get Doorkeeper's default, which must
+  # be the scope /api/mcp checks.
+  it 'uses the MCP scope as the Doorkeeper default scope' do
+    expect(Doorkeeper.config.default_scopes.to_a).to eq([Mcp::Server::REQUIRED_SCOPE])
+  end
+
   describe 'authentication' do
     let(:resource_metadata) do
       'resource_metadata="http://www.example.com/.well-known/oauth-protected-resource/api/mcp"'
@@ -31,6 +37,12 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
            params: { jsonrpc: '2.0', id: 1, method: 'tools/list' }.to_json,
            headers: { 'Authorization' => "bearer #{token.plaintext_token}", 'Content-Type' => 'application/json' }
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'rejects a bearer header with trailing junk after the token' do
+      mcp_call(token: "#{token.plaintext_token} junk", method: 'tools/list')
+      expect(response).to have_http_status(:unauthorized)
+      expect(response.headers['WWW-Authenticate']).to include('error="invalid_token"')
     end
 
     it 'escapes the request host inside the challenge quoted-string' do
