@@ -8,15 +8,68 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
   let(:token) { issue_access_token(admin: admin, application: application) }
 
   describe 'authentication' do
+    let(:resource_metadata) do
+      'resource_metadata="http://www.example.com/.well-known/oauth-protected-resource/api/mcp"'
+    end
+
     it 'rejects requests with no Authorization header' do
       post '/api/mcp', params: '{}', headers: { 'Content-Type' => 'application/json' }
       expect(response).to have_http_status(:unauthorized)
-      expect(response.headers['WWW-Authenticate']).to include('Bearer')
+      expect(response.headers['WWW-Authenticate']).to eq(%(Bearer #{resource_metadata}, scope="mcp"))
+      expect(JSON.parse(response.body)).not_to have_key('error')
     end
 
     it 'rejects an unknown bearer token' do
       mcp_call(token: 'not-a-real-token', method: 'initialize')
       expect(response).to have_http_status(:unauthorized)
+      expect(response.headers['WWW-Authenticate'])
+        .to eq(%(Bearer #{resource_metadata}, scope="mcp", error="invalid_token"))
+    end
+
+    it 'accepts the Bearer scheme case-insensitively' do
+      post '/api/mcp',
+           params: { jsonrpc: '2.0', id: 1, method: 'tools/list' }.to_json,
+           headers: { 'Authorization' => "bearer #{token.plaintext_token}", 'Content-Type' => 'application/json' }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'escapes the request host inside the challenge quoted-string' do
+      post '/api/mcp', params: '{}', headers: { 'Content-Type' => 'application/json', 'Host' => 'evil.example.com", error="x' }
+      expect(response.headers['WWW-Authenticate'])
+        .to start_with('Bearer resource_metadata="http://evil.example.com\\", error=\\"x/.well-known/')
+    end
+
+    it 'answers other methods with 405 and Allow: POST' do
+      get '/api/mcp'
+      expect(response).to have_http_status(:method_not_allowed)
+      expect(response.headers['Allow']).to eq('POST')
+    end
+
+    # Doorkeeper revokes a rotated-out refresh token the first time its successor
+    # access token is used — but only through its own token authentication.
+    it 'revokes the previous refresh token once the refreshed access token is used' do
+      old = OauthAccessToken.find_or_create_for(
+        application: application, resource_owner: admin, scopes: 'mcp', expires_in: 3600, use_refresh_token: true
+      )
+      old_refresh = old.plaintext_refresh_token
+      post '/oauth/token', params: { grant_type: 'refresh_token', refresh_token: old_refresh, client_id: application.uid }
+      new_access = JSON.parse(response.body).fetch('access_token')
+      expect(old.reload.revoked_at).to be_nil
+
+      mcp_call(token: new_access, method: 'tools/list')
+      expect(response).to have_http_status(:ok)
+      expect(old.reload.revoked_at).to be_present
+
+      post '/oauth/token', params: { grant_type: 'refresh_token', refresh_token: old_refresh, client_id: application.uid }
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it 'rejects a token without the mcp scope with insufficient_scope' do
+      tok = issue_access_token(admin: admin, application: application, scopes: 'openid')
+      mcp_call(token: tok.plaintext_token, method: 'tools/list')
+      expect(response).to have_http_status(:forbidden)
+      expect(response.headers['WWW-Authenticate'])
+        .to eq(%(Bearer #{resource_metadata}, scope="mcp", error="insufficient_scope"))
     end
 
     it 'rejects a revoked token' do
@@ -37,6 +90,7 @@ RSpec.describe 'MCP server auth + dispatch', type: :request do
       admin.update!(enabled: false)
       mcp_call(token: token.plaintext_token, method: 'tools/list')
       expect(response).to have_http_status(:unauthorized)
+      expect(response.headers['WWW-Authenticate']).to include('error="invalid_token"')
     end
 
     it 'rejects a token for a deleted admin' do

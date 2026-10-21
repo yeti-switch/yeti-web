@@ -41,4 +41,27 @@ RSpec.describe YetiConfigSchema do
       end
     end
   end
+
+  describe 'oauth.issuer' do
+    subject { schema.call(config).errors.to_h.dig(:oauth, :issuer) }
+
+    let(:config) { YetiConfig.to_h.deep_merge(oauth: { issuer: }) }
+
+    [nil, 'https://web.example.com', 'http://127.0.0.1:3000'].each do |value|
+      context "when it is #{value.inspect}" do
+        let(:issuer) { value }
+
+        it { is_expected.to be_nil }
+      end
+    end
+
+    # MCP clients fetch <issuer>/.well-known/oauth-authorization-server, routed at the root only.
+    ['https://web.example.com/', 'https://web.example.com/oauth', 'web.example.com'].each do |value|
+      context "when it is #{value.inspect}" do
+        let(:issuer) { value }
+
+        it { is_expected.to eq ['is in invalid format'] }
+      end
+    end
+  end
 end
