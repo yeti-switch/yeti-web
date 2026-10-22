@@ -9,7 +9,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
              :check_account_balance, :require_incoming_auth,
-             :from_domain, :to_domain, :tag_action_value, :external_id, :external_type, :dump_level_id, :variables
+             :from_domain, :to_domain, :tag_action_value, :external_id, :external_type, :dump_level_id, :variables,
+             :src_number_field_id, :dst_number_field_id, :src_name_field_id, :src_numberlist_use_diversion
 
   paginator :paged
 
@@ -83,6 +84,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :external_type, type: :string
   ransack_filter :transport_protocol_id, type: :number
   ransack_filter :dump_level_id, type: :number
+  ransack_filter :src_numberlist_use_diversion, type: :boolean
 
   def self.updatable_fields(_context)
     %i[
@@ -116,11 +118,12 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       src_name_field_id
       src_name_rewrite_rule
       src_name_rewrite_result
-      diversion_policy
+      diversion_policy_id
       diversion_rewrite_rule
       diversion_rewrite_result
       dst_numberlist
       src_numberlist
+      src_numberlist_use_diversion
       tag_action
       routing_plan
       allow_receive_rate_limit
@@ -136,7 +139,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       radius_accounting_profile
       from_domain
       to_domain
-      transport_protocol
+      transport_protocol_id
       variables
       external_id
       external_type

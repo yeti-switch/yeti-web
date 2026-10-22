@@ -43,6 +43,7 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       it_behaves_like :jsonapi_filters_by_string_field, :src_number_radius_rewrite_result
       it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_rule
       it_behaves_like :jsonapi_filters_by_string_field, :dst_number_radius_rewrite_result
+      it_behaves_like :jsonapi_filters_by_boolean_field, :src_numberlist_use_diversion
       it_behaves_like :jsonapi_filters_by_number_field, :external_id
       it_behaves_like :jsonapi_filters_by_string_field, :external_type do
         let(:trait) { :with_external_id }
@@ -115,7 +116,6 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
     let!(:account) { create(:account, contractor: customer).reload }
     let(:relationships) do
       {
-        'diversion-policy': wrap_relationship(:'diversion-policies', 1),
         customer: wrap_relationship(:contractors, customer.id),
         rateplan: wrap_relationship(:rateplans, rateplan.id),
         'routing-plan': wrap_relationship(:'routing-plans', routing_plan.id),
@@ -204,6 +204,41 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       include_examples :increments_customers_auth_state
     end
 
+    context 'with diversion, transport protocol and number field attributes' do
+      let(:attributes) do
+        super().merge(
+          'diversion-policy-id': CustomersAuth::DIVERSION_POLICY_ACCEPT,
+          'src-numberlist-use-diversion': true,
+          'transport-protocol-id': CustomersAuth::TRANSPORT_PROTOCOL_TCP,
+          'src-number-field-id': CustomersAuth::SRC_NUMBER_FIELD_PPI_PAI_USERPART,
+          'dst-number-field-id': CustomersAuth::DST_NUMBER_FIELD_TO_USERPART,
+          'src-name-field-id': CustomersAuth::SRC_NAME_FIELD_FROM_USERPART
+        )
+      end
+
+      it 'creates customers auth' do
+        expect { subject }.to change { CustomersAuth.count }.by(1)
+        customers_auth = CustomersAuth.last!
+        expect(response.status).to eq(201)
+        expect(customers_auth).to have_attributes(
+                                    diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                    src_numberlist_use_diversion: true,
+                                    transport_protocol_id: CustomersAuth::TRANSPORT_PROTOCOL_TCP,
+                                    src_number_field_id: CustomersAuth::SRC_NUMBER_FIELD_PPI_PAI_USERPART,
+                                    dst_number_field_id: CustomersAuth::DST_NUMBER_FIELD_TO_USERPART,
+                                    src_name_field_id: CustomersAuth::SRC_NAME_FIELD_FROM_USERPART
+                                  )
+        expect(response_data['attributes']).to include(
+                                                 'diversion-policy-id' => CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                                 'src-numberlist-use-diversion' => true
+                                               )
+        expect(customers_auth.normalized_copies).to all have_attributes(
+                                                          diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                                          src_numberlist_use_diversion: true
+                                                        )
+      end
+    end
+
     context 'when attributes are invalid' do
       let(:attributes) { { name: 'name' } }
       let(:relationships) { {} }
@@ -245,6 +280,37 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       end
 
       include_examples :increments_customers_auth_state
+    end
+
+    context 'with diversion attributes' do
+      let(:attributes) do
+        {
+          'diversion-policy-id': CustomersAuth::DIVERSION_POLICY_ACCEPT,
+          'src-numberlist-use-diversion': true
+        }
+      end
+
+      it 'updates customers auth' do
+        subject
+        expect(response.status).to eq(200)
+        expect(customers_auth.reload).to have_attributes(
+                                           diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                           src_numberlist_use_diversion: true
+                                         )
+        expect(customers_auth.normalized_copies).to all have_attributes(
+                                                          diversion_policy_id: CustomersAuth::DIVERSION_POLICY_ACCEPT,
+                                                          src_numberlist_use_diversion: true
+                                                        )
+      end
+    end
+
+    context 'with invalid diversion-policy-id' do
+      let(:attributes) { { 'diversion-policy-id': 99 } }
+
+      it 'does not update customers auth' do
+        expect { subject }.not_to change { customers_auth.reload.attributes }
+        expect(response.status).to eq(422)
+      end
     end
 
     context 'when attributes are invalid' do

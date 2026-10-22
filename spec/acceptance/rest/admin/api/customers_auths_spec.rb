@@ -14,12 +14,13 @@ RSpec.resource 'Customer Auths' do
     enable-audio-recording src-number-radius-rewrite-rule src-number-radius-rewrite-result
     dst-number-radius-rewrite-rule dst-number-radius-rewrite-result from-domain to-domain
     tag-action-value check-account-balance require-incoming-auth dump-level-id
-    external-id external-type variables
+    external-id external-type variables diversion-policy-id src-numberlist-use-diversion transport-protocol-id
+    src-number-field-id dst-number-field-id src-name-field-id
   ]
 
-  required_relationships = %i[customer rateplan routing-plan gateway account diversion-policy]
+  required_relationships = %i[customer rateplan routing-plan gateway account]
   optional_relationships = %i[
-    pop dst-numberlist src-numberlist radius-auth-profile radius-accounting-profile transport-protocol
+    pop dst-numberlist src-numberlist radius-auth-profile radius-accounting-profile
     tag-action
   ]
 
@@ -54,7 +55,8 @@ RSpec.resource 'Customer Auths' do
     let(:'reject-calls') { false }
     let(:ip) { '0.0.0.0' }
     let(:'dump-level-id') { CustomersAuth::DUMP_LEVEL_CAPTURE_ALL }
-    let(:'diversion-policy') { wrap_relationship(:'diversion-policies', 1) }
+    let(:'diversion-policy-id') { CustomersAuth::DIVERSION_POLICY_ACCEPT }
+    let(:'src-numberlist-use-diversion') { true }
     let(:customer) { wrap_relationship(:contractors, contractor.id) }
     let(:rateplan) { wrap_relationship(:rateplans, create(:rateplan).id) }
     let(:'routing-plan') { wrap_relationship(:'routing-plans', create(:routing_plan).id) }
