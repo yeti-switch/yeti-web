@@ -7,6 +7,23 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let!(:api_access) { create :api_access, api_access_attrs }
   let(:customer) { create(:customer) }
   let(:api_access_attrs) { { customer: } }
+  let(:verify_auth_token_expiration) { CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.present? }
+  let(:decoded_auth_payload) do
+    CustomerV1Auth::TokenBuilder.decode(
+      auth_token,
+      verify_expiration: verify_auth_token_expiration,
+      aud: CustomerV1Auth::Authenticator::AUDIENCE
+    )
+  end
+  let(:expected_auth_meta) { { 'auth' => decoded_auth_payload.deep_stringify_keys } }
+
+  shared_examples :stores_auth_payload_in_api_log_meta do
+    it 'stores auth payload in api log meta' do
+      expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+      expect(Log::ApiLog.last!).to have_attributes(meta: expected_auth_meta)
+    end
+  end
 
   describe 'POST /api/rest/customer/v1/auth' do
     subject do
@@ -38,6 +55,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     let(:json_request_body) { { auth: attributes } }
     let(:remote_ip) { '127.0.0.1' }
     let(:attributes) { { login: api_access.login, password: api_access.password } }
+    let(:auth_token) { response_json.fetch(:jwt) }
 
     context 'when attributes are valid' do
       it 'responds with jwt', freeze_time: true do
@@ -55,6 +73,8 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
                                           exp: CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now.to_i
                                         )
       end
+
+      include_examples :stores_auth_payload_in_api_log_meta
 
       context 'when expiration interval is blank' do
         before do
@@ -111,6 +131,13 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       let(:attributes) { super().merge password: 'wrong.password' }
 
       include_examples :responds_with_failed_login
+
+      it 'does not store auth context in api log meta' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        api_log = Log::ApiLog.last!
+        expect(api_log.meta).to be_nil
+      end
 
       context 'with cookie_auth=true' do
         let(:attributes) do
@@ -194,6 +221,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     let(:json_api_auth_token) do
       build_customer_token(api_access.id, expiration: 1.minute.from_now)
     end
+    let(:auth_token) { json_api_auth_token }
 
     it 'responds with 200' do
       subject
@@ -201,10 +229,24 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       expect(response_json).to match('allow-rec': false)
     end
 
-    it 'should create API Log record' do
+    it 'creates API log record' do
       expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-      expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+      expect(Log::ApiLog.last!).to have_attributes(
+        remote_ip: '127.0.0.1',
+        meta: expected_auth_meta
+      )
+    end
+
+    context 'with invalid Authorization header' do
+      let(:json_api_auth_token) { 'invalid' }
+
+      it 'does not persist auth meta' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        expect(response.status).to eq(401)
+        expect(Log::ApiLog.last!).to have_attributes(meta: nil, remote_ip: '127.0.0.1')
+      end
     end
 
     it_behaves_like :json_api_customer_v1_check_authorization
@@ -218,11 +260,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         expect(response_json).to match('allow-rec': true)
       end
 
-      it 'should create API Log record' do
-        expect { subject }.to change(Log::ApiLog, :count).by(1)
-
-        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
-      end
+      include_examples :stores_auth_payload_in_api_log_meta
     end
 
     context 'with dynamic auth' do
@@ -238,11 +276,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         expect(response_json).to match('allow-rec': false)
       end
 
-      it 'should create API Log record' do
-        expect { subject }.to change(Log::ApiLog, :count).by(1)
-
-        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
-      end
+      include_examples :stores_auth_payload_in_api_log_meta
 
       context 'when customer_portal_access_profile.allow_listen_recording=true' do
         let(:profile_with_recording) { create(:customer_portal_access_profile, allow_listen_recording: true) }
@@ -254,11 +288,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
           expect(response_json).to match('allow-rec': true)
         end
 
-        it 'should create API Log record' do
-          expect { subject }.to change(Log::ApiLog, :count).by(1)
-
-          expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
-        end
+        include_examples :stores_auth_payload_in_api_log_meta
       end
     end
   end
