@@ -87,7 +87,9 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
               input_html: { class: 'tom-select' },
               collection: Report::IntervalCdr::CDR_AGG_COLUMNS
 
-      f.input :filter
+      f.input :filter,
+              as: :cdr_filter,
+              columns: Report::IntervalCdr::CDR_COLUMNS
 
       f.input :group_by,
               as: :select,
