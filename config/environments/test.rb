@@ -70,6 +70,11 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # TODO: remove after upgrading to a Rails release that includes the fix:
+  # https://github.com/rails/rails/pull/58875
+  # Rails 8.1.4 fails to validate foreign keys of tables outside the search path (pgq).
+  config.active_record.verify_foreign_keys_for_fixtures = false
+
   config.active_job.queue_adapter = :test
 
   config.after_initialize do
