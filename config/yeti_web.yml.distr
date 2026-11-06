@@ -118,6 +118,10 @@ tmpdir: 'tmp'
 #  http_proxy: http://proxy.example.com:3128
 #  # Honour the standard HTTP(S)_PROXY env vars when http_proxy is not set.
 #  use_env_proxy: false
+#  # Central bank table used by the AllRatesToday provider, e.g. bcb, rbi, ecb.
+#  central_bank_code: bcb
+#  # Base url of that provider, defaults to https://allratestoday.com.
+#  central_bank_url: https://allratestoday.com
 
 # Logging (optional). Every component - puma, delayed_job, scheduler, cdr_processor,
 # prometheus exporter - logs to stdout and, when an url is set below, ships the same
