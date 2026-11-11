@@ -53,7 +53,7 @@ module GenerateReportData
       )
 
       scope = scope.where(customer_id: report.customer_id) if report.customer_id
-      scope = scope.where(report.filter) if report.filter.present?
+      scope = scope.merge(CdrReportFilter.relation(report.filter)) if report.filter.present?
 
       scope
     end

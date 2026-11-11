@@ -185,7 +185,7 @@ RSpec.describe GenerateReportData::IntervalCdr do
 
   context 'when report has filter' do
     let(:report_attrs) do
-      super().merge filter: 'duration > 0'
+      super().merge filter: 'duration_gt=0'
     end
     let!(:cdrs) do
       [

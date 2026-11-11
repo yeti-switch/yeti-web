@@ -15,6 +15,7 @@ module Report
     validate :validate_group_by
     validate :validate_send_to
     validate :validate_aggregation_function
+    validate :validate_filter
     validates :interval_length, presence: true
     validates :interval_length, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
     validates :aggregate_by, presence: true
@@ -65,6 +66,11 @@ module Report
         errors.add(:aggregation_function, :blank) if aggregator_id.nil?
         errors.add(:aggregation_function, :invalid) if aggregator_id
       end
+    end
+
+    def validate_filter
+      message = CdrReportFilter.error_for(filter)
+      errors.add(:filter, message) if message
     end
   end
 end
