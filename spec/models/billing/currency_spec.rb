@@ -30,6 +30,7 @@ RSpec.describe Billing::Currency do
     it { is_expected.to allow_value(Billing::CurrencyRateProvider::FRANKFURTER).for(:rate_provider_id) }
     it { is_expected.to allow_value(Billing::CurrencyRateProvider::BANK_OF_ISRAEL).for(:rate_provider_id) }
     it { is_expected.to allow_value(Billing::CurrencyRateProvider::NBU).for(:rate_provider_id) }
+    it { is_expected.to allow_value(Billing::CurrencyRateProvider::ALL_RATES_TODAY).for(:rate_provider_id) }
     it { is_expected.not_to allow_value(999).for(:rate_provider_id) }
   end
 
