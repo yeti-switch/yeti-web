@@ -57,7 +57,12 @@ module Yeti
 
       EQ_FILTERABLE.each do |k|
         %i[eq equals].each do |suff|
-          filter.add_filter { |cdr| cdr[:"#{k}"].to_i == search_param(k, suff).to_i } if searchable?(k, suff)
+          search_values = search_param(k, suff)
+          next unless searchable?(k, suff)
+
+          search_values.each do |value|
+            filter.add_filter { |cdr| cdr[:"#{k}"].to_i == value.to_i }
+          end
         end
       end
       STARTS_WITH_FILTERABLE.each do |k|
