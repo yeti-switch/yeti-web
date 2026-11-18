@@ -59,7 +59,8 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
                                      'expires-at': be_present
                                    )
 
-      auth_context = CustomerV1Auth::Authorizer.authorize! data[:attributes][:token]
+      auth_result = CustomerV1Auth::Authorizer.authorize! data[:attributes][:token]
+      auth_context = auth_result.auth_context
       expect(auth_context).to be_a CustomerV1Auth::AuthContext
       expect(auth_context).to have_attributes(
         customer_id: customer.id,
@@ -93,7 +94,8 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
                                        'expires-at': be_present
                                      )
 
-        auth_context = CustomerV1Auth::Authorizer.authorize! data[:attributes][:token]
+        auth_result = CustomerV1Auth::Authorizer.authorize! data[:attributes][:token]
+        auth_context = auth_result.auth_context
         expect(auth_context).to be_a CustomerV1Auth::AuthContext
         expect(auth_context).to have_attributes(
           customer_id: customer.id,
