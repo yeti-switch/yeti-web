@@ -10,6 +10,9 @@ ActiveAdmin.register Routing::NumberlistItem do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
+  acts_as_async_destroy('Routing::NumberlistItem')
+  acts_as_async_update BatchUpdateForm::NumberlistItem
+  acts_as_delayed_job_lock
 
   acts_as_export :id,
                  :key,
