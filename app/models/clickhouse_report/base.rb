@@ -102,6 +102,14 @@ module ClickhouseReport
 
     FromDateTimeInFutureError = Class.new(ParamError)
 
+    MAX_FILL_WINDOW_DAYS = 90
+    EPOCH_PARAM_FORMAT = /\A\d{1,10}\z/
+    DATETIME_PARAM_FORMAT = /
+      \A\d{4}-\d{2}-\d{2}
+      (?:[T\x20]\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?)?
+      (?:\x20?(?:Z|[+-](?:[01]\d|2[0-3])(?::?[0-5]\d)?))?\z
+    /x
+
     class_attribute :operations, instance_accessor: false, default: {}
     class_attribute :filters, instance_accessor: false, default: {}
 
@@ -155,6 +163,35 @@ module ClickhouseReport
         filters[param] = Filter.new(param:, sql:, query_param:, required:, format_value:, array:)
       end
 
+      # Returns [DateTime, zero-padded unix timestamp for a ClickHouse DateTime query param].
+      # Values without an offset are UTC.
+      def parse_datetime_param(value, name)
+        raise InvalidParamValue, "invalid value #{name}" unless value.is_a?(String)
+
+        if value.match?(EPOCH_PARAM_FORMAT)
+          parsed = Time.at(value.to_i).utc.to_datetime
+          return [parsed, epoch_query_value(parsed)]
+        end
+
+        raise InvalidParamValue, "invalid value #{name}" unless value.match?(DATETIME_PARAM_FORMAT)
+
+        parsed = DateTime.parse(value)
+        [parsed, epoch_query_value(parsed)]
+      rescue ArgumentError
+        raise InvalidParamValue, "invalid value #{name}"
+      end
+
+      # Reports that use WITH FILL produce one row per step from from-time up to now.
+      def check_fill_window(from_time)
+        return if from_time >= MAX_FILL_WINDOW_DAYS.days.ago
+
+        raise InvalidParamValue, "from-time cannot be more than #{MAX_FILL_WINDOW_DAYS} days ago"
+      end
+
+      def epoch_query_value(parsed)
+        format('%010d', parsed.to_time.to_i.clamp(0, 4_294_967_295))
+      end
+
       def required_params
         filters.values.select(&:required).map(&:param)
       end
@@ -183,7 +220,7 @@ module ClickhouseReport
       "#{column} < {#{query_param}: #{type}}"
     }
     define_operation :not_eq, sql: lambda { |column, query_param, type|
-      "#{column} >= {#{query_param}: #{type}}"
+      "#{column} != {#{query_param}: #{type}}"
     }
     define_operation :starts_with, sql: lambda { |column, query_param, type|
       "startsWith(#{column}, {#{query_param}: #{type}})"
@@ -241,6 +278,17 @@ module ClickhouseReport
 
     def format_result(body)
       body.slice('data', 'rows', 'totals')
+    end
+
+    # Upper bound for WITH FILL: up to now, or up to and including to-time when it is given.
+    def fill_to_sql
+      return 'toUnixTimestamp(now())' unless params.key?(:'to-time')
+
+      from_time = self.class.parse_datetime_param(params[:'from-time'], 'from-time').first
+      to_time = self.class.parse_datetime_param(params[:'to-time'], 'to-time').first
+      raise InvalidParamValue, 'to-time cannot be before from-time' if to_time < from_time
+
+      'least(toUnixTimestamp(now()), toUnixTimestamp({to_time: DateTime}) + 1)'
     end
 
     # @param filters [Hash] hash with filters, where key is param and value is sql condition.

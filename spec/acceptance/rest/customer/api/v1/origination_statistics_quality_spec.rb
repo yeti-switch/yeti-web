@@ -31,9 +31,9 @@ RSpec.resource 'Origination Statistics Quality', document: :customer_v1 do
     let(:sampling) { 'minute' }
     let(:query) do
       {
-        'account-id': account.uuid,
-        'from-time': 1.day.ago.iso8601,
-        sampling: 'minute'
+        'account-id': send(:'account-id'),
+        'from-time': send(:'from-time'),
+        sampling: sampling
       }
     end
 

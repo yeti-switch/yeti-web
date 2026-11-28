@@ -29,11 +29,10 @@ module ClickhouseReport
            operation: :gteq,
            required: true,
            format_value: lambda { |value, _options|
-             from_time = DateUtilities.safe_datetime_parse(value)
-             raise InvalidParamValue, 'invalid value from-time' if from_time.nil?
+             from_time, query_value = parse_datetime_param(value, 'from-time')
              raise FromDateTimeInFutureError, 'from-time cannot be in the future' if from_time > DateTime.now
 
-             value
+             query_value
            }
 
     filter :'to-time',
@@ -41,10 +40,7 @@ module ClickhouseReport
            type: 'DateTime',
            operation: :lteq,
            format_value: lambda { |value, _options|
-             to_time = DateUtilities.safe_datetime_parse(value)
-             raise InvalidParamValue, 'invalid value to-time' if to_time.nil?
-
-             value
+             parse_datetime_param(value, 'to-time').last
            }
 
     filter :'src-country-id',

@@ -300,7 +300,7 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
   end
 
   describe 'http timeouts config' do
-    let(:timeouts) { consumer.send(:http_client).instance_variable_get(:@options).timeout }
+    let(:timeouts) { consumer.send(:http_client).instance_variable_get(:@options).timeout.to_h }
 
     it 'uses default timeouts' do
       expect(timeouts).to include(connect_timeout: 20, write_timeout: 30, read_timeout: 30, request_timeout: 60)

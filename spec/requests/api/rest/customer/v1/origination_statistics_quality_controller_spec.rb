@@ -82,6 +82,7 @@ RSpec.describe Api::Rest::Customer::V1::OriginationStatisticsQualityController, 
           sampling: 'minute'
         )
       end
+      let(:clickhouse_fill_to) { 'least(toUnixTimestamp(now()), toUnixTimestamp({to_time: DateTime}) + 1)' }
       let(:clickhouse_query_sql_where_conditions) do
         [
           *super(),
@@ -107,7 +108,7 @@ RSpec.describe Api::Rest::Customer::V1::OriginationStatisticsQualityController, 
       end
       let(:clickhouse_query_params) do
         super().merge(
-          param_to_time: query[:'to-time'],
+          param_to_time: Time.iso8601(query[:'to-time']).to_i.to_s,
           param_src_country_id: query[:'src-country-id'],
           param_dst_country_id: query[:'dst-country-id'],
           param_src_prefix_routing_eq: query[:'src-prefix-routing-eq'],
@@ -194,10 +195,25 @@ RSpec.describe Api::Rest::Customer::V1::OriginationStatisticsQualityController, 
       end
     end
 
+    context 'when the "from-time" is more than 90 days ago' do
+      let(:query) { super().merge 'from-time': 91.days.ago.iso8601 }
+      let(:stub_clickhouse_query) { nil }
+
+      include_examples :responds_400, 'from-time cannot be more than 90 days ago'
+    end
+
     context 'when the "from-time" is invalid Date' do
       let(:query) { super().merge 'from-time': 'invalid' }
+      let(:stub_clickhouse_query) { nil }
 
       include_examples :responds_400, 'invalid value from-time'
+    end
+
+    context 'when the "to-time" is before "from-time"' do
+      let(:query) { super().merge 'to-time': 2.days.ago.iso8601 }
+      let(:stub_clickhouse_query) { nil }
+
+      include_examples :responds_400, 'to-time cannot be before from-time'
     end
 
     context 'when the "to-time" is invalid Date' do

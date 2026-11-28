@@ -3,6 +3,8 @@
 RSpec.shared_context :customer_termination_active_calls_clickhouse_helpers do
   include_context :clickhouse_helpers
 
+  let(:clickhouse_fill_to) { 'toUnixTimestamp(now())' }
+
   let(:clickhouse_query_sql) do
     <<~SQL.squish
       SELECT
@@ -16,14 +18,14 @@ RSpec.shared_context :customer_termination_active_calls_clickhouse_helpers do
       ORDER BY t
       WITH FILL
         FROM toUnixTimestamp(toStartOfMinute({from_time: DateTime}))
-        TO toUnixTimestamp(now())
+        TO #{clickhouse_fill_to}
         STEP 60
       FORMAT JSONColumnsWithMetadata
     SQL
   end
 
   let(:clickhouse_query_params) do
-    { param_account_id: account.id, param_from_time: from_time }
+    { param_account_id: account.id, param_from_time: Time.iso8601(from_time).to_i.to_s }
   end
 
   let(:clickhouse_data) do
