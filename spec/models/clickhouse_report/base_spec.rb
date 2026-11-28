@@ -51,7 +51,7 @@ RSpec.describe ClickhouseReport::Base do
     context 'without offset as UTC' do
       let(:value) { '2026-11-16T10:00:00.123' }
 
-      include_examples :parses, Time.utc(2026, 11, 16, 10), '1794823200'
+      include_examples :parses, Time.utc(2026, 11, 16, 10, 0, 0.123r), '1794823200'
     end
 
     context 'with date only' do
