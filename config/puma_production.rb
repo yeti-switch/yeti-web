@@ -14,7 +14,8 @@ state_path '/run/yeti/yeti-web-puma.state'
 preload_app!
 
 # Set the timeout for worker shutdown
-worker_shutdown_timeout(10)
+worker_shutdown_timeout(45)
+force_shutdown_after(40)
 
 # Set Timestamp
 log_formatter do |str|
@@ -33,7 +34,7 @@ before_fork do
     config.ram           = 2048 # mb
     config.frequency     = 120  # seconds
     config.percent_usage = 0.98
-    config.rolling_restart_frequency = 3 * 3600 # 12 hours in seconds, or 12.hours if using Rails
+    config.rolling_restart_frequency = 24 * 3600
     config.reaper_status_logs = true # setting this to false will not log lines like:
     config.pre_term = ->(worker) { warn "Worker #{worker.inspect} being killed" }
   end
