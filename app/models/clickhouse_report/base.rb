@@ -106,8 +106,8 @@ module ClickhouseReport
     EPOCH_PARAM_FORMAT = /\A\d{1,10}\z/
     DATETIME_PARAM_FORMAT = /
       \A\d{4}-\d{2}-\d{2}
-      (?:[T\x20]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?)?
-      (?:\x20?(?:Z|[+-]\d{2}(?::?\d{2})?))?\z
+      (?:[T\x20]\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?)?
+      (?:\x20?(?:Z|[+-](?:[01]\d|2[0-3])(?::?[0-5]\d)?))?\z
     /x
 
     class_attribute :operations, instance_accessor: false, default: {}
@@ -177,7 +177,7 @@ module ClickhouseReport
 
         parsed = DateTime.parse(value)
         [parsed, epoch_query_value(parsed)]
-      rescue Date::Error
+      rescue ArgumentError
         raise InvalidParamValue, "invalid value #{name}"
       end
 
