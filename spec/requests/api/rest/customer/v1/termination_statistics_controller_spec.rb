@@ -68,6 +68,7 @@ RSpec.describe Api::Rest::Customer::V1::TerminationStatisticsController do
 
     context 'when the "from-time" is invalid Date' do
       let(:query) { super().merge 'from-time': 'invalid' }
+      let(:stub_clickhouse_query) { nil }
 
       include_examples :responds_400, 'invalid value from-time'
     end

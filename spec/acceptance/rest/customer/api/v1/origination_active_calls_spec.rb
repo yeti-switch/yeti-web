@@ -28,7 +28,7 @@ RSpec.resource 'Origination Active Calls', document: :customer_v1 do
     # required filters
     let(:'account-id') { account.uuid }
     let(:'from-time') { 1.day.ago.iso8601 }
-    let(:from_time) { 1.day.ago.iso8601 }
+    let(:from_time) { send(:'from-time') }
 
     example_request 'get listing' do
       expect(status).to eq(200)

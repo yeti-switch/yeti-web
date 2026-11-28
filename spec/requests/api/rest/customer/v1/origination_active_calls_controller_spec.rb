@@ -61,10 +61,24 @@ RSpec.describe Api::Rest::Customer::V1::OriginationActiveCallsController do
       end
     end
 
+    context 'when the "from-time" is more than 90 days ago' do
+      let(:query) { super().merge 'from-time': 91.days.ago.iso8601 }
+
+      include_examples :responds_400, 'from-time cannot be more than 90 days ago'
+      include_examples :clickhouse_stub_not_requested
+    end
+
     context 'when the "from-time" is invalid Date' do
       let(:query) { super().merge 'from-time': 'invalid' }
 
       include_examples :responds_400, 'invalid value from-time'
+      include_examples :clickhouse_stub_not_requested
+    end
+
+    context 'when the "to-time" is before "from-time"' do
+      let(:query) { super().merge 'to-time': 2.days.ago.iso8601 }
+
+      include_examples :responds_400, 'to-time cannot be before from-time'
       include_examples :clickhouse_stub_not_requested
     end
 

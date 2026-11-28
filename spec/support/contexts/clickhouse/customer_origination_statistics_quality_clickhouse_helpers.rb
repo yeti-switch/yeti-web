@@ -3,6 +3,8 @@
 RSpec.shared_context :customer_origination_statistics_quality_clickhouse_helpers do
   include_context :clickhouse_helpers
 
+  let(:clickhouse_fill_to) { 'toUnixTimestamp(now())' }
+
   let(:clickhouse_query_sql) do
     <<~SQL.squish
       SELECT
@@ -18,7 +20,7 @@ RSpec.shared_context :customer_origination_statistics_quality_clickhouse_helpers
       WITH TOTALS
       ORDER BY t
       WITH FILL
-        FROM toUnixTimestamp(toStartOfMinute({from_time: DateTime})) TO toUnixTimestamp(now()) STEP 60
+        FROM toUnixTimestamp(toStartOfMinute({from_time: DateTime})) TO #{clickhouse_fill_to} STEP 60
         INTERPOLATE(acd as Null, asr as Null, cps as 0)
       FORMAT JSONColumnsWithMetadata
     SQL
@@ -34,7 +36,7 @@ RSpec.shared_context :customer_origination_statistics_quality_clickhouse_helpers
   let(:clickhouse_query_params) do
     {
       param_account_id: account.id,
-      param_from_time: query[:'from-time']
+      param_from_time: Time.iso8601(query[:'from-time']).to_i.to_s
     }
   end
 

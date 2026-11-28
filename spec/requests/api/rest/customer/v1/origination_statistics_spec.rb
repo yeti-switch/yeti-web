@@ -109,7 +109,7 @@ RSpec.describe Api::Rest::Customer::V1::OriginationStatisticsController, type: :
       end
       let(:clickhouse_query_params) do
         super().merge(
-          param_to_time: query[:'to-time'],
+          param_to_time: Time.iso8601(query[:'to-time']).to_i.to_s,
           param_src_country_id: query[:'src-country-id'],
           param_dst_country_id: query[:'dst-country-id'],
           param_src_prefix_routing_eq: query[:'src-prefix-routing-eq'],

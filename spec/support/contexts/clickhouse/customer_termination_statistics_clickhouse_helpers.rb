@@ -33,7 +33,7 @@ RSpec.shared_context :customer_termination_statistics_clickhouse_helpers do
   let(:clickhouse_query_params) do
     {
       param_account_id: account.id,
-      param_from_time: query[:'from-time']
+      param_from_time: Time.iso8601(query[:'from-time']).to_i.to_s
     }
   end
 
