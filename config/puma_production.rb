@@ -15,7 +15,6 @@ preload_app!
 
 # Set the timeout for worker shutdown
 worker_shutdown_timeout(45)
-force_shutdown_after(40)
 
 # Set Timestamp
 log_formatter do |str|
