@@ -146,27 +146,27 @@ ruby: $(RBENV_ROOT)/versions/$(rbenv_version)
 .PHONY: bundler
 bundler: ruby
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler --version 4.0.22
-	$(bundle_bin) config --local clean 'true'
-	$(bundle_bin) config --local jobs 4
-	$(bundle_bin) config --local deployment 'true'
+	gem install --no-document --install-dir $(gems) bundler --version 4.1.1
+	$(bundle_bin) config set --local clean 'true'
+	$(bundle_bin) config set --local jobs 4
+	$(bundle_bin) config set --local deployment 'true'
 
 
 .PHONY: gems
 gems: bundler
 	$(info:msg=Install/Update gems)
-	$(bundle_bin) config --local --delete with
-	$(bundle_bin) config --local --delete without
-	$(bundle_bin) config --local without 'development test'
+	$(bundle_bin) config unset --local with
+	$(bundle_bin) config unset --local without
+	$(bundle_bin) config set --local without 'development test'
 	$(bundle_bin) install
 
 
 .PHONY: gems-test
 gems-test: bundler
 	$(info:msg=Install/Update gems for tests)
-	$(bundle_bin) config --local --delete with
-	$(bundle_bin) config --local --delete without
-	$(bundle_bin) config --local with 'development test'
+	$(bundle_bin) config unset --local with
+	$(bundle_bin) config unset --local without
+	$(bundle_bin) config set --local with 'development test'
 	$(bundle_bin) install
 	$(bundle_bin) binstubs rspec-core
 
